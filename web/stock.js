@@ -66,6 +66,53 @@ d3.csv('ndx.csv').then(function (data) {
     var dateFormatParser = d3.timeParse(dateFormatSpecifier);
     var numberFormat = d3.format('.2f');
 
+    //  close, date, high, low, oi, open, volume
+    data = [{
+      "run_id": "1",
+      "start": 1529437793,
+      "end": 1529678793,
+      "author": "James Wendel",
+      "file_location": "/bin/sam/etc/hamb10003/3334",
+      "buttons": ["ravel", "vale43d", "spot", "jupiter"],
+    },
+    {
+      "run_id": "2",
+      "start": 1529437793,
+      "end": 1529678793,
+      "author": "John Minder",
+      "buttons": ["vale43d", "spot", "jupiter"]
+    },
+    {
+      "run_id": "3",
+      "start": 1529437793,
+      "end": 1529678793,
+      "author": "Abraham Lincoln",
+      "file_location": "/bin/xbin/something/38423/2kdkdk/2220030",
+      "buttons": []
+    },
+    {
+      "run_id": "4",
+      "start": 1529437793,
+      "end": 1529678793,
+      "author": "Luke landers",
+      "buttons": ["ravel"]
+    },
+        {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}];
+
+    for( var z=0; z < data.length; z++ ) {
+
+        var month = parseInt(Math.random()*12);
+        var day = parseInt(Math.random()*30);
+        var year = 1985 + parseInt(Math.random()*25);
+
+        data[z].close = parseInt(123 + Math.random()*15);
+        data[z].date = month + "/" + day + "/" + year;
+        data[z].high = 128 + parseInt(Math.random()*70);
+        data[z].low = 115 + parseInt(Math.random()*14);
+        data[z].oi = 0;
+        data[z].open = 112 + parseInt(Math.random()*40);
+    }
+
     data.forEach(function (d) {
         d.dd = dateFormatParser(d.date);
         d.month = d3.timeMonth(d.dd); // pre-calculate month for better performance
