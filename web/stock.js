@@ -5,6 +5,7 @@
 /* global dc,d3,crossfilter */
 
 // ### Create Chart Objects
+var runtimeChart = dc.barChart('#runtime-chart');
 
 // Create chart objects associated with the container elements identified by the css selector.
 // Note: It is often a good idea to have these objects accessible at the global scope so that they can be modified or
@@ -73,7 +74,7 @@ d3.csv('ndx.csv').then(function (data) {
       "end": 1529678793,
       "author": "James Wendel",
       "file_location": "/bin/sam/etc/hamb10003/3334",
-      "buttons": ["ravel", "vale43d", "spot", "jupiter"],
+      "buttons": ["ravel", "vale43d", "spot", "jupiter"]
     },
     {
       "run_id": "2",
@@ -97,7 +98,13 @@ d3.csv('ndx.csv').then(function (data) {
       "author": "Luke landers",
       "buttons": ["ravel"]
     },
-        {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}];
+        {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {},
+        {},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},
+        {},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},
+        {},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}];
+
+
+    var authors = ['Luke Landers', 'Peter Robinson', 'Bin Etcera', 'Folder Maguson', 'Euro Tables', 'Tron Mandes', 'John Hancock'];
 
     for( var z=0; z < data.length; z++ ) {
 
@@ -105,12 +112,17 @@ d3.csv('ndx.csv').then(function (data) {
         var day = parseInt(Math.random()*30);
         var year = 1985 + parseInt(Math.random()*25);
 
-        data[z].close = parseInt(123 + Math.random()*15);
+        data[z].close = parseInt(123 + Math.random()*315);
         data[z].date = month + "/" + day + "/" + year;
-        data[z].high = 128 + parseInt(Math.random()*70);
+        data[z].high = 128 + parseInt(Math.random()*670);
         data[z].low = 115 + parseInt(Math.random()*14);
         data[z].oi = 0;
-        data[z].open = 112 + parseInt(Math.random()*40);
+        data[z].volume = 200+ parseInt(Math.random()*8000);
+        data[z].open = 112 + parseInt(Math.random()*240);
+
+        var r = parseInt( Math.random() * 6 );
+        data[z].author = authors[r];
+
     }
 
     data.forEach(function (d) {
@@ -229,6 +241,7 @@ d3.csv('ndx.csv').then(function (data) {
             return 'Q4';
         }
     });
+
     var quarterGroup = quarter.group().reduceSum(function (d) {
         return d.volume;
     });
@@ -237,7 +250,7 @@ d3.csv('ndx.csv').then(function (data) {
     var dayOfWeek = ndx.dimension(function (d) {
         var day = d.dd.getDay();
         var name = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-        return day + '.' + name[day];
+        return d.author || "none";// day + '.' + name[day];
     });
     var dayOfWeekGroup = dayOfWeek.group();
 
@@ -407,11 +420,12 @@ d3.csv('ndx.csv').then(function (data) {
         // Assign colors to each value in the x scale domain
         .ordinalColors(['#3182bd', '#6baed6', '#9ecae1', '#c6dbef', '#dadaeb'])
         .label(function (d) {
-            return d.key.split('.')[1];
+            //return d.key.split('.')[1];
+            return d.key;
         })
         // Title sets the row text
         .title(function (d) {
-            return d.value;
+            return d.author;  //  d.value
         })
         .elasticX(true)
         .xAxis().ticks(4);
@@ -450,6 +464,40 @@ d3.csv('ndx.csv').then(function (data) {
     fluctuationChart.xAxis().tickFormat(
         function (v) { return v + '%'; });
     fluctuationChart.yAxis().ticks(5);
+
+
+
+    runtimeChart /* dc.barChart('#volume-month-chart', 'chartGroup') */
+        .width(980)
+        .height(180)
+        .margins({top: 10, right: 50, bottom: 30, left: 40})
+        .dimension(fluctuation)
+        .group(fluctuationGroup)
+        .elasticY(true)
+        // (_optional_) whether bar should be center to its x value. Not needed for ordinal chart, `default=false`
+        .centerBar(true)
+        // (_optional_) set gap between bars manually in px, `default=2`
+        .gap(1)
+        // (_optional_) set filter brush rounding
+        .round(dc.round.floor)
+        .alwaysUseRounding(true)
+        .x(d3.scaleLinear().domain([0, 50]))
+        .renderHorizontalGridLines(true)
+        // Customize the filter displayed in the control span
+        .filterPrinter(function (filters) {
+            var filter = filters[0], s = '';
+            s += numberFormat(filter[0]) + '% -> ' + numberFormat(filter[1]) + '%';
+            return s;
+        });
+
+    // Customize axes
+    runtimeChart.xAxis().tickFormat(
+        function (v) { return v + 'ms'; });
+    runtimeChart.yAxis().ticks(5);
+
+
+
+
 
     //#### Stacked Area Chart
 
@@ -575,7 +623,7 @@ d3.csv('ndx.csv').then(function (data) {
             return d.dd.getFullYear() + '/' + format((d.dd.getMonth() + 1));
         })
         // (_optional_) max number of records to be shown, `default = 25`
-        .size(10)
+        .size(50)
         // There are several ways to specify the columns; see the data-table documentation.
         // This code demonstrates generating the column header automatically based on the columns.
         .columns([
