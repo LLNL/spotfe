@@ -104,7 +104,8 @@ d3.csv('ndx.csv').then(function (data) {
         {},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}];
 
 
-    var authors = ['Luke Landers', 'Peter Robinson', 'Bin Etcera', 'Folder Maguson', 'Euro Tables', 'Tron Mandes', 'John Hancock'];
+    var authors = ['Luke Landers', 'Peter Robinson', 'Bin Etcera', 'Folder Maguson', 'Euro Tables', 'Tron Mandes', 'John Hancock',
+        'Al Render', 'Bobo Walls', 'Cat Snickers', 'Pepsi Magnoson', 'Mouse Nimble', 'Lolo Molo', 'Evan Snoopse', 'Wilder Ogli', 'Jimmy Napsack'];
 
     for( var z=0; z < data.length; z++ ) {
 
@@ -121,9 +122,9 @@ d3.csv('ndx.csv').then(function (data) {
         data[z].open = 112 + parseInt(Math.random()*240);
         data[z].runtime = parseInt(Math.random()*45);
 
-        var r = parseInt( Math.random() * 6 );
+        var r = parseInt( Math.random() * 7 );
         data[z].author = authors[r];
-
+        data[z].buttons = data[z].buttons || (Math.random() * 4 > 2 ? ["ravel", "vale43d", "spot"] : ["spot"]);
     }
 
     data.forEach(function (d) {
@@ -650,7 +651,22 @@ d3.csv('ndx.csv').then(function (data) {
                 }
             },
             // Use `d.volume`
-            'volume'
+            'volume',
+            {
+                label: 'Operations',
+                format: function(d) {
+
+                    var buts = "";
+
+                    for( var x in d.buttons ) {
+
+                        var but = d.buttons[x];
+                        buts += '<div class="myButton">' + but.toUpperCase() + '</div>';
+                    }
+
+                    return buts;
+                }
+            }
         ])
 
         // (_optional_) sort using the given field, `default = function(d){return d;}`

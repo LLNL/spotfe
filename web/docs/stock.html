@@ -287,7 +287,8 @@ jQuery.getJson(<span class="hljs-string">'data.json'</span>, <span class="hljs-f
         {},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}];
 
 
-    <span class="hljs-keyword">var</span> authors = [<span class="hljs-string">'Luke Landers'</span>, <span class="hljs-string">'Peter Robinson'</span>, <span class="hljs-string">'Bin Etcera'</span>, <span class="hljs-string">'Folder Maguson'</span>, <span class="hljs-string">'Euro Tables'</span>, <span class="hljs-string">'Tron Mandes'</span>, <span class="hljs-string">'John Hancock'</span>];
+    <span class="hljs-keyword">var</span> authors = [<span class="hljs-string">'Luke Landers'</span>, <span class="hljs-string">'Peter Robinson'</span>, <span class="hljs-string">'Bin Etcera'</span>, <span class="hljs-string">'Folder Maguson'</span>, <span class="hljs-string">'Euro Tables'</span>, <span class="hljs-string">'Tron Mandes'</span>, <span class="hljs-string">'John Hancock'</span>,
+        <span class="hljs-string">'Al Render'</span>, <span class="hljs-string">'Bobo Walls'</span>, <span class="hljs-string">'Cat Snickers'</span>, <span class="hljs-string">'Pepsi Magnoson'</span>, <span class="hljs-string">'Mouse Nimble'</span>, <span class="hljs-string">'Lolo Molo'</span>, <span class="hljs-string">'Evan Snoopse'</span>, <span class="hljs-string">'Wilder Ogli'</span>, <span class="hljs-string">'Jimmy Napsack'</span>];
 
     <span class="hljs-keyword">for</span>( <span class="hljs-keyword">var</span> z=<span class="hljs-number">0</span>; z &lt; data.length; z++ ) {
 
@@ -304,9 +305,9 @@ jQuery.getJson(<span class="hljs-string">'data.json'</span>, <span class="hljs-f
         data[z].open = <span class="hljs-number">112</span> + <span class="hljs-built_in">parseInt</span>(<span class="hljs-built_in">Math</span>.random()*<span class="hljs-number">240</span>);
         data[z].runtime = <span class="hljs-built_in">parseInt</span>(<span class="hljs-built_in">Math</span>.random()*<span class="hljs-number">45</span>);
 
-        <span class="hljs-keyword">var</span> r = <span class="hljs-built_in">parseInt</span>( <span class="hljs-built_in">Math</span>.random() * <span class="hljs-number">6</span> );
+        <span class="hljs-keyword">var</span> r = <span class="hljs-built_in">parseInt</span>( <span class="hljs-built_in">Math</span>.random() * <span class="hljs-number">7</span> );
         data[z].author = authors[r];
-
+        data[z].buttons = data[z].buttons || (<span class="hljs-built_in">Math</span>.random() * <span class="hljs-number">4</span> &gt; <span class="hljs-number">2</span> ? [<span class="hljs-string">"ravel"</span>, <span class="hljs-string">"vale43d"</span>, <span class="hljs-string">"spot"</span>] : [<span class="hljs-string">"spot"</span>]);
     }
 
     data.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{
@@ -1993,7 +1994,22 @@ This code demonstrates generating the column header automatically based on the c
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            <span class="hljs-string">'volume'</span>
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-string">'volume'</span>,
+            {
+                <span class="hljs-attr">label</span>: <span class="hljs-string">'Operations'</span>,
+                <span class="hljs-attr">format</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">d</span>) </span>{
+
+                    <span class="hljs-keyword">var</span> buts = <span class="hljs-string">""</span>;
+
+                    <span class="hljs-keyword">for</span>( <span class="hljs-keyword">var</span> x <span class="hljs-keyword">in</span> d.buttons ) {
+
+                        <span class="hljs-keyword">var</span> but = d.buttons[x];
+                        buts += <span class="hljs-string">'&lt;div class="myButton"&gt;'</span> + but.toUpperCase() + <span class="hljs-string">'&lt;/div&gt;'</span>;
+                    }
+
+                    <span class="hljs-keyword">return</span> buts;
+                }
+            }
         ])</pre></div></div>
             
         </li>
