@@ -119,6 +119,7 @@ d3.csv('ndx.csv').then(function (data) {
         data[z].oi = 0;
         data[z].volume = 200+ parseInt(Math.random()*8000);
         data[z].open = 112 + parseInt(Math.random()*240);
+        data[z].runtime = parseInt(Math.random()*45);
 
         var r = parseInt( Math.random() * 6 );
         data[z].author = authors[r];
@@ -227,6 +228,15 @@ d3.csv('ndx.csv').then(function (data) {
         return Math.round((d.close - d.open) / d.open * 100);
     });
     var fluctuationGroup = fluctuation.group();
+
+
+        // Determine a histogram of percent changes
+    var runtime_dimension = ndx.dimension(function (d) {
+        return Math.round(d.runtime);
+    });
+
+    var runtime_group = runtime_dimension.group();
+
 
     // Summarize volume by quarter
     var quarter = ndx.dimension(function (d) {
@@ -471,8 +481,8 @@ d3.csv('ndx.csv').then(function (data) {
         .width(980)
         .height(180)
         .margins({top: 10, right: 50, bottom: 30, left: 40})
-        .dimension(fluctuation)
-        .group(fluctuationGroup)
+        .dimension(runtime_dimension)
+        .group(runtime_group)
         .elasticY(true)
         // (_optional_) whether bar should be center to its x value. Not needed for ordinal chart, `default=false`
         .centerBar(true)
