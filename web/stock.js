@@ -68,41 +68,8 @@ d3.csv('ndx.csv').then(function (data) {
     var numberFormat = d3.format('.2f');
 
     //  close, date, high, low, oi, open, volume
-    data = [{
-      "run_id": "1",
-      "start": 1529437793,
-      "end": 1529678793,
-      "author": "James Wendel",
-      "file_location": "/bin/sam/etc/hamb10003/3334",
-      "buttons": ["ravel", "vale43d", "spot", "jupiter"]
-    },
-    {
-      "run_id": "2",
-      "start": 1529437793,
-      "end": 1529678793,
-      "author": "John Minder",
-      "buttons": ["vale43d", "spot", "jupiter"]
-    },
-    {
-      "run_id": "3",
-      "start": 1529437793,
-      "end": 1529678793,
-      "author": "Abraham Lincoln",
-      "file_location": "/bin/xbin/something/38423/2kdkdk/2220030",
-      "buttons": []
-    },
-    {
-      "run_id": "4",
-      "start": 1529437793,
-      "end": 1529678793,
-      "author": "Luke landers",
-      "buttons": ["ravel"]
-    },
-        {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {},
-        {},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},
-        {},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},
-        {},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}];
 
+    data = SPOT_DATA.runs;
 
     var authors = ['Luke Landers', 'Peter Robinson', 'Bin Etcera', 'Folder Maguson', 'Euro Tables', 'Tron Mandes', 'John Hancock',
         'Al Render', 'Bobo Walls', 'Cat Snickers', 'Pepsi Magnoson', 'Mouse Nimble', 'Lolo Molo', 'Evan Snoopse', 'Wilder Ogli', 'Jimmy Napsack'];
@@ -124,7 +91,8 @@ d3.csv('ndx.csv').then(function (data) {
 
         var r = parseInt( Math.random() * 7 );
         data[z].author = authors[r];
-        data[z].buttons = data[z].buttons || (Math.random() * 4 > 2 ? ["ravel", "vale43d", "spot"] : ["spot"]);
+//        data[z].buttons = data[z].buttons || (Math.random() * 4 > 2 ? ["ravel", "vale43d", "spot"] : ["spot"]);
+        data[z].buttons = data[z].data;
     }
 
     data.forEach(function (d) {

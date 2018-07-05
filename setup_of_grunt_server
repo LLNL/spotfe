@@ -1,0 +1,500 @@
+   30  jup
+   31  pip install jupyter-widget-example
+   32  ls
+   33  cd jupyter-widget-example/
+   34  pip install -e
+   35  pip install -e .
+   36  jupyter nbextension install --py --symlink --sys-prefix jupyter-widget-example
+   37  jupyter nbextension enable --py --sys-prefix jupyter-widget-example
+   38  jupiter
+   39  cd ..
+   40  pip install jupyterlab altair==2.0.0rc2
+   41  pip list
+   42  pip upgrade pip
+   43  history
+   44  jupyter nbextension
+   45  jupyter nbextension list
+   46  act
+   47  alias
+   48  jupiter
+   49  jup
+   50  jupyter nbextension list
+   51  pip install plotly
+   52  pip install --upgrade pip
+   53  history
+   54  alias
+   55  . ~/.bashrc
+   56  alias
+   57  ls
+   58  /usr/apps/python-2.7.14/bin/virtualenv --system-site-package venv2.7loc
+   59  ls
+   60  cd /usr/bin/
+   61  find . -name virtualenv
+   62  cd
+   63  alias
+   64  jup
+   65  jupyter labextension install @jupyter-widgets/jupyterlab-manager
+   66  r
+   67  ls
+   68  alias
+   69  jup
+   70  python -m pip install ipykernel
+   71  pip install --upgrade pip
+   72  python -m pip install ipykernel
+   73  python -m ipykernel install --prefix=$HOME/.local/ --name 'mykernel' --display-name 'mykernel'
+   74  jupiter
+   75  cd
+   76  cd Downloads/
+   77  alias r
+   78  scp Miniconda2-latest-Linux-x86_64.sh pascal@rzgw:~/
+   79  r
+   80  r
+   81  vi currently
+   82  ls c*
+   83  cd ../Documents/
+   84  ls
+   85  scp callnlgov.crt pascal@rzgw:~/
+   86  r
+   87  alias r
+   88  cat ~/timecard 
+   89  cd
+   90  vi social_crm
+   91  cd
+   92  jup
+   93  jupyter labextension install @jupyter-widgets/jupyterlab-manager
+   94  jupyter labextension install @jupyter-widgets/jupyterlab-manager --debug
+   95  jupyter labextension install @jupyter-widgets/jupyterlab-manager --debug
+   96  jupyter labextension install @jupyter-widgets/jupyterlab-manager
+   97  grep -rI '35.0' *
+   98  alias
+   99  jupyter labextension install @jupyter-widgets/jupyterlab-manager
+  100  python3 -m pip install --upgrade pip
+  101  python3 -m pip install jupyter
+  102  jupyter labextension install @jupyter-widgets/jupyterlab-manager
+  103  cd 
+  104  cd miniconda/envs/jupyterlab-ext/
+  105  ls
+  106  grep '35' *
+  107  grep -rI '35' *
+  108  ls
+  109  ls
+  110  cd ..
+  111  ls
+  112  cd jupyterlab-ext/
+  113  ls man/
+  114  jupyter labextension install @jupyter-widgets/jupyterlab-manager
+  115  npm run build
+  116  find . -name package.json
+  117  find . -name ipywidget*
+  118  cd conda-meta/ipywidgets-7.2.1-py36_1.json 
+  119  cd lib/python3.6/site-packages/ipywidgets
+  120  ls
+  121  npm run build
+  122  cd ../..
+  123  cd ..
+  124  ls
+  125  cd ..
+  126  ls
+  127  ls
+  128  cd ..
+  129  ls
+  130  git clone https://github.com/jupyter-widgets/ipywidgets.git
+  131  ls
+  132  cd ipywidgets/packages/jupyterlab-manager/
+  133  npm install
+  134  npm run build
+  135  jupyter labextension link .
+  136  cd ../..
+  137  cd ../..
+  138  cd
+  139  jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.33
+  140  history
+  141  pip list | grep jup
+  142  jupyterlab extension list
+  143  jupyter labextension list
+  144  pip list | grep 'ipy'
+  145  jupyter labextension list
+  146  pip install matplotlib
+  147  pip install plotly
+  148  jupyter labextension list
+  149  pip list | pyt
+  150  pip list | grep pyt
+  151  pip list | grep 'ipywid'
+  152  history | grep 'conda' 
+  153  vi node-env
+  154  pwd
+  155  cat node-env 
+  156  hostname
+  157  alias
+  158  jup
+  159  conda install -n base -c conda-forge widgetsnbextension
+  160  conda install -n py36 -c conda-forge ipywidgets
+  161  conda install -n jupyterlab-ext -c conda-forge ipywidgets
+  162  alias
+  163  jupiter 
+  164  r
+  165  r
+  166  jup
+  167  alias
+  168  jupiter 
+  169  act
+  170  jup
+  171  ls
+  172  alias
+  173  jn
+  174  r
+  175  jup
+  176  vi ~/.bashrc
+  177  . ~/.bashrc
+  178  stats
+  179  act
+  180  jup
+  181  stats
+  182  alias stats
+  183  stats
+  184  alias jup
+  185  pip install tabulate
+  186  stats
+  187  r
+  188  r
+  189  vi dans_suggestion
+  190  cat timecard 
+  191  r
+  192  r
+  193  vi houses
+  194  vi houses
+  195  cd Downloads/
+  196  ls
+  197  ls 24.db
+  198  ls
+  199  cd ..
+  200  cd Documents/
+  201  cd
+  202  ls
+  203  r
+  204  scp pascal@rzgw:~/24.db .
+  205  more 24.db 
+  206  r
+  207  r
+  208  r
+  209  juop
+  210  jup
+  211  jupiter
+  212  cd Downloads/
+  213  ls
+  214  ls *.py*
+  215  ls *.p*
+  216  ls *.p*n*
+  217  cd ../Documents/
+  218  ls
+  219  ls *p*
+  220  cd ../Downloads/
+  221  ls -l
+  222  ls -l Plot*
+  223  cp Plot\ Scatter\ 3.6.ipynb ~/
+  224  cd
+  225  vi houses 
+  226  jup
+  227  cd
+  228  cd workflow/sina/
+  229  cat README.md 
+  230  pip install  -r requirements.txt -r web-requirements.txt 
+  231  pip install scalar
+  232  vi sprint
+  233  scp pascal@rzsonar:~/24.db .
+  234  scp pascal@rzgw:~/24.db .
+  235  scp 24.db pascal@quartz:~/
+  236  cd siboka_
+  237  ls
+  238  cd workflow/sina/
+  239  ls
+  240  cd
+  241  ls runs_1_through_5.sqlite
+  242  scp pascal@rzgw:~/runs_1_through_5.sqlite .
+  243  scp runs_1_through_5.sqlite pascal@quartz:~/
+  244  cd workflow/sina/
+  245  git branch
+  246  alias o
+  247  ssh -X -Y pascal@quarz
+  248  ssh -X -Y pascal@quartz
+  249  cat
+  250  cat timecard 
+  251  ssh -X -Y pascal@quartz
+  252  r
+  253  ssh pascal@borax
+  254  ssh pascal@cab
+  255  r
+  256  ls
+  257  scp 24.db pascal@borax:~/
+  258  r
+  259  ssh pascal@surface
+  260  ssh pascal@borax
+  261  ssh pascal@quartz
+  262  r
+  263  ssh pascal@pascal
+  264  ssh pascal@cab
+  265  vi glassdoor_review 
+  266  ssh pascal@cab
+  267  ssh pascal@quartz
+  268  vi houses 
+  269  grep 'patest' *
+  270  vi notes
+  271  r
+  272  r
+  273  ssh pascal@sonar
+  274  ssh rzalastor
+  275  r
+  276  r
+  277  echo $SYS_TYPE
+  278  ssh pascal@borax
+  279  ssh pascal@oslic
+  280  grep 'git clone' *
+  281  vi notes
+  282  ssh pascal@pascal
+  283  ssh pascal@surface
+  284  ssh pascal@syrah
+  285  vi vitamins 
+  286  exit
+  287  ssh pascal@borax
+  288  ssh pascal@borax
+  289  ssh pascal@quartz
+  290  ssh pascal@quartz
+  291  ssh pascal@quartz
+  292  ssh pascal@quartz
+  293  ssh pascal@oslic
+  294  ssh pascal@quartz
+  295  ssh pascal@quartz
+  296  r
+  297  vi glassdoor_review 
+  298  cat timecard 
+  299  r
+  300  ssh pascal@quartz
+  301  r
+  302  scp pascal@quartz:~/sina/dist/sina-0.1.2.dev0-py2-none-any.whl .
+  303  mv sina-0.1.2.dev0-py2-none-any.whl Downloads/
+  304  ssh patest@quartz
+  305  vi oliing
+  306  cat timecard 
+  307  ssh pascal@quartz
+  308  ssh pascal@quartz
+  309  ssh pascal@quartz
+  310  vi next
+  311  vi glassdoor_review 
+  312  r
+  313  r
+  314  ssh patest
+  315  ssh patest@rslic
+  316  alias r
+  317  ssh patest@rzgw
+  318  vi hello_luc
+  319  vi hello_luc
+  320  vi hello_luc
+  321  cat hello_luc 
+  322  vi hello_luc 
+  323  cd Documents/
+  324  cat stencil_3x3_ravel.json 
+  325  alias
+  326  ls
+  327  cd
+  328  ls
+  329  cd ravel
+  330  ls
+  331  ls
+  332  cd ..
+  333  ls
+  334  alias
+  335  ru
+  336  r
+  337  r
+  338  cat timecard 
+  339  r
+  340  vi bamboo_siboka_deployment
+  341  cat bamboo_siboka_deployment 
+  342  r
+  343  cat timecard 
+  344  vi glassdoor_review 
+  345  vi notes
+  346  grep 'uest' *
+  347  ping google.com
+  348  cd Downloads/
+  349  ls plan-73466138-JOB1-2.log 
+  350  send haluska2 plan-73466138-JOB1-2.log 
+  351  give
+  352  r
+  353  r
+  354  cat timecard 
+  355  r
+  356  o
+  357  r
+  358  r
+  359  r
+  360  o
+  361  r
+  362  r
+  363  r
+  364  r
+  365  vi blockstack.key
+  366  cat blockstack.key 
+  367  vi blockstack.notes
+  368  r
+  369  grep 'onto' *
+  370  find . -mtime -8
+  371  vi sprint
+  372  r
+  373  r
+  374  r
+  375  cat timecard 
+  376  ls
+  377  more hello_luc 
+  378  rm hello_luc 
+  379  ls
+  380  more oliing 
+  381  rm oliing 
+  382  ls
+  383  more zoom_staff 
+  384  rm zoom_staff 
+  385  ls
+  386  more tdo 
+  387  rm tdo
+  388  mkdir nutrition
+  389  mv saturated_fats nutrition/
+  390  mv electrolytes nutrition/
+  391  cat test
+  392  rm test
+  393  cat test000 
+  394  rm test000
+  395  cat today
+  396  rm today
+  397  ls
+  398  vi get_paths
+  399  cat get_paths 
+  400  cd sina
+  401  cd
+  402  c
+  403  alias
+  404  greeno
+  405  alias
+  406  alias r
+  407  ls
+  408  more notes
+  409  ls
+  410  cat notes8
+  411  ls
+  412  cat note
+  413  vi git_notes 
+  414  vi becky_path_runs
+  415  cat becky_path_runs 
+  416  r
+  417  vi sina_table_structure
+  418  grep 'DAOFact' *
+  419  vi Get_Paths
+  420  vi tomatoes
+  421  r
+  422  mkdir backup
+  423  vi backup/get_path
+  424  r
+  425  cat timecard 
+  426  r
+  427  vi houses 
+  428  vi houses 
+  429  ls
+  430  more analw 
+  431  rm analw 
+  432  more notes_on_sl 
+  433  rm notes_on_sl 
+  434  ls
+  435  mv whfoods nutrition/
+  436  mv vitamins nutrition/
+  437  vi houses 
+  438  cat temp_notes 
+  439  rm temp_notes 
+  440  cat tax_change 
+  441  ls
+  442  cat tnotes
+  443  rm tnotes 
+  444  mv tomatoes nutrition/
+  445  vi spending 
+  446  cd sina
+  447  cd workflow/sina/
+  448  git fetch
+  449  git checkout develop
+  450  git fetch
+  451  git pull
+  452  git stash
+  453  git pull
+  454  git fetch
+  455  git pull
+  456  ls -l /g/g0/pascal/sina/doe9_04.sqlite
+  457  ls -l /g/g0/pascal/doe9_04.sqlite
+  458  r
+  459  cd
+  460  vi old_code/o8
+  461  cd
+  462  cd Downloads/
+  463  mv "Plot Scatter 3.6 (3) (2) (1).ipynb" Plot_Scatter_June_2018.ipynb
+  464  r
+  465  cd nutrition/
+  466  vi composting
+  467  r
+  468  ls
+  469  more cartiod 
+  470  ls
+  471  more fasting 
+  472  cd nutrition/
+  473  ls
+  474  wget "http://sacmg.ucanr.edu/Monthly_Vegetable_Gardening_Tips/"
+  475  grub
+  476  brew install wget
+  477  sudo brew
+  478  cd
+  479  vi user-defined-sprint
+  480  alias
+  481  o
+  482  grep 'histogram' *
+  483  r
+  484  vi meeting_on_june_19
+  485  vi meeting_on_june_19
+  486  vi tesla_production
+  487  grep pin *
+  488  cat timecard 
+  489  more houses 
+  490  vi sq_notes
+  491  ls
+  492  cd ..
+  493  ls
+  494  grep uest *
+  495  vi list_of_more
+  496  cd Downloads/
+  497  rm *.ipynb
+  498  vi notes
+  499  vi notes
+  500  cat timecard 
+  501  cd
+  502  cd Downloads/
+  503  ls
+  504  cd ..
+  505  git clone https://github.com/dc-js/dc.js.git
+  506  cd dc-js
+  507  cd dc.js/
+  508  ls
+  509  npm install
+  510  grunt test
+  511  npm install -g grunt-cli
+  512  sudo npm install
+  513  sudo npm install -g grunt-cli
+  514  sudo npm install grunt --save-dev
+  515  grunt build
+  516  sudo npm install
+  517  grunt test
+  518  grunt server
+  519  history
+  520  ls
+  521  grep -rI '8888' *
+  522  grep -rI '8888' * | cut -c1-80
+  523  ls
+  524  grunt server
+  525  sudo fuser -k 8888/tcp
+  526  sudo lsof -t -i tcp:8888 | xargs kill -9
+  527  grunt server
+  528  history
+  529  history >>  setup_of_grunt_server
