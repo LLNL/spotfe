@@ -44,13 +44,13 @@
    - refactor Ravel d3.
    - Place ravel into a Vue if needed.
  */
-var RV = {};
+var RV = RV || {};
 
 RV.ravelView = function() {
 
   var toggle_view_ = function( right_toggle, that ) {
 
-    var cr = $(that).closest('.card--raised');
+    var cr = $(that).closest('body');
 
     var phy_over = cr.find('.physical-div').add( cr.find('.overview-div'));
     var step_divs = cr.find('.step-div').add( cr.find('.step-overview-div'));
@@ -81,7 +81,7 @@ RV.ravelView = function() {
 
   var toggle_lines_ = function( right_toggle, that ) {
 
-    var cr = $(that).closest('.card--raised');
+    var cr = $(that).closest('body');
     var line = cr.find('line');
 
     line[right_toggle ? 'show' : 'hide']();
@@ -121,7 +121,7 @@ RV.ravelView = function() {
 
     console.dir(RV.parent_anchor);
 
-    $('.card--raised:eq(' + index + ')').addClass(tag);
+    $('body').addClass(tag);
 
     //$('.highcharts-xaxis-labels text').prepend('<div class="open_ravel_button"></div>');
 
@@ -130,7 +130,7 @@ RV.ravelView = function() {
 
     $.ajax({
       mimeType: 'text/json; charset=x-user-defined',
-      url: '/static/ravel/data/ravel_init.json',
+      url: '/ravel/data/ravel_init.json',
       method: 'GET',
       dataType: 'json',
       data: {

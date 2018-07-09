@@ -12,20 +12,39 @@
   <script src="jslib/split.js"></script>
 
   <script src="jslib/ravel.js"></script>
-  <script src="jslib/ColorLatenessModel.js"></script>
-  <script src="jslib/crossfilter.js"></script>
-  <script src="jslib/physicalView.js"></script>
-  <script src="jslib/ravel.js"></script>
   <script src="jslib/ravelView.js"></script>
-  <script src="jslib/split.js"></script>
   <script src="jslib/stepView.js"></script>
+  <script src="jslib/physicalView.js"></script>
+  <script src="jslib/ColorLatenessModel.js"></script>
 
 </head>
 
 <body>
-  <div class="step split split-vertical step-div"></div>
-  <div class="physical split split-vertical physical-div"></div>
-  <div class="overview split split-vertical overview-div"></div>
+
+  <div class="parent_anchor_0">
+    <div class="step split split-vertical step-div"></div>
+    <div class="physical split split-vertical physical-div"></div>
+    <div class="overview.split split-vertical overview-div"></div>
+    <div class="overview split split-vertical step-overview-div"></div>
+    <div class="legend"></div>
+    <div class="switch_container">
+      <div class="switch_desc">
+        Chart type: <br>
+        <div class="chart_type">
+          Physical
+        </div>
+      </div>
+      <input class="cbox switch_view" type="checkbox"/>
+      <div class="switch_desc">
+        Show<br>
+        Lines:
+      </div>
+      <input class="cbox switch_lines" type="checkbox"/>
+      <div class="start_color"></div>
+      <div class="gradient_legend"></div>
+      <div class="end_color"></div>
+    </div>
+  </div>
 
 </body>
 </html>

@@ -675,7 +675,7 @@ var ravel = {
 
     $.ajax({
       mimeType: 'text/json; charset=x-user-defined',
-      url: '/static/ravel/data/navigate.json',
+      url: '/ravel/data/old_navigate.json',
       method: 'GET',
       dataType: 'json',
       data: {
@@ -891,3 +891,10 @@ var ravel = {
 
   };
 
+
+  $(document).ready(  function() {
+
+    //  setTimeout: just temporary.
+      //  TODO: get rid of setTimeout
+      RV.ravelView.render( "" , 0);
+  });

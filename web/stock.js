@@ -646,6 +646,16 @@ d3.csv('ndx.csv').then(function (data) {
         // (_optional_) custom renderlet to post-process chart using [D3](http://d3js.org)
         .on('renderlet', function (table) {
             table.selectAll('.dc-table-group').classed('info', true);
+
+            //  Make this happen after the render table.
+            jQuery('.myButton').unbind('click').bind('click', function() {
+
+                var subject = $(this).html().toLowerCase();
+
+                if( subject === 'mpi' ) {
+                    window.open('http://localhost:8888/ravel/');
+                }
+            });
         });
 
     /*

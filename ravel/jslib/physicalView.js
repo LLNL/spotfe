@@ -58,7 +58,9 @@ ravel.draw_physical = function ( anchor_tag, phys_x_scale, anchor_index ) {
           .attr('x1', 0) // function(d) { return ravel.phys_x_scale[anchor_index](minExtent); })
           .attr('y1', function(d) { return Math.round(ravel.phys_y_scale(d)) + 0.5; })
           .attr('x2', ravel.gantt_width)
-          .attr('y2', function(d) { return Math.round(ravel.phys_y_scale(d)) + 0.5; })
+          .attr('y2', function(d) {
+            return Math.round(ravel.phys_y_scale(d)) + 0.5;
+          })
           .attr('class', 'laneLines');
       }
 

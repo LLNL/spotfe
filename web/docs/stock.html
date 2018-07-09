@@ -2039,11 +2039,7 @@ This code demonstrates generating the column header automatically based on the c
             </div>
             
             <div class="content"><div class='highlight'><pre>        .on(<span class="hljs-string">'renderlet'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">table</span>) </span>{
-            table.selectAll(<span class="hljs-string">'.dc-table-group'</span>).classed(<span class="hljs-string">'info'</span>, <span class="hljs-literal">true</span>);
-        });
-
-    <span class="hljs-comment">/*
-</span></pre></div></div>
+            table.selectAll(<span class="hljs-string">'.dc-table-group'</span>).classed(<span class="hljs-string">'info'</span>, <span class="hljs-literal">true</span>);</pre></div></div>
             
         </li>
         
@@ -2054,9 +2050,22 @@ This code demonstrates generating the column header automatically based on the c
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-113">&#182;</a>
               </div>
-              <h4 id="geo-choropleth-chart">Geo Choropleth Chart</h4>
+              <p> Make this happen after the render table.</p>
 
             </div>
+            
+            <div class="content"><div class='highlight'><pre>            jQuery(<span class="hljs-string">'.myButton'</span>).unbind(<span class="hljs-string">'click'</span>).bind(<span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+
+                <span class="hljs-keyword">var</span> subject = $(<span class="hljs-keyword">this</span>).html().toLowerCase();
+
+                <span class="hljs-keyword">if</span>( subject === <span class="hljs-string">'mpi'</span> ) {
+                    <span class="hljs-built_in">window</span>.open(<span class="hljs-string">'http://localhost:8888/ravel/'</span>);
+                }
+            });
+        });
+
+    <span class="hljs-comment">/*
+</span></pre></div></div>
             
         </li>
         
@@ -2066,6 +2075,19 @@ This code demonstrates generating the column header automatically based on the c
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-114">&#182;</a>
+              </div>
+              <h4 id="geo-choropleth-chart">Geo Choropleth Chart</h4>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-115">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-115">&#182;</a>
               </div>
               <p>Create a choropleth chart and use the given css selector as anchor. You can also specify
 an optional chart group for this chart to be scoped within. When a chart belongs
@@ -2081,11 +2103,11 @@ on other charts within the same chart group.
         </li>
         
         
-        <li id="section-115">
+        <li id="section-116">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-115">&#182;</a>
+                <a class="pilcrow" href="#section-116">&#182;</a>
               </div>
               <p>(<em>optional</em>) define chart width, default 200</p>
 
@@ -2096,11 +2118,11 @@ on other charts within the same chart group.
         </li>
         
         
-        <li id="section-116">
+        <li id="section-117">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-116">&#182;</a>
+                <a class="pilcrow" href="#section-117">&#182;</a>
               </div>
               <p>(optional) define chart height, default 200</p>
 
@@ -2111,11 +2133,11 @@ on other charts within the same chart group.
         </li>
         
         
-        <li id="section-117">
+        <li id="section-118">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-117">&#182;</a>
+                <a class="pilcrow" href="#section-118">&#182;</a>
               </div>
               <p>(optional) define chart transition duration, default 1000</p>
 
@@ -2126,11 +2148,11 @@ on other charts within the same chart group.
         </li>
         
         
-        <li id="section-118">
+        <li id="section-119">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-118">&#182;</a>
+                <a class="pilcrow" href="#section-119">&#182;</a>
               </div>
               <p>set crossfilter dimension, dimension key should match the name retrieved in geojson layer</p>
 
@@ -2141,11 +2163,11 @@ on other charts within the same chart group.
         </li>
         
         
-        <li id="section-119">
+        <li id="section-120">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-119">&#182;</a>
+                <a class="pilcrow" href="#section-120">&#182;</a>
               </div>
               <p>set crossfilter group</p>
 
@@ -2156,11 +2178,11 @@ on other charts within the same chart group.
         </li>
         
         
-        <li id="section-120">
+        <li id="section-121">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-120">&#182;</a>
+                <a class="pilcrow" href="#section-121">&#182;</a>
               </div>
               <p>(<em>optional</em>) define color function or array for bubbles</p>
 
@@ -2172,11 +2194,11 @@ on other charts within the same chart group.
         </li>
         
         
-        <li id="section-121">
+        <li id="section-122">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-121">&#182;</a>
+                <a class="pilcrow" href="#section-122">&#182;</a>
               </div>
               <p>(<em>optional</em>) define color domain to match your data domain if you want to bind data or color</p>
 
@@ -2187,11 +2209,11 @@ on other charts within the same chart group.
         </li>
         
         
-        <li id="section-122">
+        <li id="section-123">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-122">&#182;</a>
+                <a class="pilcrow" href="#section-123">&#182;</a>
               </div>
               <p>(<em>optional</em>) define color value accessor</p>
 
@@ -2202,11 +2224,11 @@ on other charts within the same chart group.
         </li>
         
         
-        <li id="section-123">
+        <li id="section-124">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-123">&#182;</a>
+                <a class="pilcrow" href="#section-124">&#182;</a>
               </div>
               <p>Project the given geojson. You can call this function multiple times with different geojson feed to generate
 multiple layers of geo paths.</p>
@@ -2226,11 +2248,11 @@ in order for the coloring to work properly</li>
         </li>
         
         
-        <li id="section-124">
+        <li id="section-125">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-124">&#182;</a>
+                <a class="pilcrow" href="#section-125">&#182;</a>
               </div>
               <p>(<em>optional</em>) closure to generate title for path, <code>default = d.key + &#39;: &#39; + d.value</code></p>
 
@@ -2243,11 +2265,11 @@ in order for the coloring to work properly</li>
         </li>
         
         
-        <li id="section-125">
+        <li id="section-126">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-125">&#182;</a>
+                <a class="pilcrow" href="#section-126">&#182;</a>
               </div>
               <h4 id="bubble-overlay-chart">Bubble Overlay Chart</h4>
 
@@ -2256,11 +2278,11 @@ in order for the coloring to work properly</li>
         </li>
         
         
-        <li id="section-126">
+        <li id="section-127">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-126">&#182;</a>
+                <a class="pilcrow" href="#section-127">&#182;</a>
               </div>
               <p>Create a overlay bubble chart and use the given css selector as anchor. You can also specify
 an optional chart group for this chart to be scoped within. When a chart belongs
@@ -2276,11 +2298,11 @@ on charts within the same chart group.
         </li>
         
         
-        <li id="section-127">
+        <li id="section-128">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-127">&#182;</a>
+                <a class="pilcrow" href="#section-128">&#182;</a>
               </div>
               <p>The bubble overlay chart does not generate its own svg element but rather reuses an existing
 svg to generate its overlay layer</p>
@@ -2292,11 +2314,11 @@ svg to generate its overlay layer</p>
         </li>
         
         
-        <li id="section-128">
+        <li id="section-129">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-128">&#182;</a>
+                <a class="pilcrow" href="#section-129">&#182;</a>
               </div>
               <p>(<em>optional</em>) define chart width, <code>default = 200</code></p>
 
@@ -2307,11 +2329,11 @@ svg to generate its overlay layer</p>
         </li>
         
         
-        <li id="section-129">
+        <li id="section-130">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-129">&#182;</a>
+                <a class="pilcrow" href="#section-130">&#182;</a>
               </div>
               <p>(<em>optional</em>) define chart height, <code>default = 200</code></p>
 
@@ -2322,11 +2344,11 @@ svg to generate its overlay layer</p>
         </li>
         
         
-        <li id="section-130">
+        <li id="section-131">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-130">&#182;</a>
+                <a class="pilcrow" href="#section-131">&#182;</a>
               </div>
               <p>(<em>optional</em>) define chart transition duration, <code>default = 1000</code></p>
 
@@ -2337,11 +2359,11 @@ svg to generate its overlay layer</p>
         </li>
         
         
-        <li id="section-131">
+        <li id="section-132">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-131">&#182;</a>
+                <a class="pilcrow" href="#section-132">&#182;</a>
               </div>
               <p>Set crossfilter dimension, dimension key should match the name retrieved in geo json layer</p>
 
@@ -2352,11 +2374,11 @@ svg to generate its overlay layer</p>
         </li>
         
         
-        <li id="section-132">
+        <li id="section-133">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-132">&#182;</a>
+                <a class="pilcrow" href="#section-133">&#182;</a>
               </div>
               <p>Set crossfilter group</p>
 
@@ -2367,11 +2389,11 @@ svg to generate its overlay layer</p>
         </li>
         
         
-        <li id="section-133">
+        <li id="section-134">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-133">&#182;</a>
+                <a class="pilcrow" href="#section-134">&#182;</a>
               </div>
               <p>Closure used to retrieve x value from multi-value group</p>
 
@@ -2382,11 +2404,11 @@ svg to generate its overlay layer</p>
         </li>
         
         
-        <li id="section-134">
+        <li id="section-135">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-134">&#182;</a>
+                <a class="pilcrow" href="#section-135">&#182;</a>
               </div>
               <p>Closure used to retrieve y value from multi-value group</p>
 
@@ -2397,11 +2419,11 @@ svg to generate its overlay layer</p>
         </li>
         
         
-        <li id="section-135">
+        <li id="section-136">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-135">&#182;</a>
+                <a class="pilcrow" href="#section-136">&#182;</a>
               </div>
               <p>(<em>optional</em>) define color function or array for bubbles</p>
 
@@ -2413,11 +2435,11 @@ svg to generate its overlay layer</p>
         </li>
         
         
-        <li id="section-136">
+        <li id="section-137">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-136">&#182;</a>
+                <a class="pilcrow" href="#section-137">&#182;</a>
               </div>
               <p>(<em>optional</em>) define color domain to match your data domain if you want to bind data or color</p>
 
@@ -2428,11 +2450,11 @@ svg to generate its overlay layer</p>
         </li>
         
         
-        <li id="section-137">
+        <li id="section-138">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-137">&#182;</a>
+                <a class="pilcrow" href="#section-138">&#182;</a>
               </div>
               <p>(<em>optional</em>) define color value accessor</p>
 
@@ -2443,11 +2465,11 @@ svg to generate its overlay layer</p>
         </li>
         
         
-        <li id="section-138">
+        <li id="section-139">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-138">&#182;</a>
+                <a class="pilcrow" href="#section-139">&#182;</a>
               </div>
               <p>Closure used to retrieve radius value from multi-value group</p>
 
@@ -2458,11 +2480,11 @@ svg to generate its overlay layer</p>
         </li>
         
         
-        <li id="section-139">
+        <li id="section-140">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-139">&#182;</a>
+                <a class="pilcrow" href="#section-140">&#182;</a>
               </div>
               <p>set radius scale</p>
 
@@ -2473,11 +2495,11 @@ svg to generate its overlay layer</p>
         </li>
         
         
-        <li id="section-140">
+        <li id="section-141">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-140">&#182;</a>
+                <a class="pilcrow" href="#section-141">&#182;</a>
               </div>
               <p>(<em>optional</em>) whether chart should render labels, <code>default = true</code></p>
 
@@ -2488,11 +2510,11 @@ svg to generate its overlay layer</p>
         </li>
         
         
-        <li id="section-141">
+        <li id="section-142">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-141">&#182;</a>
+                <a class="pilcrow" href="#section-142">&#182;</a>
               </div>
               <p>(<em>optional</em>) closure to generate label per bubble, <code>default = group.key</code></p>
 
@@ -2503,11 +2525,11 @@ svg to generate its overlay layer</p>
         </li>
         
         
-        <li id="section-142">
+        <li id="section-143">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-142">&#182;</a>
+                <a class="pilcrow" href="#section-143">&#182;</a>
               </div>
               <p>(<em>optional</em>) whether chart should render titles, <code>default = false</code></p>
 
@@ -2518,11 +2540,11 @@ svg to generate its overlay layer</p>
         </li>
         
         
-        <li id="section-143">
+        <li id="section-144">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-143">&#182;</a>
+                <a class="pilcrow" href="#section-144">&#182;</a>
               </div>
               <p>(<em>optional</em>) closure to generate title per bubble, <code>default = d.key + &#39;: &#39; + d.value</code></p>
 
@@ -2535,11 +2557,11 @@ svg to generate its overlay layer</p>
         </li>
         
         
-        <li id="section-144">
+        <li id="section-145">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-144">&#182;</a>
+                <a class="pilcrow" href="#section-145">&#182;</a>
               </div>
               <p>add data point to its layer dimension key that matches point name: it will be used to
 generate a bubble. Multiple data points can be added to the bubble overlay to generate
@@ -2553,11 +2575,11 @@ multiple bubbles.</p>
         </li>
         
         
-        <li id="section-145">
+        <li id="section-146">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-145">&#182;</a>
+                <a class="pilcrow" href="#section-146">&#182;</a>
               </div>
               <p>(<em>optional</em>) setting debug flag to true will generate a transparent layer on top of
 bubble overlay which can be used to obtain relative <code>x</code>,<code>y</code> coordinate for specific
@@ -2571,11 +2593,11 @@ data point, <code>default = false</code></p>
         </li>
         
         
-        <li id="section-146">
+        <li id="section-147">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-146">&#182;</a>
+                <a class="pilcrow" href="#section-147">&#182;</a>
               </div>
               <h4 id="rendering">Rendering</h4>
 
@@ -2584,11 +2606,11 @@ data point, <code>default = false</code></p>
         </li>
         
         
-        <li id="section-147">
+        <li id="section-148">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-147">&#182;</a>
+                <a class="pilcrow" href="#section-148">&#182;</a>
               </div>
               <p>simply call <code>.renderAll()</code> to render all charts on the page</p>
 
@@ -2601,11 +2623,11 @@ data point, <code>default = false</code></p>
         </li>
         
         
-        <li id="section-148">
+        <li id="section-149">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-148">&#182;</a>
+                <a class="pilcrow" href="#section-149">&#182;</a>
               </div>
               <p>Or you can render charts belonging to a specific chart group</p>
 
@@ -2616,11 +2638,11 @@ data point, <code>default = false</code></p>
         </li>
         
         
-        <li id="section-149">
+        <li id="section-150">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-149">&#182;</a>
+                <a class="pilcrow" href="#section-150">&#182;</a>
               </div>
               <p>Once rendered you can call <code>.redrawAll()</code> to update charts incrementally when the data
 changes, without re-rendering everything</p>
@@ -2632,11 +2654,11 @@ changes, without re-rendering everything</p>
         </li>
         
         
-        <li id="section-150">
+        <li id="section-151">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-150">&#182;</a>
+                <a class="pilcrow" href="#section-151">&#182;</a>
               </div>
               <p>Or you can choose to redraw only those charts associated with a specific chart group</p>
 
@@ -2650,11 +2672,11 @@ changes, without re-rendering everything</p>
         </li>
         
         
-        <li id="section-151">
+        <li id="section-152">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-151">&#182;</a>
+                <a class="pilcrow" href="#section-152">&#182;</a>
               </div>
               <h4 id="versions">Versions</h4>
 
@@ -2663,11 +2685,11 @@ changes, without re-rendering everything</p>
         </li>
         
         
-        <li id="section-152">
+        <li id="section-153">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-152">&#182;</a>
+                <a class="pilcrow" href="#section-153">&#182;</a>
               </div>
               <p>Determine the current version of dc with <code>dc.version</code></p>
 
@@ -2678,11 +2700,11 @@ changes, without re-rendering everything</p>
         </li>
         
         
-        <li id="section-153">
+        <li id="section-154">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-153">&#182;</a>
+                <a class="pilcrow" href="#section-154">&#182;</a>
               </div>
               <p>Determine latest stable version in the repo via Github API</p>
 

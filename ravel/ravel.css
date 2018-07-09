@@ -180,8 +180,8 @@ rect {
 .switch_container {
   z-index: 1000;
   position: absolute;
-  left: -40px;
-  top: -43px;
+  left: 40px;
+  top: 10px;
   background-color: #f9f9f9;
   border: 1px solid #efefef;
   padding: 8px 13px 0 3px;
@@ -312,3 +312,11 @@ div.start_color {
 	box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2),0 3px 4px 0 rgba(0,0,0,0.1);
 }
 
+.physical-div, .step-div {
+
+}
+
+.parent_anchor_0 {
+    height: 800px;
+    margin: 100px 0;
+}
