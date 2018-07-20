@@ -1,11 +1,12 @@
 //# dc.js Getting Started and How-To Guide
 'use strict';
 
+var ST = ST || {};
+
 /* jshint globalstrict: true */
 /* global dc,d3,crossfilter */
 
 // ### Create Chart Objects
-var runtimeChart = dc.barChart('#runtime-chart');
 
 // Create chart objects associated with the container elements identified by the css selector.
 // Note: It is often a good idea to have these objects accessible at the global scope so that they can be modified or
@@ -65,14 +66,14 @@ d3.csv('ndx.csv').then(function (data) {
     var dateFormatSpecifier = '%m/%d/%Y';
     var dateFormat = d3.timeFormat(dateFormatSpecifier);
     var dateFormatParser = d3.timeParse(dateFormatSpecifier);
-    var numberFormat = d3.format('.2f');
+    ST.numberFormat = d3.format('.2f');
 
     //  close, date, high, low, oi, open, volume
 
     data = SPOT_DATA.runs;
 
-    var authors = ['Luke Landers', 'Peter Robinson', 'Bin Etcera', 'Folder Maguson', 'Euro Tables', 'Tron Mandes', 'John Hancock',
-        'Al Render', 'Bobo Walls', 'Cat Snickers', 'Pepsi Magnoson', 'Mouse Nimble', 'Lolo Molo', 'Evan Snoopse', 'Wilder Ogli', 'Jimmy Napsack'];
+    var authors = ['Luke Landers', 'Peter Robinson', 'Bilkins Ecraa', 'Josh Maguson', 'Manie Davis', 'Tron Mandes', 'John Hancock',
+        'Al Render', 'Bobo Walls', 'Bob Smolders', 'Piny Magnoson', 'Nomo Strakes', 'Lolo Epinson', 'Evan Snoopse', 'Wilder Ogli', 'Jimmy Napsack'];
 
     for( var z=0; z < data.length; z++ ) {
 
@@ -199,14 +200,6 @@ d3.csv('ndx.csv').then(function (data) {
     var fluctuationGroup = fluctuation.group();
 
 
-        // Determine a histogram of percent changes
-    var runtime_dimension = ndx.dimension(function (d) {
-        return Math.round(d.runtime);
-    });
-
-    var runtime_group = runtime_dimension.group();
-
-
     // Summarize volume by quarter
     var quarter = ndx.dimension(function (d) {
         var month = d.dd.getMonth();
@@ -317,9 +310,9 @@ d3.csv('ndx.csv').then(function (data) {
         .title(function (p) {
             return [
                 p.key,
-                'Index Gain: ' + numberFormat(p.value.absGain),
-                'Index Gain in Percentage: ' + numberFormat(p.value.percentageGain) + '%',
-                'Fluctuation / Index Ratio: ' + numberFormat(p.value.fluctuationPercentage) + '%'
+                'Index Gain: ' + ST.numberFormat(p.value.absGain),
+                'Index Gain in Percentage: ' + ST.numberFormat(p.value.percentageGain) + '%',
+                'Fluctuation / Index Ratio: ' + ST.numberFormat(p.value.fluctuationPercentage) + '%'
             ].join('\n');
         })
         //#### Customize Axes
@@ -435,7 +428,7 @@ d3.csv('ndx.csv').then(function (data) {
         // Customize the filter displayed in the control span
         .filterPrinter(function (filters) {
             var filter = filters[0], s = '';
-            s += numberFormat(filter[0]) + '% -> ' + numberFormat(filter[1]) + '%';
+            s += ST.numberFormat(filter[0]) + '% -> ' + ST.numberFormat(filter[1]) + '%';
             return s;
         });
 
@@ -445,35 +438,7 @@ d3.csv('ndx.csv').then(function (data) {
     fluctuationChart.yAxis().ticks(5);
 
 
-
-    runtimeChart /* dc.barChart('#volume-month-chart', 'chartGroup') */
-        .width(980)
-        .height(180)
-        .margins({top: 10, right: 50, bottom: 30, left: 40})
-        .dimension(runtime_dimension)
-        .group(runtime_group)
-        .elasticY(true)
-        // (_optional_) whether bar should be center to its x value. Not needed for ordinal chart, `default=false`
-        .centerBar(true)
-        // (_optional_) set gap between bars manually in px, `default=2`
-        .gap(1)
-        // (_optional_) set filter brush rounding
-        .round(dc.round.floor)
-        .alwaysUseRounding(true)
-        .x(d3.scaleLinear().domain([0, 50]))
-        .renderHorizontalGridLines(true)
-        // Customize the filter displayed in the control span
-        .filterPrinter(function (filters) {
-            var filter = filters[0], s = '';
-            s += numberFormat(filter[0]) + '% -> ' + numberFormat(filter[1]) + '%';
-            return s;
-        });
-
-    // Customize axes
-    runtimeChart.xAxis().tickFormat(
-        function (v) { return v + 'ms'; });
-    runtimeChart.yAxis().ticks(5);
-
+    ST.RuntimeChart.render(ndx);
 
 
 
@@ -521,7 +486,7 @@ d3.csv('ndx.csv').then(function (data) {
             if (isNaN(value)) {
                 value = 0;
             }
-            return dateFormat(d.key) + '\n' + numberFormat(value);
+            return dateFormat(d.key) + '\n' + ST.numberFormat(value);
         });
 
     //#### Range Chart
@@ -615,7 +580,7 @@ d3.csv('ndx.csv').then(function (data) {
                 // Specify a custom format for column 'Change' by using a label with a function.
                 label: 'Change',
                 format: function (d) {
-                    return numberFormat(d.close - d.open);
+                    return ST.numberFormat(d.close - d.open);
                 }
             },
             // Use `d.volume`
@@ -697,7 +662,7 @@ d3.csv('ndx.csv').then(function (data) {
         })
         // (_optional_) closure to generate title for path, `default = d.key + ': ' + d.value`
         .title(function(d) {
-            return 'State: ' + d.key + '\nTotal Amount Raised: ' + numberFormat(d.value ? d.value : 0) + 'M';
+            return 'State: ' + d.key + '\nTotal Amount Raised: ' + ST.numberFormat(d.value ? d.value : 0) + 'M';
         });
 
         //#### Bubble Overlay Chart

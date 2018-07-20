@@ -33,13 +33,10 @@
 
         <div class="clearfix"></div>
     </div>
-</div>
-
-<div class="row">
 
     <div id="runtime-chart">
         <strong>Runtime</strong>
-        <a class="reset" href="javascript:runtimeChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
+        <a class="reset" href="javascript:ST.RuntimeChart.inst();" style="display: none;">reset</a>
     </div>
 
     <div id="gain-loss-chart">
@@ -70,9 +67,7 @@
 
         <div class="clearfix"></div>
     </div>
-</div>
 
-<div class="row">
     <div id="monthly-move-chart">
         <strong>Monthly Index Abs Move & Volume/500,000 Chart</strong>
         <span class="reset" style="display: none;">range: <span class="filter"></span></span>
@@ -81,9 +76,7 @@
 
         <div class="clearfix"></div>
     </div>
-</div>
 
-<div class="row">
     <div id="monthly-volume-chart">
     </div>
     <p class="muted pull-right" style="margin-right: 15px;">select a time range to zoom in</p>
@@ -111,6 +104,7 @@
 <script type="text/javascript" src="js/crossfilter.js"></script>
 <script type="text/javascript" src="js/dc.js"></script>
 
+<script src="js/RuntimeChart.js"></script>
 <script type="text/javascript" src="stock.js"></script>
 <script src="js/chavez-spot.js"></script>
 
