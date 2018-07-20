@@ -8,11 +8,17 @@ ST.RuntimeChart = function() {
 
         // Determine a histogram of percent changes
         var runtime_dimension = ndx.dimension(function (d) {
-            return Math.round(d.runtime);
+            return Math.round(d.runtime/1)*1;
         });
 
         var runtime_group = runtime_dimension.group();
 
+        var rcht = '<div id="runtime-chart"> \
+            <strong>Runtime</strong> \
+            <a class="reset" href="javascript:ST.RuntimeChart.reset();" style="display: none;">reset</a>\
+        </div>';
+
+        $('.row:eq(0)').append(rcht);
 
         inst_ = dc.barChart('#runtime-chart');
 
@@ -49,7 +55,7 @@ ST.RuntimeChart = function() {
 
     return {
         render: render_,
-        inst: function() {
+        reset: function() {
             inst_.filterAll();
             dc.redrawAll();
         }
