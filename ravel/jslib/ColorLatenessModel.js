@@ -75,20 +75,21 @@ RV.ColorLatenessModel = function() {
     .range([mod.from, mod.to]);
   };
 
-  var get_max_ = function(events) {
+    var get_max_ = function(events) {
 
-    var max = 0;
-    for( var x in events ) {
+        var max = 0;
+        for( var x in events ) {
 
-      events[x].lateness = events[x].lateness || 0;
+            var color_default = (+events[x].step) + (+events[x].entity);
+            events[x].lateness = events[x].lateness || color_default;
 
-      if( events[x].lateness > max) {
-        max = events[x].lateness;
-      }
-    }
+            if( events[x].lateness > max) {
+                max = events[x].lateness;
+            }
+        }
 
-    return max;
-  };
+        return max;
+    };
 
   var get_min_ = function(events) {
 
