@@ -36,6 +36,9 @@ RV.ColorLatenessModel = function() {
 
     d.lateness = d.lateness || 0;
 
+    if( !color_function_ ) {
+      alert('Color function has not been defined.  Run RV.ColorLatenessModel.normalize(), so I know how to scale the colors.  Thanks.');
+    }
     var rgb = color_function_(+d.lateness);
 
     rgb = rgb.substr(4);

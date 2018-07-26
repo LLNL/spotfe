@@ -130,7 +130,7 @@ RV.ravelView = function() {
 
     $.ajax({
       mimeType: 'text/json; charset=x-user-defined',
-      url: '/ravel/data/ravel_init.json',
+      url: '/ravel/data/navigate.json',  //ravel_init
       method: 'GET',
       dataType: 'json',
       data: {
@@ -144,7 +144,8 @@ RV.ravelView = function() {
       },
       success: function (ravel_init) {
 
-        //reinit_();
+        RV.ColorLatenessModel.normalize( ravel_init.traceinfo.events );
+
         init_ravel();
         ravel.init(ravel_init.traceinfo);
 

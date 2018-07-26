@@ -1,6 +1,26 @@
 //  come from ajax calls.
 var navigate, ravel_init;
 
+var validate_obj = function(o) {
+
+  if( o && typeof o === 'object') {
+
+  } else {
+    alert('Validate object failed.  ['+o+'] is not a object, but is expected to be.  Caller: ' + validate_obj.caller);
+  }
+};
+
+var validate_number = function(v) {
+  if( typeof v === 'number') {
+
+  } else {
+    alert('Validate number failed.  ['+v+'] is not a number, but is expected to be.  Caller: ' + arguments.callee.caller.name);
+  }
+  if(v < 0) {
+      alert('Validate number.  V is negative.  V='+v);
+  }
+};
+
 var ravel = {
     get_data_state: false,
     data: null,
@@ -449,11 +469,29 @@ var ravel = {
     ravel.parent_events_inst = ravel.parent_events_inst || [];
     ravel.parent_events_inst[RV.parent_index] = ravel.data.parent_events;
 
+    /*
+        Set the startime and stoptime to mintime and maxtime.
+        This was originally defined at the end of ravel_init.json but we're no
+        longer doing ajax calls for subsets.
+     */
+    ravel.data.stoptime = ravel.data.maxtime;
+    ravel.data.starttime = ravel.data.mintime;
+
+
+    validate_obj(ravel.data);
+
+    validate_number(ravel.data.mintime);
+    validate_number(ravel.data.maxtime);
+    validate_number(ravel.data.minstep);
+    validate_number(ravel.data.maxstep);
+    validate_number(ravel.data.stoptime);
+    validate_number(ravel.data.starttime);
 
     ravel.min_time = ravel.data.mintime;
     ravel.max_time = ravel.data.maxtime;
     ravel.min_step = ravel.data.minstep;
     ravel.max_step = ravel.data.maxstep;
+
     ravel.current_span = ravel.data.stoptime - ravel.data.starttime;
     ravel.current_step_span = 50; //ravel.data.stopstep - ravel.data.startstep;
 
@@ -466,9 +504,9 @@ var ravel = {
      *  Domain sets the min and max time.
      */
     ravel.mini_x_scale[RV.parent_index].domain([ravel.min_time, ravel.max_time]);
-    ravel.phys_x_scale[RV.parent_index].domain([ravel.data.starttime, ravel.data.stoptime]);
-    ravel.step_x_scale[RV.parent_index].domain([ravel.data.startstep, ravel.data.stopstep]);
-    ravel.step_mini_x_scale[RV.parent_index].domain([12,90]);    //  ravel.data.startstep, ravel.data.stopstep
+    ravel.phys_x_scale[RV.parent_index].domain([ravel.min_time, ravel.max_time]);  //  ravel.data.starttime,  ravel.data.stoptime
+    ravel.step_x_scale[RV.parent_index].domain([ravel.min_step, ravel.max_step]);
+    ravel.step_mini_x_scale[RV.parent_index].domain([ravel.min_step, ravel.max_step]);    //  ravel.data.startstep, ravel.data.stopstep
 
     //  I'm not sure what overview it's expecting here, but it wants a length operator.
     ravel.data.overview = [0,1000,2000,3000];
@@ -675,7 +713,7 @@ var ravel = {
 
     $.ajax({
       mimeType: 'text/json; charset=x-user-defined',
-      url: '/ravel/data/old_navigate.json',
+      url: '/ravel/data/navigate.json',
       method: 'GET',
       dataType: 'json',
       data: {
@@ -790,7 +828,7 @@ var ravel = {
   ravel.update = function (json, anchor_index, phys_x_scale) {
 
     ravel.data = json;
-    ravel.step_x_scale[anchor_index].domain([ravel.data.startstep, ravel.data.stopstep]);
+    ravel.step_x_scale[anchor_index].domain([ravel.data.minstep, ravel.data.maxstep]);
 
     var anchor_tag = '.parent_anchor_' + anchor_index + ' ';
     RV.parent_anchor = anchor_tag;

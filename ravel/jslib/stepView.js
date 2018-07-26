@@ -89,7 +89,10 @@
         .style('stroke-width', strokeWidth);
 
       rects.enter().append('rect')
-        .attr('x', d => { return ravel.step_x_scale[anchor_index](d.step) + barXoffset; })
+        .attr('x', d => {
+            var xstep = ravel.step_x_scale[anchor_index](d.step);
+          return xstep + barXoffset;
+        })
         .attr('y', d => { return ravel.step_y_scale(d.entity) + barYoffset; })
         .attr('style', RV.ColorLatenessModel.get)
         .attr('height', barHeight)
