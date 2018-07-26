@@ -150,7 +150,7 @@ rect {
 .legend table {
     border: 1px solid #aaaaaa;
     border-collapse: collapse;
-    box-shadow: 2px 2px 3px #aaa;
+    box-shadow: 2px 2px 3px #888888;
 }
 
 .legend table tr:nth-child(1) td {
@@ -169,11 +169,11 @@ rect {
 }
 
 .legend {
-  position: absolute;
-  top: 250px;
+  top: 10px;
   right: 80px;
   width: 100px;
   height: 200px;
+    margin: 0 0 0 30px;
 }
 
 
@@ -320,5 +320,5 @@ div.start_color {
 
 .parent_anchor_0 {
     height: 800px;
-    margin: 100px 0;
+    margin: 70px 0 0 0;
 }
