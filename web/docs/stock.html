@@ -62,7 +62,6 @@ filtered by other page controls.</p>
             
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> gainOrLossChart = dc.pieChart(<span class="hljs-string">'#gain-loss-chart'</span>);
 <span class="hljs-keyword">var</span> fluctuationChart = dc.barChart(<span class="hljs-string">'#fluctuation-chart'</span>);
-<span class="hljs-keyword">var</span> quarterChart = dc.pieChart(<span class="hljs-string">'#quarter-chart'</span>);
 <span class="hljs-keyword">var</span> dayOfWeekChart = dc.rowChart(<span class="hljs-string">'#day-of-week-chart'</span>);
 <span class="hljs-keyword">var</span> moveChart = dc.lineChart(<span class="hljs-string">'#monthly-move-chart'</span>);
 <span class="hljs-keyword">var</span> volumeChart = dc.barChart(<span class="hljs-string">'#monthly-volume-chart'</span>);
@@ -251,10 +250,25 @@ jQuery.getJson(<span class="hljs-string">'data.json'</span>, <span class="hljs-f
             </div>
             
             <div class="content"><div class='highlight'><pre>
-    data = SPOT_DATA.runs;
+    data = SPOT_DATA.runs;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <p> Reduce # of authors</p>
 
-    <span class="hljs-keyword">var</span> authors = [<span class="hljs-string">'Luke Landers'</span>, <span class="hljs-string">'Peter Robinson'</span>, <span class="hljs-string">'Bilkins Ecraa'</span>, <span class="hljs-string">'Josh Maguson'</span>, <span class="hljs-string">'Manie Davis'</span>, <span class="hljs-string">'Tron Mandes'</span>, <span class="hljs-string">'John Hancock'</span>,
-        <span class="hljs-string">'Al Render'</span>, <span class="hljs-string">'Bobo Walls'</span>, <span class="hljs-string">'Bob Smolders'</span>, <span class="hljs-string">'Piny Magnoson'</span>, <span class="hljs-string">'Nomo Strakes'</span>, <span class="hljs-string">'Lolo Epinson'</span>, <span class="hljs-string">'Evan Snoopse'</span>, <span class="hljs-string">'Wilder Ogli'</span>, <span class="hljs-string">'Jimmy Napsack'</span>];
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">for</span>( <span class="hljs-keyword">var</span> z=<span class="hljs-number">0</span>; z &lt; data.length; z++ ) {
+        data[z].author = data[z % <span class="hljs-number">40</span>].author;
+    }
+
 
     <span class="hljs-keyword">for</span>( <span class="hljs-keyword">var</span> z=<span class="hljs-number">0</span>; z &lt; data.length; z++ ) {
 
@@ -269,19 +283,20 @@ jQuery.getJson(<span class="hljs-string">'data.json'</span>, <span class="hljs-f
         data[z].oi = <span class="hljs-number">0</span>;
         data[z].volume = <span class="hljs-number">200</span>+ <span class="hljs-built_in">parseInt</span>(<span class="hljs-built_in">Math</span>.random()*<span class="hljs-number">8000</span>);
         data[z].open = <span class="hljs-number">112</span> + <span class="hljs-built_in">parseInt</span>(<span class="hljs-built_in">Math</span>.random()*<span class="hljs-number">240</span>);
-        data[z].runtime = <span class="hljs-built_in">parseInt</span>(<span class="hljs-built_in">Math</span>.random()*<span class="hljs-number">45</span>);
 
-        <span class="hljs-keyword">var</span> r = <span class="hljs-built_in">parseInt</span>( <span class="hljs-built_in">Math</span>.random() * <span class="hljs-number">7</span> );
-        data[z].author = authors[r];</pre></div></div>
+        <span class="hljs-keyword">var</span> diff = data[z].end - data[z].start;
+        data[z].runtime = <span class="hljs-built_in">parseInt</span>(diff/<span class="hljs-number">3600</span>);
+
+        data[z].long_runtimes = (data[z].runtime &gt;= <span class="hljs-number">12</span>) ? <span class="hljs-string">"Long"</span> : <span class="hljs-string">"Short"</span>;</pre></div></div>
             
         </li>
         
         
-        <li id="section-15">
+        <li id="section-16">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-15">&#182;</a>
+                <a class="pilcrow" href="#section-16">&#182;</a>
               </div>
               <pre><code>   data[z].buttons = data[z].buttons || (<span class="hljs-built_in">Math</span>.random() * <span class="hljs-number">4</span> &gt; <span class="hljs-number">2</span> ? [<span class="hljs-string">"ravel"</span>, <span class="hljs-string">"vale43d"</span>, <span class="hljs-string">"spot"</span>] : [<span class="hljs-string">"spot"</span>]);
 </code></pre>
@@ -300,11 +315,11 @@ jQuery.getJson(<span class="hljs-string">'data.json'</span>, <span class="hljs-f
         </li>
         
         
-        <li id="section-16">
+        <li id="section-17">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-16">&#182;</a>
+                <a class="pilcrow" href="#section-17">&#182;</a>
               </div>
               <h3 id="create-crossfilter-dimensions-and-groups">Create Crossfilter Dimensions and Groups</h3>
 
@@ -313,11 +328,11 @@ jQuery.getJson(<span class="hljs-string">'data.json'</span>, <span class="hljs-f
         </li>
         
         
-        <li id="section-17">
+        <li id="section-18">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-17">&#182;</a>
+                <a class="pilcrow" href="#section-18">&#182;</a>
               </div>
               <p>See the <a href="https://github.com/square/crossfilter/wiki/API-Reference">crossfilter API</a> for reference.</p>
 
@@ -329,11 +344,11 @@ jQuery.getJson(<span class="hljs-string">'data.json'</span>, <span class="hljs-f
         </li>
         
         
-        <li id="section-18">
+        <li id="section-19">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-18">&#182;</a>
+                <a class="pilcrow" href="#section-19">&#182;</a>
               </div>
               <p>Dimension by full date</p>
 
@@ -346,11 +361,11 @@ jQuery.getJson(<span class="hljs-string">'data.json'</span>, <span class="hljs-f
         </li>
         
         
-        <li id="section-19">
+        <li id="section-20">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-19">&#182;</a>
+                <a class="pilcrow" href="#section-20">&#182;</a>
               </div>
               <p>Dimension by month</p>
 
@@ -363,11 +378,11 @@ jQuery.getJson(<span class="hljs-string">'data.json'</span>, <span class="hljs-f
         </li>
         
         
-        <li id="section-20">
+        <li id="section-21">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-20">&#182;</a>
+                <a class="pilcrow" href="#section-21">&#182;</a>
               </div>
               <p>Group by total movement within month</p>
 
@@ -380,11 +395,11 @@ jQuery.getJson(<span class="hljs-string">'data.json'</span>, <span class="hljs-f
         </li>
         
         
-        <li id="section-21">
+        <li id="section-22">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-21">&#182;</a>
+                <a class="pilcrow" href="#section-22">&#182;</a>
               </div>
               <p>Group by total volume within move, and scale down result</p>
 
@@ -414,11 +429,11 @@ jQuery.getJson(<span class="hljs-string">'data.json'</span>, <span class="hljs-f
         </li>
         
         
-        <li id="section-22">
+        <li id="section-23">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-22">&#182;</a>
+                <a class="pilcrow" href="#section-23">&#182;</a>
               </div>
               <p>Create categorical dimension</p>
 
@@ -431,11 +446,11 @@ jQuery.getJson(<span class="hljs-string">'data.json'</span>, <span class="hljs-f
         </li>
         
         
-        <li id="section-23">
+        <li id="section-24">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-23">&#182;</a>
+                <a class="pilcrow" href="#section-24">&#182;</a>
               </div>
               <p>Produce counts records in the dimension</p>
 
@@ -446,11 +461,11 @@ jQuery.getJson(<span class="hljs-string">'data.json'</span>, <span class="hljs-f
         </li>
         
         
-        <li id="section-24">
+        <li id="section-25">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-24">&#182;</a>
+                <a class="pilcrow" href="#section-25">&#182;</a>
               </div>
               <p>Determine a histogram of percent changes</p>
 
@@ -460,36 +475,6 @@ jQuery.getJson(<span class="hljs-string">'data.json'</span>, <span class="hljs-f
         <span class="hljs-keyword">return</span> <span class="hljs-built_in">Math</span>.round((d.close - d.open) / d.open * <span class="hljs-number">100</span>);
     });
     <span class="hljs-keyword">var</span> fluctuationGroup = fluctuation.group();</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-25">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-25">&#182;</a>
-              </div>
-              <p>Summarize volume by quarter</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> quarter = ndx.dimension(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{
-        <span class="hljs-keyword">var</span> month = d.dd.getMonth();
-        <span class="hljs-keyword">if</span> (month &lt;= <span class="hljs-number">2</span>) {
-            <span class="hljs-keyword">return</span> <span class="hljs-string">'Q1'</span>;
-        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (month &gt; <span class="hljs-number">2</span> &amp;&amp; month &lt;= <span class="hljs-number">5</span>) {
-            <span class="hljs-keyword">return</span> <span class="hljs-string">'Q2'</span>;
-        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (month &gt; <span class="hljs-number">5</span> &amp;&amp; month &lt;= <span class="hljs-number">8</span>) {
-            <span class="hljs-keyword">return</span> <span class="hljs-string">'Q3'</span>;
-        } <span class="hljs-keyword">else</span> {
-            <span class="hljs-keyword">return</span> <span class="hljs-string">'Q4'</span>;
-        }
-    });
-
-    <span class="hljs-keyword">var</span> quarterGroup = quarter.group().reduceSum(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{
-        <span class="hljs-keyword">return</span> d.volume;
-    });</pre></div></div>
             
         </li>
         
@@ -540,7 +525,25 @@ jQuery.getJson(<span class="hljs-string">'data.json'</span>, <span class="hljs-f
             </div>
             
             <div class="content"><div class='highlight'><pre>
-    ST.BubbleChart.render( ndx );</pre></div></div>
+    ST.BubbleChart.render( ndx );
+
+    ST.PieChart.render( ndx, {
+        <span class="hljs-attr">title</span>: <span class="hljs-string">"Authors"</span>,
+        <span class="hljs-attr">iterator_attribute</span>: <span class="hljs-string">"author"</span>,
+        <span class="hljs-attr">inner_radius</span>: <span class="hljs-number">0</span>
+    } );
+
+    ST.PieChart.render( ndx, {
+        <span class="hljs-attr">title</span>: <span class="hljs-string">"Long Runtime"</span>,
+        <span class="hljs-attr">iterator_attribute</span>: <span class="hljs-string">"long_runtimes"</span>,
+        <span class="hljs-attr">inner_radius</span>: <span class="hljs-number">30</span>
+    } );
+
+    ST.PieChart.render( ndx, {
+        <span class="hljs-attr">title</span>: <span class="hljs-string">"Program"</span>,
+        <span class="hljs-attr">iterator_attribute</span>: <span class="hljs-string">"program"</span>,
+        <span class="hljs-attr">inner_radius</span>: <span class="hljs-number">0</span>
+    } );</pre></div></div>
             
         </li>
         
@@ -782,15 +785,7 @@ on other charts within the same chart group.
             </div>
             
             <div class="content"><div class='highlight'><pre>        .colorAccessor(function(d, i){return d.value;})
-        */;
-
-    quarterChart /* dc.pieChart('#quarter-chart', 'chartGroup') */
-        .width(180)
-        .height(180)
-        .radius(80)
-        .innerRadius(30)
-        .dimension(quarter)
-        .group(quarterGroup);</pre></div></div>
+        */;</pre></div></div>
             
         </li>
         
@@ -823,8 +818,8 @@ on other charts within the same chart group.
             </div>
             
             <div class="content"><div class='highlight'><pre>    dayOfWeekChart <span class="hljs-comment">/* dc.rowChart('#day-of-week-chart', 'chartGroup') */</span>
-        .width(<span class="hljs-number">180</span>)
-        .height(<span class="hljs-number">180</span>)
+        .width(<span class="hljs-number">240</span>)
+        .height(<span class="hljs-number">950</span>)
         .margins({<span class="hljs-attr">top</span>: <span class="hljs-number">20</span>, <span class="hljs-attr">left</span>: <span class="hljs-number">10</span>, <span class="hljs-attr">right</span>: <span class="hljs-number">10</span>, <span class="hljs-attr">bottom</span>: <span class="hljs-number">20</span>})
         .group(dayOfWeekGroup)
         .dimension(dayOfWeek)</pre></div></div>

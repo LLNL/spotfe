@@ -23,7 +23,7 @@ ST.RuntimeChart = function() {
         inst_ = dc.barChart('#runtime-chart');
 
         inst_ /* dc.barChart('#volume-month-chart', 'chartGroup') */
-            .width(980)
+            .width(760)
             .height(180)
             .margins({top: 10, right: 50, bottom: 30, left: 40})
             .dimension(runtime_dimension)
@@ -36,7 +36,7 @@ ST.RuntimeChart = function() {
             // (_optional_) set filter brush rounding
             .round(dc.round.floor)
             .alwaysUseRounding(true)
-            .x(d3.scaleLinear().domain([0, 50]))
+            .x(d3.scaleLinear().domain([0, 24]))
             .renderHorizontalGridLines(true)
             // Customize the filter displayed in the control span
             .filterPrinter(function (filters) {
@@ -48,7 +48,7 @@ ST.RuntimeChart = function() {
         // Customize axes
         inst_.xAxis().tickFormat(
             function (v) {
-                return v + 'ms';
+                return v + 'h';
             });
         inst_.yAxis().ticks(5);
     };

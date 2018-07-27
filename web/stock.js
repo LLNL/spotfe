@@ -13,7 +13,6 @@ var ST = ST || {};
 // filtered by other page controls.
 var gainOrLossChart = dc.pieChart('#gain-loss-chart');
 var fluctuationChart = dc.barChart('#fluctuation-chart');
-var quarterChart = dc.pieChart('#quarter-chart');
 var dayOfWeekChart = dc.rowChart('#day-of-week-chart');
 var moveChart = dc.lineChart('#monthly-move-chart');
 var volumeChart = dc.barChart('#monthly-volume-chart');
@@ -71,8 +70,11 @@ d3.csv('ndx.csv').then(function (data) {
 
     data = SPOT_DATA.runs;
 
-    var authors = ['Luke Landers', 'Peter Robinson', 'Bilkins Ecraa', 'Josh Maguson', 'Manie Davis', 'Tron Mandes', 'John Hancock',
-        'Al Render', 'Bobo Walls', 'Bob Smolders', 'Piny Magnoson', 'Nomo Strakes', 'Lolo Epinson', 'Evan Snoopse', 'Wilder Ogli', 'Jimmy Napsack'];
+    //  Reduce # of authors
+    for( var z=0; z < data.length; z++ ) {
+        data[z].author = data[z % 40].author;
+    }
+
 
     for( var z=0; z < data.length; z++ ) {
 
@@ -87,10 +89,12 @@ d3.csv('ndx.csv').then(function (data) {
         data[z].oi = 0;
         data[z].volume = 200+ parseInt(Math.random()*8000);
         data[z].open = 112 + parseInt(Math.random()*240);
-        data[z].runtime = parseInt(Math.random()*45);
 
-        var r = parseInt( Math.random() * 7 );
-        data[z].author = authors[r];
+        var diff = data[z].end - data[z].start;
+        data[z].runtime = parseInt(diff/3600);
+
+        data[z].long_runtimes = (data[z].runtime >= 12) ? "Long" : "Short";
+
 //        data[z].buttons = data[z].buttons || (Math.random() * 4 > 2 ? ["ravel", "vale43d", "spot"] : ["spot"]);
         data[z].buttons = data[z].data;
     }
@@ -158,23 +162,6 @@ d3.csv('ndx.csv').then(function (data) {
     var fluctuationGroup = fluctuation.group();
 
 
-    // Summarize volume by quarter
-    var quarter = ndx.dimension(function (d) {
-        var month = d.dd.getMonth();
-        if (month <= 2) {
-            return 'Q1';
-        } else if (month > 2 && month <= 5) {
-            return 'Q2';
-        } else if (month > 5 && month <= 8) {
-            return 'Q3';
-        } else {
-            return 'Q4';
-        }
-    });
-
-    var quarterGroup = quarter.group().reduceSum(function (d) {
-        return d.volume;
-    });
 
     // Counts per weekday
     var dayOfWeek = ndx.dimension(function (d) {
@@ -192,6 +179,25 @@ d3.csv('ndx.csv').then(function (data) {
     //#### Bubble Chart
 
     ST.BubbleChart.render( ndx );
+
+    ST.PieChart.render( ndx, {
+        title: "Authors",
+        iterator_attribute: "author",
+        inner_radius: 0
+    } );
+
+    ST.PieChart.render( ndx, {
+        title: "Long Runtime",
+        iterator_attribute: "long_runtimes",
+        inner_radius: 30
+    } );
+
+    ST.PieChart.render( ndx, {
+        title: "Program",
+        iterator_attribute: "program",
+        inner_radius: 0
+    } );
+
     //Create a bubble chart and use the given css selector as anchor. You can also specify
     //an optional chart group for this chart to be scoped within. When a chart belongs
     //to a specific group then any interaction with the chart will only trigger redraws
@@ -244,13 +250,7 @@ d3.csv('ndx.csv').then(function (data) {
         .colorAccessor(function(d, i){return d.value;})
         */;
 
-    quarterChart /* dc.pieChart('#quarter-chart', 'chartGroup') */
-        .width(180)
-        .height(180)
-        .radius(80)
-        .innerRadius(30)
-        .dimension(quarter)
-        .group(quarterGroup);
+
 
     //#### Row Chart
 
@@ -260,8 +260,8 @@ d3.csv('ndx.csv').then(function (data) {
     // on other charts within the same chart group.
     // <br>API: [Row Chart](https://github.com/dc-js/dc.js/blob/master/web/docs/api-latest.md#row-chart)
     dayOfWeekChart /* dc.rowChart('#day-of-week-chart', 'chartGroup') */
-        .width(180)
-        .height(180)
+        .width(240)
+        .height(950)
         .margins({top: 20, left: 10, right: 10, bottom: 20})
         .group(dayOfWeekGroup)
         .dimension(dayOfWeek)

@@ -366,3 +366,19 @@ div.dc-html-legend {
 	position:relative;
 	top:1px;
 }
+
+#quarter-chart .pie-slice {
+    fill: #000000;
+}
+
+body .container {
+  width: 1280px;
+}
+
+body .dc-chart g.row text {
+  fill: #000000;
+}
+
+#day-of-week-chart {
+  margin: 0 26px 0 0;
+}

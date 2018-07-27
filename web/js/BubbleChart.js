@@ -19,6 +19,7 @@ ST.BubbleChart = function() {
         var yearlyDimension = ndx.dimension(function (d) {
             return d3.timeYear(d.dd).getFullYear();
         });
+
         // Maintain running tallies by year as filters are applied or removed
         var yearlyPerformanceGroup = yearlyDimension.group().reduce(
             /* callback for when data is added to the current filter results */
