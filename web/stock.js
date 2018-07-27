@@ -92,6 +92,7 @@ d3.csv('ndx.csv').then(function (data) {
 
         var diff = data[z].end - data[z].start;
         data[z].runtime = parseInt(diff/3600);
+        data[z].thermal = parseInt(Math.random()*500);
 
         data[z].long_runtimes = (data[z].runtime >= 12) ? "Long" : "Short";
 
@@ -439,8 +440,10 @@ d3.csv('ndx.csv').then(function (data) {
         // Data table does not use crossfilter group but rather a closure
         // as a grouping function
         .group(function (d) {
+
             var format = d3.format('02d');
-            return d.dd.getFullYear() + '/' + format((d.dd.getMonth() + 1));
+            var date = new Date(d.start*1000);
+            return date.getFullYear() + '/' + format((date.getMonth() + 1));
         })
         // (_optional_) max number of records to be shown, `default = 25`
         .size(50)
@@ -450,17 +453,15 @@ d3.csv('ndx.csv').then(function (data) {
             // Use the `d.date` field; capitalized automatically
             'date',
             // Use `d.open`, `d.close`
-            'open',
-            'close',
+            'long_runtimes',
+            'runtime',
             {
                 // Specify a custom format for column 'Change' by using a label with a function.
-                label: 'Change',
+                label: 'Thermal',
                 format: function (d) {
-                    return ST.numberFormat(d.close - d.open);
+                    return ST.numberFormat(d.thermal);
                 }
             },
-            // Use `d.volume`
-            'volume',
             {
                 label: 'Operations',
                 format: function(d) {
