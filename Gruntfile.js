@@ -85,7 +85,7 @@ module.exports = function (grunt) {
                     '<%= conf.spec %>/**/*.js',
                     'Gruntfile.js',
                     'grunt/*.js',
-                    '<%= conf.web %>/stock.js'],
+                    '<%= conf.web %>/ChartCollection.js'],
                 options: {
                     config: '.jscsrc'
                 }
@@ -99,7 +99,7 @@ module.exports = function (grunt) {
                     '<%= conf.spec %>/**/*.js',
                     'Gruntfile.js',
                     'grunt/*.js',
-                    '<%= conf.web %>/stock.js'
+                    '<%= conf.web %>/ChartCollection.js'
                 ],
                 options: {
                     jshintrc: '.jshintrc'
@@ -112,7 +112,7 @@ module.exports = function (grunt) {
                 tasks: ['build', 'jsdoc', 'jsdoc2md']
             },
             scripts: {
-                files: ['<%= conf.src %>/**/*.js', '<%= conf.web %>/stock.js'],
+                files: ['<%= conf.src %>/**/*.js', '<%= conf.web %>/ChartCollection.js'],
                 tasks: ['docs']
             },
             sass: {
@@ -314,7 +314,7 @@ module.exports = function (grunt) {
                     {
                         expand: true,
                         cwd: '<%= conf.web %>',
-                        src: ['stock.js']
+                        src: ['ChartCollection.js']
                     }
                 ]
             }

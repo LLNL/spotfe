@@ -23,7 +23,7 @@ ST.RuntimeChart = function() {
         inst_ = dc.barChart('#runtime-chart');
 
         inst_ /* dc.barChart('#volume-month-chart', 'chartGroup') */
-            .width(760)
+            .width(600)
             .height(180)
             .margins({top: 10, right: 50, bottom: 30, left: 40})
             .dimension(runtime_dimension)

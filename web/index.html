@@ -23,19 +23,19 @@
 <body>
 
 <div class="container">
+<div id="day-of-week-chart">
+    <strong>Code Author</strong>
+    <a class="reset" href="javascript:dayOfWeekChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
 
-    <div id="day-of-week-chart">
-        <strong>Code Author</strong>
-        <a class="reset" href="javascript:dayOfWeekChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
+    <div class="clearfix"></div>
+</div>
 
-        <div class="clearfix"></div>
-    </div>
-
+<div class="inner_container">
 
     <div class="row">
 
         <div id="monthly-move-chart">
-            <strong>Monthly Index Abs Move & Volume/500,000 Chart</strong>
+            <strong>Disk IO Volume</strong>
             <span class="reset" style="display: none;">range: <span class="filter"></span></span>
             <a class="reset" href="javascript:moveChart.filterAll();volumeChart.filterAll();dc.redrawAll();"
                style="display: none;">reset</a>
@@ -73,7 +73,7 @@
 <script src="js/RuntimeChart.js"></script>
 <script src="js/BubbleChart.js"></script>
 <script src="js/PieChart.js"></script>
-<script type="text/javascript" src="stock.js"></script>
+<script type="text/javascript" src="ChartCollection.js"></script>
 <script src="js/chavez-spot.js"></script>
 
 </body>

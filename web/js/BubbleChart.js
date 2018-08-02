@@ -7,7 +7,7 @@ ST.BubbleChart = function() {
     var render_ = function( ndx ) {
 
         var rcht =     '<div id="yearly-bubble-chart" class="dc-chart">\
-        <strong>Yearly Performance</strong> (radius: Runtime, color: Thermal)\
+        <strong>Yearly Runtime Performance</strong> (radius: Runtime, color: Thermal)\
         <a class="reset" href="javascript:ST.BubbleChart.reset();"\
            style="display: none;">reset</a>\
         <div class="clearfix"></div>\

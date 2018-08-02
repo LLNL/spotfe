@@ -51,6 +51,13 @@ var nasdaqTable = dc.dataTable('.dc-data-table');
 
 //### Load your data
 
+var reduce_authors = function( data ) {
+
+    for( var z=0; z < data.length; z++ ) {
+        data[z].author = data[z % 25].author;
+    }
+};
+
 //Data can be loaded through regular means with your
 //favorite javascript library
 //
@@ -71,12 +78,13 @@ d3.csv('ndx.csv').then(function (data) {
     data = SPOT_DATA.runs;
 
     //  Reduce # of authors
-    for( var z=0; z < data.length; z++ ) {
-        data[z].author = data[z % 40].author;
-    }
+    //reduce_authors(data);
 
+    var uniq_author_count = {};
 
     for( var z=0; z < data.length; z++ ) {
+
+        uniq_author_count[data[z].author] = 1;
 
         var month = parseInt(Math.random()*12);
         var day = parseInt(Math.random()*30);
@@ -94,11 +102,13 @@ d3.csv('ndx.csv').then(function (data) {
         data[z].runtime = parseInt(diff/3600);
         data[z].thermal = parseInt(Math.random()*500);
 
-        data[z].long_runtimes = (data[z].runtime >= 12) ? "Long" : "Short";
+        data[z].thermal_variance = (data[z].runtime >= 8) ? "Above" : "Below";
 
 //        data[z].buttons = data[z].buttons || (Math.random() * 4 > 2 ? ["ravel", "vale43d", "spot"] : ["spot"]);
         data[z].buttons = data[z].data;
     }
+
+    var number_of_authors = Object.keys(uniq_author_count).length;
 
     data.forEach(function (d) {
         d.dd = dateFormatParser(d.date);
@@ -181,15 +191,15 @@ d3.csv('ndx.csv').then(function (data) {
 
     ST.BubbleChart.render( ndx );
 
-    ST.PieChart.render( ndx, {
+/*    ST.PieChart.render( ndx, {
         title: "Authors",
         iterator_attribute: "author",
         inner_radius: 0
     } );
-
+*/
     ST.PieChart.render( ndx, {
-        title: "Long Runtime",
-        iterator_attribute: "long_runtimes",
+        title: "Thermal Variance",
+        iterator_attribute: "thermal_variance",
         inner_radius: 30
     } );
 
@@ -255,6 +265,7 @@ d3.csv('ndx.csv').then(function (data) {
 
     //#### Row Chart
 
+    var height = number_of_authors * 25;
     // Create a row chart and use the given css selector as anchor. You can also specify
     // an optional chart group for this chart to be scoped within. When a chart belongs
     // to a specific group then any interaction with such chart will only trigger redraw
@@ -262,7 +273,7 @@ d3.csv('ndx.csv').then(function (data) {
     // <br>API: [Row Chart](https://github.com/dc-js/dc.js/blob/master/web/docs/api-latest.md#row-chart)
     dayOfWeekChart /* dc.rowChart('#day-of-week-chart', 'chartGroup') */
         .width(240)
-        .height(950)
+        .height(height)
         .margins({top: 20, left: 10, right: 10, bottom: 20})
         .group(dayOfWeekGroup)
         .dimension(dayOfWeek)
@@ -348,13 +359,13 @@ d3.csv('ndx.csv').then(function (data) {
         // Add the base layer of the stack with group. The second parameter specifies a series name for use in the
         // legend.
         // The `.valueAccessor` will be used for the base layer
-        .group(indexAvgByMonthGroup, 'Monthly Index Average')
+        .group(indexAvgByMonthGroup, 'Lateral')
         .valueAccessor(function (d) {
             return d.value.avg;
         })
         // Stack additional layers with `.stack`. The first paramenter is a new group.
         // The second parameter is the series name. The third is a value accessor.
-        .stack(monthlyMoveGroup, 'Monthly Index Move', function (d) {
+        .stack(monthlyMoveGroup, 'Scummy', function (d) {
             return d.value;
         })
         // Title can be called by any stack layer.
@@ -453,7 +464,7 @@ d3.csv('ndx.csv').then(function (data) {
             // Use the `d.date` field; capitalized automatically
             'date',
             // Use `d.open`, `d.close`
-            'long_runtimes',
+            'thermal_variance',
             'runtime',
             {
                 // Specify a custom format for column 'Change' by using a label with a function.
