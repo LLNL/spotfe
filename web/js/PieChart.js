@@ -22,7 +22,8 @@ ST.PieChart = function() {
         });
 
         var quarterGroup = quarter.group().reduceSum(function (d) {
-            return d.volume;
+            //  This can be whatever variable you want to sum up in the pie chart, for example total runtime, etc.
+            return 1;
         });
 
         quarterChart[id_] = dc.pieChart('#quarter-chart' + id_ );

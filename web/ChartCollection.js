@@ -73,7 +73,6 @@ d3.csv('ndx.csv').then(function (data) {
     var dateFormatParser = d3.timeParse(dateFormatSpecifier);
     ST.numberFormat = d3.format('.2f');
 
-    //  close, date, high, low, oi, open, volume
 
     data = SPOT_DATA.runs;
 
@@ -86,17 +85,13 @@ d3.csv('ndx.csv').then(function (data) {
 
         uniq_author_count[data[z].author] = 1;
 
-        var month = parseInt(Math.random()*12);
-        var day = parseInt(Math.random()*30);
-        var year = 1985 + parseInt(Math.random()*25);
+        var spot_date = new Date( data[z].start * 1000 );
 
-        data[z].close = parseInt(123 + Math.random()*315);
+        var month = spot_date.getMonth() + 1;
+        var day = spot_date.getDate();
+        var year = spot_date.getFullYear();
+
         data[z].date = month + "/" + day + "/" + year;
-        data[z].high = 128 + parseInt(Math.random()*670);
-        data[z].low = 115 + parseInt(Math.random()*14);
-        data[z].oi = 0;
-        data[z].volume = 200+ parseInt(Math.random()*8000);
-        data[z].open = 112 + parseInt(Math.random()*240);
 
         var diff = data[z].end - data[z].start;
         data[z].runtime = parseInt(diff/3600);
@@ -133,24 +128,26 @@ d3.csv('ndx.csv').then(function (data) {
     var moveMonths = ndx.dimension(function (d) {
         return d.month;
     });
-    // Group by total movement within month
-    var monthlyMoveGroup = moveMonths.group().reduceSum(function (d) {
-        return Math.abs(d.close - d.open);
+    // Total Runtimes per month
+    var scummy = moveMonths.group().reduceSum(function (d) {
+        return d.runtime;
     });
     // Group by total volume within move, and scale down result
     var volumeByMonthGroup = moveMonths.group().reduceSum(function (d) {
-        return d.volume / 500000;
+        return d.runtime;
     });
-    var indexAvgByMonthGroup = moveMonths.group().reduce(
+
+    //  Average runtimes by month.
+    var lateral = moveMonths.group().reduce(
         function (p, v) {
             ++p.days;
-            p.total += (v.open + v.close) / 2;
+            p.total += (v.runtime);
             p.avg = Math.round(p.total / p.days);
             return p;
         },
         function (p, v) {
             --p.days;
-            p.total -= (v.open + v.close) / 2;
+            p.total -= (v.runtime);
             p.avg = p.days ? Math.round(p.total / p.days) : 0;
             return p;
         },
@@ -346,7 +343,7 @@ d3.csv('ndx.csv').then(function (data) {
         .mouseZoomable(true)
     // Specify a "range chart" to link its brush extent with the zoom of the current "focus chart".
         .rangeChart(volumeChart)
-        .x(d3.scaleTime().domain([new Date(1985, 0, 1), new Date(2012, 11, 31)]))
+        .x(d3.scaleTime().domain([new Date(2008, 0, 1), new Date(2018, 11, 31)]))
         .round(d3.timeMonth.round)
         .xUnits(d3.timeMonths)
         .elasticY(true)
@@ -359,13 +356,13 @@ d3.csv('ndx.csv').then(function (data) {
         // Add the base layer of the stack with group. The second parameter specifies a series name for use in the
         // legend.
         // The `.valueAccessor` will be used for the base layer
-        .group(indexAvgByMonthGroup, 'Lateral')
+        .group(lateral, 'Average Runtime per month')
         .valueAccessor(function (d) {
             return d.value.avg;
         })
         // Stack additional layers with `.stack`. The first paramenter is a new group.
         // The second parameter is the series name. The third is a value accessor.
-        .stack(monthlyMoveGroup, 'Scummy', function (d) {
+        .stack(scummy, 'Total Runtime per month', function (d) {
             return d.value;
         })
         // Title can be called by any stack layer.
@@ -388,7 +385,7 @@ d3.csv('ndx.csv').then(function (data) {
         .group(volumeByMonthGroup)
         .centerBar(true)
         .gap(1)
-        .x(d3.scaleTime().domain([new Date(1985, 0, 1), new Date(2012, 11, 31)]))
+        .x(d3.scaleTime().domain([new Date(2002, 0, 1), new Date(2019, 11, 31)]))
         .round(d3.timeMonth.round)
         .alwaysUseRounding(true)
         .xUnits(d3.timeMonths);
@@ -457,7 +454,7 @@ d3.csv('ndx.csv').then(function (data) {
             return date.getFullYear() + '/' + format((date.getMonth() + 1));
         })
         // (_optional_) max number of records to be shown, `default = 25`
-        .size(50)
+        .size(250)
         // There are several ways to specify the columns; see the data-table documentation.
         // This code demonstrates generating the column header automatically based on the columns.
         .columns([

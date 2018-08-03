@@ -25,7 +25,7 @@ ST.BubbleChart = function() {
             /* callback for when data is added to the current filter results */
             function (p, v) {
                 ++p.count;
-                p.absGain += v.close - v.open;
+                p.absGain += (+v.thermal);
                 p.fluctuation += Math.abs(v.close - v.open);
                 p.sumIndex += (v.open + v.close) / 2;
                 p.avgIndex = p.sumIndex / p.count;
@@ -40,7 +40,7 @@ ST.BubbleChart = function() {
             /* callback for when data is removed from the current filter results */
             function (p, v) {
                 --p.count;
-                p.absGain -= v.close - v.open;
+                p.absGain -= v.thermal;
                 p.fluctuation -= Math.abs(v.close - v.open);
                 p.sumIndex -= (v.open + v.close) / 2;
                 p.avgIndex = p.count ? p.sumIndex / p.count : 0;
@@ -150,9 +150,9 @@ ST.BubbleChart = function() {
         .title(function (p) {
             return [
                 p.key,
-                'Index Gain: ' + ST.numberFormat(p.value.absGain),
-                'Index Gain in Percentage: ' + ST.numberFormat(p.value.percentageGain) + '%',
-                'Fluctuation / Index Ratio: ' + ST.numberFormat(p.value.fluctuationPercentage) + '%'
+                'Thermal: ' + ST.numberFormat(p.value.thermal),
+                'Runtime: ' + ST.numberFormat(p.value.runtime),
+                'Thermal / Runtime: ' + ST.numberFormat(p.value.thermal / p.value.runtime)
             ].join('\n');
         })
         //#### Customize Axes
