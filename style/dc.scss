@@ -381,6 +381,14 @@ body .dc-chart g.row text {
 
 #day-of-week-chart {
   margin: 0 26px 0 0;
+    float: none;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.inner_container {
+    display: inline-block;
+    width: 960px;
 }
 
 #runtime-chart strong {

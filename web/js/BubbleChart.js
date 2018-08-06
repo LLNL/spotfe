@@ -24,32 +24,34 @@ ST.BubbleChart = function() {
         var yearlyPerformanceGroup = yearlyDimension.group().reduce(
             /* callback for when data is added to the current filter results */
             function (p, v) {
+
                 ++p.count;
                 p.absGain += (+v.thermal);
-                p.fluctuation += Math.abs(v.close - v.open);
                 p.sumIndex += (v.open + v.close) / 2;
                 p.avgIndex = p.sumIndex / p.count;
                 p.percentageGain = p.avgIndex ? (p.absGain / p.avgIndex) * 100 : 0;
-                p.fluctuationPercentage = p.avgIndex ? (p.fluctuation / p.avgIndex) * 100 : 0;
 
-                p.runtime = v.runtime;
-                p.thermal = v.thermal;
+                p.runtime = (+v.runtime);
+                p.thermal += (+v.thermal);
+                p.avgThermal = p.thermal / p.count;
                 p.start = v.start;
+
                 return p;
             },
             /* callback for when data is removed from the current filter results */
             function (p, v) {
+
                 --p.count;
                 p.absGain -= v.thermal;
-                p.fluctuation -= Math.abs(v.close - v.open);
                 p.sumIndex -= (v.open + v.close) / 2;
                 p.avgIndex = p.count ? p.sumIndex / p.count : 0;
                 p.percentageGain = p.avgIndex ? (p.absGain / p.avgIndex) * 100 : 0;
-                p.fluctuationPercentage = p.avgIndex ? (p.fluctuation / p.avgIndex) * 100 : 0;
 
                 p.runtime = v.runtime;
-                p.thermal = v.thermal;
+                p.thermal -= v.thermal;
+                p.avgThermal = p.count ? p.thermal / p.count : 0;
                 p.start = v.start;
+
                 return p;
             },
             /* initialize p */
@@ -57,8 +59,6 @@ ST.BubbleChart = function() {
                 return {
                     count: 0,
                     absGain: 0,
-                    fluctuation: 0,
-                    fluctuationPercentage: 0,
                     sumIndex: 0,
                     avgIndex: 0,
                     percentageGain: 0,
@@ -86,14 +86,14 @@ ST.BubbleChart = function() {
             // (_optional_) define color function or array for bubbles: [ColorBrewer](http://colorbrewer2.org/)
             .colors(d3.schemeRdYlGn[9])
             //(optional) define color domain to match your data domain if you want to bind data or color
-            .colorDomain([0, 500])
+            .colorDomain([210, 290])
             //##### Accessors
 
             //Accessor functions are applied to each value returned by the grouping
 
             // `.colorAccessor` - the returned value will be passed to the `.colors()` scale to determine a fill color
             .colorAccessor(function (d) {
-                return d.value.thermal; // d.value.absGain;
+                return d.value.avgThermal; // d.value.absGain;
             })
         // `.keyAccessor` - the `X` value will be passed to the `.x()` scale to determine pixel location
         .keyAccessor(function (p) {
@@ -150,9 +150,9 @@ ST.BubbleChart = function() {
         .title(function (p) {
             return [
                 p.key,
-                'Thermal: ' + ST.numberFormat(p.value.thermal),
+                'Average Thermal: ' + ST.numberFormat(p.value.avgThermal),
                 'Runtime: ' + ST.numberFormat(p.value.runtime),
-                'Thermal / Runtime: ' + ST.numberFormat(p.value.thermal / p.value.runtime)
+                'Thermal / Runtime: ' + ST.numberFormat(p.value.avgThermal / p.value.runtime)
             ].join('\n');
         })
         //#### Customize Axes

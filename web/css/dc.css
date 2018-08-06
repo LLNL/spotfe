@@ -296,21 +296,20 @@ div.dc-html-legend {
   fill: #000000; }
 
 body .container {
-  width: 1300px;
-}
-body .inner_container {
-  width: 980px;
-  display: inline-block;
-  float: none;
-}
+  width: 1280px; }
 
 body .dc-chart g.row text {
   fill: #000000; }
 
 #day-of-week-chart {
   margin: 0 26px 0 0;
+  float: none;
   display: inline-block;
-}
+  vertical-align: top; }
+
+.inner_container {
+  display: inline-block;
+  width: 960px; }
 
 #runtime-chart strong {
   display: block; }

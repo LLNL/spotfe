@@ -94,6 +94,7 @@ d3.csv('ndx.csv').then(function (data) {
         data[z].date = month + "/" + day + "/" + year;
 
         var diff = data[z].end - data[z].start;
+
         data[z].runtime = parseInt(diff/3600);
         data[z].thermal = parseInt(Math.random()*500);
 
@@ -108,8 +109,6 @@ d3.csv('ndx.csv').then(function (data) {
     data.forEach(function (d) {
         d.dd = dateFormatParser(d.date);
         d.month = d3.timeMonth(d.dd); // pre-calculate month for better performance
-        d.close = +d.close; // coerce to number
-        d.open = +d.open;
     });
 
     //### Create Crossfilter Dimensions and Groups
