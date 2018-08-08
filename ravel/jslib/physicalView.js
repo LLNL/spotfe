@@ -115,7 +115,7 @@ ravel.draw_physical = function ( anchor_tag, phys_x_scale, anchor_index ) {
           .attr('class', 'parent')
           .attr('tool_title', ravel.get_function_name_tooltip)
           //.append('svg:title')
-          .text(ravel.get_function_name_tooltip);   // In the physical charts, these events known as "parent_events" in the navigate.json file - the text() is gray bar browser tooltip.
+          .text(ravel.get_function_name_tooltip);   // In the physical charts, these events known as "parent_events" in the navigate.js file - the text() is gray bar browser tooltip.
 
         rects.exit().remove();
 

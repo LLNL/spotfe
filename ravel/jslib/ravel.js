@@ -711,9 +711,9 @@ var ravel = {
 
     ravel.get_data_state = true;
 
-    $.ajax({
+/*    $.ajax({
       mimeType: 'text/json; charset=x-user-defined',
-      url: '/ravel/data/navigate.json',
+      url: '/ravel/data/navigate.js',
       method: 'GET',
       dataType: 'json',
       data: {
@@ -727,7 +727,7 @@ var ravel = {
       },
       success: function(json) {
 
-        navigate = json;
+        //navigate = json;*/
         RV.ColorLatenessModel.normalize( navigate.traceinfo.events );
 
         ravel.get_data_state = false;
@@ -738,8 +738,8 @@ var ravel = {
         //  Need to resize so taht the X axis on the logical graph is correct.
         //  Ideally we have an event handler for the end of the draw event.
         //setTimeout( ravel.resize, 500 );
-      }
-    });
+      //}
+    //});
   };
 
 
@@ -806,7 +806,7 @@ var ravel = {
    *  USAGE:
    *    Only happens on a drilldown event, when you click a date on X-axis.
    *    ravel_init.json is probably not really needed for our current use case.
-   *    navigate.json has pretty much everything that ravel_init.json has.
+   *    navigate.js has pretty much everything that ravel_init.json has.
    */
   ravel.init = function (json) {
 

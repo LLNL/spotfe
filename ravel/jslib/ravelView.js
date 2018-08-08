@@ -128,9 +128,9 @@ RV.ravelView = function() {
     //  This code was for when we used jquery to insert it into the DOM.
     //  Now we're using the HcChart PUG template to insert it.
 
-    $.ajax({
+/*    $.ajax({
       mimeType: 'text/json; charset=x-user-defined',
-      url: '/ravel/data/navigate.json',  //ravel_init
+      url: '/ravel/data/navigate.js',  //ravel_init
       method: 'GET',
       dataType: 'json',
       data: {
@@ -140,9 +140,11 @@ RV.ravelView = function() {
          "entity_start": ravel.data.entity_start,
          "entities": ravel.data.entities,
          "width": ravel.gantt_width,
-         "metric": ravel.metric*/
+         "metric": ravel.metric
       },
-      success: function (ravel_init) {
+      success: function (ravel_init) {*/
+
+        var ravel_init = navigate;
 
         RV.ColorLatenessModel.normalize( ravel_init.traceinfo.events );
 
@@ -172,8 +174,8 @@ RV.ravelView = function() {
           d3.select(RV.parent_anchor + '.step_axis').call(ravel.step_x_axis[index]);
           ravel.draw_step( RV.parent_anchor, RV.parent_index);
         }, 500);
-      }
-    });
+     // }
+    //});
   };
 
 

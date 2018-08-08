@@ -66,7 +66,6 @@ var reduce_authors = function( data ) {
 //d3.json('data.json').then(function(data) {...});
 //jQuery.getJson('data.json', function(data){...});
 //```
-d3.csv('ndx.csv').then(function (data) {
     // Since its a csv file we need to format the data a bit.
     var dateFormatSpecifier = '%m/%d/%Y';
     var dateFormat = d3.timeFormat(dateFormatSpecifier);
@@ -74,7 +73,7 @@ d3.csv('ndx.csv').then(function (data) {
     ST.numberFormat = d3.format('.2f');
 
 
-    data = SPOT_DATA.runs;
+    var data = SPOT_DATA.runs;
 
     //  Reduce # of authors
     //reduce_authors(data);
@@ -502,7 +501,9 @@ d3.csv('ndx.csv').then(function (data) {
                 var subject = $(this).html().toLowerCase();
 
                 if( subject === 'mpi' ) {
-                    window.open('http://localhost:8888/ravel/');
+
+                    //  http://localhost:8888
+                    window.open('../ravel/index.html');
                 }
             });
         });
@@ -621,16 +622,9 @@ d3.csv('ndx.csv').then(function (data) {
     dc.redrawAll('group');
     */
 
-});
 
 //#### Versions
 
 //Determine the current version of dc with `dc.version`
 d3.selectAll('#version').text(dc.version);
 
-// Determine latest stable version in the repo via Github API
-d3.json('https://api.github.com/repos/dc-js/dc.js/releases/latest').then(function (latestRelease) {
-    /*jshint camelcase: false */
-    /* jscs:disable */
-    d3.selectAll('#latest').text(latestRelease.tag_name);
-});

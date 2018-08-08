@@ -1,4 +1,4 @@
-{
+var navigate = {
     "traceinfo": {
  "entities": 9,
  "entity_start": 0,
@@ -336,4 +336,4 @@
 },
   "parent_events": [[]]
 
-}
+};
