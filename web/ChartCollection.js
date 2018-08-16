@@ -458,6 +458,13 @@ var reduce_authors = function( data ) {
         .columns([
             // Use the `d.date` field; capitalized automatically
             'date',
+            'program',
+            {
+                label: 'User',
+                format: function(d) {
+                    return d.author
+                }
+            },
             // Use `d.open`, `d.close`
             'thermal_variance',
             'runtime',
