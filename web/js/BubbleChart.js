@@ -4,10 +4,16 @@ ST.BubbleChart = function() {
 
     var yearlyBubbleChart;
 
+    var get_version_ = function( d ) {
+
+        var version = d.version ? d.version.substr(0,1) : "";
+        return d.program + ' v' + version;
+    };
+
     var render_ = function( ndx ) {
 
         var rcht =     '<div id="yearly-bubble-chart" class="dc-chart">\
-        <strong>Yearly Runtime Performance</strong> (radius: Runtime, color: Thermal)\
+        <strong>Yearly Runtime Performance</strong> (radius: Figure of Merit, color: Thermal)\
         <a class="reset" href="javascript:ST.BubbleChart.reset();"\
            style="display: none;">reset</a>\
         <div class="clearfix"></div>\
@@ -17,7 +23,9 @@ ST.BubbleChart = function() {
 
         // Dimension by year
         var yearlyDimension = ndx.dimension(function (d) {
-            return d3.timeYear(d.dd).getFullYear();
+
+            return get_version_(d);
+            //  return d3.timeYear(d.dd).getFullYear();
         });
 
         // Maintain running tallies by year as filters are applied or removed
@@ -31,10 +39,15 @@ ST.BubbleChart = function() {
                 p.avgIndex = p.sumIndex / p.count;
                 p.percentageGain = p.avgIndex ? (p.absGain / p.avgIndex) * 100 : 0;
 
-                p.runtime = (+v.runtime);
+                p.runtime += (+v.runtime);
+                p.avgRuntime = p.runtime / p.count;
                 p.thermal += (+v.thermal);
                 p.avgThermal = p.thermal / p.count;
                 p.start = v.start;
+                p.number_of_runs += 1;
+
+                p.scientific_performance += (+v.scientific_performance);
+                p.avgScientific_performance = p.scientific_performance / p.count;
 
                 return p;
             },
@@ -47,10 +60,16 @@ ST.BubbleChart = function() {
                 p.avgIndex = p.count ? p.sumIndex / p.count : 0;
                 p.percentageGain = p.avgIndex ? (p.absGain / p.avgIndex) * 100 : 0;
 
-                p.runtime = v.runtime;
+                p.runtime -= v.runtime;
+                p.avgRuntime = p.count ? p.runtime / p.count : 0;
+
                 p.thermal -= v.thermal;
                 p.avgThermal = p.count ? p.thermal / p.count : 0;
                 p.start = v.start;
+                p.number_of_runs -= 1;
+
+                p.scientific_performance -= (+v.scientific_performance);
+                p.avgScientific_performance = p.scientific_performance / p.count;
 
                 return p;
             },
@@ -63,7 +82,10 @@ ST.BubbleChart = function() {
                     avgIndex: 0,
                     percentageGain: 0,
                     start: 0,
-                    thermal: 0
+                    thermal: 0,
+                    runtime: 0,
+                    number_of_runs: 0,
+                    scientific_performance: 0
                 };
             }
         );
@@ -98,8 +120,9 @@ ST.BubbleChart = function() {
         // `.keyAccessor` - the `X` value will be passed to the `.x()` scale to determine pixel location
         .keyAccessor(function (p) {
 
-            var date = new Date(p.value.start*1000);
-            return date.getMonth();
+            //var date = new Date(p.value.start*1000);
+            //return date.getMonth();
+            return p.value.avgRuntime;
         })
         // `.valueAccessor` - the `Y` value will be passed to the `.y()` scale to determine pixel location
         .valueAccessor(function (p) {
@@ -108,16 +131,18 @@ ST.BubbleChart = function() {
             var day = date.getDate();
             var week = parseInt(day / 7);
 
-            return week;
+            return p.value.number_of_runs;
         })
         // `.radiusValueAccessor` - the value will be passed to the `.r()` scale to determine radius size;
         //   by default this maps linearly to [0,100]
         .radiusValueAccessor(function (p) {
-            return p.value.runtime;
+
+            console.log(p.value.avgScientific_performance);
+            return p.value.avgScientific_performance / 10; //p.value.runtime;
         })
         .maxBubbleRelativeSize(0.3)
-        .x(d3.scaleLinear().domain([0,11]))
-        .y(d3.scaleLinear().domain([0,4]))
+        .x(d3.scaleLinear().domain([0, 30]))
+        .y(d3.scaleLinear().domain([0, 14]))
         .r(d3.scaleLinear().domain([0, 100]))
         //##### Elastic Scaling
 
@@ -133,25 +158,26 @@ ST.BubbleChart = function() {
         // (_optional_) render vertical grid lines, `default=false`
         .renderVerticalGridLines(true)
         // (_optional_) render an axis label below the x axis
-        .xAxisLabel('Month')
+        .xAxisLabel('Avg Runtime')
         // (_optional_) render a vertical axis lable left of the y axis
-        .yAxisLabel('Week in Month')
+        .yAxisLabel('Number of Runs')
         //##### Labels and  Titles
 
         //Labels are displayed on the chart for each bubble. Titles displayed on mouseover.
         // (_optional_) whether chart should render labels, `default = true`
         .renderLabel(true)
         .label(function (p) {
-            var date = new Date(p.value.start*1000);
-            return date.getFullYear(); //p.key;
+            //var date = new Date(p.value.start*1000);
+            //return date.getFullYear(); //p.key;
+            return p.key;
         })
         // (_optional_) whether chart should render titles, `default = false`
         .renderTitle(true)
         .title(function (p) {
             return [
                 p.key,
+                'Average Runtime: ' + ST.numberFormat(p.value.avgRuntime),
                 'Average Thermal: ' + ST.numberFormat(p.value.avgThermal),
-                'Runtime: ' + ST.numberFormat(p.value.runtime),
                 'Thermal / Runtime: ' + ST.numberFormat(p.value.avgThermal / p.value.runtime)
             ].join('\n');
         })

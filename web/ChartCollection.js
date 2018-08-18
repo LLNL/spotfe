@@ -96,6 +96,7 @@ var reduce_authors = function( data ) {
 
         data[z].runtime = parseInt(diff/3600);
         data[z].thermal = parseInt(Math.random()*500);
+        data[z].scientific_performance = parseInt(z);
 
         data[z].thermal_variance = (data[z].runtime >= 8) ? "Above" : "Below";
 
@@ -165,6 +166,7 @@ var reduce_authors = function( data ) {
     var fluctuation = ndx.dimension(function (d) {
         return Math.round((d.close - d.open) / d.open * 100);
     });
+
     var fluctuationGroup = fluctuation.group();
 
 
@@ -175,6 +177,7 @@ var reduce_authors = function( data ) {
         var name = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
         return d.author || "none";// day + '.' + name[day];
     });
+
     var dayOfWeekGroup = dayOfWeek.group();
 
     //### Define Chart Attributes
@@ -465,14 +468,18 @@ var reduce_authors = function( data ) {
                     return d.author
                 }
             },
-            // Use `d.open`, `d.close`
-            'thermal_variance',
             'runtime',
             {
                 // Specify a custom format for column 'Change' by using a label with a function.
                 label: 'Thermal',
                 format: function (d) {
                     return ST.numberFormat(d.thermal);
+                }
+            },
+            {
+                label: 'Performance',
+                format: function( d ) {
+                    return d.scientific_performance;
                 }
             },
             {
