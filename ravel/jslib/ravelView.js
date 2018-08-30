@@ -146,6 +146,7 @@ RV.ravelView = function() {
 
         var ravel_init = navigate;
 
+        RV.ComputeLatenessModel.compute( ravel_init.traceinfo.events );
         RV.ColorLatenessModel.normalize( ravel_init.traceinfo.events );
 
         init_ravel();

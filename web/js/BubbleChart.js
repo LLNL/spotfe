@@ -49,6 +49,9 @@ ST.BubbleChart = function() {
                 p.scientific_performance += (+v.scientific_performance);
                 p.avgScientific_performance = p.scientific_performance / p.count;
 
+                p.figure_of_merit += (+v.figure_of_merit);
+                p.avgFigureOfMerit = p.figure_of_merit / p.count;
+
                 return p;
             },
             /* callback for when data is removed from the current filter results */
@@ -71,6 +74,9 @@ ST.BubbleChart = function() {
                 p.scientific_performance -= (+v.scientific_performance);
                 p.avgScientific_performance = p.scientific_performance / p.count;
 
+                p.figure_of_merit -= (+v.figure_of_merit);
+                p.avgFigureOfMerit = p.figure_of_merit / p.count;
+
                 return p;
             },
             /* initialize p */
@@ -85,7 +91,8 @@ ST.BubbleChart = function() {
                     thermal: 0,
                     runtime: 0,
                     number_of_runs: 0,
-                    scientific_performance: 0
+                    scientific_performance: 0,
+                    figure_of_merit: 0
                 };
             }
         );
@@ -97,7 +104,7 @@ ST.BubbleChart = function() {
         // (_optional_) define chart width, `default = 200`
             .width(990)
             // (_optional_) define chart height, `default = 200`
-            .height(250)
+            .height(380)
             // (_optional_) define chart transition duration, `default = 750`
             .transitionDuration(1500)
             .margins({top: 10, right: 50, bottom: 30, left: 40})
@@ -108,7 +115,7 @@ ST.BubbleChart = function() {
             // (_optional_) define color function or array for bubbles: [ColorBrewer](http://colorbrewer2.org/)
             .colors(d3.schemeRdYlGn[9])
             //(optional) define color domain to match your data domain if you want to bind data or color
-            .colorDomain([210, 290])
+            .colorDomain([30, 80])
             //##### Accessors
 
             //Accessor functions are applied to each value returned by the grouping
@@ -137,8 +144,8 @@ ST.BubbleChart = function() {
         //   by default this maps linearly to [0,100]
         .radiusValueAccessor(function (p) {
 
-            console.log(p.value.avgScientific_performance);
-            return p.value.avgScientific_performance / 10; //p.value.runtime;
+            console.log(p.value.avgFigureOfMerit);
+            return p.value.avgFigureOfMerit / 10; //p.value.runtime;
         })
         .maxBubbleRelativeSize(0.3)
         .x(d3.scaleLinear().domain([0, 30]))
@@ -151,7 +158,7 @@ ST.BubbleChart = function() {
         .elasticX(true)
         //`.yAxisPadding` and `.xAxisPadding` add padding to data above and below their max values in the same unit
         //domains as the Accessors.
-        .yAxisPadding(1)
+        .yAxisPadding(85)
         .xAxisPadding(1)
         // (_optional_) render horizontal grid lines, `default=false`
         .renderHorizontalGridLines(true)
@@ -176,6 +183,7 @@ ST.BubbleChart = function() {
         .title(function (p) {
             return [
                 p.key,
+                'Avg Figure of Merit: ' + ST.numberFormat(p.value.avgFigureOfMerit),
                 'Average Runtime: ' + ST.numberFormat(p.value.avgRuntime),
                 'Average Thermal: ' + ST.numberFormat(p.value.avgThermal),
                 'Thermal / Runtime: ' + ST.numberFormat(p.value.avgThermal / p.value.runtime)

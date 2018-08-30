@@ -54,7 +54,10 @@ var nasdaqTable = dc.dataTable('.dc-data-table');
 var reduce_authors = function( data ) {
 
     for( var z=0; z < data.length; z++ ) {
-        data[z].author = data[z % 25].author;
+
+        var rt = Math.floor((data[z].end - data[z].start)/3600);
+        var mod = rt + 10;
+        data[z].author = data[z % mod].author;
     }
 };
 
@@ -76,7 +79,7 @@ var reduce_authors = function( data ) {
     var data = SPOT_DATA.runs;
 
     //  Reduce # of authors
-    //reduce_authors(data);
+    reduce_authors(data);
 
     var uniq_author_count = {};
 
@@ -95,8 +98,12 @@ var reduce_authors = function( data ) {
         var diff = data[z].end - data[z].start;
 
         data[z].runtime = parseInt(diff/3600);
-        data[z].thermal = parseInt(Math.random()*500);
+
+        var mult = data[z].program === "umt" ? 2 : 1;
+        data[z].thermal = data[z].runtime * mult * 3; //data[z].runtime > 11 ? 500 : 50; //parseInt(Math.random()*500);
         data[z].scientific_performance = parseInt(z);
+
+        data[z].figure_of_merit = data[z].scientific_performance / (data[z].runtime || 1) * 6;
 
         data[z].thermal_variance = (data[z].runtime >= 8) ? "Above" : "Below";
 
@@ -462,6 +469,7 @@ var reduce_authors = function( data ) {
             // Use the `d.date` field; capitalized automatically
             'date',
             'program',
+            'version',
             {
                 label: 'User',
                 format: function(d) {

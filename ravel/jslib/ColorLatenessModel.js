@@ -18,10 +18,14 @@ RV.ColorLatenessModel = function() {
     {
       from: "#dc00ff",
       to: "#fffb00"
-    }
+    },
+      {
+        to: "#ff2e1f",
+          from: "#9ac2ff"
+      }
   ];
 
-  const USE_MODEL = 0;
+  const USE_MODEL = 4;
 
   var color_function_;
 
@@ -37,7 +41,7 @@ RV.ColorLatenessModel = function() {
     d.lateness = d.lateness || 0;
 
     if( !color_function_ ) {
-      alert('Color function has not been defined.  Run RV.ColorLatenessModel.normalize(), so I know how to scale the colors.  Thanks.');
+      alert('Color function has not been defined.  Run RV.ColorLatenessModel.normalize( events ), so I know how to scale the colors.  Thanks.');
     }
     var rgb = color_function_(+d.lateness);
 
@@ -80,8 +84,8 @@ RV.ColorLatenessModel = function() {
         var max = 0;
         for( var x in events ) {
 
-            var color_default = (+events[x].step) + (+events[x].entity);
-            events[x].lateness = events[x].lateness || color_default;
+            //var color_default = (+events[x].step) + (+events[x].entity);
+            events[x].lateness = events[x].lateness; // || color_default;
 
             if( events[x].lateness > max) {
                 max = events[x].lateness;
