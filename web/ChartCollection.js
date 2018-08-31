@@ -11,9 +11,7 @@ var ST = ST || {};
 // Create chart objects associated with the container elements identified by the css selector.
 // Note: It is often a good idea to have these objects accessible at the global scope so that they can be modified or
 // filtered by other page controls.
-var gainOrLossChart = dc.pieChart('#gain-loss-chart');
 var fluctuationChart = dc.barChart('#fluctuation-chart');
-var dayOfWeekChart = dc.rowChart('#day-of-week-chart');
 var nasdaqCount = dc.dataCount('.dc-data-count');
 var nasdaqTable = dc.dataTable('.dc-data-table');
 
@@ -77,7 +75,7 @@ var reduce_authors = function( data ) {
     var data = SPOT_DATA.runs;
 
     //  Reduce # of authors
-    reduce_authors(data);
+    //reduce_authors(data);
 
     var uniq_author_count = {};
 
@@ -129,13 +127,6 @@ var reduce_authors = function( data ) {
     });
 
 
-    // Create categorical dimension
-    var gainOrLoss = ndx.dimension(function (d) {
-        return d.open > d.close ? 'Loss' : 'Gain';
-    });
-    // Produce counts records in the dimension
-    var gainOrLossGroup = gainOrLoss.group();
-
     // Determine a histogram of percent changes
     var fluctuation = ndx.dimension(function (d) {
         return Math.round((d.close - d.open) / d.open * 100);
@@ -143,23 +134,6 @@ var reduce_authors = function( data ) {
 
     var fluctuationGroup = fluctuation.group();
 
-
-
-    // Counts per weekday
-    var dayOfWeek = ndx.dimension(function (d) {
-        var day = d.dd.getDay();
-        var name = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-        return d.author || "none";// day + '.' + name[day];
-    });
-
-    var dayOfWeekGroup = dayOfWeek.group();
-
-    //### Define Chart Attributes
-    // Define chart attributes using fluent methods. See the
-    // [dc.js API Reference](https://github.com/dc-js/dc.js/blob/master/web/docs/api-latest.md) for more information
-    //
-
-    //#### Bubble Chart
 
     ST.BubbleChart.render( ndx );
 
@@ -181,86 +155,8 @@ var reduce_authors = function( data ) {
         inner_radius: 0
     } );
 
-    //Create a bubble chart and use the given css selector as anchor. You can also specify
-    //an optional chart group for this chart to be scoped within. When a chart belongs
-    //to a specific group then any interaction with the chart will only trigger redraws
-    //on charts within the same chart group.
-    // <br>API: [Bubble Chart](https://github.com/dc-js/dc.js/blob/master/web/docs/api-latest.md#bubble-chart)
 
-
-    // #### Pie/Donut Charts
-
-    // Create a pie chart and use the given css selector as anchor. You can also specify
-    // an optional chart group for this chart to be scoped within. When a chart belongs
-    // to a specific group then any interaction with such chart will only trigger redraw
-    // on other charts within the same chart group.
-    // <br>API: [Pie Chart](https://github.com/dc-js/dc.js/blob/master/web/docs/api-latest.md#pie-chart)
-
-    gainOrLossChart /* dc.pieChart('#gain-loss-chart', 'chartGroup') */
-    // (_optional_) define chart width, `default = 200`
-        .width(180)
-    // (optional) define chart height, `default = 200`
-        .height(180)
-    // Define pie radius
-        .radius(80)
-    // Set dimension
-        .dimension(gainOrLoss)
-    // Set group
-        .group(gainOrLossGroup)
-    // (_optional_) by default pie chart will use `group.key` as its label but you can overwrite it with a closure.
-        .label(function (d) {
-            if (gainOrLossChart.hasFilter() && !gainOrLossChart.hasFilter(d.key)) {
-                return d.key + '(0%)';
-            }
-            var label = d.key;
-            if (all.value()) {
-                label += '(' + Math.floor(d.value / all.value() * 100) + '%)';
-            }
-            return label;
-        })
-    /*
-        // (_optional_) whether chart should render labels, `default = true`
-        .renderLabel(true)
-        // (_optional_) if inner radius is used then a donut chart will be generated instead of pie chart
-        .innerRadius(40)
-        // (_optional_) define chart transition duration, `default = 350`
-        .transitionDuration(500)
-        // (_optional_) define color array for slices
-        .colors(['#3182bd', '#6baed6', '#9ecae1', '#c6dbef', '#dadaeb'])
-        // (_optional_) define color domain to match your data domain if you want to bind data or color
-        .colorDomain([-1750, 1644])
-        // (_optional_) define color value accessor
-        .colorAccessor(function(d, i){return d.value;})
-        */;
-
-
-
-    //#### Row Chart
-
-    var height = number_of_authors * 25;
-    // Create a row chart and use the given css selector as anchor. You can also specify
-    // an optional chart group for this chart to be scoped within. When a chart belongs
-    // to a specific group then any interaction with such chart will only trigger redraw
-    // on other charts within the same chart group.
-    // <br>API: [Row Chart](https://github.com/dc-js/dc.js/blob/master/web/docs/api-latest.md#row-chart)
-    dayOfWeekChart /* dc.rowChart('#day-of-week-chart', 'chartGroup') */
-        .width(240)
-        .height(height)
-        .margins({top: 20, left: 10, right: 10, bottom: 20})
-        .group(dayOfWeekGroup)
-        .dimension(dayOfWeek)
-        // Assign colors to each value in the x scale domain
-        .ordinalColors(['#3182bd', '#6baed6', '#9ecae1', '#c6dbef', '#dadaeb'])
-        .label(function (d) {
-            //return d.key.split('.')[1];
-            return d.key;
-        })
-        // Title sets the row text
-        .title(function (d) {
-            return d.author;  //  d.value
-        })
-        .elasticX(true)
-        .xAxis().ticks(4);
+    ST.HorizontalBarChart.render();
 
     //#### Bar Chart
 
