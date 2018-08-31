@@ -144,7 +144,6 @@ ST.BubbleChart = function() {
         //   by default this maps linearly to [0,100]
         .radiusValueAccessor(function (p) {
 
-            console.log(p.value.avgFigureOfMerit);
             return p.value.avgFigureOfMerit / 10; //p.value.runtime;
         })
         .maxBubbleRelativeSize(0.3)
