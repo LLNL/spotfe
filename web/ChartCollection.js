@@ -11,7 +11,6 @@ var ST = ST || {};
 // Create chart objects associated with the container elements identified by the css selector.
 // Note: It is often a good idea to have these objects accessible at the global scope so that they can be modified or
 // filtered by other page controls.
-var fluctuationChart = dc.barChart('#fluctuation-chart');
 var nasdaqCount = dc.dataCount('.dc-data-count');
 var nasdaqTable = dc.dataTable('.dc-data-table');
 
@@ -127,22 +126,8 @@ var reduce_authors = function( data ) {
     });
 
 
-    // Determine a histogram of percent changes
-    var fluctuation = ndx.dimension(function (d) {
-        return Math.round((d.close - d.open) / d.open * 100);
-    });
-
-    var fluctuationGroup = fluctuation.group();
-
-
     ST.BubbleChart.render( ndx );
 
-/*    ST.PieChart.render( ndx, {
-        title: "Authors",
-        iterator_attribute: "author",
-        inner_radius: 0
-    } );
-*/
     ST.PieChart.render( ndx, {
         title: "Thermal Variance",
         iterator_attribute: "thermal_variance",
@@ -157,48 +142,9 @@ var reduce_authors = function( data ) {
 
 
     ST.HorizontalBarChart.render();
-
-    //#### Bar Chart
-
-    // Create a bar chart and use the given css selector as anchor. You can also specify
-    // an optional chart group for this chart to be scoped within. When a chart belongs
-    // to a specific group then any interaction with such chart will only trigger redraw
-    // on other charts within the same chart group.
-    // <br>API: [Bar Chart](https://github.com/dc-js/dc.js/blob/master/web/docs/api-latest.md#bar-chart)
-    fluctuationChart /* dc.barChart('#volume-month-chart', 'chartGroup') */
-        .width(420)
-        .height(180)
-        .margins({top: 10, right: 50, bottom: 30, left: 40})
-        .dimension(fluctuation)
-        .group(fluctuationGroup)
-        .elasticY(true)
-        // (_optional_) whether bar should be center to its x value. Not needed for ordinal chart, `default=false`
-        .centerBar(true)
-        // (_optional_) set gap between bars manually in px, `default=2`
-        .gap(1)
-        // (_optional_) set filter brush rounding
-        .round(dc.round.floor)
-        .alwaysUseRounding(true)
-        .x(d3.scaleLinear().domain([-25, 25]))
-        .renderHorizontalGridLines(true)
-        // Customize the filter displayed in the control span
-        .filterPrinter(function (filters) {
-            var filter = filters[0], s = '';
-            s += ST.numberFormat(filter[0]) + '% -> ' + ST.numberFormat(filter[1]) + '%';
-            return s;
-        });
-
-    // Customize axes
-    fluctuationChart.xAxis().tickFormat(
-        function (v) { return v + '%'; });
-    fluctuationChart.yAxis().ticks(5);
-
-
     ST.RuntimeChart.render(ndx);
-
-
-
     ST.LineChart.render(ndx);
+
     //#### Data Count
 
     // Create a data count widget and use the given css selector as anchor. You can also specify
@@ -331,107 +277,6 @@ var reduce_authors = function( data ) {
             });
         });
 
-    /*
-    //#### Geo Choropleth Chart
-
-    //Create a choropleth chart and use the given css selector as anchor. You can also specify
-    //an optional chart group for this chart to be scoped within. When a chart belongs
-    //to a specific group then any interaction with such chart will only trigger redraw
-    //on other charts within the same chart group.
-    // <br>API: [Geo Chroropleth Chart][choro]
-    // [choro]: https://github.com/dc-js/dc.js/blob/master/web/docs/api-latest.md#geo-choropleth-chart
-    dc.geoChoroplethChart('#us-chart')
-         // (_optional_) define chart width, default 200
-        .width(990)
-        // (optional) define chart height, default 200
-        .height(500)
-        // (optional) define chart transition duration, default 1000
-        .transitionDuration(1000)
-        // set crossfilter dimension, dimension key should match the name retrieved in geojson layer
-        .dimension(states)
-        // set crossfilter group
-        .group(stateRaisedSum)
-        // (_optional_) define color function or array for bubbles
-        .colors(['#ccc', '#E2F2FF','#C4E4FF','#9ED2FF','#81C5FF','#6BBAFF','#51AEFF','#36A2FF','#1E96FF','#0089FF',
-            '#0061B5'])
-        // (_optional_) define color domain to match your data domain if you want to bind data or color
-        .colorDomain([-5, 200])
-        // (_optional_) define color value accessor
-        .colorAccessor(function(d, i){return d.value;})
-        // Project the given geojson. You can call this function multiple times with different geojson feed to generate
-        // multiple layers of geo paths.
-        //
-        // * 1st param - geojson data
-        // * 2nd param - name of the layer which will be used to generate css class
-        // * 3rd param - (_optional_) a function used to generate key for geo path, it should match the dimension key
-        // in order for the coloring to work properly
-        .overlayGeoJson(statesJson.features, 'state', function(d) {
-            return d.properties.name;
-        })
-        // (_optional_) closure to generate title for path, `default = d.key + ': ' + d.value`
-        .title(function(d) {
-            return 'State: ' + d.key + '\nTotal Amount Raised: ' + ST.numberFormat(d.value ? d.value : 0) + 'M';
-        });
-
-        //#### Bubble Overlay Chart
-
-        // Create a overlay bubble chart and use the given css selector as anchor. You can also specify
-        // an optional chart group for this chart to be scoped within. When a chart belongs
-        // to a specific group then any interaction with the chart will only trigger redraw
-        // on charts within the same chart group.
-        // <br>API: [Bubble Overlay Chart][bubble]
-        // [bubble]: https://github.com/dc-js/dc.js/blob/master/web/docs/api-latest.md#bubble-overlay-chart
-        dc.bubbleOverlay('#bubble-overlay', 'chartGroup')
-            // The bubble overlay chart does not generate its own svg element but rather reuses an existing
-            // svg to generate its overlay layer
-            .svg(d3.select('#bubble-overlay svg'))
-            // (_optional_) define chart width, `default = 200`
-            .width(990)
-            // (_optional_) define chart height, `default = 200`
-            .height(500)
-            // (_optional_) define chart transition duration, `default = 1000`
-            .transitionDuration(1000)
-            // Set crossfilter dimension, dimension key should match the name retrieved in geo json layer
-            .dimension(states)
-            // Set crossfilter group
-            .group(stateRaisedSum)
-            // Closure used to retrieve x value from multi-value group
-            .keyAccessor(function(p) {return p.value.absGain;})
-            // Closure used to retrieve y value from multi-value group
-            .valueAccessor(function(p) {return p.value.percentageGain;})
-            // (_optional_) define color function or array for bubbles
-            .colors(['#ccc', '#E2F2FF','#C4E4FF','#9ED2FF','#81C5FF','#6BBAFF','#51AEFF','#36A2FF','#1E96FF','#0089FF',
-                '#0061B5'])
-            // (_optional_) define color domain to match your data domain if you want to bind data or color
-            .colorDomain([-5, 200])
-            // (_optional_) define color value accessor
-            .colorAccessor(function(d, i){return d.value;})
-            // Closure used to retrieve radius value from multi-value group
-            .radiusValueAccessor(function(p) {return p.value.fluctuationPercentage;})
-            // set radius scale
-            .r(d3.scaleLinear().domain([0, 3]))
-            // (_optional_) whether chart should render labels, `default = true`
-            .renderLabel(true)
-            // (_optional_) closure to generate label per bubble, `default = group.key`
-            .label(function(p) {return p.key.getFullYear();})
-            // (_optional_) whether chart should render titles, `default = false`
-            .renderTitle(true)
-            // (_optional_) closure to generate title per bubble, `default = d.key + ': ' + d.value`
-            .title(function(d) {
-                return 'Title: ' + d.key;
-            })
-            // add data point to its layer dimension key that matches point name: it will be used to
-            // generate a bubble. Multiple data points can be added to the bubble overlay to generate
-            // multiple bubbles.
-            .point('California', 100, 120)
-            .point('Colorado', 300, 120)
-            // (_optional_) setting debug flag to true will generate a transparent layer on top of
-            // bubble overlay which can be used to obtain relative `x`,`y` coordinate for specific
-            // data point, `default = false`
-            .debug(true);
-    */
-
-    //#### Rendering
 
     //simply call `.renderAll()` to render all charts on the page
     dc.renderAll();
