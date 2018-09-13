@@ -125,25 +125,93 @@ var reduce_authors = function( data ) {
         return d.dd;
     });
 
+    var SET_WIDTH = 470;
 
-    ST.BubbleChart.render( ndx );
+    //  this will eventually come from the BE.
+    var meta_data_specs = [
+        {
+            viz: "BarChart",
+            table_column: true,
+            dimension: "runtime",
+            width: SET_WIDTH,
+            height: 400
+        },
+        {
+            viz: "MULTI-GRAPH",
+            table_column: true
+        },
+        {
+            viz: "BubbleChart",
+            table_column: true,
+            width: SET_WIDTH,
+            height: 400
+        },
+        {
+            viz: "PieChart",
+            table_column: true,
+            title: "Thermal Variance",
+            iterator_attribute: "thermal_variance",
+            inner_radius: 30,
+            width: SET_WIDTH,
+            height: 400,
+            radius: 170
+        },
+        {
+            viz: "PieChart",
+            table_column: true,
+            title: "Program",
+            iterator_attribute: "program",
+            inner_radius: 0,
+            width: SET_WIDTH,
+            height: 400,
+            radius: 170
+        },
+        {
+            viz: "LINE-CHART",
+            table_column: true
+        }
+    ];
 
-    ST.PieChart.render( ndx, {
-        title: "Thermal Variance",
-        iterator_attribute: "thermal_variance",
-        inner_radius: 30
-    } );
 
-    ST.PieChart.render( ndx, {
-        title: "Program",
-        iterator_attribute: "program",
-        inner_radius: 0
-    } );
+    var RENDER_GENERIC = true;
+
+    if( RENDER_GENERIC ) {
+
+        for( var dimension in meta_data_specs ) {
+
+            var spec = meta_data_specs[dimension];
+            var viz = spec.viz;
+
+            if( ST[viz] && ST[viz].render ) {
+
+                ST[viz].render(ndx, spec );
+            } else {
+                console.log('Sorry.  Viz type viz='+ viz + ' is not supported.');
+            }
+
+        }
+
+    } else {
+
+        ST.BubbleChart.render(ndx);
+
+        ST.PieChart.render(ndx, {
+            title: "Thermal Variance",
+            iterator_attribute: "thermal_variance",
+            inner_radius: 30
+        });
+
+        ST.PieChart.render(ndx, {
+            title: "Program",
+            iterator_attribute: "program",
+            inner_radius: 0
+        });
 
 
-    ST.HorizontalBarChart.render();
-    ST.RuntimeChart.render(ndx);
-    ST.LineChart.render(ndx);
+        ST.HorizontalBarChart.render();
+        ST.BarChart.render(ndx);
+        ST.LineChart.render(ndx);
+    }
 
     //#### Data Count
 

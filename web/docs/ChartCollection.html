@@ -341,25 +341,7 @@ reduce_authors(data);</p>
         <span class="hljs-keyword">return</span> d.dd;
     });
 
-
-    ST.BubbleChart.render( ndx );
-
-    ST.PieChart.render( ndx, {
-        <span class="hljs-attr">title</span>: <span class="hljs-string">"Thermal Variance"</span>,
-        <span class="hljs-attr">iterator_attribute</span>: <span class="hljs-string">"thermal_variance"</span>,
-        <span class="hljs-attr">inner_radius</span>: <span class="hljs-number">30</span>
-    } );
-
-    ST.PieChart.render( ndx, {
-        <span class="hljs-attr">title</span>: <span class="hljs-string">"Program"</span>,
-        <span class="hljs-attr">iterator_attribute</span>: <span class="hljs-string">"program"</span>,
-        <span class="hljs-attr">inner_radius</span>: <span class="hljs-number">0</span>
-    } );
-
-
-    ST.HorizontalBarChart.render();
-    ST.RuntimeChart.render(ndx);
-    ST.LineChart.render(ndx);</pre></div></div>
+    <span class="hljs-keyword">var</span> SET_WIDTH = <span class="hljs-number">470</span>;</pre></div></div>
             
         </li>
         
@@ -370,9 +352,94 @@ reduce_authors(data);</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-18">&#182;</a>
               </div>
-              <h4 id="data-count">Data Count</h4>
+              <p> this will eventually come from the BE.</p>
 
             </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> meta_data_specs = [
+        {
+            <span class="hljs-attr">viz</span>: <span class="hljs-string">"BarChart"</span>,
+            <span class="hljs-attr">table_column</span>: <span class="hljs-literal">true</span>,
+            <span class="hljs-attr">dimension</span>: <span class="hljs-string">"runtime"</span>,
+            <span class="hljs-attr">width</span>: SET_WIDTH,
+            <span class="hljs-attr">height</span>: <span class="hljs-number">400</span>
+        },
+        {
+            <span class="hljs-attr">viz</span>: <span class="hljs-string">"MULTI-GRAPH"</span>,
+            <span class="hljs-attr">table_column</span>: <span class="hljs-literal">true</span>
+        },
+        {
+            <span class="hljs-attr">viz</span>: <span class="hljs-string">"BubbleChart"</span>,
+            <span class="hljs-attr">table_column</span>: <span class="hljs-literal">true</span>,
+            <span class="hljs-attr">width</span>: SET_WIDTH,
+            <span class="hljs-attr">height</span>: <span class="hljs-number">400</span>
+        },
+        {
+            <span class="hljs-attr">viz</span>: <span class="hljs-string">"PieChart"</span>,
+            <span class="hljs-attr">table_column</span>: <span class="hljs-literal">true</span>,
+            <span class="hljs-attr">title</span>: <span class="hljs-string">"Thermal Variance"</span>,
+            <span class="hljs-attr">iterator_attribute</span>: <span class="hljs-string">"thermal_variance"</span>,
+            <span class="hljs-attr">inner_radius</span>: <span class="hljs-number">30</span>,
+            <span class="hljs-attr">width</span>: SET_WIDTH,
+            <span class="hljs-attr">height</span>: <span class="hljs-number">400</span>,
+            <span class="hljs-attr">radius</span>: <span class="hljs-number">170</span>
+        },
+        {
+            <span class="hljs-attr">viz</span>: <span class="hljs-string">"PieChart"</span>,
+            <span class="hljs-attr">table_column</span>: <span class="hljs-literal">true</span>,
+            <span class="hljs-attr">title</span>: <span class="hljs-string">"Program"</span>,
+            <span class="hljs-attr">iterator_attribute</span>: <span class="hljs-string">"program"</span>,
+            <span class="hljs-attr">inner_radius</span>: <span class="hljs-number">0</span>,
+            <span class="hljs-attr">width</span>: SET_WIDTH,
+            <span class="hljs-attr">height</span>: <span class="hljs-number">400</span>,
+            <span class="hljs-attr">radius</span>: <span class="hljs-number">170</span>
+        },
+        {
+            <span class="hljs-attr">viz</span>: <span class="hljs-string">"LINE-CHART"</span>,
+            <span class="hljs-attr">table_column</span>: <span class="hljs-literal">true</span>
+        }
+    ];
+
+
+    <span class="hljs-keyword">var</span> RENDER_GENERIC = <span class="hljs-literal">true</span>;
+
+    <span class="hljs-keyword">if</span>( RENDER_GENERIC ) {
+
+        <span class="hljs-keyword">for</span>( <span class="hljs-keyword">var</span> dimension <span class="hljs-keyword">in</span> meta_data_specs ) {
+
+            <span class="hljs-keyword">var</span> spec = meta_data_specs[dimension];
+            <span class="hljs-keyword">var</span> viz = spec.viz;
+
+            <span class="hljs-keyword">if</span>( ST[viz] &amp;&amp; ST[viz].render ) {
+
+                ST[viz].render(ndx, spec );
+            } <span class="hljs-keyword">else</span> {
+                <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Sorry.  Viz type viz='</span>+ viz + <span class="hljs-string">' is not supported.'</span>);
+            }
+
+        }
+
+    } <span class="hljs-keyword">else</span> {
+
+        ST.BubbleChart.render(ndx);
+
+        ST.PieChart.render(ndx, {
+            <span class="hljs-attr">title</span>: <span class="hljs-string">"Thermal Variance"</span>,
+            <span class="hljs-attr">iterator_attribute</span>: <span class="hljs-string">"thermal_variance"</span>,
+            <span class="hljs-attr">inner_radius</span>: <span class="hljs-number">30</span>
+        });
+
+        ST.PieChart.render(ndx, {
+            <span class="hljs-attr">title</span>: <span class="hljs-string">"Program"</span>,
+            <span class="hljs-attr">iterator_attribute</span>: <span class="hljs-string">"program"</span>,
+            <span class="hljs-attr">inner_radius</span>: <span class="hljs-number">0</span>
+        });
+
+
+        ST.HorizontalBarChart.render();
+        ST.BarChart.render(ndx);
+        ST.LineChart.render(ndx);
+    }</pre></div></div>
             
         </li>
         
@@ -382,6 +449,19 @@ reduce_authors(data);</p>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+              <h4 id="data-count">Data Count</h4>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-20">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-20">&#182;</a>
               </div>
               <p>Create a data count widget and use the given css selector as anchor. You can also specify
 an optional chart group for this chart to be scoped within. When a chart belongs
@@ -404,11 +484,11 @@ on other charts within the same chart group.
         </li>
         
         
-        <li id="section-20">
+        <li id="section-21">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-20">&#182;</a>
+                <a class="pilcrow" href="#section-21">&#182;</a>
               </div>
               <p>(<em>optional</em>) <code>.html</code> sets different html when some records or all records are selected.
 <code>.html</code> replaces everything in the anchor with the html given using the following function.
@@ -425,11 +505,11 @@ on other charts within the same chart group.
         </li>
         
         
-        <li id="section-21">
+        <li id="section-22">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-21">&#182;</a>
+                <a class="pilcrow" href="#section-22">&#182;</a>
               </div>
               <h4 id="data-table">Data Table</h4>
 
@@ -438,11 +518,11 @@ on other charts within the same chart group.
         </li>
         
         
-        <li id="section-22">
+        <li id="section-23">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-22">&#182;</a>
+                <a class="pilcrow" href="#section-23">&#182;</a>
               </div>
               <p>Create a data table widget and use the given css selector as anchor. You can also specify
 an optional chart group for this chart to be scoped within. When a chart belongs
@@ -474,11 +554,11 @@ on other charts within the same chart group.
         </li>
         
         
-        <li id="section-23">
+        <li id="section-24">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-23">&#182;</a>
+                <a class="pilcrow" href="#section-24">&#182;</a>
               </div>
               <p>Data table does not use crossfilter group but rather a closure
 as a grouping function</p>
@@ -495,11 +575,11 @@ as a grouping function</p>
         </li>
         
         
-        <li id="section-24">
+        <li id="section-25">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-24">&#182;</a>
+                <a class="pilcrow" href="#section-25">&#182;</a>
               </div>
               <p>(<em>optional</em>) max number of records to be shown, <code>default = 25</code></p>
 
@@ -510,11 +590,11 @@ as a grouping function</p>
         </li>
         
         
-        <li id="section-25">
+        <li id="section-26">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-25">&#182;</a>
+                <a class="pilcrow" href="#section-26">&#182;</a>
               </div>
               <p>There are several ways to specify the columns; see the data-table documentation.
 This code demonstrates generating the column header automatically based on the columns.</p>
@@ -526,11 +606,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-26">
+        <li id="section-27">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-26">&#182;</a>
+                <a class="pilcrow" href="#section-27">&#182;</a>
               </div>
               <p>Use the <code>d.date</code> field; capitalized automatically</p>
 
@@ -551,11 +631,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-27">
+        <li id="section-28">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-27">&#182;</a>
+                <a class="pilcrow" href="#section-28">&#182;</a>
               </div>
               <p>Specify a custom format for column ‘Change’ by using a label with a function.</p>
 
@@ -592,11 +672,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-28">
+        <li id="section-29">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-28">&#182;</a>
+                <a class="pilcrow" href="#section-29">&#182;</a>
               </div>
               <p>(<em>optional</em>) sort using the given field, <code>default = function(d){return d;}</code></p>
 
@@ -609,11 +689,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-29">
+        <li id="section-30">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-29">&#182;</a>
+                <a class="pilcrow" href="#section-30">&#182;</a>
               </div>
               <p>(<em>optional</em>) sort order, <code>default = d3.ascending</code></p>
 
@@ -624,11 +704,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-30">
+        <li id="section-31">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-30">&#182;</a>
+                <a class="pilcrow" href="#section-31">&#182;</a>
               </div>
               <p>(<em>optional</em>) custom renderlet to post-process chart using <a href="http://d3js.org">D3</a></p>
 
@@ -640,11 +720,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-31">
+        <li id="section-32">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-31">&#182;</a>
+                <a class="pilcrow" href="#section-32">&#182;</a>
               </div>
               <p> Make this happen after the render table.</p>
 
@@ -659,11 +739,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-32">
+        <li id="section-33">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-32">&#182;</a>
+                <a class="pilcrow" href="#section-33">&#182;</a>
               </div>
               <p> <a href="http://localhost:8888">http://localhost:8888</a></p>
 
@@ -677,11 +757,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-33">
+        <li id="section-34">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-33">&#182;</a>
+                <a class="pilcrow" href="#section-34">&#182;</a>
               </div>
               <p>simply call <code>.renderAll()</code> to render all charts on the page</p>
 
@@ -694,11 +774,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-34">
+        <li id="section-35">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-34">&#182;</a>
+                <a class="pilcrow" href="#section-35">&#182;</a>
               </div>
               <p>Or you can render charts belonging to a specific chart group</p>
 
@@ -709,11 +789,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-35">
+        <li id="section-36">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-35">&#182;</a>
+                <a class="pilcrow" href="#section-36">&#182;</a>
               </div>
               <p>Once rendered you can call <code>.redrawAll()</code> to update charts incrementally when the data
 changes, without re-rendering everything</p>
@@ -725,11 +805,11 @@ changes, without re-rendering everything</p>
         </li>
         
         
-        <li id="section-36">
+        <li id="section-37">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-36">&#182;</a>
+                <a class="pilcrow" href="#section-37">&#182;</a>
               </div>
               <p>Or you can choose to redraw only those charts associated with a specific chart group</p>
 
@@ -741,11 +821,11 @@ changes, without re-rendering everything</p>
         </li>
         
         
-        <li id="section-37">
+        <li id="section-38">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-37">&#182;</a>
+                <a class="pilcrow" href="#section-38">&#182;</a>
               </div>
               <h4 id="versions">Versions</h4>
 
@@ -754,11 +834,11 @@ changes, without re-rendering everything</p>
         </li>
         
         
-        <li id="section-38">
+        <li id="section-39">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-38">&#182;</a>
+                <a class="pilcrow" href="#section-39">&#182;</a>
               </div>
               <p>Determine the current version of dc with <code>dc.version</code></p>
 

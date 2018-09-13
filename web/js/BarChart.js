@@ -1,31 +1,40 @@
 var ST = ST || {};
 
-ST.RuntimeChart = function() {
+ST.BarChart = function() {
 
-    var inst_;
+    var inst_,
+        inst_num_ = 0;
 
-    var render_ = function( ndx ) {
+    var render_ = function( ndx, options ) {
+
+        options = options || {};
+        var dimension = options.dimension || "runtime";
+
+        inst_num_++;
 
         // Determine a histogram of percent changes
         var runtime_dimension = ndx.dimension(function (d) {
-            return Math.round(d.runtime/1)*1;
+
+            var dim = d[dimension];
+            return Math.round(dim/1)*1;
         });
 
         var runtime_group = runtime_dimension.group();
 
-        var rcht = '<div id="runtime-chart"> \
-            <strong>Runtime</strong> \
-            <a class="reset" href="javascript:ST.RuntimeChart.reset();" style="display: none;">reset</a>\
+        var rcht = '<div class="runtime-chart' + inst_num_ + '"> \
+            <div class="top_left"> \
+                <strong>' + dimension + '</strong> \
+                <a class="reset" href="javascript:ST.BarChart.reset();" style="display: none;">reset</a>\
+            </div> \
         </div>';
 
         $('.row:eq(0)').append(rcht);
 
-        inst_ = dc.barChart('#runtime-chart');
+        inst_ = dc.barChart('.runtime-chart' + inst_num_ );
 
-        inst_ /* dc.barChart('#volume-month-chart', 'chartGroup') */
-            .width(600)
-            .height(180)
-            .margins({top: 10, right: 50, bottom: 30, left: 40})
+        inst_.width( options.width || 580)
+            .height( options.height || 180)
+            .margins( options.margins || {top: 10, right: 50, bottom: 30, left: 40})
             .dimension(runtime_dimension)
             .group(runtime_group)
             .elasticY(true)

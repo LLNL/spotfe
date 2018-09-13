@@ -7,6 +7,11 @@ ST.PieChart = function() {
 
     var render_ = function( ndx, spec ) {
 
+        var width = spec.width || 180;
+        var height = spec.height || 180;
+        var radius = spec.radius || 80;
+        var inner_radius = spec.inner_radius || 0;
+
         var rcht =     '<div dom_id="' + id_ + '" id="quarter-chart' + id_ + '">  \
         <strong>' + spec.title + '</strong> \
         <a class="reset pie_reset"  style="display: none;">reset</a> \
@@ -28,10 +33,10 @@ ST.PieChart = function() {
 
         quarterChart[id_] = dc.pieChart('#quarter-chart' + id_ );
         quarterChart[id_] /* dc.pieChart('#quarter-chart', 'chartGroup') */
-            .width(180)
-            .height(180)
-            .radius(80)
-            .innerRadius(spec.inner_radius)
+            .width( width )
+            .height(height )
+            .radius( radius )
+            .innerRadius(inner_radius)
             .dimension(quarter)
             .group(quarterGroup);
 

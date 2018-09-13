@@ -10,7 +10,9 @@ ST.BubbleChart = function() {
         return d.program + ' v' + version;
     };
 
-    var render_ = function( ndx ) {
+    var render_ = function( ndx, spec ) {
+
+        spec = spec || {};
 
         var rcht =     '<div id="yearly-bubble-chart" class="dc-chart">\
         <strong>Yearly Runtime Performance</strong> (radius: Figure of Merit, color: Thermal)\
@@ -102,9 +104,9 @@ ST.BubbleChart = function() {
 
         yearlyBubbleChart /* dc.bubbleChart('#yearly-bubble-chart', 'chartGroup') */
         // (_optional_) define chart width, `default = 200`
-            .width(990)
+            .width( spec.width || 990)
             // (_optional_) define chart height, `default = 200`
-            .height(380)
+            .height( spec.height || 380)
             // (_optional_) define chart transition duration, `default = 750`
             .transitionDuration(1500)
             .margins({top: 10, right: 50, bottom: 30, left: 40})

@@ -52,7 +52,7 @@ ST.LineChart = function() {
             }
         );
 
-        moveChart_ /* dc.lineChart('#monthly-move-chart', 'chartGroup') */
+        moveChart_
             .renderArea(true)
             .width(990)
             .height(200)
