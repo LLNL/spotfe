@@ -5,20 +5,27 @@ ST.LineChart = function() {
     var moveChart_, volumeChart_;
 
 
-    var render_ = function( ndx ) {
+    var render_ = function( ndx, options ) {
 
-        $('.row:eq(0)').append('        <div id="monthly-move-chart"> \
+        options = options || {};
+
+        var style = options.width ? 'width: ' + options.width + 'px;' : '';
+        style = style + (options.height ? 'height: ' + (options.height + 100) + 'px;' : "");
+
+        $('.row:eq(0)').append('<div class="contain_lines" style="' + style + '">\
+        <div class="monthly-move-chart"> \
             <strong>Runtime total + Runtime Average</strong> \
             <span class="reset" style="display: none;">range: <span class="filter"></span></span> \
             <a class="reset" href="javascript: ST.LineChart.reset();" \
                style="display: none;">reset</a> \
             <div class="clearfix"></div> \
         </div> \
-        <div id="monthly-volume-chart"> \
-        </div> ');
+        <div class="monthly-volume-chart"> \
+        </div>\
+         </div>');
 
-        moveChart_ = dc.lineChart('#monthly-move-chart');
-        volumeChart_ = dc.barChart('#monthly-volume-chart');
+        moveChart_ = dc.lineChart('.monthly-move-chart');
+        volumeChart_ = dc.barChart('.monthly-volume-chart');
 
         // Dimension by month
         var moveMonths = ndx.dimension(function (d) {
@@ -54,15 +61,15 @@ ST.LineChart = function() {
 
         moveChart_
             .renderArea(true)
-            .width(990)
-            .height(200)
+            .width( options.width || 990)
+            .height( options.height || 200)
             .transitionDuration(1000)
-            .margins({top: 30, right: 50, bottom: 25, left: 40})
+            .margins({top: 10, right: 50, bottom: 25, left: 40})
             .dimension(moveMonths)
             .mouseZoomable(true)
             // Specify a "range chart" to link its brush extent with the zoom of the current "focus chart".
             .rangeChart(volumeChart_)
-            .x(d3.scaleTime().domain([new Date(2008, 0, 1), new Date(2018, 11, 31)]))
+            .x(d3.scaleTime().domain([new Date(2009, 0, 1), new Date(2018, 5, 31)]))
             .round(d3.timeMonth.round)
             .xUnits(d3.timeMonths)
             .elasticY(true)
@@ -102,17 +109,18 @@ ST.LineChart = function() {
 
         // Since this bar chart is specified as "range chart" for the area chart, its brush extent
         // will always match the zoom of the area chart.
-        volumeChart_.width(990) /* dc.barChart('#monthly-volume-chart', 'chartGroup'); */
-            .height(40)
-            .margins({top: 0, right: 50, bottom: 20, left: 40})
+        volumeChart_.width( options.width || 990) /* dc.barChart('#monthly-volume-chart', 'chartGroup'); */
+            .height(100)
+            .margins({top: 0, right: 50, bottom: 50, left: 40})
             .dimension(moveMonths)
             .group(volumeByMonthGroup)
             .centerBar(true)
             .gap(1)
-            .x(d3.scaleTime().domain([new Date(2002, 0, 1), new Date(2019, 11, 31)]))
+            .x(d3.scaleTime().domain([new Date(2009, 0, 1), new Date(2018, 5, 31)]))
             .round(d3.timeMonth.round)
             .alwaysUseRounding(true)
-            .xUnits(d3.timeMonths);
+            .xUnits(d3.timeMonths)
+            .yAxis().ticks(3)
 
     };
 

@@ -89,6 +89,7 @@ var reduce_authors = function( data ) {
         var year = spot_date.getFullYear();
 
         data[z].date = month + "/" + day + "/" + year;
+        data[z].year = year;
 
         var diff = data[z].end - data[z].start;
 
@@ -130,6 +131,18 @@ var reduce_authors = function( data ) {
     //  this will eventually come from the BE.
     var meta_data_specs = [
         {
+            viz: "LineChart",
+            table_column: true,
+            width: SET_WIDTH,
+            height: 320
+        },
+        {
+            viz: "BubbleChart",
+            table_column: true,
+            width: SET_WIDTH,
+            height: 400
+        },
+        {
             viz: "BarChart",
             table_column: true,
             dimension: "runtime",
@@ -137,12 +150,11 @@ var reduce_authors = function( data ) {
             height: 400
         },
         {
-            viz: "MULTI-GRAPH",
-            table_column: true
-        },
-        {
-            viz: "BubbleChart",
+            viz: "BarChart",
             table_column: true,
+            dimension: "year",
+            xrange: [2008,2018],
+            xsuffix: "",
             width: SET_WIDTH,
             height: 400
         },
@@ -210,7 +222,10 @@ var reduce_authors = function( data ) {
 
         ST.HorizontalBarChart.render();
         ST.BarChart.render(ndx);
-        ST.LineChart.render(ndx);
+        ST.LineChart.render(ndx, {
+            width: 900,
+            height: 200
+        });
     }
 
     //#### Data Count

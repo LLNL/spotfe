@@ -5,6 +5,10 @@ ST.BarChart = function() {
     var inst_,
         inst_num_ = 0;
 
+    var upper_ = function( lower ) {
+        return lower.charAt(0).toUpperCase() + lower.substr(1);
+    };
+
     var render_ = function( ndx, options ) {
 
         options = options || {};
@@ -16,14 +20,14 @@ ST.BarChart = function() {
         var runtime_dimension = ndx.dimension(function (d) {
 
             var dim = d[dimension];
-            return Math.round(dim/1)*1;
+            return typeof dim === 'number' ? Math.round(dim/1)*1 : dim;
         });
 
         var runtime_group = runtime_dimension.group();
 
         var rcht = '<div class="runtime-chart' + inst_num_ + '"> \
             <div class="top_left"> \
-                <strong>' + dimension + '</strong> \
+                <strong>' + upper_(dimension) + '</strong> \
                 <a class="reset" href="javascript:ST.BarChart.reset();" style="display: none;">reset</a>\
             </div> \
         </div>';
@@ -34,18 +38,18 @@ ST.BarChart = function() {
 
         inst_.width( options.width || 580)
             .height( options.height || 180)
-            .margins( options.margins || {top: 10, right: 50, bottom: 30, left: 40})
+            .margins( options.margins || {top: 10, right: 50, bottom: 20, left: 40})
             .dimension(runtime_dimension)
             .group(runtime_group)
             .elasticY(true)
             // (_optional_) whether bar should be center to its x value. Not needed for ordinal chart, `default=false`
-            .centerBar(true)
+            .centerBar(false)
             // (_optional_) set gap between bars manually in px, `default=2`
             .gap(1)
             // (_optional_) set filter brush rounding
             .round(dc.round.floor)
             .alwaysUseRounding(true)
-            .x(d3.scaleLinear().domain([0, 24]))
+            .x(d3.scaleLinear().domain( options.xrange || [0, 24]))
             .renderHorizontalGridLines(true)
             // Customize the filter displayed in the control span
             .filterPrinter(function (filters) {
@@ -57,7 +61,7 @@ ST.BarChart = function() {
         // Customize axes
         inst_.xAxis().tickFormat(
             function (v) {
-                return v + 'h';
+                return v + (options.xsuffix !== undefined ? options.xsuffix : 'h');
             });
         inst_.yAxis().ticks(5);
     };

@@ -259,6 +259,7 @@ reduce_authors(data);</p>
         <span class="hljs-keyword">var</span> year = spot_date.getFullYear();
 
         data[z].date = month + <span class="hljs-string">"/"</span> + day + <span class="hljs-string">"/"</span> + year;
+        data[z].year = year;
 
         <span class="hljs-keyword">var</span> diff = data[z].end - data[z].start;
 
@@ -358,6 +359,18 @@ reduce_authors(data);</p>
             
             <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> meta_data_specs = [
         {
+            <span class="hljs-attr">viz</span>: <span class="hljs-string">"LineChart"</span>,
+            <span class="hljs-attr">table_column</span>: <span class="hljs-literal">true</span>,
+            <span class="hljs-attr">width</span>: SET_WIDTH,
+            <span class="hljs-attr">height</span>: <span class="hljs-number">320</span>
+        },
+        {
+            <span class="hljs-attr">viz</span>: <span class="hljs-string">"BubbleChart"</span>,
+            <span class="hljs-attr">table_column</span>: <span class="hljs-literal">true</span>,
+            <span class="hljs-attr">width</span>: SET_WIDTH,
+            <span class="hljs-attr">height</span>: <span class="hljs-number">400</span>
+        },
+        {
             <span class="hljs-attr">viz</span>: <span class="hljs-string">"BarChart"</span>,
             <span class="hljs-attr">table_column</span>: <span class="hljs-literal">true</span>,
             <span class="hljs-attr">dimension</span>: <span class="hljs-string">"runtime"</span>,
@@ -365,12 +378,11 @@ reduce_authors(data);</p>
             <span class="hljs-attr">height</span>: <span class="hljs-number">400</span>
         },
         {
-            <span class="hljs-attr">viz</span>: <span class="hljs-string">"MULTI-GRAPH"</span>,
-            <span class="hljs-attr">table_column</span>: <span class="hljs-literal">true</span>
-        },
-        {
-            <span class="hljs-attr">viz</span>: <span class="hljs-string">"BubbleChart"</span>,
+            <span class="hljs-attr">viz</span>: <span class="hljs-string">"BarChart"</span>,
             <span class="hljs-attr">table_column</span>: <span class="hljs-literal">true</span>,
+            <span class="hljs-attr">dimension</span>: <span class="hljs-string">"year"</span>,
+            <span class="hljs-attr">xrange</span>: [<span class="hljs-number">2008</span>,<span class="hljs-number">2018</span>],
+            <span class="hljs-attr">xsuffix</span>: <span class="hljs-string">""</span>,
             <span class="hljs-attr">width</span>: SET_WIDTH,
             <span class="hljs-attr">height</span>: <span class="hljs-number">400</span>
         },
@@ -438,7 +450,10 @@ reduce_authors(data);</p>
 
         ST.HorizontalBarChart.render();
         ST.BarChart.render(ndx);
-        ST.LineChart.render(ndx);
+        ST.LineChart.render(ndx, {
+            <span class="hljs-attr">width</span>: <span class="hljs-number">900</span>,
+            <span class="hljs-attr">height</span>: <span class="hljs-number">200</span>
+        });
     }</pre></div></div>
             
         </li>

@@ -403,3 +403,11 @@ body .dc-chart g.row text {
 #runtime-chart strong {
     display: block;
 }
+
+.contain_lines {
+    float: none;
+    clear: both;
+    width: 470px;
+    display: inline-block;
+    height: 430px;
+}
