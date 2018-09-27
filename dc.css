@@ -5,12 +5,19 @@
 div.dc-chart {
   float: left; }
 
+.row:nth-child(1) .dc-chart {
+  height: 410px;
+  margin: 30px 0 0 0; }
+
 .dc-chart {
   position: relative; }
   .dc-chart .top_left {
     position: absolute;
     top: 0;
     left: 0; }
+    .dc-chart .top_left strong {
+      position: relative;
+      top: -15px; }
   .dc-chart rect.bar {
     stroke: none;
     cursor: pointer; }

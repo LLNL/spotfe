@@ -61,7 +61,7 @@ ST.BarChart = function() {
         // Customize axes
         inst_.xAxis().tickFormat(
             function (v) {
-                return v + (options.xsuffix !== undefined ? options.xsuffix : 'h');
+                return v + (options.xsuffix !== undefined ? options.xsuffix : '');
             });
         inst_.yAxis().ticks(5);
     };

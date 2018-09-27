@@ -23,7 +23,7 @@ ST.PieChart = function() {
 
         // Summarize volume by quarter
         var quarter = ndx.dimension(function (d) {
-            return d[spec.iterator_attribute];
+            return d[spec.dimension];
         });
 
         var quarterGroup = quarter.group().reduceSum(function (d) {

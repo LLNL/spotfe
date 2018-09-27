@@ -94,6 +94,7 @@ var reduce_authors = function( data ) {
         var diff = data[z].end - data[z].start;
 
         data[z].runtime = parseInt(diff/3600);
+        data[z].runtime2 = parseInt(diff/1200);
 
         var mult = data[z].program === "umt" ? 2 : 1;
         data[z].thermal = data[z].runtime * mult * 3; //data[z].runtime > 11 ? 500 : 50; //parseInt(Math.random()*500);
@@ -112,12 +113,13 @@ var reduce_authors = function( data ) {
     data.forEach(function (d) {
         d.dd = dateFormatParser(d.date);
         d.month = d3.timeMonth(d.dd); // pre-calculate month for better performance
+        //d.year = d3.timeYear(d.dd);
     });
 
     //### Create Crossfilter Dimensions and Groups
 
     //See the [crossfilter API](https://github.com/square/crossfilter/wiki/API-Reference) for reference.
-    var ndx = crossfilter(data);
+    var ndx = crossfilter( ST.ReturnedDataStub.data );
     var all = ndx.groupAll();
 
 
@@ -126,72 +128,20 @@ var reduce_authors = function( data ) {
         return d.dd;
     });
 
-    var SET_WIDTH = 470;
 
     //  this will eventually come from the BE.
-    var meta_data_specs = [
-        {
-            viz: "LineChart",
-            table_column: true,
-            width: SET_WIDTH,
-            height: 320
-        },
-        {
-            viz: "BubbleChart",
-            table_column: true,
-            width: SET_WIDTH,
-            height: 400
-        },
-        {
-            viz: "BarChart",
-            table_column: true,
-            dimension: "runtime",
-            width: SET_WIDTH,
-            height: 400
-        },
-        {
-            viz: "BarChart",
-            table_column: true,
-            dimension: "year",
-            xrange: [2008,2018],
-            xsuffix: "",
-            width: SET_WIDTH,
-            height: 400
-        },
-        {
-            viz: "PieChart",
-            table_column: true,
-            title: "Thermal Variance",
-            iterator_attribute: "thermal_variance",
-            inner_radius: 30,
-            width: SET_WIDTH,
-            height: 400,
-            radius: 170
-        },
-        {
-            viz: "PieChart",
-            table_column: true,
-            title: "Program",
-            iterator_attribute: "program",
-            inner_radius: 0,
-            width: SET_WIDTH,
-            height: 400,
-            radius: 170
-        },
-        {
-            viz: "LINE-CHART",
-            table_column: true
-        }
-    ];
+    var layout_spec = ST.ReturnedDataStub.layout.charts;
+
+    ST.LayoutAugmenterModel.get( layout_spec );
 
 
     var RENDER_GENERIC = true;
 
     if( RENDER_GENERIC ) {
 
-        for( var dimension in meta_data_specs ) {
+        for( var dimension in layout_spec ) {
 
-            var spec = meta_data_specs[dimension];
+            var spec = layout_spec[dimension];
             var viz = spec.viz;
 
             if( ST[viz] && ST[viz].render ) {
@@ -280,6 +230,29 @@ var reduce_authors = function( data ) {
     //    </div>
     // ```
     // or do it programmatically using `.columns()`.
+    var columns = [];
+    for( var z in ST.ReturnedDataStub.layout.table ) {
+
+        var tab = ST.ReturnedDataStub.layout.table[z];
+        columns.push( tab.dimension );
+    }
+
+    columns.push(    {
+        label: 'Operations',
+        format: function(d) {
+
+            var buts = "";
+
+            for( var x in d.drilldown ) {
+
+                var but = d.drilldown[x];
+                buts += '<div class="myButton">' + but.toUpperCase() + '</div>';
+            }
+
+            return buts;
+        }
+    });
+
 
     nasdaqTable /* dc.dataTable('.dc-data-table', 'chartGroup') */
         .dimension(dateDimension)
@@ -295,47 +268,7 @@ var reduce_authors = function( data ) {
         .size(250)
         // There are several ways to specify the columns; see the data-table documentation.
         // This code demonstrates generating the column header automatically based on the columns.
-        .columns([
-            // Use the `d.date` field; capitalized automatically
-            'date',
-            'program',
-            'version',
-            {
-                label: 'User',
-                format: function(d) {
-                    return d.author
-                }
-            },
-            'runtime',
-            {
-                // Specify a custom format for column 'Change' by using a label with a function.
-                label: 'Thermal',
-                format: function (d) {
-                    return ST.numberFormat(d.thermal);
-                }
-            },
-            {
-                label: 'Performance',
-                format: function( d ) {
-                    return d.scientific_performance;
-                }
-            },
-            {
-                label: 'Operations',
-                format: function(d) {
-
-                    var buts = "";
-
-                    for( var x in d.buttons ) {
-
-                        var but = d.buttons[x];
-                        buts += '<div class="myButton">' + but.toUpperCase() + '</div>';
-                    }
-
-                    return buts;
-                }
-            }
-        ])
+        .columns(columns)
 
         // (_optional_) sort using the given field, `default = function(d){return d;}`
         .sortBy(function (d) {

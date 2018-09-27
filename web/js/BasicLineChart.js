@@ -1,6 +1,6 @@
 var ST = ST || {};
 
-ST.LineChart = function() {
+ST.BasicLineChart = function() {
 
     var moveChart_, volumeChart_;
 
@@ -8,75 +8,45 @@ ST.LineChart = function() {
     var render_ = function( ndx, options ) {
 
         options = options || {};
+        options.dimensions = options.dimensions || ['one', 'two', 'three'];
 
         var style = options.width ? 'width: ' + options.width + 'px;' : '';
         style = style + (options.height ? 'height: ' + (options.height + 100) + 'px;' : "");
 
         $('.row:eq(0)').append('<div class="contain_lines" style="' + style + '">\
-        <div class="monthly-move-chart"> \
+        <div class="basic-monthly-move-chart"> \
             <strong>Runtime total + Runtime Average</strong> \
             <span class="reset" style="display: none;">range: <span class="filter"></span></span> \
-            <a class="reset" href="javascript: ST.LineChart.reset();" \
+            <a class="reset" href="javascript: ST.BasicLineChart.reset();" \
                style="display: none;">reset</a> \
             <div class="clearfix"></div> \
         </div> \
-        <div class="monthly-volume-chart"> \
+        <div class="basic-monthly-volume-chart"> \
         </div>\
          </div>');
 
-        moveChart_ = dc.lineChart('.monthly-move-chart');
-        volumeChart_ = dc.barChart('.monthly-volume-chart');
+        moveChart_ = dc.lineChart('.basic-monthly-move-chart');
+        volumeChart_ = dc.barChart('.basic-monthly-volume-chart');
 
         // Dimension by month
         var moveMonths = ndx.dimension(function (d) {
             return d.month;
         });
+
         // Total Runtimes per month
         var scummy = moveMonths.group().reduceSum(function (d) {
-            return d.runtime;
+            return d[ options.dimensions[0]];
+        });
+
+        var scummy2 = moveMonths.group().reduceSum(function (d) {
+            return d[ options.dimensions[1]];
         });
 
         // Group by total volume within move, and scale down result
         var volumeByMonthGroup = moveMonths.group().reduceSum(function (d) {
-            return d.runtime;
+            return d[ options.dimensions[2]];
         });
 
-        var lateral = moveMonths.group().reduce(
-            function (p, v) {
-                ++p.days;
-                p.total += (v.runtime);
-                p.avg = Math.round(p.total / p.days);
-                return p;
-            },
-            function (p, v) {
-                --p.days;
-                p.total -= (v.runtime);
-                p.avg = p.days ? Math.round(p.total / p.days) : 0;
-                return p;
-            },
-            function () {
-                return {days: 0, total: 0, avg: 0};
-            }
-        );
-
-        //  Average runtimes by month.
-        var lateral_old = moveMonths.group().reduce(
-            function (p, v) {
-                ++p.days;
-                p.total += (v.runtime);
-                p.avg = Math.round(p.total / p.days);
-                return p;
-            },
-            function (p, v) {
-                --p.days;
-                p.total -= (v.runtime);
-                p.avg = p.days ? Math.round(p.total / p.days) : 0;
-                return p;
-            },
-            function () {
-                return {days: 0, total: 0, avg: 0};
-            }
-        );
 
         moveChart_
             .renderArea(true)
@@ -101,9 +71,9 @@ ST.LineChart = function() {
             // Add the base layer of the stack with group. The second parameter specifies a series name for use in the
             // legend.
             // The `.valueAccessor` will be used for the base layer
-            .group(lateral_old, 'Average Runtime per month')
+            .group(scummy2, 'Average Runtime per month')
             .valueAccessor(function (d) {
-                return d.value.avg;
+                return d.value;
             })
             // Stack additional layers with `.stack`. The first paramenter is a new group.
             // The second parameter is the series name. The third is a value accessor.

@@ -33,6 +33,14 @@ div.dc-chart {
     float: left;
 }
 
+.row:nth-child(1) {
+
+    .dc-chart {
+        height: 410px;
+        margin: 30px 0 0 0;
+    }
+}
+
 .dc-chart {
 
     position: relative;
@@ -41,6 +49,11 @@ div.dc-chart {
         position: absolute;
         top: 0;
         left: 0;
+
+        strong {
+            position: relative;
+            top: -15px;
+        }
     }
 
     rect {
