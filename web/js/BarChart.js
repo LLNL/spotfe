@@ -16,10 +16,21 @@ ST.BarChart = function() {
 
         inst_num_++;
 
+        var min = 100000;
+        var max = 0;
+
         // Determine a histogram of percent changes
         var runtime_dimension = ndx.dimension(function (d) {
 
             var dim = d[dimension];
+
+            if( dim < min ) {
+                min = dim;
+            }
+            if( dim > max ) {
+                max = dim;
+            }
+
             return typeof dim === 'number' ? Math.round(dim/1)*1 : dim;
         });
 
@@ -49,7 +60,7 @@ ST.BarChart = function() {
             // (_optional_) set filter brush rounding
             .round(dc.round.floor)
             .alwaysUseRounding(true)
-            .x(d3.scaleLinear().domain( options.xrange || [0, 24]))
+            .x(d3.scaleLinear().domain( options.xrange || [min - 1, max + 1]))
             .renderHorizontalGridLines(true)
             // Customize the filter displayed in the control span
             .filterPrinter(function (filters) {

@@ -1,30 +1,38 @@
 var ST = ST || {};
 
-ST.HorizontalBarChart = function() {
+ST.LeftHorizontalBarChart = function() {
 
     var horizontalStackedChart_;
 
-    var render_ = function() {
+    var render_ = function( ndx, options ) {
 
         $('.left_side').append('<div id="day-of-week-chart"> \
     <strong>User</strong> \
-    <a class="reset" href="javascript: ST.HorizontalBarChart.reset();" style="display: none;">reset</a> \
+    <a class="reset" href="javascript: ST.LeftHorizontalBarChart.reset();" style="display: none;">reset</a> \
     <div class="clearfix"></div> \
     </div> ');
 
         horizontalStackedChart_ = dc.rowChart('#day-of-week-chart');
-        var height = number_of_authors * 25;
         var colors = ['#3182bd', '#6baed6', '#9ecae1', '#c6dbef', '#dadaeb'];
         colors = ['#9ecae1']; //,'#3182bd','#3182bd','#3182bd','#3182bd'];
 
+        var uniq_counts = {};
+
         // Counts per weekday
         var dayOfWeek = ndx.dimension(function (d) {
-            var day = d.dd.getDay();
+            //var day = d.dd.getDay();
             var name = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-            return d.author || "none";// day + '.' + name[day];
+            uniq_counts[ d[ options.dimension ] ] = 1;
+            return d[ options.dimension ];// || "none";// day + '.' + name[day];
         });
 
         var dayOfWeekGroup = dayOfWeek.group();
+
+        console.dir(uniq_counts);
+
+        var number_of_authors = Object.keys( uniq_counts ).length;
+        console.log(number_of_authors);
+        var height = number_of_authors * 35;
 
         // Create a row chart and use the given css selector as anchor. You can also specify
         // an optional chart group for this chart to be scoped within. When a chart belongs
