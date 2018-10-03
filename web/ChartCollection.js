@@ -119,7 +119,10 @@ var reduce_authors = function( data ) {
     //### Create Crossfilter Dimensions and Groups
 
     //See the [crossfilter API](https://github.com/square/crossfilter/wiki/API-Reference) for reference.
-    var ndx = crossfilter( ST.ReturnedDataStub.data );
+
+var RenderChartCollection = function() {
+
+    var ndx = crossfilter(ST.ReturnedDataStub.data);
     var all = ndx.groupAll();
 
 
@@ -132,23 +135,23 @@ var reduce_authors = function( data ) {
     //  this will eventually come from the BE.
     var layout_spec = ST.ReturnedDataStub.layout.charts;
 
-    ST.LayoutAugmenterModel.get( layout_spec );
+    ST.LayoutAugmenterModel.get(layout_spec);
 
 
     var RENDER_GENERIC = true;
 
-    if( RENDER_GENERIC ) {
+    if (RENDER_GENERIC) {
 
-        for( var dimension in layout_spec ) {
+        for (var dimension in layout_spec) {
 
             var spec = layout_spec[dimension];
             var viz = spec.viz;
 
-            if( ST[viz] && ST[viz].render ) {
+            if (ST[viz] && ST[viz].render) {
 
-                ST[viz].render(ndx, spec );
+                ST[viz].render(ndx, spec);
             } else {
-                console.log('Sorry.  Viz type viz='+ viz + ' is not supported.');
+                console.log('Sorry.  Viz type viz=' + viz + ' is not supported.');
             }
 
         }
@@ -201,7 +204,7 @@ var reduce_authors = function( data ) {
         // `%filter-count` and `%total-count` are replaced with the values obtained.
         .html({
             some: '<strong>%filter-count</strong> selected out of <strong>%total-count</strong> records' +
-                ' | <a href=\'javascript:dc.filterAll(); dc.renderAll();\'>Reset All</a>',
+            ' | <a href=\'javascript:dc.filterAll(); dc.renderAll();\'>Reset All</a>',
             all: 'All records selected. Please click on the graph to apply filters.'
         });
 
@@ -231,19 +234,19 @@ var reduce_authors = function( data ) {
     // ```
     // or do it programmatically using `.columns()`.
     var columns = [];
-    for( var z in ST.ReturnedDataStub.layout.table ) {
+    for (var z in ST.ReturnedDataStub.layout.table) {
 
         var tab = ST.ReturnedDataStub.layout.table[z];
-        columns.push( tab.dimension );
+        columns.push(tab.dimension);
     }
 
-    columns.push(    {
+    columns.push({
         label: 'Operations',
-        format: function(d) {
+        format: function (d) {
 
             var buts = "";
 
-            for( var x in d.drilldown ) {
+            for (var x in d.drilldown) {
 
                 var but = d.drilldown[x];
                 buts += '<div class="myButton">' + but.toUpperCase() + '</div>';
@@ -261,7 +264,7 @@ var reduce_authors = function( data ) {
         .group(function (d) {
 
             var format = d3.format('02d');
-            var date = new Date(d.start*1000);
+            var date = new Date(d.start * 1000);
             return date.getFullYear() + '/' + format((date.getMonth() + 1));
         })
         // (_optional_) max number of records to be shown, `default = 25`
@@ -281,11 +284,11 @@ var reduce_authors = function( data ) {
             table.selectAll('.dc-table-group').classed('info', true);
 
             //  Make this happen after the render table.
-            jQuery('.myButton').unbind('click').bind('click', function() {
+            jQuery('.myButton').unbind('click').bind('click', function () {
 
                 var subject = $(this).html().toLowerCase();
 
-                if( subject === 'mpi' ) {
+                if (subject === 'mpi') {
 
                     //  http://localhost:8888
                     window.open('../ravel/index.html');
@@ -297,18 +300,18 @@ var reduce_authors = function( data ) {
     //simply call `.renderAll()` to render all charts on the page
     dc.renderAll();
     /*
-    // Or you can render charts belonging to a specific chart group
-    dc.renderAll('group');
-    // Once rendered you can call `.redrawAll()` to update charts incrementally when the data
-    // changes, without re-rendering everything
-    dc.redrawAll();
-    // Or you can choose to redraw only those charts associated with a specific chart group
-    dc.redrawAll('group');
-    */
+     // Or you can render charts belonging to a specific chart group
+     dc.renderAll('group');
+     // Once rendered you can call `.redrawAll()` to update charts incrementally when the data
+     // changes, without re-rendering everything
+     dc.redrawAll();
+     // Or you can choose to redraw only those charts associated with a specific chart group
+     dc.redrawAll('group');
+     */
 
 
 //#### Versions
 
 //Determine the current version of dc with `dc.version`
-d3.selectAll('#version').text(dc.version);
-
+    d3.selectAll('#version').text(dc.version);
+};

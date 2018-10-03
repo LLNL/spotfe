@@ -37,7 +37,7 @@ div.dc-chart {
 
     .dc-chart {
         height: 410px;
-        margin: 30px 0 0 0;
+        margin: 37px 0 0 0;
     }
 }
 
@@ -47,13 +47,8 @@ div.dc-chart {
 
     .top_left {
         position: absolute;
-        top: 0;
+        top: -20px;
         left: 0;
-
-        strong {
-            position: relative;
-            top: -15px;
-        }
     }
 
     rect {
@@ -423,4 +418,12 @@ body .dc-chart g.row text {
     width: 470px;
     display: inline-block;
     height: 430px;
+}
+
+.error_statement {
+    color: red;
+    border: 1px solid red;
+    padding: 15px;
+    background-color: #ffdddd;
+    maring: 25px;
 }

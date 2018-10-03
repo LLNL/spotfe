@@ -3,41 +3,41 @@ ST.ReturnedDataStub = {
         charts: [
             {
                 viz: "BarChart",
-                dimension: "problem_size"
+                dimension: "Problem Size"
             },
             {
                 viz: "PieChart",
                 title: "Compiler names + Compiler Version",
-                dimension: "compiler_name_plus_compiler_version"
+                dimension: "Compiler Name"
             },
             {
                 viz: "LeftHorizontalBarChart",
                 title: "Code Builder",
-                dimension: "code_builder"
+                dimension: "Code Builder"
             },
             {
                 //  eventually will be HorizontalBarChart
                 //  for now using PieChart because HorizontalBarChart is not supported yet.
                 viz: "PieChart",
-                title: "Flags",
-                dimension: "flags"
+                title: "Compiler Flags",
+                dimension: "Compiler Flags"
             },
             {
                 viz: "BarChart",
                 title: "Number of Regions",
-                dimension: "number_of_regions"
+                dimension: "Number of Regions"
             },
             {
                 //  BubbleChart is not completely supported yet and won't be for a while.
                 //  But here is the interface.
                 viz: "BubbleChart",
-                xaxis: "region_balance",
+                xaxis: "Region Balance",
                 yaxis: "region_cost"
             },
             {
                 viz: "BarChart",
-                title: "Max Iterations",
-                dimension: "max_iterations"
+                title: "Iterations",
+                dimension: "Iterations"
             }
         ],
         table: [
@@ -49,16 +49,16 @@ ST.ReturnedDataStub = {
                 dimension: 'date'
             },
             {
-                label: 'program',
-                dimension: 'program'
+                label: 'cali.caliper.version',
+                dimension: 'cali.caliper.version'
             },
             {
-                label: 'problem_size',
-                dimension: 'problem_size'
+                label: 'Problem Size',
+                dimension: 'Problem Size'
             },
             {
-                label: 'region_balance',
-                dimension: 'region_balance'
+                label: 'Region Balance',
+                dimension: 'Region Balance'
             }
         ]
     },
@@ -86,7 +86,7 @@ ST.ReturnedDataStub = {
             "code_builder": "Tsung-Dao (T.D.) Lee",
             "problem_size": 3,
             "program": "umt",
-            "flags": "-F -Millenium ",
+            "flags": "-OPUS 6 ",
             "number_of_regions": 2,
             "region_balance": 4,
             "region_cost": 5,
@@ -115,8 +115,8 @@ ST.ReturnedDataStub = {
             "compiler_name_plus_compiler_version": "Visual Studios 6",
             "code_builder": "James Downy",
             "problem_size": 4,
-            "program": "umt",
-            "flags": "-F -Millenium ",
+            "program": "lulesh",
+            "flags": "-W 283 -MINI",
             "number_of_regions": 5,
             "region_balance": 3,
             "region_cost": 12,
@@ -130,7 +130,7 @@ ST.ReturnedDataStub = {
             "compiler_name_plus_compiler_version": "Visual Studios 6",
             "code_builder": "Roger Lumberg",
             "problem_size": 4,
-            "program": "umt",
+            "program": "lulesh",
             "flags": "-F -Millenium ",
             "number_of_regions": 1,
             "region_balance": 3,

@@ -7,17 +7,14 @@ div.dc-chart {
 
 .row:nth-child(1) .dc-chart {
   height: 410px;
-  margin: 30px 0 0 0; }
+  margin: 37px 0 0 0; }
 
 .dc-chart {
   position: relative; }
   .dc-chart .top_left {
     position: absolute;
-    top: 0;
+    top: -20px;
     left: 0; }
-    .dc-chart .top_left strong {
-      position: relative;
-      top: -15px; }
   .dc-chart rect.bar {
     stroke: none;
     cursor: pointer; }
@@ -294,3 +291,10 @@ body .dc-chart g.row text {
   width: 470px;
   display: inline-block;
   height: 430px; }
+
+.error_statement {
+  color: red;
+  border: 1px solid red;
+  padding: 15px;
+  background-color: #ffdddd;
+  maring: 25px; }
