@@ -4,6 +4,7 @@ ST.CallSpot = function() {
 
         var spotArgs = " summary data/lulesh";
         spotArgs = " summary /usr/gapps/wf/web/spot/data/lulesh";
+        var command = '/usr/gapps/wf/web/spot/virtenv/bin/python /usr/gapps/wf/web/spot/spot.py  summary /usr/gapps/wf/web/spot/data/lulesh_maximal';
 
         $.ajax({
             dataType:'jsonp',
@@ -11,13 +12,14 @@ ST.CallSpot = function() {
             data:   {
                 'via'    : 'post',
                 'route'  : '/command/rztopaz',
-                'command': 'bash <<BASH_INPUT\n/usr/gapps/wf/web/spot/virtenv/bin/python /usr/gapps/wf/web/spot/spot.py ' + spotArgs + '\nBASH_INPUT\n'
+                'command': command
             }
         }).done(function(value) {
 
             if( value.error !== "" ) {
 
-                error_( value.error );
+                error_( value.error  + "<br><br>pro tip: see Joe Chavez.");
+                console.log('command=' + command);
 
             } else {
 
@@ -49,7 +51,7 @@ ST.CallSpot = function() {
         }).error(function() {
 
             var link = "https://rzlc.llnl.gov/";
-            error_('Could not contact rzlc.llnl.gov  Make sure you have internet connection and are already authenticated with RZ.  For example <a target="_blank" href="' + link + '">RZ Link</a>');
+            error_('Could not contact rzlc.llnl.gov  Make sure you are already authenticated with RZ.  For example <a target="_blank" href="' + link + '">RZ Link</a>');
         });
     };
 
