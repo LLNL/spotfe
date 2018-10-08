@@ -1,10 +1,10 @@
 ST.CallSpot = function() {
 
-    var ajax_ = function() {
+    var ajax_ = function( file ) {
 
         var spotArgs = " summary data/lulesh";
         spotArgs = " summary /usr/gapps/wf/web/spot/data/lulesh";
-        var command = '/usr/gapps/wf/web/spot/virtenv/bin/python /usr/gapps/wf/web/spot/spot.py  summary /usr/gapps/wf/web/spot/data/lulesh_maximal';
+        var command = '/usr/gapps/wf/web/spot/virtenv/bin/python /usr/gapps/wf/web/spot/spot.py  summary ' + file;
 
         $.ajax({
             dataType:'jsonp',
@@ -30,8 +30,8 @@ ST.CallSpot = function() {
 
                 for (var x in parsed) {
 
-                    if (newp.length < 4500) {
-                        newp.push(parsed[x][0]);
+                    if (newp.length < 3000) {
+                        newp.push(parsed[x]);
                     }
                 }
 
@@ -45,6 +45,7 @@ ST.CallSpot = function() {
                 newp[7]['Compiler Name'] = "GNU Filler";
 
                 ST.ReturnedDataStub.data = newp;
+
                 console.dir(newp);
                 RenderChartCollection();
             }
@@ -61,9 +62,27 @@ ST.CallSpot = function() {
         $('body').prepend( html );
     };
 
+    function getUrlVars_() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+            vars[key] = value;
+        });
+        return vars;
+    };
+
+    var get_ = function( param ) {
+        var vars = getUrlVars_();
+        return vars[param];
+    };
 
     $(document).ready( function() {
 
-        ajax_();
+        var file = get_('sf');
+        var default_file = "/usr/gapps/wf/web/spot/data/lulesh_maximal";
+        file = file || default_file;
+
+        console.dir(file);
+
+        ajax_(file);
     });
 }();
