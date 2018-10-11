@@ -11,7 +11,7 @@ ST.CallSpot = function() {
             url:     'https://rzlc.llnl.gov/lorenz/lora/lora.cgi/jsonp',
             data:   {
                 'via'    : 'post',
-                'route'  : '/command/rztopaz',
+                'route'  : '/command/rzgenie',
                 'command': command
             }
         }).done(function(value) {
@@ -26,34 +26,79 @@ ST.CallSpot = function() {
                 var spotReturnedValue = value.output.command_out;
                 var parsed = JSON.parse(spotReturnedValue);
 
+                for( var y in parsed ) {
+
+                    var par = parsed[y];
+                    for( var z in par ) {
+
+                        //par[z] = +par[z];
+
+                        if( isNaN(par[z]) ) {
+                          //  par[z] = 1;
+                        }
+
+                        if( z === undefined || par[z] === undefined || isNaN(par[z])) {
+                            //console.log('isnu='+z + '  par[z]=' + par[z]);
+                        }
+                    }
+                }
+
                 var newp = [];
 
                 for (var x in parsed) {
 
-                    if (newp.length < 3000) {
-                        newp.push(parsed[x]);
+                    if (newp.length < 15100) {
+
+                        var valid_obj = parsed[x];
+                        var date = 1539283462;
+
+                        var spot_date = new Date( date * 1000 );
+
+                        var month = spot_date.getMonth() + 1;
+                        var day = spot_date.getDate();
+                        var year = spot_date.getFullYear();
+
+                        valid_obj.epoch_date = date;
+                        valid_obj.date = month + "/" + day + "/" + year;
+
+
+                        newp.push(valid_obj);
                     }
                 }
 
                 newp[0]['Code Builder'] = "Filler0";
                 newp[1]['Code Builder'] = "Filler1";
-                newp[2]['Compiler Name'] = "GNU Filler";
+   /*             newp[2]['Compiler Name'] = "GNU Filler";
                 newp[3]['Compiler Name'] = "GNU Filler";
                 newp[4]['Compiler Name'] = "GNU Filler";
                 newp[5]['Compiler Name'] = "GNU Filler";
                 newp[6]['Compiler Name'] = "GNU Filler";
-                newp[7]['Compiler Name'] = "GNU Filler";
-
-                ST.ReturnedDataStub.data = newp;
+                newp[7]['Compiler Name'] = "GNU Filler";*/
 
                 console.dir(newp);
-                RenderChartCollection();
+                RenderChartCollection( newp );
             }
         }).error(function() {
 
             var link = "https://rzlc.llnl.gov/";
             error_('Could not contact rzlc.llnl.gov  Make sure you are already authenticated with RZ.  For example <a target="_blank" href="' + link + '">RZ Link</a>');
         });
+    };
+
+    var make_obj_valid_ = function( obj ) {
+
+        for( var x in obj ) {
+
+            if( isNaN(x) || x === undefined ) {
+                x = "cant_be_undef";
+            }
+
+            if( isNaN(obj[x]) || obj[x] === undefined ) {
+                obj[x] = "can not be undefined or NaN";
+            }
+        }
+
+        return obj;
     };
 
     var error_ = function( str ) {

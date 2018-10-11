@@ -2,10 +2,6 @@ ST.ReturnedDataStub = {
     layout: {
         charts: [
             {
-                viz: "BarChart",
-                dimension: "Problem Size"
-            },
-            {
                 viz: "PieChart",
                 title: "Compiler names + Compiler Version",
                 dimension: "Compiler Name"
@@ -24,10 +20,14 @@ ST.ReturnedDataStub = {
             },
             {
                 viz: "BarChart",
+                dimension: "Problem Size"
+            },
+            {
+                viz: "BarChart",
                 title: "Number of Regions",
                 dimension: "Number of Regions"
             },
-            {
+/*            {
                 //  BubbleChart is not completely supported yet and won't be for a while.
                 //  But here is the interface.
                 viz: "BubbleChart",
@@ -38,7 +38,7 @@ ST.ReturnedDataStub = {
                 viz: "BarChart",
                 title: "Iterations",
                 dimension: "Iterations"
-            }
+            }*/
         ],
         table: [
             //  For now, we only support label and dimension must be the same.

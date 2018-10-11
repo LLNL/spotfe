@@ -31,7 +31,8 @@ ST.BarChart = function() {
                 max = dim;
             }
 
-            return typeof dim === 'number' ? Math.round(dim/1)*1 : dim;
+            var ret = typeof dim === 'number' ? Math.round(dim/1)*1 : dim;
+            return +ret;
         });
 
         var runtime_group = runtime_dimension.group();

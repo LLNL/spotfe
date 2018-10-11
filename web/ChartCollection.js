@@ -120,15 +120,17 @@ var reduce_authors = function( data ) {
 
     //See the [crossfilter API](https://github.com/square/crossfilter/wiki/API-Reference) for reference.
 
-var RenderChartCollection = function() {
+var RenderChartCollection = function( the_data ) {
 
-    var ndx = crossfilter(ST.ReturnedDataStub.data);
+    //  ST.ReturnedDataStub.data
+    var ndx = crossfilter( the_data );
     var all = ndx.groupAll();
 
 
     // Dimension by full date
     var dateDimension = ndx.dimension(function (d) {
-        return d.dd;
+        return dateFormatParser(d.date);
+        //return d.dd;
     });
 
 
@@ -257,14 +259,14 @@ var RenderChartCollection = function() {
     });
 
 
-    nasdaqTable /* dc.dataTable('.dc-data-table', 'chartGroup') */
+    nasdaqTable
         .dimension(dateDimension)
         // Data table does not use crossfilter group but rather a closure
         // as a grouping function
         .group(function (d) {
 
             var format = d3.format('02d');
-            var date = new Date(d.start * 1000);
+            var date = new Date(d.epoch_date * 1000);
             return date.getFullYear() + '/' + format((date.getMonth() + 1));
         })
         // (_optional_) max number of records to be shown, `default = 25`
@@ -275,7 +277,7 @@ var RenderChartCollection = function() {
 
         // (_optional_) sort using the given field, `default = function(d){return d;}`
         .sortBy(function (d) {
-            return d.dd;
+            return d.date;
         })
         // (_optional_) sort order, `default = d3.ascending`
         .order(d3.ascending)

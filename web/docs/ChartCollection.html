@@ -338,10 +338,7 @@ reduce_authors(data);</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>
-<span class="hljs-keyword">var</span> RenderChartCollection = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
-
-    <span class="hljs-keyword">var</span> ndx = crossfilter(ST.ReturnedDataStub.data);
-    <span class="hljs-keyword">var</span> all = ndx.groupAll();</pre></div></div>
+<span class="hljs-keyword">var</span> RenderChartCollection = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> the_data </span>) </span>{</pre></div></div>
             
         </li>
         
@@ -352,13 +349,12 @@ reduce_authors(data);</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-18">&#182;</a>
               </div>
-              <p>Dimension by full date</p>
+              <p> ST.ReturnedDataStub.data</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> dateDimension = ndx.dimension(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{
-        <span class="hljs-keyword">return</span> d.dd;
-    });</pre></div></div>
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> ndx = crossfilter( the_data );
+    <span class="hljs-keyword">var</span> all = ndx.groupAll();</pre></div></div>
             
         </li>
         
@@ -368,6 +364,37 @@ reduce_authors(data);</p>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+              <p>Dimension by full date</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> dateDimension = ndx.dimension(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{
+        <span class="hljs-keyword">return</span> dateFormatParser(d.date);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-20">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-20">&#182;</a>
+              </div>
+              <p>return d.dd;</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-21">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-21">&#182;</a>
               </div>
               <p> this will eventually come from the BE.</p>
 
@@ -424,11 +451,11 @@ reduce_authors(data);</p>
         </li>
         
         
-        <li id="section-20">
+        <li id="section-22">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-20">&#182;</a>
+                <a class="pilcrow" href="#section-22">&#182;</a>
               </div>
               <h4 id="data-count">Data Count</h4>
 
@@ -437,11 +464,11 @@ reduce_authors(data);</p>
         </li>
         
         
-        <li id="section-21">
+        <li id="section-23">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-21">&#182;</a>
+                <a class="pilcrow" href="#section-23">&#182;</a>
               </div>
               <p>Create a data count widget and use the given css selector as anchor. You can also specify
 an optional chart group for this chart to be scoped within. When a chart belongs
@@ -464,11 +491,11 @@ on other charts within the same chart group.
         </li>
         
         
-        <li id="section-22">
+        <li id="section-24">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-22">&#182;</a>
+                <a class="pilcrow" href="#section-24">&#182;</a>
               </div>
               <p>(<em>optional</em>) <code>.html</code> sets different html when some records or all records are selected.
 <code>.html</code> replaces everything in the anchor with the html given using the following function.
@@ -485,11 +512,11 @@ on other charts within the same chart group.
         </li>
         
         
-        <li id="section-23">
+        <li id="section-25">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-23">&#182;</a>
+                <a class="pilcrow" href="#section-25">&#182;</a>
               </div>
               <h4 id="data-table">Data Table</h4>
 
@@ -498,11 +525,11 @@ on other charts within the same chart group.
         </li>
         
         
-        <li id="section-24">
+        <li id="section-26">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-24">&#182;</a>
+                <a class="pilcrow" href="#section-26">&#182;</a>
               </div>
               <p>Create a data table widget and use the given css selector as anchor. You can also specify
 an optional chart group for this chart to be scoped within. When a chart belongs
@@ -551,17 +578,17 @@ on other charts within the same chart group.
     });
 
 
-    nasdaqTable <span class="hljs-comment">/* dc.dataTable('.dc-data-table', 'chartGroup') */</span>
+    nasdaqTable
         .dimension(dateDimension)</pre></div></div>
             
         </li>
         
         
-        <li id="section-25">
+        <li id="section-27">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-25">&#182;</a>
+                <a class="pilcrow" href="#section-27">&#182;</a>
               </div>
               <p>Data table does not use crossfilter group but rather a closure
 as a grouping function</p>
@@ -571,18 +598,18 @@ as a grouping function</p>
             <div class="content"><div class='highlight'><pre>        .group(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{
 
             <span class="hljs-keyword">var</span> format = d3.format(<span class="hljs-string">'02d'</span>);
-            <span class="hljs-keyword">var</span> date = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(d.start * <span class="hljs-number">1000</span>);
+            <span class="hljs-keyword">var</span> date = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(d.epoch_date * <span class="hljs-number">1000</span>);
             <span class="hljs-keyword">return</span> date.getFullYear() + <span class="hljs-string">'/'</span> + format((date.getMonth() + <span class="hljs-number">1</span>));
         })</pre></div></div>
             
         </li>
         
         
-        <li id="section-26">
+        <li id="section-28">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-26">&#182;</a>
+                <a class="pilcrow" href="#section-28">&#182;</a>
               </div>
               <p>(<em>optional</em>) max number of records to be shown, <code>default = 25</code></p>
 
@@ -593,11 +620,11 @@ as a grouping function</p>
         </li>
         
         
-        <li id="section-27">
+        <li id="section-29">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-27">&#182;</a>
+                <a class="pilcrow" href="#section-29">&#182;</a>
               </div>
               <p>There are several ways to specify the columns; see the data-table documentation.
 This code demonstrates generating the column header automatically based on the columns.</p>
@@ -609,28 +636,28 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-28">
+        <li id="section-30">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-28">&#182;</a>
+                <a class="pilcrow" href="#section-30">&#182;</a>
               </div>
               <p>(<em>optional</em>) sort using the given field, <code>default = function(d){return d;}</code></p>
 
             </div>
             
             <div class="content"><div class='highlight'><pre>        .sortBy(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{
-            <span class="hljs-keyword">return</span> d.dd;
+            <span class="hljs-keyword">return</span> d.date;
         })</pre></div></div>
             
         </li>
         
         
-        <li id="section-29">
+        <li id="section-31">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-29">&#182;</a>
+                <a class="pilcrow" href="#section-31">&#182;</a>
               </div>
               <p>(<em>optional</em>) sort order, <code>default = d3.ascending</code></p>
 
@@ -641,11 +668,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-30">
+        <li id="section-32">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-30">&#182;</a>
+                <a class="pilcrow" href="#section-32">&#182;</a>
               </div>
               <p>(<em>optional</em>) custom renderlet to post-process chart using <a href="http://d3js.org">D3</a></p>
 
@@ -657,11 +684,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-31">
+        <li id="section-33">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-31">&#182;</a>
+                <a class="pilcrow" href="#section-33">&#182;</a>
               </div>
               <p> Make this happen after the render table.</p>
 
@@ -676,11 +703,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-32">
+        <li id="section-34">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-32">&#182;</a>
+                <a class="pilcrow" href="#section-34">&#182;</a>
               </div>
               <p> <a href="http://localhost:8888">http://localhost:8888</a></p>
 
@@ -694,11 +721,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-33">
+        <li id="section-35">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-33">&#182;</a>
+                <a class="pilcrow" href="#section-35">&#182;</a>
               </div>
               <p>simply call <code>.renderAll()</code> to render all charts on the page</p>
 
@@ -711,11 +738,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-34">
+        <li id="section-36">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-34">&#182;</a>
+                <a class="pilcrow" href="#section-36">&#182;</a>
               </div>
               <p>Or you can render charts belonging to a specific chart group</p>
 
@@ -726,11 +753,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-35">
+        <li id="section-37">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-35">&#182;</a>
+                <a class="pilcrow" href="#section-37">&#182;</a>
               </div>
               <p>Once rendered you can call <code>.redrawAll()</code> to update charts incrementally when the data
 changes, without re-rendering everything</p>
@@ -742,11 +769,11 @@ changes, without re-rendering everything</p>
         </li>
         
         
-        <li id="section-36">
+        <li id="section-38">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-36">&#182;</a>
+                <a class="pilcrow" href="#section-38">&#182;</a>
               </div>
               <p>Or you can choose to redraw only those charts associated with a specific chart group</p>
 
@@ -758,11 +785,11 @@ changes, without re-rendering everything</p>
         </li>
         
         
-        <li id="section-37">
+        <li id="section-39">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-37">&#182;</a>
+                <a class="pilcrow" href="#section-39">&#182;</a>
               </div>
               <h4 id="versions">Versions</h4>
 
@@ -771,11 +798,11 @@ changes, without re-rendering everything</p>
         </li>
         
         
-        <li id="section-38">
+        <li id="section-40">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-38">&#182;</a>
+                <a class="pilcrow" href="#section-40">&#182;</a>
               </div>
               <p>Determine the current version of dc with <code>dc.version</code></p>
 
