@@ -126,7 +126,7 @@ ST.CallSpot = function() {
         var default_file = "/usr/gapps/wf/web/spot/data/lulesh_maximal";
         file = file || default_file;
 
-        console.dir(file);
+        $('.using_file .txt').html(file);
 
         ajax_(file);
     });
