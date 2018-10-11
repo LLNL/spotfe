@@ -47,7 +47,7 @@ ST.CallSpot = function() {
 
                 for (var x in parsed) {
 
-                    if (newp.length < 15100) {
+                    if (newp.length < max_) {
 
                         var valid_obj = parsed[x];
                         var date = 1539283462;
@@ -120,13 +120,29 @@ ST.CallSpot = function() {
         return vars[param];
     };
 
+    var help_icon_ = function( file, max ) {
+
+        $('.using_file .txt').html(file);
+        $('.using_file .max').html(max_);
+
+        $('.help_icon').unbind('click').bind('click', function() {
+            $('.help_body').toggle();
+        });
+    };
+
+    var max_;
+
     $(document).ready( function() {
 
         var file = get_('sf');
-        var default_file = "/usr/gapps/wf/web/spot/data/lulesh_maximal";
-        file = file || default_file;
+        max_ = get_('max');
 
-        $('.using_file .txt').html(file);
+        var default_file = "/usr/gapps/wf/web/spot/data/lulesh_maximal";
+
+        file = file || default_file;
+        max_ = max_ || 3000;
+
+        help_icon_(file, max_);
 
         ajax_(file);
     });

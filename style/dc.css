@@ -299,11 +299,23 @@ body .dc-chart g.row text {
   background-color: #ffdddd;
   maring: 25px; }
 
-.container .using_file {
+.container .help_body {
+  background-color: #f2f2f2;
+  border: 1px solid #cccccc;
+  padding: 10px;
+  font-size: 13px;
+  margin: 4px 0 4px -20px;
+  display: none; }
+.container .help_icon {
   background-color: #f2f2f2;
   border: 1px solid #cccccc;
   padding: 3px;
-  font-size: 12px;
-  margin: 4px 0 4px -20px; }
+  display: inline-block;
+  width: 20px;
+  cursor: pointer;
+  text-align: center;
+  position: absolute;
+  top: 5px;
+  right: 5px; }
 
 /*# sourceMappingURL=dc.css.map */
