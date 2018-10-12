@@ -569,7 +569,7 @@ on other charts within the same chart group.
             <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> x <span class="hljs-keyword">in</span> d.drilldown) {
 
                 <span class="hljs-keyword">var</span> but = d.drilldown[x];
-                buts += <span class="hljs-string">'&lt;div class="myButton"&gt;'</span> + but.toUpperCase() + <span class="hljs-string">'&lt;/div&gt;'</span>;
+                buts += <span class="hljs-string">'&lt;div run_id="'</span> + d.run_id + <span class="hljs-string">'" class="myButton"&gt;'</span> + but.toUpperCase() + <span class="hljs-string">'&lt;/div&gt;'</span>;
             }
 
             <span class="hljs-keyword">return</span> buts;

@@ -58,9 +58,11 @@ ST.CallSpot = function() {
                         var day = spot_date.getDate();
                         var year = spot_date.getFullYear();
 
+                        //  This is just for stub
                         valid_obj.epoch_date = date;
                         valid_obj.date = month + "/" + day + "/" + year;
-
+                        valid_obj.run_id = "id_" + month + "_" + day;
+                        valid_obj.drilldown = ['Jupyter', 'mpi', 'duration'];
 
                         newp.push(valid_obj);
                     }
@@ -86,21 +88,6 @@ ST.CallSpot = function() {
         });
     };
 
-    var make_obj_valid_ = function( obj ) {
-
-        for( var x in obj ) {
-
-            if( isNaN(x) || x === undefined ) {
-                x = "cant_be_undef";
-            }
-
-            if( isNaN(obj[x]) || obj[x] === undefined ) {
-                obj[x] = "can not be undefined or NaN";
-            }
-        }
-
-        return obj;
-    };
 
     var error_ = function( str ) {
 
@@ -123,7 +110,7 @@ ST.CallSpot = function() {
 
     var help_icon_ = function( file, max ) {
 
-        Vue.component('button-counter', {
+        Vue.component('help-section', {
             data: function () {
                 return {
                     seen: false,

@@ -252,7 +252,7 @@ var RenderChartCollection = function( the_data ) {
             for (var x in d.drilldown) {
 
                 var but = d.drilldown[x];
-                buts += '<div class="myButton">' + but.toUpperCase() + '</div>';
+                buts += '<div run_id="' + d.run_id + '" class="myButton">' + but.toUpperCase() + '</div>';
             }
 
             return buts;
