@@ -142,11 +142,10 @@ ST.CallSpot = function() {
             '</div>'
         });
 
-                //  Need to find the dc.js end event handler.
-                new Vue({
-                    el: "#one_app"
-                });
-
+        //  Need to find the dc.js end event handler.
+        new Vue({
+            el: "#help_icon"
+        });
     };
 
 
