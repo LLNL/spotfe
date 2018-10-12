@@ -38,7 +38,8 @@ ST.PieChart = function() {
             .radius( radius )
             .innerRadius(inner_radius)
             .dimension(quarter)
-            .group(quarterGroup);
+            .group(quarterGroup)
+            .on('filtered', ST.UrlStateManager.filtered );
 
         $('.pie_reset').unbind('click').bind('click', ST.PieChart.reset);
         id_++;

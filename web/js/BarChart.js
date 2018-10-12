@@ -68,7 +68,8 @@ ST.BarChart = function() {
                 var filter = filters[0], s = '';
                 s += ST.numberFormat(filter[0]) + '% -> ' + ST.numberFormat(filter[1]) + '%';
                 return s;
-            });
+            }).on('filtered', ST.UrlStateManager.filtered );
+//            .filter(dc.filters.RangedFilter(3, 100));
 
         // Customize axes
         inst_.xAxis().tickFormat(

@@ -11,7 +11,7 @@ ST.CallSpot = function() {
             url:     'https://rzlc.llnl.gov/lorenz/lora/lora.cgi/jsonp',
             data:   {
                 'via'    : 'post',
-                'route'  : '/command/rzgenie',
+                'route'  : '/command/rztopaz',      //  rzgenie
                 'command': command
             }
         }).done(function(value) {
