@@ -8,8 +8,9 @@ ST.UrlStateManager = function() {
             console.log('range:', range[0], range[1]);
             console.dir(filters);
         }
-        else
+        else {
             console.log('no filters');
+        }
     };
 
     return {

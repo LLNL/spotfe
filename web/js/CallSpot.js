@@ -77,6 +77,7 @@ ST.CallSpot = function() {
 
                 console.dir(newp);
                 RenderChartCollection( newp );
+
             }
         }).error(function() {
 
@@ -122,13 +123,32 @@ ST.CallSpot = function() {
 
     var help_icon_ = function( file, max ) {
 
-        $('.using_file .txt').html(file);
-        $('.using_file .max').html(max_);
-
-        $('.help_icon').unbind('click').bind('click', function() {
-            $('.help_body').toggle();
+        Vue.component('button-counter', {
+            data: function () {
+                return {
+                    seen: false,
+                    max: max_,
+                    file: file
+                }
+            },
+            template: '<div>' +
+                '<div class="help_icon" v-on:click="seen=(!seen)">?</div>\
+                <div class="help_body" v-if="seen">\
+                Using file: <span class="txt">{{ file }}</span>\
+                <br>Using max: <span class="max">{{ max }}</span>\
+                <br>You can specify the <b>s</b>pot <b>f</b>ile with sf= in the url bar.\
+                <br>You can specify the <b>max</b> with max= in the url bar.\
+                </div> ' +
+            '</div>'
         });
+
+                //  Need to find the dc.js end event handler.
+                new Vue({
+                    el: "#one_app"
+                });
+
     };
+
 
     var max_;
 

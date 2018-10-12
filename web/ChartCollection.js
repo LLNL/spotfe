@@ -8,11 +8,6 @@ var ST = ST || {};
 
 // ### Create Chart Objects
 
-// Create chart objects associated with the container elements identified by the css selector.
-// Note: It is often a good idea to have these objects accessible at the global scope so that they can be modified or
-// filtered by other page controls.
-var nasdaqCount = dc.dataCount('.dc-data-count');
-var nasdaqTable = dc.dataTable('.dc-data-table');
 
 // ### Anchor Div for Charts
 /*
@@ -197,6 +192,12 @@ var RenderChartCollection = function( the_data ) {
     //  selected out of <span class='total-count'></span> records.
     //</div>
     //```
+
+    // Create chart objects associated with the container elements identified by the css selector.
+    // Note: It is often a good idea to have these objects accessible at the global scope so that they can be modified or
+    // filtered by other page controls.
+    var nasdaqCount = dc.dataCount('.dc-data-count');
+    var nasdaqTable = dc.dataTable('.dc-data-table');
 
     nasdaqCount /* dc.dataCount('.dc-data-count', 'chartGroup'); */
         .dimension(ndx)
