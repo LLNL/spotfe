@@ -83,8 +83,9 @@ ST.BarChart = function() {
         //  This is terrible.  Come on dc.js, you need to make an onload event or something!
         setTimeout( function() {
 
+            //  still needs a lot of work.
             for( var z=0; z < 2; z++ ) {
-                inst_[z].filter(dc.filters.RangedFilter(1, 4));
+                //inst_[z].filter(dc.filters.RangedFilter(1, 4));
             }
 
             ST.CallSpot.bind();
