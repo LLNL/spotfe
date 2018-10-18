@@ -54,6 +54,7 @@ ST.BarChart = function() {
             .dimension(runtime_dimension)
             .group(runtime_group)
             .elasticY(true)
+            .elasticX(true)
             // (_optional_) whether bar should be center to its x value. Not needed for ordinal chart, `default=false`
             .centerBar(false)
             // (_optional_) set gap between bars manually in px, `default=2`
@@ -69,7 +70,6 @@ ST.BarChart = function() {
                 s += ST.numberFormat(filter[0]) + '% -> ' + ST.numberFormat(filter[1]) + '%';
                 return s;
             }).on('filtered', ST.UrlStateManager.filtered );
-//            .filter(dc.filters.RangedFilter(3, 100));
 
         // Customize axes
         inst_.xAxis().tickFormat(
@@ -77,6 +77,11 @@ ST.BarChart = function() {
                 return v + (options.xsuffix !== undefined ? options.xsuffix : '');
             });
         inst_.yAxis().ticks(5);
+
+        //  This is terrible.  Come on dc.js, you need to make an onload event or something!
+        setTimeout( function() {
+            inst_.filter(dc.filters.RangedFilter(1, 4));
+        }, 1000);
     };
 
     return {

@@ -1,6 +1,6 @@
 ST.CallSpot = function() {
 
-    var ajax_ = function( file ) {
+    var ajax_ = function( file, success ) {
 
         var spotArgs = " summary data/lulesh";
         spotArgs = " summary /usr/gapps/wf/web/spot/data/lulesh";
@@ -14,85 +14,92 @@ ST.CallSpot = function() {
                 'route'  : '/command/rztopaz',      //  rzgenie
                 'command': command
             }
-        }).done(function(value) {
-
-            if( value.error !== "" ) {
-
-                error_( value.error  + "<br><br>pro tip: see Joe Chavez.");
-                console.log('command=' + command);
-
-            } else {
-
-                var spotReturnedValue = value.output.command_out;
-                var parsed = JSON.parse(spotReturnedValue);
-
-                for( var y in parsed ) {
-
-                    var par = parsed[y];
-                    for( var z in par ) {
-
-                        //par[z] = +par[z];
-
-                        if( isNaN(par[z]) ) {
-                          //  par[z] = 1;
-                        }
-
-                        if( z === undefined || par[z] === undefined || isNaN(par[z])) {
-                            //console.log('isnu='+z + '  par[z]=' + par[z]);
-                        }
-                    }
-                }
-
-                var newp = [];
-
-                for (var x in parsed) {
-
-                    if (newp.length < max_) {
-
-                        var valid_obj = parsed[x];
-                        var date = 1539283462;
-
-                        var spot_date = new Date( date * 1000 );
-
-                        var month = spot_date.getMonth() + 1;
-                        var day = spot_date.getDate();
-                        var year = spot_date.getFullYear();
-
-                        //  This is just for stub
-                        valid_obj.epoch_date = date;
-                        valid_obj.date = month + "/" + day + "/" + year;
-                        valid_obj.run_id = "id_" + month + "_" + day;
-                        valid_obj.drilldown = ['Jupyter', 'mpi', 'duration'];
-
-                        newp.push(valid_obj);
-                    }
-                }
-
-                newp[0]['Code Builder'] = "Filler0";
-                newp[1]['Code Builder'] = "Filler1";
-   /*             newp[2]['Compiler Name'] = "GNU Filler";
-                newp[3]['Compiler Name'] = "GNU Filler";
-                newp[4]['Compiler Name'] = "GNU Filler";
-                newp[5]['Compiler Name'] = "GNU Filler";
-                newp[6]['Compiler Name'] = "GNU Filler";
-                newp[7]['Compiler Name'] = "GNU Filler";*/
-
-                console.dir(newp);
-                RenderChartCollection( newp );
-
-            }
-        }).error(function() {
-
-            var link = "https://rzlc.llnl.gov/";
-            error_('Could not contact rzlc.llnl.gov  Make sure you are already authenticated with RZ.  For example <a target="_blank" href="' + link + '">RZ Link</a>');
-        });
+        }).done( success ).error( handle_error_ );
     };
 
+    var handle_success_ = function(value) {
+
+        if( value.error !== "" ) {
+
+            error_( value.error  + "<br><br>pro tip: see Joe Chavez.");
+            console.log('command=' + command);
+
+        } else {
+
+            var spotReturnedValue = value.output.command_out;
+            var parsed = JSON.parse(spotReturnedValue);
+
+            var newp = [];
+
+            for (var x in parsed) {
+
+                if (newp.length < max_) {
+
+                    var valid_obj = parsed[x];
+                    var date = 1539283462;
+
+                    var spot_date = new Date( date * 1000 );
+
+                    var month = spot_date.getMonth() + 1;
+                    var day = spot_date.getDate();
+                    var year = spot_date.getFullYear();
+
+                    //  This is just for stub
+                    valid_obj.epoch_date = date;
+                    valid_obj.date = month + "/" + day + "/" + year;
+                    valid_obj.run_id = "id_" + Math.floor(Math.random()*10000);
+                    valid_obj.drilldown = ['Jupyter', 'mpi', 'duration'];
+
+                    newp.push(valid_obj);
+                }
+            }
+
+            newp[0]['Code Builder'] = "Filler0";
+            newp[1]['Code Builder'] = "Filler1";
+            /*             newp[2]['Compiler Name'] = "GNU Filler";
+             newp[3]['Compiler Name'] = "GNU Filler";
+             newp[4]['Compiler Name'] = "GNU Filler";
+             newp[5]['Compiler Name'] = "GNU Filler";
+             newp[6]['Compiler Name'] = "GNU Filler";
+             newp[7]['Compiler Name'] = "GNU Filler";*/
+
+            console.dir(newp);
+            RenderChartCollection( newp );
+
+            $('.dc-chart .myButton').unbind('click').bind('click', drill_down_ );
+        }
+    };
+
+    var handle_error_ = function() {
+
+        var link = "https://rzlc.llnl.gov/";
+        error_('Could not contact rzlc.llnl.gov  Make sure you are already authenticated with RZ.  For example <a target="_blank" href="' + link + '">RZ Link</a>');
+    };
 
     var error_ = function( str ) {
 
         var html = '<div class="error_statement">' + str + '</div>';
         $('body').prepend( html );
+    };
+
+    var drill_down_ = function() {
+
+        var run_id = $(this).attr('run_id');
+        var subject = $(this).html().toLowerCase();
+
+        console.log( "ri=" + run_id + '  do_this=' + subject );
+
+        if (subject === 'mpi') {
+
+            //  http://localhost:8888
+            window.open('../ravel/index.html');
+        } else {
+
+            ajax_("get_me_url", function() {
+
+                // now go to the URL that BE tells us to go to.
+            });
+        }
     };
 
     function getUrlVars_() {
@@ -150,6 +157,6 @@ ST.CallSpot = function() {
 
         help_icon_(file, max_);
 
-        ajax_(file);
+        ajax_(file, handle_success_ );
     });
 }();

@@ -3,44 +3,6 @@
 
 var ST = ST || {};
 
-/* jshint globalstrict: true */
-/* global dc,d3,crossfilter */
-
-// ### Create Chart Objects
-
-
-// ### Anchor Div for Charts
-/*
-// A div anchor that can be identified by id
-    <div id='your-chart'></div>
-// Title or anything you want to add above the chart
-    <div id='chart'><span>Days by Gain or Loss</span></div>
-// ##### .turnOnControls()
-
-// If a link with css class `reset` is present then the chart
-// will automatically hide/show it based on whether there is a filter
-// set on the chart (e.g. slice selection for pie chart and brush
-// selection for bar chart). Enable this with `chart.turnOnControls(true)`
-
-// dc.js >=2.1 uses `visibility: hidden` to hide/show controls without
-// disrupting the layout. To return the old `display: none` behavior,
-// set `chart.controlsUseVisibility(false)` and use that style instead.
-    <div id='chart'>
-       <a class='reset'
-          href='javascript:myChart.filterAll();dc.redrawAll();'
-          style='visibility: hidden;'>reset</a>
-    </div>
-// dc.js will also automatically inject the current filter value into
-// any html element with its css class set to `filter`
-    <div id='chart'>
-        <span class='reset' style='visibility: hidden;'>
-          Current filter: <span class='filter'></span>
-        </span>
-    </div>
-*/
-
-//### Load your data
-
 var reduce_authors = function( data ) {
 
     for( var z=0; z < data.length; z++ ) {
@@ -51,15 +13,7 @@ var reduce_authors = function( data ) {
     }
 };
 
-//Data can be loaded through regular means with your
-//favorite javascript library
-//
-//```javascript
-//d3.csv('data.csv').then(function(data) {...});
-//d3.json('data.json').then(function(data) {...});
-//jQuery.getJson('data.json', function(data){...});
-//```
-    // Since its a csv file we need to format the data a bit.
+
     var dateFormatSpecifier = '%m/%d/%Y';
     var dateFormat = d3.timeFormat(dateFormatSpecifier);
     var dateFormatParser = d3.timeParse(dateFormatSpecifier);
@@ -289,13 +243,6 @@ var RenderChartCollection = function( the_data ) {
             //  Make this happen after the render table.
             jQuery('.myButton').unbind('click').bind('click', function () {
 
-                var subject = $(this).html().toLowerCase();
-
-                if (subject === 'mpi') {
-
-                    //  http://localhost:8888
-                    window.open('../ravel/index.html');
-                }
             });
         });
 
