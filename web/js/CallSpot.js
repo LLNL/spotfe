@@ -1,10 +1,10 @@
 ST.CallSpot = function() {
 
-    var ajax_ = function( file, success ) {
+    var ajax_ = function( file, type, success ) {
 
         var spotArgs = " summary data/lulesh";
         spotArgs = " summary /usr/gapps/wf/web/spot/data/lulesh";
-        var command = '/usr/gapps/wf/web/spot/virtenv/bin/python /usr/gapps/wf/web/spot/spot.py  summary ' + file;
+        var command = '/usr/gapps/wf/web/spot/virtenv/bin/python /usr/gapps/wf/web/spot/spot.py ' + type  + ' ' + file;
 
         $.ajax({
             dataType:'jsonp',
@@ -22,7 +22,6 @@ ST.CallSpot = function() {
         if( value.error !== "" ) {
 
             error_( value.error  + "<br><br>pro tip: see Joe Chavez.");
-            console.log('command=' + command);
 
         } else {
 
@@ -65,9 +64,13 @@ ST.CallSpot = function() {
 
             console.dir(newp);
             RenderChartCollection( newp );
-
-            $('.dc-chart .myButton').unbind('click').bind('click', drill_down_ );
+            bind_();
         }
+    };
+
+    //  Certain events like filtering unbind the buttons, so need to rebind.
+    var bind_ = function() {
+        $('.dc-chart .myButton').unbind('click').bind('click', drill_down_ );
     };
 
     var handle_error_ = function() {
@@ -95,8 +98,12 @@ ST.CallSpot = function() {
             window.open('../ravel/index.html');
         } else {
 
-            ajax_("get_me_url", function() {
+            var file = get_file_();
 
+            ajax_(file, "jupyter", function(data) {
+
+                var url = data.output.command_out;
+                window.open( url );
                 // now go to the URL that BE tells us to go to.
             });
         }
@@ -145,18 +152,27 @@ ST.CallSpot = function() {
 
     var max_;
 
-    $(document).ready( function() {
+    var get_file_ = function() {
 
         var file = get_('sf');
-        max_ = get_('max');
-
         var default_file = "/usr/gapps/wf/web/spot/data/lulesh_maximal";
 
-        file = file || default_file;
+        return file || default_file;
+    };
+
+    $(document).ready( function() {
+
+        max_ = get_('max');
+
         max_ = max_ || 3000;
+        var file = get_file_();
 
         help_icon_(file, max_);
 
-        ajax_(file, handle_success_ );
+        ajax_(file, 'summary', handle_success_ );
     });
+
+    return {
+        bind: bind_
+    }
 }();

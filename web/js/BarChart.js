@@ -86,6 +86,8 @@ ST.BarChart = function() {
             for( var z=0; z < 2; z++ ) {
                 inst_[z].filter(dc.filters.RangedFilter(1, 4));
             }
+
+            ST.CallSpot.bind();
         }, 1000);
 
         inst_num_++;
