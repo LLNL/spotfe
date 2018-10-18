@@ -2,7 +2,7 @@ var ST = ST || {};
 
 ST.BarChart = function() {
 
-    var inst_,
+    var inst_ = [],
         inst_num_ = 0;
 
     var upper_ = function( lower ) {
@@ -13,8 +13,6 @@ ST.BarChart = function() {
 
         options = options || {};
         var dimension = options.dimension || "runtime";
-
-        inst_num_++;
 
         var min = 100000;
         var max = 0;
@@ -46,9 +44,12 @@ ST.BarChart = function() {
 
         $('.row:eq(0)').append(rcht);
 
-        inst_ = dc.barChart('.runtime-chart' + inst_num_ );
 
-        inst_.width( options.width || 580)
+        inst_[inst_num_] = dc.barChart('.runtime-chart' + inst_num_ );
+
+        var one_i = inst_[inst_num_];
+
+        one_i.width( options.width || 580)
             .height( options.height || 180)
             .margins( options.margins || {top: 10, right: 50, bottom: 20, left: 40})
             .dimension(runtime_dimension)
@@ -66,23 +67,30 @@ ST.BarChart = function() {
             .renderHorizontalGridLines(true)
             // Customize the filter displayed in the control span
             .filterPrinter(function (filters) {
+
                 var filter = filters[0], s = '';
                 s += ST.numberFormat(filter[0]) + '% -> ' + ST.numberFormat(filter[1]) + '%';
                 return s;
             }).on('filtered', ST.UrlStateManager.filtered );
 
         // Customize axes
-        inst_.xAxis().tickFormat(
+        one_i.xAxis().tickFormat(
             function (v) {
                 return v + (options.xsuffix !== undefined ? options.xsuffix : '');
             });
-        inst_.yAxis().ticks(5);
+        one_i.yAxis().ticks(5);
 
         //  This is terrible.  Come on dc.js, you need to make an onload event or something!
         setTimeout( function() {
-            inst_.filter(dc.filters.RangedFilter(1, 4));
+
+            for( var z=0; z < 2; z++ ) {
+                inst_[z].filter(dc.filters.RangedFilter(1, 4));
+            }
         }, 1000);
+
+        inst_num_++;
     };
+
 
     return {
         render: render_,
