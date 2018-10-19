@@ -17,6 +17,9 @@ ST.CallSpot = function() {
         }).done( success ).error( handle_error_ );
     };
 
+
+    var objs_by_run_id_ = {};
+
     var handle_success_ = function(value) {
 
         if( value.error !== "" ) {
@@ -30,11 +33,11 @@ ST.CallSpot = function() {
 
             var newp = [];
 
-            for (var x in parsed) {
+            for (var key in parsed) {
 
                 if (newp.length < max_) {
 
-                    var valid_obj = parsed[x];
+                    var valid_obj = parsed[key];
                     var date = 1539283462;
 
                     var spot_date = new Date( date * 1000 );
@@ -48,8 +51,10 @@ ST.CallSpot = function() {
                     valid_obj.date = month + "/" + day + "/" + year;
                     valid_obj.run_id = "id_" + Math.floor(Math.random()*10000);
                     valid_obj.drilldown = ['Jupyter', 'mpi', 'duration'];
+                    valid_obj.key = key;
 
                     newp.push(valid_obj);
+                    objs_by_run_id_[valid_obj.run_id] = valid_obj;
                 }
             }
 
@@ -99,10 +104,14 @@ ST.CallSpot = function() {
         } else {
 
             var file = get_file_();
+            var key = objs_by_run_id_[run_id].key;
+            var appended = file + '/' + key;
 
-            ajax_(file, "jupyter", function(data) {
+            ajax_(appended, "jupyter", function(data) {
 
-                var url = data.output.command_out;
+                var command_out = data.output.command_out;
+                var url = command_out;
+
                 window.open( url );
                 // now go to the URL that BE tells us to go to.
             });
