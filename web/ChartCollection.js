@@ -241,9 +241,7 @@ var RenderChartCollection = function( the_data ) {
             table.selectAll('.dc-table-group').classed('info', true);
 
             //  Make this happen after the render table.
-            jQuery('.myButton').unbind('click').bind('click', function () {
-
-            });
+            jQuery('.myButton').unbind('click').bind('click', ST.CallSpot.drilldown );
         });
 
 

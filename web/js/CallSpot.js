@@ -75,7 +75,7 @@ ST.CallSpot = function() {
 
     //  Certain events like filtering unbind the buttons, so need to rebind.
     var bind_ = function() {
-        $('.dc-chart .myButton').unbind('click').bind('click', drill_down_ );
+       $('.dc-chart .myButton').unbind('click').bind('click', drill_down_ );
     };
 
     var handle_error_ = function() {
@@ -182,6 +182,7 @@ ST.CallSpot = function() {
     });
 
     return {
+        drilldown: drill_down_,
         bind: bind_
     }
 }();

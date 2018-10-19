@@ -12,7 +12,7 @@ ST.PieChart = function() {
         var radius = spec.radius || 80;
         var inner_radius = spec.inner_radius || 0;
 
-        var rcht =     '<div dom_id="' + id_ + '" id="quarter-chart' + id_ + '">  \
+        var rcht =     '<div instance_num="' + id_ + '" id="quarter-chart' + id_ + '">  \
         <strong>' + spec.title + '</strong> \
         <a class="reset pie_reset"  style="display: none;">reset</a> \
         <div class="clearfix"></div> \
@@ -49,8 +49,8 @@ ST.PieChart = function() {
         render: render_,
         reset: function() {
 
-            var dom_id = $(this).parent().attr('dom_id');
-            quarterChart[dom_id].filterAll();
+            var instance_num = $(this).parent().attr('instance_num');
+            quarterChart[instance_num].filterAll();
             dc.redrawAll();
         }
     }

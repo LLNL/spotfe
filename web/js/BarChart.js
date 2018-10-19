@@ -38,7 +38,7 @@ ST.BarChart = function() {
         var rcht = '<div class="runtime-chart' + inst_num_ + '"> \
             <div class="top_left"> \
                 <strong>' + upper_(dimension) + '</strong> \
-                <a class="reset" href="javascript:ST.BarChart.reset();" style="display: none;">reset</a>\
+                <a class="reset" onclick="ST.BarChart.reset(this);" style="display: none;">reset</a>\
             </div> \
         </div>';
 
@@ -48,6 +48,7 @@ ST.BarChart = function() {
         inst_[inst_num_] = dc.barChart('.runtime-chart' + inst_num_ );
 
         var one_i = inst_[inst_num_];
+        $('.runtime-chart' + inst_num_).attr('instance_num', inst_num_);
 
         one_i.width( options.width || 580)
             .height( options.height || 180)
@@ -97,8 +98,12 @@ ST.BarChart = function() {
 
     return {
         render: render_,
-        reset: function() {
-            inst_.filterAll();
+        reset: function(that) {
+
+            var grandpa = $(that).closest("[instance_num]");
+            var instance_num = grandpa.attr('instance_num');
+
+            inst_[instance_num].filterAll();
             dc.redrawAll();
         }
     }
