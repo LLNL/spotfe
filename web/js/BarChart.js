@@ -64,7 +64,7 @@ ST.BarChart = function() {
             // (_optional_) set filter brush rounding
             .round(dc.round.floor)
             .alwaysUseRounding(true)
-            .x(d3.scaleLinear().domain( options.xrange || [min - 1, max + 1]))
+            .x(d3.scaleLinear().domain( options.xrange || [min - 1, max + 2]))
             .renderHorizontalGridLines(true)
             // Customize the filter displayed in the control span
             .filterPrinter(function (filters) {
@@ -98,7 +98,9 @@ ST.BarChart = function() {
             dc.redrawAll();
         },
         load_filter: function() {
+            
             ST.UrlStateManager.load_filter( inst_, 'BarChart' );
+            dc.redrawAll();
         }
     }
 }();
