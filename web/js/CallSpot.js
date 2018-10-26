@@ -31,6 +31,8 @@ ST.CallSpot = function() {
             var spotReturnedValue = value.output.command_out;
             var parsed = JSON.parse(spotReturnedValue);
 
+            console.dir(parsed);
+
             var newp = [];
 
             for (var key in parsed) {
@@ -118,18 +120,6 @@ ST.CallSpot = function() {
         }
     };
 
-    function getUrlVars_() {
-        var vars = {};
-        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-            vars[key] = value;
-        });
-        return vars;
-    };
-
-    var get_ = function( param ) {
-        var vars = getUrlVars_();
-        return vars[param];
-    };
 
     var help_icon_ = function( file, max ) {
 
@@ -163,7 +153,7 @@ ST.CallSpot = function() {
 
     var get_file_ = function() {
 
-        var file = get_('sf');
+        var file = ST.Utility.get_param('sf');
         var default_file = "/usr/gapps/wf/web/spot/data/lulesh_maximal";
 
         return file || default_file;
@@ -171,7 +161,7 @@ ST.CallSpot = function() {
 
     $(document).ready( function() {
 
-        max_ = get_('max');
+        max_ = ST.Utility.get_param('max');
 
         max_ = max_ || 3000;
         var file = get_file_();

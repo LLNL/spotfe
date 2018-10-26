@@ -72,7 +72,9 @@ ST.BarChart = function() {
                 var filter = filters[0], s = '';
                 s += ST.numberFormat(filter[0]) + '% -> ' + ST.numberFormat(filter[1]) + '%';
                 return s;
-            }).on('filtered', ST.UrlStateManager.filtered );
+            }).on('filtered', function(d) {
+                ST.UrlStateManager.user_filtered(d, 'BarChart');
+            });
 
         // Customize axes
         one_i.xAxis().tickFormat(
@@ -80,17 +82,6 @@ ST.BarChart = function() {
                 return v + (options.xsuffix !== undefined ? options.xsuffix : '');
             });
         one_i.yAxis().ticks(5);
-
-        //  This is terrible.  Come on dc.js, you need to make an onload event or something!
-        setTimeout( function() {
-
-            //  still needs a lot of work.
-            for( var z=0; z < 2; z++ ) {
-                //inst_[z].filter(dc.filters.RangedFilter(1, 4));
-            }
-
-            ST.CallSpot.bind();
-        }, 1000);
 
         inst_num_++;
     };
@@ -105,6 +96,9 @@ ST.BarChart = function() {
 
             inst_[instance_num].filterAll();
             dc.redrawAll();
+        },
+        load_filter: function() {
+            ST.UrlStateManager.load_filter( inst_, 'BarChart' );
         }
     }
 }();

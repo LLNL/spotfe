@@ -247,6 +247,7 @@ var RenderChartCollection = function( the_data ) {
 
     //simply call `.renderAll()` to render all charts on the page
     dc.renderAll();
+    ST.BarChart.load_filter();
     /*
      // Or you can render charts belonging to a specific chart group
      dc.renderAll('group');
