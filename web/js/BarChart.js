@@ -72,8 +72,9 @@ ST.BarChart = function() {
                 var filter = filters[0], s = '';
                 s += ST.numberFormat(filter[0]) + '% -> ' + ST.numberFormat(filter[1]) + '%';
                 return s;
-            }).on('filtered', function(d) {
-                ST.UrlStateManager.user_filtered(d, 'BarChart');
+            }).on('filtered', function( chart ) {
+
+                ST.UrlStateManager.user_filtered( chart, 'BarChart');
             });
 
         // Customize axes
@@ -98,9 +99,8 @@ ST.BarChart = function() {
             dc.redrawAll();
         },
         load_filter: function() {
-            
+
             ST.UrlStateManager.load_filter( inst_, 'BarChart' );
-            dc.redrawAll();
         }
     }
 }();

@@ -11,7 +11,7 @@ ST.CallSpot = function() {
             url:     'https://rzlc.llnl.gov/lorenz/lora/lora.cgi/jsonp',
             data:   {
                 'via'    : 'post',
-                'route'  : '/command/rztopaz',      //  rzgenie
+                'route'  : '/command/rzgenie',      //  rzgenie
                 'command': command
             }
         }).done( success ).error( handle_error_ );
@@ -29,7 +29,8 @@ ST.CallSpot = function() {
         } else {
 
             var spotReturnedValue = value.output.command_out;
-            var parsed = JSON.parse(spotReturnedValue);
+            var parsed_whole = JSON.parse(spotReturnedValue);
+            var parsed = parsed_whole.data;
 
             console.dir(parsed);
 
@@ -70,7 +71,7 @@ ST.CallSpot = function() {
              newp[7]['Compiler Name'] = "GNU Filler";*/
 
             console.dir(newp);
-            RenderChartCollection( newp );
+            RenderChartCollection( newp, ST.ReturnedDataStub.layout );
             bind_();
         }
     };

@@ -69,7 +69,7 @@ var reduce_authors = function( data ) {
 
     //See the [crossfilter API](https://github.com/square/crossfilter/wiki/API-Reference) for reference.
 
-var RenderChartCollection = function( the_data ) {
+var RenderChartCollection = function( the_data, layout_spec ) {
 
     //  ST.ReturnedDataStub.data
     var ndx = crossfilter( the_data );
@@ -83,19 +83,18 @@ var RenderChartCollection = function( the_data ) {
     });
 
 
-    //  this will eventually come from the BE.
-    var layout_spec = ST.ReturnedDataStub.layout.charts;
+    var layout_charts = layout_spec.charts;
 
-    ST.LayoutAugmenterModel.get(layout_spec);
+    ST.LayoutAugmenterModel.get(layout_charts);
 
 
     var RENDER_GENERIC = true;
 
     if (RENDER_GENERIC) {
 
-        for (var dimension in layout_spec) {
+        for (var dimension in layout_charts) {
 
-            var spec = layout_spec[dimension];
+            var spec = layout_charts[dimension];
             var viz = spec.viz;
 
             if (ST[viz] && ST[viz].render) {
@@ -191,9 +190,9 @@ var RenderChartCollection = function( the_data ) {
     // ```
     // or do it programmatically using `.columns()`.
     var columns = [];
-    for (var z in ST.ReturnedDataStub.layout.table) {
+    for (var z in layout_spec.table) {
 
-        var tab = ST.ReturnedDataStub.layout.table[z];
+        var tab = layout_spec.table[z];
         columns.push(tab.dimension);
     }
 
@@ -248,6 +247,9 @@ var RenderChartCollection = function( the_data ) {
     //simply call `.renderAll()` to render all charts on the page
     dc.renderAll();
     ST.BarChart.load_filter();
+    ST.PieChart.load_filter();
+
+    dc.redrawAll();
     /*
      // Or you can render charts belonging to a specific chart group
      dc.renderAll('group');

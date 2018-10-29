@@ -39,7 +39,9 @@ ST.PieChart = function() {
             .innerRadius(inner_radius)
             .dimension(quarter)
             .group(quarterGroup)
-            .on('filtered', ST.UrlStateManager.filtered );
+            .on('filtered', function(chart) {
+                ST.UrlStateManager.user_filtered(chart, 'PieChart');
+            });
 
         $('.pie_reset').unbind('click').bind('click', ST.PieChart.reset);
         id_++;
@@ -52,6 +54,10 @@ ST.PieChart = function() {
             var instance_num = $(this).parent().attr('instance_num');
             quarterChart[instance_num].filterAll();
             dc.redrawAll();
+        },
+        load_filter: function() {
+
+            ST.UrlStateManager.load_filter( quarterChart, 'PieChart' );
         }
     }
 }();

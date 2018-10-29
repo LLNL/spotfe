@@ -1,21 +1,32 @@
 ST.UrlStateManager = function() {
 
     //  User made a change in the chart filters.
-    var user_filtered_ = function(chart, type) {
+    var user_filtered_ = function( chart, type) {
 
         var filters = chart.filters();
         var aname = chart.anchorName();
-        var instance_num = +aname.replace(".runtime-chart", "");
+        var instance_num = +aname.replace(/\D/g,'');
+        var range = filters[0];
 
         console.log(instance_num);
 
-        if(filters.length) {
-            var range = filters[0];
+        if(range) {
             console.log('range:', range[0], range[1]);
-            console.dir(filters);
 
             var param = type + instance_num;
-            var paramValue = range[0] + ',' + range[1];
+            var paramValue = "";
+
+            if( type === 'PieChart') {
+
+                for( var x =0; x < filters.length; x++ ) {
+                    paramValue += "," + filters[x];
+                }
+
+                paramValue = paramValue.substr(1);
+
+            } else {
+                paramValue = range[0] + ',' + range[1];
+            }
 
             var newUrl = updateURLParameter( location.href, param, paramValue );
 
@@ -58,7 +69,13 @@ ST.UrlStateManager = function() {
             if( params ) {
 
                 var sp = params.split(',');
-                inst_[z].filter(dc.filters.RangedFilter(sp[0], sp[1]));
+
+                if( type === "PieChart" ) {
+
+                    //inst_[z].filter( function() {} );
+                } else {
+                    inst_[z].filter(dc.filters.RangedFilter(sp[0], sp[1]));
+                }
             }
         }
 
