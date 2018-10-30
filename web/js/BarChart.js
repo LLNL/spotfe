@@ -18,19 +18,11 @@ ST.BarChart = function() {
         var max = 0;
 
         // Determine a histogram of percent changes
-        var runtime_dimension = ndx.dimension(function (d) {
+        var runtime_dimension = ndx.dimension(function (cali_object) {
 
-            if( !d[dimension] ) {
+            ST.Utility.validate_cali_object( cali_object, dimension );
 
-                var dimensions_available = "";
-                for( var x in d ) {
-                    dimensions_available += ', ' + x;
-                }
-
-                ST.Utility.error('From layout_spec, could not find dimension <b>' + dimension + '</b> in Data Set.  Data set contains the following dimensions: ' + dimensions_available.substr(1) + '  Probable solution: Change layout spec to match data.');
-            }
-
-            var dim = d[dimension];
+            var dim = cali_object[dimension];
 
             if( dim < min ) {
                 min = dim;

@@ -19,11 +19,14 @@ ST.LeftHorizontalBarChart = function() {
         var uniq_counts = {};
 
         // Counts per weekday
-        var dayOfWeek = ndx.dimension(function (d) {
+        var dayOfWeek = ndx.dimension(function (cali_object) {
+
+            ST.Utility.validate_cali_object( cali_object, options.dimension );
+
             //var day = d.dd.getDay();
             var name = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-            uniq_counts[ d[ options.dimension ] ] = 1;
-            return d[ options.dimension ];// || "none";// day + '.' + name[day];
+            uniq_counts[ cali_object[ options.dimension ] ] = 1;
+            return cali_object[ options.dimension ];// || "none";// day + '.' + name[day];
         });
 
         var dayOfWeekGroup = dayOfWeek.group();
