@@ -13,8 +13,18 @@ ST.Utility = function() {
         return vars[param];
     };
 
+    var error_ = function( str ) {
+
+        if( $('.error_statement').length === 0 ) {
+
+            var html = '<div class="error_statement">' + str + '</div>';
+            $('body').prepend( html );
+        }
+    };
+
 
     return {
-        get_param: get_param_
+        get_param: get_param_,
+        error: error_
     }
 }();

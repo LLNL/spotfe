@@ -24,7 +24,7 @@ ST.CallSpot = function() {
 
         if( value.error !== "" ) {
 
-            error_( value.error  + "<br><br>pro tip: see Joe Chavez.");
+            ST.Utility.error( value.error  + "<br><br>pro tip: see Joe Chavez.");
 
         } else {
 
@@ -70,8 +70,22 @@ ST.CallSpot = function() {
              newp[6]['Compiler Name'] = "GNU Filler";
              newp[7]['Compiler Name'] = "GNU Filler";*/
 
-            console.dir(newp);
-            RenderChartCollection( newp, ST.ReturnedDataStub.layout );
+            for( var x in parsed_whole.layout.charts ) {
+
+                delete parsed_whole.layout.charts[x].height;
+                delete parsed_whole.layout.charts[x].inner_radius;
+                delete parsed_whole.layout.charts[x].radius;
+                delete parsed_whole.layout.charts[x].width;
+            }
+
+            //console.dir(newp);
+            delete parsed_whole.layout.charts[0].height;
+            console.dir(parsed_whole.layout.charts[0]);
+            console.dir(parsed_whole.layout);
+            console.dir(ST.ReturnedDataStub.layout);
+
+
+            RenderChartCollection( newp, parsed_whole.layout );
             bind_();
         }
     };
@@ -84,14 +98,9 @@ ST.CallSpot = function() {
     var handle_error_ = function() {
 
         var link = "https://rzlc.llnl.gov/";
-        error_('Could not contact rzlc.llnl.gov  Make sure you are already authenticated with RZ.  For example <a target="_blank" href="' + link + '">RZ Link</a>');
+        ST.Utility.error('Could not contact rzlc.llnl.gov  Make sure you are already authenticated with RZ.  For example <a target="_blank" href="' + link + '">RZ Link</a>');
     };
 
-    var error_ = function( str ) {
-
-        var html = '<div class="error_statement">' + str + '</div>';
-        $('body').prepend( html );
-    };
 
     var drill_down_ = function() {
 
