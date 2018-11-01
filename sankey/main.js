@@ -1,7 +1,33 @@
 
-new Vue({ 
-    el: '#app',
-    data: {
-        myInputData:{"main/LagrangeLeapFrog/LagrangeNodal": 1479.0, "main/LagrangeLeapFrog/LagrangeNodal/CalcForceForNodes": 1449.0, "main/LagrangeLeapFrog/LagrangeNodal/CalcForceForNodes/CalcVolumeForceForElems": 69.0, "main/LagrangeLeapFrog/LagrangeNodal/CalcForceForNodes/CalcVolumeForceForElems/IntegrateStressForElems": 16.0, "main/LagrangeLeapFrog/LagrangeElements/UpdateVolumesForElems": 4.0, "main/LagrangeLeapFrog/LagrangeNodal/CalcForceForNodes/CalcVolumeForceForElems/CalcHourglassControlForElems": 23.0, "main/LagrangeLeapFrog/CalcTimeConstraintsForElems": 73.0, "main/LagrangeLeapFrog/LagrangeNodal/CalcForceForNodes/CalcVolumeForceForElems/CalcHourglassControlForElems/CalcFBHourglassForceForElems": 14.0, "main/LagrangeLeapFrog/CalcTimeConstraintsForElems/CalcCourantConstraintForElems": 24.0, "main/LagrangeLeapFrog/CalcTimeConstraintsForElems/CalcHydroConstraintForElems": 22.0, "main/LagrangeLeapFrog/LagrangeElements": 1832.0, "main/LagrangeLeapFrog/LagrangeElements/CalcLagrangeElements": 26.0, "main/LagrangeLeapFrog/LagrangeElements/CalcLagrangeElements/CalcKinematicsForElems": 20.0, "main/LagrangeLeapFrog/LagrangeElements/CalcQForElems": 1053.0, "main/LagrangeLeapFrog/LagrangeElements/CalcQForElems/CalcMonotonicQGradientsForElems": 978.0, "main/LagrangeLeapFrog/LagrangeElements/ApplyMaterialPropertiesForElems": 739.0, "main/LagrangeLeapFrog/LagrangeElements/CalcQForElems/CalcMonotonicQRegionForElems": 8.0, "main/LagrangeLeapFrog/LagrangeElements/ApplyMaterialPropertiesForElems/EvalEOSForElems": 386.0, "main/LagrangeLeapFrog/LagrangeElements/ApplyMaterialPropertiesForElems/EvalEOSForElems/CalcEnergyForElems": 331.0, "main/LagrangeLeapFrog/LagrangeElements/ApplyMaterialPropertiesForElems/EvalEOSForElems/CalcEnergyForElems/CalcPressureForElems": 150.0, "main": 3528.0, "main/LagrangeLeapFrog/LagrangeElements/ApplyMaterialPropertiesForElems/EvalEOSForElems/CalcSoundSpeedForElems": 3.0, "main/TimeIncrement": 7.0, "main/LagrangeLeapFrog": 3394.0}
-    },
+var render = function( data ) {
+
+    var parsed = JSON.parse(data.output.command_out);
+    console.dir( parsed );
+
+    new Vue({
+        el: '#app',
+        data: {
+            myInputData: parsed
+        },
+    });
+};
+
+$(document).ready( function() {
+
+    //var command = "/usr/gapps/wf/web/spot/virtenv/bin/python /usr/gapps/wf/web/spot/spot.py durations /usr/gapps/wf/web/spot/data/lulesh_maximal/180927-111516_20211_r0F16Lg2yVqK.cali";
+    var command = ST.Utility.get_param('command');
+    command = decodeURIComponent(command);
+    console.dir(command);
+
+    $.ajax({
+        dataType:'jsonp',
+        url:     'https://rzlc.llnl.gov/lorenz/lora/lora.cgi/jsonp',
+        data:   {
+            'via'    : 'post',
+            'route'  : '/command/rzgenie',      //  rzgenie
+            'command': command
+        }
+    }).done( render );
+
 });
+

@@ -1,10 +1,14 @@
 ST.CallSpot = function() {
 
+    var get_command_ = function( type, file ) {
+        return '/usr/gapps/wf/web/spot/virtenv/bin/python /usr/gapps/wf/web/spot/spot.py ' + type  + ' ' + file;
+    };
+
     var ajax_ = function( file, type, success ) {
 
         var spotArgs = " summary data/lulesh";
         spotArgs = " summary /usr/gapps/wf/web/spot/data/lulesh";
-        var command = '/usr/gapps/wf/web/spot/virtenv/bin/python /usr/gapps/wf/web/spot/spot.py ' + type  + ' ' + file;
+        var command = get_command_( type, file );
 
         $.ajax({
             dataType:'jsonp',
@@ -53,7 +57,7 @@ ST.CallSpot = function() {
                     valid_obj.epoch_date = date;
                     valid_obj.date = month + "/" + day + "/" + year;
                     valid_obj.run_id = "id_" + Math.floor(Math.random()*10000);
-                    valid_obj.drilldown = ['Jupyter', 'mpi', 'duration'];
+                    valid_obj.drilldown = ['Jupyter', 'mpi', 'durations'];
                     valid_obj.key = key;
 
                     newp.push(valid_obj);
@@ -96,6 +100,10 @@ ST.CallSpot = function() {
 
         var run_id = $(this).attr('run_id');
         var subject = $(this).html().toLowerCase();
+        var file = get_file_();
+        var key = objs_by_run_id_[run_id].key;
+        var appended = file + '/' + key;
+
 
         console.log( "ri=" + run_id + '  do_this=' + subject );
 
@@ -103,12 +111,16 @@ ST.CallSpot = function() {
 
             //  http://localhost:8888
             window.open('../ravel/index.html');
+
+        } else if( subject === "durations" ) {
+
+            var command = get_command_("durations", appended);
+
+            window.open('../sankey/index.html?command=' + command );
+
         } else {
 
-            var file = get_file_();
-            var key = objs_by_run_id_[run_id].key;
-            var appended = file + '/' + key;
-
+            //  subject must be jupyter or durations
             ajax_(appended, "jupyter", function(data) {
 
                 var command_out = data.output.command_out;

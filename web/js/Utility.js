@@ -1,3 +1,5 @@
+var ST = ST || {};
+
 ST.Utility = function() {
 
     function getUrlVars_() {
