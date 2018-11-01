@@ -63,29 +63,19 @@ ST.CallSpot = function() {
 
             newp[0]['Code Builder'] = "Filler0";
             newp[1]['Code Builder'] = "Filler1";
-            /*             newp[2]['Compiler Name'] = "GNU Filler";
+            /*newp[2]['Compiler Name'] = "GNU Filler";
              newp[3]['Compiler Name'] = "GNU Filler";
              newp[4]['Compiler Name'] = "GNU Filler";
              newp[5]['Compiler Name'] = "GNU Filler";
              newp[6]['Compiler Name'] = "GNU Filler";
              newp[7]['Compiler Name'] = "GNU Filler";*/
 
-            for( var x in parsed_whole.layout.charts ) {
-
-                delete parsed_whole.layout.charts[x].height;
-                delete parsed_whole.layout.charts[x].inner_radius;
-                delete parsed_whole.layout.charts[x].radius;
-                delete parsed_whole.layout.charts[x].width;
-            }
-
-            //console.dir(newp);
-            delete parsed_whole.layout.charts[0].height;
             console.dir(parsed_whole.layout.charts[0]);
             console.dir(parsed_whole.layout);
-            console.dir(ST.ReturnedDataStub.layout);
+            //console.dir(ST.ReturnedDataStub.layout);
 
 
-            RenderChartCollection( newp, parsed_whole.layout );
+            RenderChartCollection( newp, parsed_whole.layout );  //  ST.ReturnedDataStub.layout); //
             bind_();
         }
     };
