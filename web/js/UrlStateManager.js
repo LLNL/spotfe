@@ -72,7 +72,11 @@ ST.UrlStateManager = function() {
 
                 if( type === "PieChart" ) {
 
-                    //inst_[z].filter( function() {} );
+                    console.dir(sp);
+                    for( var y=0; y < sp.length; y++ ) {
+                        inst_[z].filter(sp[y]);
+                    }
+
                 } else {
                     inst_[z].filter(dc.filters.RangedFilter(sp[0], sp[1]));
                 }

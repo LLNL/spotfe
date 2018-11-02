@@ -74,8 +74,6 @@ ST.CallSpot = function() {
              newp[6]['Compiler Name'] = "GNU Filler";
              newp[7]['Compiler Name'] = "GNU Filler";*/
 
-            console.dir(parsed_whole.layout.charts[0]);
-            console.dir(parsed_whole.layout);
             //console.dir(ST.ReturnedDataStub.layout);
 
 
