@@ -19,12 +19,14 @@ $(document).ready( function() {
     command = decodeURIComponent(command);
     console.dir(command);
 
+    var machine = ST.Utility.get_param('machine');
+
     $.ajax({
         dataType:'jsonp',
         url:     'https://rzlc.llnl.gov/lorenz/lora/lora.cgi/jsonp',
         data:   {
             'via'    : 'post',
-            'route'  : '/command/rzgenie',      //  rzgenie
+            'route'  : '/command/' + machine,      //  rzgenie
             'command': command
         }
     }).done( render );

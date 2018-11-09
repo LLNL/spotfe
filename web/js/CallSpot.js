@@ -112,7 +112,7 @@ ST.CallSpot = function() {
 
         } else if( subject === "durations" ) {
 
-            var command = get_command_("durations", appended);
+            var command = get_command_("durations", appended) + "&machine=" + machine_;
 
             window.open('../sankey/index.html?command=' + command );
 
