@@ -15,7 +15,7 @@ ST.CallSpot = function() {
             url:     'https://rzlc.llnl.gov/lorenz/lora/lora.cgi/jsonp',
             data:   {
                 'via'    : 'post',
-                'route'  : '/command/rzgenie',      //  rzgenie
+                'route'  : '/command/' + machine_,      //  rzgenie
                 'command': command
             }
         }).done( success ).error( handle_error_ );
@@ -131,14 +131,15 @@ ST.CallSpot = function() {
     };
 
 
-    var help_icon_ = function( file, max ) {
+    var help_icon_ = function( file ) {
 
         Vue.component('help-section', {
             data: function () {
                 return {
                     seen: false,
                     max: max_,
-                    file: file
+                    file: file,
+                    machine: machine_
                 }
             },
             template: '<div>' +
@@ -146,8 +147,10 @@ ST.CallSpot = function() {
                 <div class="help_body" v-if="seen">\
                 Using file: <span class="txt">{{ file }}</span>\
                 <br>Using max: <span class="max">{{ max }}</span>\
+                <br>Using machine: <span class="machine">{{ machine }}</span>\
                 <br>You can specify the <b>s</b>pot <b>f</b>ile with sf= in the url bar.\
                 <br>You can specify the <b>max</b> with max= in the url bar.\
+                <br>You can specify the <b>machine</b> with machine= in the url bar. \
                 </div> ' +
             '</div>'
         });
@@ -159,7 +162,7 @@ ST.CallSpot = function() {
     };
 
 
-    var max_;
+    var max_, machine_;
 
     var get_file_ = function() {
 
@@ -172,11 +175,14 @@ ST.CallSpot = function() {
     $(document).ready( function() {
 
         max_ = ST.Utility.get_param('max');
+        machine_ = ST.Utility.get_param('machine');
 
         max_ = max_ || 18000;
+        machine_ = machine_ || "rzgenie";
+
         var file = get_file_();
 
-        help_icon_(file, max_);
+        help_icon_(file);
 
         ajax_(file, 'summary', handle_success_ );
     });
