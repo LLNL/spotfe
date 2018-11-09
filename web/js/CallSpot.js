@@ -1,7 +1,9 @@
 ST.CallSpot = function() {
 
     var get_command_ = function( type, file ) {
-        return '/usr/gapps/wf/web/spot/virtenv/bin/python /usr/gapps/wf/web/spot/spot.py ' + type  + ' ' + file;
+
+        var lay = params_.layout ? ' --layout=' + params_.layout : "";
+        return '/usr/gapps/wf/web/spot/virtenv/bin/python /usr/gapps/wf/web/spot/spot.py ' + type  + ' ' + file + lay;
     };
 
     var ajax_ = function( file, type, success ) {
@@ -15,7 +17,7 @@ ST.CallSpot = function() {
             url:     'https://rzlc.llnl.gov/lorenz/lora/lora.cgi/jsonp',
             data:   {
                 'via'    : 'post',
-                'route'  : '/command/' + machine_,      //  rzgenie
+                'route'  : '/command/' + params_.machine,      //  rzgenie
                 'command': command
             }
         }).done( success ).error( handle_error_ );
@@ -42,7 +44,7 @@ ST.CallSpot = function() {
 
             for (var key in parsed) {
 
-                if (newp.length < max_) {
+                if (newp.length < params_.max) {
 
                     var valid_obj = parsed[key];
                     var date = 1539283462;
@@ -112,7 +114,7 @@ ST.CallSpot = function() {
 
         } else if( subject === "durations" ) {
 
-            var command = get_command_("durations", appended) + "&machine=" + machine_;
+            var command = get_command_("durations", appended ) + "&machine=" + params_.machine;
 
             window.open('../sankey/index.html?command=' + command );
 
@@ -137,9 +139,10 @@ ST.CallSpot = function() {
             data: function () {
                 return {
                     seen: false,
-                    max: max_,
+                    max: params_.max,
                     file: file,
-                    machine: machine_
+                    machine: params_.machine,
+                    layout: params_.layout
                 }
             },
             template: '<div>' +
@@ -148,9 +151,11 @@ ST.CallSpot = function() {
                 Using file: <span class="txt">{{ file }}</span>\
                 <br>Using max: <span class="max">{{ max }}</span>\
                 <br>Using machine: <span class="machine">{{ machine }}</span>\
+                <br>Using layout: <span class="machine">{{ layout }}</span>\
                 <br>You can specify the <b>s</b>pot <b>f</b>ile with sf= in the url bar.\
                 <br>You can specify the <b>max</b> with max= in the url bar.\
                 <br>You can specify the <b>machine</b> with machine= in the url bar. \
+                <br>You can specify the <b>layout</b> with layout= in the url bar. \
                 </div> ' +
             '</div>'
         });
@@ -162,7 +167,7 @@ ST.CallSpot = function() {
     };
 
 
-    var max_, machine_;
+    var params_ = {};
 
     var get_file_ = function() {
 
@@ -174,11 +179,12 @@ ST.CallSpot = function() {
 
     $(document).ready( function() {
 
-        max_ = ST.Utility.get_param('max');
-        machine_ = ST.Utility.get_param('machine');
+        params_.max = ST.Utility.get_param('max');
+        params_.machine = ST.Utility.get_param('machine');
+        params_.layout = ST.Utility.get_param('layout');
 
-        max_ = max_ || 18000;
-        machine_ = machine_ || "rzgenie";
+        params_.max = params_.max || 18000;
+        params_.machine = params_.machine || "rzgenie";
 
         var file = get_file_();
 
