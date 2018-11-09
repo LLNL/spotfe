@@ -173,7 +173,7 @@ ST.CallSpot = function() {
 
         max_ = ST.Utility.get_param('max');
 
-        max_ = max_ || 3000;
+        max_ = max_ || 18000;
         var file = get_file_();
 
         help_icon_(file, max_);
