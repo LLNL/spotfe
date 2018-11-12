@@ -30,7 +30,7 @@ ST.CallSpot = function() {
 
         if( value.error !== "" ) {
 
-            ST.Utility.error( value.error  + "<br><br>pro tip: see Joe Chavez.");
+            ST.Utility.error( value.error );
 
         } else {
 
@@ -78,6 +78,7 @@ ST.CallSpot = function() {
 
             //console.dir(ST.ReturnedDataStub.layout);
 
+            ST.layout_used = parsed_whole.layout;
 
             RenderChartCollection( newp, parsed_whole.layout );  //  ST.ReturnedDataStub.layout); //
             bind_();

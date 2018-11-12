@@ -1,0 +1,16 @@
+{
+    "charts":
+    [
+        {"dimension":"Compiler Name","title":"Compiler names + Compiler Version","viz":"PieChart","width":470,"height":400,"inner_radius":30,"radius":170},
+        {"dimension":"Code Builder","title":"Code Builder","viz":"LeftHorizontalBarChart","width":470,"height":400},
+        {"dimension":"Compiler Flags","title":"Compiler Flags","viz":"PieChart","width":470,"height":400,"inner_radius":30,"radius":170},
+        {"dimension":"Problem Size","viz":"BarChart","width":470,"height":400},
+        {"dimension":"Number of Regions","title":"Number of Regions","viz":"BarChart","width":470,"height":400}
+    ],
+    "table":[
+        {"dimension":"date","label":"date"},
+        {"dimension":"cali.caliper.version","label":"cali.caliper.version"},
+        {"dimension":"Problem Size","label":"Problem Size"},
+        {"dimension":"Region Balance","label":"Region Balance"}
+    ]
+}
