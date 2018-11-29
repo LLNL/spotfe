@@ -60,6 +60,10 @@ ST.LeftHorizontalBarChart = function() {
             })
             .elasticX(true)
             .xAxis().ticks(4);
+            //.on('filtered', function(chart) {
+            //    ST.UrlStateManager.user_filtered(chart, 'LeftHorizontalBarChart');
+            //});
+
 
     };
 
@@ -69,6 +73,11 @@ ST.LeftHorizontalBarChart = function() {
 
             horizontalStackedChart_.filterAll();
             dc.redrawAll();
+        },
+        load_filter: function() {
+
+            ST.UrlStateManager.load_filter( horizontalStackedChart_, 'LeftHorizontalBarChart' );
         }
+
     }
 }();

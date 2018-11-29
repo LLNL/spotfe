@@ -248,6 +248,7 @@ var RenderChartCollection = function( the_data, layout_spec ) {
     dc.renderAll();
     ST.BarChart.load_filter();
     ST.PieChart.load_filter();
+    ST.LeftHorizontalBarChart.load_filter();
 
     dc.redrawAll();
     /*
