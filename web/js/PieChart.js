@@ -46,12 +46,12 @@ ST.PieChart = function() {
             })
             .ordinalColors([
                 '#9bdb8d',
-                '#6fbfff',
                 '#eb8b8e',
                 '#bf82d5',
-                '#ace7ff',
                 '#ffb661',
+                '#6fbfff',
                 '#a3b7cc',
+                '#ace7ff'
             ]);
 
         $('.pie_reset').unbind('click').bind('click', ST.PieChart.reset);
