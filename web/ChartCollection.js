@@ -213,6 +213,8 @@ var RenderChartCollection = function( the_data, layout_spec ) {
     });
 
 
+    //  https://github.com/HamsterHuey/intothevoid.io/blob/master/code/2017/dcjs%20sortable%20table/dcjsSortableTable.html
+
     nasdaqTable
         .dimension(dateDimension)
         // Data table does not use crossfilter group but rather a closure
@@ -231,7 +233,9 @@ var RenderChartCollection = function( the_data, layout_spec ) {
 
         // (_optional_) sort using the given field, `default = function(d){return d;}`
         .sortBy(function (d) {
-            return d.date;
+
+            var col = "runtime2"; // "Region Balance";
+            return d[col]; // d.date;
         })
         // (_optional_) sort order, `default = d3.ascending`
         .order(d3.ascending)
@@ -243,6 +247,14 @@ var RenderChartCollection = function( the_data, layout_spec ) {
             jQuery('.myButton').unbind('click').bind('click', ST.CallSpot.drilldown );
         });
 
+/*    setTimeout( function() {
+        console.log("now sort by Region Balance");
+        nasdaqTable.sortBy( function(d) {
+
+            var col = "Region Balance";
+            return d[col]; // d.date;
+        });
+    }, 5000);*/
 
     //simply call `.renderAll()` to render all charts on the page
     dc.renderAll();
@@ -261,9 +273,14 @@ var RenderChartCollection = function( the_data, layout_spec ) {
      dc.redrawAll('group');
      */
 
-
-//#### Versions
-
-//Determine the current version of dc with `dc.version`
+    //Determine the current version of dc with `dc.version`
     d3.selectAll('#version').text(dc.version);
+
+
+    var byDate = ndx.dimension(function (d) {
+        return d.date;
+    });
+
+    var table_data = byDate.top(Infinity);
+    console.dir(table_data);
 };

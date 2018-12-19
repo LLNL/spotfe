@@ -162,9 +162,9 @@ ST.CallSpot = function() {
         });
 
         //  Need to find the dc.js end event handler.
-        new Vue({
-            el: "#help_icon"
-        });
+        //new Vue({
+        //    el: "#help_icon"
+        //});
     };
 
 
@@ -192,6 +192,15 @@ ST.CallSpot = function() {
         help_icon_(file);
 
         ajax_(file, 'summary', handle_success_ );
+
+        var app = new Vue({
+            el: "#app",
+            methods: {
+                updateData: function() {
+                    app.$emit('updateData', 1);
+                }
+            }
+        });
     });
 
     return {
@@ -199,3 +208,4 @@ ST.CallSpot = function() {
         bind: bind_
     }
 }();
+
