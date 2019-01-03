@@ -1,3 +1,5 @@
+var app;
+
 ST.CallSpot = function() {
 
     var get_command_ = function( type, file ) {
@@ -59,7 +61,7 @@ ST.CallSpot = function() {
                     valid_obj.epoch_date = date;
                     valid_obj.date = month + "/" + day + "/" + year;
                     valid_obj.run_id = "id_" + Math.floor(Math.random()*10000);
-                    valid_obj.drilldown = ['Jupyter', 'mpi', 'durations'];
+                    valid_obj.drilldown = ['Jupyter', 'mpi', 'walltime'];
                     valid_obj.key = key;
 
                     newp.push(valid_obj);
@@ -113,7 +115,7 @@ ST.CallSpot = function() {
             //  http://localhost:8888
             window.open('../ravel/index.html');
 
-        } else if( subject === "durations" ) {
+        } else if( subject === "walltime" ) {
 
             var command = get_command_("durations", appended ) + "&machine=" + params_.machine;
 
@@ -121,7 +123,7 @@ ST.CallSpot = function() {
 
         } else {
 
-            //  subject must be jupyter or durations
+            //  subject must be jupyter or walltime
             ajax_(appended, "jupyter", function(data) {
 
                 var command_out = data.output.command_out;
@@ -146,6 +148,7 @@ ST.CallSpot = function() {
                     layout: params_.layout
                 }
             },
+            props: ['bus'],
             template: '<div>' +
                 '<div class="help_icon" v-on:click="seen=(!seen)">?</div>\
                 <div class="help_body" v-if="seen">\
@@ -158,7 +161,19 @@ ST.CallSpot = function() {
                 <br>You can specify the <b>machine</b> with machine= in the url bar. \
                 <br>You can specify the <b>layout</b> with layout= in the url bar. \
                 </div> ' +
-            '</div>'
+            '</div>',
+            mounted: function() {
+
+                setTimeout( function() {
+
+                    app.bus.$on('updateData', this.updateData );
+                }, 2000);
+            },
+            methods: {
+                updateData: function( max ) {
+                    console.log('help updting ' + max);
+                }
+            }
         });
 
         //  Need to find the dc.js end event handler.
@@ -193,14 +208,19 @@ ST.CallSpot = function() {
 
         ajax_(file, 'summary', handle_success_ );
 
-        var app = new Vue({
+        app = new Vue({
             el: "#app",
+            data: {
+                bus: new Vue()
+            },
             methods: {
-                updateData: function() {
-                    app.$emit('updateData', 1);
+                update: function( str ) {
+                    app.bus.$emit('updateData', {});
                 }
             }
         });
+
+        //app.update();
     });
 
     return {
@@ -209,3 +229,4 @@ ST.CallSpot = function() {
     }
 }();
 
+const events = new Vue({});

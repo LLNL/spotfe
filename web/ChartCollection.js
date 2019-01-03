@@ -234,7 +234,7 @@ var RenderChartCollection = function( the_data, layout_spec ) {
         // (_optional_) sort using the given field, `default = function(d){return d;}`
         .sortBy(function (d) {
 
-            var col = "runtime2"; // "Region Balance";
+            var col = "runtime"; // "Region Balance";
             return d[col]; // d.date;
         })
         // (_optional_) sort order, `default = d3.ascending`
@@ -247,14 +247,14 @@ var RenderChartCollection = function( the_data, layout_spec ) {
             jQuery('.myButton').unbind('click').bind('click', ST.CallSpot.drilldown );
         });
 
-/*    setTimeout( function() {
+    setTimeout( function() {
         console.log("now sort by Region Balance");
         nasdaqTable.sortBy( function(d) {
 
             var col = "Region Balance";
             return d[col]; // d.date;
         });
-    }, 5000);*/
+    }, 5000);
 
     //simply call `.renderAll()` to render all charts on the page
     dc.renderAll();

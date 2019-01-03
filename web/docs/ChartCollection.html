@@ -483,7 +483,7 @@ This code demonstrates generating the column header automatically based on the c
             
             <div class="content"><div class='highlight'><pre>        .sortBy(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{
 
-            <span class="hljs-keyword">var</span> col = <span class="hljs-string">"runtime2"</span>; <span class="hljs-comment">// "Region Balance";</span>
+            <span class="hljs-keyword">var</span> col = <span class="hljs-string">"runtime"</span>; <span class="hljs-comment">// "Region Balance";</span>
             <span class="hljs-keyword">return</span> d[col]; <span class="hljs-comment">// d.date;</span>
         })</pre></div></div>
             
@@ -534,14 +534,14 @@ This code demonstrates generating the column header automatically based on the c
             <div class="content"><div class='highlight'><pre>            jQuery(<span class="hljs-string">'.myButton'</span>).unbind(<span class="hljs-string">'click'</span>).bind(<span class="hljs-string">'click'</span>, ST.CallSpot.drilldown );
         });
 
-<span class="hljs-comment">/*    setTimeout( function() {
-        console.log("now sort by Region Balance");
-        nasdaqTable.sortBy( function(d) {
+    setTimeout( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"now sort by Region Balance"</span>);
+        nasdaqTable.sortBy( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">d</span>) </span>{
 
-            var col = "Region Balance";
-            return d[col]; // d.date;
+            <span class="hljs-keyword">var</span> col = <span class="hljs-string">"Region Balance"</span>;
+            <span class="hljs-keyword">return</span> d[col]; <span class="hljs-comment">// d.date;</span>
         });
-    }, 5000);*/</span></pre></div></div>
+    }, <span class="hljs-number">5000</span>);</pre></div></div>
             
         </li>
         
