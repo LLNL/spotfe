@@ -247,14 +247,20 @@ var RenderChartCollection = function( the_data, layout_spec ) {
             jQuery('.myButton').unbind('click').bind('click', ST.CallSpot.drilldown );
         });
 
-    setTimeout( function() {
+
+/*    setTimeout( function() {
         console.log("now sort by Region Balance");
         nasdaqTable.sortBy( function(d) {
 
             var col = "Region Balance";
             return d[col]; // d.date;
         });
-    }, 5000);
+
+        dc.renderAll();
+        dc.redrawAll();
+
+    }, 5000);*/
+
 
     //simply call `.renderAll()` to render all charts on the page
     dc.renderAll();
@@ -283,4 +289,25 @@ var RenderChartCollection = function( the_data, layout_spec ) {
 
     var table_data = byDate.top(Infinity);
     console.dir(table_data);
+
+    $('.dc-data-table th').ArrowFunctions( function sort_me() {
+
+        var target = $(event.target);
+        var is_up = target.hasClass('up_arrow');
+        var what_sort = target.parent().html();
+
+        console.log( what_sort );
+    });
+};
+
+
+$.fn.ArrowFunctions = function() {
+
+    var arrows = "<div class='up_arrow'></div>" +
+        "<div class='down_arrow'></div>";
+
+    return this.each( function() {
+
+        $(this).append(arrows);
+    });
 };

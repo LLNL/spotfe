@@ -534,14 +534,19 @@ This code demonstrates generating the column header automatically based on the c
             <div class="content"><div class='highlight'><pre>            jQuery(<span class="hljs-string">'.myButton'</span>).unbind(<span class="hljs-string">'click'</span>).bind(<span class="hljs-string">'click'</span>, ST.CallSpot.drilldown );
         });
 
-    setTimeout( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
-        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"now sort by Region Balance"</span>);
-        nasdaqTable.sortBy( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">d</span>) </span>{
 
-            <span class="hljs-keyword">var</span> col = <span class="hljs-string">"Region Balance"</span>;
-            <span class="hljs-keyword">return</span> d[col]; <span class="hljs-comment">// d.date;</span>
+<span class="hljs-comment">/*    setTimeout( function() {
+        console.log("now sort by Region Balance");
+        nasdaqTable.sortBy( function(d) {
+
+            var col = "Region Balance";
+            return d[col]; // d.date;
         });
-    }, <span class="hljs-number">5000</span>);</pre></div></div>
+
+        dc.renderAll();
+        dc.redrawAll();
+
+    }, 5000);*/</span></pre></div></div>
             
         </li>
         
@@ -634,6 +639,27 @@ changes, without re-rendering everything</p>
 
     <span class="hljs-keyword">var</span> table_data = byDate.top(<span class="hljs-literal">Infinity</span>);
     <span class="hljs-built_in">console</span>.dir(table_data);
+
+    $(<span class="hljs-string">'.dc-data-table th'</span>).ArrowFunctions( <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sort_me</span>(<span class="hljs-params"></span>) </span>{
+
+        <span class="hljs-keyword">var</span> target = $(event.target);
+        <span class="hljs-keyword">var</span> is_up = target.hasClass(<span class="hljs-string">'up_arrow'</span>);
+        <span class="hljs-keyword">var</span> what_sort = target.parent().html();
+
+        <span class="hljs-built_in">console</span>.log( what_sort );
+    });
+};
+
+
+$.fn.ArrowFunctions = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+
+    <span class="hljs-keyword">var</span> arrows = <span class="hljs-string">"&lt;div class='up_arrow'&gt;&lt;/div&gt;"</span> +
+        <span class="hljs-string">"&lt;div class='down_arrow'&gt;&lt;/div&gt;"</span>;
+
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.each( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+
+        $(<span class="hljs-keyword">this</span>).append(arrows);
+    });
 };</pre></div></div>
             
         </li>

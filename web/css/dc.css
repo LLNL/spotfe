@@ -317,3 +317,28 @@ body .dc-chart g.row text {
   position: absolute;
   top: 5px;
   right: 5px; }
+
+.dc-data-table th {
+  position: relative; }
+
+.dc-data-table .up_arrow {
+  position: absolute;
+  top: 12px;
+  right: 2px;
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid black;
+  cursor: pointer; }
+
+.dc-data-table .down_arrow {
+  position: absolute;
+  top: 19px;
+  right: 2px;
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 7px solid #000;
+  cursor: pointer; }
