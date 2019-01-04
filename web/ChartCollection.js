@@ -2,6 +2,7 @@
 'use strict';
 
 var ST = ST || {};
+var nasdaqTable;
 
 var reduce_authors = function( data ) {
 
@@ -150,7 +151,7 @@ var RenderChartCollection = function( the_data, layout_spec ) {
     // Note: It is often a good idea to have these objects accessible at the global scope so that they can be modified or
     // filtered by other page controls.
     var nasdaqCount = dc.dataCount('.dc-data-count');
-    var nasdaqTable = dc.dataTable('.dc-data-table');
+    nasdaqTable = dc.dataTable('.dc-data-table');
 
     nasdaqCount /* dc.dataCount('.dc-data-count', 'chartGroup'); */
         .dimension(ndx)
@@ -248,20 +249,6 @@ var RenderChartCollection = function( the_data, layout_spec ) {
         });
 
 
-/*    setTimeout( function() {
-        console.log("now sort by Region Balance");
-        nasdaqTable.sortBy( function(d) {
-
-            var col = "Region Balance";
-            return d[col]; // d.date;
-        });
-
-        dc.renderAll();
-        dc.redrawAll();
-
-    }, 5000);*/
-
-
     //simply call `.renderAll()` to render all charts on the page
     dc.renderAll();
     ST.BarChart.load_filter();
@@ -290,18 +277,39 @@ var RenderChartCollection = function( the_data, layout_spec ) {
     var table_data = byDate.top(Infinity);
     console.dir(table_data);
 
-    $('.dc-data-table th').ArrowFunctions( function sort_me() {
+    bind_sort();
+};
 
-        var target = $(event.target);
-        var is_up = target.hasClass('up_arrow');
-        var what_sort = target.parent().html();
 
-        console.log( what_sort );
+var bind_sort = function() {
+
+    $('.dc-data-table th').ArrowFunctions({
+        arrow_click: function sort_me() {
+
+            var target = $(event.target);
+            var is_up = target.hasClass('up_arrow');
+            var what_sort = target.parent().html();
+
+            what_sort = what_sort.split('<')[0];
+
+            console.log("now sort by: " + what_sort);
+            nasdaqTable.sortBy( function(d) {
+
+                var col = "Region Balance";
+                return d[what_sort]; // d.date;
+            })
+                .order( is_up ? d3.ascending : d3.descending );
+
+            dc.renderAll();
+            dc.redrawAll();
+
+            bind_sort();
+        }
     });
 };
 
 
-$.fn.ArrowFunctions = function() {
+$.fn.ArrowFunctions = function( obj ) {
 
     var arrows = "<div class='up_arrow'></div>" +
         "<div class='down_arrow'></div>";
@@ -309,5 +317,6 @@ $.fn.ArrowFunctions = function() {
     return this.each( function() {
 
         $(this).append(arrows);
+        $(this).find('.up_arrow, .down_arrow').unbind('click').bind('click', obj.arrow_click );
     });
 };

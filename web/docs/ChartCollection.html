@@ -28,6 +28,7 @@
             <div class="content"><div class='highlight'><pre><span class="hljs-meta">'use strict'</span>;
 
 <span class="hljs-keyword">var</span> ST = ST || {};
+<span class="hljs-keyword">var</span> nasdaqTable;
 
 <span class="hljs-keyword">var</span> reduce_authors = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> data </span>) </span>{
 
@@ -304,7 +305,7 @@ filtered by other page controls.</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> nasdaqCount = dc.dataCount(<span class="hljs-string">'.dc-data-count'</span>);
-    <span class="hljs-keyword">var</span> nasdaqTable = dc.dataTable(<span class="hljs-string">'.dc-data-table'</span>);
+    nasdaqTable = dc.dataTable(<span class="hljs-string">'.dc-data-table'</span>);
 
     nasdaqCount <span class="hljs-comment">/* dc.dataCount('.dc-data-count', 'chartGroup'); */</span>
         .dimension(ndx)
@@ -532,21 +533,7 @@ This code demonstrates generating the column header automatically based on the c
             </div>
             
             <div class="content"><div class='highlight'><pre>            jQuery(<span class="hljs-string">'.myButton'</span>).unbind(<span class="hljs-string">'click'</span>).bind(<span class="hljs-string">'click'</span>, ST.CallSpot.drilldown );
-        });
-
-
-<span class="hljs-comment">/*    setTimeout( function() {
-        console.log("now sort by Region Balance");
-        nasdaqTable.sortBy( function(d) {
-
-            var col = "Region Balance";
-            return d[col]; // d.date;
-        });
-
-        dc.renderAll();
-        dc.redrawAll();
-
-    }, 5000);*/</span></pre></div></div>
+        });</pre></div></div>
             
         </li>
         
@@ -640,18 +627,39 @@ changes, without re-rendering everything</p>
     <span class="hljs-keyword">var</span> table_data = byDate.top(<span class="hljs-literal">Infinity</span>);
     <span class="hljs-built_in">console</span>.dir(table_data);
 
-    $(<span class="hljs-string">'.dc-data-table th'</span>).ArrowFunctions( <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sort_me</span>(<span class="hljs-params"></span>) </span>{
+    bind_sort();
+};
 
-        <span class="hljs-keyword">var</span> target = $(event.target);
-        <span class="hljs-keyword">var</span> is_up = target.hasClass(<span class="hljs-string">'up_arrow'</span>);
-        <span class="hljs-keyword">var</span> what_sort = target.parent().html();
 
-        <span class="hljs-built_in">console</span>.log( what_sort );
+<span class="hljs-keyword">var</span> bind_sort = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+
+    $(<span class="hljs-string">'.dc-data-table th'</span>).ArrowFunctions({
+        <span class="hljs-attr">arrow_click</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sort_me</span>(<span class="hljs-params"></span>) </span>{
+
+            <span class="hljs-keyword">var</span> target = $(event.target);
+            <span class="hljs-keyword">var</span> is_up = target.hasClass(<span class="hljs-string">'up_arrow'</span>);
+            <span class="hljs-keyword">var</span> what_sort = target.parent().html();
+
+            what_sort = what_sort.split(<span class="hljs-string">'&lt;'</span>)[<span class="hljs-number">0</span>];
+
+            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"now sort by: "</span> + what_sort);
+            nasdaqTable.sortBy( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">d</span>) </span>{
+
+                <span class="hljs-keyword">var</span> col = <span class="hljs-string">"Region Balance"</span>;
+                <span class="hljs-keyword">return</span> d[what_sort]; <span class="hljs-comment">// d.date;</span>
+            })
+                .order( is_up ? d3.ascending : d3.descending );
+
+            dc.renderAll();
+            dc.redrawAll();
+
+            bind_sort();
+        }
     });
 };
 
 
-$.fn.ArrowFunctions = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+$.fn.ArrowFunctions = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> obj </span>) </span>{
 
     <span class="hljs-keyword">var</span> arrows = <span class="hljs-string">"&lt;div class='up_arrow'&gt;&lt;/div&gt;"</span> +
         <span class="hljs-string">"&lt;div class='down_arrow'&gt;&lt;/div&gt;"</span>;
@@ -659,6 +667,7 @@ $.fn.ArrowFunctions = <span class="hljs-function"><span class="hljs-keyword">fun
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.each( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
 
         $(<span class="hljs-keyword">this</span>).append(arrows);
+        $(<span class="hljs-keyword">this</span>).find(<span class="hljs-string">'.up_arrow, .down_arrow'</span>).unbind(<span class="hljs-string">'click'</span>).bind(<span class="hljs-string">'click'</span>, obj.arrow_click );
     });
 };</pre></div></div>
             

@@ -460,25 +460,25 @@ body .dc-chart g.row text {
 
     .up_arrow {
         position: absolute;
-        top: 12px;
+        top: 10px;
         right: 2px;
         width: 0;
         height: 0;
         border-left: 7px solid transparent;
         border-right: 7px solid transparent;
-        border-bottom: 7px solid black;
+        border-bottom: 7px solid #555555;
         cursor: pointer;
     }
 
     .down_arrow {
         position: absolute;
-        top: 19px;
+        top: 20px;
         right: 2px;
         width: 0;
         height: 0;
         border-left: 7px solid transparent;
         border-right: 7px solid transparent;
-        border-top: 7px solid #000;
+        border-top: 7px solid #555555;
         cursor: pointer;
     }
 }
