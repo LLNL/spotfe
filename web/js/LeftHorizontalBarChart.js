@@ -72,7 +72,9 @@ ST.LeftHorizontalBarChart = function() {
         reset: function() {
 
             horizontalStackedChart_.filterAll();
+
             dc.redrawAll();
+            bind_sort();
         },
         load_filter: function() {
 

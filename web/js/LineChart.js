@@ -149,6 +149,7 @@ ST.LineChart = function() {
             moveChart_.filterAll();
             volumeChart_.filterAll();
             dc.redrawAll();
+            bind_sort();
         }
     }
 }();

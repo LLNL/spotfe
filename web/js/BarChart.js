@@ -98,7 +98,9 @@ ST.BarChart = function() {
             var instance_num = grandpa.attr('instance_num');
 
             inst_[instance_num].filterAll();
+
             dc.redrawAll();
+            bind_sort();
         },
         load_filter: function() {
 
