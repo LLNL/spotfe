@@ -242,10 +242,13 @@ var RenderChartCollection = function( the_data, layout_spec ) {
         .order(d3.ascending)
         // (_optional_) custom renderlet to post-process chart using [D3](http://d3js.org)
         .on('renderlet', function (table) {
+
             table.selectAll('.dc-table-group').classed('info', true);
 
             //  Make this happen after the render table.
             jQuery('.myButton').unbind('click').bind('click', ST.CallSpot.drilldown );
+
+            bind_sort();
         });
 
 
