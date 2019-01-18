@@ -27,8 +27,6 @@ RV.ComputeLatenessModel = function() {
           steps[event.step] = get_earliest_enter_for_a_step_( events, event.step );
       }
 
-      console.dir(steps);
-
       return steps;
   };
 
@@ -43,8 +41,6 @@ RV.ComputeLatenessModel = function() {
 
           events[x].lateness = ev.exit - earliest_enters[ev.step];
           events[x].lateness = Math.min( events[x].lateness, MAX_LATENESS );
-
-          console.log( events[x].lateness );
       }
   };
 

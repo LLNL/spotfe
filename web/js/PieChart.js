@@ -51,7 +51,10 @@ ST.PieChart = function() {
                 '#ffb661',
                 '#6fbfff',
                 '#a3b7cc',
-                '#ace7ff'
+                '#ace7ff',
+                '#ccaa44',
+                '#77bb22',
+                '#dd2277'
             ]);
 
         $('.pie_reset').unbind('click').bind('click', ST.PieChart.reset);

@@ -1,5 +1,7 @@
 var app;
 
+var ST = ST || {};
+
 ST.CallSpot = function() {
 
     var get_command_ = function( type, file ) {
@@ -82,7 +84,9 @@ ST.CallSpot = function() {
 
             ST.layout_used = parsed_whole.layout;
 
-            RenderChartCollection( newp, parsed_whole.layout );  //  ST.ReturnedDataStub.layout); //
+            if( window.RenderChartCollection ) {
+                RenderChartCollection(newp, parsed_whole.layout);  //  ST.ReturnedDataStub.layout); //
+            }
             bind_();
         }
     };
@@ -162,17 +166,7 @@ ST.CallSpot = function() {
                 <br>You can specify the <b>layout</b> with layout= in the url bar. \
                 </div> ' +
             '</div>',
-            mounted: function() {
-
-                setTimeout( function() {
-
-                    app.bus.$on('updateData', this.updateData );
-                }, 2000);
-            },
             methods: {
-                updateData: function( max ) {
-                    console.log('help updting ' + max);
-                }
             }
         });
 
@@ -212,15 +206,8 @@ ST.CallSpot = function() {
             el: "#app",
             data: {
                 bus: new Vue()
-            },
-            methods: {
-                update: function( str ) {
-                    app.bus.$emit('updateData', {});
-                }
             }
         });
-
-        //app.update();
     });
 
     return {
@@ -228,5 +215,3 @@ ST.CallSpot = function() {
         bind: bind_
     }
 }();
-
-const events = new Vue({});

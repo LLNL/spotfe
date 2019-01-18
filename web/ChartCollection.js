@@ -72,6 +72,9 @@ var reduce_authors = function( data ) {
 
 var RenderChartCollection = function( the_data, layout_spec ) {
 
+    console.dir( the_data );
+//    ST.MakeNiceData.make( the_data );
+
     //  ST.ReturnedDataStub.data
     var ndx = crossfilter( the_data );
     var all = ndx.groupAll();
