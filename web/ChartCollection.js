@@ -326,3 +326,4 @@ $.fn.ArrowFunctions = function( obj ) {
         $(this).find('.up_arrow, .down_arrow').unbind('click').bind('click', obj.arrow_click );
     });
 };
+

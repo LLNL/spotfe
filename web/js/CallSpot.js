@@ -1,5 +1,3 @@
-var app;
-
 var ST = ST || {};
 
 ST.CallSpot = function() {
@@ -140,19 +138,18 @@ ST.CallSpot = function() {
     };
 
 
-    var help_icon_ = function( file ) {
+    var help_icon_ = function( file, params ) {
 
         Vue.component('help-section', {
             data: function () {
                 return {
                     seen: false,
-                    max: params_.max,
+                    max: params.max,
                     file: file,
-                    machine: params_.machine,
-                    layout: params_.layout
+                    machine: params.machine,
+                    layout: params.layout
                 }
             },
-            props: ['bus'],
             template: '<div>' +
                 '<div class="help_icon" v-on:click="seen=(!seen)">?</div>\
                 <div class="help_body" v-if="seen">\
@@ -171,9 +168,9 @@ ST.CallSpot = function() {
         });
 
         //  Need to find the dc.js end event handler.
-        //new Vue({
-        //    el: "#help_icon"
-        //});
+        new Vue({
+            el: "#help_icon"
+        });
     };
 
 
@@ -198,20 +195,14 @@ ST.CallSpot = function() {
 
         var file = get_file_();
 
-        help_icon_(file);
+        help_icon_(file, params_ );
 
-        ajax_(file, 'summary', handle_success_ );
-
-        app = new Vue({
-            el: "#app",
-            data: {
-                bus: new Vue()
-            }
-        });
+        ST.CallSpot.ajax(file, 'summary', handle_success_ );
     });
 
     return {
         drilldown: drill_down_,
-        bind: bind_
+        bind: bind_,
+        ajax: ajax_
     }
 }();

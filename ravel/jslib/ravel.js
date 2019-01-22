@@ -932,6 +932,8 @@ var ravel = {
 
   $(document).ready(  function() {
 
+    ST.CallSpot.ajax('mpitrace', "");
+
     //  setTimeout: just temporary.
       //  TODO: get rid of setTimeout
       RV.ravelView.render( "" , 0);
