@@ -1,0 +1,14 @@
+TODO LIST
+=================================================
+
+1.  Genericize the CallSpot.js so it can be used in any project
+2.  Enable usage of CallSpot.js from new dur_sankey along with the parameters.
+3.  Construct STUB data from CallSpot: spot.py durations2 <filepath1.cali> [filepath2.cali]*
+4.  Get dur_sankey working with the STUB data.
+5.  Get dur_sankey working for any filepathX.cali
+6.  Make Spot 2 compare button and extract all runIDs/filepathX.cali
+7.  Integrate Spot 2 cali extraction with the new dur_sankey project page.
+8.  Find a way to do in-order sorting.  Is there an option for this?
+
+8.  At somepoint, I'll have to get back to Ravel.
+9.  Icons... someday.

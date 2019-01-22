@@ -687,7 +687,64 @@ $.fn.ArrowFunctions = <span class="hljs-function"><span class="hljs-keyword">fun
         $(<span class="hljs-keyword">this</span>).append(arrows);
         $(<span class="hljs-keyword">this</span>).find(<span class="hljs-string">'.up_arrow, .down_arrow'</span>).unbind(<span class="hljs-string">'click'</span>).bind(<span class="hljs-string">'click'</span>, obj.arrow_click );
     });
-};</pre></div></div>
+};
+
+
+<span class="hljs-keyword">var</span> help_icon_ = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> file, params </span>) </span>{
+
+    Vue.component(<span class="hljs-string">'help-section'</span>, {
+        <span class="hljs-attr">data</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+            <span class="hljs-keyword">return</span> {
+                <span class="hljs-attr">seen</span>: <span class="hljs-literal">false</span>,
+                <span class="hljs-attr">max</span>: params.max,
+                <span class="hljs-attr">file</span>: file,
+                <span class="hljs-attr">machine</span>: params.machine,
+                <span class="hljs-attr">layout</span>: params.layout
+            }
+        },
+        <span class="hljs-attr">template</span>: <span class="hljs-string">'&lt;div&gt;'</span> +
+        <span class="hljs-string">'&lt;div class="help_icon" v-on:click="seen=(!seen)"&gt;?&lt;/div&gt;\
+        &lt;div class="help_body" v-if="seen"&gt;\
+        Using file: &lt;span class="txt"&gt;{{ file }}&lt;/span&gt;\
+        &lt;br&gt;Using max: &lt;span class="max"&gt;{{ max }}&lt;/span&gt;\
+        &lt;br&gt;Using machine: &lt;span class="machine"&gt;{{ machine }}&lt;/span&gt;\
+        &lt;br&gt;Using layout: &lt;span class="machine"&gt;{{ layout }}&lt;/span&gt;\
+        &lt;br&gt;You can specify the &lt;b&gt;s&lt;/b&gt;pot &lt;b&gt;f&lt;/b&gt;ile with sf= in the url bar.\
+        &lt;br&gt;You can specify the &lt;b&gt;max&lt;/b&gt; with max= in the url bar.\
+        &lt;br&gt;You can specify the &lt;b&gt;machine&lt;/b&gt; with machine= in the url bar. \
+        &lt;br&gt;You can specify the &lt;b&gt;layout&lt;/b&gt; with layout= in the url bar. \
+        &lt;/div&gt; '</span> +
+        <span class="hljs-string">'&lt;/div&gt;'</span>,
+        <span class="hljs-attr">methods</span>: {
+        }
+    });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-30">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-30">&#182;</a>
+              </div>
+              <p> Need to find the dc.js end event handler.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">new</span> Vue({
+        <span class="hljs-attr">el</span>: <span class="hljs-string">"#help_icon"</span>
+    });
+};
+
+$(<span class="hljs-built_in">document</span>).ready( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+
+    <span class="hljs-keyword">var</span> file = ST.Utility.get_file();
+
+    help_icon_(file, ST.params );
+
+    ST.CallSpot.ajax(file, <span class="hljs-string">'summary'</span>);
+});</pre></div></div>
             
         </li>
         

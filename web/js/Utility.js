@@ -40,8 +40,18 @@ ST.Utility = function() {
         }
     };
 
+    var get_file_ = function() {
+
+        var file = ST.Utility.get_param('sf');
+        var default_file = "/usr/gapps/wf/web/spot/data/lulesh_maximal";
+
+        return file || default_file;
+    };
+
+
     return {
         validate_cali_object: validate_cali_object_,
+        get_file: get_file_,
         get_param: get_param_,
         error: error_
     }

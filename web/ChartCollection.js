@@ -327,3 +327,47 @@ $.fn.ArrowFunctions = function( obj ) {
     });
 };
 
+
+var help_icon_ = function( file, params ) {
+
+    Vue.component('help-section', {
+        data: function () {
+            return {
+                seen: false,
+                max: params.max,
+                file: file,
+                machine: params.machine,
+                layout: params.layout
+            }
+        },
+        template: '<div>' +
+        '<div class="help_icon" v-on:click="seen=(!seen)">?</div>\
+        <div class="help_body" v-if="seen">\
+        Using file: <span class="txt">{{ file }}</span>\
+        <br>Using max: <span class="max">{{ max }}</span>\
+        <br>Using machine: <span class="machine">{{ machine }}</span>\
+        <br>Using layout: <span class="machine">{{ layout }}</span>\
+        <br>You can specify the <b>s</b>pot <b>f</b>ile with sf= in the url bar.\
+        <br>You can specify the <b>max</b> with max= in the url bar.\
+        <br>You can specify the <b>machine</b> with machine= in the url bar. \
+        <br>You can specify the <b>layout</b> with layout= in the url bar. \
+        </div> ' +
+        '</div>',
+        methods: {
+        }
+    });
+
+    //  Need to find the dc.js end event handler.
+    new Vue({
+        el: "#help_icon"
+    });
+};
+
+$(document).ready( function() {
+
+    var file = ST.Utility.get_file();
+
+    help_icon_(file, ST.params );
+
+    ST.CallSpot.ajax(file, 'summary');
+});

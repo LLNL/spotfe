@@ -1,4 +1,11 @@
 
+
+$(document).ready(  function() {
+
+    ST.CallSpot.ajax('durations2', "180926-171347_114610_dFcHlCXdiuQG.cali");
+
+});
+
 const data = {} // put data from server here obtained from "spot.py durations2 <filepath1> [filepath2]*"
 
 

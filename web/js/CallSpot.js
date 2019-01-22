@@ -2,13 +2,27 @@ var ST = ST || {};
 
 ST.CallSpot = function() {
 
+    var init_ = function() {
+        ST.params = ST.params || {};
+        ST.params.max = ST.Utility.get_param('max');
+        ST.params.machine = ST.Utility.get_param('machine');
+        ST.params.layout = ST.Utility.get_param('layout');
+
+        ST.params.max = ST.params.max || 18000;
+        ST.params.machine = ST.params.machine || "rzgenie";
+    };
+
     var get_command_ = function( type, file ) {
 
-        var lay = params_.layout ? ' --layout=' + params_.layout : "";
+        var lay = ST.params.layout ? ' --layout=' + ST.params.layout : "";
         return '/usr/gapps/wf/web/spot/virtenv/bin/python /usr/gapps/wf/web/spot/spot.py ' + type  + ' ' + file + lay;
     };
 
     var ajax_ = function( file, type, success ) {
+
+        init_();
+        
+        success = success || handle_success_;
 
         var spotArgs = " summary data/lulesh";
         spotArgs = " summary /usr/gapps/wf/web/spot/data/lulesh";
@@ -19,7 +33,7 @@ ST.CallSpot = function() {
             url:     'https://rzlc.llnl.gov/lorenz/lora/lora.cgi/jsonp',
             data:   {
                 'via'    : 'post',
-                'route'  : '/command/' + params_.machine,      //  rzgenie
+                'route'  : '/command/' + ST.params.machine,      //  rzgenie
                 'command': command
             }
         }).done( success ).error( handle_error_ );
@@ -28,6 +42,7 @@ ST.CallSpot = function() {
 
     var objs_by_run_id_ = {};
 
+    //  this is the default success handler
     var handle_success_ = function(value) {
 
         if( value.error !== "" ) {
@@ -46,7 +61,7 @@ ST.CallSpot = function() {
 
             for (var key in parsed) {
 
-                if (newp.length < params_.max) {
+                if (newp.length < ST.params.max) {
 
                     var valid_obj = parsed[key];
                     var date = 1539283462;
@@ -105,7 +120,7 @@ ST.CallSpot = function() {
 
         var run_id = $(this).attr('run_id');
         var subject = $(this).html().toLowerCase();
-        var file = get_file_();
+        var file = ST.Utility.get_file();
         var key = objs_by_run_id_[run_id].key;
         var appended = file + '/' + key;
 
@@ -119,7 +134,7 @@ ST.CallSpot = function() {
 
         } else if( subject === "walltime" ) {
 
-            var command = get_command_("durations", appended ) + "&machine=" + params_.machine;
+            var command = get_command_("durations", appended ) + "&machine=" + ST.params.machine;
 
             window.open('../sankey/index.html?command=' + command );
 
@@ -138,67 +153,8 @@ ST.CallSpot = function() {
     };
 
 
-    var help_icon_ = function( file, params ) {
+    ST.params = ST.params || {};
 
-        Vue.component('help-section', {
-            data: function () {
-                return {
-                    seen: false,
-                    max: params.max,
-                    file: file,
-                    machine: params.machine,
-                    layout: params.layout
-                }
-            },
-            template: '<div>' +
-                '<div class="help_icon" v-on:click="seen=(!seen)">?</div>\
-                <div class="help_body" v-if="seen">\
-                Using file: <span class="txt">{{ file }}</span>\
-                <br>Using max: <span class="max">{{ max }}</span>\
-                <br>Using machine: <span class="machine">{{ machine }}</span>\
-                <br>Using layout: <span class="machine">{{ layout }}</span>\
-                <br>You can specify the <b>s</b>pot <b>f</b>ile with sf= in the url bar.\
-                <br>You can specify the <b>max</b> with max= in the url bar.\
-                <br>You can specify the <b>machine</b> with machine= in the url bar. \
-                <br>You can specify the <b>layout</b> with layout= in the url bar. \
-                </div> ' +
-            '</div>',
-            methods: {
-            }
-        });
-
-        //  Need to find the dc.js end event handler.
-        new Vue({
-            el: "#help_icon"
-        });
-    };
-
-
-    var params_ = {};
-
-    var get_file_ = function() {
-
-        var file = ST.Utility.get_param('sf');
-        var default_file = "/usr/gapps/wf/web/spot/data/lulesh_maximal";
-
-        return file || default_file;
-    };
-
-    $(document).ready( function() {
-
-        params_.max = ST.Utility.get_param('max');
-        params_.machine = ST.Utility.get_param('machine');
-        params_.layout = ST.Utility.get_param('layout');
-
-        params_.max = params_.max || 18000;
-        params_.machine = params_.machine || "rzgenie";
-
-        var file = get_file_();
-
-        help_icon_(file, params_ );
-
-        ST.CallSpot.ajax(file, 'summary', handle_success_ );
-    });
 
     return {
         drilldown: drill_down_,
