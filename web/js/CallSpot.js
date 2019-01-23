@@ -12,21 +12,21 @@ ST.CallSpot = function() {
         ST.params.machine = ST.params.machine || "rzgenie";
     };
 
-    var get_command_ = function( type, file ) {
+    var get_command_ = function( type, file, lay ) {
 
-        var lay = ST.params.layout ? ' --layout=' + ST.params.layout : "";
         return '/usr/gapps/wf/web/spot/virtenv/bin/python /usr/gapps/wf/web/spot/spot.py ' + type  + ' ' + file + lay;
     };
 
-    var ajax_ = function( file, type, success ) {
+    var ajax_ = function( file, type, success, layout ) {
 
         init_();
-        
+
         success = success || handle_success_;
 
         var spotArgs = " summary data/lulesh";
         spotArgs = " summary /usr/gapps/wf/web/spot/data/lulesh";
-        var command = get_command_( type, file );
+
+        var command = get_command_( type, file, layout );
 
         $.ajax({
             dataType:'jsonp',
@@ -134,7 +134,7 @@ ST.CallSpot = function() {
 
         } else if( subject === "walltime" ) {
 
-            var command = get_command_("durations", appended ) + "&machine=" + ST.params.machine;
+            var command = get_command_("durations", appended, "" ) + "&machine=" + ST.params.machine;
 
             window.open('../sankey/index.html?command=' + command );
 
@@ -148,7 +148,7 @@ ST.CallSpot = function() {
 
                 window.open( url );
                 // now go to the URL that BE tells us to go to.
-            });
+            }, "");
         }
     };
 

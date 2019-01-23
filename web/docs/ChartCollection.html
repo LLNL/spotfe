@@ -742,8 +742,9 @@ $(<span class="hljs-built_in">document</span>).ready( <span class="hljs-function
     <span class="hljs-keyword">var</span> file = ST.Utility.get_file();
 
     help_icon_(file, ST.params );
+    <span class="hljs-keyword">var</span> layout = ST.params.layout ? <span class="hljs-string">' --layout='</span> + ST.params.layout : <span class="hljs-string">""</span>;
 
-    ST.CallSpot.ajax(file, <span class="hljs-string">'summary'</span>);
+    ST.CallSpot.ajax(file, <span class="hljs-string">'summary'</span>, <span class="hljs-literal">undefined</span>, layout);
 });</pre></div></div>
             
         </li>
