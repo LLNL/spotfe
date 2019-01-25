@@ -2,9 +2,12 @@
 
 $(document).ready(  function() {
 
-    ST.CallSpot.ajax("180926-171347_114610_dFcHlCXdiuQG.cali", 'durations2', init );
+    var dir = "/usr/gapps/wf/web/spot/data/lulesh_minimal/";
+
+    ST.CallSpot.ajax( dir + "180926-171347_114610_dFcHlCXdiuQG.cali", 'durations2', init );
 
 });
+
 
 function setSeriesList(parentPath) {
     let node = stratData
@@ -46,8 +49,9 @@ var init = function( dat ) {
         $('body').append( '<span class="error">' + dat.error + '</span>');
     }
 
-    const data = {};// put data from server here obtained from "spot.py durations2 <filepath1> [filepath2]*"
+    const data = JSON.parse(dat.output.command_out);// put data from server here obtained from "spot.py durations2 <filepath1> [filepath2]*"
 
+    console.dir(data);
 
 // stratify incoming data
     const stratFunc = d3.stratify()
