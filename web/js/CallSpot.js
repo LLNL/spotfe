@@ -14,6 +14,8 @@ ST.CallSpot = function() {
 
     var get_command_ = function( type, file, lay ) {
 
+        lay = lay || "";
+
         return '/usr/gapps/wf/web/spot/virtenv/bin/python /usr/gapps/wf/web/spot/spot.py ' + type  + ' ' + file + lay;
     };
 
