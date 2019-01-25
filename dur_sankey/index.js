@@ -1,46 +1,20 @@
 
+var dirme = function( cali ) {
+
+    var dir = "/usr/gapps/wf/web/spot/data/lulesh_minimal/";
+    return dir + cali + ' ';
+};
 
 $(document).ready(  function() {
 
-    var dir = "/usr/gapps/wf/web/spot/data/lulesh_minimal/";
+    var dirs = dirme("180926-171347_114610_dFcHlCXdiuQG.cali") +
+                dirme("180926-171354_114737_llIMtdhrtFBl.cali") +
+                dirme("180926-171351_45280_H6AUaDgoCQ0n.cali") +
+                dirme("180926-171348_171822_1yPFpzkcG7G3.cali");
 
-    ST.CallSpot.ajax( dir + "180926-171347_114610_dFcHlCXdiuQG.cali", 'durations2', init );
+    ST.CallSpot.ajax( dirs, 'durations2', init );
 
 });
-
-
-function setSeriesList(parentPath) {
-    let node = stratData
-    // set node to parentpath node by walking path
-    parentPath.split('/').slice(1).forEach(childId => node = node.children.find(node => node.id == childId))
-
-    //format children nodes for display
-    const seriesList = node.children.map(
-        child => ({
-            name: child.id + (child.height ? '*' : '')
-            , data: child.data.durationList.map(
-                duration => ({
-                    y: duration
-                    , drilldown: child.height
-                    , key: child.data.funcPath
-                }))
-        })
-    )
-    // sets series on chart
-    while (myChart.series.length > 0) myChart.series[0].remove(false)
-    for (let series of seriesList) myChart.addSeries(series, false)
-    myChart.redraw()
-}
-
-function onDrilldown(event) {
-    if (event.points) {  // x-axis date clicked
-        console.log('event', event)
-        setSankey(event.point.category)
-    } else { // chart area clicked
-        const path = event.point.options.key
-        setPath(path)
-    }
-}
 
 
 var init = function( dat ) {
@@ -59,6 +33,39 @@ var init = function( dat ) {
         .parentId(d => d.funcPath.split("/").slice(-2, -1))
     const stratData = stratFunc(data.durationLists)
 
+
+    function setSeriesList(parentPath) {
+        let node = stratData
+        // set node to parentpath node by walking path
+        parentPath.split('/').slice(1).forEach(childId => node = node.children.find(node => node.id == childId))
+
+        //format children nodes for display
+        const seriesList = node.children.map(
+            child => ({
+                name: child.id + (child.height ? '*' : '')
+                , data: child.data.durationList.map(
+                    duration => ({
+                        y: duration
+                        , drilldown: child.height
+                        , key: child.data.funcPath
+                    }))
+            })
+        )
+        // sets series on chart
+        while (myChart.series.length > 0) myChart.series[0].remove(false)
+        for (let series of seriesList) myChart.addSeries(series, false)
+        myChart.redraw()
+    }
+
+    function onDrilldown(event) {
+        if (event.points) {  // x-axis date clicked
+            console.log('event', event)
+            setSankey(event.point.category)
+        } else { // chart area clicked
+            const path = event.point.options.key
+            setPath(path)
+        }
+    }
 
 // elm init from main.js
     let app = Elm.Main.init(
