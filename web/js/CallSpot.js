@@ -108,17 +108,38 @@ ST.CallSpot = function() {
 
     //  Certain events like filtering unbind the buttons, so need to rebind.
     var bind_ = function() {
-       $('.dc-chart .myButton').unbind('click').bind('click', drill_down_ );
+       $('.dc-table-row .drilldown').unbind('click').bind('click', drill_down_ );
     };
 
     var handle_error_ = function() {
 
         var link = "https://rzlc.llnl.gov/";
-        ST.Utility.error('Could not contact rzlc.llnl.gov  Make sure you are already authenticated with RZ.  For example <a target="_blank" href="' + link + '">RZ Link</a>');
+        ST.Utility.error('Could not contact rzlc.llnl.gov  Make sure you are already authenticated with RZ.  ' +
+            'For example <a target="_blank" href="' + link + '">RZ Link</a>');
     };
 
 
+    var get_keys_ = function() {
+
+        var str = "";
+
+        $('.dc-table-row .key').each( function() {
+
+            str += $(this).html() + ',';
+        });
+
+        return str;
+    };
+
     var drill_down_ = function() {
+
+        if( !$(this).hasClass('drilldown')) {
+            //  compare button
+            var keys = get_keys_();
+            window.open('../dur_sankey/?calis=' + keys);
+
+            return false;
+        }
 
         var run_id = $(this).attr('run_id');
         var subject = $(this).html().toLowerCase();

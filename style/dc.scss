@@ -482,3 +482,18 @@ body .dc-chart g.row text {
         cursor: pointer;
     }
 }
+
+.bottom_table {
+    position: relative;
+
+    .compare_button {
+        position: absolute;
+        top: 30px;
+        right: -5px;
+        z-index: 10;
+    }
+
+    .hidden {
+        display: none;
+    }
+}

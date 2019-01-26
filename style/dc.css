@@ -340,4 +340,14 @@ body .dc-chart g.row text {
   border-top: 7px solid #555555;
   cursor: pointer; }
 
+.bottom_table {
+  position: relative; }
+  .bottom_table .compare_button {
+    position: absolute;
+    top: 30px;
+    right: -5px;
+    z-index: 10; }
+  .bottom_table .hidden {
+    display: none; }
+
 /*# sourceMappingURL=dc.css.map */

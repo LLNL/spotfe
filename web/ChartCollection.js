@@ -209,10 +209,12 @@ var RenderChartCollection = function( the_data, layout_spec ) {
             for (var x in d.drilldown) {
 
                 var but = d.drilldown[x];
-                buts += '<div run_id="' + d.run_id + '" class="myButton">' + but.toUpperCase() + '</div>';
+                buts += '<div run_id="' + d.run_id + '" class="drilldown myButton">' + but.toUpperCase() + '</div>';
             }
 
-            return buts;
+            var hidden = '<div class="hidden key">' + d.key + '</div>';
+
+            return buts + hidden;
         }
     });
 
