@@ -29,6 +29,7 @@ ST.CallSpot = function() {
         spotArgs = " summary /usr/gapps/wf/web/spot/data/lulesh";
 
         var command = get_command_( type, file, layout );
+        console.log(command);
 
         $.ajax({
             dataType:'jsonp',
@@ -122,10 +123,13 @@ ST.CallSpot = function() {
     var get_keys_ = function() {
 
         var str = "";
+        var count = 0;
 
         $('.dc-table-row .key').each( function() {
 
-            str += $(this).html() + ',';
+            if( count++ < 10 ) {
+                str += $(this).html() + ',';
+            }
         });
 
         return str;
@@ -136,7 +140,9 @@ ST.CallSpot = function() {
         if( !$(this).hasClass('drilldown')) {
             //  compare button
             var keys = get_keys_();
-            window.open('../dur_sankey/?calis=' + keys);
+            var machine = "machine=" + ST.params.machine + "&";
+
+            window.open('../dur_sankey/?' + machine + 'calis=' + keys);
 
             return false;
         }

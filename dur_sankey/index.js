@@ -5,6 +5,10 @@ var dirme = function( cali ) {
     return dir + cali + ' ';
 };
 
+var get_dirs_ = function() {
+
+};
+
 $(document).ready(  function() {
 
     var dirs = dirme("180926-171347_114610_dFcHlCXdiuQG.cali") +
@@ -14,6 +18,7 @@ $(document).ready(  function() {
 
     ST.CallSpot.ajax( dirs, 'durations2', init );
 
+    //ST.CallSpot.ajax("/usr/gapps/wf/web/spot/data/lulesh_maximal", 'summary');
 });
 
 

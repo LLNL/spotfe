@@ -107,7 +107,6 @@ var RenderChartCollection = function( the_data, layout_spec ) {
             } else {
                 console.log('Sorry.  Viz type viz=' + viz + ' is not supported.');
             }
-
         }
 
     } else {
