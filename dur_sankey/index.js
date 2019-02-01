@@ -7,7 +7,17 @@ var dirme = function( cali ) {
 
 var get_dirs_ = function() {
 
+    var calis = localStorage.getItem('calis');
+    var spi = calis.split(' ');
+
+    spi = spi.splice(0,38);
+    calis = spi.join(' ');
+    return calis;
+
+    //var calis = ST.Utility.get_param("calis");
+    //return calis;
 };
+
 
 $(document).ready(  function() {
 
@@ -16,7 +26,11 @@ $(document).ready(  function() {
                 dirme("180926-171351_45280_H6AUaDgoCQ0n.cali") +
                 dirme("180926-171348_171822_1yPFpzkcG7G3.cali");
 
-    ST.CallSpot.ajax( dirs, 'durations2', init );
+    dirs = get_dirs_();
+    console.dir(dirs);
+
+    //return false;
+    ST.CallSpot.ajax( ' ' + dirs, 'durations2', init );
 
     //ST.CallSpot.ajax("/usr/gapps/wf/web/spot/data/lulesh_maximal", 'summary');
 });

@@ -33,6 +33,7 @@ ST.CallSpot = function() {
 
         $.ajax({
             dataType:'jsonp',
+            type: "POST",
             url:     'https://rzlc.llnl.gov/lorenz/lora/lora.cgi/jsonp',
             data:   {
                 'via'    : 'post',
@@ -127,12 +128,12 @@ ST.CallSpot = function() {
 
         $('.dc-table-row .key').each( function() {
 
-            if( count++ < 10 ) {
-                str += $(this).html() + ',';
-            }
+            //if( count++ < 330 ) {
+                str += ' /usr/gapps/wf/web/spot/data/lulesh_maximal/' + $(this).html();
+            //}
         });
 
-        return str;
+        return str.substr(1);
     };
 
     var drill_down_ = function() {
@@ -141,8 +142,9 @@ ST.CallSpot = function() {
             //  compare button
             var keys = get_keys_();
             var machine = "machine=" + ST.params.machine + "&";
+            localStorage.setItem('calis', keys);
 
-            window.open('../dur_sankey/?' + machine + 'calis=' + keys);
+            window.open('../dur_sankey/?' + machine + 'calis=local');
 
             return false;
         }
