@@ -2,7 +2,7 @@
 var dirme = function( cali ) {
 
     var dir = "/usr/gapps/wf/web/spot/data/lulesh_minimal/";
-    return dir + cali + ' ';
+    return dir + " " + cali + ' ';
 };
 
 var get_dirs_ = function() {
@@ -10,7 +10,7 @@ var get_dirs_ = function() {
     var calis = localStorage.getItem('calis');
     var spi = calis.split(' ');
 
-    spi = spi.splice(0,38);
+    spi = spi.splice(0,68);
     calis = spi.join(' ');
     return calis;
 
@@ -29,8 +29,10 @@ $(document).ready(  function() {
     dirs = get_dirs_();
     console.dir(dirs);
 
-    //return false;
-    ST.CallSpot.ajax( ' ' + dirs, 'durations2', init );
+    var dir = "/usr/gapps/wf/web/spot/data/lulesh_maximal/";
+    var predir = " --directory " + dir + " ";
+
+    ST.CallSpot.ajax( predir + dirs, 'durations2', init );
 
     //ST.CallSpot.ajax("/usr/gapps/wf/web/spot/data/lulesh_maximal", 'summary');
 });

@@ -128,9 +128,8 @@ ST.CallSpot = function() {
 
         $('.dc-table-row .key').each( function() {
 
-            //if( count++ < 330 ) {
-                str += ' /usr/gapps/wf/web/spot/data/lulesh_maximal/' + $(this).html();
-            //}
+            var maximal = '/usr/gapps/wf/web/spot/data/lulesh_maximal/';
+            str += ' ' + $(this).html();
         });
 
         return str.substr(1);
