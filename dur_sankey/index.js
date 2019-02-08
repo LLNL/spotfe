@@ -29,7 +29,9 @@ $(document).ready(  function() {
     dirs = get_dirs_();
     console.dir(dirs);
 
-    var dir = "/usr/gapps/wf/web/spot/data/lulesh_maximal/";
+    //var dir = "/usr/gapps/wf/web/spot/data/lulesh_maximal/";
+
+    var dir = ST.Utility.get_param('directory');
     var predir = " --directory " + dir + " ";
 
     ST.CallSpot.ajax( predir + dirs, 'durations2', init );

@@ -43,7 +43,7 @@ ST.Utility = function() {
     var get_file_ = function() {
 
         var file = ST.Utility.get_param('sf');
-        var default_file = "/usr/gapps/wf/web/spot/data/lulesh_maximal";
+        var default_file = "/usr/gapps/spot/datasets/lulesh2small"; // "/usr/gapps/wf/web/spot/data/lulesh_maximal";
 
         return file || default_file;
     };

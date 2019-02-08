@@ -128,7 +128,6 @@ ST.CallSpot = function() {
 
         $('.dc-table-row .key').each( function() {
 
-            var maximal = '/usr/gapps/wf/web/spot/data/lulesh_maximal/';
             str += ' ' + $(this).html();
         });
 
@@ -143,7 +142,9 @@ ST.CallSpot = function() {
             var machine = "machine=" + ST.params.machine + "&";
             localStorage.setItem('calis', keys);
 
-            window.open('../dur_sankey/?' + machine + 'calis=local');
+            var directory = ST.Utility.get_file();
+
+            window.open('../dur_sankey/?' + machine + 'calis=local&directory=' + directory);
 
             return false;
         }
