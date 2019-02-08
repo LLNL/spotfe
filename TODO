@@ -1,12 +1,8 @@
 TODO LIST
 =================================================
-- default to the new data (not the old one)
-- Pass actual directory, don't use the Stub.
-- Test enhanced Layout
-8.  Find a way to do in-order sorting.  Investigate: Is there an option for this?
-
-9.  At somepoint, I'll have to get back to Ravel.
-10.  Icons... someday.
+- Find a way to do in-order sorting.  Investigate: Is there an option for this?
+- Ravel with new API integration
+- Icons
 
 
 

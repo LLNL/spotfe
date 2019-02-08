@@ -932,9 +932,13 @@ var ravel = {
 
   $(document).ready(  function() {
 
-    ST.CallSpot.ajax('mpitrace', "");
+    var render_ = function( data ) {
 
-    //  setTimeout: just temporary.
-      //  TODO: get rid of setTimeout
+      var outer = JSON.parse(data.output.command_out);
+      console.dir(outer);
+      
       RV.ravelView.render( "" , 0);
+    };
+
+    ST.CallSpot.ajax('mpitrace', "", render_ );
   });

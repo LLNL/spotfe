@@ -100,6 +100,7 @@ ST.CallSpot = function() {
             //console.dir(ST.ReturnedDataStub.layout);
 
             ST.layout_used = parsed_whole.layout;
+            console.dir( ST.layout_used );
 
             if( window.RenderChartCollection ) {
                 RenderChartCollection(newp, parsed_whole.layout);  //  ST.ReturnedDataStub.layout); //
