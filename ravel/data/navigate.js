@@ -1,4 +1,5 @@
-var navigate = {
+var navigate = {};
+var navigate_old = {
     "traceinfo": {
         "entities": 9,
         "entity_start": 0,

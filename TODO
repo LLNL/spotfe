@@ -1,7 +1,8 @@
 TODO LIST
 =================================================
-- Find a way to do in-order sorting.  Investigate: Is there an option for this?
-- Ravel with new API integration
+- Find a way to do in-order sorting.
+    * Investigate: Is there an option for this?
+    * Can we specify a sort function?
 - Icons
 
 
@@ -20,6 +21,7 @@ DONE
 5.  Get dur_sankey working for any filepathX.cali
 6.  Make Spot 2 compare button and extract all runIDs/filepathX.cali
 7.  Integrate Spot 2 cali extraction with the new dur_sankey project page.
+8.  Ravel with new API integration, now able to make post request ad handle response, use response to show graph.
 
 
 

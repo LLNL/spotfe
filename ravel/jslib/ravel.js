@@ -936,7 +936,9 @@ var ravel = {
 
       var outer = JSON.parse(data.output.command_out);
       console.dir(outer);
-      
+
+      navigate = outer;
+
       RV.ravelView.render( "" , 0);
     };
 
