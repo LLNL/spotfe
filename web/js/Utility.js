@@ -48,9 +48,20 @@ ST.Utility = function() {
         return file || default_file;
     };
 
+    var init_params_ = function() {
+
+        ST.params = ST.params || {};
+        ST.params.max = ST.Utility.get_param('max');
+        ST.params.machine = ST.Utility.get_param('machine');
+        ST.params.layout = ST.Utility.get_param('layout');
+
+        ST.params.max = ST.params.max || 18000;
+        ST.params.machine = ST.params.machine || "rzgenie";
+    };
 
     return {
         validate_cali_object: validate_cali_object_,
+        init_params: init_params_,
         get_file: get_file_,
         get_param: get_param_,
         error: error_

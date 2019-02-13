@@ -367,6 +367,7 @@ var help_icon_ = function( file, params ) {
 $(document).ready( function() {
 
     var file = ST.Utility.get_file();
+    ST.Utility.init_params();
 
     help_icon_(file, ST.params );
     var layout = ST.params.layout ? ' --layout=' + ST.params.layout : "";

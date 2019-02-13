@@ -2,16 +2,6 @@ var ST = ST || {};
 
 ST.CallSpot = function() {
 
-    var init_ = function() {
-        ST.params = ST.params || {};
-        ST.params.max = ST.Utility.get_param('max');
-        ST.params.machine = ST.Utility.get_param('machine');
-        ST.params.layout = ST.Utility.get_param('layout');
-
-        ST.params.max = ST.params.max || 18000;
-        ST.params.machine = ST.params.machine || "rzgenie";
-    };
-
     var get_command_ = function( type, file, lay ) {
 
         lay = lay || "";
@@ -21,7 +11,7 @@ ST.CallSpot = function() {
 
     var ajax_ = function( file, type, success, layout ) {
 
-        init_();
+        ST.Utility.init_params();
 
         success = success || handle_success_;
 
