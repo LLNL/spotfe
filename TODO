@@ -1,6 +1,11 @@
+RECENTLY DONE:
+- Allow the person to specify an Endpoint to call, an input box for dan laney.
+- Fixed Title overlapping Graph Bug.
+
+
 TODO LIST
 =================================================
-- Allow the person to specify an Endpoint to call, an input box for dan laney.
+- Host on Both RZ and CZ.
 - Labels
 - Group By.
 - be able to specify which ravel file to get (passing the run_id through)
@@ -9,7 +14,6 @@ TODO LIST
     * Investigate: Is there an option for this?
     * Can we specify a sort function?
 - Icons
-- Host on Both RZ and CZ.
 
 
 https://lc.llnl.gov/spot/dcvis/web/?sf=/usr/gapps/spot/datasets/lulesh2small&layout=/usr/gapps/spot/datasets/enhanced_layout.json

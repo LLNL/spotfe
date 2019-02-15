@@ -31,6 +31,7 @@ $font_sans_serif: sans-serif;
 
 div.dc-chart {
     float: left;
+    padding-top: 30px;
 }
 
 .row:nth-child(1) {
@@ -47,7 +48,7 @@ div.dc-chart {
 
     .top_left {
         position: absolute;
-        top: -20px;
+        top: 10px;
         left: 0;
     }
 

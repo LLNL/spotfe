@@ -8,7 +8,7 @@ ST.LayoutAugmenterModel = function() {
 
             var mod = model[x];
             mod.width = 470;
-            mod.height = 400;
+            mod.height = 370;
 
             if( mod.viz === "BasicLineChart" ) {
                 mod.height = 320;

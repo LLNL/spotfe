@@ -3,7 +3,8 @@
   stroke-opacity: 0.5; }
 
 div.dc-chart {
-  float: left; }
+  float: left;
+  padding-top: 30px; }
 
 .row:nth-child(1) .dc-chart {
   height: 410px;
@@ -13,7 +14,7 @@ div.dc-chart {
   position: relative; }
   .dc-chart .top_left {
     position: absolute;
-    top: -20px;
+    top: 10px;
     left: 0; }
   .dc-chart rect.bar {
     stroke: none;
