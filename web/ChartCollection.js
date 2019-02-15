@@ -338,7 +338,8 @@ var help_icon_ = function( file, params ) {
                 max: params.max,
                 file: file,
                 machine: params.machine,
-                layout: params.layout
+                layout: params.layout,
+                get_rundata_url: params.get_rundata_url
             }
         },
         template: '<div>' +
@@ -348,10 +349,12 @@ var help_icon_ = function( file, params ) {
         <br>Using max: <span class="max">{{ max }}</span>\
         <br>Using machine: <span class="machine">{{ machine }}</span>\
         <br>Using layout: <span class="machine">{{ layout }}</span>\
+        <br>Using get_rundata_url URL: <span class="machine">{{ get_rundata_url }}</span>\
         <br>You can specify the <b>s</b>pot <b>f</b>ile with sf= in the url bar.\
         <br>You can specify the <b>max</b> with max= in the url bar.\
         <br>You can specify the <b>machine</b> with machine= in the url bar. \
         <br>You can specify the <b>layout</b> with layout= in the url bar. \
+        <br>You can specify the <b>get_rundata_url</b> with get_rundata_url= in the url bar.\
         </div> ' +
         '</div>',
         methods: {

@@ -51,12 +51,14 @@ ST.Utility = function() {
     var init_params_ = function() {
 
         ST.params = ST.params || {};
+        ST.params.get_rundata_url = ST.Utility.get_param('get_rundata_url');
         ST.params.max = ST.Utility.get_param('max');
         ST.params.machine = ST.Utility.get_param('machine');
         ST.params.layout = ST.Utility.get_param('layout');
 
         ST.params.max = ST.params.max || 18000;
         ST.params.machine = ST.params.machine || "rzgenie";
+        ST.params.get_rundata_url = ST.params.get_rundata_url || 'https://rzlc.llnl.gov/lorenz/lora/lora.cgi/jsonp';
     };
 
     return {

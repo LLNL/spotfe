@@ -1,10 +1,15 @@
 TODO LIST
 =================================================
+- Allow the person to specify an Endpoint to call, an input box for dan laney.
+- Labels
+- Group By.
+- be able to specify which ravel file to get (passing the run_id through)
+- Get Ravel to work with new input files
 - Find a way to do in-order sorting.
     * Investigate: Is there an option for this?
     * Can we specify a sort function?
 - Icons
-
+- Host on Both RZ and CZ.
 
 
 https://lc.llnl.gov/spot/dcvis/web/?sf=/usr/gapps/spot/datasets/lulesh2small&layout=/usr/gapps/spot/datasets/enhanced_layout.json
@@ -24,4 +29,31 @@ DONE
 8.  Ravel with new API integration, now able to make post request ad handle response, use response to show graph.
 
 
+Future features:
+1. Allow user to specify columns with some UI widget
+2. Chart overlap issue
+3. Ability to overwrite column names on table (aliases)
 
+
+
+
+
+
+
+
+
+Error reporting feature:
+ was helping Dan Laney through using the Spot 2.0 page, I started him at this URL
+
+https://lc.llnl.gov/spot/dcvis/web/?sf=/usr/gapps/spot/datasets/lulesh2small&layout=/usr/gapps/spot/datasets/enhanced_layout.json
+
+First he got the “log in to the RZ” message, which confuses people, while still being a good error message. It would be nice if we could have an RZ and a CZ hosting.
+
+Then he got a “Lorenz Error, failed to run command…” message, which came from him not having an account on Genie. This was easily solvable, but it might be nice to add warnings like
+“If you don’t have an account on [whatever the specified machine was], try picking a machine you have access to, like [the current URL]&machine=rzslic,” essentially debugging messages. Low priority, but useful.
+
+Also really nice work on the error messages, it was possible to talk Dan through a session over Jabber pretty easily, that’s paying dividends.
+
+Best,
+
+David P

@@ -700,7 +700,8 @@ $.fn.ArrowFunctions = <span class="hljs-function"><span class="hljs-keyword">fun
                 <span class="hljs-attr">max</span>: params.max,
                 <span class="hljs-attr">file</span>: file,
                 <span class="hljs-attr">machine</span>: params.machine,
-                <span class="hljs-attr">layout</span>: params.layout
+                <span class="hljs-attr">layout</span>: params.layout,
+                <span class="hljs-attr">get_rundata_url</span>: params.get_rundata_url
             }
         },
         <span class="hljs-attr">template</span>: <span class="hljs-string">'&lt;div&gt;'</span> +
@@ -710,10 +711,12 @@ $.fn.ArrowFunctions = <span class="hljs-function"><span class="hljs-keyword">fun
         &lt;br&gt;Using max: &lt;span class="max"&gt;{{ max }}&lt;/span&gt;\
         &lt;br&gt;Using machine: &lt;span class="machine"&gt;{{ machine }}&lt;/span&gt;\
         &lt;br&gt;Using layout: &lt;span class="machine"&gt;{{ layout }}&lt;/span&gt;\
+        &lt;br&gt;Using get_rundata_url URL: &lt;span class="machine"&gt;{{ get_rundata_url }}&lt;/span&gt;\
         &lt;br&gt;You can specify the &lt;b&gt;s&lt;/b&gt;pot &lt;b&gt;f&lt;/b&gt;ile with sf= in the url bar.\
         &lt;br&gt;You can specify the &lt;b&gt;max&lt;/b&gt; with max= in the url bar.\
         &lt;br&gt;You can specify the &lt;b&gt;machine&lt;/b&gt; with machine= in the url bar. \
         &lt;br&gt;You can specify the &lt;b&gt;layout&lt;/b&gt; with layout= in the url bar. \
+        &lt;br&gt;You can specify the &lt;b&gt;get_rundata_url&lt;/b&gt; with get_rundata_url= in the url bar.\
         &lt;/div&gt; '</span> +
         <span class="hljs-string">'&lt;/div&gt;'</span>,
         <span class="hljs-attr">methods</span>: {

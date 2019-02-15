@@ -24,7 +24,7 @@ ST.CallSpot = function() {
         $.ajax({
             dataType:'jsonp',
             type: "POST",
-            url:     'https://rzlc.llnl.gov/lorenz/lora/lora.cgi/jsonp',
+            url: ST.params.get_rundata_url,
             data:   {
                 'via'    : 'post',
                 'route'  : '/command/' + ST.params.machine,      //  rzgenie
@@ -104,11 +104,21 @@ ST.CallSpot = function() {
        $('.dc-table-row .drilldown').unbind('click').bind('click', drill_down_ );
     };
 
-    var handle_error_ = function() {
+    var handle_error_ = function( data ) {
 
         var link = "https://rzlc.llnl.gov/";
-        ST.Utility.error('Could not contact rzlc.llnl.gov  Make sure you are already authenticated with RZ.  ' +
-            'For example <a target="_blank" href="' + link + '">RZ Link</a>');
+        console.dir(data);
+
+        var checks = '<li>Make sure you are already authenticated with RZ.  ' +
+            'For example, you can try logging in here: <a target="_blank" href="' + link + '">RZ Link</a></li>';
+
+        var pu = ST.Utility.get_param('get_rundata_url');
+
+        if( pu !== undefined ) {
+            checks += '<li>Is your <b>get_rundata_url</b> ('+ pu + ') correct? ';
+        }
+
+        ST.Utility.error('Could not contact rzlc.llnl.gov  Things to check: <ul>' + checks + '</ul>');
     };
 
 
