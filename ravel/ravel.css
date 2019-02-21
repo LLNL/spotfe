@@ -322,3 +322,12 @@ div.start_color {
     height: 800px;
     margin: 70px 0 0 0;
 }
+
+.error_statement {
+    color: red;
+    border: 1px solid red;
+    padding: 15px;
+    background-color: #ffdddd;
+	position: absolute;
+	z-index: 5;
+}

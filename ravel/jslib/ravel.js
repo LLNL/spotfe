@@ -934,6 +934,10 @@ var ravel = {
 
     var render_ = function( data ) {
 
+      if( data.error !== "" ) {
+          ST.Utility.error( data.error );
+      }
+
       var outer = JSON.parse(data.output.command_out);
       console.dir(outer);
 
@@ -942,5 +946,8 @@ var ravel = {
       RV.ravelView.render( "" , 0);
     };
 
-    ST.CallSpot.ajax('mpitrace', "", render_ );
+    var cali_key = " " + ST.Utility.get_param("cali_key");
+    cali_key = "";
+
+    ST.CallSpot.ajax('mpitrace' + cali_key, "", render_ );
   });

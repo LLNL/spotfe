@@ -162,7 +162,7 @@ ST.CallSpot = function() {
         if (subject === 'mpi') {
 
             //  http://localhost:8888
-            window.open('../ravel/index.html');
+            window.open('../ravel/index.html?cali_key=' + key );
 
         } else if( subject === "walltime" ) {
 
