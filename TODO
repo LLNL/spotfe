@@ -3,11 +3,13 @@ RECENTLY DONE:
 - Fixed Title overlapping Graph Bug.
 - A few minor error message modifications.
 - Pass cali_key to ravel page and prep it to be sent to BE.
+- First pass of reductionSplicer which reduces the events and messages to a certain step index for example 0 - 100.
 
 
 TODO LIST
 =================================================
 - Start providing support for larger MPI files: /g/g0/pascal/lulesh/lulesh_ravel_traces
+    * Support actual render, make sure it can handle the data render.
 - Labels -> instead of the cali key, try specifying the field based on the last sorted field on the spot 2 page.
 - Integration: send cali file run IDs.  this specifies which ravel trace to use by the cali file name.
     * This Integration won't be possible until we have those files in the proper location with the right cali filenames.

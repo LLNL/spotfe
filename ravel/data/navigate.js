@@ -1,5 +1,5 @@
-var navigate = {};
-var navigate_old = {
+var navigate_override = {};
+var navigate = {
     "traceinfo": {
         "entities": 9,
         "entity_start": 0,

@@ -932,22 +932,31 @@ var ravel = {
 
   $(document).ready(  function() {
 
-    var render_ = function( data ) {
+      var render_ = function( data ) {
 
-      if( data.error !== "" ) {
-          ST.Utility.error( data.error );
-      }
+          if( data.error !== "" ) {
+              ST.Utility.error( data.error );
+          }
 
-      var outer = JSON.parse(data.output.command_out);
-      console.dir(outer);
+          var outer = JSON.parse(data.output.command_out);
+          console.dir(outer);
 
-      navigate = outer;
+          navigate = outer;
 
-      RV.ravelView.render( "" , 0);
-    };
+          var reduced = ST.ReductionSplicer.get( navigate.traceinfo.events, navigate.traceinfo.messages );
 
-    var cali_key = " " + ST.Utility.get_param("cali_key");
-    cali_key = "";
+          navigate.traceinfo.events = reduced.events;
+          navigate.traceinfo.messages = reduced.messages;
 
-    ST.CallSpot.ajax('mpitrace' + cali_key, "", render_ );
+          //return false;
+          console.log('entities=' + navigate.traceinfo.entities);
+          //navigate.parent_events.splice(0,10);
+
+          RV.ravelView.render( "" , 0);
+      };
+
+      var cali_key = " " + ST.Utility.get_param("cali_key");
+      cali_key = " /g/g0/pascal/short_lulesh_x64_ravel.json";
+
+      ST.CallSpot.ajax('mpitrace' + cali_key, "", render_ );
   });
