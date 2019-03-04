@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spot 2 Documentation</title>
+    <style>
+        body {
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+        .inner {
+            margin: 0 auto;
+            width: 1024px;
+            padding: 25px;
+            border-left: 1px solid #e2e2e2;
+            border-right: 1px solid #e2e2e2;
+            background-color: white;
+        }
+        .url_params {
+            padding: 0 0 0 40px;
+        }
+        h2 {
+            margin-top: 100px;
+        }
+        h2:first-child {
+            margin-top: 0;
+        }
+        h3 {
+            margin: 30px 0 2px 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="inner">
+    <h2>URL Parameters</h2>
+
+    <div class="url_params">
+        <h3>max</h3>
+        <p>You can specify the <b>max</b> with max= in the url bar.  Max is the maximum number of iterations to make.  If you set it to 50, it will ignore all runs after the 50th run.  This helps with very large data sets.  A typical value for this might be max=18000
+        </p>
+
+        <h3>machine</h3>
+        <p>
+            You can specify the <b>machine</b> with machine= in the url bar.  Machine tells which machine to run it on.  You may need to run on a machine that you have access to.
+            Typical values for machine are rzgenie, rzslic, etc.
+        </p>
+
+        <h3>spot file</h3>
+        <p>
+            You can specify the <b>s</b>pot <b>f</b>ile with sf= in the url bar.
+            sf= is the directory/file sf is short for the dataset (short for Spot File)
+            <br><br>
+            Typical values for this are:
+        <pre>/usr/gapps/spot/datasets/lulesh2small</pre>
+        <pre>/usr/gapps/wf/web/spot/data/lulesh_maximal/</pre>
+        </p>
+
+        <h3>layout</h3>
+        <p>
+            You can specify the <b>layout</b> with layout= in the url bar.
+            The layout file tells the dashboard how to display it.
+            <br><br>
+            Typical values for this are:
+        <pre>/usr/gapps/spot/datasets/enhanced_layout.json</pre>
+        <pre></pre>
+        </p>
+
+        <h3>get_rundata_url</h3>
+        <p>
+            Using get_rundata_url URL: <span class="machine">https://rzlc.llnl.gov/lorenz/lora/lora.cgi/jsonp</span>
+
+            <br><br>You can specify the <b>get_rundata_url</b> with get_rundata_url= in the url bar.  The get_rundata_url tells where to make the back end call to.
+
+        </p>
+    </div>
+
+    <h2>DataSet</h2>
+    <p>The Data set is an array in this format for each object:
+    <pre>
+    0:
+    Cluster: "rzalastor"
+    Code Builder: "dzpolia"
+    Compiler Flags: "-O3"
+    Compiler Name: "Intel"
+    Compiler Version: "18.0.1.20171018"
+    FigureOfMerit: "0.050350"
+    Hostname: "rzalastor2"
+    Inclusive Duration: 20335
+    Iterations: "3700000"
+    Number of Regions: "6"
+    Problem Size: "1"
+    Region Balance: "2"
+    Region Cost: "1"
+    cali.caliper.version: "2.0.0-dev"
+    cali.experiment: "default"
+    date: "10/11/2018"
+    drilldown: (3) ["Jupyter", "mpi", "walltime"]
+    epoch_date: 1539283462
+    key: "190115-143834_166759_queH4QIMBwAG.cali"
+    run_id: "id_9268"
+
+    </pre>
+
+    </p>
+
+
+
+
+    <h2>Layout Spec</h2>
+    <p>Here is an example of a layout file, that shows what you can currently set: (currently: dimension and labels need to match for now, but later we’ll support differences).
+        This layout spec is designed to be extended, such that we can add x axis titles, etc.
+    <pre>
+    {
+    "charts": [
+        {
+            "dimension": "Compiler Name",
+            "title": "Compiler names + Compiler Version",
+            "viz": "PieChart"
+        },
+        {
+            "dimension": "Hostname",
+            "title": "Hostname",
+            "viz": "PieChart"
+        },
+        {
+            "dimension": "Cluster",
+            "title": "Cluster",
+            "viz": "PieChart"
+        },
+        {
+            "dimension": "Code Builder",
+            "title": "Code Builder",
+            "viz": "LeftHorizontalBarChart"
+        },
+        {
+            "dimension": "Compiler Flags",
+            "title": "Compiler Flags",
+            "viz": "PieChart"
+        },
+        {
+            "dimension": "Iterations",
+            "viz": "BarChart"
+        },
+        {
+            "dimension": "FigureOfMerit",
+            "viz": "BarChart"
+        },
+        {
+            "dimension": "Number of Regions",
+            "title": "Number of Regions",
+            "viz": "BarChart"
+        }
+    ],
+    "table": [
+        {
+            "dimension": "date",
+            "label": "date"
+        },
+        {
+            "dimension": "cali.caliper.version",
+            "label": "cali.caliper.version"
+        },
+        {
+            "dimension": "Problem Size",
+            "label": "Problem Size"
+        },
+        {
+            "dimension": "Region Balance",
+            "label": "Region Balance"
+        }
+    ]
+}
+</pre>
+
+    </p>
+
+
+
+    <h2>Getting Started</h2>
+    <p>
+        If someone wanted to start playing with the this, they could leave all the default parameters and simply pass in sf=/directory/to/your/data
+        You’ll need to make sure that the data is the same format as this: (/usr/gapps/spot/datasets/lulesh2small ) to begin with.
+
+        Then you can create your own data sets.  At that point, you’ll need to start specifying a layout file.
+
+    </p>
+
+
+    <h2></h2>
+    <p></p>
+
+
+    <h2></h2>
+    <p></p>
+
+
+    <h2></h2>
+    <p></p>
+
+
+    <h2></h2>
+    <p></p>
+
+
+    <h2></h2>
+    <p></p>
+
+
+
+</div>
+</body>
+</html>

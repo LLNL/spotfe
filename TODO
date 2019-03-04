@@ -1,13 +1,13 @@
 RECENTLY DONE:
-- Allow the person to specify an Endpoint to call, an input box for dan laney.
-- Fixed Title overlapping Graph Bug.
-- A few minor error message modifications.
-- Pass cali_key to ravel page and prep it to be sent to BE.
-- First pass of reductionSplicer which reduces the events and messages to a certain step index for example 0 - 100.
+- Updated some documentation
+- Send project manager the Documentation.
 
 
 TODO LIST
 =================================================
+- Allow them to specify command.
+- take a look at CFG code base
+    * what would it take to run it on LC, give it a try.
 - Start providing support for larger MPI files: /g/g0/pascal/lulesh/lulesh_ravel_traces
     * Support actual render, make sure it can handle the data render.
 - Labels -> instead of the cali key, try specifying the field based on the last sorted field on the spot 2 page.
@@ -21,6 +21,9 @@ TODO LIST
     * Investigate: Is there an option for this?
     * Can we specify a sort function?
 - Icons
+- tooltip suggestion from Tammy Dahlgren
+- Custom X-axis titles.
+
 
 
 https://lc.llnl.gov/spot/dcvis/web/?sf=/usr/gapps/spot/datasets/lulesh2small&layout=/usr/gapps/spot/datasets/enhanced_layout.json
@@ -39,6 +42,15 @@ DONE
 7.  Integrate Spot 2 cali extraction with the new dur_sankey project page.
 8.  Ravel with new API integration, now able to make post request ad handle response, use response to show graph.
 
+RECENTLY DONE:
+- Allow the person to specify an Endpoint to call, an input box for dan laney.
+- Fixed Title overlapping Graph Bug.
+- A few minor error message modifications.
+
+RAVEL:
+- Pass cali_key to ravel page and prep it to be sent to BE.
+- First pass of reductionSplicer which reduces the events and messages to a certain step index for example 0 - 100.
+
 
 Future features:
 1. Allow user to specify columns with some UI widget
@@ -48,6 +60,10 @@ Future features:
 
 
 
+lulesh_x27_ravel.js   lulesh_x27_ravel.json lulesh_x8_ravel.js
+aschwanden1@doc ~/Downloads: pwd
+/Users/aschwanden1/Downloads
+aschwanden1@doc ~/Downloads:
 
 
 
@@ -68,3 +84,8 @@ Also really nice work on the error messages, it was possible to talk Dan through
 Best,
 
 David P
+
+----------------------------
+HSTS error:
+if you write in browser "this is safe" then it will let you get past the HSTS error.
+

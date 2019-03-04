@@ -355,6 +355,8 @@ var help_icon_ = function( file, params ) {
         <br>You can specify the <b>machine</b> with machine= in the url bar. \
         <br>You can specify the <b>layout</b> with layout= in the url bar. \
         <br>You can specify the <b>get_rundata_url</b> with get_rundata_url= in the url bar.\
+        \
+        <br><a href="../web/doc.html" target="_blank">more...</a> \
         </div> ' +
         '</div>',
         methods: {
