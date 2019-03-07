@@ -9,11 +9,14 @@ ST.CallSpot = function() {
         return '/usr/gapps/wf/web/spot/virtenv/bin/python /usr/gapps/wf/web/spot/spot.py ' + type  + ' ' + file + lay;
     };
 
-    var ajax_ = function( file, type, success, layout ) {
+    var ajax_ = function( obj ) {
+
+        var file = obj.file;
+        var type = obj.type;
+        var success = obj.success || handle_success_;
+        var layout = obj.layout || "";
 
         ST.Utility.init_params();
-
-        success = success || handle_success_;
 
         var spotArgs = " summary data/lulesh";
         spotArgs = " summary /usr/gapps/wf/web/spot/data/lulesh";
@@ -173,14 +176,18 @@ ST.CallSpot = function() {
         } else {
 
             //  subject must be jupyter or walltime
-            ajax_(appended, "jupyter", function(data) {
+            ajax_({
+                file: appended,
+                type: "jupyter",
+                "success": function(data) {
 
-                var command_out = data.output.command_out;
-                var url = command_out;
+                    var command_out = data.output.command_out;
+                    var url = command_out;
 
-                window.open( url );
-                // now go to the URL that BE tells us to go to.
-            }, "");
+                    window.open(url);
+                    // now go to the URL that BE tells us to go to.
+                }
+            });
         }
     };
 

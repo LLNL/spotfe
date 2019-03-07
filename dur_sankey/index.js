@@ -34,9 +34,11 @@ $(document).ready(  function() {
     var dir = ST.Utility.get_param('directory');
     var predir = " --directory " + dir + " ";
 
-    ST.CallSpot.ajax( predir + dirs, 'durations2', init );
-
-    //ST.CallSpot.ajax("/usr/gapps/wf/web/spot/data/lulesh_maximal", 'summary');
+    ST.CallSpot.ajax({
+        file: predir + dirs,
+        type: 'durations2',
+        success: init
+    });
 });
 
 

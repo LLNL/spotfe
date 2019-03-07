@@ -958,5 +958,9 @@ var ravel = {
       var cali_key = " " + ST.Utility.get_param("cali_key");
       cali_key = " /g/g0/pascal/short_lulesh_x64_ravel.json";
 
-      ST.CallSpot.ajax('mpitrace' + cali_key, "", render_ );
+      ST.CallSpot.ajax({
+          file: 'mpitrace' + cali_key,
+          type: "",
+          success: render_
+      });
   });

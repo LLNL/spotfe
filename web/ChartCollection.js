@@ -377,5 +377,9 @@ $(document).ready( function() {
     help_icon_(file, ST.params );
     var layout = ST.params.layout ? ' --layout=' + ST.params.layout : "";
 
-    ST.CallSpot.ajax(file, 'summary', undefined, layout);
+    ST.CallSpot.ajax({
+        file: file,
+        type: 'summary',
+        layout: layout
+    });
 });

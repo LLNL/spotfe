@@ -751,7 +751,11 @@ $(<span class="hljs-built_in">document</span>).ready( <span class="hljs-function
     help_icon_(file, ST.params );
     <span class="hljs-keyword">var</span> layout = ST.params.layout ? <span class="hljs-string">' --layout='</span> + ST.params.layout : <span class="hljs-string">""</span>;
 
-    ST.CallSpot.ajax(file, <span class="hljs-string">'summary'</span>, <span class="hljs-literal">undefined</span>, layout);
+    ST.CallSpot.ajax({
+        <span class="hljs-attr">file</span>: file,
+        <span class="hljs-attr">type</span>: <span class="hljs-string">'summary'</span>,
+        <span class="hljs-attr">layout</span>: layout
+    });
 });</pre></div></div>
             
         </li>
