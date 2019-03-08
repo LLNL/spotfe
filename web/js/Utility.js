@@ -55,10 +55,12 @@ ST.Utility = function() {
         ST.params.max = ST.Utility.get_param('max');
         ST.params.machine = ST.Utility.get_param('machine');
         ST.params.layout = ST.Utility.get_param('layout');
+        ST.params.command = ST.Utility.get_param('command');
 
         ST.params.max = ST.params.max || 18000;
         ST.params.machine = ST.params.machine || "rzgenie";
         ST.params.get_rundata_url = ST.params.get_rundata_url || 'https://rzlc.llnl.gov/lorenz/lora/lora.cgi/jsonp';
+        ST.params.command = ST.params.command || "/usr/gapps/wf/web/spot/virtenv/bin/python /usr/gapps/wf/web/spot/spot.py";
     };
 
     return {

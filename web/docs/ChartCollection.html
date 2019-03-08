@@ -701,7 +701,8 @@ $.fn.ArrowFunctions = <span class="hljs-function"><span class="hljs-keyword">fun
                 <span class="hljs-attr">file</span>: file,
                 <span class="hljs-attr">machine</span>: params.machine,
                 <span class="hljs-attr">layout</span>: params.layout,
-                <span class="hljs-attr">get_rundata_url</span>: params.get_rundata_url
+                <span class="hljs-attr">get_rundata_url</span>: params.get_rundata_url,
+                <span class="hljs-attr">command</span>: params.command
             }
         },
         <span class="hljs-attr">template</span>: <span class="hljs-string">'&lt;div&gt;'</span> +
@@ -712,11 +713,13 @@ $.fn.ArrowFunctions = <span class="hljs-function"><span class="hljs-keyword">fun
         &lt;br&gt;Using machine: &lt;span class="machine"&gt;{{ machine }}&lt;/span&gt;\
         &lt;br&gt;Using layout: &lt;span class="machine"&gt;{{ layout }}&lt;/span&gt;\
         &lt;br&gt;Using get_rundata_url URL: &lt;span class="machine"&gt;{{ get_rundata_url }}&lt;/span&gt;\
+        &lt;br&gt;Using command: &lt;span class="machine"&gt;{{ command }}&lt;/span&gt;\
         &lt;br&gt;You can specify the &lt;b&gt;s&lt;/b&gt;pot &lt;b&gt;f&lt;/b&gt;ile with sf= in the url bar.\
         &lt;br&gt;You can specify the &lt;b&gt;max&lt;/b&gt; with max= in the url bar.\
         &lt;br&gt;You can specify the &lt;b&gt;machine&lt;/b&gt; with machine= in the url bar. \
         &lt;br&gt;You can specify the &lt;b&gt;layout&lt;/b&gt; with layout= in the url bar. \
         &lt;br&gt;You can specify the &lt;b&gt;get_rundata_url&lt;/b&gt; with get_rundata_url= in the url bar.\
+        &lt;br&gt;You can specify the &lt;b&gt;command&lt;/b&gt; with command= in the url bar.\
         \
         &lt;br&gt;&lt;a href="../web/doc.html" target="_blank"&gt;more...&lt;/a&gt; \
         &lt;/div&gt; '</span> +
@@ -749,12 +752,14 @@ $(<span class="hljs-built_in">document</span>).ready( <span class="hljs-function
     ST.Utility.init_params();
 
     help_icon_(file, ST.params );
+
     <span class="hljs-keyword">var</span> layout = ST.params.layout ? <span class="hljs-string">' --layout='</span> + ST.params.layout : <span class="hljs-string">""</span>;
 
     ST.CallSpot.ajax({
         <span class="hljs-attr">file</span>: file,
         <span class="hljs-attr">type</span>: <span class="hljs-string">'summary'</span>,
-        <span class="hljs-attr">layout</span>: layout
+        <span class="hljs-attr">layout</span>: layout,
+        <span class="hljs-attr">command</span>: ST.params.command
     });
 });</pre></div></div>
             

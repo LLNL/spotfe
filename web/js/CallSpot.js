@@ -2,11 +2,11 @@ var ST = ST || {};
 
 ST.CallSpot = function() {
 
-    var get_command_ = function( type, file, lay ) {
+    var get_command_ = function( type, file, lay, command ) {
 
         lay = lay || "";
 
-        return '/usr/gapps/wf/web/spot/virtenv/bin/python /usr/gapps/wf/web/spot/spot.py ' + type  + ' ' + file + lay;
+        return command + ' ' + type  + ' ' + file + lay;
     };
 
     var ajax_ = function( obj ) {
@@ -15,13 +15,14 @@ ST.CallSpot = function() {
         var type = obj.type;
         var success = obj.success || handle_success_;
         var layout = obj.layout || "";
+        var commandp = obj.command;
 
         ST.Utility.init_params();
 
         var spotArgs = " summary data/lulesh";
         spotArgs = " summary /usr/gapps/wf/web/spot/data/lulesh";
 
-        var command = get_command_( type, file, layout );
+        var command = get_command_( type, file, layout, commandp );
         console.log(command);
 
         $.ajax({

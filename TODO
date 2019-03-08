@@ -1,11 +1,14 @@
 RECENTLY DONE:
 - Updated some documentation
 - Send Tammy the Documentation.
+- Refactor ajax interface to allow for more parameters, in preparation for command option
+- Allow them to specify command.
 
 
 TODO LIST
 =================================================
-- Allow them to specify command.
+- Ravel: Expand entity lanes so that we can make it more vertically spaced.
+- put help in it's own vue file.
 - take a look at CFG code base
     * what would it take to run it on LC, give it a try.
 - Start providing support for larger MPI files: /g/g0/pascal/lulesh/lulesh_ravel_traces
@@ -16,7 +19,7 @@ TODO LIST
     * After that, I should be able to just pass in the location of the file with absolute directories: /g/g0/pascal/lulesh/lulesh_ravel_traces/xxxxx.cali
 - Error message: “If you don’t have an account on [whatever the specified machine was], try picking a machine you have access to, like [the current URL]&machine=rzslic,” essentially debugging messages. Low priority, but useful.
 - Host on Both RZ and CZ.
-- Group By.
+- Group By?  need to ask exactly what this is.
 - Find a way to do in-order sorting.
     * Investigate: Is there an option for this?
     * Can we specify a sort function?

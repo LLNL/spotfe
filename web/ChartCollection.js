@@ -339,7 +339,8 @@ var help_icon_ = function( file, params ) {
                 file: file,
                 machine: params.machine,
                 layout: params.layout,
-                get_rundata_url: params.get_rundata_url
+                get_rundata_url: params.get_rundata_url,
+                command: params.command
             }
         },
         template: '<div>' +
@@ -350,11 +351,13 @@ var help_icon_ = function( file, params ) {
         <br>Using machine: <span class="machine">{{ machine }}</span>\
         <br>Using layout: <span class="machine">{{ layout }}</span>\
         <br>Using get_rundata_url URL: <span class="machine">{{ get_rundata_url }}</span>\
+        <br>Using command: <span class="machine">{{ command }}</span>\
         <br>You can specify the <b>s</b>pot <b>f</b>ile with sf= in the url bar.\
         <br>You can specify the <b>max</b> with max= in the url bar.\
         <br>You can specify the <b>machine</b> with machine= in the url bar. \
         <br>You can specify the <b>layout</b> with layout= in the url bar. \
         <br>You can specify the <b>get_rundata_url</b> with get_rundata_url= in the url bar.\
+        <br>You can specify the <b>command</b> with command= in the url bar.\
         \
         <br><a href="../web/doc.html" target="_blank">more...</a> \
         </div> ' +
@@ -375,11 +378,13 @@ $(document).ready( function() {
     ST.Utility.init_params();
 
     help_icon_(file, ST.params );
+
     var layout = ST.params.layout ? ' --layout=' + ST.params.layout : "";
 
     ST.CallSpot.ajax({
         file: file,
         type: 'summary',
-        layout: layout
+        layout: layout,
+        command: ST.params.command
     });
 });
