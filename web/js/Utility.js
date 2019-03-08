@@ -1,5 +1,9 @@
 var ST = ST || {};
 
+ST.Default = {
+    COMMAND: "/usr/gapps/wf/web/spot/virtenv/bin/python /usr/gapps/wf/web/spot/spot.py"
+};
+
 ST.Utility = function() {
 
     function getUrlVars_() {
@@ -60,7 +64,7 @@ ST.Utility = function() {
         ST.params.max = ST.params.max || 18000;
         ST.params.machine = ST.params.machine || "rzgenie";
         ST.params.get_rundata_url = ST.params.get_rundata_url || 'https://rzlc.llnl.gov/lorenz/lora/lora.cgi/jsonp';
-        ST.params.command = ST.params.command || "/usr/gapps/wf/web/spot/virtenv/bin/python /usr/gapps/wf/web/spot/spot.py";
+        ST.params.command = ST.params.command || ST.Default.COMMAND;
     };
 
     return {

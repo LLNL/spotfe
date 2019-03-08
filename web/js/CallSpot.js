@@ -5,6 +5,7 @@ ST.CallSpot = function() {
     var get_command_ = function( type, file, lay, command ) {
 
         lay = lay || "";
+        command = command || ST.Default.COMMAND;
 
         return command + ' ' + type  + ' ' + file + lay;
     };

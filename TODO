@@ -2,7 +2,7 @@ RECENTLY DONE:
 - Updated some documentation
 - Send Tammy the Documentation.
 - Refactor ajax interface to allow for more parameters, in preparation for command option
-- Allow them to specify command.
+- Allow them to specify command dynamically in URL.
 
 
 TODO LIST
