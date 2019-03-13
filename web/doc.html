@@ -113,6 +113,27 @@
 
     </p>
 
+    <h2>DataSet Object Attributes</h2>
+    <p>
+        Most of the attributes above are arbitrary labels of things being plotted.  These labels need to match the layout file.  For example, "Compiler Name" in the layout spec as an
+        attribute of "dimension", must match the DataSet attribute "Compiler Name", etc.
+    </p>
+
+    <p>
+        The <b>Drilldown</b> option has a special function.  It will show the buttons listed in the drilldown array.  Currently, only 3 drilldowns are supported:
+        <Ul>
+            <li>Jupyter</li>
+            <li>MPI (Ravel traces)</li>
+            <li>Walltime</li>
+        </Ul>
+
+        Each of these will open a new window calling the backend with the cali-key to retrieve the correct data.
+    </p>
+
+    <p>
+        The <b>key</b> is the cali-key and it is used by some of the drilldown options, in order to tell the back end what charts to open up.
+    </p>
+
 
 
 

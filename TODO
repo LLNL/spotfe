@@ -3,13 +3,34 @@ RECENTLY DONE:
 - Send Tammy the Documentation.
 - Refactor ajax interface to allow for more parameters, in preparation for command option
 - Allow them to specify command dynamically in URL.
+- Get Optviz working:
+    * Cloned OptViz repo onto LC, and set up permissions script
+    * created new index.html file
+    * hacked some of the JS links
+    * figured out the right input files to use.
+    * and got it operational with some hacking: https://lc.llnl.gov/lorenz_base/dev/pascal/optvis/templates/
+
 
 
 TODO LIST
 =================================================
+- Write some stuff about the front end:
+    - visualizations that we can do
+    - the data and layout interface.
+- be able to run on CZ:
+    - default cz to cz jsonp
+    - default rz to rz jsonp
+- Work on Sorting, data needs to work with the following:
+    {"Compiler Version": {
+        label: "6.1.1",
+        value: 6001001
+    }
+        * support just value as well.
+        * look into in-place sort.
 - Ravel: Expand entity lanes so that we can make it more vertically spaced.
+    * set height of this element: physical split split-vertical physical-div to 1800px
 - put help in it's own vue file.
-- take a look at CFG code base
+- Once sabin sends index.html, i can try and launch it.
     * what would it take to run it on LC, give it a try.
 - Start providing support for larger MPI files: /g/g0/pascal/lulesh/lulesh_ravel_traces
     * Support actual render, make sure it can handle the data render.
@@ -33,6 +54,10 @@ https://lc.llnl.gov/spot/dcvis/web/?sf=/usr/gapps/spot/datasets/lulesh2small&lay
             var maximal = '/usr/gapps/wf/web/spot/data/lulesh_maximal/';
 
 
+Sorting
+Value
+Cardinality
+Instantiation - version number, this is a string, a double
 
 
 DONE
@@ -69,6 +94,8 @@ aschwanden1@doc ~/Downloads: pwd
 aschwanden1@doc ~/Downloads:
 
 
+Show all Hosts:
+https://lc.llnl.gov/lorenz/lora/lora.cgi/user/ME/hosts
 
 
 
@@ -92,3 +119,10 @@ David P
 HSTS error:
 if you write in browser "this is safe" then it will let you get past the HSTS error.
 
+
+
+How to use CFG:
+https://lc.llnl.gov/lorenz_base/dev/pascal/optvis/templates/
+Input source file: lulesh.css
+Input dot file: lulesh.o.dot
+Input json analysis file: lulesh.o.json

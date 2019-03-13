@@ -29,6 +29,7 @@ ST.CallSpot = function() {
         $.ajax({
             dataType:'jsonp',
             type: "POST",
+            method: "POST",
             url: ST.params.get_rundata_url,
             data:   {
                 'via'    : 'post',
@@ -123,7 +124,7 @@ ST.CallSpot = function() {
             checks += '<li>Is your <b>get_rundata_url</b> ('+ pu + ') correct? ';
         }
 
-        ST.Utility.error('Could not contact rzlc.llnl.gov  Things to check: <ul>' + checks + '</ul>');
+        ST.Utility.error('Could not complete server call.  Things to check: <ul>' + checks + '</ul>');
     };
 
 
