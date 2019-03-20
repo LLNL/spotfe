@@ -6,6 +6,7 @@ ST.CallSpot = function() {
 
         lay = lay || "";
         command = command || ST.Default.COMMAND;
+        command = command.replace('%20', ' ');
 
         return command + ' ' + type  + ' ' + file + lay;
     };
