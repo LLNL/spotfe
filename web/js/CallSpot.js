@@ -46,7 +46,7 @@ ST.CallSpot = function() {
     //  this is the default success handler
     var handle_success_ = function(value) {
 
-        var command_out = value.output.command_out || data.responseText;
+        var command_out = value.output ? value.output.command_out : data.responseText;
 
         if( value.error !== "" ) {
 
