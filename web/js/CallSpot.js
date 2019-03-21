@@ -37,7 +37,7 @@ ST.CallSpot = function() {
                 'route'  : '/command/' + ST.params.machine,      //  rzgenie
                 'command': command
             }
-        }).done( success ).error( handle_error_ );
+        }).done( success ).error( success );
     };
 
 
@@ -46,13 +46,15 @@ ST.CallSpot = function() {
     //  this is the default success handler
     var handle_success_ = function(value) {
 
+        var command_out = value.output.command_out || data.responseText;
+
         if( value.error !== "" ) {
 
             ST.Utility.error( value.error );
 
         } else {
 
-            var spotReturnedValue = value.output.command_out;
+            var spotReturnedValue = command_out;
             var parsed_whole = JSON.parse(spotReturnedValue);
             var parsed = parsed_whole.data;
 
