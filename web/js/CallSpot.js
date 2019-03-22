@@ -56,7 +56,21 @@ ST.CallSpot = function() {
 
             var spotReturnedValue = command_out;
             var parsed_whole = JSON.parse(spotReturnedValue);
-            var parsed = parsed_whole.data;
+
+            var command_out2;
+            var parsed;
+
+            if( parsed_whole.layout ) {
+                ST.layout_used = parsed_whole.layout;
+                parsed = parsed_whole.data; 
+            } else {
+
+                command_out2 = parsed_whole.output.command_out;
+                var data = JSON.parse(command_out2);
+                parsed = data.data;
+                ST.layout_used = data.layout;
+            }
+
 
             console.dir(parsed);
 
@@ -98,11 +112,10 @@ ST.CallSpot = function() {
 
             //console.dir(ST.ReturnedDataStub.layout);
 
-            ST.layout_used = parsed_whole.layout;
             console.dir( ST.layout_used );
 
             if( window.RenderChartCollection ) {
-                RenderChartCollection(newp, parsed_whole.layout);  //  ST.ReturnedDataStub.layout); //
+                RenderChartCollection(newp, ST.layout_used);  //  ST.ReturnedDataStub.layout); //
             }
             bind_();
         }
