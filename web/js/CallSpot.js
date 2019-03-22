@@ -60,9 +60,13 @@ ST.CallSpot = function() {
             var command_out2;
             var parsed;
 
+            if( parsed_whole.error ) {
+                ST.Utility.error( parsed_whole.error );
+
+            } else
             if( parsed_whole.layout ) {
                 ST.layout_used = parsed_whole.layout;
-                parsed = parsed_whole.data; 
+                parsed = parsed_whole.data;
             } else {
 
                 command_out2 = parsed_whole.output.command_out;

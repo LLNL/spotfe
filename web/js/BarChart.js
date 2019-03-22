@@ -52,6 +52,9 @@ ST.BarChart = function() {
         var one_i = inst_[inst_num_];
         $('.runtime-chart' + inst_num_).attr('instance_num', inst_num_);
 
+        var domain = options.xrange || [min - 1, parseInt(max) + 2];
+        var xinput = d3.scaleLinear().domain( domain );
+
         one_i.width( options.width || 580)
             .height( options.height || 180)
             .margins( options.margins || {top: 10, right: 50, bottom: 20, left: 40})
@@ -66,7 +69,7 @@ ST.BarChart = function() {
             // (_optional_) set filter brush rounding
             .round(dc.round.floor)
             .alwaysUseRounding(true)
-            .x(d3.scaleLinear().domain( options.xrange || [min - 1, max + 2]))
+            .x( xinput )
             .renderHorizontalGridLines(true)
             // Customize the filter displayed in the control span
             .filterPrinter(function (filters) {
