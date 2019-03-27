@@ -21,8 +21,8 @@ ST.CallSpot = function() {
 
 
         is_rzlc_target = ST.params.get_rundata_url.indexOf('rzlc.llnl.gov') > -1;
-        var rzcommand = "/usr/tce/bin/python3%20/usr/global/web-pages/lc/www/spot/spot.py";
-        var czcommand = ST.Default.COMMAND;
+        var czcommand = "/usr/tce/bin/python3%20/usr/global/web-pages/lc/www/spot/spot.py";
+        var rzcommand = ST.Default.COMMAND;
 
         commandp = is_rzlc_target ? rzcommand : czcommand;
         commandp = commandp.replace('%20', ' ');
