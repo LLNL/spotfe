@@ -333,7 +333,8 @@ var help_icon_ = function( file, params ) {
 
     var urls = [
         "https://rzlc.llnl.gov/spot/dcvis/web/?sf=/usr/gapps/spot/datasets/jit_data&layout=/usr/gapps/spot/datasets/jit.json",
-        "https://lc.llnl.gov/spot/dcvis/web/?sf=/usr/global/web-pages/lc/www/spot/lulesh2small&machine=oslic&command=/usr/tce/bin/python3%20/usr/global/web-pages/lc/www/spot/spot.py&get_rundata_url=https://lc.llnl.gov/lorenz/lora/lora.cgi/command/oslic",
+        "https://lc.llnl.gov/spot/dcvis/web/?sf=/usr/global/web-pages/lc/www/spot/lulesh2small",
+        //Asperational: https://lc.llnl.gov/spot/dcvis/web/?sf=/usr/global/web-pages/lc/www/spot/lulesh2small&machine=oslic&command=/usr/tce/bin/python3%20/usr/global/web-pages/lc/www/spot/spot.py&get_rundata_url=https://lc.llnl.gov/lorenz/lora/lora.cgi/command/oslic",
         "https://lc.llnl.gov/spot/dcvis/web/?sf=/usr/gapps/spot/datasets/lulesh2small&layout=/usr/gapps/spot/datasets/enhanced_layout.json"
     ];
 

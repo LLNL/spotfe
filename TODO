@@ -14,6 +14,21 @@ RECENTLY DONE:
 
 TODO LIST
 =================================================
+- Labels for X and Y (units and labels)
+- Units.
+- Fix X Axis:
+    * https://lc.llnl.gov/spot/dcvis/web/?sf=/usr/gapps/spot/datasets/lulesh2small&layout=/usr/gapps/spot/datasets/enhanced_layout.json&BarChart1=3,11
+    * Mushing together. 100000,200000k3000000
+- Fix Y Axis.
+
+- Be able to set # of buckets
+    * Default to 20 buckets.
+- Floating point numbers on the X-Axis.
+    * Bucketing might fix this issue, if we make sure to use whole numbers.
+
+- Jupyter/MPI clicking on CZ.
+- Arrows in the correct location (just to the left)
+- Caching Issue.
 - Write some stuff about the front end:
     - visualizations that we can do
     - the data and layout interface.
