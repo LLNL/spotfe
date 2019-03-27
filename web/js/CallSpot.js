@@ -207,7 +207,7 @@ ST.CallSpot = function() {
             localStorage.setItem('calis', keys);
 
             var directory = ST.Utility.get_file();
-            var comm = command || "";
+            var comm = command ? '&command=' + command : "";
 
             window.open('../dur_sankey/?' + machine + 'calis=local&directory=' + directory + comm);
 
