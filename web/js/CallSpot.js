@@ -11,6 +11,8 @@ ST.CallSpot = function() {
         return command + ' ' + type  + ' ' + file + lay;
     };
 
+    var is_rzlc_target;
+
     var ajax_ = function( obj ) {
 
         var file = obj.file;
@@ -27,7 +29,8 @@ ST.CallSpot = function() {
         var command = get_command_( type, file, layout, commandp );
         console.log(command);
         //var type = window.location.hostname === "rzlc.llnl.gov" ? "GET" : "POST";
-        var is_rzlc_target = ST.params.get_rundata_url.indexOf('rzlc.llnl.gov') > -1;
+        is_rzlc_target = ST.params.get_rundata_url.indexOf('rzlc.llnl.gov') > -1;
+
         var type = is_rzlc_target ? "GET" : "POST";
         var target = is_rzlc_target ? 'RZ' : 'CZ';
 
@@ -142,11 +145,20 @@ ST.CallSpot = function() {
 
             handle_success_( data );
         } else {
-            var link = "https://rzlc.llnl.gov/";
             console.dir(data);
+            var checks;
 
-            var checks = '<li>Make sure you are already authenticated with RZ.  ' +
-                'For example, you can try logging in here: <a target="_blank" href="' + link + '">RZ Link</a></li>';
+            if( is_rzlc_target ) {
+                var link = "https://rzlc.llnl.gov/";
+                checks = '<li>You are making a JSONP call to the <b>RZ</b></li>' +
+                    '<li>Make sure you are already authenticated with RZ.  ' +
+                    'For example, you can try logging in here: <a target="_blank" href="' + link + '">RZ Link</a></li>';
+            } else {
+                var link = "https://lc.llnl.gov/";
+                checks = '<li>You are making a JSONP call to the <b>CZ</b></li>' +
+                    '<li>Make sure you are already authenticated with CZ.  ' +
+                    'For example, you can try logging in here: <a target="_blank" href="' + link + '">CZ Link</a></li>';
+            }
 
             var pu = ST.Utility.get_param('get_rundata_url');
 
@@ -154,7 +166,10 @@ ST.CallSpot = function() {
                 checks += '<li>Is your <b>get_rundata_url</b> (' + pu + ') correct? ';
             }
 
-            ST.Utility.error('Could not complete server call.  Things to check: <ul>' + checks + '</ul>.  Return console.dir(data) has been dumped to console.  ResponseText=' + data.responseText);
+            var checks2 = '<li>Return console.dir(data) has been dumped to console.  </li>' +
+                '<li>FYI: data.responseText=' + data.responseText + '</li>';
+
+            ST.Utility.error('Could not complete server call.  Things to check: <ul>' + checks + checks2 + '</ul>.');
         }
     };
 
