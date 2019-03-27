@@ -36,6 +36,8 @@ ST.CallSpot = function() {
         //var type = window.location.hostname === "rzlc.llnl.gov" ? "GET" : "POST";
 
         var type = is_rzlc_target ? "GET" : "POST";
+        type = "GET";
+
         var target = is_rzlc_target ? 'RZ' : 'CZ';
 
         console.log('Target is ' + target + '.  Therefore we are using ' + type);
