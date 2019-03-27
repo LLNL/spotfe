@@ -6,39 +6,41 @@ ST.CallSpot = function() {
 
         lay = lay || "";
 
-        return command + ' ' + type  + ' ' + file + lay;
+        var czcommand = "/usr/tce/bin/python3%20/usr/global/web-pages/lc/www/spot/spot.py";
+        var rzcommand = ST.Default.COMMAND;
+
+        is_rzlc_target = ST.Utility.on_rz();
+
+        var commandp = is_rzlc_target ? rzcommand : czcommand;
+        commandp = commandp.replace('%20', ' ');
+
+        return commandp + ' ' + type  + ' ' + file + lay;
     };
 
     var is_rzlc_target;
 
     var ajax_ = function( obj ) {
 
-        ST.Utility.init_params();
-
-        var file = obj.file || ST.params.get_rundata_url;
+        var file = obj.file;
         var type = obj.type;
         var success = obj.success || handle_success_;
         var layout = obj.layout || "";
         var commandp = obj.command;
 
 
+        ST.Utility.init_params();
 
-        is_rzlc_target = file.indexOf('rzlc.llnl.gov') > -1;
-        var czcommand = "/usr/tce/bin/python3%20/usr/global/web-pages/lc/www/spot/spot.py";
-        var rzcommand = ST.Default.COMMAND;
-
-        commandp = is_rzlc_target ? rzcommand : czcommand;
-        commandp = commandp.replace('%20', ' ');
+        is_rzlc_target = ST.Utility.on_rz();
 
 
 
 
-        var final_command = get_command_( type, file, layout, commandp );
+        var final_command = get_command_( type, file, layout, "" );
         console.log(final_command);
         //var type = window.location.hostname === "rzlc.llnl.gov" ? "GET" : "POST";
 
         var type = is_rzlc_target ? "GET" : "POST";
-        //type = "GET";
+        type = "GET";
 
         var target = is_rzlc_target ? 'RZ' : 'CZ';
 
@@ -48,7 +50,7 @@ ST.CallSpot = function() {
             dataType:'jsonp',
             type: type,
             method: type,
-            url: file,
+            url: ST.params.get_rundata_url,
             data:   {
                 'via'    : 'post',
                 'route'  : '/command/' + ST.params.machine,      //  rzgenie

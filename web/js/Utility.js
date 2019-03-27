@@ -62,19 +62,23 @@ ST.Utility = function() {
         ST.params.command = ST.Utility.get_param('command');
 
         ST.params.max = ST.params.max || 18000;
-        ST.params.machine = ST.params.machine || "rzgenie";
+        ST.params.machine = on_rz_() ? "rzgenie" : "oslic";
         ST.params.get_rundata_url = ST.params.get_rundata_url || get_default_url_();
         ST.params.command = ST.params.command || ST.Default.COMMAND;
 
     };
 
+    var on_rz_ = function() {
+        return window.location.hostname === "rzlc.llnl.gov";
+    };
 
     var get_default_url_ = function() {
-        var rz = window.location.hostname === "rzlc.llnl.gov" ? 'rz' : '';
+        var rz = on_rz_() ? 'rz' : '';
         return 'https://' + rz + 'lc.llnl.gov/lorenz/lora/lora.cgi/jsonp';
     };
 
     return {
+        on_rz: on_rz_,
         validate_cali_object: validate_cali_object_,
         init_params: init_params_,
         get_file: get_file_,
