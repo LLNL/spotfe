@@ -53,6 +53,7 @@ ST.BarChart = function() {
         $('.runtime-chart' + inst_num_).attr('instance_num', inst_num_);
 
         var domain = options.xrange || [min - 1, parseInt(max) + 2];
+        //domain = [0,80];
         var xinput = d3.scaleLinear().domain( domain );
 
         one_i.width( options.width || 580)
@@ -61,7 +62,7 @@ ST.BarChart = function() {
             .dimension(runtime_dimension)
             .group(runtime_group)
             .elasticY(true)
-            .elasticX(true)
+            .elasticX(false)  //  The reason I set elasticX to false is so that it will use the min and max numbers. for the domain.
             // (_optional_) whether bar should be center to its x value. Not needed for ordinal chart, `default=false`
             .centerBar(false)
             // (_optional_) set gap between bars manually in px, `default=2`
