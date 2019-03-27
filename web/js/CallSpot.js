@@ -27,6 +27,7 @@ ST.CallSpot = function() {
         var command = get_command_( type, file, layout, commandp );
         console.log(command);
         var type = window.location.hostname === "rzlc.llnl.gov" ? "GET" : "POST";
+        var type = "GET";
 
         $.ajax({
             dataType:'jsonp',
@@ -133,19 +134,24 @@ ST.CallSpot = function() {
 
     var handle_error_ = function( data ) {
 
-        var link = "https://rzlc.llnl.gov/";
-        console.dir(data);
+        if( data.status === 200 && data.responseText ) {
 
-        var checks = '<li>Make sure you are already authenticated with RZ.  ' +
-            'For example, you can try logging in here: <a target="_blank" href="' + link + '">RZ Link</a></li>';
+            handle_success_( data );
+        } else {
+            var link = "https://rzlc.llnl.gov/";
+            console.dir(data);
 
-        var pu = ST.Utility.get_param('get_rundata_url');
+            var checks = '<li>Make sure you are already authenticated with RZ.  ' +
+                'For example, you can try logging in here: <a target="_blank" href="' + link + '">RZ Link</a></li>';
 
-        if( pu !== undefined ) {
-            checks += '<li>Is your <b>get_rundata_url</b> ('+ pu + ') correct? ';
+            var pu = ST.Utility.get_param('get_rundata_url');
+
+            if (pu !== undefined) {
+                checks += '<li>Is your <b>get_rundata_url</b> (' + pu + ') correct? ';
+            }
+
+            ST.Utility.error('Could not complete server call.  Things to check: <ul>' + checks + '</ul>.  Return console.dir(data) has been dumped to console.  ResponseText=' + data.responseText);
         }
-
-        ST.Utility.error('Could not complete server call.  Things to check: <ul>' + checks + '</ul>.  Return console.dir(data) has been dumped to console.');
     };
 
 
