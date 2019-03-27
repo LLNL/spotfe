@@ -132,3 +132,11 @@ Input json analysis file: lulesh.o.json
 https://rzlc.llnl.gov/spot/dcvis/web/?sf=/usr/gapps/spot/datasets/jit_data&layout=/usr/gapps/spot/datasets/jit.json
 https://lc.llnl.gov/spot/dcvis/web/?sf=/usr/global/web-pages/lc/www/spot/lulesh2small&machine=oslic&command=/usr/tce/bin/python3%20/usr/global/web-pages/lc/www/spot/spot.py&get_rundata_url=https://lc.llnl.gov/lorenz/lora/lora.cgi/command/oslic
 
+
+
+                is_rzlc_target = file.indexOf('rzlc.llnl.gov') > -1;
+        var czcommand = "/usr/tce/bin/python3%20/usr/global/web-pages/lc/www/spot/spot.py";
+        var rzcommand = ST.Default.COMMAND;
+
+        commandp = is_rzlc_target ? rzcommand : czcommand;
+        commandp = commandp.replace('%20', ' ');

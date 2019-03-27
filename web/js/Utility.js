@@ -66,15 +66,6 @@ ST.Utility = function() {
         ST.params.get_rundata_url = ST.params.get_rundata_url || get_default_url_();
         ST.params.command = ST.params.command || ST.Default.COMMAND;
 
-                is_rzlc_target = file.indexOf('rzlc.llnl.gov') > -1;
-        var czcommand = "/usr/tce/bin/python3%20/usr/global/web-pages/lc/www/spot/spot.py";
-        var rzcommand = ST.Default.COMMAND;
-
-        commandp = is_rzlc_target ? rzcommand : czcommand;
-        commandp = commandp.replace('%20', ' ');
-
-
-
     };
 
 
