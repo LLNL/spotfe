@@ -5,8 +5,6 @@ ST.CallSpot = function() {
     var get_command_ = function( type, file, lay, command ) {
 
         lay = lay || "";
-        command = command || ST.Default.COMMAND;
-        command = command.replace('%20', ' ');
 
         return command + ' ' + type  + ' ' + file + lay;
     };
@@ -21,15 +19,21 @@ ST.CallSpot = function() {
         var layout = obj.layout || "";
         var commandp = obj.command;
 
+
+        is_rzlc_target = ST.params.get_rundata_url.indexOf('rzlc.llnl.gov') > -1;
+        var rzcommand = "/usr/tce/bin/python3%20/usr/global/web-pages/lc/www/spot/spot.py";
+        var czcommand = ST.Default.COMMAND;
+
+        commandp = is_rzlc_target ? rzcommand : czcommand;
+        commandp = commandp.replace('%20', ' ');
+
+
         ST.Utility.init_params();
 
-        var spotArgs = " summary data/lulesh";
-        spotArgs = " summary /usr/gapps/wf/web/spot/data/lulesh";
 
-        var command = get_command_( type, file, layout, commandp );
-        console.log(command);
+        var final_command = get_command_( type, file, layout, commandp );
+        console.log(final_command);
         //var type = window.location.hostname === "rzlc.llnl.gov" ? "GET" : "POST";
-        is_rzlc_target = ST.params.get_rundata_url.indexOf('rzlc.llnl.gov') > -1;
 
         var type = is_rzlc_target ? "GET" : "POST";
         var target = is_rzlc_target ? 'RZ' : 'CZ';
@@ -44,7 +48,7 @@ ST.CallSpot = function() {
             data:   {
                 'via'    : 'post',
                 'route'  : '/command/' + ST.params.machine,      //  rzgenie
-                'command': command
+                'command': final_command
             }
         }).done( success ).error( handle_error_ );
     };

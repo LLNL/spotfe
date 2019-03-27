@@ -67,7 +67,7 @@ ST.Utility = function() {
         ST.params.command = ST.params.command || ST.Default.COMMAND;
     };
 
-    
+
     var get_default_url_ = function() {
         var rz = window.location.hostname === "rzlc.llnl.gov" ? 'rz' : '';
         return 'https://' + rz + 'lc.llnl.gov/lorenz/lora/lora.cgi/jsonp';
