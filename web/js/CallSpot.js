@@ -26,11 +26,12 @@ ST.CallSpot = function() {
 
         var command = get_command_( type, file, layout, commandp );
         console.log(command);
+        var type = window.location.hostname === "rzlc.llnl.gov" ? "GET" : "POST";
 
         $.ajax({
             dataType:'jsonp',
-            type: "GET",
-            method: "GET",
+            type: type,
+            method: type,
             url: ST.params.get_rundata_url,
             data:   {
                 'via'    : 'post',
