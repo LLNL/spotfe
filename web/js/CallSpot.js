@@ -198,6 +198,8 @@ ST.CallSpot = function() {
 
     var drill_down_ = function() {
 
+        var command = ST.params.command;
+
         if( !$(this).hasClass('drilldown')) {
             //  compare button
             var keys = get_keys_();
@@ -205,8 +207,9 @@ ST.CallSpot = function() {
             localStorage.setItem('calis', keys);
 
             var directory = ST.Utility.get_file();
+            var comm = command || "";
 
-            window.open('../dur_sankey/?' + machine + 'calis=local&directory=' + directory);
+            window.open('../dur_sankey/?' + machine + 'calis=local&directory=' + directory + comm);
 
             return false;
         }
@@ -216,7 +219,6 @@ ST.CallSpot = function() {
         var file = ST.Utility.get_file();
         var key = objs_by_run_id_[run_id].key;
         var appended = file + '/' + key;
-        var command = ST.params.command;
 
 
         console.log( "ri=" + run_id + '  do_this=' + subject );

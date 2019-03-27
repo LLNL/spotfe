@@ -33,9 +33,12 @@ $(document).ready(  function() {
 
     var dir = ST.Utility.get_param('directory');
     var predir = " --directory " + dir + " ";
+    var command = ST.Utility.get_param('command');
+    command = decodeURIComponent(command);
 
     ST.CallSpot.ajax({
         file: predir + dirs,
+        command: command,
         type: 'durations2',
         success: init
     });
