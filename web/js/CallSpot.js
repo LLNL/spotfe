@@ -13,11 +13,14 @@ ST.CallSpot = function() {
 
     var ajax_ = function( obj ) {
 
-        var file = obj.file;
+        ST.Utility.init_params();
+
+        var file = obj.file || ST.params.get_rundata_url;
         var type = obj.type;
         var success = obj.success || handle_success_;
         var layout = obj.layout || "";
         var commandp = obj.command;
+
 
 
         is_rzlc_target = file.indexOf('rzlc.llnl.gov') > -1;
@@ -28,7 +31,6 @@ ST.CallSpot = function() {
         commandp = commandp.replace('%20', ' ');
 
 
-        ST.Utility.init_params();
 
 
         var final_command = get_command_( type, file, layout, commandp );
@@ -36,7 +38,7 @@ ST.CallSpot = function() {
         //var type = window.location.hostname === "rzlc.llnl.gov" ? "GET" : "POST";
 
         var type = is_rzlc_target ? "GET" : "POST";
-        type = "GET";
+        //type = "GET";
 
         var target = is_rzlc_target ? 'RZ' : 'CZ';
 
@@ -46,7 +48,7 @@ ST.CallSpot = function() {
             dataType:'jsonp',
             type: type,
             method: type,
-            url: ST.params.get_rundata_url,
+            url: file,
             data:   {
                 'via'    : 'post',
                 'route'  : '/command/' + ST.params.machine,      //  rzgenie
