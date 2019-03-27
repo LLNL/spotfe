@@ -44,7 +44,7 @@ ST.CallSpot = function() {
             dataType:'jsonp',
             type: type,
             method: type,
-            url: file,
+            url: ST.params.get_rundata_url,
             data:   {
                 'via'    : 'post',
                 'route'  : '/command/' + ST.params.machine,      //  rzgenie
