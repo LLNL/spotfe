@@ -29,8 +29,8 @@ ST.CallSpot = function() {
 
         $.ajax({
             dataType:'jsonp',
-            type: "POST",
-            method: "POST",
+            type: "GET",
+            method: "GET",
             url: ST.params.get_rundata_url,
             data:   {
                 'via'    : 'post',

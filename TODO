@@ -126,3 +126,9 @@ https://lc.llnl.gov/lorenz_base/dev/pascal/optvis/templates/
 Input source file: lulesh.css
 Input dot file: lulesh.o.dot
 Input json analysis file: lulesh.o.json
+
+
+
+https://rzlc.llnl.gov/spot/dcvis/web/?sf=/usr/gapps/spot/datasets/jit_data&layout=/usr/gapps/spot/datasets/jit.json
+https://lc.llnl.gov/spot/dcvis/web/?sf=/usr/global/web-pages/lc/www/spot/lulesh2small&machine=oslic&command=/usr/tce/bin/python3%20/usr/global/web-pages/lc/www/spot/spot.py&get_rundata_url=https://lc.llnl.gov/lorenz/lora/lora.cgi/command/oslic
+
