@@ -63,8 +63,14 @@ ST.Utility = function() {
 
         ST.params.max = ST.params.max || 18000;
         ST.params.machine = ST.params.machine || "rzgenie";
-        ST.params.get_rundata_url = ST.params.get_rundata_url || 'https://rzlc.llnl.gov/lorenz/lora/lora.cgi/jsonp';
+        ST.params.get_rundata_url = ST.params.get_rundata_url || get_default_url_();
         ST.params.command = ST.params.command || ST.Default.COMMAND;
+    };
+
+    
+    var get_default_url_ = function() {
+        var rz = window.location.hostname === "rzlc.llnl.gov" ? 'rz' : '';
+        return 'https://' + rz + 'lc.llnl.gov/lorenz/lora/lora.cgi/jsonp';
     };
 
     return {
