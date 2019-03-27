@@ -38,7 +38,7 @@ ST.CallSpot = function() {
                 'route'  : '/command/' + ST.params.machine,      //  rzgenie
                 'command': command
             }
-        }).done( success ).error( success );
+        }).done( success ).error( handle_error_ );
     };
 
 
@@ -145,7 +145,7 @@ ST.CallSpot = function() {
             checks += '<li>Is your <b>get_rundata_url</b> ('+ pu + ') correct? ';
         }
 
-        ST.Utility.error('Could not complete server call.  Things to check: <ul>' + checks + '</ul>');
+        ST.Utility.error('Could not complete server call.  Things to check: <ul>' + checks + '</ul>.  Return console.dir(data) has been dumped to console.');
     };
 
 
