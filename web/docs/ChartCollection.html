@@ -693,6 +693,20 @@ $.fn.ArrowFunctions = <span class="hljs-function"><span class="hljs-keyword">fun
 
 <span class="hljs-keyword">var</span> help_icon_ = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> file, params </span>) </span>{
 
+    <span class="hljs-keyword">var</span> urls = [
+        <span class="hljs-string">"https://rzlc.llnl.gov/spot/dcvis/web/?sf=/usr/gapps/spot/datasets/jit_data&amp;layout=/usr/gapps/spot/datasets/jit.json"</span>,
+        <span class="hljs-string">"https://lc.llnl.gov/spot/dcvis/web/?sf=/usr/global/web-pages/lc/www/spot/lulesh2small&amp;machine=oslic&amp;command=/usr/tce/bin/python3%20/usr/global/web-pages/lc/www/spot/spot.py&amp;get_rundata_url=https://lc.llnl.gov/lorenz/lora/lora.cgi/command/oslic"</span>,
+        <span class="hljs-string">"https://lc.llnl.gov/spot/dcvis/web/?sf=/usr/gapps/spot/datasets/lulesh2small&amp;layout=/usr/gapps/spot/datasets/enhanced_layout.json"</span>
+    ];
+
+    <span class="hljs-keyword">var</span> working_html = <span class="hljs-string">""</span>;
+
+    <span class="hljs-keyword">for</span>( <span class="hljs-keyword">var</span> x = <span class="hljs-number">0</span>; x &lt; urls.length; x++ ) {
+
+        <span class="hljs-keyword">var</span> url = urls[x];
+        working_html += <span class="hljs-string">'&lt;div&gt;&lt;a href="'</span> + url + <span class="hljs-string">'" target="_blank"&gt;'</span> + url + <span class="hljs-string">'&lt;/a&gt;&lt;/div&gt;'</span>;
+    }
+
     Vue.component(<span class="hljs-string">'help-section'</span>, {
         <span class="hljs-attr">data</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
             <span class="hljs-keyword">return</span> {
@@ -722,7 +736,8 @@ $.fn.ArrowFunctions = <span class="hljs-function"><span class="hljs-keyword">fun
         &lt;br&gt;You can specify the &lt;b&gt;command&lt;/b&gt; with command= in the url bar.\
         \
         &lt;br&gt;&lt;a href="../web/doc.html" target="_blank"&gt;more...&lt;/a&gt; \
-        &lt;/div&gt; '</span> +
+        &lt;div&gt;Some Working Urls&lt;/div&gt;'</span> +
+        working_html + <span class="hljs-string">'&lt;/div&gt; '</span> +
         <span class="hljs-string">'&lt;/div&gt;'</span>,
         <span class="hljs-attr">methods</span>: {
         }

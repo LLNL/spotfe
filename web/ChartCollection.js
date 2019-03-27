@@ -331,6 +331,20 @@ $.fn.ArrowFunctions = function( obj ) {
 
 var help_icon_ = function( file, params ) {
 
+    var urls = [
+        "https://rzlc.llnl.gov/spot/dcvis/web/?sf=/usr/gapps/spot/datasets/jit_data&layout=/usr/gapps/spot/datasets/jit.json",
+        "https://lc.llnl.gov/spot/dcvis/web/?sf=/usr/global/web-pages/lc/www/spot/lulesh2small&machine=oslic&command=/usr/tce/bin/python3%20/usr/global/web-pages/lc/www/spot/spot.py&get_rundata_url=https://lc.llnl.gov/lorenz/lora/lora.cgi/command/oslic",
+        "https://lc.llnl.gov/spot/dcvis/web/?sf=/usr/gapps/spot/datasets/lulesh2small&layout=/usr/gapps/spot/datasets/enhanced_layout.json"
+    ];
+
+    var working_html = "";
+
+    for( var x = 0; x < urls.length; x++ ) {
+
+        var url = urls[x];
+        working_html += '<div><a href="' + url + '" target="_blank">' + url + '</a></div>';
+    }
+
     Vue.component('help-section', {
         data: function () {
             return {
@@ -360,7 +374,8 @@ var help_icon_ = function( file, params ) {
         <br>You can specify the <b>command</b> with command= in the url bar.\
         \
         <br><a href="../web/doc.html" target="_blank">more...</a> \
-        </div> ' +
+        <div>Some Working Urls</div>' +
+        working_html + '</div> ' +
         '</div>',
         methods: {
         }

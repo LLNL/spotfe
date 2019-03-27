@@ -305,6 +305,8 @@ body .dc-chart g.row text {
   padding: 10px;
   font-size: 13px;
   margin: 4px 0 4px -20px; }
+.container a {
+  cursor: pointer; }
 .container .help_icon {
   background-color: #f2f2f2;
   border: 1px solid #cccccc;
