@@ -20,7 +20,7 @@ ST.CallSpot = function() {
         var commandp = obj.command;
 
 
-        is_rzlc_target = ST.params.get_rundata_url.indexOf('rzlc.llnl.gov') > -1;
+        is_rzlc_target = file.indexOf('rzlc.llnl.gov') > -1;
         var czcommand = "/usr/tce/bin/python3%20/usr/global/web-pages/lc/www/spot/spot.py";
         var rzcommand = ST.Default.COMMAND;
 
@@ -44,7 +44,7 @@ ST.CallSpot = function() {
             dataType:'jsonp',
             type: type,
             method: type,
-            url: ST.params.get_rundata_url,
+            url: file,
             data:   {
                 'via'    : 'post',
                 'route'  : '/command/' + ST.params.machine,      //  rzgenie
