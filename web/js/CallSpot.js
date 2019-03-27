@@ -216,6 +216,7 @@ ST.CallSpot = function() {
         var file = ST.Utility.get_file();
         var key = objs_by_run_id_[run_id].key;
         var appended = file + '/' + key;
+        var command = ST.params.command;
 
 
         console.log( "ri=" + run_id + '  do_this=' + subject );
@@ -227,9 +228,9 @@ ST.CallSpot = function() {
 
         } else if( subject === "walltime" ) {
 
-            var command = get_command_("durations", appended, "" ) + "&machine=" + ST.params.machine;
+            var command_par = get_command_("durations", appended, "", command ) + "&machine=" + ST.params.machine;
 
-            window.open('../sankey/index.html?command=' + command );
+            window.open('../sankey/index.html?command=' + command_par );
 
         } else {
 
@@ -237,6 +238,7 @@ ST.CallSpot = function() {
             ajax_({
                 file: appended,
                 type: "jupyter",
+                command: command,
                 "success": function(data) {
 
                     var command_out = data.output.command_out;

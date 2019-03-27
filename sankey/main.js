@@ -20,10 +20,12 @@ $(document).ready( function() {
     console.dir(command);
 
     var machine = ST.Utility.get_param('machine');
+    var is_rz = location.href.indexOf('rzlc.llnl.gov') > -1;
+    var pre = is_rz ? 'https://rzlc.llnl.gov' : 'https://lc.llnl.gov';
 
     $.ajax({
         dataType:'jsonp',
-        url:     'https://rzlc.llnl.gov/lorenz/lora/lora.cgi/jsonp',
+        url:     pre + '/lorenz/lora/lora.cgi/jsonp',
         data:   {
             'via'    : 'post',
             'route'  : '/command/' + machine,      //  rzgenie
