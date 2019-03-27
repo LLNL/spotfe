@@ -26,8 +26,12 @@ ST.CallSpot = function() {
 
         var command = get_command_( type, file, layout, commandp );
         console.log(command);
-        var type = window.location.hostname === "rzlc.llnl.gov" ? "GET" : "POST";
-        var type = "GET";
+        //var type = window.location.hostname === "rzlc.llnl.gov" ? "GET" : "POST";
+        var is_rzlc_target = ST.params.get_rundata_url.indexOf('rzlc.llnl.gov') > -1;
+        var type = is_rzlc_target ? "POST" : "GET";
+        var target = is_rzlc_target ? 'RZ' : 'CZ';
+
+        console.log('Target is ' + target + '.  Therefore we are using ' + type);
 
         $.ajax({
             dataType:'jsonp',
