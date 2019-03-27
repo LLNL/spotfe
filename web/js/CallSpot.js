@@ -70,7 +70,16 @@ ST.CallSpot = function() {
             var parsed;
 
             if( parsed_whole.error ) {
-                ST.Utility.error( parsed_whole.error );
+
+                var er = parsed_whole.error;
+                var additional = "";
+
+                if( er.indexOf('Failed to run command') > -1 && er.indexOf('No such file or directory') > -1 ) {
+                    additional = "<br><br>Usually, this means you need to specify a command.  For example, try adding the following to the URL: &command=/usr/tce/bin/python3%20/usr/global/web-pages/lc/www/spot/spot.py";
+                }
+
+                ST.Utility.error( er + additional);
+
 
             } else
             if( parsed_whole.layout ) {
