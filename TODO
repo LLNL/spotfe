@@ -14,7 +14,7 @@ RECENTLY DONE:
 
 TODO LIST
 =================================================
-- Labels for X and Y (units and labels)
+- Labels for X and Y
 - Units.
 - Fix X Axis:
     * https://lc.llnl.gov/spot/dcvis/web/?sf=/usr/gapps/spot/datasets/lulesh2small&layout=/usr/gapps/spot/datasets/enhanced_layout.json&BarChart1=3,11

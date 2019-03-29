@@ -4,7 +4,7 @@
 
 div.dc-chart {
   float: left;
-  padding-top: 30px; }
+  padding-top: 55px; }
 
 .row:nth-child(1) .dc-chart {
   height: 410px;
@@ -14,8 +14,24 @@ div.dc-chart {
   position: relative; }
   .dc-chart .top_left {
     position: absolute;
-    top: 10px;
+    top: 30px;
     left: 0; }
+  .dc-chart .x-label {
+    position: absolute;
+    left: 0;
+    bottom: -15px;
+    width: 400px;
+    text-align: center; }
+  .dc-chart .y-label {
+    position: absolute;
+    left: -186px;
+    bottom: 185px;
+    text-align: center;
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    transform: rotate(-90deg); }
   .dc-chart rect.bar {
     stroke: none;
     cursor: pointer; }
@@ -319,7 +335,8 @@ body .dc-chart g.row text {
   text-align: center;
   position: absolute;
   top: 5px;
-  right: 5px; }
+  right: 5px;
+  z-index: 1000; }
 
 .dc-data-table th {
   position: relative; }

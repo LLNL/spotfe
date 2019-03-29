@@ -37,11 +37,17 @@ ST.BarChart = function() {
 
         var runtime_group = runtime_dimension.group();
 
+        var width = options.width || 580;
+        var height = options.height || 180;
+
+
         var rcht = '<div class="runtime-chart' + inst_num_ + '"> \
             <div class="top_left"> \
                 <strong>' + upper_(dimension) + '</strong> \
                 <a class="reset" onclick="ST.BarChart.reset(this);" style="display: none;">reset</a>\
             </div> \
+            <div class="x-label" style="width: ' + width + 'px;">' + options["x-label"] + '</div> \
+            <div class="y-label" style="width: ' + height + 'px;">' + options["y-label"] + '</div> \
         </div>';
 
         $('.row:eq(0)').append(rcht);
@@ -56,8 +62,8 @@ ST.BarChart = function() {
         //domain = [0,80];
         var xinput = d3.scaleLinear().domain( domain );
 
-        one_i.width( options.width || 580)
-            .height( options.height || 180)
+        one_i.width( width )
+            .height( height )
             .margins( options.margins || {top: 10, right: 50, bottom: 20, left: 40})
             .dimension(runtime_dimension)
             .group(runtime_group)

@@ -31,7 +31,7 @@ $font_sans_serif: sans-serif;
 
 div.dc-chart {
     float: left;
-    padding-top: 30px;
+    padding-top: 55px;
 }
 
 .row:nth-child(1) {
@@ -48,8 +48,28 @@ div.dc-chart {
 
     .top_left {
         position: absolute;
-        top: 10px;
+        top: 30px;
         left: 0;
+    }
+
+    .x-label {
+        position: absolute;
+        left: 0;
+        bottom: -15px;
+        width: 400px;
+        text-align: center;
+    }
+
+    .y-label {
+        position: absolute;
+        left: -186px;
+        bottom: 185px;
+        text-align: center;
+        -webkit-transform: rotate(-90deg);
+        -moz-transform: rotate(-90deg);
+        -o-transform: rotate(-90deg);
+        -ms-transform: rotate(-90deg);
+        transform: rotate(-90deg);
     }
 
     rect {
@@ -453,6 +473,7 @@ body .dc-chart g.row text {
         position: absolute;
         top: 5px;
         right: 5px;
+        z-index: 1000;
     }
 }
 
