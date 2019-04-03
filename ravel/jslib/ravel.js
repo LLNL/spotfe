@@ -943,7 +943,18 @@ var ravel = {
 
           navigate = outer;
 
-          var reduced = ST.ReductionSplicer.get( navigate.traceinfo.events, navigate.traceinfo.messages );
+          var events, messages;
+
+          //  sometimes we get a traceinfo wrapper and sometimes we don't.
+          if( navigate.traceinfo ) {
+            events = navigate.traceinfo.events;
+            messages = navigate.traceinfo.messages;
+          } else {
+            events = navigate.events;
+            messages = navigate.messages;
+          }
+
+          var reduced = ST.ReductionSplicer.get( events, messages );
 
           navigate.traceinfo.events = reduced.events;
           navigate.traceinfo.messages = reduced.messages;
