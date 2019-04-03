@@ -155,3 +155,10 @@ https://lc.llnl.gov/spot/dcvis/web/?sf=/usr/global/web-pages/lc/www/spot/lulesh2
 
         commandp = is_rzlc_target ? rzcommand : czcommand;
         commandp = commandp.replace('%20', ' ');
+
+
+        //var type = window.location.hostname === "rzlc.llnl.gov" ? "GET" : "POST";
+
+        var type = is_rzlc_target ? "GET" : "POST";
+
+        var target = is_rzlc_target ? 'RZ' : 'CZ';

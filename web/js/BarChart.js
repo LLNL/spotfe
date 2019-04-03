@@ -40,14 +40,17 @@ ST.BarChart = function() {
         var width = options.width || 580;
         var height = options.height || 180;
 
+        var xlabel = options["x-label"] || "";
+        var ylabel = options["y-label"] || "";
+
 
         var rcht = '<div class="runtime-chart' + inst_num_ + '"> \
             <div class="top_left"> \
                 <strong>' + upper_(dimension) + '</strong> \
                 <a class="reset" onclick="ST.BarChart.reset(this);" style="display: none;">reset</a>\
             </div> \
-            <div class="x-label" style="width: ' + width + 'px;">' + options["x-label"] + '</div> \
-            <div class="y-label" style="width: ' + height + 'px;">' + options["y-label"] + '</div> \
+            <div class="x-label" style="width: ' + width + 'px;">' + xlabel + '</div> \
+            <div class="y-label" style="width: ' + height + 'px;">' + ylabel + '</div> \
         </div>';
 
         $('.row:eq(0)').append(rcht);

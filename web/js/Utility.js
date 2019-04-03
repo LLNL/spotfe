@@ -62,7 +62,13 @@ ST.Utility = function() {
         ST.params.command = ST.Utility.get_param('command');
 
         ST.params.max = ST.params.max || 18000;
-        ST.params.machine = on_rz_() ? "rzgenie" : "oslic";
+
+        if( !ST.params.machine ) {
+            ST.params.machine = on_rz_() ? "rzgenie" : "oslic";
+        }
+
+        //  Default to GET.  Only use POST for custom get_rundata_url
+        ST.params.type = ST.params.get_rundata_url ? "POST" : "GET";
         ST.params.get_rundata_url = ST.params.get_rundata_url || get_default_url_();
         ST.params.command = ST.params.command || ST.Default.COMMAND;
 

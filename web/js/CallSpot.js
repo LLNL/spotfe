@@ -25,7 +25,6 @@ ST.CallSpot = function() {
         var type = obj.type;
         var success = obj.success || handle_success_;
         var layout = obj.layout || "";
-        var commandp = obj.command;
 
 
         ST.Utility.init_params();
@@ -33,13 +32,11 @@ ST.CallSpot = function() {
         is_rzlc_target = ST.Utility.on_rz();
 
         var final_command = get_command_( type, file, layout, "" );
-        console.log(final_command);
-        //var type = window.location.hostname === "rzlc.llnl.gov" ? "GET" : "POST";
 
-        var type = is_rzlc_target ? "GET" : "POST";
-        type = "GET";
+        console.log('final command=' + final_command);
+        console.log('url=' + ST.params.get_rundata_url);
 
-        var target = is_rzlc_target ? 'RZ' : 'CZ';
+        type = ST.params.type;
 
         $.ajax({
             dataType:'jsonp',
