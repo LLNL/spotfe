@@ -14,10 +14,10 @@ var validate_number = function(v) {
   if( typeof v === 'number') {
 
   } else {
-    alert('Validate number failed.  ['+v+'] is not a number, but is expected to be.  Caller: ' + arguments.callee.caller.name);
+    console.log('Validate number failed.  ['+v+'] is not a number, but is expected to be.  Caller: ' + arguments.callee.caller.name);
   }
   if(v < 0) {
-      alert('Validate number.  V is negative.  V='+v);
+      console.log('Validate number.  V is negative.  V='+v);
   }
 };
 
