@@ -956,6 +956,8 @@ var ravel = {
 
           var reduced = ST.ReductionSplicer.get( events, messages );
 
+          navigate.traceinfo = {};
+          
           navigate.traceinfo.events = reduced.events;
           navigate.traceinfo.messages = reduced.messages;
 
