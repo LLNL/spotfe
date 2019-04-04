@@ -118,13 +118,18 @@ ST.BarChart = function() {
             });
 
         // Customize axes
-        one_i.xAxis().tickFormat(
+        var xticks = one_i.xAxis().tickFormat(
             function (v) {
 
                 v = get_dec_v_(+v);
 
                 return v + (options.xsuffix !== undefined ? options.xsuffix : '');
             });
+
+        if( options.xticks ) {
+            xticks.ticks( options.xticks );
+        }
+
         one_i.yAxis().ticks(5);
 
         inst_num_++;
