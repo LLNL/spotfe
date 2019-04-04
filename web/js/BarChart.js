@@ -11,11 +11,15 @@ ST.BarChart = function() {
 
     var render_ = function( ndx, options ) {
 
+        //  STUB
+        //options.buckets = ['0-5', '5-10', '10-15', '15-20'];
+
         options = options || {};
         var dimension = options.dimension || "runtime";
 
         var min = 100000;
         var max = 0;
+        var use_buckets = options.buckets;
 
         // Determine a histogram of percent changes
         var runtime_dimension = ndx.dimension(function (cali_object) {
@@ -32,7 +36,14 @@ ST.BarChart = function() {
             }
 
             var ret = typeof dim === 'number' ? Math.round(dim/1)*1 : dim;
-            return +ret;
+
+            if( use_buckets ) {
+
+            } else {
+            //return '0-5';
+            return Math.round(ret);
+
+            }
         });
 
         var runtime_group = runtime_dimension.group();
@@ -61,9 +72,16 @@ ST.BarChart = function() {
         var one_i = inst_[inst_num_];
         $('.runtime-chart' + inst_num_).attr('instance_num', inst_num_);
 
-        var domain = options.xrange || [min - 1, parseInt(max) + 2];
-        //domain = [0,80];
+        var domain = options.xrange || [min - 1, parseInt(max) + 3];
         var xinput = d3.scaleLinear().domain( domain );
+
+        if( use_buckets ) {
+            domain = options.buckets;
+            var xinput2 = d3.scaleOrdinal().domain(domain);
+
+            one_i.xUnits(dc.units.ordinal);
+        }
+
 
         one_i.width( width )
             .height( height )
@@ -79,7 +97,7 @@ ST.BarChart = function() {
             // (_optional_) set filter brush rounding
             .round(dc.round.floor)
             .alwaysUseRounding(true)
-            .x( xinput )
+            .x( use_buckets ? xinput2 : xinput )
             .renderHorizontalGridLines(true)
             // Customize the filter displayed in the control span
             .filterPrinter(function (filters) {
