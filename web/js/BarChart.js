@@ -105,7 +105,7 @@ ST.BarChart = function() {
             .alwaysUseRounding(true)
             .x( use_buckets ? xinput2 : xinput )
             .renderHorizontalGridLines(true)
-            .ordinalColors(['green', 'blue'])
+            //.ordinalColors(['green', 'blue'])
             // Customize the filter displayed in the control span
             .filterPrinter(function (filters) {
 
