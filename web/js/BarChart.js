@@ -126,8 +126,8 @@ ST.BarChart = function() {
                 return v + (options.xsuffix !== undefined ? options.xsuffix : '');
             });
 
-        if( options.xticks ) {
-            xticks.ticks( options.xticks );
+        if( options["x-ticks"] ) {
+            xticks.ticks( options["x-ticks"] );
         }
 
         one_i.yAxis().ticks(5);
