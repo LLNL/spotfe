@@ -38,11 +38,13 @@ ST.BarChart = function() {
             var ret = typeof dim === 'number' ? Math.round(dim/1)*1 : dim;
 
             if( use_buckets ) {
-
+                //return '0-5';
             } else {
-            //return '0-5';
-            return Math.round(ret);
+                return Math.round(ret);
 
+                //ret = +ret;
+                //var down = Math.round(ret/1000);
+                //return ret > 1000 ? down + 'e3' : ret;
             }
         });
 
@@ -72,7 +74,9 @@ ST.BarChart = function() {
         var one_i = inst_[inst_num_];
         $('.runtime-chart' + inst_num_).attr('instance_num', inst_num_);
 
-        var domain = options.xrange || [min - 1, parseInt(max) + 3];
+        var domain = options.xrange || [min - 1, parseInt(max) + 1];
+        //domain = [0,80];
+
         var xinput = d3.scaleLinear().domain( domain );
 
         if( use_buckets ) {
@@ -81,6 +85,8 @@ ST.BarChart = function() {
 
             one_i.xUnits(dc.units.ordinal);
         }
+
+        //one_i.xUnits()
 
 
         one_i.width( width )
@@ -99,6 +105,7 @@ ST.BarChart = function() {
             .alwaysUseRounding(true)
             .x( use_buckets ? xinput2 : xinput )
             .renderHorizontalGridLines(true)
+            .ordinalColors(['green', 'blue'])
             // Customize the filter displayed in the control span
             .filterPrinter(function (filters) {
 
@@ -113,11 +120,39 @@ ST.BarChart = function() {
         // Customize axes
         one_i.xAxis().tickFormat(
             function (v) {
+
+                v = get_dec_v_(+v);
+
                 return v + (options.xsuffix !== undefined ? options.xsuffix : '');
             });
         one_i.yAxis().ticks(5);
 
         inst_num_++;
+    };
+
+
+    var get_dec_v_ = function(v) {
+
+        for( var x=3; x < 15; x++ ) {
+
+            var low = Math.pow( 10, x );
+            var lowp = Math.pow( 10, x + 1 );
+
+            if (+v >= low && v < lowp ) {
+
+                var mv = parseInt(v / low );
+
+                return mv + 'e' + x;
+            }
+        }
+
+        return v;
+    };
+
+    var round_ = function( v ) {
+
+        var v2 = Math.round(v * 10);
+        return v2 / 10;
     };
 
 

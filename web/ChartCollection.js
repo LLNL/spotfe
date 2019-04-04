@@ -56,6 +56,13 @@ var reduce_authors = function( data ) {
 
 //        data[z].buttons = data[z].buttons || (Math.random() * 4 > 2 ? ["ravel", "vale43d", "spot"] : ["spot"]);
         data[z].buttons = data[z].data;
+
+        //  hack it for now, so that they can do the SE Paper on time.
+        var demo_mode = 1;
+        if( demo_mode ) {
+
+        }
+
     }
 
     var number_of_authors = Object.keys(uniq_author_count).length;

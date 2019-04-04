@@ -37,6 +37,12 @@ ST.LeftHorizontalBarChart = function() {
         console.log(number_of_authors);
         var height = number_of_authors * 35;
 
+        var translate_ = {
+            "willEmailYouToComplain" : "mlegendre",
+            "Filler0" : "paschwanden",
+            "Filler1" : "dboehma",
+            "dzpolia" : "dzpolia"
+        };
         // Create a row chart and use the given css selector as anchor. You can also specify
         // an optional chart group for this chart to be scoped within. When a chart belongs
         // to a specific group then any interaction with such chart will only trigger redraw
@@ -52,7 +58,7 @@ ST.LeftHorizontalBarChart = function() {
             .ordinalColors(colors)
             .label(function (d) {
                 //return d.key.split('.')[1];
-                return d.key;
+                return translate_[d.key] || "Jim";
             })
             // Title sets the row text
             .title(function (d) {
