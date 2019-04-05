@@ -130,7 +130,7 @@ ST.BarChart = function() {
             xticks.ticks( options["x-ticks"] );
         }
 
-        one_i.yAxis().ticks(5);
+        one_i.yAxis().ticks( options["y-ticks"] || 5);
 
         inst_num_++;
     };
