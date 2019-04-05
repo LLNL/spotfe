@@ -59,7 +59,7 @@ ST.BarChart = function() {
 
         var rcht = '<div class="runtime-chart' + inst_num_ + '"> \
             <div class="top_left"> \
-                <strong>' + upper_(dimension) + '</strong> \
+                <strong>' + upper_( options.title || dimension) + '</strong> \
                 <a class="reset" onclick="ST.BarChart.reset(this);" style="display: none;">reset</a>\
             </div> \
             <div class="x-label" style="width: ' + width + 'px;">' + xlabel + '</div> \
