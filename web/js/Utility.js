@@ -59,7 +59,6 @@ ST.Utility = function() {
         ST.params.max = ST.Utility.get_param('max');
         ST.params.machine = ST.Utility.get_param('machine');
         ST.params.layout = ST.Utility.get_param('layout');
-        ST.params.command = ST.Utility.get_param('command');
 
         ST.params.max = ST.params.max || 18000;
 
@@ -70,9 +69,8 @@ ST.Utility = function() {
         //  Default to GET.  Only use POST for custom get_rundata_url
         ST.params.type = ST.params.get_rundata_url ? "POST" : "GET";
         ST.params.get_rundata_url = ST.params.get_rundata_url || get_default_url_();
-        ST.params.command = ST.params.command || ST.Default.COMMAND;
-
     };
+
 
     var on_rz_ = function() {
         return window.location.hostname === "rzlc.llnl.gov";

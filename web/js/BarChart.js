@@ -9,10 +9,32 @@ ST.BarChart = function() {
         return lower.charAt(0).toUpperCase() + lower.substr(1);
     };
 
+    var get_bucket_ = function( buckets, number ) {
+
+        number = +number;
+
+        for( var z=0; z < buckets.length; z++ ) {
+
+            var bucket = buckets[z];
+            var spli = bucket.split('-');
+
+            var first = spli[0];
+            var second = spli[1];
+
+            if( number >= first && number <= second ) {
+                return bucket;
+            }
+        }
+
+        return "could not find bucket";
+    };
+
+
     var render_ = function( ndx, options ) {
 
         //  STUB
         //options.buckets = ['0-5', '5-10', '10-15', '15-20'];
+        options.buckets = typeof options.buckets === "string" ? eval(options.buckets) : options.buckets;
 
         options = options || {};
         var dimension = options.dimension || "runtime";
@@ -38,7 +60,7 @@ ST.BarChart = function() {
             var ret = typeof dim === 'number' ? Math.round(dim/1)*1 : dim;
 
             if( use_buckets ) {
-                //return '0-5';
+                return get_bucket_( options.buckets, ret );
             } else {
                 return Math.round(ret);
 
@@ -121,7 +143,7 @@ ST.BarChart = function() {
         var xticks = one_i.xAxis().tickFormat(
             function (v) {
 
-                v = get_dec_v_(+v);
+                v = get_dec_v_( v, use_buckets);
 
                 return v + (options.xsuffix !== undefined ? options.xsuffix : '');
             });
@@ -136,14 +158,20 @@ ST.BarChart = function() {
     };
 
 
-    var get_dec_v_ = function(v) {
+    var get_dec_v_ = function(v, use_buckets ) {
+
+        if( use_buckets ) {
+            return v;
+        }
 
         for( var x=3; x < 15; x++ ) {
+
+            v = +v;
 
             var low = Math.pow( 10, x );
             var lowp = Math.pow( 10, x + 1 );
 
-            if (+v >= low && v < lowp ) {
+            if ( v >= low && v < lowp ) {
 
                 var mv = parseInt(v / low );
 

@@ -20,6 +20,8 @@ TODO LIST
 - DONE for figure of Merit try to round down.
 - DONE replace "willEmailYou ToComplain" with "pascal", filler0 (matt) and filler1 (david)
 - DONE 1e7, 1e8 abbreviations for Num of Iterations.
+- DONE Fixed Title
+- DONE y ticks, x ticks
 - Bar Charts different colors for each one.
 - Fix last bar selectable?
 
@@ -175,3 +177,7 @@ https://lc.llnl.gov/spot/dcvis/web/?sf=/usr/global/web-pages/lc/www/spot/lulesh2
         var type = is_rzlc_target ? "GET" : "POST";
 
         var target = is_rzlc_target ? 'RZ' : 'CZ';
+
+
+
+//  https://lc.llnl.gov/spot/dcvis/web/?&machine=oslic&command=/usr/tce/bin/python3%20/g/g90/boehme3/experiments/ubiquitous_analysis/spot.py&get_rundata_url=https://lc.llnl.gov/lorenz/lora/lora.cgi/command/oslic&sf=/g/g90/boehme3/experiments/ubiquitous_analysis/lulesh_data&layout=/g/g90/boehme3/experiments/ubiquitous_analysis/layout.json

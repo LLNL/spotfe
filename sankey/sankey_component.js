@@ -17,7 +17,7 @@ Vue.component('sankey-diagram', {
             <g class="links" :style="{fill:'none', stroke: '#070', 'stroke-opacity':0.2}">
                 <path v-for="link in sankeyData.links" :d="horizLink(link)" :style="{'stroke-width': Math.max(1, link.width)}"></path>
             </g>
-            <g class="nodes" font-family="sans-serif" font-size="12">
+            <g class="nodes" font-family="sans-serif" font-size="14">
                 <g v-for="node in sankeyData.nodes">
                     <rect :x="node.x0" :y="node.y0" @click="nodeClicked(node.key)" :height="node.y1 - node.y0" :width="node.x1 - node.x0"
                     :style="{fill: node.color, stroke: '#000'}"></rect><text :x="node.x0 - 6" :y="(node.y1 + node.y0) / 2" dy="0.35em"

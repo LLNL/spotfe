@@ -2,7 +2,7 @@ var ST = ST || {};
 
 ST.CallSpot = function() {
 
-    var get_command_ = function( type, file, lay, command ) {
+    var get_command_ = function( type, file, lay ) {
 
         lay = lay || "";
 
@@ -12,6 +12,13 @@ ST.CallSpot = function() {
         is_rzlc_target = ST.Utility.on_rz();
 
         var commandp = is_rzlc_target ? rzcommand : czcommand;
+
+        //  Override if the URL contains command in it.
+        var param_com = ST.Utility.get_param('command');
+        if( param_com ) {
+            commandp = param_com;
+        }
+
         commandp = commandp.replace('%20', ' ');
 
         return commandp + ' ' + type  + ' ' + file + lay;
@@ -31,7 +38,7 @@ ST.CallSpot = function() {
 
         is_rzlc_target = ST.Utility.on_rz();
 
-        var final_command = get_command_( type, file, layout, "" );
+        var final_command = get_command_( type, file, layout );
 
         console.log('final command=' + final_command);
         console.log('url=' + ST.params.get_rundata_url);
@@ -198,9 +205,8 @@ ST.CallSpot = function() {
         return str.substr(1);
     };
 
-    var drill_down_ = function() {
 
-        var command = ST.params.command;
+    var drill_down_ = function() {
 
         if( !$(this).hasClass('drilldown')) {
             //  compare button
@@ -209,6 +215,8 @@ ST.CallSpot = function() {
             localStorage.setItem('calis', keys);
 
             var directory = ST.Utility.get_file();
+
+            var command = ST.Utility.get_param('command');
             var comm = command ? '&command=' + command : "";
 
             window.open('../dur_sankey/?' + machine + 'calis=local&directory=' + directory + comm);
@@ -232,7 +240,7 @@ ST.CallSpot = function() {
 
         } else if( subject === "walltime" ) {
 
-            var command_par = get_command_("durations", appended, "", command ) + "&machine=" + ST.params.machine;
+            var command_par = get_command_("durations", appended, "" ) + "&machine=" + ST.params.machine;
 
             window.open('../sankey/index.html?command=' + command_par );
 

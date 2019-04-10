@@ -24,7 +24,7 @@ div.dc-chart {
     text-align: center; }
   .dc-chart .y-label {
     position: absolute;
-    left: -186px;
+    left: -190px;
     bottom: 185px;
     text-align: center;
     -webkit-transform: rotate(-90deg);

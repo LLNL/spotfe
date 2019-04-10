@@ -408,7 +408,6 @@ $(document).ready( function() {
     ST.CallSpot.ajax({
         file: file,
         type: 'summary',
-        layout: layout,
-        command: ST.params.command
+        layout: layout
     });
 });
