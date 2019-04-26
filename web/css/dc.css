@@ -344,7 +344,7 @@ body .dc-chart g.row text {
 .dc-data-table .up_arrow {
   position: absolute;
   top: 10px;
-  right: 2px;
+  left: -9px;
   width: 0;
   height: 0;
   border-left: 7px solid transparent;
@@ -355,13 +355,20 @@ body .dc-chart g.row text {
 .dc-data-table .down_arrow {
   position: absolute;
   top: 20px;
-  right: 2px;
+  left: -9px;
   width: 0;
   height: 0;
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
   border-top: 7px solid #555555;
   cursor: pointer; }
+
+.dc-data-table .dc-table-head {
+  position: relative;
+  left: 14px; }
+
+.dc-data-table .dc-table-head:last-child {
+  display: none; }
 
 .bottom_table {
   position: relative; }
