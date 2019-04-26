@@ -14,6 +14,9 @@ TODO:
 Debug:
 http://localhost:8888/web/?sf=/g/g0/pascal/spot_lulesh_dataset/lulesh_data&layout=/g/g0/pascal/spot_lulesh_dataset/layout.json
     * It would appear that somehow the X-scale is not being set correctly for some reason.
+    * This was due to the fact that the data was "90","120" so it tried to treat it as a string, which caused it to find out the max and minimum incorrectly.
+
+- Another Issue: When sorting Problem size ("90","120"), etc the sorting is incorrect because it sorts it as a string, not a number.
 
 
 RECENTLY DONE:

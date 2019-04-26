@@ -49,6 +49,7 @@ ST.BarChart = function() {
             ST.Utility.validate_cali_object( cali_object, dimension );
 
             var dim = cali_object[dimension];
+            dim = +dim;
 
             if( dim < min ) {
                 min = dim;
