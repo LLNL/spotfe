@@ -127,6 +127,15 @@ ST.CallSpot = function() {
                     valid_obj.drilldown = ['Jupyter', 'mpi', 'walltime'];
                     valid_obj.key = key;
 
+                    for( var y in valid_obj ) {
+                        var what_is_it = matchExpression(valid_obj[y]);
+
+                        if (what_is_it.onlyNumbers) {
+                            valid_obj[y] = +valid_obj[y];
+                        }
+                    }
+
+
                     newp.push(valid_obj);
                     objs_by_run_id_[valid_obj.run_id] = valid_obj;
                 }

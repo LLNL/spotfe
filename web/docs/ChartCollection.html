@@ -124,8 +124,6 @@ reduce_authors(data);</p>
         <span class="hljs-keyword">if</span>( demo_mode ) {
 
         }
-
-
     }
 
     <span class="hljs-keyword">var</span> number_of_authors = <span class="hljs-built_in">Object</span>.keys(uniq_author_count).length;
@@ -147,7 +145,31 @@ reduce_authors(data);</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    });</pre></div></div>
+            <div class="content"><div class='highlight'><pre>    });
+
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">matchExpression</span>(<span class="hljs-params"> str </span>) </span>{
+    <span class="hljs-keyword">var</span> rgularExp = {
+        <span class="hljs-attr">contains_alphaNumeric</span> : <span class="hljs-regexp">/^(?!-)(?!.*-)[A-Za-z0-9-]+(?&lt;!-)$/</span>,
+        <span class="hljs-attr">containsNumber</span> : <span class="hljs-regexp">/\d+/</span>,
+        <span class="hljs-attr">containsAlphabet</span> : <span class="hljs-regexp">/[a-zA-Z]/</span>,
+
+        <span class="hljs-attr">onlyLetters</span> : <span class="hljs-regexp">/^[A-Za-z]+$/</span>,
+        <span class="hljs-attr">onlyNumbers</span> : <span class="hljs-regexp">/^[0-9]+$/</span>,
+        <span class="hljs-attr">onlyMixOfAlphaNumeric</span> : <span class="hljs-regexp">/^([0-9]+[a-zA-Z]+|[a-zA-Z]+[0-9]+)[0-9a-zA-Z]*$/</span>
+    }
+
+    <span class="hljs-keyword">var</span> expMatch = {};
+    expMatch.containsNumber = rgularExp.containsNumber.test(str);
+    expMatch.containsAlphabet = rgularExp.containsAlphabet.test(str);
+    expMatch.alphaNumeric = rgularExp.contains_alphaNumeric.test(str);
+
+    expMatch.onlyNumbers = rgularExp.onlyNumbers.test(str);
+    expMatch.onlyLetters = rgularExp.onlyLetters.test(str);
+    expMatch.mixOfAlphaNumeric = rgularExp.onlyMixOfAlphaNumeric.test(str);
+
+    <span class="hljs-keyword">return</span> expMatch;
+}</pre></div></div>
             
         </li>
         

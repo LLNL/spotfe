@@ -62,8 +62,6 @@ var reduce_authors = function( data ) {
         if( demo_mode ) {
 
         }
-
-
     }
 
     var number_of_authors = Object.keys(uniq_author_count).length;
@@ -73,6 +71,30 @@ var reduce_authors = function( data ) {
         d.month = d3.timeMonth(d.dd); // pre-calculate month for better performance
         //d.year = d3.timeYear(d.dd);
     });
+
+
+function matchExpression( str ) {
+    var rgularExp = {
+        contains_alphaNumeric : /^(?!-)(?!.*-)[A-Za-z0-9-]+(?<!-)$/,
+        containsNumber : /\d+/,
+        containsAlphabet : /[a-zA-Z]/,
+
+        onlyLetters : /^[A-Za-z]+$/,
+        onlyNumbers : /^[0-9]+$/,
+        onlyMixOfAlphaNumeric : /^([0-9]+[a-zA-Z]+|[a-zA-Z]+[0-9]+)[0-9a-zA-Z]*$/
+    }
+
+    var expMatch = {};
+    expMatch.containsNumber = rgularExp.containsNumber.test(str);
+    expMatch.containsAlphabet = rgularExp.containsAlphabet.test(str);
+    expMatch.alphaNumeric = rgularExp.contains_alphaNumeric.test(str);
+
+    expMatch.onlyNumbers = rgularExp.onlyNumbers.test(str);
+    expMatch.onlyLetters = rgularExp.onlyLetters.test(str);
+    expMatch.mixOfAlphaNumeric = rgularExp.onlyMixOfAlphaNumeric.test(str);
+
+    return expMatch;
+}
 
     //### Create Crossfilter Dimensions and Groups
 

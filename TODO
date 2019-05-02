@@ -7,10 +7,10 @@ RECENTLY DONE:
 - DONE y ticks, x ticks
 - DONEish buckets.  Needs more testing and shake down.
 - DONE Arrows to the left of each of the Table headers.
-
+- DONE - fixed table sorting bug for strings that should be numbers (did some type coercion on data in ajax return handler)
 
 Figured out:
-Debug:
+Debugged David boehme's issue:
 http://localhost:8888/web/?sf=/g/g0/pascal/spot_lulesh_dataset/lulesh_data&layout=/g/g0/pascal/spot_lulesh_dataset/layout.json
     * It would appear that somehow the X-scale is not being set correctly for some reason.
     * This was due to the fact that the data was "90","120" so it tried to treat it as a string, which caused it to find out the max and minimum incorrectly.
@@ -37,7 +37,9 @@ TODO LIST
 =================================================
 - Need to get access to /usr/gapps/spot/datasets  (dzpolia currently owns it)  I can't add layout files there.
 - Need to either have data as number or we do the rounding (based on if there's just numbers.
-    * Why does table not always reflect all values present:  This is due to the data is a string type but it should be a numeric type.
+    * Why does table not always reflect all values present:  This is due to the data is a string type but it should be a numeric type?
+    * http://localhost:8888/web/?layout=default_layout.json
+    * Number of Regions should now be sorted as a number and why doesn't 12 appear anywhere in table, but it apepars in number of regions.
 - Bar Charts different colors for each one.
 - may 3rd is David Poliakoff's last day
 - Units.
