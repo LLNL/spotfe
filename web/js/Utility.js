@@ -1,7 +1,8 @@
 var ST = ST || {};
 
 ST.Default = {
-    COMMAND: "/usr/gapps/wf/web/spot/virtenv/bin/python /usr/gapps/wf/web/spot/spot.py"
+    COMMAND: "/usr/gapps/wf/web/spot/virtenv/bin/python /usr/gapps/wf/web/spot/spot.py",
+    LAYOUT: "/g/g0/pascal/default_layout.json"
 };
 
 ST.Utility = function() {
@@ -61,6 +62,9 @@ ST.Utility = function() {
         ST.params.layout = ST.Utility.get_param('layout');
 
         ST.params.max = ST.params.max || 18000;
+
+        //  Can't start using this layout until it's placed
+        //ST.params.layout = ST.params.layout || ST.Default.LAYOUT;
 
         if( !ST.params.machine ) {
             ST.params.machine = on_rz_() ? "rzgenie" : "oslic";

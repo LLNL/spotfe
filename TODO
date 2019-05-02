@@ -6,11 +6,10 @@ RECENTLY DONE:
 - DONE Fixed Title
 - DONE y ticks, x ticks
 - DONEish buckets.  Needs more testing and shake down.
-- Bar Charts different colors for each one.
+- DONE Arrows to the left of each of the Table headers.
 
 
-
-TODO:
+Figured out:
 Debug:
 http://localhost:8888/web/?sf=/g/g0/pascal/spot_lulesh_dataset/lulesh_data&layout=/g/g0/pascal/spot_lulesh_dataset/layout.json
     * It would appear that somehow the X-scale is not being set correctly for some reason.
@@ -30,35 +29,26 @@ RECENTLY DONE:
     * hacked some of the JS links
     * figured out the right input files to use.
     * and got it operational with some hacking: https://lc.llnl.gov/lorenz_base/dev/pascal/optvis/templates/
+- DONE: Got MPI working on CZ.
 
 
 
 TODO LIST
 =================================================
-- DONE: Got MPI working on CZ.
-
-- Fix last bar selectable?
-
-- specific spot.py not working for david -> at compare button (look into)
-- why does table not reflect data/what's in the charts?
-
+- Need to get access to /usr/gapps/spot/datasets  (dzpolia currently owns it)  I can't add layout files there.
+- Need to either have data as number or we do the rounding (based on if there's just numbers.
+    * Why does table not always reflect all values present:  This is due to the data is a string type but it should be a numeric type.
+- Bar Charts different colors for each one.
 - may 3rd is David Poliakoff's last day
-
-
 - Units.
 - Fix X Axis:
     * https://lc.llnl.gov/spot/dcvis/web/?sf=/usr/gapps/spot/datasets/lulesh2small&layout=/usr/gapps/spot/datasets/enhanced_layout.json&BarChart1=3,11
-    * Mushing together. 100000,200000k3000000
 - Fix Y Axis.
+- Fix last bar selectable? -> confirm this.
 
-- Be able to set # of buckets
-    * Default to 20 buckets.
 - Floating point numbers on the X-Axis.
     * Bucketing might fix this issue, if we make sure to use whole numbers.
-
 - Jupyter/MPI clicking on CZ.
-- Arrows in the correct location (just to the left)
-- Caching Issue.
 - Write some stuff about the front end:
     - visualizations that we can do
     - the data and layout interface.

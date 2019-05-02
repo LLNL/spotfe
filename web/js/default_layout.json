@@ -1,0 +1,48 @@
+/* This needs to be in a location accesible by everyone.  My home directory wont work for that. */
+{
+  "charts":
+  [
+    {
+      "dimension": "Compiler Name",
+      "title": "Compiler names + Compiler Version",
+      "viz": "PieChart"
+    },
+    {
+      "dimension": "Code Builder",
+      "title": "Code Builder",
+      "viz": "LeftHorizontalBarChart"
+    },
+    {
+      "dimension": "Compiler Flags",
+      "title": "Compiler Flags",
+      "viz": "PieChart"
+    },
+    {
+      "dimension": "Problem Size",
+      "viz": "BarChart"
+    },
+    {
+      "dimension": "Number of Regions",
+      "title": "Number of Regions",
+      "viz": "BarChart"
+    }
+  ],
+  "table": [
+    {
+      "dimension": "date",
+      "label": "date"
+    },
+    {
+      "dimension": "cali.caliper.version",
+      "label": "cali.caliper.version"
+    },
+    {
+      "dimension": "Problem Size",
+      "label": "Problem Size"
+    },
+    {
+      "dimension": "Region Balance",
+      "label": "Region Balance"
+    }
+  ]
+}

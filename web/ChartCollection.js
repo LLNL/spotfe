@@ -63,6 +63,7 @@ var reduce_authors = function( data ) {
 
         }
 
+
     }
 
     var number_of_authors = Object.keys(uniq_author_count).length;
