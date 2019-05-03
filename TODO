@@ -8,6 +8,8 @@ RECENTLY DONE:
 - DONEish buckets.  Needs more testing and shake down.
 - DONE Arrows to the left of each of the Table headers.
 - DONE - fixed table sorting bug for strings that should be numbers (did some type coercion on data in ajax return handler)
+- DONE - fixed table not showing all values bug: was due to maximum was set to 250 even though there were 5000 values.
+    * Chart Collection Line 264.  It still showed up in the bar charts but not the table.  Once max was increased to proper value, then all values show up even after being sorted.
 
 Figured out:
 Debugged David boehme's issue:
@@ -36,18 +38,9 @@ RECENTLY DONE:
 TODO LIST
 =================================================
 - Need to get access to /usr/gapps/spot/datasets  (dzpolia currently owns it)  I can't add layout files there.
-- Need to either have data as number or we do the rounding (based on if there's just numbers.
-    * Why does table not always reflect all values present:  This is due to the data is a string type but it should be a numeric type?
-    * http://localhost:8888/web/?layout=default_layout.json
-    * Number of Regions should now be sorted as a number and why doesn't 12 appear anywhere in table, but it apepars in number of regions.
 - Bar Charts different colors for each one.
 - may 3rd is David Poliakoff's last day
 - Units.
-- Fix X Axis:
-    * https://lc.llnl.gov/spot/dcvis/web/?sf=/usr/gapps/spot/datasets/lulesh2small&layout=/usr/gapps/spot/datasets/enhanced_layout.json&BarChart1=3,11
-- Fix Y Axis.
-- Fix last bar selectable? -> confirm this.
-
 - Floating point numbers on the X-Axis.
     * Bucketing might fix this issue, if we make sure to use whole numbers.
 - Jupyter/MPI clicking on CZ.
