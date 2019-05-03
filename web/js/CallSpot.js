@@ -127,11 +127,13 @@ ST.CallSpot = function() {
                     valid_obj.drilldown = ['Jupyter', 'mpi', 'walltime'];
                     valid_obj.key = key;
 
-                    for( var y in valid_obj ) {
-                        var what_is_it = matchExpression(valid_obj[y]);
+                    for( var dimension in valid_obj ) {
 
-                        if (what_is_it.onlyNumbers) {
-                            valid_obj[y] = +valid_obj[y];
+                        var what_is_it = matchExpression(valid_obj[dimension]);
+                        var sda = sort_dimension_as_number_(dimension);
+
+                        if (what_is_it.onlyNumbers || sda) {
+                            valid_obj[dimension] = +valid_obj[dimension];
                         }
                     }
 
@@ -160,6 +162,26 @@ ST.CallSpot = function() {
             bind_();
         }
     };
+
+    var are_numbers_ = null;
+    var sort_dimension_as_number_ = function( dimension ) {
+
+        if( !are_numbers_ ) {
+
+            are_numbers_ = {};
+
+            var table = ST.layout_used.table;
+
+            for( var x=0; x < table.length; x++ ) {
+
+                var dim = table[x].dimension;
+                are_numbers_[ dim ] = table[x].sort_as_number;
+            }
+        }
+
+        return are_numbers_[ dimension ] ? are_numbers_[ dimension ] : false;
+    };
+
 
     //  Certain events like filtering unbind the buttons, so need to rebind.
     var bind_ = function() {

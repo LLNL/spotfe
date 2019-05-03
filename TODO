@@ -1,15 +1,18 @@
 RECENTLY DONE:
-- DONE: Labels for X and Y
+- DONE: Labels for X and Y axis
 - DONE for figure of Merit try to round down.
 - DONE replace "willEmailYou ToComplain" with "pascal", filler0 (matt) and filler1 (david)
 - DONE 1e7, 1e8 abbreviations for Num of Iterations.
-- DONE Fixed Title
-- DONE y ticks, x ticks
+
+DONE since last time.
+- DONE Fixed Title for graph
+- DONE y ticks, x ticks - you can roughly specify the number of ticks you want (experimental)
 - DONEish buckets.  Needs more testing and shake down.
 - DONE Arrows to the left of each of the Table headers.
 - DONE - fixed table sorting bug for strings that should be numbers (did some type coercion on data in ajax return handler)
 - DONE - fixed table not showing all values bug: was due to maximum was set to 250 even though there were 5000 values.
     * Chart Collection Line 264.  It still showed up in the bar charts but not the table.  Once max was increased to proper value, then all values show up even after being sorted.
+- DONE - sort_as_number feature.
 
 Figured out:
 Debugged David boehme's issue:
