@@ -7,13 +7,13 @@ ST.UrlStateManager = function() {
         var aname = chart.anchorName();
         var instance_num = +aname.replace(/\D/g,'');
         var range = filters[0];
+        var param = type + instance_num;
 
         console.log(instance_num);
 
         if(range) {
             console.log('range:', range[0], range[1]);
 
-            var param = type + instance_num;
             var paramValue = "";
 
             if( type === 'PieChart') {
@@ -33,10 +33,32 @@ ST.UrlStateManager = function() {
             history.pushState({}, null, newUrl);
         }
         else {
+
+            var newUrl = removeParam( param, location.href );
+            history.pushState({}, null, newUrl);
+
             console.log('no filters');
         }
     };
 
+
+    function removeParam(key, sourceURL) {
+        var rtn = sourceURL.split("?")[0],
+            param,
+            params_arr = [],
+            queryString = (sourceURL.indexOf("?") !== -1) ? sourceURL.split("?")[1] : "";
+        if (queryString !== "") {
+            params_arr = queryString.split("&");
+            for (var i = params_arr.length - 1; i >= 0; i -= 1) {
+                param = params_arr[i].split("=")[0];
+                if (param === key) {
+                    params_arr.splice(i, 1);
+                }
+            }
+            rtn = rtn + "?" + params_arr.join("&");
+        }
+        return rtn;
+    }
 
     function updateURLParameter(url, param, paramVal){
         var newAdditionalURL = "";
