@@ -32,14 +32,14 @@ $(document).ready(  function() {
     //var dir = "/usr/gapps/wf/web/spot/data/lulesh_maximal/";
 
     var dir = ST.Utility.get_param('directory');
-    var predir = " --directory " + dir + " ";
+    var predir = " " + dir + " --filenames ";
     var command = ST.Utility.get_param('command');
     command = decodeURIComponent(command);
 
     ST.CallSpot.ajax({
         file: predir + dirs,
         command: command,
-        type: 'durations2',
+        type: 'hierarchical',
         success: init
     });
 });
@@ -55,6 +55,17 @@ var init = function( dat ) {
 
     console.dir(data);
 
+
+// elm init from main.js
+    let app = Elm.Main.init(
+        {
+            node: document.querySelector('#durations-chart'),
+        //    flags: {rootName: data.durationLists[0].funcPath.split('/').shift()}
+        })
+
+    app.ports.setData.send(data);
+
+    /*
 // stratify incoming data
     const stratFunc = d3.stratify()
         .id(d => d.funcPath.split("/").pop())
@@ -94,13 +105,6 @@ var init = function( dat ) {
             setPath(path)
         }
     }
-
-// elm init from main.js
-    let app = Elm.Main.init(
-        {
-            node: document.querySelector('#durations-chart'),
-            flags: {rootName: data.durationLists[0].funcPath.split('/').shift()}
-        })
 
 // to elm
     function setPath(pathName) {
@@ -218,7 +222,7 @@ var init = function( dat ) {
             },
             ],
         }
-    );
+    );*/
 
 
 };

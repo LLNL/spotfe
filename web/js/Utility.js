@@ -64,7 +64,11 @@ ST.Utility = function() {
         ST.params.max = ST.params.max || 18000;
 
         //  Can't start using this layout until it's placed
-        //ST.params.layout = ST.params.layout || ST.Default.LAYOUT;
+        if( !ST.params.layout ) {
+            //  https://lc.llnl.gov/spot/dcvis/web/?
+            // sf=/usr/gapps/spot/datasets/lulesh2small&layout=/g/g0/pascal/enhanced_layout_label.json&BarChart2=0,-&PieChart1=rzgenie2
+            ST.params.layout = "/g/g0/pascal/enhanced_layout_label.json";
+        }
 
         if( !ST.params.machine ) {
             ST.params.machine = on_rz_() ? "rzgenie" : "oslic";
