@@ -60,6 +60,8 @@ ST.Utility = function() {
         ST.params.max = ST.Utility.get_param('max');
         ST.params.machine = ST.Utility.get_param('machine');
         ST.params.layout = ST.Utility.get_param('layout');
+        ST.params.last_days = ST.Utility.get_param('last_days') || 0;
+        ST.params.exe_compare = ST.Utility.get_param('exe_compare') || 0;
 
         ST.params.max = ST.params.max || 18000;
 

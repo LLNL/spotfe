@@ -201,6 +201,8 @@ ST.BarChart = function() {
 
             dc.redrawAll();
             bind_sort();
+
+            ST.UrlStateManager.load_filter( inst_, 'BarChart' );
         },
         load_filter: function() {
 

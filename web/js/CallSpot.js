@@ -105,6 +105,11 @@ ST.CallSpot = function() {
 
             console.dir(parsed);
 
+            var now = Math.round( Date.now() / 1000);
+            var since = ST.params.last_days * 24 * 3600;
+            var min_date = ST.params.last_days === 0 ? 0 : (now - since);
+
+
             var newp = [];
 
             for (var key in parsed) {
@@ -112,34 +117,39 @@ ST.CallSpot = function() {
                 if (newp.length < ST.params.max) {
 
                     var valid_obj = parsed[key];
-                    var date = 1539283462;
 
-                    var spot_date = new Date( date * 1000 );
+                    //  Generate a random date for now.
+                    var date = 1557354304 - Math.floor( Math.random() * 280 * 86000);
 
-                    var month = spot_date.getMonth() + 1;
-                    var day = spot_date.getDate();
-                    var year = spot_date.getFullYear();
+                    if( date > min_date ) {
 
-                    //  This is just for stub
-                    valid_obj.epoch_date = date;
-                    valid_obj.date = month + "/" + day + "/" + year;
-                    valid_obj.run_id = "id_" + Math.floor(Math.random()*10000);
-                    valid_obj.drilldown = ['Jupyter', 'mpi', 'walltime'];
-                    valid_obj.key = key;
+                        var spot_date = new Date(date * 1000);
 
-                    for( var dimension in valid_obj ) {
+                        var month = spot_date.getMonth() + 1;
+                        var day = spot_date.getDate();
+                        var year = spot_date.getFullYear();
 
-                        var what_is_it = matchExpression(valid_obj[dimension]);
-                        var sda = sort_dimension_as_number_(dimension);
+                        //  This is just for stub
+                        valid_obj.epoch_date = date;
+                        valid_obj.date = month + "/" + day + "/" + year;
+                        valid_obj.run_id = "id_" + Math.floor(Math.random() * 10000);
+                        valid_obj.drilldown = ['Jupyter', 'mpi', 'walltime'];
+                        valid_obj.key = key;
 
-                        if (what_is_it.onlyNumbers || sda) {
-                            valid_obj[dimension] = +valid_obj[dimension];
+                        for (var dimension in valid_obj) {
+
+                            var what_is_it = matchExpression(valid_obj[dimension]);
+                            var sda = sort_dimension_as_number_(dimension);
+
+                            if (what_is_it.onlyNumbers || sda) {
+                                valid_obj[dimension] = +valid_obj[dimension];
+                            }
                         }
+
+
+                        newp.push(valid_obj);
+                        objs_by_run_id_[valid_obj.run_id] = valid_obj;
                     }
-
-
-                    newp.push(valid_obj);
-                    objs_by_run_id_[valid_obj.run_id] = valid_obj;
                 }
             }
 
@@ -159,7 +169,13 @@ ST.CallSpot = function() {
             if( window.RenderChartCollection ) {
                 RenderChartCollection(newp, ST.layout_used);  //  ST.ReturnedDataStub.layout); //
             }
+
             bind_();
+
+            //  execute compare right away, if we're exe_compare
+            if( exe_compare_() ) {
+                drill_down_();
+            }
         }
     };
 
@@ -230,27 +246,40 @@ ST.CallSpot = function() {
 
         $('.dc-table-row .key').each( function() {
 
-            str += ' ' + $(this).html();
+            var cali_key = $(this).html();
+            str += ' ' + cali_key;
         });
 
         return str.substr(1);
     };
 
 
+    var exe_compare_ = function() {
+        return ST.params.exe_compare === "1";
+    };
+
+
     var drill_down_ = function() {
 
         if( !$(this).hasClass('drilldown')) {
+
             //  compare button
             var keys = get_keys_();
             var machine = "machine=" + ST.params.machine + "&";
+
             localStorage.setItem('calis', keys);
 
             var directory = ST.Utility.get_file();
 
             var command = ST.Utility.get_param('command');
             var comm = command ? '&command=' + command : "";
+            var goto_url = '../dur_sankey/?' + machine + 'calis=local&directory=' + directory + comm;
 
-            window.open('../dur_sankey/?' + machine + 'calis=local&directory=' + directory + comm);
+            if( exe_compare_() ) {
+                location.href = goto_url;
+            } else {
+                window.open( goto_url );
+            }
 
             return false;
         }
