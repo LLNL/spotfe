@@ -6,13 +6,14 @@ RECENTLY DONE:
 
 DONE since last time.
 - DONE Fixed Title for graph
-- DONE y ticks, x ticks - you can roughly specify the number of ticks you want (experimental)
+- DONE y ticks, x ticks - you can roughly specify the number of ticks you want
 - DONEish buckets.  Needs more testing and shake down.
 - DONE Arrows to the left of each of the Table headers.
 - DONE - fixed table sorting bug for strings that should be numbers (did some type coercion on data in ajax return handler)
 - DONE - fixed table not showing all values bug: was due to maximum was set to 250 even though there were 5000 values.
     * Chart Collection Line 264.  It still showed up in the bar charts but not the table.  Once max was increased to proper value, then all values show up even after being sorted.
 - DONE - sort_as_number feature.
+
 
 Figured out:
 Debugged David boehme's issue:
@@ -40,6 +41,10 @@ RECENTLY DONE:
 
 TODO LIST
 =================================================
+- First priority: is making the last 30 days of data for compare button
+- Check Left column to make sure that it's not hard coded.
+- Hi Pascal! I get a syntax error in Spot2 in ChartCollection.js:78:32 in Firefox. It doesn't like the regex there. Works fine in Chrome.
+- X range -> take the distance from Min to Max (1% or 3%) of the distance (from Min to max) and add to the max xrange
 - Need to get access to /usr/gapps/spot/datasets  (dzpolia currently owns it)  I can't add layout files there.
 - Bar Charts different colors for each one.
 - may 3rd is David Poliakoff's last day

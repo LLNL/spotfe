@@ -181,7 +181,9 @@
             "title": "Number of Regions",
             "viz": "BarChart",
 			"y-label": "Num. of runs for our Figure of merit ch.",
-			"x-label": "figure x label"
+			"x-label": "figure x label",
+            "x-ticks": 8,
+            "y-ticks": 12
         }
     ],
     "table": [
@@ -195,7 +197,8 @@
         },
         {
             "dimension": "Problem Size",
-            "label": "Problem Size"
+            "label": "Problem Size",
+            "sort_as_number": true
         },
         {
             "dimension": "Region Balance",
@@ -211,6 +214,26 @@
     <p>You can specify labels in any of the BarChart graphs, simply by adding "x-label", or "y-label"</p>
 
 
+    <h2>Ticks</h2>
+    <p>You can specify the number of ticks you would like on the X-axis or the y-axis, via "x-ticks", or "y-ticks".</p>
+
+
+    <h2>Table Column Sorting</h2>
+    <p>
+        By default the table columns will be sorted either as a string or as numbers based on the type of the data.  Hence "GNU" would be sorted as a string, but 238438 would be sorted as a number.  If
+    the string only contains numbers, such as "234234" we'll typecast it to a number and sort as a number.  If you wish to coerce a string to be sorted as a number, for instance "234.44", then
+    you can use a "sort_as_number": true in the table definition, in the layout spec.
+    </p>
+
+
+    <h2></h2>
+    <p></p>
+
+
+    <h2></h2>
+    <p></p>
+
+
 
     <h2>Getting Started</h2>
     <p>
@@ -223,22 +246,6 @@
         Then you can create your own data sets.  At that point, you’ll need to start specifying a layout file.
 
     </p>
-
-
-    <h2></h2>
-    <p></p>
-
-
-    <h2></h2>
-    <p></p>
-
-
-    <h2></h2>
-    <p></p>
-
-
-    <h2></h2>
-    <p></p>
 
 
     <h2></h2>
