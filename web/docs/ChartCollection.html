@@ -692,7 +692,34 @@ changes, without re-rendering everything</p>
 };
 
 
-<span class="hljs-keyword">var</span> bind_sort = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+<span class="hljs-keyword">var</span> bind_sort = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-31">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-31">&#182;</a>
+              </div>
+              <p> for some reason, dc.js capitalizes column headings, thus messing up the sort
+ reference when they click on the arrow click.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> normalize_indexes_ = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> obj </span>) </span>{
+
+        <span class="hljs-keyword">var</span> nobj = {};
+
+        <span class="hljs-keyword">for</span>( <span class="hljs-keyword">var</span> x <span class="hljs-keyword">in</span> obj ) {
+            <span class="hljs-keyword">var</span> lower = x.toLowerCase();
+            nobj[lower] = obj[x];
+        }
+
+        <span class="hljs-keyword">return</span> nobj;
+    };
+
 
     $(<span class="hljs-string">'.dc-data-table th'</span>).ArrowFunctions({
         <span class="hljs-attr">arrow_click</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sort_me</span>(<span class="hljs-params"></span>) </span>{
@@ -701,13 +728,15 @@ changes, without re-rendering everything</p>
             <span class="hljs-keyword">var</span> is_up = target.hasClass(<span class="hljs-string">'up_arrow'</span>);
             <span class="hljs-keyword">var</span> what_sort = target.parent().html();
 
-            what_sort = what_sort.split(<span class="hljs-string">'&lt;'</span>)[<span class="hljs-number">0</span>];
+            what_sort = what_sort.split(<span class="hljs-string">'&lt;'</span>)[<span class="hljs-number">0</span>].toLowerCase();
 
             <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"now sort by: "</span> + what_sort);
             nasdaqTable.sortBy( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">d</span>) </span>{
 
+                <span class="hljs-keyword">var</span> nobj = normalize_indexes_(d);
+
                 <span class="hljs-keyword">var</span> col = <span class="hljs-string">"Region Balance"</span>;
-                <span class="hljs-keyword">return</span> d[what_sort]; <span class="hljs-comment">// d.date;</span>
+                <span class="hljs-keyword">return</span> nobj[what_sort]; <span class="hljs-comment">// d.date;</span>
             })
                 .order( is_up ? d3.ascending : d3.descending );
 
@@ -742,11 +771,11 @@ $.fn.ArrowFunctions = <span class="hljs-function"><span class="hljs-keyword">fun
         </li>
         
         
-        <li id="section-31">
+        <li id="section-32">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-31">&#182;</a>
+                <a class="pilcrow" href="#section-32">&#182;</a>
               </div>
               <p>Asperational: <a href="https://lc.llnl.gov/spot/dcvis/web/?sf=/usr/global/web-pages/lc/www/spot/lulesh2small&amp;machine=oslic&amp;command=/usr/tce/bin/python3%20/usr/global/web-pages/lc/www/spot/spot.py&amp;get_rundata_url=https://lc.llnl.gov/lorenz/lora/lora.cgi/command/oslic&quot;">https://lc.llnl.gov/spot/dcvis/web/?sf=/usr/global/web-pages/lc/www/spot/lulesh2small&amp;machine=oslic&amp;command=/usr/tce/bin/python3%20/usr/global/web-pages/lc/www/spot/spot.py&amp;get_rundata_url=https://lc.llnl.gov/lorenz/lora/lora.cgi/command/oslic&quot;</a>,</p>
 
@@ -803,11 +832,11 @@ $.fn.ArrowFunctions = <span class="hljs-function"><span class="hljs-keyword">fun
         </li>
         
         
-        <li id="section-32">
+        <li id="section-33">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-32">&#182;</a>
+                <a class="pilcrow" href="#section-33">&#182;</a>
               </div>
               <p> Need to find the dc.js end event handler.</p>
 

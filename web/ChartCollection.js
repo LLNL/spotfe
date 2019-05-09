@@ -320,6 +320,21 @@ var RenderChartCollection = function( the_data, layout_spec ) {
 
 var bind_sort = function() {
 
+    //  for some reason, dc.js capitalizes column headings, thus messing up the sort
+    //  reference when they click on the arrow click.
+    var normalize_indexes_ = function( obj ) {
+
+        var nobj = {};
+
+        for( var x in obj ) {
+            var lower = x.toLowerCase();
+            nobj[lower] = obj[x];
+        }
+
+        return nobj;
+    };
+
+
     $('.dc-data-table th').ArrowFunctions({
         arrow_click: function sort_me() {
 
@@ -327,13 +342,15 @@ var bind_sort = function() {
             var is_up = target.hasClass('up_arrow');
             var what_sort = target.parent().html();
 
-            what_sort = what_sort.split('<')[0];
+            what_sort = what_sort.split('<')[0].toLowerCase();
 
             console.log("now sort by: " + what_sort);
             nasdaqTable.sortBy( function(d) {
 
+                var nobj = normalize_indexes_(d);
+
                 var col = "Region Balance";
-                return d[what_sort]; // d.date;
+                return nobj[what_sort]; // d.date;
             })
                 .order( is_up ? d3.ascending : d3.descending );
 

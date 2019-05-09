@@ -41,7 +41,8 @@ RECENTLY DONE:
 
 TODO LIST
 =================================================
-- Table Sorting is Broken, fix this.
+- Table Sorting is Broken, fix this. -> thi sis because the first letter is capitalized, so when it goes to sort, it doesn't recognize the string.
+    * prevent dc.js auto capitalize?
 - Announce last_x_day feature, plus the exe_compare=1 feature.
 
 - X range -> take the distance from Min to Max (1% or 3%) of the distance (from Min to max) and add to the max xrange
