@@ -97,7 +97,14 @@ ST.BarChart = function() {
         var one_i = inst_[inst_num_];
         $('.runtime-chart' + inst_num_).attr('instance_num', inst_num_);
 
-        var domain = options.xrange || [min - 1, parseInt(max) + 2];
+        var distance = max - min;
+        var diff_dist = distance * .03;
+
+        if( distance > 5 ) {
+            diff_dist = 1;
+        }
+
+        var domain = options.xrange || [min - diff_dist, max + diff_dist];
         //domain = [0,80];
 
         var xinput = d3.scaleLinear().domain( domain );
