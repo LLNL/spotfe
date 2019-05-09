@@ -202,7 +202,7 @@ ST.BarChart = function() {
             dc.redrawAll();
             bind_sort();
 
-            ST.UrlStateManager.load_filter( inst_, 'BarChart' );
+            ST.UrlStateManager.remove_param( 'BarChart' + instance_num );
         },
         load_filter: function() {
 

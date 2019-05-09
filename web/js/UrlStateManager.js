@@ -1,24 +1,24 @@
 ST.UrlStateManager = function() {
 
     //  User made a change in the chart filters.
-    var user_filtered_ = function( chart, type) {
+    var user_filtered_ = function( chart, type ) {
 
         var filters = chart.filters();
         var aname = chart.anchorName();
-        var instance_num = +aname.replace(/\D/g,'');
+        var instance_num = +aname.replace(/\D/g, '');
         var range = filters[0];
         var param = type + instance_num;
 
         console.log(instance_num);
 
-        if(range) {
+        if (range) {
             console.log('range:', range[0], range[1]);
 
             var paramValue = "";
 
-            if( type === 'PieChart') {
+            if (type === 'PieChart') {
 
-                for( var x =0; x < filters.length; x++ ) {
+                for (var x = 0; x < filters.length; x++) {
                     paramValue += "," + filters[x];
                 }
 
@@ -28,21 +28,19 @@ ST.UrlStateManager = function() {
                 paramValue = range[0] + ',' + range[1];
             }
 
-            var newUrl = updateURLParameter( location.href, param, paramValue );
+            var loc = "" + location.href;
+            var newUrl = updateURLParameter(loc, param, paramValue);
 
             history.pushState({}, null, newUrl);
-        }
-        else {
-
-            var newUrl = removeParam( param, location.href );
-            history.pushState({}, null, newUrl);
-
-            console.log('no filters');
         }
     };
 
 
-    function removeParam(key, sourceURL) {
+
+    function remove_param_(key) {
+
+        var sourceURL = location.href;
+
         var rtn = sourceURL.split("?")[0],
             param,
             params_arr = [],
@@ -57,8 +55,10 @@ ST.UrlStateManager = function() {
             }
             rtn = rtn + "?" + params_arr.join("&");
         }
-        return rtn;
-    }
+
+        history.pushState({}, null, rtn);
+    };
+
 
     function updateURLParameter(url, param, paramVal){
         var newAdditionalURL = "";
@@ -109,6 +109,7 @@ ST.UrlStateManager = function() {
     };
 
     return {
+        remove_param: remove_param_,
         user_filtered: user_filtered_,
         load_filter: load_filter_
     }
