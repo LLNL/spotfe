@@ -41,14 +41,13 @@ RECENTLY DONE:
 
 TODO LIST
 =================================================
-- First priority: is making the last 30 days of data for compare button
-    * Let spot1 accept a parameter (last_90_days) -> will need to get those.
-    * First iteration just go to spot1.
-- Fix the default_layout file bug on CZ.
-- X range -> take the distance from Min to Max (1% or 3%) of the distance (from Min to max) and add to the max xrange
+- Table Sorting is Broken, fix this.
+- Announce last_x_day feature, plus the exe_compare=1 feature.
 
+- X range -> take the distance from Min to Max (1% or 3%) of the distance (from Min to max) and add to the max xrange
 - Joy Kitson -> make some trips there. (Matt here mon,tues,wed)  Matt leaving thursday
     * she's coming on monday.  first week is LTrain, getting a system, cafeteria, dada.
+
 - Check Left column to make sure that it's not hard coded.
 - Hi Pascal! I get a syntax error in Spot2 in ChartCollection.js:78:32 in Firefox. It doesn't like the regex there. Works fine in Chrome.
 - Need to get access to /usr/gapps/spot/datasets  (dzpolia currently owns it)  I can't add layout files there.

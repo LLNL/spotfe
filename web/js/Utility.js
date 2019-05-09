@@ -69,7 +69,7 @@ ST.Utility = function() {
         if( !ST.params.layout ) {
             //  https://lc.llnl.gov/spot/dcvis/web/?
             // sf=/usr/gapps/spot/datasets/lulesh2small&layout=/g/g0/pascal/enhanced_layout_label.json&BarChart2=0,-&PieChart1=rzgenie2
-            ST.params.layout = "/g/g0/pascal/enhanced_layout_label.json";
+            ST.params.layout = "/usr/gapps/spot/datasets/enhanced_layout_label.json";
         }
 
         if( !ST.params.machine ) {
