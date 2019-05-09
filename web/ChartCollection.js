@@ -258,7 +258,8 @@ var RenderChartCollection = function( the_data, layout_spec ) {
 
             var format = d3.format('02d');
             var date = new Date(d.epoch_date * 1000);
-            return date.getFullYear() + '/' + format((date.getMonth() + 1));
+            //return date.getFullYear() + '/' + format((date.getMonth() + 1));
+            return 1;
         })
         // (_optional_) max number of records to be shown, `default = 25`
         .size( ST.params.max )
