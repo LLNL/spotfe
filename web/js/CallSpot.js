@@ -153,6 +153,14 @@ ST.CallSpot = function() {
                 }
             }
 
+            var num_total = Object.keys(parsed).length;
+            var num_past_min_date = newp.length;
+
+            if( num_past_min_date === 0 ) {
+                alert('Although you have ' + num_total + ' total data objects, you only 0 data objects with a date greater than ' + since +
+                    '.  If you wish to eliminate this constraint, remove "last_days" from the URL parameter list.');
+            }
+
             newp[0]['Code Builder'] = "Filler0";
             newp[1]['Code Builder'] = "Filler1";
             /*newp[2]['Compiler Name'] = "GNU Filler";
@@ -179,7 +187,9 @@ ST.CallSpot = function() {
         }
     };
 
+
     var are_numbers_ = null;
+
     var sort_dimension_as_number_ = function( dimension ) {
 
         if( !are_numbers_ ) {
