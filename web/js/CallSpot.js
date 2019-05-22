@@ -90,16 +90,17 @@ ST.CallSpot = function() {
                 ST.Utility.error( er + additional);
 
 
-            } else
-            if( parsed_whole.layout ) {
-                ST.layout_used = parsed_whole.layout;
-                parsed = parsed_whole.data;
             } else {
+                if (parsed_whole.layout) {
+                    ST.layout_used = parsed_whole.layout;
+                    parsed = parsed_whole.data;
+                } else {
 
-                command_out2 = parsed_whole.output.command_out;
-                var data = JSON.parse(command_out2);
-                parsed = data.data;
-                ST.layout_used = data.layout;
+                    command_out2 = parsed_whole.output.command_out;
+                    var data = JSON.parse(command_out2);
+                    parsed = data.data;
+                    ST.layout_used = data.layout;
+                }
             }
 
 
@@ -153,24 +154,18 @@ ST.CallSpot = function() {
                 }
             }
 
+
             var num_total = Object.keys(parsed).length;
             var num_past_min_date = newp.length;
 
             if( num_past_min_date === 0 ) {
-                alert('Although you have ' + num_total + ' total data objects, you only 0 data objects with a date greater than ' + since +
-                    '.  If you wish to eliminate this constraint, remove "last_days" from the URL parameter list.');
+                alert('Although you have ' + num_total + ' total data objects, you only 0 data objects with a date greater than ' + min_date +
+                    '(last_days=' + ST.params.last_days + ').  If you wish to eliminate this constraint, remove "last_days" from the URL parameter list.');
             }
 
             newp[0]['Code Builder'] = "Filler0";
             newp[1]['Code Builder'] = "Filler1";
-            /*newp[2]['Compiler Name'] = "GNU Filler";
-             newp[3]['Compiler Name'] = "GNU Filler";
-             newp[4]['Compiler Name'] = "GNU Filler";
-             newp[5]['Compiler Name'] = "GNU Filler";
-             newp[6]['Compiler Name'] = "GNU Filler";
-             newp[7]['Compiler Name'] = "GNU Filler";*/
-
-            //console.dir(ST.ReturnedDataStub.layout);
+            /*newp[2]['Compiler Name'] = "GNU Filler";*/
 
             console.dir( ST.layout_used );
 
