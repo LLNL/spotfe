@@ -139,7 +139,7 @@ ST.CallSpot = function() {
 
                         for (var dimension in valid_obj) {
 
-                            var what_is_it = matchExpression(valid_obj[dimension]);
+                            var what_is_it = ST.Utility.match_expression(valid_obj[dimension]);
                             var sda = sort_dimension_as_number_(dimension);
 
                             if (what_is_it.onlyNumbers || sda) {

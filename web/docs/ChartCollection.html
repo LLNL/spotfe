@@ -2,7 +2,7 @@
 
 <html>
 <head>
-  <title>dc.js Getting Started and How-To Guide</title>
+  <title>ChartCollection.js</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
   <link rel="stylesheet" media="all" href="docco.css" />
@@ -13,6 +13,12 @@
     
     <ul class="sections">
         
+          <li id="title">
+              <div class="annotation">
+                  <h1>ChartCollection.js</h1>
+              </div>
+          </li>
+        
         
         
         <li id="section-1">
@@ -21,11 +27,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <h1 id="dc-js-getting-started-and-how-to-guide">dc.js Getting Started and How-To Guide</h1>
-
+              
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-meta">'use strict'</span>;
+            <div class="content"><div class='highlight'><pre><span class="hljs-meta">
+'use strict'</span>;
 
 <span class="hljs-keyword">var</span> ST = ST || {};
 <span class="hljs-keyword">var</span> nasdaqTable;
@@ -105,25 +111,7 @@ reduce_authors(data);</p>
 </code></pre>
             </div>
             
-            <div class="content"><div class='highlight'><pre>        data[z].buttons = data[z].data;</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-4">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-4">&#182;</a>
-              </div>
-              <p> hack it for now, so that they can do the SE Paper on time.</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">var</span> demo_mode = <span class="hljs-number">1</span>;
-        <span class="hljs-keyword">if</span>( demo_mode ) {
-
-        }
+            <div class="content"><div class='highlight'><pre>        data[z].buttons = data[z].data;
     }
 
     <span class="hljs-keyword">var</span> number_of_authors = <span class="hljs-built_in">Object</span>.keys(uniq_author_count).length;
@@ -135,41 +123,36 @@ reduce_authors(data);</p>
         </li>
         
         
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>d.year = d3.timeYear(d.dd);</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    });</pre></div></div>
+            
+        </li>
+        
+        
         <li id="section-5">
             <div class="annotation">
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
-              <p>d.year = d3.timeYear(d.dd);</p>
+              <p> Create Crossfilter Dimensions and Groups
+ See the <a href="https://github.com/square/crossfilter/wiki/API-Reference">crossfilter API</a> for reference.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    });
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-keyword">var</span> RenderChartCollection = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> the_data, layout_spec </span>) </span>{
 
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">matchExpression</span>(<span class="hljs-params"> str </span>) </span>{
-    <span class="hljs-keyword">var</span> rgularExp = {
-        <span class="hljs-attr">contains_alphaNumeric</span> : <span class="hljs-regexp">/^(?!-)(?!.*-)[A-Za-z0-9-]+(?&lt;!-)$/</span>,
-        <span class="hljs-attr">containsNumber</span> : <span class="hljs-regexp">/\d+/</span>,
-        <span class="hljs-attr">containsAlphabet</span> : <span class="hljs-regexp">/[a-zA-Z]/</span>,
-
-        <span class="hljs-attr">onlyLetters</span> : <span class="hljs-regexp">/^[A-Za-z]+$/</span>,
-        <span class="hljs-attr">onlyNumbers</span> : <span class="hljs-regexp">/^[0-9]+$/</span>,
-        <span class="hljs-attr">onlyMixOfAlphaNumeric</span> : <span class="hljs-regexp">/^([0-9]+[a-zA-Z]+|[a-zA-Z]+[0-9]+)[0-9a-zA-Z]*$/</span>
-    }
-
-    <span class="hljs-keyword">var</span> expMatch = {};
-    expMatch.containsNumber = rgularExp.containsNumber.test(str);
-    expMatch.containsAlphabet = rgularExp.containsAlphabet.test(str);
-    expMatch.alphaNumeric = rgularExp.contains_alphaNumeric.test(str);
-
-    expMatch.onlyNumbers = rgularExp.onlyNumbers.test(str);
-    expMatch.onlyLetters = rgularExp.onlyLetters.test(str);
-    expMatch.mixOfAlphaNumeric = rgularExp.onlyMixOfAlphaNumeric.test(str);
-
-    <span class="hljs-keyword">return</span> expMatch;
-}</pre></div></div>
+    <span class="hljs-built_in">console</span>.dir( the_data );</pre></div></div>
             
         </li>
         
@@ -180,7 +163,7 @@ reduce_authors(data);</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
-              <h3 id="create-crossfilter-dimensions-and-groups">Create Crossfilter Dimensions and Groups</h3>
+              <p>   ST.MakeNiceData.make( the_data );</p>
 
             </div>
             
@@ -193,37 +176,6 @@ reduce_authors(data);</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
-              <p>See the <a href="https://github.com/square/crossfilter/wiki/API-Reference">crossfilter API</a> for reference.</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>
-<span class="hljs-keyword">var</span> RenderChartCollection = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> the_data, layout_spec </span>) </span>{
-
-    <span class="hljs-built_in">console</span>.dir( the_data );</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-8">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-8">&#182;</a>
-              </div>
-              <p>   ST.MakeNiceData.make( the_data );</p>
-
-            </div>
-            
-        </li>
-        
-        
-        <li id="section-9">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-9">&#182;</a>
-              </div>
               <p> ST.ReturnedDataStub.data</p>
 
             </div>
@@ -234,33 +186,19 @@ reduce_authors(data);</p>
         </li>
         
         
-        <li id="section-10">
+        <li id="section-8">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-10">&#182;</a>
+                <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
               <p>Dimension by full date</p>
 
             </div>
             
             <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> dateDimension = ndx.dimension(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{
-        <span class="hljs-keyword">return</span> dateFormatParser(d.date);</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-11">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-11">&#182;</a>
-              </div>
-              <p>return d.dd;</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>    });
+        <span class="hljs-keyword">return</span> dateFormatParser(d.date);
+    });
 
 
     <span class="hljs-keyword">var</span> layout_charts = layout_spec.charts;
@@ -313,11 +251,11 @@ reduce_authors(data);</p>
         </li>
         
         
-        <li id="section-12">
+        <li id="section-9">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-12">&#182;</a>
+                <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
               <h4 id="data-count">Data Count</h4>
 
@@ -326,11 +264,11 @@ reduce_authors(data);</p>
         </li>
         
         
-        <li id="section-13">
+        <li id="section-10">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-13">&#182;</a>
+                <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
               <p>Create a data count widget and use the given css selector as anchor. You can also specify
 an optional chart group for this chart to be scoped within. When a chart belongs
@@ -348,11 +286,11 @@ on other charts within the same chart group.
         </li>
         
         
-        <li id="section-14">
+        <li id="section-11">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-14">&#182;</a>
+                <a class="pilcrow" href="#section-11">&#182;</a>
               </div>
               <p>Create chart objects associated with the container elements identified by the css selector.
 Note: It is often a good idea to have these objects accessible at the global scope so that they can be modified or
@@ -370,11 +308,11 @@ filtered by other page controls.</p>
         </li>
         
         
-        <li id="section-15">
+        <li id="section-12">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-15">&#182;</a>
+                <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
               <p>(<em>optional</em>) <code>.html</code> sets different html when some records or all records are selected.
 <code>.html</code> replaces everything in the anchor with the html given using the following function.
@@ -391,11 +329,11 @@ filtered by other page controls.</p>
         </li>
         
         
-        <li id="section-16">
+        <li id="section-13">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-16">&#182;</a>
+                <a class="pilcrow" href="#section-13">&#182;</a>
               </div>
               <h4 id="data-table">Data Table</h4>
 
@@ -404,11 +342,11 @@ filtered by other page controls.</p>
         </li>
         
         
-        <li id="section-17">
+        <li id="section-14">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-17">&#182;</a>
+                <a class="pilcrow" href="#section-14">&#182;</a>
               </div>
               <p>Create a data table widget and use the given css selector as anchor. You can also specify
 an optional chart group for this chart to be scoped within. When a chart belongs
@@ -461,11 +399,11 @@ on other charts within the same chart group.
         </li>
         
         
-        <li id="section-18">
+        <li id="section-15">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-18">&#182;</a>
+                <a class="pilcrow" href="#section-15">&#182;</a>
               </div>
               <p> <a href="https://github.com/HamsterHuey/intothevoid.io/blob/master/code/2017/dcjs%20sortable%20table/dcjsSortableTable.html">https://github.com/HamsterHuey/intothevoid.io/blob/master/code/2017/dcjs%20sortable%20table/dcjsSortableTable.html</a></p>
 
@@ -478,11 +416,11 @@ on other charts within the same chart group.
         </li>
         
         
-        <li id="section-19">
+        <li id="section-16">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-19">&#182;</a>
+                <a class="pilcrow" href="#section-16">&#182;</a>
               </div>
               <p>Data table does not use crossfilter group but rather a closure
 as a grouping function</p>
@@ -497,11 +435,11 @@ as a grouping function</p>
         </li>
         
         
-        <li id="section-20">
+        <li id="section-17">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-20">&#182;</a>
+                <a class="pilcrow" href="#section-17">&#182;</a>
               </div>
               <p>return date.getFullYear() + ‘/‘ + format((date.getMonth() + 1));</p>
 
@@ -513,11 +451,11 @@ as a grouping function</p>
         </li>
         
         
-        <li id="section-21">
+        <li id="section-18">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-21">&#182;</a>
+                <a class="pilcrow" href="#section-18">&#182;</a>
               </div>
               <p>(<em>optional</em>) max number of records to be shown, <code>default = 25</code></p>
 
@@ -528,11 +466,11 @@ as a grouping function</p>
         </li>
         
         
-        <li id="section-22">
+        <li id="section-19">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-22">&#182;</a>
+                <a class="pilcrow" href="#section-19">&#182;</a>
               </div>
               <p>There are several ways to specify the columns; see the data-table documentation.
 This code demonstrates generating the column header automatically based on the columns.</p>
@@ -544,11 +482,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-23">
+        <li id="section-20">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-23">&#182;</a>
+                <a class="pilcrow" href="#section-20">&#182;</a>
               </div>
               <p>(<em>optional</em>) sort using the given field, <code>default = function(d){return d;}</code></p>
 
@@ -563,11 +501,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-24">
+        <li id="section-21">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-24">&#182;</a>
+                <a class="pilcrow" href="#section-21">&#182;</a>
               </div>
               <p>(<em>optional</em>) sort order, <code>default = d3.ascending</code></p>
 
@@ -578,11 +516,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-25">
+        <li id="section-22">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-25">&#182;</a>
+                <a class="pilcrow" href="#section-22">&#182;</a>
               </div>
               <p>(<em>optional</em>) custom renderlet to post-process chart using <a href="http://d3js.org">D3</a></p>
 
@@ -595,11 +533,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-26">
+        <li id="section-23">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-26">&#182;</a>
+                <a class="pilcrow" href="#section-23">&#182;</a>
               </div>
               <p> Make this happen after the render table.</p>
 
@@ -613,11 +551,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-27">
+        <li id="section-24">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-27">&#182;</a>
+                <a class="pilcrow" href="#section-24">&#182;</a>
               </div>
               <p>simply call <code>.renderAll()</code> to render all charts on the page</p>
 
@@ -635,11 +573,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-28">
+        <li id="section-25">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-28">&#182;</a>
+                <a class="pilcrow" href="#section-25">&#182;</a>
               </div>
               <p>Or you can render charts belonging to a specific chart group</p>
 
@@ -650,11 +588,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-29">
+        <li id="section-26">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-29">&#182;</a>
+                <a class="pilcrow" href="#section-26">&#182;</a>
               </div>
               <p>Once rendered you can call <code>.redrawAll()</code> to update charts incrementally when the data
 changes, without re-rendering everything</p>
@@ -666,11 +604,11 @@ changes, without re-rendering everything</p>
         </li>
         
         
-        <li id="section-30">
+        <li id="section-27">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-30">&#182;</a>
+                <a class="pilcrow" href="#section-27">&#182;</a>
               </div>
               <p>Or you can choose to redraw only those charts associated with a specific chart group</p>
 
@@ -682,11 +620,11 @@ changes, without re-rendering everything</p>
         </li>
         
         
-        <li id="section-31">
+        <li id="section-28">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-31">&#182;</a>
+                <a class="pilcrow" href="#section-28">&#182;</a>
               </div>
               <p>Determine the current version of dc with <code>dc.version</code></p>
 
@@ -711,11 +649,11 @@ changes, without re-rendering everything</p>
         </li>
         
         
-        <li id="section-32">
+        <li id="section-29">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-32">&#182;</a>
+                <a class="pilcrow" href="#section-29">&#182;</a>
               </div>
               <p> for some reason, dc.js capitalizes column headings, thus messing up the sort
  reference when they click on the arrow click.</p>
@@ -775,91 +713,6 @@ $.fn.ArrowFunctions = <span class="hljs-function"><span class="hljs-keyword">fun
     });
 };
 
-
-<span class="hljs-keyword">var</span> help_icon_ = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> file, params </span>) </span>{
-
-    <span class="hljs-keyword">var</span> urls = [
-        <span class="hljs-string">"https://rzlc.llnl.gov/spot/dcvis/web/?sf=/usr/gapps/spot/datasets/jit_data&amp;layout=/usr/gapps/spot/datasets/jit.json"</span>,
-        <span class="hljs-string">"https://lc.llnl.gov/spot/dcvis/web/?sf=/usr/global/web-pages/lc/www/spot/lulesh2small"</span>,</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-33">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-33">&#182;</a>
-              </div>
-              <p>Asperational: <a href="https://lc.llnl.gov/spot/dcvis/web/?sf=/usr/global/web-pages/lc/www/spot/lulesh2small&amp;machine=oslic&amp;command=/usr/tce/bin/python3%20/usr/global/web-pages/lc/www/spot/spot.py&amp;get_rundata_url=https://lc.llnl.gov/lorenz/lora/lora.cgi/command/oslic&quot;">https://lc.llnl.gov/spot/dcvis/web/?sf=/usr/global/web-pages/lc/www/spot/lulesh2small&amp;machine=oslic&amp;command=/usr/tce/bin/python3%20/usr/global/web-pages/lc/www/spot/spot.py&amp;get_rundata_url=https://lc.llnl.gov/lorenz/lora/lora.cgi/command/oslic&quot;</a>,</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>        <span class="hljs-string">"https://lc.llnl.gov/spot/dcvis/web/?sf=/usr/gapps/spot/datasets/lulesh2small&amp;layout=/usr/gapps/spot/datasets/enhanced_layout.json"</span>,
-        <span class="hljs-string">"https://lc.llnl.gov/spot/dcvis/web/?sf=/usr/gapps/spot/datasets/lulesh2small&amp;layout=/usr/gapps/spot/datasets/enhanced_layout_label.json"</span>
-    ];
-
-    <span class="hljs-keyword">var</span> working_html = <span class="hljs-string">""</span>;
-
-    <span class="hljs-keyword">for</span>( <span class="hljs-keyword">var</span> x = <span class="hljs-number">0</span>; x &lt; urls.length; x++ ) {
-
-        <span class="hljs-keyword">var</span> url = urls[x];
-        working_html += <span class="hljs-string">'&lt;div&gt;&lt;a href="'</span> + url + <span class="hljs-string">'" target="_blank"&gt;'</span> + url + <span class="hljs-string">'&lt;/a&gt;&lt;/div&gt;'</span>;
-    }
-
-    Vue.component(<span class="hljs-string">'help-section'</span>, {
-        <span class="hljs-attr">data</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
-            <span class="hljs-keyword">return</span> {
-                <span class="hljs-attr">seen</span>: <span class="hljs-literal">false</span>,
-                <span class="hljs-attr">max</span>: params.max,
-                <span class="hljs-attr">file</span>: file,
-                <span class="hljs-attr">machine</span>: params.machine,
-                <span class="hljs-attr">layout</span>: params.layout,
-                <span class="hljs-attr">get_rundata_url</span>: params.get_rundata_url,
-                <span class="hljs-attr">command</span>: params.command
-            }
-        },
-        <span class="hljs-attr">template</span>: <span class="hljs-string">'&lt;div&gt;'</span> +
-        <span class="hljs-string">'&lt;div class="help_icon" v-on:click="seen=(!seen)"&gt;?&lt;/div&gt;\
-        &lt;div class="help_body" v-if="seen"&gt;\
-        Using file: &lt;span class="txt"&gt;{{ file }}&lt;/span&gt;\
-        &lt;br&gt;Using max: &lt;span class="max"&gt;{{ max }}&lt;/span&gt;\
-        &lt;br&gt;Using machine: &lt;span class="machine"&gt;{{ machine }}&lt;/span&gt;\
-        &lt;br&gt;Using layout: &lt;span class="machine"&gt;{{ layout }}&lt;/span&gt;\
-        &lt;br&gt;Using get_rundata_url URL: &lt;span class="machine"&gt;{{ get_rundata_url }}&lt;/span&gt;\
-        &lt;br&gt;Using command: &lt;span class="machine"&gt;{{ command }}&lt;/span&gt;\
-        &lt;br&gt;You can specify the &lt;b&gt;s&lt;/b&gt;pot &lt;b&gt;f&lt;/b&gt;ile with sf= in the url bar.\
-        &lt;br&gt;You can specify the &lt;b&gt;max&lt;/b&gt; with max= in the url bar.\
-        &lt;br&gt;You can specify the &lt;b&gt;machine&lt;/b&gt; with machine= in the url bar. \
-        &lt;br&gt;You can specify the &lt;b&gt;layout&lt;/b&gt; with layout= in the url bar. \
-        &lt;br&gt;You can specify the &lt;b&gt;get_rundata_url&lt;/b&gt; with get_rundata_url= in the url bar.\
-        &lt;br&gt;You can specify the &lt;b&gt;command&lt;/b&gt; with command= in the url bar.\
-        \
-        &lt;br&gt;&lt;a href="../web/doc.html" target="_blank"&gt;more...&lt;/a&gt; \
-        &lt;div&gt;Some Working Urls&lt;/div&gt;'</span> +
-        working_html + <span class="hljs-string">'&lt;/div&gt; '</span> +
-        <span class="hljs-string">'&lt;/div&gt;'</span>,
-        <span class="hljs-attr">methods</span>: {
-        }
-    });</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-34">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-34">&#182;</a>
-              </div>
-              <p> Need to find the dc.js end event handler.</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">new</span> Vue({
-        <span class="hljs-attr">el</span>: <span class="hljs-string">"#help_icon"</span>
-    });
-};
 
 $(<span class="hljs-built_in">document</span>).ready( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
 

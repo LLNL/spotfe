@@ -91,8 +91,52 @@ ST.Utility = function() {
         return 'https://' + rz + 'lc.llnl.gov/lorenz/lora/lora.cgi/jsonp';
     };
 
+
+    /*
+     *  Tells you what this string is, useful for knowing how to sort stuff.
+     *  This function returns the following object:
+     *
+     *  {
+            alphaNumeric: false
+            containsAlphabet: false
+            containsNumber: true
+            mixOfAlphaNumeric: false
+            onlyLetters: false
+            onlyNumbers: false
+        }
+     *
+     *
+     *  INPUT:
+     *      input_str is something you want to figure out: "234234" or "23.2342" or "mystringing", etc
+     */
+    var matchExpression_ = function( str ) {
+
+        var rgularExp = {
+            contains_alphaNumeric : /^(?!-)(?!.*-)[A-Za-z0-9-]+(?<!-)$/,
+            containsNumber : /\d+/,
+            containsAlphabet : /[a-zA-Z]/,
+
+            onlyLetters : /^[A-Za-z]+$/,
+            onlyNumbers : /^[0-9]+$/,
+            onlyMixOfAlphaNumeric : /^([0-9]+[a-zA-Z]+|[a-zA-Z]+[0-9]+)[0-9a-zA-Z]*$/
+        };
+
+        var expMatch = {};
+        expMatch.containsNumber = rgularExp.containsNumber.test(str);
+        expMatch.containsAlphabet = rgularExp.containsAlphabet.test(str);
+        expMatch.alphaNumeric = rgularExp.contains_alphaNumeric.test(str);
+
+        expMatch.onlyNumbers = rgularExp.onlyNumbers.test(str);
+        expMatch.onlyLetters = rgularExp.onlyLetters.test(str);
+        expMatch.mixOfAlphaNumeric = rgularExp.onlyMixOfAlphaNumeric.test(str);
+
+        return expMatch;
+    };
+
+
     return {
         on_rz: on_rz_,
+        match_expression: matchExpression_,
         validate_cali_object: validate_cali_object_,
         init_params: init_params_,
         get_file: get_file_,

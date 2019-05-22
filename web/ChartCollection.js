@@ -1,4 +1,4 @@
-//# dc.js Getting Started and How-To Guide
+
 'use strict';
 
 var ST = ST || {};
@@ -56,12 +56,6 @@ var reduce_authors = function( data ) {
 
 //        data[z].buttons = data[z].buttons || (Math.random() * 4 > 2 ? ["ravel", "vale43d", "spot"] : ["spot"]);
         data[z].buttons = data[z].data;
-
-        //  hack it for now, so that they can do the SE Paper on time.
-        var demo_mode = 1;
-        if( demo_mode ) {
-
-        }
     }
 
     var number_of_authors = Object.keys(uniq_author_count).length;
@@ -73,32 +67,8 @@ var reduce_authors = function( data ) {
     });
 
 
-function matchExpression( str ) {
-    var rgularExp = {
-        contains_alphaNumeric : /^(?!-)(?!.*-)[A-Za-z0-9-]+(?<!-)$/,
-        containsNumber : /\d+/,
-        containsAlphabet : /[a-zA-Z]/,
-
-        onlyLetters : /^[A-Za-z]+$/,
-        onlyNumbers : /^[0-9]+$/,
-        onlyMixOfAlphaNumeric : /^([0-9]+[a-zA-Z]+|[a-zA-Z]+[0-9]+)[0-9a-zA-Z]*$/
-    }
-
-    var expMatch = {};
-    expMatch.containsNumber = rgularExp.containsNumber.test(str);
-    expMatch.containsAlphabet = rgularExp.containsAlphabet.test(str);
-    expMatch.alphaNumeric = rgularExp.contains_alphaNumeric.test(str);
-
-    expMatch.onlyNumbers = rgularExp.onlyNumbers.test(str);
-    expMatch.onlyLetters = rgularExp.onlyLetters.test(str);
-    expMatch.mixOfAlphaNumeric = rgularExp.onlyMixOfAlphaNumeric.test(str);
-
-    return expMatch;
-}
-
-    //### Create Crossfilter Dimensions and Groups
-
-    //See the [crossfilter API](https://github.com/square/crossfilter/wiki/API-Reference) for reference.
+//  Create Crossfilter Dimensions and Groups
+//  See the [crossfilter API](https://github.com/square/crossfilter/wiki/API-Reference) for reference.
 
 var RenderChartCollection = function( the_data, layout_spec ) {
 
@@ -113,7 +83,6 @@ var RenderChartCollection = function( the_data, layout_spec ) {
     // Dimension by full date
     var dateDimension = ndx.dimension(function (d) {
         return dateFormatParser(d.date);
-        //return d.dd;
     });
 
 
@@ -376,66 +345,6 @@ $.fn.ArrowFunctions = function( obj ) {
     });
 };
 
-
-var help_icon_ = function( file, params ) {
-
-    var urls = [
-        "https://rzlc.llnl.gov/spot/dcvis/web/?sf=/usr/gapps/spot/datasets/jit_data&layout=/usr/gapps/spot/datasets/jit.json",
-        "https://lc.llnl.gov/spot/dcvis/web/?sf=/usr/global/web-pages/lc/www/spot/lulesh2small",
-        //Asperational: https://lc.llnl.gov/spot/dcvis/web/?sf=/usr/global/web-pages/lc/www/spot/lulesh2small&machine=oslic&command=/usr/tce/bin/python3%20/usr/global/web-pages/lc/www/spot/spot.py&get_rundata_url=https://lc.llnl.gov/lorenz/lora/lora.cgi/command/oslic",
-        "https://lc.llnl.gov/spot/dcvis/web/?sf=/usr/gapps/spot/datasets/lulesh2small&layout=/usr/gapps/spot/datasets/enhanced_layout.json",
-        "https://lc.llnl.gov/spot/dcvis/web/?sf=/usr/gapps/spot/datasets/lulesh2small&layout=/usr/gapps/spot/datasets/enhanced_layout_label.json"
-    ];
-
-    var working_html = "";
-
-    for( var x = 0; x < urls.length; x++ ) {
-
-        var url = urls[x];
-        working_html += '<div><a href="' + url + '" target="_blank">' + url + '</a></div>';
-    }
-
-    Vue.component('help-section', {
-        data: function () {
-            return {
-                seen: false,
-                max: params.max,
-                file: file,
-                machine: params.machine,
-                layout: params.layout,
-                get_rundata_url: params.get_rundata_url,
-                command: params.command
-            }
-        },
-        template: '<div>' +
-        '<div class="help_icon" v-on:click="seen=(!seen)">?</div>\
-        <div class="help_body" v-if="seen">\
-        Using file: <span class="txt">{{ file }}</span>\
-        <br>Using max: <span class="max">{{ max }}</span>\
-        <br>Using machine: <span class="machine">{{ machine }}</span>\
-        <br>Using layout: <span class="machine">{{ layout }}</span>\
-        <br>Using get_rundata_url URL: <span class="machine">{{ get_rundata_url }}</span>\
-        <br>Using command: <span class="machine">{{ command }}</span>\
-        <br>You can specify the <b>s</b>pot <b>f</b>ile with sf= in the url bar.\
-        <br>You can specify the <b>max</b> with max= in the url bar.\
-        <br>You can specify the <b>machine</b> with machine= in the url bar. \
-        <br>You can specify the <b>layout</b> with layout= in the url bar. \
-        <br>You can specify the <b>get_rundata_url</b> with get_rundata_url= in the url bar.\
-        <br>You can specify the <b>command</b> with command= in the url bar.\
-        \
-        <br><a href="../web/doc.html" target="_blank">more...</a> \
-        <div>Some Working Urls</div>' +
-        working_html + '</div> ' +
-        '</div>',
-        methods: {
-        }
-    });
-
-    //  Need to find the dc.js end event handler.
-    new Vue({
-        el: "#help_icon"
-    });
-};
 
 $(document).ready( function() {
 
