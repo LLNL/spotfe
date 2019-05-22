@@ -163,7 +163,7 @@ reduce_authors(data);</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
-              <p>   ST.MakeNiceData.make( the_data );</p>
+              <p> ST.MakeNiceData.make( the_data );</p>
 
             </div>
             
@@ -641,6 +641,22 @@ changes, without re-rendering everything</p>
     <span class="hljs-built_in">console</span>.dir(table_data);
 
     bind_sort();
+    render_compare_arguments( the_data[<span class="hljs-number">0</span>] );
+};
+
+
+<span class="hljs-keyword">var</span> render_compare_arguments = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> fields </span>) </span>{
+
+    <span class="hljs-keyword">var</span> options = <span class="hljs-string">""</span>;
+
+    <span class="hljs-keyword">for</span>( <span class="hljs-keyword">var</span> field <span class="hljs-keyword">in</span> fields ) {
+        options += <span class="hljs-string">'&lt;option value="'</span> + field + <span class="hljs-string">'"&gt;'</span> + field + <span class="hljs-string">'&lt;/option&gt;'</span>;
+    }
+
+    <span class="hljs-keyword">var</span> ht = <span class="hljs-string">'&lt;select class="xaxis"&gt;'</span> + options + <span class="hljs-string">'&lt;/select&gt;'</span> +
+            <span class="hljs-string">'&lt;select class="groupby"&gt;'</span> + options + <span class="hljs-string">'&lt;/select&gt;'</span>;
+
+    $(<span class="hljs-string">'.compare_arguments'</span>).html( ht );
 };
 
 

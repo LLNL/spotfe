@@ -183,6 +183,7 @@ ST.CallSpot = function() {
     };
 
 
+
     var are_numbers_ = null;
 
     var sort_dimension_as_number_ = function( dimension ) {

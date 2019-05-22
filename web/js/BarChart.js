@@ -132,6 +132,7 @@ ST.BarChart = function() {
             .gap(1)
             // (_optional_) set filter brush rounding
             .round(dc.round.floor)
+            //.xUnits(.1)   //  not a function.
             .alwaysUseRounding(true)
             .x( use_buckets ? xinput2 : xinput )
             .renderHorizontalGridLines(true)

@@ -1,8 +1,35 @@
 
-- Announce last_x_day feature, plus the exe_compare=1 feature.
-- X range -> take the distance from Min to Max (1% or 3%) of the distance (from Min to max) and add to the max xrange
-- Table Sorting is Broken, fix this. -> this is because the first letter is capitalized, so when it goes to sort, it doesn't recognize the string.
+- DONE Announce last_x_day feature, plus the exe_compare=1 feature.
+- DONE X range -> take the distance from Min to Max (1% or 3%) of the distance (from Min to max) and add to the max xrange
+- DONE Table Sorting bug, fix this. -> this is because the first letter is capitalized, so when it goes to sort, it doesn't recognize the string.
     * prevent dc.js auto capitalize?
+
+1. Get Date Data and make sure it shows up in spot2 and spot1
+2. Drop downs for xAxis and GroupBy
+3. Send XAxis and GroupBy to spot1
+4. Receive XAxis and GroupBy on spot1
+5. on spot1 use those 2 to populate the page.
+6. when dropdowns are selected, update the URL
+7. bookmark button on spot2 page that adds "exe_compare=1" to URL.
+
+Later on: Be able to graph X-axis of less than 1 int width.
+
+
+- Get Date data from boehme and use that.
+- Some way to generically specify the "date" field for last_days
+- When they click compare, send "hey, I want X-axis to be VAR"  VAR Should be some field the user selects.
+    * Initially let's specify it on the URL parameters, later we let them select dropdown it.
+- Consider some kind of Calendar or Date selector chart that would be able to select dates, rather than just the URL parameter.
+- exe_compare=1 find a way to add this to bookmark.
+    * make some kind of bookmark button.
+
+- Joy Kiton - (David Boehme) 13th, 14th (Figure out what is 17th -> 21st).
+
+
+Think about: Time Series / Line Graphs
+    * estimate on this.
+    * Max pressure over time.
+    * maybe 12 line graphs per graph.
 
 
 - DONE: Labels for X and Y axis
@@ -197,3 +224,10 @@ https://lc.llnl.gov/spot/dcvis/web/?sf=/usr/global/web-pages/lc/www/spot/lulesh2
 
 
 //  https://lc.llnl.gov/spot/dcvis/web/?&machine=oslic&command=/usr/tce/bin/python3%20/g/g90/boehme3/experiments/ubiquitous_analysis/spot.py&get_rundata_url=https://lc.llnl.gov/lorenz/lora/lora.cgi/command/oslic&sf=/g/g90/boehme3/experiments/ubiquitous_analysis/lulesh_data&layout=/g/g90/boehme3/experiments/ubiquitous_analysis/layout.json
+
+
+Adiak - metadata and extendable data format for Runs.  purpose of this is to standardize
+data output, so that they all print to the same format.
+
+Problem: too many physists use different
+data storage formats.

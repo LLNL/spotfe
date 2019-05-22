@@ -527,6 +527,13 @@ body .dc-chart g.row text {
         z-index: 10;
     }
 
+    .compare_arguments {
+        position: absolute;
+        top: 30px;
+        right: 120px;
+        z-index: 10;
+    }
+
     .hidden {
         display: none;
     }

@@ -73,7 +73,7 @@ var reduce_authors = function( data ) {
 var RenderChartCollection = function( the_data, layout_spec ) {
 
     console.dir( the_data );
-//    ST.MakeNiceData.make( the_data );
+    //  ST.MakeNiceData.make( the_data );
 
     //  ST.ReturnedDataStub.data
     var ndx = crossfilter( the_data );
@@ -285,6 +285,22 @@ var RenderChartCollection = function( the_data, layout_spec ) {
     console.dir(table_data);
 
     bind_sort();
+    render_compare_arguments( the_data[0] );
+};
+
+
+var render_compare_arguments = function( fields ) {
+
+    var options = "";
+
+    for( var field in fields ) {
+        options += '<option value="' + field + '">' + field + '</option>';
+    }
+
+    var ht = '<select class="xaxis">' + options + '</select>' +
+            '<select class="groupby">' + options + '</select>';
+
+    $('.compare_arguments').html( ht );
 };
 
 

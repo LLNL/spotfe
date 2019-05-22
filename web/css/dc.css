@@ -377,5 +377,10 @@ body .dc-chart g.row text {
     top: 30px;
     right: -5px;
     z-index: 10; }
+  .bottom_table .compare_arguments {
+    position: absolute;
+    top: 30px;
+    right: 120px;
+    z-index: 10; }
   .bottom_table .hidden {
     display: none; }
