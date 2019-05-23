@@ -55,6 +55,11 @@ var init = function( dat ) {
 
     console.dir(data);
 
+    var xaxis = localStorage.getItem('xaxis');
+    var groupby = localStorage.getItem('groupby');
+
+    console.log('xaxis=' + xaxis + '   groupby=' + groupby);
+
 
 // elm init from main.js
     let app = Elm.Main.init(

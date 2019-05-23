@@ -532,6 +532,11 @@ body .dc-chart g.row text {
         top: 30px;
         right: 120px;
         z-index: 10;
+
+        select {
+            height: 35px;
+            margin: 0 5px  0 0;
+        }
     }
 
     .hidden {

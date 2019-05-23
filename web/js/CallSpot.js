@@ -272,8 +272,12 @@ ST.CallSpot = function() {
             //  compare button
             var keys = get_keys_();
             var machine = "machine=" + ST.params.machine + "&";
+            var xaxis = $('.compare_arguments .xaxis').val();
+            var groupby = $('.compare_arguments .groupby').val();
 
             localStorage.setItem('calis', keys);
+            localStorage.setItem('xaxis', xaxis);
+            localStorage.setItem('groupby', groupby);
 
             var directory = ST.Utility.get_file();
 
