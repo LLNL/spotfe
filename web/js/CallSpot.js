@@ -158,7 +158,11 @@ ST.CallSpot = function() {
             var num_total = Object.keys(parsed).length;
             var num_past_min_date = newp.length;
 
-            if( num_past_min_date === 0 ) {
+            if( num_total === 0 ) {
+                alert('I got 0 data objects.');
+            }
+
+            if( num_past_min_date === 0 && num_total > 0 ) {
                 alert('Although you have ' + num_total + ' total data objects, you only 0 data objects with a date greater than ' + min_date +
                     '(last_days=' + ST.params.last_days + ').  If you wish to eliminate this constraint, remove "last_days" from the URL parameter list.');
             }

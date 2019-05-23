@@ -28,14 +28,18 @@ ST.UrlStateManager = function() {
                 paramValue = range[0] + ',' + range[1];
             }
 
-            var loc = "" + location.href;
-            var newUrl = updateURLParameter(loc, param, paramValue);
-
-            history.pushState({}, null, newUrl);
+            update_url_( param, paramValue );
         }
     };
 
-    
+
+    var update_url_ = function( param, val ) {
+
+        var loc = "" + location.href;
+        var newUrl = updateURLParameter(loc, param, val);
+
+        history.pushState({}, null, newUrl);
+    };
 
 
     function remove_param_(key) {
@@ -110,6 +114,7 @@ ST.UrlStateManager = function() {
     };
 
     return {
+        update_url: update_url_,
         remove_param: remove_param_,
         user_filtered: user_filtered_,
         load_filter: load_filter_

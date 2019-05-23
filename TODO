@@ -10,6 +10,7 @@
 - DONE 4. Receive XAxis and GroupBy on spot1
 5. on spot1 use those 2 to populate the page.
 6. when dropdowns are selected, update the URL
+    ST.UrlStateManager.update_url('xaxis', )
 7. when URL has xaxis and groupby propogate them to the select drop down.
 8. bookmark button on spot2 page that adds "exe_compare=1" to URL.
 
