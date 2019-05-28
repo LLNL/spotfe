@@ -8,7 +8,7 @@
 - DONE 2. Drop downs for xAxis and GroupBy
 - DONE 3. Send XAxis and GroupBy to spot1
 - DONE 4. Receive XAxis and GroupBy on spot1
-5. on spot1 use those 2 to populate the page.
+- DONE 5. on spot1 use those 2 to populate the page.
 6. when dropdowns are selected, update the URL
     ST.UrlStateManager.update_url('xaxis', )
 7. when URL has xaxis and groupby propogate them to the select drop down.

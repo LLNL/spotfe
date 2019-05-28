@@ -64,17 +64,17 @@ var init = function( dat ) {
     console.log('xaxis=' + xaxis + '   groupby=' + groupby);
 
 
-// elm init from main.js
+    // elm init from main.js
     let app = Elm.Main.init(
         {
             node: document.querySelector('#durations-chart'),
-        //    flags: {rootName: data.durationLists[0].funcPath.split('/').shift()}
         })
 
-    app.ports.setData.send(data);
+    app.ports.setData.send(data)
+    app.ports.setXaxis.send(xaxis)  // set Xaxis here
+    app.ports.setGroupBy.send(groupby)  // set Groupby
 
 
-    
     /*
 // stratify incoming data
     const stratFunc = d3.stratify()
