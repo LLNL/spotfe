@@ -53,7 +53,17 @@ ST.Utility = function() {
         return file || default_file;
     };
 
+
+    var dur_keys_ = {
+        "/usr/gapps/spot/datasets/jit_data" : "sum#time.inclusive.duration",
+        "/usr/global/web-pages/lc/www/spot/lulesh2small" : "sum#time.inclusive.duration",
+        "/usr/gapps/spot/datasets/lulesh2small" : "sum#time.inclusive.duration"
+    };
+
+
     var init_params_ = function() {
+
+        var sf = get_file_();
 
         ST.params = ST.params || {};
         ST.params.get_rundata_url = ST.Utility.get_param('get_rundata_url');
@@ -62,6 +72,11 @@ ST.Utility = function() {
         ST.params.layout = ST.Utility.get_param('layout');
         ST.params.last_days = ST.Utility.get_param('last_days') || 0;
         ST.params.exe_compare = ST.Utility.get_param('exe_compare') || 0;
+        ST.params.duration_key = dur_keys_[sf];
+
+        if( !ST.params.duration_key ) {
+            alert('Unknown duration key for this spot file (sf) ' + sf);
+        }
 
         ST.params.max = ST.params.max || 18000;
 

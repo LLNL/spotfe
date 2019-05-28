@@ -24,6 +24,7 @@ ST.CallSpot = function() {
         return commandp + ' ' + type  + ' ' + file + lay;
     };
 
+
     var is_rzlc_target;
 
     var ajax_ = function( obj ) {
@@ -120,9 +121,9 @@ ST.CallSpot = function() {
                     var valid_obj = parsed[key];
 
                     //  Generate a random date for now.
-                    var date = 1557354304 - Math.floor( Math.random() * 280 * 86000);
+                    var date = valid_obj['Start time']; // 1557354304 - Math.floor( Math.random() * 280 * 86000);
 
-                    if( date > min_date ) {
+                    if( !date || date > min_date ) {
 
                         var spot_date = new Date(date * 1000);
 
@@ -131,8 +132,8 @@ ST.CallSpot = function() {
                         var year = spot_date.getFullYear();
 
                         //  This is just for stub
-                        valid_obj.epoch_date = date;
-                        valid_obj.date = month + "/" + day + "/" + year;
+                        //valid_obj.epoch_date = date;
+                        valid_obj.formatdate = month + "/" + day + "/" + year;
                         valid_obj.run_id = "id_" + Math.floor(Math.random() * 10000);
                         valid_obj.drilldown = ['Jupyter', 'mpi', 'walltime'];
                         valid_obj.key = key;
@@ -314,7 +315,8 @@ ST.CallSpot = function() {
 
         } else if( subject === "walltime" ) {
 
-            var command_par = get_command_("durations", appended, "" ) + "&machine=" + ST.params.machine;
+            var dur = ST.params.duration_key + ' ';
+            var command_par = get_command_("durations", dur + " " + appended, "" ) + "&machine=" + ST.params.machine;
 
             window.open('../sankey/index.html?command=' + command_par );
 

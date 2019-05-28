@@ -226,7 +226,7 @@ var RenderChartCollection = function( the_data, layout_spec ) {
         .group(function (d) {
 
             var format = d3.format('02d');
-            var date = new Date(d.epoch_date * 1000);
+            var date = new Date(d.date * 1000);  // used to be epoch_date
             //return date.getFullYear() + '/' + format((date.getMonth() + 1));
             return 1;
         })

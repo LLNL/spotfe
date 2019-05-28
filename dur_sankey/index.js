@@ -21,6 +21,8 @@ var get_dirs_ = function() {
 
 $(document).ready(  function() {
 
+    ST.Utility.init_params();
+
     var dirs = dirme("180926-171347_114610_dFcHlCXdiuQG.cali") +
                 dirme("180926-171354_114737_llIMtdhrtFBl.cali") +
                 dirme("180926-171351_45280_H6AUaDgoCQ0n.cali") +
@@ -30,9 +32,10 @@ $(document).ready(  function() {
     console.dir(dirs);
 
     //var dir = "/usr/gapps/wf/web/spot/data/lulesh_maximal/";
+    var dur = ST.params.duration_key + ' ';
 
     var dir = ST.Utility.get_param('directory');
-    var predir = " " + dir + " --filenames ";
+    var predir = " " + dir + " " + dur + " --filenames ";
     var command = ST.Utility.get_param('command');
     command = decodeURIComponent(command);
 
@@ -70,6 +73,8 @@ var init = function( dat ) {
 
     app.ports.setData.send(data);
 
+
+    
     /*
 // stratify incoming data
     const stratFunc = d3.stratify()
