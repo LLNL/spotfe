@@ -657,6 +657,27 @@ changes, without re-rendering everything</p>
             <span class="hljs-string">'&lt;select class="groupby"&gt;'</span> + options + <span class="hljs-string">'&lt;/select&gt;'</span>;
 
     $(<span class="hljs-string">'.compare_arguments'</span>).html( ht );
+
+    $(<span class="hljs-string">'.compare_arguments .xaxis, .compare_arguments .groupby'</span>).unbind(<span class="hljs-string">'change'</span>).bind(<span class="hljs-string">'change'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+
+        <span class="hljs-keyword">var</span> cla = $(<span class="hljs-keyword">this</span>).attr(<span class="hljs-string">'class'</span>);
+        <span class="hljs-keyword">var</span> val = $(<span class="hljs-keyword">this</span>).val();
+
+        ST.UrlStateManager.update_url( cla, val );
+    });
+
+    load_compare();
+};
+
+
+<span class="hljs-keyword">var</span> load_compare = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+
+    <span class="hljs-keyword">var</span> xaxis = ST.Utility.get_param(<span class="hljs-string">'xaxis'</span>);
+    <span class="hljs-keyword">var</span> groupby = ST.Utility.get_param(<span class="hljs-string">'groupby'</span>);
+    groupby = <span class="hljs-built_in">decodeURIComponent</span>( groupby );
+
+    $(<span class="hljs-string">'.compare_arguments .xaxis'</span>).val( xaxis );
+    $(<span class="hljs-string">'.compare_arguments .groupby'</span>).val( groupby );
 };
 
 

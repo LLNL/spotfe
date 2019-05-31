@@ -15,6 +15,7 @@
 8. bookmark button on spot2 page that adds "exe_compare=1" to URL.
 
 Later on: Be able to graph X-axis of less than 1 int width.
+    * as part of this need to be able to subdivide the bars into widths of 0.1 or 0.2, etc.
 
 
 - Get Date data from boehme and use that.

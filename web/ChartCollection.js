@@ -301,6 +301,27 @@ var render_compare_arguments = function( fields ) {
             '<select class="groupby">' + options + '</select>';
 
     $('.compare_arguments').html( ht );
+
+    $('.compare_arguments .xaxis, .compare_arguments .groupby').unbind('change').bind('change', function() {
+
+        var cla = $(this).attr('class');
+        var val = $(this).val();
+
+        ST.UrlStateManager.update_url( cla, val );
+    });
+
+    load_compare();
+};
+
+
+var load_compare = function() {
+
+    var xaxis = ST.Utility.get_param('xaxis');
+    var groupby = ST.Utility.get_param('groupby');
+    groupby = decodeURIComponent( groupby );
+
+    $('.compare_arguments .xaxis').val( xaxis );
+    $('.compare_arguments .groupby').val( groupby );
 };
 
 
