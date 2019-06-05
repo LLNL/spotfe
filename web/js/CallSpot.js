@@ -136,7 +136,7 @@ ST.CallSpot = function() {
                         valid_obj.formatdate = month + "/" + day + "/" + year;
                         valid_obj.run_id = "id_" + Math.floor(Math.random() * 10000);
                         valid_obj.drilldown = ['Jupyter', 'mpi', 'walltime'];
-                        valid_obj.key = key;
+                        valid_obj.key = valid_obj.key || key;
 
                         for (var dimension in valid_obj) {
 
@@ -283,6 +283,7 @@ ST.CallSpot = function() {
             localStorage.setItem('calis', keys);
             localStorage.setItem('xaxis', xaxis);
             localStorage.setItem('groupby', groupby);
+            localStorage.setItem('location.href', location.href);
 
             var directory = ST.Utility.get_file();
 
