@@ -690,8 +690,13 @@ changes, without re-rendering everything</p>
     <span class="hljs-keyword">var</span> xaxis = ST.Utility.get_param(<span class="hljs-string">'xaxis'</span>, <span class="hljs-literal">true</span>);
     <span class="hljs-keyword">var</span> groupby = ST.Utility.get_param(<span class="hljs-string">'groupby'</span>, <span class="hljs-literal">true</span>);
 
-    $(<span class="hljs-string">'.compare_arguments .xaxis'</span>).val( xaxis );
-    $(<span class="hljs-string">'.compare_arguments .groupby'</span>).val( groupby );
+    <span class="hljs-keyword">if</span>( xaxis !== <span class="hljs-string">'undefined'</span>) {
+        $(<span class="hljs-string">'.compare_arguments .xaxis'</span>).val(xaxis);
+    }
+
+    <span class="hljs-keyword">if</span>( groupby !== <span class="hljs-string">'undefined'</span>) {
+        $(<span class="hljs-string">'.compare_arguments .groupby'</span>).val(groupby);
+    }
 };
 
 

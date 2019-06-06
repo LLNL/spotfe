@@ -27,7 +27,7 @@ ST.Utility = function() {
         return ret;
     };
 
-    
+
     var error_ = function( str ) {
 
         if( $('.error_statement').length === 0 ) {

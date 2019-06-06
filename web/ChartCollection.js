@@ -322,8 +322,13 @@ var load_compare = function() {
     var xaxis = ST.Utility.get_param('xaxis', true);
     var groupby = ST.Utility.get_param('groupby', true);
 
-    $('.compare_arguments .xaxis').val( xaxis );
-    $('.compare_arguments .groupby').val( groupby );
+    if( xaxis !== 'undefined') {
+        $('.compare_arguments .xaxis').val(xaxis);
+    }
+
+    if( groupby !== 'undefined') {
+        $('.compare_arguments .groupby').val(groupby);
+    }
 };
 
 
