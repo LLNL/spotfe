@@ -10,12 +10,18 @@
 - DONE 4. Receive XAxis and GroupBy on spot1
 - DONE 5. on spot1 use those 2 to populate the page.
 
-6. when dropdowns are selected, update the URL
+- DONE 6. when dropdowns are selected, update the URL
     ST.UrlStateManager.update_url('xaxis', )
     * this needs more testing.
 
-7. when URL has xaxis and groupby propogate them to the select drop down.
-8. on spot2 page make sure to add "exe_compare=1" to URL, plus add xaxis and groupby as well.
+- DONE 7. when URL has xaxis and groupby propogate them to the select drop down.
+- DONE 8. on spot2 page make sure to add "exe_compare=1" to URL, plus add xaxis and groupby as well.
+
+9. Add all BarChartX and PieChartX to compareURL.
+
+10. On the Spot1 page, be able to change the xAxis and GroupBy URLs based on the select drop down change.
+
+
 
 Later on: Be able to graph X-axis of less than 1 int width.
     * as part of this need to be able to subdivide the bars into widths of 0.1 or 0.2, etc.
