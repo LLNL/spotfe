@@ -58,19 +58,22 @@ var init = function( dat ) {
 
     console.dir(data);
 
-    var xaxis = localStorage.getItem('xaxis');
-    var groupby = localStorage.getItem('groupby');
+    //var location = localStorage.getItem('location.href');
 
-    console.log('xaxis=' + xaxis + '   groupby=' + groupby);
+    ST.UrlStateManager.update_url('exe_compare', '1');
+
+    //console.log('xaxis=' + xaxis + '   groupby=' + groupby);
+    var xaxis = ST.Utility.get_param('xaxis', true);
+    var groupby = ST.Utility.get_param('groupby', true);
 
 
     // elm init from main.js
     let app = Elm.Main.init(
         {
             node: document.querySelector('#durations-chart'),
-        })
+        });
 
-    app.ports.setData.send(data)
-    app.ports.setXaxis.send(xaxis)  // set Xaxis here
-    app.ports.setGroupBy.send(groupby)  // set Groupby
+    app.ports.setData.send(data);
+    app.ports.setXaxis.send(xaxis);     // set Xaxis here
+    app.ports.setGroupBy.send(groupby);  // set Groupby
 };

@@ -651,9 +651,22 @@ changes, without re-rendering everything</p>
 
     <span class="hljs-keyword">for</span>( <span class="hljs-keyword">var</span> field <span class="hljs-keyword">in</span> fields ) {
         options += <span class="hljs-string">'&lt;option value="'</span> + field + <span class="hljs-string">'"&gt;'</span> + field + <span class="hljs-string">'&lt;/option&gt;'</span>;
-    }
+    }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-29">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-29">&#182;</a>
+              </div>
+              <p> ‘<a id="bookmarkme" href="javascript: void(0)" rel="sidebar">Bookmark</a>‘ +</p>
 
-    <span class="hljs-keyword">var</span> ht = <span class="hljs-string">'&lt;select class="xaxis"&gt;'</span> + options + <span class="hljs-string">'&lt;/select&gt;'</span> +
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> ht = <span class="hljs-string">'&lt;select class="xaxis"&gt;'</span> + options + <span class="hljs-string">'&lt;/select&gt;'</span> +
             <span class="hljs-string">'&lt;select class="groupby"&gt;'</span> + options + <span class="hljs-string">'&lt;/select&gt;'</span>;
 
     $(<span class="hljs-string">'.compare_arguments'</span>).html( ht );
@@ -662,6 +675,7 @@ changes, without re-rendering everything</p>
 
         <span class="hljs-keyword">var</span> cla = $(<span class="hljs-keyword">this</span>).attr(<span class="hljs-string">'class'</span>);
         <span class="hljs-keyword">var</span> val = $(<span class="hljs-keyword">this</span>).val();
+        val = val.replace(<span class="hljs-regexp">/#/</span>, <span class="hljs-string">''</span>);
 
         ST.UrlStateManager.update_url( cla, val );
     });
@@ -670,11 +684,11 @@ changes, without re-rendering everything</p>
 };
 
 
+
 <span class="hljs-keyword">var</span> load_compare = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
 
-    <span class="hljs-keyword">var</span> xaxis = ST.Utility.get_param(<span class="hljs-string">'xaxis'</span>);
-    <span class="hljs-keyword">var</span> groupby = ST.Utility.get_param(<span class="hljs-string">'groupby'</span>);
-    groupby = <span class="hljs-built_in">decodeURIComponent</span>( groupby );
+    <span class="hljs-keyword">var</span> xaxis = ST.Utility.get_param(<span class="hljs-string">'xaxis'</span>, <span class="hljs-literal">true</span>);
+    <span class="hljs-keyword">var</span> groupby = ST.Utility.get_param(<span class="hljs-string">'groupby'</span>, <span class="hljs-literal">true</span>);
 
     $(<span class="hljs-string">'.compare_arguments .xaxis'</span>).val( xaxis );
     $(<span class="hljs-string">'.compare_arguments .groupby'</span>).val( groupby );
@@ -686,11 +700,11 @@ changes, without re-rendering everything</p>
         </li>
         
         
-        <li id="section-29">
+        <li id="section-30">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-29">&#182;</a>
+                <a class="pilcrow" href="#section-30">&#182;</a>
               </div>
               <p> for some reason, dc.js capitalizes column headings, thus messing up the sort
  reference when they click on the arrow click.</p>

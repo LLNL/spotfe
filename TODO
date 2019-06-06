@@ -9,10 +9,13 @@
 - DONE 3. Send XAxis and GroupBy to spot1
 - DONE 4. Receive XAxis and GroupBy on spot1
 - DONE 5. on spot1 use those 2 to populate the page.
+
 6. when dropdowns are selected, update the URL
     ST.UrlStateManager.update_url('xaxis', )
+    * this needs more testing.
+
 7. when URL has xaxis and groupby propogate them to the select drop down.
-8. bookmark button on spot2 page that adds "exe_compare=1" to URL.
+8. on spot2 page make sure to add "exe_compare=1" to URL, plus add xaxis and groupby as well.
 
 Later on: Be able to graph X-axis of less than 1 int width.
     * as part of this need to be able to subdivide the bars into widths of 0.1 or 0.2, etc.

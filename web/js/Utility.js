@@ -15,11 +15,19 @@ ST.Utility = function() {
         return vars;
     };
 
-    var get_param_ = function( param ) {
+    var get_param_ = function( param, decode_uri ) {
+
         var vars = getUrlVars_();
-        return vars[param];
+        var ret = vars[param];
+
+        if( decode_uri ) {
+            ret = decodeURIComponent( ret );
+        }
+
+        return ret;
     };
 
+    
     var error_ = function( str ) {
 
         if( $('.error_statement').length === 0 ) {

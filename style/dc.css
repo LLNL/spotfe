@@ -379,6 +379,8 @@ body .dc-chart g.row text {
     .bottom_table .compare_arguments select {
       height: 35px;
       margin: 0 5px  0 0; }
+    .bottom_table .compare_arguments #bookmarkme {
+      margin: 0 10px 0 0; }
   .bottom_table .hidden {
     display: none; }
 

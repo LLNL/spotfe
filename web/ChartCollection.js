@@ -297,6 +297,7 @@ var render_compare_arguments = function( fields ) {
         options += '<option value="' + field + '">' + field + '</option>';
     }
 
+    //  '<a id="bookmarkme" href="javascript: void(0)" rel="sidebar">Bookmark</a>' +
     var ht = '<select class="xaxis">' + options + '</select>' +
             '<select class="groupby">' + options + '</select>';
 
@@ -306,6 +307,7 @@ var render_compare_arguments = function( fields ) {
 
         var cla = $(this).attr('class');
         var val = $(this).val();
+        val = val.replace(/#/, '');
 
         ST.UrlStateManager.update_url( cla, val );
     });
@@ -314,11 +316,11 @@ var render_compare_arguments = function( fields ) {
 };
 
 
+
 var load_compare = function() {
 
-    var xaxis = ST.Utility.get_param('xaxis');
-    var groupby = ST.Utility.get_param('groupby');
-    groupby = decodeURIComponent( groupby );
+    var xaxis = ST.Utility.get_param('xaxis', true);
+    var groupby = ST.Utility.get_param('groupby', true);
 
     $('.compare_arguments .xaxis').val( xaxis );
     $('.compare_arguments .groupby').val( groupby );

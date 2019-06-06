@@ -280,16 +280,19 @@ ST.CallSpot = function() {
             var xaxis = $('.compare_arguments .xaxis').val();
             var groupby = $('.compare_arguments .groupby').val();
 
+            //localStorage.setItem('xaxis', xaxis);
+            //localStorage.setItem('groupby', groupby);
             localStorage.setItem('calis', keys);
-            localStorage.setItem('xaxis', xaxis);
-            localStorage.setItem('groupby', groupby);
-            localStorage.setItem('location.href', location.href);
+            //localStorage.setItem('location.href', location.href);
 
             var directory = ST.Utility.get_file();
 
             var command = ST.Utility.get_param('command');
             var comm = command ? '&command=' + command : "";
-            var goto_url = '../dur_sankey/?' + machine + 'calis=local&directory=' + directory + comm;
+            var xaxis_par = '&xaxis=' + xaxis;
+            var groupby_par = '&groupby=' + groupby;
+
+            var goto_url = '../dur_sankey/?' + machine + 'calis=local&directory=' + directory + comm + xaxis_par + groupby_par;
 
             if( exe_compare_() ) {
                 location.href = goto_url;
