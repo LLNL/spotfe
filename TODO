@@ -17,14 +17,18 @@
 - DONE 7. when URL has xaxis and groupby propogate them to the select drop down.
 - DONE 8. on spot2 page make sure to add "exe_compare=1" to URL, plus add xaxis and groupby as well.
 
+10. Support default layout file.  If none is given then don't send one.
+    * So if you point to the backend on CZ to /usr/gapps/spot/spot.py you should be able to experiment with the changes.
+
 9. Add all BarChartX and PieChartX to compareURL.
 
-10. On the Spot1 page, be able to change the xAxis and GroupBy URLs based on the select drop down change.
 
-
-
-Later on: Be able to graph X-axis of less than 1 int width.
+11: Be able to graph X-axis of less than 1 int width.
     * as part of this need to be able to subdivide the bars into widths of 0.1 or 0.2, etc.
+
+12. On the Spot1 page, be able to change the xAxis and GroupBy URLs based on the select drop down change.
+
+
 
 
 - Get Date data from boehme and use that.
@@ -216,24 +220,6 @@ Input json analysis file: lulesh.o.json
 
 https://rzlc.llnl.gov/spot/dcvis/web/?sf=/usr/gapps/spot/datasets/jit_data&layout=/usr/gapps/spot/datasets/jit.json
 https://lc.llnl.gov/spot/dcvis/web/?sf=/usr/global/web-pages/lc/www/spot/lulesh2small&machine=oslic&command=/usr/tce/bin/python3%20/usr/global/web-pages/lc/www/spot/spot.py&get_rundata_url=https://lc.llnl.gov/lorenz/lora/lora.cgi/command/oslic
-
-
-
-                is_rzlc_target = file.indexOf('rzlc.llnl.gov') > -1;
-        var czcommand = "/usr/tce/bin/python3%20/usr/global/web-pages/lc/www/spot/spot.py";
-        var rzcommand = ST.Default.COMMAND;
-
-        commandp = is_rzlc_target ? rzcommand : czcommand;
-        commandp = commandp.replace('%20', ' ');
-
-
-        //var type = window.location.hostname === "rzlc.llnl.gov" ? "GET" : "POST";
-
-        var type = is_rzlc_target ? "GET" : "POST";
-
-        var target = is_rzlc_target ? 'RZ' : 'CZ';
-
-
 
 //  https://lc.llnl.gov/spot/dcvis/web/?&machine=oslic&command=/usr/tce/bin/python3%20/g/g90/boehme3/experiments/ubiquitous_analysis/spot.py&get_rundata_url=https://lc.llnl.gov/lorenz/lora/lora.cgi/command/oslic&sf=/g/g90/boehme3/experiments/ubiquitous_analysis/lulesh_data&layout=/g/g90/boehme3/experiments/ubiquitous_analysis/layout.json
 

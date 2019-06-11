@@ -6,7 +6,8 @@ ST.CallSpot = function() {
 
         lay = lay || "";
 
-        var czcommand = "/usr/tce/bin/python3%20/usr/global/web-pages/lc/www/spot/spot.py";
+        //var czcommand = "/usr/tce/bin/python3%20/usr/global/web-pages/lc/www/spot/spot.py";
+        var czcommand = "/usr/tce/bin/python3%20/usr/gapps/spot/spot.py";
         var rzcommand = ST.Default.COMMAND;
 
         is_rzlc_target = ST.Utility.on_rz();
