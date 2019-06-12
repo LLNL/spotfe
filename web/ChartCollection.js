@@ -226,6 +226,8 @@ var RenderChartCollection = function( the_data, layout_spec ) {
     });
 
 
+    render_compare_arguments( the_data[0] );
+
     //  https://github.com/HamsterHuey/intothevoid.io/blob/master/code/2017/dcjs%20sortable%20table/dcjsSortableTable.html
 
     nasdaqTable
@@ -294,7 +296,6 @@ var RenderChartCollection = function( the_data, layout_spec ) {
     console.dir(table_data);
 
     bind_sort();
-    render_compare_arguments( the_data[0] );
 };
 
 
