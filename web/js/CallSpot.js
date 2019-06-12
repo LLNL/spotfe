@@ -291,7 +291,7 @@ ST.CallSpot = function() {
             var command = ST.Utility.get_param('command');
             var comm = command ? '&command=' + command : "";
             var xaxis_par = '&xaxis=' + xaxis;
-            var groupby_par = '&groupby=' + groupby;
+            var groupby_par = '&groupby=' + groupby + ST.UrlStateManager.get_chart_pars();
 
             var goto_url = '../dur_sankey/?' + machine + 'calis=local&directory=' + directory + comm + xaxis_par + groupby_par;
 

@@ -17,13 +17,16 @@
 - DONE 7. when URL has xaxis and groupby propogate them to the select drop down.
 - DONE 8. on spot2 page make sure to add "exe_compare=1" to URL, plus add xaxis and groupby as well.
 
-10. Support default layout file.  If none is given then don't send one.
-    * So if you point to the backend on CZ to /usr/gapps/spot/spot.py you should be able to experiment with the changes.
 
-9. Add all BarChartX and PieChartX to compareURL.
+9. - Add all BarChartX and PieChartX to compareURL.
 
+- Fix firefox/safari browser problem: regUlral expression.
 
-11: Be able to graph X-axis of less than 1 int width.
+- Work with chavez to get the spot1 page up and running again.
+
+10. - Deal with maximum call stack size exceeded error.
+
+11. Be able to graph X-axis of less than 1 int width.
     * as part of this need to be able to subdivide the bars into widths of 0.1 or 0.2, etc.
 
 12. On the Spot1 page, be able to change the xAxis and GroupBy URLs based on the select drop down change.

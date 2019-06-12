@@ -113,7 +113,34 @@ ST.UrlStateManager = function() {
         ST.CallSpot.bind();
     };
 
+    var get_chart_pars_ = function() {
+
+        var pars = "";
+
+        //  Happens on page load, when we need to load the filters present in the URL bar.
+        for( var z=0; z < 10; z++ ) {
+
+            var tag = "PieChart" + z;
+            var par = ST.Utility.get_param(tag);
+
+            if( par ) {
+                pars += '&' + tag + '=' + par;
+            }
+
+
+            var tag = "BarChart" + z;
+            var par = ST.Utility.get_param(tag);
+
+            if( par ) {
+                pars += '&' + tag + '=' + par;
+            }
+        }
+
+        return pars;
+    };
+
     return {
+        get_chart_pars: get_chart_pars_,
         update_url: update_url_,
         remove_param: remove_param_,
         user_filtered: user_filtered_,
