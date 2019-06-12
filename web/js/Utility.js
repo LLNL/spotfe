@@ -1,7 +1,7 @@
 var ST = ST || {};
 
 ST.Default = {
-    COMMAND: "/usr/gapps/wf/web/spot/virtenv/bin/python /usr/gapps/wf/web/spot/spot.py",
+    COMMAND: "/usr/gapps/wf/web/spot/virtenv/bin/python /usr/gapps/spot/spot.py", // /usr/gapps/wf/web/spot/spot.py",
     LAYOUT: "/g/g0/pascal/default_layout.json"
 };
 
