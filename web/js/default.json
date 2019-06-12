@@ -1,0 +1,18 @@
+"layout": {
+"chart": [
+{"dimension": "FigureOfMerit", "title": "FigureOfMerit", "viz": "BarChart"},
+{"dimension": "Iterations", "title": "Iterations", "viz": "BarChart"},
+{"dimension": "Problem Size", "title": "Problem Size", "viz": "BarChart"},
+{"dimension": "Number of Regions", "title": "Number of Regions", "viz": "BarChart"},
+{"dimension": "Region Balance", "title": "Region Balance", "viz": "BarChart"},
+{"dimension": "Region Cost", "title": "Region Cost", "viz": "BarChart"},
+{"dimension": "Compiler Name", "title": "Compiler Name", "viz": "PieChart"},
+{"dimension": "Compiler Version", "title": "Compiler Version", "viz": "PieChart"},
+{"dimension": "Code Builder", "title": "Code Builder", "viz": "PieChart"},
+{"dimension": "Compiler Flags", "title": "Compiler Flags", "viz": "PieChart"},
+{"dimension": "Hostname", "title": "Hostname", "viz": "PieChart"},
+{"dimension": "Cluster", "title": "Cluster", "viz": "PieChart"},
+{"dimension": "cali.caliper.version", "title": "cali.caliper.version", "viz": "PieChart"},
+{"dimension": "cali.experiment", "title": "cali.experiment", "viz": "PieChart"},
+{"dimension": "Inclusive Duration", "title": "Inclusive Duration", "viz": "BarChart"}
+]

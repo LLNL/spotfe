@@ -85,6 +85,15 @@ var RenderChartCollection = function( the_data, layout_spec ) {
         return dateFormatParser(d.date);
     });
 
+    if( !layout_spec.charts ) {
+
+        var mes = layout_spec.chart ? "chart specification should be plural: charts, not chart.  " : "";
+        alert(mes + '   <b>charts</b> is not defined in layout file.')
+    }
+    
+    if( layout_spec.charts.length === undefined ) {
+        alert('Layout charts must be of type array.')
+    }
 
     var layout_charts = layout_spec.charts;
 
