@@ -143,7 +143,7 @@ ST.BarChart = function() {
             .alwaysUseRounding(true)
             .x( use_buckets ? xinput2 : xinput )
             .renderHorizontalGridLines(true)
-            .ordinalColors(get_colors_( inst_num_ ))
+            .ordinalColors(get_colors_( options.dimension ))
             // Customize the filter displayed in the control span
             .filterPrinter(function (filters) {
 
@@ -174,7 +174,20 @@ ST.BarChart = function() {
     };
 
 
-    var get_colors_ = function( inst ) {
+    String.prototype.hashCode = function() {
+
+        var hash = 0, i, chr;
+        if (this.length === 0) return hash;
+        for (i = 0; i < this.length; i++) {
+            chr   = this.charCodeAt(i);
+            hash  = ((hash << 5) - hash) + chr;
+            hash |= 0; // Convert to 32bit integer
+        }
+        return hash;
+    };
+
+
+    var get_colors_ = function( dimension ) {
 
         var pallets = ALL_PALLETES_AVAILABLE;
 
@@ -183,8 +196,10 @@ ST.BarChart = function() {
         }
 
         var ordinal_colors = pallets[ST.params.pallet_num];
+        var num = Math.abs(dimension.hashCode());
+        console.log( num );
 
-        var color = ordinal_colors[ inst % ordinal_colors.length ];
+        var color = ordinal_colors[ num % ordinal_colors.length ];
         return [color];
     };
 
