@@ -59,6 +59,10 @@ ST.LayoutAugmenterModel = function() {
                 if( +val < spec[attr].min ) {
                     spec[attr].min = val;
                 }
+
+                if( +val !== parseInt(val) ) {
+                    spec[attr].has_decimal = true;
+                }
             }
         }
 
@@ -76,7 +80,7 @@ ST.LayoutAugmenterModel = function() {
 
                 var bar_width;
 
-                if (spec[attr].distance >= SUB_INTEGER_LIMIT) {
+                if (spec[attr].distance >= SUB_INTEGER_LIMIT || !spec[attr].has_decimal ) {
                     bar_width = 1;
                 } else {
                     //  Use buckets to create sub-integer support.
