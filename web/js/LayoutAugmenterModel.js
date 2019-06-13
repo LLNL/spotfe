@@ -66,14 +66,15 @@ ST.LayoutAugmenterModel = function() {
             }
         }
 
-        console.dir( spec );
+
         var SUB_INTEGER_LIMIT = 8;
 
         for( var mx in model ) {
 
             var mod = model[mx];
 
-            if( mod.viz === "BarChart") {
+            //  Don't override a layout generated buckets.
+            if( mod.viz === "BarChart" && !model[mx].buckets) {
 
                 var attr = model[mx].dimension;
                 spec[attr].distance = spec[attr].max - spec[attr].min;
@@ -89,6 +90,9 @@ ST.LayoutAugmenterModel = function() {
                     //options.buckets = "['0-0.2', '0.2-0.4', '0.4-0.6', '0.6-1', '1-10']";
                 }
 
+                spec[attr].min = +spec[attr].min;
+                spec[attr].max = +spec[attr].max;
+
                 model[mx].xrange = [spec[attr].min - bar_width, spec[attr].max + bar_width];
                 var xr = model[mx].xrange;
 
@@ -101,7 +105,6 @@ ST.LayoutAugmenterModel = function() {
                     model[mx].use_middling = false;
 
                     do {
-
                         before_dash += bar_width;
                         after_dash += bar_width;
 
