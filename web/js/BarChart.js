@@ -38,8 +38,6 @@ ST.BarChart = function() {
         options = options || {};
         var dimension = options.dimension || "runtime";
 
-        var min = 100000;
-        var max = 0;
         var use_buckets = options.buckets;
 
 
@@ -51,23 +49,13 @@ ST.BarChart = function() {
             var dim = cali_object[dimension];
             dim = +dim;
 
-            if( dim < min ) {
-                min = dim;
-            }
-            if( dim > max ) {
-                max = dim;
-            }
-
-            var ret = typeof dim === 'number' ? Math.round(dim/1)*1 : dim;
+            //var ret = typeof dim === 'number' ? Math.round(dim/1)*1 : dim;
+            var ret = dim;
 
             if( use_buckets ) {
                 return get_bucket_( options.buckets, ret );
             } else {
                 return Math.round(ret);
-
-                //ret = +ret;
-                //var down = Math.round(ret/1000);
-                //return ret > 1000 ? down + 'e3' : ret;
             }
         });
 
