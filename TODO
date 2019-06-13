@@ -1,3 +1,25 @@
+TODO/ Feature Requests:
+00. One color - http://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3
+0. That last X-axis ranges make sure it's not 5.3 when it's seperated by 1 tick
+1. Y-axis Ranges should be selected better.
+2. Sub integer support
+7. Retest last_days=XX
+5. On the Spot1 page, be able to change the xAxis and GroupBy URLs based on the select drop down change.
+3. Store layout Preferences: which are changes for example: being able to not show certain charts.
+    -> Preferences which allow you to kill things in the Table.
+4. Instead of BarChartX, need to go by dimension name so that it doesn't break whenever the user adds a new data attribute
+8. Deal with maximum call stack size exceeded error.
+9. LAST: Ravel calculation of Lateness is inverted.
+
+
+Caveat:
+- Must remain in the same browser in order to pull up results because we store cali files in localStorage
+    * storage in URL is not an option if we have too many cali files.
+    * Eventually we'll want to store that on the BE, come up with an architecture for that.
+
+
+
+
 
 - DONE Announce last_x_day feature, plus the exe_compare=1 feature.
 - DONE X range -> take the distance from Min to Max (1% or 3%) of the distance (from Min to max) and add to the max xrange
@@ -23,6 +45,8 @@
 - Fix firefox/safari browser problem: regUlral expression.
 
 - Work with chavez to get the spot1 page up and running again.
+
+- Retest last_days=XX
 
 10. - Deal with maximum call stack size exceeded error.
 

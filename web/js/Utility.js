@@ -81,6 +81,7 @@ ST.Utility = function() {
         ST.params.last_days = ST.Utility.get_param('last_days') || 0;
         ST.params.exe_compare = ST.Utility.get_param('exe_compare') || 0;
         ST.params.duration_key = dur_keys_[sf];
+        ST.params.pallet_num = ST.Utility.get_param('color') || 0;
 
         if( !ST.params.duration_key ) {
             alert('Unknown duration key for this spot file (sf) ' + sf);
@@ -136,7 +137,7 @@ ST.Utility = function() {
     var matchExpression_ = function( str ) {
 
         var rgularExp = {
-            contains_alphaNumeric : /^(?!-)(?!.*-)[A-Za-z0-9-]+(?<!-)$/,
+            contains_alphaNumeric : /\d+/, //  This regexp only works in Chrome: /^(?!-)(?!.*-)[A-Za-z0-9-]+(?<!-)$/,
             containsNumber : /\d+/,
             containsAlphabet : /[a-zA-Z]/,
 

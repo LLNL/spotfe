@@ -1,6 +1,6 @@
 RV.ComputeLatenessModel = function() {
 
-      var get_earliest_enter_for_a_step_ = function( events, step ) {
+    var get_earliest_enter_for_a_step_ = function( events, step ) {
 
       var min_enter = 100000000;
 

@@ -117,8 +117,6 @@ ST.BarChart = function() {
         }
 
         //one_i.xUnits()
-
-
         one_i.width( width )
             .height( height )
             .margins( options.margins || {top: 10, right: 50, bottom: 20, left: 40})
@@ -136,7 +134,7 @@ ST.BarChart = function() {
             .alwaysUseRounding(true)
             .x( use_buckets ? xinput2 : xinput )
             .renderHorizontalGridLines(true)
-            //.ordinalColors(['green', 'blue'])
+            .ordinalColors(get_colors_( inst_num_ ))
             // Customize the filter displayed in the control span
             .filterPrinter(function (filters) {
 
@@ -164,6 +162,21 @@ ST.BarChart = function() {
         one_i.yAxis().ticks( options["y-ticks"] || 5);
 
         inst_num_++;
+    };
+
+
+    var get_colors_ = function( inst ) {
+
+        var pallets = ALL_PALLETES_AVAILABLE;
+
+        if( !pallets[ST.params.pallet_num] ) {
+            alert('That pallet number is not defined.');
+        }
+
+        var ordinal_colors = pallets[ST.params.pallet_num];
+
+        var color = ordinal_colors[ inst % ordinal_colors.length ];
+        return [color];
     };
 
 
