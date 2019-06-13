@@ -108,10 +108,10 @@ ST.LayoutAugmenterModel = function() {
                         before_dash += bar_width;
                         after_dash += bar_width;
 
-                        before_dash = round_( before_dash );
-                        after_dash = round_( after_dash );
+                        var before = round_( before_dash );
+                        var after = round_( after_dash );
 
-                        var dash_str = before_dash + '-' + after_dash;
+                        var dash_str = before + '-' + after;
 
                         model[mx].buckets.push(dash_str);
 

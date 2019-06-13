@@ -7,6 +7,7 @@ DONE: Firefox Fix.
 
 7. Retest last_days=XX
 5. On the Spot1 page, be able to change the xAxis and GroupBy URLs based on the select drop down change.
+6. Get a Real date and show it as some kind of selectable chart or at least a drop down.
 3. Store layout Preferences: which are changes for example: being able to not show certain charts.
     -> Preferences which allow you to kill things in the Table.
 4. Instead of BarChartX, need to go by dimension name so that it doesn't break whenever the user adds a new data attribute
