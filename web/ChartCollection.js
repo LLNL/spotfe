@@ -192,7 +192,7 @@ var RenderChartCollection = function( the_data, layout_spec ) {
             return 1;
         })
         // (_optional_) max number of records to be shown, `default = 25`
-        .size( ST.params.max )
+        .size( 100 )    //  ST.params.max
         // There are several ways to specify the columns; see the data-table documentation.
         // This code demonstrates generating the column header automatically based on the columns.
         .columns(columns)

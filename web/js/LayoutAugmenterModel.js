@@ -7,7 +7,7 @@ ST.LayoutAugmenterModel = function() {
         for( var x in model ) {
 
             var mod = model[x];
-            mod.width = 470;
+            mod.width = 680;
             mod.height = 370;
 
             if( mod.viz === "BasicLineChart" ) {
@@ -67,7 +67,7 @@ ST.LayoutAugmenterModel = function() {
         }
 
 
-        var SUB_INTEGER_LIMIT = 8;
+        var SUB_INTEGER_LIMIT = 12;
 
         for( var mx in model ) {
 
