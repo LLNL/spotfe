@@ -94,6 +94,7 @@ ST.LayoutAugmenterModel = function() {
                 spec[attr].max = +spec[attr].max;
 
                 model[mx].xrange = [spec[attr].min - bar_width, spec[attr].max + bar_width];
+
                 var xr = model[mx].xrange;
 
                 if( bar_width !== 1 ) {
@@ -127,7 +128,7 @@ ST.LayoutAugmenterModel = function() {
 
 
     var round_ = function( i ) {
-        return Math.round( i * 10 ) / 10;
+        return Math.round( i * 100 ) / 100;
     };
 
 

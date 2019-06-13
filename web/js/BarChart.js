@@ -9,6 +9,7 @@ ST.BarChart = function() {
         return lower.charAt(0).toUpperCase() + lower.substr(1);
     };
 
+    //  This is the part where the actual data is placed into the bucket we want it to be in.
     var get_bucket_ = function( buckets, number ) {
 
         number = +number;
