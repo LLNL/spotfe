@@ -2,7 +2,7 @@ ST.LayoutAugmenterModel = function() {
 
     //  The backend will not control things like width and height of charts.
     //  It's up to us here to augment the model with the correct layout attributes.
-    var get_ = function( model ) {
+    var get_ = function( model, data ) {
 
         for( var x in model ) {
 
@@ -27,6 +27,12 @@ ST.LayoutAugmenterModel = function() {
                 mod.radius = 170;
             }
         }
+
+        bucket_sub_integer_( model, data );
+    };
+
+    var bucket_sub_integer_ = function( model, data ) {
+
     };
 
     return {

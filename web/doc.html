@@ -111,7 +111,18 @@
 
     </pre>
 
+    There are several special attributes above that do specific things.
+
+    <h3>drilldown</h3>
+    <p>
+        This will provide buttons on the right for specific drilldown cases.
     </p>
+
+    <h3>key</h3>
+    <p>Key is a unique identifier that will get passed to the next page.  For our use case it's a cali file, but it can be any identifier you want.</p>
+
+
+
 
     <h2>DataSet Object Attributes</h2>
     <p>
@@ -174,7 +185,9 @@
         },
         {
             "dimension": "FigureOfMerit",
-            "viz": "BarChart"
+            "viz": "BarChart",
+            "buckets": "['0-5', '6-10', '11-15', '16-20']"
+            "buckets": "['0-2', '3-4', '5-6', '7-10', '11-200']"
         },
         {
             "dimension": "Number of Regions",

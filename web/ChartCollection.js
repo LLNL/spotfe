@@ -46,15 +46,6 @@ var reduce_authors = function( data ) {
         data[z].runtime = parseInt(diff/3600);
         data[z].runtime2 = parseInt(diff/1200);
 
-        var mult = data[z].program === "umt" ? 2 : 1;
-        data[z].thermal = data[z].runtime * mult * 3; //data[z].runtime > 11 ? 500 : 50; //parseInt(Math.random()*500);
-        data[z].scientific_performance = parseInt(z);
-
-        data[z].figure_of_merit = data[z].scientific_performance / (data[z].runtime || 1) * 6;
-
-        data[z].thermal_variance = (data[z].runtime >= 8) ? "Above" : "Below";
-
-//        data[z].buttons = data[z].buttons || (Math.random() * 4 > 2 ? ["ravel", "vale43d", "spot"] : ["spot"]);
         data[z].buttons = data[z].data;
     }
 
@@ -74,6 +65,8 @@ var RenderChartCollection = function( the_data, layout_spec ) {
 
     console.dir( the_data );
     //  ST.MakeNiceData.make( the_data );
+    //          options.buckets = ['0-0.3', '0.3-0.6', '0.6-10', '10-15', '15-20'];
+
 
     //  ST.ReturnedDataStub.data
     var ndx = crossfilter( the_data );
@@ -97,65 +90,22 @@ var RenderChartCollection = function( the_data, layout_spec ) {
 
     var layout_charts = layout_spec.charts;
 
-    ST.LayoutAugmenterModel.get(layout_charts);
+    ST.LayoutAugmenterModel.get(layout_charts, the_data);
 
 
-    var RENDER_GENERIC = true;
+    for (var dimension in layout_charts) {
 
-    if (RENDER_GENERIC) {
+        var spec = layout_charts[dimension];
+        var viz = spec.viz;
 
-        for (var dimension in layout_charts) {
+        if (ST[viz] && ST[viz].render) {
 
-            var spec = layout_charts[dimension];
-            var viz = spec.viz;
-
-            if (ST[viz] && ST[viz].render) {
-
-                ST[viz].render(ndx, spec);
-            } else {
-                console.log('Sorry.  Viz type viz=' + viz + ' is not supported.');
-            }
+            ST[viz].render(ndx, spec);
+        } else {
+            console.log('Sorry.  Viz type viz=' + viz + ' is not supported.');
         }
-
-    } else {
-
-        ST.BubbleChart.render(ndx);
-
-        ST.PieChart.render(ndx, {
-            title: "Thermal Variance",
-            iterator_attribute: "thermal_variance",
-            inner_radius: 30
-        });
-
-        ST.PieChart.render(ndx, {
-            title: "Program",
-            iterator_attribute: "program",
-            inner_radius: 0
-        });
-
-
-        ST.HorizontalBarChart.render();
-        ST.BarChart.render(ndx);
-        ST.LineChart.render(ndx, {
-            width: 900,
-            height: 200
-        });
     }
 
-    //#### Data Count
-
-    // Create a data count widget and use the given css selector as anchor. You can also specify
-    // an optional chart group for this chart to be scoped within. When a chart belongs
-    // to a specific group then any interaction with such chart will only trigger redraw
-    // on other charts within the same chart group.
-    // <br>API: [Data Count Widget](https://github.com/dc-js/dc.js/blob/master/web/docs/api-latest.md#data-count-widget)
-    //
-    //```html
-    //<div class='dc-data-count'>
-    //  <span class='filter-count'></span>
-    //  selected out of <span class='total-count'></span> records.
-    //</div>
-    //```
 
     // Create chart objects associated with the container elements identified by the css selector.
     // Note: It is often a good idea to have these objects accessible at the global scope so that they can be modified or

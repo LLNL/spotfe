@@ -33,7 +33,6 @@ ST.BarChart = function() {
     var render_ = function( ndx, options ) {
 
         //  STUB
-        //options.buckets = ['0-5', '5-10', '10-15', '15-20'];
         options.buckets = typeof options.buckets === "string" ? eval(options.buckets) : options.buckets;
 
         options = options || {};
@@ -42,6 +41,7 @@ ST.BarChart = function() {
         var min = 100000;
         var max = 0;
         var use_buckets = options.buckets;
+
 
         // Determine a histogram of percent changes
         var runtime_dimension = ndx.dimension(function (cali_object) {
@@ -71,6 +71,21 @@ ST.BarChart = function() {
             }
         });
 
+        var distance = max - min;
+
+        var SUB_INTEGER_LIMIT = 12;
+        var diff_dist = 1;
+
+        if( distance >= SUB_INTEGER_LIMIT ) {
+            diff_dist = 1;
+        } else {
+            //  Use buckets to create sub-integer support.
+            diff_dist = distance / SUB_INTEGER_LIMIT;
+
+            //options.buckets = "['0-0.2', '0.2-0.4', '0.4-0.6', '0.6-1', '1-10']";
+            //use_buckets = true;
+        }
+
         var runtime_group = runtime_dimension.group();
 
         var width = options.width || 580;
@@ -97,12 +112,6 @@ ST.BarChart = function() {
         var one_i = inst_[inst_num_];
         $('.runtime-chart' + inst_num_).attr('instance_num', inst_num_);
 
-        var distance = max - min;
-        var diff_dist = distance * .03;
-
-        if( distance > 5 ) {
-            diff_dist = 1;
-        }
 
         var domain = options.xrange || [min - diff_dist, max + diff_dist];
         //domain = [0,80];

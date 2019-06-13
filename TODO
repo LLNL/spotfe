@@ -1,8 +1,10 @@
 TODO/ Feature Requests:
-00. One color - http://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3
+DONE: 00. One color - http://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3
+DONE: Firefox Fix.
+2. Sub integer support
 0. That last X-axis ranges make sure it's not 5.3 when it's seperated by 1 tick
 1. Y-axis Ranges should be selected better.
-2. Sub integer support
+
 7. Retest last_days=XX
 5. On the Spot1 page, be able to change the xAxis and GroupBy URLs based on the select drop down change.
 3. Store layout Preferences: which are changes for example: being able to not show certain charts.
