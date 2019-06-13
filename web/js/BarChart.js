@@ -71,20 +71,6 @@ ST.BarChart = function() {
             }
         });
 
-        var distance = max - min;
-
-        var SUB_INTEGER_LIMIT = 12;
-        var diff_dist = 1;
-
-        if( distance >= SUB_INTEGER_LIMIT ) {
-            diff_dist = 1;
-        } else {
-            //  Use buckets to create sub-integer support.
-            diff_dist = distance / SUB_INTEGER_LIMIT;
-
-            //options.buckets = "['0-0.2', '0.2-0.4', '0.4-0.6', '0.6-1', '1-10']";
-            //use_buckets = true;
-        }
 
         var runtime_group = runtime_dimension.group();
 
@@ -113,7 +99,7 @@ ST.BarChart = function() {
         $('.runtime-chart' + inst_num_).attr('instance_num', inst_num_);
 
 
-        var domain = options.xrange || [min - diff_dist, max + diff_dist];
+        var domain = options.xrange;
         //domain = [0,80];
 
         var xinput = d3.scaleLinear().domain( domain );
@@ -159,7 +145,7 @@ ST.BarChart = function() {
         var xticks = one_i.xAxis().tickFormat(
             function (v) {
 
-                v = get_dec_v_( v, use_buckets);
+                v = get_dec_v_( v, use_buckets, options.use_middling);
 
                 return v + (options.xsuffix !== undefined ? options.xsuffix : '');
             });
@@ -197,17 +183,32 @@ ST.BarChart = function() {
 
         var ordinal_colors = pallets[ST.params.pallet_num];
         var num = Math.abs(dimension.hashCode());
-        console.log( num );
 
         var color = ordinal_colors[ num % ordinal_colors.length ];
         return [color];
     };
 
 
-    var get_dec_v_ = function(v, use_buckets ) {
+    var get_middling_ = function( v ) {
+
+        var spli = v.split('-');
+        var before_dash = +spli[0];
+        var after_dash = +spli[1];
+        var avg = (before_dash + after_dash) / 2;
+
+        return round2_(avg);
+    };
+
+
+    var round2_ = function( i ) {
+        return Math.round( i * 100 ) / 100;
+    };
+
+
+    var get_dec_v_ = function(v, use_buckets, use_middling ) {
 
         if( use_buckets ) {
-            return v;
+            return use_middling ? get_middling_(v) : v;
         }
 
         for( var x=3; x < 15; x++ ) {

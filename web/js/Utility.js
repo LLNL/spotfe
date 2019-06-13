@@ -81,7 +81,7 @@ ST.Utility = function() {
         ST.params.last_days = ST.Utility.get_param('last_days') || 0;
         ST.params.exe_compare = ST.Utility.get_param('exe_compare') || 0;
         ST.params.duration_key = dur_keys_[sf];
-        ST.params.pallet_num = ST.Utility.get_param('color') || 1;
+        ST.params.pallet_num = ST.Utility.get_param('color') || 15;
 
         if( !ST.params.duration_key ) {
             alert('Unknown duration key for this spot file (sf) ' + sf);
