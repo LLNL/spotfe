@@ -283,6 +283,10 @@ div.dc-html-legend {
 #quarter-chart .pie-slice {
   fill: #000000; }
 
+#day-of-week-chart {
+  position: absolute;
+  left: -250px; }
+
 body .container {
   width: 1280px; }
 
@@ -293,7 +297,8 @@ body .dc-chart g.row text {
   margin: 0 26px 0 0;
   float: none;
   display: inline-block;
-  vertical-align: top; }
+  vertical-align: top;
+  position: relative; }
 
 .inner_container {
   display: inline-block;
