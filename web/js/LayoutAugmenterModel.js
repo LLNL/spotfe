@@ -128,7 +128,7 @@ ST.LayoutAugmenterModel = function() {
 
 
     var round_ = function( i ) {
-        return Math.round( i * 100 ) / 100;
+        return Math.round( i * 10 ) / 10;
     };
 
 

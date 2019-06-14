@@ -190,7 +190,7 @@ ST.BarChart = function() {
 
 
     var round2_ = function( i ) {
-        return Math.round( i * 10 ) / 10;
+        return Math.round( i * 100 ) / 100;
     };
 
 
