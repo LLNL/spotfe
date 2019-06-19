@@ -3,9 +3,11 @@ DONE: 00. One color - http://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3
 DONE: Firefox Fix.
 DONE 2. Sub integer support
 DONE 0. That last X-axis ranges make sure it's not 5.3 when it's seperated by 1 tick
-- Generate some super small data sets on the FE, can that be done easily?
 1. Y-axis Ranges should be selected better.
 2. be able to accept very small differences in data values, like: 2.702 to 2.705, etc.
+    * Generate some super small data sets on the FE, can that be done easily?
+    * Add one chart to the layouts and one on the Data array-> just add one more attribute in the range of 2.7465 and 2.7459
+    * Do study on if we can have a range selector on a bucketed chart.
 3. Reset All link should reset all URL parameters.
 
 7. Retest last_days=XX

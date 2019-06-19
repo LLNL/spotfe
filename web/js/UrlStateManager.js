@@ -9,10 +9,10 @@ ST.UrlStateManager = function() {
         var range = filters[0];
         var param = type + instance_num;
 
-        console.log(instance_num);
+        //console.log(instance_num);
 
         if (range) {
-            console.log('range:', range[0], range[1]);
+            //console.log('range:', range[0], range[1]);
 
             var paramValue = "";
 

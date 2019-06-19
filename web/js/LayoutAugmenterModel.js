@@ -63,6 +63,9 @@ ST.LayoutAugmenterModel = function() {
                 if( +val !== parseInt(val) ) {
                     spec[attr].has_decimal = true;
                 }
+
+                spec[attr].count = spec[attr].count || 0;
+                spec[attr].count++;
             }
         }
 
@@ -93,7 +96,7 @@ ST.LayoutAugmenterModel = function() {
                 spec[attr].min = +spec[attr].min;
                 spec[attr].max = +spec[attr].max;
 
-                model[mx].xrange = [spec[attr].min - bar_width, spec[attr].max + bar_width];
+                model[mx].xrange = [spec[attr].min, spec[attr].max + bar_width];
 
                 var xr = model[mx].xrange;
 
@@ -103,7 +106,7 @@ ST.LayoutAugmenterModel = function() {
                     var after_dash = xr[0] + bar_width;
 
                     model[mx].buckets = [];
-                    model[mx].use_middling = false;
+                    model[mx].use_middling = true;
 
                     do {
                         before_dash += bar_width;
@@ -128,7 +131,7 @@ ST.LayoutAugmenterModel = function() {
 
 
     var round_ = function( i ) {
-        return Math.round( i * 10 ) / 10;
+        return i; //Math.round( i * 10 ) / 10;
     };
 
 

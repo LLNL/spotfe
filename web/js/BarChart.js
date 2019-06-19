@@ -42,6 +42,8 @@ ST.BarChart = function() {
         var use_buckets = options.buckets;
 
 
+        var counts = {};
+
         // Determine a histogram of percent changes
         var runtime_dimension = ndx.dimension(function (cali_object) {
 
@@ -51,14 +53,22 @@ ST.BarChart = function() {
             dim = +dim;
 
             //var ret = typeof dim === 'number' ? Math.round(dim/1)*1 : dim;
-            var ret = dim;
+
+            var ret;
 
             if( use_buckets ) {
-                return get_bucket_( options.buckets, ret );
+                ret = get_bucket_( options.buckets, dim );
             } else {
-                return Math.round(ret);
+                ret = Math.round(dim);
             }
+
+            counts[ ret ] = counts[ ret ] || 0;
+            counts[ ret ]++;
+
+            return ret;
         });
+
+        console.dir(counts);
 
 
         var runtime_group = runtime_dimension.group();
@@ -106,10 +116,9 @@ ST.BarChart = function() {
             .margins( options.margins || {top: 10, right: 50, bottom: 20, left: 40})
             .dimension(runtime_dimension)
             .group(runtime_group)
-            .elasticY(true)
             .elasticX(false)  //  The reason I set elasticX to false is so that it will use the min and max numbers. for the domain.
             // (_optional_) whether bar should be center to its x value. Not needed for ordinal chart, `default=false`
-            .centerBar(false)
+            .centerBar( false )
             // (_optional_) set gap between bars manually in px, `default=2`
             .gap(1)
             // (_optional_) set filter brush rounding
@@ -117,6 +126,10 @@ ST.BarChart = function() {
             //.xUnits(.1)   //  not a function.
             .alwaysUseRounding(true)
             .x( use_buckets ? xinput2 : xinput )
+            .elasticY(true)
+            //  This can correctly get and set the yrange, but there will be a problem when you select other charts, thus altering
+            //  the histogram results, because as you filter the histogram results then go out of range.
+            //.y( d3.scaleLinear().domain( get_yrange_(counts)) )
             .renderHorizontalGridLines(true)
             .ordinalColors(get_colors_( options.dimension ))
             // Customize the filter displayed in the control span
@@ -129,6 +142,24 @@ ST.BarChart = function() {
 
                 ST.UrlStateManager.user_filtered( chart, 'BarChart');
             });
+
+
+        //  if we're going to calculate the yrange correctly it's going to get tough.
+        //  https://github.com/dc-js/dc.js/issues/667
+        if( false ) {
+            one_i.chart(function (c) {
+                var child = dc.lineChart(c);
+                dc.override(child, 'yAxisMin', function () {
+                    var min = d3.min(child.data(), function (layer) {
+                        return d3.min(layer.values, function (p) {
+                            return p.y + p.y0;
+                        });
+                    });
+                    return dc.utils.subtract(min, child.yAxisPadding());
+                });
+                return child;
+            });
+        }
 
         // Customize axes
         var xticks = one_i.xAxis().tickFormat(
@@ -146,6 +177,32 @@ ST.BarChart = function() {
         one_i.yAxis().ticks( options["y-ticks"] || 5);
 
         inst_num_++;
+    };
+
+
+    var get_yrange_ = function( counts ) {
+
+        var min = 10000000;
+        var max = 0;
+
+        for( var z in counts ) {
+
+            var cc = counts[z];
+
+            if( cc > max ) {
+                max = cc;
+            }
+
+            if( cc < min ) {
+                min = cc;
+            }
+        }
+
+        var pad = (max - min) * 0.1;
+        var minp = min - pad;
+        minp = minp < 0 ? 0 : minp;
+
+        return [minp, max];
     };
 
 
@@ -185,12 +242,12 @@ ST.BarChart = function() {
         var after_dash = +spli[1];
         var avg = (before_dash + after_dash) / 2;
 
-        return round2_(avg);
+        return round2_(before_dash);
     };
 
 
     var round2_ = function( i ) {
-        return Math.round( i * 100 ) / 100;
+        return Math.round( i * 10000 ) / 10000;
     };
 
 
