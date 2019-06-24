@@ -118,7 +118,7 @@ var RenderChartCollection = function( the_data, layout_spec ) {
         // `%filter-count` and `%total-count` are replaced with the values obtained.
         .html({
             some: '<strong>%filter-count</strong> selected out of <strong>%total-count</strong> records' +
-            ' | <a href=\'javascript:dc.filterAll(); dc.renderAll();\'>Reset All</a>',
+            ' | <a href=\'javascript:dc.filterAll(); dc.renderAll(); ST.UrlStateManager.remove_all_chart_pars();\'>Reset All</a>',
             all: 'All records selected. Please click on the graph to apply filters.'
         });
 

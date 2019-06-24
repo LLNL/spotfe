@@ -113,6 +113,7 @@ ST.UrlStateManager = function() {
         ST.CallSpot.bind();
     };
 
+
     var get_chart_pars_ = function() {
 
         var pars = "";
@@ -139,7 +140,25 @@ ST.UrlStateManager = function() {
         return pars;
     };
 
+
+    var remove_all_chart_pars_ = function() {
+
+        for( var z=0; z < 10; z++ ) {
+
+            var tag = "PieChart" + z;
+            remove_param_(tag);
+
+            var tag = "BarChart" + z;
+            remove_param_(tag);
+        }
+
+        //dc.redrawAll();
+        bind_sort();
+    };
+
+
     return {
+        remove_all_chart_pars: remove_all_chart_pars_,
         get_chart_pars: get_chart_pars_,
         update_url: update_url_,
         remove_param: remove_param_,
