@@ -2,7 +2,7 @@
 'use strict';
 
 var ST = ST || {};
-var nasdaqTable;
+var runTable;
 
 var reduce_authors = function( data ) {
 
@@ -107,13 +107,10 @@ var RenderChartCollection = function( the_data, layout_spec ) {
     }
 
 
-    // Create chart objects associated with the container elements identified by the css selector.
-    // Note: It is often a good idea to have these objects accessible at the global scope so that they can be modified or
-    // filtered by other page controls.
-    var nasdaqCount = dc.dataCount('.dc-data-count');
-    nasdaqTable = dc.dataTable('.dc-data-table');
+    var dataCount = dc.dataCount('.dc-data-count');
+    runTable = dc.dataTable('.dc-data-table');
 
-    nasdaqCount /* dc.dataCount('.dc-data-count', 'chartGroup'); */
+    dataCount /* dc.dataCount('.dc-data-count', 'chartGroup'); */
         .dimension(ndx)
         .group(all)
         // (_optional_) `.html` sets different html when some records or all records are selected.
@@ -180,7 +177,7 @@ var RenderChartCollection = function( the_data, layout_spec ) {
 
     //  https://github.com/HamsterHuey/intothevoid.io/blob/master/code/2017/dcjs%20sortable%20table/dcjsSortableTable.html
 
-    nasdaqTable
+    runTable
         .dimension(dateDimension)
         // Data table does not use crossfilter group but rather a closure
         // as a grouping function
@@ -319,7 +316,7 @@ var bind_sort = function() {
             what_sort = what_sort.split('<')[0].toLowerCase();
 
             console.log("now sort by: " + what_sort);
-            nasdaqTable.sortBy( function(d) {
+            runTable.sortBy( function(d) {
 
                 var nobj = normalize_indexes_(d);
 
