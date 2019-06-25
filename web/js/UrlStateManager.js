@@ -33,6 +33,12 @@ ST.UrlStateManager = function() {
     };
 
 
+    var update_slash_ = function( new_slash ) {
+
+        var newl = location.href.replace(/dur_sankey/, new_slash);
+        history.pushState({}, null, newl);
+    };
+
     var update_url_ = function( param, val ) {
 
         var loc = "" + location.href;
@@ -158,6 +164,7 @@ ST.UrlStateManager = function() {
 
 
     return {
+        update_slash: update_slash_,
         remove_all_chart_pars: remove_all_chart_pars_,
         get_chart_pars: get_chart_pars_,
         update_url: update_url_,

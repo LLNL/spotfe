@@ -1,16 +1,18 @@
 TODO/ Feature Requests:
+- Retest that in the other environments: CZ and RZ.
+7. Retest last_days=XX
 DONE: 00. One color - http://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3
 DONE: Firefox Fix.
 DONE 2. Sub integer support
 DONE 0. That last X-axis ranges make sure it's not 5.3 when it's seperated by 1 tick
-1. Y-axis Ranges should be selected better.
+DONE 3. Reset All link should reset all URL parameters.
 2. be able to accept very small differences in data values, like: 2.702 to 2.705, etc.
     * Generate some super small data sets on the FE, can that be done easily?
     * Add one chart to the layouts and one on the Data array-> just add one more attribute in the range of 2.7465 and 2.7459
-    * Do study on if we can have a range selector on a bucketed chart.
-3. Reset All link should reset all URL parameters.
-
-7. Retest last_days=XX
+1. Y-axis Ranges should be selected better.
+-  Need to fix: Uncaught RangeError: Maximum call stack size exceeded    crossfilter.js: 1353.
+5. Do study on if we can have a range selector on a bucketed chart.
+8. What about a date selector dropdown?  X number of days.  Instead of last_days=XXX
 5. On the Spot1 page, be able to change the xAxis and GroupBy URLs based on the select drop down change.
 6. Get a Real date and show it as some kind of selectable chart or at least a drop down.
 3. Store layout Preferences: which are changes for example: being able to not show certain charts.

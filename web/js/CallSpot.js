@@ -121,8 +121,11 @@ ST.CallSpot = function() {
 
                     var valid_obj = parsed[key];
 
+                    //  This is a STUB!!!!!!!  STUB STUB STUB.
+                    valid_obj['Start time'] = 1557354304 - Math.floor( Math.random() * 280 * 86000);
+
                     //  Generate a random date for now.
-                    var date = valid_obj['Start time']; // 1557354304 - Math.floor( Math.random() * 280 * 86000);
+                    var date = valid_obj['Start time'];
 
                     if( !date || date > min_date ) {
 
@@ -165,7 +168,7 @@ ST.CallSpot = function() {
             }
 
             if( num_past_min_date === 0 && num_total > 0 ) {
-                alert('Although you have ' + num_total + ' total data objects, you only 0 data objects with a date greater than ' + min_date +
+                alert('Although you have ' + num_total + ' total data objects, you only 0 data objects with a "Start time" greater than ' + min_date +
                     '(last_days=' + ST.params.last_days + ').  If you wish to eliminate this constraint, remove "last_days" from the URL parameter list.');
             }
 
@@ -175,15 +178,22 @@ ST.CallSpot = function() {
 
             console.dir( ST.layout_used );
 
-            if( window.RenderChartCollection ) {
-                RenderChartCollection(newp, ST.layout_used);  //  ST.ReturnedDataStub.layout); //
-            }
+            //  This is quite lousy but drill_down needs to happen after RenderChartCollection
+            //  Currently RenderChartCollection has a fatal javascript error coming from dc.js
+            //  which needs to get fixed.
+            try {
+                if (window.RenderChartCollection) {
+                    RenderChartCollection(newp, ST.layout_used);  //  ST.ReturnedDataStub.layout); //
+                }
+            } catch(e) {
+                console.log("caught an error.");
+                //  execute compare right away, if we're exe_compare
+                if( exe_compare_() ) {
+                    drill_down_();
+                }
 
-            bind_();
-
-            //  execute compare right away, if we're exe_compare
-            if( exe_compare_() ) {
-                drill_down_();
+            } finally {
+                bind_();
             }
         }
     };
@@ -267,6 +277,7 @@ ST.CallSpot = function() {
 
 
     var exe_compare_ = function() {
+        //alert(ST.params.exe_compare);
         return ST.params.exe_compare === "1";
     };
 
