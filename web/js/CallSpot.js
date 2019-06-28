@@ -123,6 +123,7 @@ ST.CallSpot = function() {
 
                     //  This is a STUB!!!!!!!  STUB STUB STUB.
                     valid_obj['Start time'] = 1557354304 - Math.floor( Math.random() * 280 * 86000);
+                    valid_obj['Tiny Nums'] = 2.7023 + (Math.random()/10);
 
                     //  Generate a random date for now.
                     var date = valid_obj['Start time'];
@@ -176,6 +177,14 @@ ST.CallSpot = function() {
             newp[1]['Code Builder'] = "Filler1";
             /*newp[2]['Compiler Name'] = "GNU Filler";*/
 
+            //  STUB!!
+
+            ST.layout_used.charts.push({
+                dimension: "Tiny Nums",
+                title: "Tiny Nums",
+                viz: "BarChart"
+            });
+
             console.dir( ST.layout_used );
 
             //  This is quite lousy but drill_down needs to happen after RenderChartCollection
@@ -187,6 +196,8 @@ ST.CallSpot = function() {
                 }
             } catch(e) {
                 console.log("caught an error.");
+                console.dir(e);
+
                 //  execute compare right away, if we're exe_compare
                 if( exe_compare_() ) {
                     drill_down_();

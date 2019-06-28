@@ -101,7 +101,7 @@ ST.BarChart = function() {
         var domain = options.xrange;
         //domain = [0,80];
 
-        var xinput = d3.scaleLinear().domain( domain );
+        var xinput = d3.scaleLinear(0.25).domain( domain );
 
         if( use_buckets ) {
             domain = options.buckets;

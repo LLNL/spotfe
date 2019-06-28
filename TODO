@@ -1,11 +1,11 @@
 TODO/ Feature Requests:
-- Retest that in the other environments: CZ and RZ.
-7. Retest last_days=XX
 DONE: 00. One color - http://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3
 DONE: Firefox Fix.
 DONE 2. Sub integer support
 DONE 0. That last X-axis ranges make sure it's not 5.3 when it's seperated by 1 tick
 DONE 3. Reset All link should reset all URL parameters.
+- Think about container graphs and Preferences to X-out a Graph.
+- Document whether it uses buckets OR standard.
 2. be able to accept very small differences in data values, like: 2.702 to 2.705, etc.
     * Generate some super small data sets on the FE, can that be done easily?
     * Add one chart to the layouts and one on the Data array-> just add one more attribute in the range of 2.7465 and 2.7459
@@ -20,6 +20,8 @@ DONE 3. Reset All link should reset all URL parameters.
 4. Instead of BarChartX, need to go by dimension name so that it doesn't break whenever the user adds a new data attribute
 8. Deal with maximum call stack size exceeded error.
 9. LAST: Ravel calculation of Lateness is inverted.
+
+
 
 
 Caveat:

@@ -1,8 +1,12 @@
 ST.LayoutAugmenterModel = function() {
 
+    var model_;
+
     //  The backend will not control things like width and height of charts.
     //  It's up to us here to augment the model with the correct layout attributes.
     var get_ = function( model, data ) {
+
+        model_ = model;
 
         for( var x in model ) {
 
@@ -77,7 +81,7 @@ ST.LayoutAugmenterModel = function() {
             var mod = model[mx];
 
             //  Don't override a layout generated buckets.
-            if( mod.viz === "BarChart" && !model[mx].buckets) {
+            if( mod.viz === "BarChart" && !model[mx].buckets ) {
 
                 var attr = model[mx].dimension;
                 spec[attr].distance = spec[attr].max - spec[attr].min;
@@ -136,6 +140,9 @@ ST.LayoutAugmenterModel = function() {
 
 
     return {
-        get: get_
+        get: get_,
+        get_model: function() {
+            return model_;
+        }
     }
 }();

@@ -78,6 +78,7 @@ var RenderChartCollection = function( the_data, layout_spec ) {
         return dateFormatParser(d.date);
     });
 
+    //  Do Layoutspec validation
     if( !layout_spec.charts ) {
 
         var mes = layout_spec.chart ? "chart specification should be plural: charts, not chart.  " : "";
