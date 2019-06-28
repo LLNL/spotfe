@@ -92,6 +92,7 @@ var RenderChartCollection = function( the_data, layout_spec ) {
     var layout_charts = layout_spec.charts;
 
     ST.LayoutAugmenterModel.get(layout_charts, the_data);
+    ST.UserPreferences.render();
 
 
     for (var dimension in layout_charts) {

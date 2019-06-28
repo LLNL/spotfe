@@ -456,19 +456,36 @@ body .dc-chart g.row text {
 
 .container {
 
-    .help_body {
+    .help_body, .user_pref_body {
         background-color: #f2f2f2;
         border: 1px solid #cccccc;
-        padding: 10px;
+        padding: 22px;
         font-size: 13px;
         margin: 4px 0 4px -20px;
+    }
+
+    .user_pref_body .prow {
+
+        display: inline-block;
+        width: 300px;
+        margin: 6px 0 6px 0;
+
+        .title {
+            position: relative;
+            top: 4px;
+            left: 4px;
+        }
+
+        input {
+            zoom: 1.5;
+        }
     }
 
     a {
         cursor: pointer;
     }
 
-    .help_icon {
+    .help_icon, .user_pref_icon {
         background-color: #f2f2f2;
         border: 1px solid #cccccc;
         padding: 3px;
@@ -481,7 +498,12 @@ body .dc-chart g.row text {
         right: 5px;
         z-index: 1000;
     }
+
+    .user_pref_icon {
+        right: 40px;
+    }
 }
+
 
 .dc-data-table {
 
