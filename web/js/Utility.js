@@ -68,6 +68,22 @@ ST.Utility = function() {
         "/usr/gapps/spot/datasets/lulesh2small" : "sum#time.inclusive.duration"
     };
 
+    var get_dur_key_ = function(sf) {
+
+        var default_key = "sum#time.inclusive.duration";
+        var user_dur = ST.Utility.get_param('duration_key');
+
+        //if( !ST.params.duration_key ) {
+        //    alert('Unknown duration key for this spot file (sf) ' + sf);
+        //}
+
+        if( user_dur ) {
+            return user_dur;
+        }
+
+        return dur_keys_[sf] || default_key;
+    };
+
 
     var init_params_ = function() {
 
@@ -80,12 +96,9 @@ ST.Utility = function() {
         ST.params.layout = ST.Utility.get_param('layout');
         ST.params.last_days = ST.Utility.get_param('last_days') || 0;
         ST.params.exe_compare = ST.Utility.get_param('exe_compare') || 0;
-        ST.params.duration_key = dur_keys_[sf];
+        ST.params.duration_key = get_dur_key_(sf);
         ST.params.pallet_num = ST.Utility.get_param('color') || 15;
 
-        if( !ST.params.duration_key ) {
-            alert('Unknown duration key for this spot file (sf) ' + sf);
-        }
 
         ST.params.max = ST.params.max || 18000;
 
