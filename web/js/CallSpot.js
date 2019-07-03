@@ -112,6 +112,7 @@ ST.CallSpot = function() {
             var since = ST.params.last_days * 24 * 3600;
             var min_date = ST.params.last_days === 0 ? 0 : (now - since);
 
+            var DATE_KEY = "launchdate";
 
             var newp = [];
 
@@ -122,11 +123,13 @@ ST.CallSpot = function() {
                     var valid_obj = parsed[key];
 
                     //  This is a STUB!!!!!!!  STUB STUB STUB.
-                    valid_obj['Start time'] = 1557354304 - Math.floor( Math.random() * 280 * 86000);
+                    var made_up = 1557354304 - Math.floor( Math.random() * 380 * 86000);
+
+                    valid_obj[DATE_KEY] = valid_obj[DATE_KEY] || made_up;
                     valid_obj['Tiny Nums'] = 2.7023 + (Math.random()/10);
 
                     //  Generate a random date for now.
-                    var date = valid_obj['Start time'];
+                    var date = valid_obj[DATE_KEY];
 
                     if( !date || date > min_date ) {
 
@@ -169,8 +172,8 @@ ST.CallSpot = function() {
             }
 
             if( num_past_min_date === 0 && num_total > 0 ) {
-                alert('Although you have ' + num_total + ' total data objects, you only 0 data objects with a "Start time" greater than ' + min_date +
-                    '(last_days=' + ST.params.last_days + ').  If you wish to eliminate this constraint, remove "last_days" from the URL parameter list.');
+                alert('Although you have ' + num_total + ' total data objects, you only 0 data objects with a "' + DATE_KEY + '" greater than ' + min_date +
+                    '(' + ST.LAST_DAYS + '=' + ST.params.last_days + ').  If you wish to eliminate this constraint, remove "' + ST.LAST_DAYS + '" from the URL parameter list.');
             }
 
             newp[0]['Code Builder'] = "Filler0";

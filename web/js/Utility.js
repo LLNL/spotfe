@@ -5,6 +5,8 @@ ST.Default = {
     LAYOUT: "/g/g0/pascal/default_layout.json"
 };
 
+ST.LAST_DAYS = "launchdate_days_ago";
+
 ST.Utility = function() {
 
     function getUrlVars_() {
@@ -94,7 +96,7 @@ ST.Utility = function() {
         ST.params.max = ST.Utility.get_param('max');
         ST.params.machine = ST.Utility.get_param('machine');
         ST.params.layout = ST.Utility.get_param('layout');
-        ST.params.last_days = ST.Utility.get_param('last_days') || 0;
+        ST.params.last_days = ST.Utility.get_param(ST.LAST_DAYS) || 0;
         ST.params.exe_compare = ST.Utility.get_param('exe_compare') || 0;
         ST.params.duration_key = get_dur_key_(sf);
         ST.params.pallet_num = ST.Utility.get_param('color') || 15;

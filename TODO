@@ -1,3 +1,17 @@
+July 2nd TODO:
+DONE 1. Change start date to launchdate_days_ago and default a launchdate if one is not found
+1.5  Verify that it will work from browser to browser and computer ot computer
+2. Add Labels: Groupby and Label xAxis
+3. Preferences: both loading of the checkmarks and graphs
+    * And saving the checkbox or uncheckbox.
+4. Naming of Barchat => dimension ("Iteration")
+5. Redirect from /spot2 to our deployment area.
+6. File upload browser on landing page.
+7. Days ago dropdown box.
+9. On the Spot1 page, be able to change the xAxis and GroupBy URLs based on the select drop down change.
+
+
+
 TODO/ Feature Requests:
 DONE: 00. One color - http://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3
 DONE: Firefox Fix.
