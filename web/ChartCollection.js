@@ -210,7 +210,7 @@ var RenderChartCollection = function( the_data, layout_spec ) {
             table.selectAll('.dc-table-group').classed('info', true);
 
             //  Make this happen after the render table.
-            jQuery('.compare_button').unbind('click').bind('click', ST.CallSpot.drilldown );
+            jQuery('.compare_button, .dc-table-column .drilldown').unbind('click').bind('click', ST.CallSpot.drilldown );
 
             bind_sort();
         });
