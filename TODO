@@ -1,13 +1,19 @@
 July 2nd TODO:
+Warning: If other people are going to start using this, we really need to do a LOT more QA on it, lots more testing, with more data sets.
+- Need to do lots more testing.
+- Currently NO support for SubInteger URL
 DONE 1. Change start date to launchdate_days_ago and default a launchdate if one is not found
-1.5  Verify that it will work from browser to browser and computer ot computer
+DONE 7. Days ago dropdown box.
+DONE 2. Switched over to deterministic random launchDate generator.
+1.5  Launchdate feature needs more testing on Data with an actual launchdate (STUBs wont work because those dates are randomly generated).
 2. Add Labels: Groupby and Label xAxis
 3. Preferences: both loading of the checkmarks and graphs
     * And saving the checkbox or uncheckbox.
 4. Naming of Barchat => dimension ("Iteration")
 5. Redirect from /spot2 to our deployment area.
+5.5 -> Exception error prevents exe_compare from working in firefox and safari
 6. File upload browser on landing page.
-7. Days ago dropdown box.
+7. Make tic marks at the beginning of the barChart.
 9. On the Spot1 page, be able to change the xAxis and GroupBy URLs based on the select drop down change.
 
 

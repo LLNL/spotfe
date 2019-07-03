@@ -128,7 +128,7 @@ ST.LayoutAugmenterModel = function() {
                     model[mx].buckets = JSON.stringify( model[mx].buckets );
                 }
 
-                console.dir(mod);
+                //console.dir(mod);
             }
         }
     };

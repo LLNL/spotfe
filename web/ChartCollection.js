@@ -210,7 +210,7 @@ var RenderChartCollection = function( the_data, layout_spec ) {
             table.selectAll('.dc-table-group').classed('info', true);
 
             //  Make this happen after the render table.
-            jQuery('.myButton').unbind('click').bind('click', ST.CallSpot.drilldown );
+            jQuery('.compare_button').unbind('click').bind('click', ST.CallSpot.drilldown );
 
             bind_sort();
         });
@@ -269,6 +269,21 @@ var render_compare_arguments = function( fields ) {
         val = val.replace(/#/, '');
 
         ST.UrlStateManager.update_url( cla, val );
+    });
+
+    var last_days = ST.Utility.get_param(ST.LAST_DAYS) || "";
+
+    $('.bottom_table').prepend('<div class="launcher">' +
+        '<div class="days_label">launchdate days ago: </div>' +
+        '<input type="text" class="launchdate_days_ago" value="' + last_days + '"/>' +
+        '<div class="launch_button myButton">RELOAD</div>' +
+        '</div>');
+
+    $('.launch_button').unbind('click').bind('click', function() {
+
+        var val = $('.launchdate_days_ago').val();
+        ST.UrlStateManager.update_url("launchdate_days_ago", val);
+        location.reload();
     });
 
     load_compare();

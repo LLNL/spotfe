@@ -471,7 +471,7 @@ This code demonstrates generating the column header automatically based on the c
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            jQuery(<span class="hljs-string">'.myButton'</span>).unbind(<span class="hljs-string">'click'</span>).bind(<span class="hljs-string">'click'</span>, ST.CallSpot.drilldown );
+            <div class="content"><div class='highlight'><pre>            jQuery(<span class="hljs-string">'.compare_button'</span>).unbind(<span class="hljs-string">'click'</span>).bind(<span class="hljs-string">'click'</span>, ST.CallSpot.drilldown );
 
             bind_sort();
         });</pre></div></div>
@@ -605,6 +605,21 @@ changes, without re-rendering everything</p>
         val = val.replace(<span class="hljs-regexp">/#/</span>, <span class="hljs-string">''</span>);
 
         ST.UrlStateManager.update_url( cla, val );
+    });
+
+    <span class="hljs-keyword">var</span> last_days = ST.Utility.get_param(ST.LAST_DAYS) || <span class="hljs-string">""</span>;
+
+    $(<span class="hljs-string">'.bottom_table'</span>).prepend(<span class="hljs-string">'&lt;div class="launcher"&gt;'</span> +
+        <span class="hljs-string">'&lt;div class="days_label"&gt;launchdate days ago: &lt;/div&gt;'</span> +
+        <span class="hljs-string">'&lt;input type="text" class="launchdate_days_ago" value="'</span> + last_days + <span class="hljs-string">'"/&gt;'</span> +
+        <span class="hljs-string">'&lt;div class="launch_button myButton"&gt;RELOAD&lt;/div&gt;'</span> +
+        <span class="hljs-string">'&lt;/div&gt;'</span>);
+
+    $(<span class="hljs-string">'.launch_button'</span>).unbind(<span class="hljs-string">'click'</span>).bind(<span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+
+        <span class="hljs-keyword">var</span> val = $(<span class="hljs-string">'.launchdate_days_ago'</span>).val();
+        ST.UrlStateManager.update_url(<span class="hljs-string">"launchdate_days_ago"</span>, val);
+        location.reload();
     });
 
     load_compare();

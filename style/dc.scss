@@ -555,6 +555,23 @@ body .dc-chart g.row text {
         z-index: 10;
     }
 
+    .launcher {
+        .launchdate_days_ago {
+            position: absolute;
+
+            left: 0;
+            top: 20px;
+            padding: 8px;
+            font-size: 14px;
+            z-index: 1000;
+        }
+
+        .launch_button {
+            position: absolute;
+            left: 240px;
+        }
+    }
+
     .compare_arguments {
         position: absolute;
         top: 30px;

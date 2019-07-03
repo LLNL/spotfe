@@ -388,6 +388,16 @@ body .dc-chart g.row text {
     top: 30px;
     right: -5px;
     z-index: 10; }
+  .bottom_table .launcher .launchdate_days_ago {
+    position: absolute;
+    left: 0;
+    top: 20px;
+    padding: 8px;
+    font-size: 14px;
+    z-index: 1000; }
+  .bottom_table .launcher .launch_button {
+    position: absolute;
+    left: 240px; }
   .bottom_table .compare_arguments {
     position: absolute;
     top: 30px;

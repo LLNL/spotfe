@@ -106,11 +106,11 @@ ST.CallSpot = function() {
             }
 
 
-            console.dir(parsed);
+            //console.dir(parsed);
 
             var now = Math.round( Date.now() / 1000);
             var since = ST.params.last_days * 24 * 3600;
-            var min_date = ST.params.last_days === 0 ? 0 : (now - since);
+            var min_date = ST.params.last_days == 0 ? 0 : (now - since);
 
             var DATE_KEY = "launchdate";
 
@@ -123,7 +123,9 @@ ST.CallSpot = function() {
                     var valid_obj = parsed[key];
 
                     //  This is a STUB!!!!!!!  STUB STUB STUB.
-                    var made_up = 1557354304 - Math.floor( Math.random() * 380 * 86000);
+                    var rb = valid_obj['Region Balance'];
+                    var deterministic = valid_obj.FigureOfMerit || rb || 0.5;
+                    var made_up = 1557354304 - Math.floor( deterministic * 380 * 86000);
 
                     valid_obj[DATE_KEY] = valid_obj[DATE_KEY] || made_up;
                     valid_obj['Tiny Nums'] = 2.7023 + (Math.random()/10);
@@ -202,12 +204,13 @@ ST.CallSpot = function() {
                 console.log("caught an error.");
                 console.dir(e);
 
+            } finally {
+
                 //  execute compare right away, if we're exe_compare
                 if( exe_compare_() ) {
                     drill_down_();
                 }
 
-            } finally {
                 bind_();
             }
         }
@@ -313,13 +316,16 @@ ST.CallSpot = function() {
             //localStorage.setItem('location.href', location.href);
 
             var directory = ST.Utility.get_file();
-
             var command = ST.Utility.get_param('command');
             var comm = command ? '&command=' + command : "";
             var xaxis_par = '&xaxis=' + xaxis;
             var groupby_par = '&groupby=' + groupby + ST.UrlStateManager.get_chart_pars();
 
-            var goto_url = '../dur_sankey/?' + machine + 'calis=local&directory=' + directory + comm + xaxis_par + groupby_par;
+            var days_ago = ST.Utility.get_param(ST.LAST_DAYS);
+            var last_days = days_ago ? ( "&" + ST.LAST_DAYS + "=" + days_ago ) : "";
+
+            var goto_url = '../dur_sankey/?' + machine + 'calis=local&directory=' + directory +
+                comm + xaxis_par + groupby_par + last_days;
 
             if( exe_compare_() ) {
                 location.href = goto_url;
