@@ -1,21 +1,28 @@
 July 2nd TODO:
 Warning: If other people are going to start using this, we really need to do a LOT more QA on it, lots more testing, with more data sets.
 - Need to do lots more testing.
-- Currently NO support for SubInteger URL
 DONE 1. Change start date to launchdate_days_ago and default a launchdate if one is not found
 DONE 7. Days ago dropdown box.
 DONE 2. Switched over to deterministic random launchDate generator.
+3. Need to copy over CZ cali files to RZ, and do testing.
 1.5  Launchdate feature needs more testing on Data with an actual launchdate (STUBs wont work because those dates are randomly generated).
+
+HIGHEST TODO:
+1. On Date Type show date instead of 1e9
+3.5 Be able to have a date type to show date (month/year) if layout says it's a date.
 2. Add Labels: Groupby and Label xAxis
 3. Preferences: both loading of the checkmarks and graphs
+    * .show = then show the graph.
     * And saving the checkbox or uncheckbox.
+3.6 X-tics take a look if it's just integers?
+=================================================================================
 4. Naming of Barchat => dimension ("Iteration")
 5. Redirect from /spot2 to our deployment area.
-5.5 -> Exception error prevents exe_compare from working in firefox and safari
 6. File upload browser on landing page.
 7. Make tic marks at the beginning of the barChart.
 9. On the Spot1 page, be able to change the xAxis and GroupBy URLs based on the select drop down change.
-
+10. Currently NO support for SubInteger URL -> because it uses bucketing.
+    * this means you can't run the dashboard if that's being used
 
 
 TODO/ Feature Requests:
