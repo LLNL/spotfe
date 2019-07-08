@@ -12,7 +12,8 @@ HIGHEST TODO:
 3.5 Be able to have a date type to show date (month/year) if layout says it's a date.
 2. Add Labels: Groupby and Label xAxis
 3. Preferences: both loading of the checkmarks and graphs
-    * .show = then show the graph.
+    * .show = then show the graph, else hide the graph
+    * .show = then show the table column, else hide the table column.
     * And saving the checkbox or uncheckbox.
 3.6 X-tics take a look if it's just integers?
 =================================================================================
