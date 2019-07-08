@@ -128,7 +128,7 @@ ST.CallSpot = function() {
                     var made_up = 1557354304 - Math.floor( deterministic * 380 * 86000);
 
                     valid_obj[DATE_KEY] = valid_obj[DATE_KEY] || made_up;
-                    valid_obj['Tiny Nums'] = 2.7023 + (Math.random()/10);
+                    //valid_obj['Tiny Nums'] = 2.7023 + (Math.random()/10);
 
                     //  Generate a random date for now.
                     var date = valid_obj[DATE_KEY];
@@ -184,11 +184,11 @@ ST.CallSpot = function() {
 
             //  STUB!!
 
-            ST.layout_used.charts.push({
+            /*ST.layout_used.charts.push({
                 dimension: "Tiny Nums",
                 title: "Tiny Nums",
                 viz: "BarChart"
-            });
+            });*/
 
             console.dir( ST.layout_used );
 

@@ -250,7 +250,7 @@ var RenderChartCollection = function( the_data, layout_spec ) {
 
 var render_compare_arguments = function( fields ) {
 
-    var options = "";
+    var options = "<option value=''></option>";
 
     for( var field in fields ) {
         options += '<option value="' + field + '">' + field + '</option>';
