@@ -34,7 +34,7 @@ $(document).ready(  function() {
     //var dir = "/usr/gapps/wf/web/spot/data/lulesh_maximal/";
     var dur = ST.params.duration_key + ' ';
 
-    var dir = ST.Utility.get_param('directory');
+    var dir = ST.Utility.get_param('sf');
     var predir = " " + dir + " " + dur + " --filenames ";
     var command = ST.Utility.get_param('command');
     command = decodeURIComponent(command);
