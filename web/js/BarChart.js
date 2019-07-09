@@ -123,7 +123,7 @@ ST.BarChart = function() {
             .gap(1)
             // (_optional_) set filter brush rounding
             .round(dc.round.floor)
-            //.xUnits(.1)   //  not a function.
+            //.xUnits(function() {return 20;})   //  not a function.
             .alwaysUseRounding(true)
             .x( use_buckets ? xinput2 : xinput )
             .elasticY(true)
@@ -142,6 +142,14 @@ ST.BarChart = function() {
 
                 ST.UrlStateManager.user_filtered( chart, 'BarChart');
             });
+
+        var xrange = domain[1] - domain[0];
+
+        if( xrange > 30 ) {
+            /*one_i.xUnits( function() {
+                return 30;
+            }).gap(5);*/
+        }
 
 
         //  if we're going to calculate the yrange correctly it's going to get tough.

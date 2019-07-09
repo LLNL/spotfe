@@ -9,6 +9,9 @@ DONE 2. Switched over to deterministic random launchDate generator.
 
 HIGHEST TODO:
 1. On Date Type show date instead of 1e9
+2. Ideally set the bar width
+    * Next best option is to get the Bar Off the Y Axis, by having the range be +/- 5%
+0. Fix Iterations -> xUnit()  -> set # of buckets.
 3.5 Be able to have a date type to show date (month/year) if layout says it's a date.
 2. Add Labels: Groupby and Label xAxis
 3. Preferences: both loading of the checkmarks and graphs
@@ -24,6 +27,12 @@ HIGHEST TODO:
 9. On the Spot1 page, be able to change the xAxis and GroupBy URLs based on the select drop down change.
 10. Currently NO support for SubInteger URL -> because it uses bucketing.
     * this means you can't run the dashboard if that's being used
+
+https://stackoverflow.com/questions/15191258/properly-display-bin-width-in-barchart-using-dc-js-and-crossfilter-js
+
+Things to watch out for:
+- is duration key quoted
+- are you signed in with a user that is WCIuser group.
 
 
 TODO/ Feature Requests:

@@ -100,7 +100,7 @@ var RenderChartCollection = function( the_data, layout_spec ) {
         var spec = layout_charts[dimension];
         var viz = spec.viz;
 
-        if (ST[viz] && ST[viz].render) {
+        if (ST[viz] && ST[viz].render && spec.show === true ) {
 
             ST[viz].render(ndx, spec);
         } else {

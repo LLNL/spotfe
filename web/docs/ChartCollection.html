@@ -214,7 +214,7 @@ reduce_authors(data);</p>
         <span class="hljs-keyword">var</span> spec = layout_charts[dimension];
         <span class="hljs-keyword">var</span> viz = spec.viz;
 
-        <span class="hljs-keyword">if</span> (ST[viz] &amp;&amp; ST[viz].render) {
+        <span class="hljs-keyword">if</span> (ST[viz] &amp;&amp; ST[viz].render &amp;&amp; spec.show === <span class="hljs-literal">true</span> ) {
 
             ST[viz].render(ndx, spec);
         } <span class="hljs-keyword">else</span> {
