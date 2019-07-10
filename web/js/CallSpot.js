@@ -2,9 +2,7 @@ var ST = ST || {};
 
 ST.CallSpot = function() {
 
-    var get_command_ = function( type, file, lay ) {
-
-        lay = lay || "";
+    var get_command_begin_ = function() {
 
         //var czcommand = "/usr/tce/bin/python3%20/usr/global/web-pages/lc/www/spot/spot.py";
         var czcommand = "/usr/tce/bin/python3%20/usr/gapps/spot/spot.py";
@@ -21,8 +19,15 @@ ST.CallSpot = function() {
         }
 
         commandp = commandp.replace('%20', ' ');
+        return commandp;
+    };
 
-        return commandp + ' ' + type  + ' ' + file + lay;
+
+    var get_command_ = function( type, file, lay ) {
+
+        lay = lay || "";
+
+        return get_command_begin_() + ' ' + type  + ' ' + file + lay;
     };
 
 
@@ -381,6 +386,7 @@ ST.CallSpot = function() {
 
 
     return {
+        get_command_begin: get_command_begin_,
         drilldown: drill_down_,
         bind: bind_,
         ajax: ajax_

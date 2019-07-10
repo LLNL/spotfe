@@ -98,7 +98,7 @@ ST.Utility = function() {
         ST.params.layout = ST.Utility.get_param('layout');
         ST.params.last_days = ST.Utility.get_param(ST.LAST_DAYS) || 0;
         ST.params.exe_compare = ST.Utility.get_param('exe_compare') || 0;
-        ST.params.duration_key =  "'" + get_dur_key_(sf) + "'";
+        ST.params.duration_key =  get_dur_key_(sf);
         ST.params.pallet_num = ST.Utility.get_param('color') || 15;
 
 

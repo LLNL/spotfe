@@ -64,6 +64,7 @@ var reduce_authors = function( data ) {
 var RenderChartCollection = function( the_data, layout_spec ) {
 
     console.dir( the_data );
+    var GLOB_DAT = the_data;
     //  ST.MakeNiceData.make( the_data );
     //          options.buckets = ['0-0.3', '0.3-0.6', '0.6-10', '10-15', '15-20'];
 
