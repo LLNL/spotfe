@@ -41,7 +41,7 @@ ST.UserPreferences = function() {
                     //  dirpath is the the Spot File <sf>
                     var sf = ST.Utility.get_file();
 
-                    var command = begin + " showChart " + hide + " " + sf + " " + chart_dimension;
+                    var command = begin + " showChart " + hide + " " + sf + " '" + chart_dimension + "'";
 
                     //  Make an AJAX call to BE about chart_dimension and value.
                     $.ajax({
