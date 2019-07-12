@@ -154,7 +154,7 @@ var RenderChartCollection = function( the_data, layout_spec ) {
     for (var z in layout_spec.table) {
 
         var tab = layout_spec.table[z];
-        
+
         if( tab.show ) {
             columns.push(tab.dimension);
         }

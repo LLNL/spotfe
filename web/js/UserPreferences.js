@@ -31,9 +31,9 @@ ST.UserPreferences = function() {
                 check: function( chart_dimension, val ) {
 
                     var checked = val.target.checked;
+                    var dome = checked ? "show" : "hide";
 
-                    console.dir(chart_dimension);
-                    console.dir(checked);
+                    $('[chart-dimension="' + chart_dimension.toLowerCase() + '"]')[dome]();
 
                     var hide = checked ? " " : " --hide ";
                     var begin = ST.CallSpot.get_command_begin();

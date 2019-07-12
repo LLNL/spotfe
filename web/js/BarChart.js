@@ -80,7 +80,7 @@ ST.BarChart = function() {
         var ylabel = options["y-label"] || "";
 
 
-        var rcht = '<div class="runtime-chart' + inst_num_ + '"> \
+        var rcht = '<div class="runtime-chart' + inst_num_ + '" chart-dimension="' + dimension.toLowerCase() + '"> \
             <div class="top_left"> \
                 <strong>' + upper_( options.title || dimension) + '</strong> \
                 <a class="reset" onclick="ST.BarChart.reset(this);" style="display: none;">reset</a>\
