@@ -34,6 +34,8 @@ ST.PieChart = function() {
             return 1;
         });
 
+        var colors = ST.Utility.get_colors( spec.dimension, true );
+
         quarterChart[id_] = dc.pieChart('#quarter-chart' + id_ );
         quarterChart[id_] /* dc.pieChart('#quarter-chart', 'chartGroup') */
             .width( width )

@@ -177,8 +177,29 @@ ST.Utility = function() {
         return expMatch;
     };
 
+    var get_colors_ = function( dimension, just_pallet ) {
+
+        var pallets = ALL_PALLETES_AVAILABLE;
+
+        if( !pallets[ST.params.pallet_num] ) {
+            alert('That pallet number is not defined.');
+        }
+
+        var ordinal_colors = pallets[ST.params.pallet_num];
+
+        if( just_pallet ) {
+            return ordinal_colors;
+        }
+
+        var num = Math.abs(dimension.hashCode());
+
+        var color = ordinal_colors[ num % ordinal_colors.length ];
+        return [color];
+    };
+
 
     return {
+        get_colors: get_colors_,
         on_rz: on_rz_,
         match_expression: matchExpression_,
         validate_cali_object: validate_cali_object_,

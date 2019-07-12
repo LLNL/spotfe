@@ -131,7 +131,7 @@ ST.BarChart = function() {
             //  the histogram results, because as you filter the histogram results then go out of range.
             //.y( d3.scaleLinear().domain( get_yrange_(counts)) )
             .renderHorizontalGridLines(true)
-            .ordinalColors(get_colors_( options.dimension ))
+            .ordinalColors(ST.Utility.get_colors( options.dimension ))
             // Customize the filter displayed in the control span
             .filterPrinter(function (filters) {
 
@@ -224,22 +224,6 @@ ST.BarChart = function() {
             hash |= 0; // Convert to 32bit integer
         }
         return hash;
-    };
-
-
-    var get_colors_ = function( dimension ) {
-
-        var pallets = ALL_PALLETES_AVAILABLE;
-
-        if( !pallets[ST.params.pallet_num] ) {
-            alert('That pallet number is not defined.');
-        }
-
-        var ordinal_colors = pallets[ST.params.pallet_num];
-        var num = Math.abs(dimension.hashCode());
-
-        var color = ordinal_colors[ num % ordinal_colors.length ];
-        return [color];
     };
 
 
