@@ -162,7 +162,9 @@ reduce_authors(data);</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> ndx = crossfilter( the_data );
-    <span class="hljs-keyword">var</span> all = ndx.groupAll();</pre></div></div>
+    <span class="hljs-keyword">var</span> all = ndx.groupAll();
+
+    ST.NDX = ndx;</pre></div></div>
             
         </li>
         
@@ -551,7 +553,26 @@ changes, without re-rendering everything</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>     dc.redrawAll('group');
-     */</pre></div></div>
+     */
+
+    /*var byDate = ndx.dimension(function (d) {
+        return d.date;
+    });
+
+    var table_data = byDate.top(Infinity);
+    */
+
+    bind_sort();
+};
+
+
+var render_compare_arguments = function( fields ) {
+
+    var options = "&lt;option value=''&gt;&lt;/option&gt;";
+
+    for( var field in fields ) {
+        options += '&lt;option value="' + field + '"&gt;' + field + '&lt;/option&gt;';
+    }</pre></div></div>
             
         </li>
         
@@ -561,41 +582,6 @@ changes, without re-rendering everything</p>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-25">&#182;</a>
-              </div>
-              <p>Determine the current version of dc with <code>dc.version</code></p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>    d3.selectAll(<span class="hljs-string">'#version'</span>).text(dc.version);
-
-
-    <span class="hljs-comment">/*var byDate = ndx.dimension(function (d) {
-        return d.date;
-    });
-
-    var table_data = byDate.top(Infinity);
-    */</span>
-
-    bind_sort();
-};
-
-
-<span class="hljs-keyword">var</span> render_compare_arguments = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> fields </span>) </span>{
-
-    <span class="hljs-keyword">var</span> options = <span class="hljs-string">"&lt;option value=''&gt;&lt;/option&gt;"</span>;
-
-    <span class="hljs-keyword">for</span>( <span class="hljs-keyword">var</span> field <span class="hljs-keyword">in</span> fields ) {
-        options += <span class="hljs-string">'&lt;option value="'</span> + field + <span class="hljs-string">'"&gt;'</span> + field + <span class="hljs-string">'&lt;/option&gt;'</span>;
-    }</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-26">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-26">&#182;</a>
               </div>
               <p> ‘<a id="bookmarkme" href="javascript: void(0)" rel="sidebar">Bookmark</a>‘ +</p>
 
@@ -655,11 +641,11 @@ changes, without re-rendering everything</p>
         </li>
         
         
-        <li id="section-27">
+        <li id="section-26">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-27">&#182;</a>
+                <a class="pilcrow" href="#section-26">&#182;</a>
               </div>
               <p> for some reason, dc.js capitalizes column headings, thus messing up the sort
  reference when they click on the arrow click.</p>

@@ -73,6 +73,7 @@ var RenderChartCollection = function( the_data, layout_spec ) {
     var ndx = crossfilter( the_data );
     var all = ndx.groupAll();
 
+    ST.NDX = ndx;
 
     // Dimension by full date
     var dateDimension = ndx.dimension(function (d) {
@@ -240,10 +241,6 @@ var RenderChartCollection = function( the_data, layout_spec ) {
      // Or you can choose to redraw only those charts associated with a specific chart group
      dc.redrawAll('group');
      */
-
-    //Determine the current version of dc with `dc.version`
-    d3.selectAll('#version').text(dc.version);
-
 
     /*var byDate = ndx.dimension(function (d) {
         return d.date;
