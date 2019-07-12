@@ -4,11 +4,6 @@ ST.UserPreferences = function() {
 
         var charts = ST.LayoutAugmenterModel.get_model();
 
-        for( var x in charts ) {
-
-            charts[x].show = charts[x].show || true;
-        }
-
 
         Vue.component('user-preferences', {
             data: function() {

@@ -205,17 +205,21 @@ reduce_authors(data);</p>
     }
 
     <span class="hljs-keyword">var</span> layout_charts = layout_spec.charts;
+    <span class="hljs-keyword">var</span> original_lc = $.extend( <span class="hljs-literal">true</span>, {}, layout_charts);
+
+    <span class="hljs-built_in">console</span>.dir(original_lc);
 
     ST.LayoutAugmenterModel.get(layout_charts, the_data);
-    ST.UserPreferences.render();
+    ST.UserPreferences.render( original_lc );
 
 
     <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> dimension <span class="hljs-keyword">in</span> layout_charts) {
 
         <span class="hljs-keyword">var</span> spec = layout_charts[dimension];
         <span class="hljs-keyword">var</span> viz = spec.viz;
+        <span class="hljs-keyword">var</span> orig = original_lc[dimension];
 
-        <span class="hljs-keyword">if</span> (ST[viz] &amp;&amp; ST[viz].render &amp;&amp; spec.show === <span class="hljs-literal">true</span> ) {
+        <span class="hljs-keyword">if</span> (ST[viz] &amp;&amp; ST[viz].render ) {
 
             ST[viz].render(ndx, spec);
         } <span class="hljs-keyword">else</span> {
@@ -565,12 +569,12 @@ changes, without re-rendering everything</p>
             <div class="content"><div class='highlight'><pre>    d3.selectAll(<span class="hljs-string">'#version'</span>).text(dc.version);
 
 
-    <span class="hljs-keyword">var</span> byDate = ndx.dimension(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{
-        <span class="hljs-keyword">return</span> d.date;
+    <span class="hljs-comment">/*var byDate = ndx.dimension(function (d) {
+        return d.date;
     });
 
-    <span class="hljs-keyword">var</span> table_data = byDate.top(<span class="hljs-literal">Infinity</span>);
-    <span class="hljs-built_in">console</span>.dir(table_data);
+    var table_data = byDate.top(Infinity);
+    */</span>
 
     bind_sort();
 };

@@ -91,17 +91,21 @@ var RenderChartCollection = function( the_data, layout_spec ) {
     }
 
     var layout_charts = layout_spec.charts;
+    var original_lc = $.extend( true, {}, layout_charts);
+
+    console.dir(original_lc);
 
     ST.LayoutAugmenterModel.get(layout_charts, the_data);
-    ST.UserPreferences.render();
+    ST.UserPreferences.render( original_lc );
 
 
     for (var dimension in layout_charts) {
 
         var spec = layout_charts[dimension];
         var viz = spec.viz;
+        var orig = original_lc[dimension];
 
-        if (ST[viz] && ST[viz].render && spec.show === true ) {
+        if (ST[viz] && ST[viz].render ) {
 
             ST[viz].render(ndx, spec);
         } else {
@@ -241,12 +245,12 @@ var RenderChartCollection = function( the_data, layout_spec ) {
     d3.selectAll('#version').text(dc.version);
 
 
-    var byDate = ndx.dimension(function (d) {
+    /*var byDate = ndx.dimension(function (d) {
         return d.date;
     });
 
     var table_data = byDate.top(Infinity);
-    console.dir(table_data);
+    */
 
     bind_sort();
 };

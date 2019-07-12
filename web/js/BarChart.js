@@ -33,6 +33,7 @@ ST.BarChart = function() {
 
     var render_ = function( ndx, options ) {
 
+        console.log( 'show='+ options.show );
         //  STUB
         options.buckets = typeof options.buckets === "string" ? eval(options.buckets) : options.buckets;
 
@@ -79,8 +80,9 @@ ST.BarChart = function() {
         var xlabel = options["x-label"] || "";
         var ylabel = options["y-label"] || "";
 
+        var style = options.show ? "display: block;" : "display: none;";
 
-        var rcht = '<div class="runtime-chart' + inst_num_ + '" chart-dimension="' + dimension.toLowerCase() + '"> \
+        var rcht = '<div class="runtime-chart' + inst_num_ + '" style="' + style + '" chart-dimension="' + dimension.toLowerCase() + '"> \
             <div class="top_left"> \
                 <strong>' + upper_( options.title || dimension) + '</strong> \
                 <a class="reset" onclick="ST.BarChart.reset(this);" style="display: none;">reset</a>\

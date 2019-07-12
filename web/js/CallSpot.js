@@ -195,8 +195,6 @@ ST.CallSpot = function() {
                 viz: "BarChart"
             });*/
 
-            console.dir( ST.layout_used );
-
 
             //  This is quite lousy but drill_down needs to happen after RenderChartCollection
             //  Currently RenderChartCollection has a fatal javascript error coming from dc.js

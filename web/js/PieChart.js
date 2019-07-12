@@ -13,7 +13,10 @@ ST.PieChart = function() {
         var inner_radius = spec.inner_radius || 0;
         var dl = spec.dimension.toLowerCase();
 
-        var rcht =     '<div instance_num="' + id_ + '" id="quarter-chart' + id_ + '"  chart-dimension="' + dl + '">  \
+        var style = spec.show ? "display: block;" : "display: none;";
+
+        var rcht =     '<div instance_num="' + id_ + '"  ' +
+            'style="' + style + '" id="quarter-chart' + id_ + '"  chart-dimension="' + dl + '">  \
         <strong>' + spec.title + '</strong> \
         <a class="reset pie_reset"  style="display: none;">reset</a> \
         <div class="clearfix"></div> \
