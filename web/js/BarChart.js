@@ -175,7 +175,7 @@ ST.BarChart = function() {
         var xticks = one_i.xAxis().tickFormat(
             function (v) {
 
-                v = get_dec_v_( v, use_buckets, options.use_middling);
+                v = get_dec_v_( v, use_buckets, options.use_middling, options.date );
 
                 return v + (options.xsuffix !== undefined ? options.xsuffix : '');
             });
@@ -244,8 +244,22 @@ ST.BarChart = function() {
         return Math.round( i * 10000 ) / 10000;
     };
 
+    var get_date_ = function( d ) {
 
-    var get_dec_v_ = function(v, use_buckets, use_middling ) {
+        var date = new Date(d);
+        var month = 1 + parseInt(date.getMonth());
+        var day = date.getDate();
+        var year = date.getFullYear()-2000;
+
+        var formattedTime = month + '/' + day + '/' + year;
+        return formattedTime;
+    };
+
+    var get_dec_v_ = function(v, use_buckets, use_middling, is_date ) {
+
+        if( is_date ) {
+            return get_date_(v*1000);
+        }
 
         if( use_buckets ) {
             return use_middling ? get_middling_(v) : v;
