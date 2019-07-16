@@ -178,7 +178,8 @@ ST.BarChart = function() {
         var xticks = one_i.xAxis().tickFormat(
             function (v) {
 
-                v = get_dec_v_( v, use_buckets, options.use_middling, options.date );
+                var is_date = options.type === "date";
+                v = get_dec_v_( v, use_buckets, options.use_middling, is_date );
 
                 return v + (options.xsuffix !== undefined ? options.xsuffix : '');
             });
