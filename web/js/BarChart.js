@@ -149,12 +149,12 @@ ST.BarChart = function() {
 
         /*  .xUnits(d3.time.months)
             .xUnits is what gets the bar width right (so that dc.js can count the number of visible bars).
-        */
+
         if( xrange > 30 ) {
             one_i.xUnits( function() {
                 return 5;
             }); //.gap(5);
-        }
+        }*/
 
 
         //  if we're going to calculate the yrange correctly it's going to get tough.
