@@ -32,7 +32,7 @@ $(document).ready(  function() {
     console.dir(dirs);
 
     //var dir = "/usr/gapps/wf/web/spot/data/lulesh_maximal/";
-    var dur = ST.params.duration_key + ' ';
+    var dur = ""; //ST.params.duration_key + ' ';
 
     var dir = ST.Utility.get_param('sf');
     var predir = " " + dir + " " + dur + " --filenames ";

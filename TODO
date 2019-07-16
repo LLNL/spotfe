@@ -10,8 +10,9 @@ DONE 2. Switched over to deterministic random launchDate generator.
 
 HIGHEST TODO:
 2. Add Labels: Groupby and Label xAxis
-1. On Date Type show date instead of 1e9
-3. From UserPreferences Module -> make table change right away. -> $('._4').hide()/ .show()
+TEST: 1. On Date Type show date instead of 1e9
+3. From UserPreferences Module -> make table change right away.
+    * Load all columns, then hide the ones not checked: $('._4').hide()/ .show()
     * when the person checks a checkbox or uncheckboxes it.
 0. Fix Iterations -> xUnit()  -> set # of buckets.
 2. Ideally set the bar width
