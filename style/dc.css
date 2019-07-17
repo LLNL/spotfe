@@ -323,12 +323,12 @@ body .dc-chart g.row text {
 .container .help_body, .container .user_pref_body {
   background-color: #f2f2f2;
   border: 1px solid #cccccc;
-  padding: 22px;
+  padding: 22px 0 22px 22px;
   font-size: 13px;
   margin: 4px 0 4px -20px; }
 .container .user_pref_body .prow {
   display: inline-block;
-  width: 300px;
+  width: 230px;
   margin: 6px 0 6px 0; }
   .container .user_pref_body .prow .title {
     position: relative;

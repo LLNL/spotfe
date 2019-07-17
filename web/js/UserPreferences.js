@@ -4,6 +4,12 @@ ST.UserPreferences = function() {
 
         var charts = ST.LayoutAugmenterModel.get_model();
 
+        charts.sort( function( a, b ) {
+
+            if(a.dimension < b.dimension) { return -1; }
+            if(a.dimension > b.dimension) { return 1; }
+            return 0;
+        });
 
         Vue.component('user-preferences', {
             data: function() {

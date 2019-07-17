@@ -7,9 +7,26 @@ DONE 2. Switched over to deterministic random launchDate generator.
 3. Need to copy over CZ cali files to RZ, and do testing.
 1.5  Launchdate feature needs more testing on Data with an actual launchdate (STUBs wont work because those dates are randomly generated).
 
+done:
+- date field
+- show/hide
+- got the spot2 directory (just need to place a redirrect)
+
+- would like some more data: retesting tiny nums (or the features that we need).
+
+next:
+- alphabetize the the checkboxes, so you dont have to hunt.
+- put the precize time in table.
+- match date to duration format.  (multi-line, OR vertically)
+- spot2 redirect.
+2. Add Labels: Groupby and Label xAxis
+- xUnits() -> set bucket count for division.
+- Table HTML -> for the pieCharts and barCharts.
+- dynamic table row show/hide fix.
+- xTics astethetics, don't show 1.2,1.4 in the 1,2,3 data
+
 
 HIGHEST TODO:
-2. Add Labels: Groupby and Label xAxis
 TEST: 1. On Date Type show date instead of 1e9
 3. From UserPreferences Module -> make table change right away.
     * Load all columns, then hide the ones not checked: $('._4').hide()/ .show()
@@ -21,6 +38,7 @@ TEST: 1. On Date Type show date instead of 1e9
 3.6 X-tics take a look if it's just integers?
 =================================================================================
 4. Naming of Barchat => dimension ("Iteration")
+    * don't mess up the URLs (dont use BarChart0, BarChart1, etc)
 5. Redirect from /spot2 to our deployment area.
     * https://lc.llnl.gov/content/
     * spot2 -> I already made the content directory request.
@@ -29,6 +47,7 @@ TEST: 1. On Date Type show date instead of 1e9
 9. On the Spot1 page, be able to change the xAxis and GroupBy URLs based on the select drop down change.
 10. Currently NO support for SubInteger URL -> because it uses bucketing.
     * this means you can't run the dashboard if that's being used
+11. Some day do NULL.
 
 https://stackoverflow.com/questions/15191258/properly-display-bin-width-in-barchart-using-dc-js-and-crossfilter-js
 
