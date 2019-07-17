@@ -263,7 +263,9 @@ var render_compare_arguments = function( fields ) {
 
     //  '<a id="bookmarkme" href="javascript: void(0)" rel="sidebar">Bookmark</a>' +
     var ht = '<select class="xaxis">' + options + '</select>' +
-            '<select class="groupby">' + options + '</select>';
+            '<select class="groupby">' + options + '</select>' +
+        '<div class="xaxis_label">Xaxis:</div>' +
+        '<div class="groupby_label">Group By:</div>';
 
     $('.compare_arguments').html( ht );
 

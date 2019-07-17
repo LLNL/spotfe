@@ -15,7 +15,7 @@ done:
 - would like some more data: retesting tiny nums (or the features that we need).
 
 next:
-- alphabetize the the checkboxes, so you dont have to hunt.
+- DONE: alphabetize the the checkboxes, so you dont have to hunt.
 - put the precize time in table.
 - match date to duration format.  (multi-line, OR vertically)
 - spot2 redirect.

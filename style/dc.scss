@@ -586,6 +586,18 @@ body .dc-chart g.row text {
         #bookmarkme {
             margin: 0 10px 0 0;
         }
+
+        .xaxis_label {
+            position: absolute;
+            left: 10px;
+            top: -20px;
+        }
+
+        .groupby_label {
+            position: absolute;
+            left: 227px;
+            top: -20px;
+        }
     }
 
     .hidden {
