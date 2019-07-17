@@ -327,7 +327,10 @@ body .dc-chart g.row text {
     height: 410px; }
   .container .x.axis text {
     text-anchor: end !important;
-    transform: rotate(-45deg); }
+    transform: rotate(-45deg) translate(-7px, -5px);
+    position: relative;
+    left: -8px;
+    top: 3px; }
   .container .help_body, .container .user_pref_body {
     background-color: #f2f2f2;
     border: 1px solid #cccccc;

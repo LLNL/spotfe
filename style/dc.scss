@@ -464,7 +464,10 @@ body .dc-chart g.row text {
     /* Need to be able to see long labels without them overlapping each other. */
     .x.axis text {
         text-anchor: end !important;
-        transform: rotate(-45deg);
+        transform: rotate(-45deg) translate(-7px, -5px);
+        position: relative;
+        left: -8px;
+        top: 3px;
     }
 
     .help_body, .user_pref_body {
