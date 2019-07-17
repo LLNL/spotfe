@@ -1,5 +1,7 @@
 var ST = ST || {};
 
+ST.NUM_BINS = 20;
+
 ST.BarChart = function() {
 
     var inst_ = [],
@@ -72,7 +74,22 @@ ST.BarChart = function() {
         console.dir(counts);
 
 
-        var runtime_group = runtime_dimension.group();
+        var domain = options.xrange;
+        //domain = [0,80];
+        var xrange = domain[1] - domain[0];
+
+        var bin_me = xrange > 30;
+        var runtime_group;
+
+        if( bin_me ) {
+
+            var binWidth = xrange / ST.NUM_BINS;
+            runtime_group = runtime_dimension.group( function(d){
+                return Math.floor(d / binWidth) * binWidth;
+            } );
+        } else {
+            runtime_group = runtime_dimension.group();
+        }
 
         var width = options.width || 580;
         var height = options.height || 180;
@@ -100,8 +117,6 @@ ST.BarChart = function() {
         $('.runtime-chart' + inst_num_).attr('instance_num', inst_num_);
 
 
-        var domain = options.xrange;
-        //domain = [0,80];
 
         var xinput = d3.scaleLinear(0.25).domain( domain );
 
@@ -145,16 +160,15 @@ ST.BarChart = function() {
                 ST.UrlStateManager.user_filtered( chart, 'BarChart');
             });
 
-        var xrange = domain[1] - domain[0];
 
         /*  .xUnits(d3.time.months)
             .xUnits is what gets the bar width right (so that dc.js can count the number of visible bars).
-
-        if( xrange > 30 ) {
+        */
+        if( bin_me ) {
             one_i.xUnits( function() {
-                return 5;
+                return ST.NUM_BINS;
             }); //.gap(5);
-        }*/
+        }
 
 
         //  if we're going to calculate the yrange correctly it's going to get tough.
@@ -258,6 +272,7 @@ ST.BarChart = function() {
         var formattedTime = month + '/' + day + '/' + year;
         return formattedTime;
     };
+
 
     var get_dec_v_ = function(v, use_buckets, use_middling, is_date ) {
 

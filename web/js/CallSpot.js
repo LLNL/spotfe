@@ -112,6 +112,7 @@ ST.CallSpot = function() {
 
 
             //console.dir(parsed);
+            var USE_TINY_STUB = true;
 
             var now = Math.round( Date.now() / 1000);
             var since = ST.params.last_days * 24 * 3600;
@@ -133,7 +134,10 @@ ST.CallSpot = function() {
                     var made_up = 1557354304 - Math.floor( deterministic * 380 * 86000);
 
                     valid_obj[DATE_KEY] = valid_obj[DATE_KEY] || made_up;
-                    //valid_obj['Tiny Nums'] = 2.7023 + (Math.random()/10);
+
+                    if( USE_TINY_STUB ) {
+                        valid_obj['Tiny Nums'] = 2.7023 + (Math.random() / 10);
+                    }
 
                     //  Generate a random date for now.
                     var date = valid_obj[DATE_KEY];
@@ -189,11 +193,13 @@ ST.CallSpot = function() {
 
             //  STUB!!
 
-            /*ST.layout_used.charts.push({
-                dimension: "Tiny Nums",
-                title: "Tiny Nums",
-                viz: "BarChart"
-            });*/
+            if( USE_TINY_STUB ) {
+                ST.layout_used.charts.push({
+                    dimension: "Tiny Nums",
+                    title: "Tiny Nums",
+                    viz: "BarChart"
+                });
+            }
 
 
             //  This is quite lousy but drill_down needs to happen after RenderChartCollection

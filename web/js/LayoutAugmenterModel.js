@@ -74,8 +74,6 @@ ST.LayoutAugmenterModel = function() {
         }
 
 
-        var SUB_INTEGER_LIMIT = 12;
-
         for( var mx in model ) {
 
             var mod = model[mx];
@@ -88,11 +86,11 @@ ST.LayoutAugmenterModel = function() {
 
                 var bar_width;
 
-                if (spec[attr].distance >= SUB_INTEGER_LIMIT || !spec[attr].has_decimal ) {
+                if (spec[attr].distance >= ST.NUM_BINS || !spec[attr].has_decimal ) {
                     bar_width = 1;
                 } else {
                     //  Use buckets to create sub-integer support.
-                    bar_width = spec[attr].distance / SUB_INTEGER_LIMIT;
+                    bar_width = spec[attr].distance / ST.NUM_BINS;
 
                     //options.buckets = "['0-0.2', '0.2-0.4', '0.4-0.6', '0.6-1', '1-10']";
                 }

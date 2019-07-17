@@ -17,12 +17,15 @@ done:
 next:
 DONE - alphabetize the the checkboxes, so you dont have to hunt.
 DONE - Add Labels: Groupby and Label xAxis
+DONE - XUnit bucketing.
+- for TinyNums make x-axis vertical
+- RightMost BIN is cut in half for some reason.
 - put the precize time in table.
-- match date to duration format.  (multi-line, OR vertically)
+- for X-axis: match date to duration format.  (multi-line, OR vertically)
 - spot2 redirect.
-- xUnits() -> set bucket count for division.
 - Table HTML -> for the pieCharts and barCharts.
 - dynamic table row show/hide fix.
+- Apply xUnits to sub-integer charts.
 - xTics astethetics, don't show 1.2,1.4 in the 1,2,3 data
 
 
