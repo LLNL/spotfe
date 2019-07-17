@@ -410,7 +410,7 @@ body .dc-chart g.row text {
       margin: 0 10px 0 0; }
     .bottom_table .compare_arguments .xaxis_label {
       position: absolute;
-      left: 10px;
+      left: 5px;
       top: -20px; }
     .bottom_table .compare_arguments .groupby_label {
       position: absolute;

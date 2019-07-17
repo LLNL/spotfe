@@ -15,11 +15,11 @@ done:
 - would like some more data: retesting tiny nums (or the features that we need).
 
 next:
-- DONE: alphabetize the the checkboxes, so you dont have to hunt.
+DONE - alphabetize the the checkboxes, so you dont have to hunt.
+DONE - Add Labels: Groupby and Label xAxis
 - put the precize time in table.
 - match date to duration format.  (multi-line, OR vertically)
 - spot2 redirect.
-2. Add Labels: Groupby and Label xAxis
 - xUnits() -> set bucket count for division.
 - Table HTML -> for the pieCharts and barCharts.
 - dynamic table row show/hide fix.

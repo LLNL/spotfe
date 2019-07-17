@@ -269,7 +269,7 @@ ST.BarChart = function() {
             return use_middling ? get_middling_(v) : v;
         }
 
-        for( var x=3; x < 15; x++ ) {
+        for( var x=5; x < 15; x++ ) {
 
             v = +v;
 
