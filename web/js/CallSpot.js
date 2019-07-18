@@ -154,7 +154,7 @@ ST.CallSpot = function() {
                         //valid_obj.epoch_date = date;
                         valid_obj.formatdate = month + "/" + day + "/" + year;
                         valid_obj.run_id = "id_" + Math.floor(Math.random() * 10000);
-                        valid_obj.drilldown = ['Jupyter', 'mpi', 'walltime'];
+                        valid_obj.drilldown = ['Jupyter', 'walltime'];
                         valid_obj.key = valid_obj.key || key;
 
                         for (var dimension in valid_obj) {

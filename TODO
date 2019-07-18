@@ -16,16 +16,25 @@ done:
 
 next:
 DONE - alphabetize the the checkboxes, so you dont have to hunt.
-DONE - Add Labels: Groupby and Label xAxis
-DONE - XUnit bucketing -> this means you don't need to see those super skinny bars where the width is just 1 point on the x-axis on a 1000 point xrange graph
+DONE - Added Labels: Groupby and Label xAxis for the select drop downs.
+BINS - I made some progress on bar chart bins -> this means you don't need to see those super skinny bars where the width is just 1 point on the x-axis on a 1000 point xrange graph
+    * It works like this: If the X-range is more than 30 it will sub-divide into 20 bins
+    * note: there's still 2 minor bugs with this: the leftmost bucket doesn't always show up and the right most bucket only shows 1/2 of it sometimes, hence why the iterations chart looks blank.
+    * Sub-Integer charts still work like they did before
 DONE - Added commas to really large numbers.
-DONE - make x-axis 45 degrees vertical
+DONE - made x-axis 45 degrees vertical
 DONE - for X-axis: match date to duration format of the other spot page.  (multi-line, OR vertically)
 DONE - put the correct format of date in table - not the unix epoch time.
-- spot2 redirect or deploy there and level it up 1 step from web/
-- Table HTML -> for the pieCharts and barCharts - maintain left/right position.
+DONE - spot2 redirect or deploy there and level it up 1 step from web/
+    * https://lc.llnl.gov/spot2/
+    * https://rzlc.llnl.gov/spot2/?sf=/usr/gapps/spot/datasets/lulesh_new
+
+- fix production deploy compare, jupyter, walltime -> then let matt know when its ready.
+
+- take a quick look at jupyter and let joe know.
 - LeftMost BIN does not show up.
 - RightMost BIN is cut in half for some reason.
+- Table HTML -> for the pieCharts and barCharts - maintain left/right position.
 - dynamic table row show/hide fix.
     * You need to render ALL columns, then after initialization, call hide() on each column that needs to be hidden
     * then again call show/hide whenever some chart/column gets checked/unchecked.
@@ -33,6 +42,10 @@ DONE - put the correct format of date in table - not the unix epoch time.
     * don't mess up the URLs (dont use BarChart0, BarChart1, etc)
 - Apply xUnits to sub-integer charts.
 - xTics astethetics, don't show 1.2,1.4 in the 1,2,3 data
+- Nulls
+- STrings plus more than 12 unique values then we need to have a left horizontal bar.
+- File Upload browser on landing Page.
+
 
 
 HIGHEST TODO:
