@@ -29,6 +29,11 @@ ST.LeftHorizontalBarChart = function() {
             return cali_object[ options.dimension ];// || "none";// day + '.' + name[day];
         });
 
+        if( ST.cali_valid === false ) {
+            //  Error on screen.
+            return false;
+        }
+
         var dayOfWeekGroup = dayOfWeek.group();
 
         console.dir(uniq_counts);

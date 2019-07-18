@@ -32,6 +32,11 @@ ST.PieChart = function() {
             return cali_object[spec.dimension];
         });
 
+        if( ST.cali_valid === false ) {
+            //  Error on screen.
+            return false;
+        }
+
         var quarterGroup = quarter.group().reduceSum(function (d) {
             //  This can be whatever variable you want to sum up in the pie chart, for example total runtime, etc.
             return 1;

@@ -73,6 +73,11 @@ ST.BarChart = function() {
 
         console.dir(counts);
 
+        if( ST.cali_valid === false ) {
+            //  Error on screen.
+            return false;
+        }
+
 
         var domain = options.xrange;
         //domain = [0,80];

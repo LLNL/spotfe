@@ -57,8 +57,11 @@ ST.Utility = function() {
                 '<li>Remove <b>' + dimension + '</b> from the layout file.</li>' +
                 '</ul>');
 
-            alert('check error below.');
+            ST.cali_valid = false;
+            return false;
         }
+
+        return true;
     };
 
     var get_file_ = function() {
