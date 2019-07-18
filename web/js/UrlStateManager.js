@@ -35,7 +35,7 @@ ST.UrlStateManager = function() {
 
     var update_slash_ = function( new_slash ) {
 
-        var newl = location.href.replace(/dur_sankey/, new_slash);
+        var newl = location.href.replace(/dur_sankey\//, new_slash);
         history.pushState({}, null, newl);
     };
 

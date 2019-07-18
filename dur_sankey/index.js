@@ -61,7 +61,7 @@ var init = function( dat ) {
     //var location = localStorage.getItem('location.href');
 
     ST.UrlStateManager.update_url('exe_compare', '1');
-    ST.UrlStateManager.update_slash('web');
+    ST.UrlStateManager.update_slash('');
 
     //console.log('xaxis=' + xaxis + '   groupby=' + groupby);
     var xaxis = ST.Utility.get_param('xaxis', true);
