@@ -333,7 +333,7 @@ ST.CallSpot = function() {
             var days_ago = ST.Utility.get_param(ST.LAST_DAYS);
             var last_days = days_ago ? ( "&" + ST.LAST_DAYS + "=" + days_ago ) : "";
 
-            var goto_url = '../dur_sankey/?' + machine + 'calis=local&sf=' + directory +
+            var goto_url = '/dur_sankey/?' + machine + 'calis=local&sf=' + directory +
                 comm + xaxis_par + groupby_par + last_days;
 
             if( exe_compare_() ) {
