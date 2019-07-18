@@ -458,16 +458,16 @@ body .dc-chart g.row text {
 
     /* make room for rotated labels. */
     svg[height="370"] {
-        height: 410px;
+        height: 450px;
     }
 
     /* Need to be able to see long labels without them overlapping each other. */
-    .x.axis text {
-        text-anchor: end !important;
-        transform: rotate(-45deg) translate(-7px, -5px);
-        position: relative;
-        left: -8px;
-        top: 3px;
+    .x.axis {
+
+        text {
+            text-anchor: end !important;
+            transform: rotate(-45deg) translate(-7px, -5px) scaleX(1.15) scaleY(1.15);
+        }
     }
 
     .help_body, .user_pref_body {

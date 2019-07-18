@@ -265,11 +265,16 @@ ST.BarChart = function() {
     var get_date_ = function( d ) {
 
         var date = new Date(d);
-        var month = 1 + parseInt(date.getMonth());
+        var month = parseInt(date.getMonth());
+        var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        var mon = months[month];
         var day = date.getDate();
-        var year = date.getFullYear()-2000;
+        var year = date.getFullYear(); //  -2000
 
-        var formattedTime = month + '/' + day + '/' + year;
+        var minutes = date.getMinutes();
+        var hour = date.getHours();
+
+        var formattedTime = year + '-' + mon + '-' + day + "   " + hour + ":" + minutes;
         return formattedTime;
     };
 
