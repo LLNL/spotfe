@@ -17,13 +17,13 @@ done:
 next:
 DONE - alphabetize the the checkboxes, so you dont have to hunt.
 DONE - Add Labels: Groupby and Label xAxis
-DONE - XUnit bucketing.
+DONE - XUnit bucketing -> this means you don't need to see those super skinny bars where the width is just 1 point on the x-axis on a 1000 point xrange graph
 DONE - Added commas to really large numbers.
 DONE - make x-axis 45 degrees vertical
 DONE - for X-axis: match date to duration format.  (multi-line, OR vertically)
 - RightMost BIN is cut in half for some reason.
 - put the precize time in table -> right now it's just a unix epoch time.
-- spot2 redirect.
+- spot2 redirect or deploy there and level it up 1 step from web/
 - Table HTML -> for the pieCharts and barCharts.
 - dynamic table row show/hide fix.
 - Apply xUnits to sub-integer charts.

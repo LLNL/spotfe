@@ -161,7 +161,20 @@ var RenderChartCollection = function( the_data, layout_spec ) {
         var tab = layout_spec.table[z];
 
         if( tab.show ) {
-            columns.push(tab.dimension);
+
+            if( tab.type === "date" ) {
+
+                columns.push({
+                    label: tab.label,
+                    format: function (d) {
+                        return ST.Utility.format_date( d.launchdate );
+                    }
+                });
+
+            } else {
+
+                columns.push(tab.dimension);
+            }
         }
     }
 

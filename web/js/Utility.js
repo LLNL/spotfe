@@ -198,7 +198,29 @@ ST.Utility = function() {
     };
 
 
+    var format_date_ = function( d ) {
+
+        var date = new Date(d*1000);
+        var month = parseInt(date.getMonth());
+        var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        var mon = months[month];
+        var day = date.getDate();
+        var year = date.getFullYear(); //  -2000
+
+        var minutes = date.getMinutes();
+        var hour = date.getHours();
+
+        if( minutes < 10 ) {
+            minutes = "0" + minutes;
+        }
+
+        var formattedTime = year + '-' + mon + '-' + day + "   " + hour + ":" + minutes;
+        return formattedTime;
+    };
+
+
     return {
+        format_date: format_date_,
         get_colors: get_colors_,
         on_rz: on_rz_,
         match_expression: matchExpression_,

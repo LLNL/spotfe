@@ -262,22 +262,6 @@ ST.BarChart = function() {
         return Math.round( i * 10000 ) / 10000;
     };
 
-    var get_date_ = function( d ) {
-
-        var date = new Date(d);
-        var month = parseInt(date.getMonth());
-        var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-        var mon = months[month];
-        var day = date.getDate();
-        var year = date.getFullYear(); //  -2000
-
-        var minutes = date.getMinutes();
-        var hour = date.getHours();
-
-        var formattedTime = year + '-' + mon + '-' + day + "   " + hour + ":" + minutes;
-        return formattedTime;
-    };
-
 
     var commas_ = function(x) {
         var parts = x.toString().split(".");
@@ -289,7 +273,7 @@ ST.BarChart = function() {
     var get_dec_v_ = function(v, use_buckets, use_middling, is_date ) {
 
         if( is_date ) {
-            return get_date_(v*1000);
+            return ST.Utility.format_date(v);
         }
 
         if( use_buckets ) {

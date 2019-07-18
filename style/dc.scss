@@ -466,9 +466,17 @@ body .dc-chart g.row text {
 
         text {
             text-anchor: end !important;
-            transform: rotate(-45deg) translate(-7px, -5px) scaleX(1.2) scaleY(1.2);
+            transform: rotate(-45deg) translate(-7px, -5px) scaleX(1.23) scaleY(1.23);
         }
     }
+
+    .y.axis {
+
+        text {
+            transform: scaleX(1.2) scaleY(1.2);
+        }
+    }
+
 
     .help_body, .user_pref_body {
         background-color: #f2f2f2;
