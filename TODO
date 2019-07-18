@@ -20,14 +20,17 @@ DONE - Add Labels: Groupby and Label xAxis
 DONE - XUnit bucketing -> this means you don't need to see those super skinny bars where the width is just 1 point on the x-axis on a 1000 point xrange graph
 DONE - Added commas to really large numbers.
 DONE - make x-axis 45 degrees vertical
-DONE - for X-axis: match date to duration format.  (multi-line, OR vertically)
-DONE - put the precize time in table -> right now it's just a unix epoch time.
+DONE - for X-axis: match date to duration format of the other spot page.  (multi-line, OR vertically)
+DONE - put the correct format of date in table - not the unix epoch time.
 - spot2 redirect or deploy there and level it up 1 step from web/
 - Table HTML -> for the pieCharts and barCharts - maintain left/right position.
+- LeftMost BIN does not show up.
 - RightMost BIN is cut in half for some reason.
 - dynamic table row show/hide fix.
     * You need to render ALL columns, then after initialization, call hide() on each column that needs to be hidden
     * then again call show/hide whenever some chart/column gets checked/unchecked.
+- Naming of Barchat => dimension ("Iteration")
+    * don't mess up the URLs (dont use BarChart0, BarChart1, etc)
 - Apply xUnits to sub-integer charts.
 - xTics astethetics, don't show 1.2,1.4 in the 1,2,3 data
 
