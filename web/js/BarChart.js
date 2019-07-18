@@ -279,6 +279,13 @@ ST.BarChart = function() {
     };
 
 
+    var commas_ = function(x) {
+        var parts = x.toString().split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return parts.join(".");
+    };
+
+
     var get_dec_v_ = function(v, use_buckets, use_middling, is_date ) {
 
         if( is_date ) {
@@ -286,10 +293,10 @@ ST.BarChart = function() {
         }
 
         if( use_buckets ) {
-            return use_middling ? get_middling_(v) : v;
+            return use_middling ? get_middling_(v) : commas_(v);
         }
 
-        for( var x=10; x < 20; x++ ) {
+        for( var x=13; x < 30; x++ ) {
 
             v = +v;
 
@@ -304,7 +311,7 @@ ST.BarChart = function() {
             }
         }
 
-        return v;
+        return commas_(v);
     };
 
     var round_ = function( v ) {
