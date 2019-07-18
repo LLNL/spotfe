@@ -112,7 +112,7 @@ ST.CallSpot = function() {
 
 
             //console.dir(parsed);
-            var USE_TINY_STUB = true;
+            var USE_TINY_STUB = ST.Utility.get_param('tiny') === 'yes';
 
             var now = Math.round( Date.now() / 1000);
             var since = ST.params.last_days * 24 * 3600;

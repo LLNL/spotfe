@@ -21,11 +21,13 @@ DONE - XUnit bucketing -> this means you don't need to see those super skinny ba
 DONE - Added commas to really large numbers.
 DONE - make x-axis 45 degrees vertical
 DONE - for X-axis: match date to duration format.  (multi-line, OR vertically)
-- RightMost BIN is cut in half for some reason.
-- put the precize time in table -> right now it's just a unix epoch time.
+DONE - put the precize time in table -> right now it's just a unix epoch time.
 - spot2 redirect or deploy there and level it up 1 step from web/
-- Table HTML -> for the pieCharts and barCharts.
+- Table HTML -> for the pieCharts and barCharts - maintain left/right position.
+- RightMost BIN is cut in half for some reason.
 - dynamic table row show/hide fix.
+    * You need to render ALL columns, then after initialization, call hide() on each column that needs to be hidden
+    * then again call show/hide whenever some chart/column gets checked/unchecked.
 - Apply xUnits to sub-integer charts.
 - xTics astethetics, don't show 1.2,1.4 in the 1,2,3 data
 
@@ -52,6 +54,7 @@ TEST: 1. On Date Type show date instead of 1e9
 10. Currently NO support for SubInteger URL -> because it uses bucketing.
     * this means you can't run the dashboard if that's being used
 11. Some day do NULL.
+
 
 https://stackoverflow.com/questions/15191258/properly-display-bin-width-in-barchart-using-dc-js-and-crossfilter-js
 

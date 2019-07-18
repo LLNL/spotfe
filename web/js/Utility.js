@@ -51,7 +51,13 @@ ST.Utility = function() {
             }
 
             ST.Utility.error('From layout_spec, could not find dimension <b>' + dimension + '</b> in Data Set.  ' +
-                'Data set contains the following dimensions: ' + dimensions_available.substr(1) + '.  Probable solution: Change layout spec to match data.');
+                'Data set contains the following dimensions: ' + dimensions_available.substr(1) + '.  ' +
+                'You can solve this problem in 1 of 2 ways: <ul>' +
+                '<li>Add <b>' + dimension + '</b> to the dataset OR</li>' +
+                '<li>Remove <b>' + dimension + '</b> from the layout file.</li>' +
+                '</ul>');
+
+            alert('check error below.');
         }
     };
 
