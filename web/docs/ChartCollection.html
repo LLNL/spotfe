@@ -579,11 +579,38 @@ changes, without re-rendering everything</p>
 };
 
 
+var get_farr = function( fields ) {
+
+    var farr = ST.Utility.to_array( fields );
+
+    farr.sort( function(a, b) {
+
+        a = a.toLowerCase();
+        b = b.toLowerCase();
+
+        if( a &lt; b ) {
+            return -1;
+        }
+        if( a &gt; b ) {
+            return 1;
+        }
+
+        return 0;
+    });
+
+    console.dir(farr);
+    return farr;
+};
+
+
 var render_compare_arguments = function( fields ) {
 
     var options = "&lt;option value=''&gt;&lt;/option&gt;";
+    var farr = get_farr( fields );
 
-    for( var field in fields ) {
+    for( var x=0; x &lt; farr.length; x++ ) {
+
+        var field = farr[x];
         options += '&lt;option value="' + field + '"&gt;' + field + '&lt;/option&gt;';
     }</pre></div></div>
             

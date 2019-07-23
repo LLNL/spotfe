@@ -228,7 +228,16 @@ ST.Utility = function() {
     };
 
 
+    var to_array_ = function( obj ) {
+
+        return $.map(obj, function(value, index) {
+            return [index];
+        });
+    };
+
+
     return {
+        to_array: to_array_,
         format_date: format_date_,
         get_colors: get_colors_,
         on_rz: on_rz_,

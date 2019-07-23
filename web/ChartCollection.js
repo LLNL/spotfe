@@ -266,11 +266,38 @@ var RenderChartCollection = function( the_data, layout_spec ) {
 };
 
 
+var get_farr = function( fields ) {
+
+    var farr = ST.Utility.to_array( fields );
+
+    farr.sort( function(a, b) {
+
+        a = a.toLowerCase();
+        b = b.toLowerCase();
+
+        if( a < b ) {
+            return -1;
+        }
+        if( a > b ) {
+            return 1;
+        }
+
+        return 0;
+    });
+
+    console.dir(farr);
+    return farr;
+};
+
+
 var render_compare_arguments = function( fields ) {
 
     var options = "<option value=''></option>";
+    var farr = get_farr( fields );
 
-    for( var field in fields ) {
+    for( var x=0; x < farr.length; x++ ) {
+
+        var field = farr[x];
         options += '<option value="' + field + '">' + field + '</option>';
     }
 

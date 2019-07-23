@@ -29,22 +29,31 @@ DONE - spot2 redirect or deploy there and level it up 1 step from web/
     * https://lc.llnl.gov/spot2/
     * https://rzlc.llnl.gov/spot2/?sf=/usr/gapps/spot/datasets/lulesh_new
 
-- fix production deploy compare, jupyter, walltime -> then let matt know when its ready.
 
-- take a quick look at jupyter and let joe know.
-- LeftMost BIN does not show up.
-- RightMost BIN is cut in half for some reason.
+List of Joe's working on:
+- Compare page x-axis and groupby drop downs not populating
+- Jupyter call not returning stuff
+- Durations call not returning stuff
+- Getting the following to not crash: RZ ONLY: ~/testresults
+
+
+Next:
+- alphabetize the drop down.
 - Table HTML -> for the pieCharts and barCharts - maintain left/right position.
 - dynamic table row show/hide fix.
     * You need to render ALL columns, then after initialization, call hide() on each column that needs to be hidden
     * then again call show/hide whenever some chart/column gets checked/unchecked.
+- if sf file is not there then spit out an error.
+- for now an input box.  "Please provide a directory that contains dot cali files."
 - Naming of Barchat => dimension ("Iteration")
     * don't mess up the URLs (dont use BarChart0, BarChart1, etc)
+- LeftMost BIN does not show up.
+- RightMost BIN is cut in half for some reason.
+- File Upload browser on landing Page.
 - Apply xUnits to sub-integer charts.
 - xTics astethetics, don't show 1.2,1.4 in the 1,2,3 data
 - Nulls
 - STrings plus more than 12 unique values then we need to have a left horizontal bar.
-- File Upload browser on landing Page.
 
 
 
