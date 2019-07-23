@@ -2,9 +2,12 @@
   fill-opacity: 0.5;
   stroke-opacity: 0.5; }
 
+.chart_container .dc-chart {
+  height: 420px; }
+
 div.dc-chart {
-  float: left;
-  padding-top: 55px; }
+  padding-top: 55px;
+  float: left; }
 
 .row:nth-child(1) .dc-chart {
   height: 410px;

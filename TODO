@@ -1,18 +1,3 @@
-July 2nd TODO:
-Warning: If other people are going to start using this, we really need to do a LOT more QA on it, lots more testing, with more data sets.
-- Need to do lots more testing.
-DONE 1. Change start date to launchdate_days_ago and default a launchdate if one is not found
-DONE 7. Days ago dropdown box.
-DONE 2. Switched over to deterministic random launchDate generator.
-3. Need to copy over CZ cali files to RZ, and do testing.
-1.5  Launchdate feature needs more testing on Data with an actual launchdate (STUBs wont work because those dates are randomly generated).
-
-done:
-- date field
-- show/hide
-- got the spot2 directory (just need to place a redirrect)
-
-- would like some more data: retesting tiny nums (or the features that we need).
 
 next:
 DONE - alphabetize the the checkboxes, so you dont have to hunt.
@@ -28,6 +13,7 @@ DONE - put the correct format of date in table - not the unix epoch time.
 DONE - spot2 redirect or deploy there and level it up 1 step from web/
     * https://lc.llnl.gov/spot2/
     * https://rzlc.llnl.gov/spot2/?sf=/usr/gapps/spot/datasets/lulesh_new
+DONE - alphabetize the drop down.
 
 
 List of Joe's working on:
@@ -38,7 +24,6 @@ List of Joe's working on:
 
 
 Next:
-- alphabetize the drop down.
 - Table HTML -> for the pieCharts and barCharts - maintain left/right position.
 - dynamic table row show/hide fix.
     * You need to render ALL columns, then after initialization, call hide() on each column that needs to be hidden

@@ -29,9 +29,13 @@ $font_sans_serif: sans-serif;
     stroke-opacity: 0.5;
 }
 
+.chart_container .dc-chart {
+    height: 420px;
+}
+
 div.dc-chart {
-    float: left;
     padding-top: 55px;
+    float: left;
 }
 
 .row:nth-child(1) {

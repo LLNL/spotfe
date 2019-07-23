@@ -99,7 +99,6 @@ var RenderChartCollection = function( the_data, layout_spec ) {
     ST.LayoutAugmenterModel.get(layout_charts, the_data);
     ST.UserPreferences.render( original_lc );
 
-
     for (var dimension in layout_charts) {
 
         var spec = layout_charts[dimension];
