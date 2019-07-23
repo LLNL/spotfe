@@ -155,25 +155,23 @@ var RenderChartCollection = function( the_data, layout_spec ) {
     // ```
     // or do it programmatically using `.columns()`.
     var columns = [];
+
     for (var z in layout_spec.table) {
 
         var tab = layout_spec.table[z];
 
-        if( tab.show ) {
+        if( tab.type === "date" ) {
 
-            if( tab.type === "date" ) {
+            columns.push({
+                label: tab.label,
+                format: function (d) {
+                    return ST.Utility.format_date( d.launchdate );
+                }
+            });
 
-                columns.push({
-                    label: tab.label,
-                    format: function (d) {
-                        return ST.Utility.format_date( d.launchdate );
-                    }
-                });
+        } else {
 
-            } else {
-
-                columns.push(tab.dimension);
-            }
+            columns.push(tab.dimension);
         }
     }
 
@@ -244,22 +242,21 @@ var RenderChartCollection = function( the_data, layout_spec ) {
     ST.LeftHorizontalBarChart.load_filter();
 
     dc.redrawAll();
-    /*
-     // Or you can render charts belonging to a specific chart group
-     dc.renderAll('group');
-     // Once rendered you can call `.redrawAll()` to update charts incrementally when the data
-     // changes, without re-rendering everything
-     dc.redrawAll();
-     // Or you can choose to redraw only those charts associated with a specific chart group
-     dc.redrawAll('group');
-     */
 
-    /*var byDate = ndx.dimension(function (d) {
-        return d.date;
-    });
 
-    var table_data = byDate.top(Infinity);
-    */
+    for (var z in layout_spec.table) {
+
+        var tab = layout_spec.table[z];
+
+        var nth = parseInt(z) + 1;
+        var column = $('th:nth-child(' + nth + '), ._' + z);
+
+        if( !tab.show ) {
+            column.hide();
+        } else {
+            column.show();
+        }
+    }
 
     bind_sort();
 };

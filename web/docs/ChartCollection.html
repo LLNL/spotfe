@@ -303,25 +303,23 @@ on other charts within the same chart group.
             </div>
             
             <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> columns = [];
+
     <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> z <span class="hljs-keyword">in</span> layout_spec.table) {
 
         <span class="hljs-keyword">var</span> tab = layout_spec.table[z];
 
-        <span class="hljs-keyword">if</span>( tab.show ) {
+        <span class="hljs-keyword">if</span>( tab.type === <span class="hljs-string">"date"</span> ) {
 
-            <span class="hljs-keyword">if</span>( tab.type === <span class="hljs-string">"date"</span> ) {
+            columns.push({
+                <span class="hljs-attr">label</span>: tab.label,
+                <span class="hljs-attr">format</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{
+                    <span class="hljs-keyword">return</span> ST.Utility.format_date( d.launchdate );
+                }
+            });
 
-                columns.push({
-                    <span class="hljs-attr">label</span>: tab.label,
-                    <span class="hljs-attr">format</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{
-                        <span class="hljs-keyword">return</span> ST.Utility.format_date( d.launchdate );
-                    }
-                });
+        } <span class="hljs-keyword">else</span> {
 
-            } <span class="hljs-keyword">else</span> {
-
-                columns.push(tab.dimension);
-            }
+            columns.push(tab.dimension);
         }
     }
 
@@ -517,8 +515,60 @@ This code demonstrates generating the column header automatically based on the c
     ST.LeftHorizontalBarChart.load_filter();
 
     dc.redrawAll();
-    <span class="hljs-comment">/*
-</span></pre></div></div>
+
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> z <span class="hljs-keyword">in</span> layout_spec.table) {
+
+        <span class="hljs-keyword">var</span> tab = layout_spec.table[z];
+
+        <span class="hljs-keyword">var</span> nth = <span class="hljs-built_in">parseInt</span>(z) + <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">var</span> column = $(<span class="hljs-string">'th:nth-child('</span> + nth + <span class="hljs-string">'), ._'</span> + z);
+
+        <span class="hljs-keyword">if</span>( !tab.show ) {
+            column.hide();
+        } <span class="hljs-keyword">else</span> {
+            column.show();
+        }
+    }
+
+    bind_sort();
+};
+
+
+<span class="hljs-keyword">var</span> get_farr = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> fields </span>) </span>{
+
+    <span class="hljs-keyword">var</span> farr = ST.Utility.to_array( fields );
+
+    farr.sort( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">a, b</span>) </span>{
+
+        a = a.toLowerCase();
+        b = b.toLowerCase();
+
+        <span class="hljs-keyword">if</span>( a &lt; b ) {
+            <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+        }
+        <span class="hljs-keyword">if</span>( a &gt; b ) {
+            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+        }
+
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    });
+
+    <span class="hljs-built_in">console</span>.dir(farr);
+    <span class="hljs-keyword">return</span> farr;
+};
+
+
+<span class="hljs-keyword">var</span> render_compare_arguments = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> fields </span>) </span>{
+
+    <span class="hljs-keyword">var</span> options = <span class="hljs-string">"&lt;option value=''&gt;&lt;/option&gt;"</span>;
+    <span class="hljs-keyword">var</span> farr = get_farr( fields );
+
+    <span class="hljs-keyword">for</span>( <span class="hljs-keyword">var</span> x=<span class="hljs-number">0</span>; x &lt; farr.length; x++ ) {
+
+        <span class="hljs-keyword">var</span> field = farr[x];
+        options += <span class="hljs-string">'&lt;option value="'</span> + field + <span class="hljs-string">'"&gt;'</span> + field + <span class="hljs-string">'&lt;/option&gt;'</span>;
+    }</pre></div></div>
             
         </li>
         
@@ -528,99 +578,6 @@ This code demonstrates generating the column header automatically based on the c
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-22">&#182;</a>
-              </div>
-              <p>Or you can render charts belonging to a specific chart group</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>     dc.renderAll(<span class="hljs-string">'group'</span>);</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-23">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-23">&#182;</a>
-              </div>
-              <p>Once rendered you can call <code>.redrawAll()</code> to update charts incrementally when the data
-changes, without re-rendering everything</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>     dc.redrawAll();</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-24">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-24">&#182;</a>
-              </div>
-              <p>Or you can choose to redraw only those charts associated with a specific chart group</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>     dc.redrawAll('group');
-     */
-
-    /*var byDate = ndx.dimension(function (d) {
-        return d.date;
-    });
-
-    var table_data = byDate.top(Infinity);
-    */
-
-    bind_sort();
-};
-
-
-var get_farr = function( fields ) {
-
-    var farr = ST.Utility.to_array( fields );
-
-    farr.sort( function(a, b) {
-
-        a = a.toLowerCase();
-        b = b.toLowerCase();
-
-        if( a &lt; b ) {
-            return -1;
-        }
-        if( a &gt; b ) {
-            return 1;
-        }
-
-        return 0;
-    });
-
-    console.dir(farr);
-    return farr;
-};
-
-
-var render_compare_arguments = function( fields ) {
-
-    var options = "&lt;option value=''&gt;&lt;/option&gt;";
-    var farr = get_farr( fields );
-
-    for( var x=0; x &lt; farr.length; x++ ) {
-
-        var field = farr[x];
-        options += '&lt;option value="' + field + '"&gt;' + field + '&lt;/option&gt;';
-    }</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-25">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-25">&#182;</a>
               </div>
               <p> ‘<a id="bookmarkme" href="javascript: void(0)" rel="sidebar">Bookmark</a>‘ +</p>
 
@@ -682,11 +639,11 @@ var render_compare_arguments = function( fields ) {
         </li>
         
         
-        <li id="section-26">
+        <li id="section-23">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-26">&#182;</a>
+                <a class="pilcrow" href="#section-23">&#182;</a>
               </div>
               <p> for some reason, dc.js capitalizes column headings, thus messing up the sort
  reference when they click on the arrow click.</p>

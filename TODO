@@ -14,6 +14,7 @@ DONE - spot2 redirect or deploy there and level it up 1 step from web/
     * https://lc.llnl.gov/spot2/
     * https://rzlc.llnl.gov/spot2/?sf=/usr/gapps/spot/datasets/lulesh_new
 DONE - alphabetize the drop down.
+DONE - Table HTML -> for the pieCharts and barCharts - maintain left/right position.
 
 
 List of Joe's working on:
@@ -24,7 +25,6 @@ List of Joe's working on:
 
 
 Next:
-- Table HTML -> for the pieCharts and barCharts - maintain left/right position.
 - dynamic table row show/hide fix.
     * You need to render ALL columns, then after initialization, call hide() on each column that needs to be hidden
     * then again call show/hide whenever some chart/column gets checked/unchecked.
