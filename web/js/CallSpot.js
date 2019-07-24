@@ -206,8 +206,10 @@ ST.CallSpot = function() {
             //  Currently RenderChartCollection has a fatal javascript error coming from dc.js
             //  which needs to get fixed.
             try {
-                if (window.RenderChartCollection) {
-                    RenderChartCollection(newp, ST.layout_used);  //  ST.ReturnedDataStub.layout); //
+                if (ST && ST.ChartCollection ) {
+
+                    ST.newp = newp;
+                    ST.ChartCollection.RenderChartCollection(ST.newp, ST.layout_used);  //  ST.ReturnedDataStub.layout); //
                 }
             } catch(e) {
                 console.log("caught an error.");

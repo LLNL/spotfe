@@ -4,421 +4,423 @@
 var ST = ST || {};
 var runTable;
 
-var reduce_authors = function( data ) {
-
-    for( var z=0; z < data.length; z++ ) {
-
-        var rt = Math.floor((data[z].end - data[z].start)/3600);
-        var mod = rt + 10;
-        data[z].author = data[z % mod].author;
-    }
-};
 
 
-    var dateFormatSpecifier = '%m/%d/%Y';
-    var dateFormat = d3.timeFormat(dateFormatSpecifier);
-    var dateFormatParser = d3.timeParse(dateFormatSpecifier);
-    ST.numberFormat = d3.format('.2f');
+var dateFormatSpecifier = '%m/%d/%Y';
+var dateFormat = d3.timeFormat(dateFormatSpecifier);
+var dateFormatParser = d3.timeParse(dateFormatSpecifier);
+ST.numberFormat = d3.format('.2f');
 
 
-    var data = SPOT_DATA.runs;
+var data = SPOT_DATA.runs;
 
-    //  Reduce # of authors
-    //reduce_authors(data);
+//  Reduce # of authors
+//reduce_authors(data);
 
-    var uniq_author_count = {};
+var uniq_author_count = {};
 
-    for( var z=0; z < data.length; z++ ) {
+for( var z=0; z < data.length; z++ ) {
 
-        uniq_author_count[data[z].author] = 1;
+    uniq_author_count[data[z].author] = 1;
 
-        var spot_date = new Date( data[z].start * 1000 );
+    var spot_date = new Date( data[z].start * 1000 );
 
-        var month = spot_date.getMonth() + 1;
-        var day = spot_date.getDate();
-        var year = spot_date.getFullYear();
+    var month = spot_date.getMonth() + 1;
+    var day = spot_date.getDate();
+    var year = spot_date.getFullYear();
 
-        data[z].date = month + "/" + day + "/" + year;
-        data[z].year = year;
+    data[z].date = month + "/" + day + "/" + year;
+    data[z].year = year;
 
-        var diff = data[z].end - data[z].start;
+    var diff = data[z].end - data[z].start;
 
-        data[z].runtime = parseInt(diff/3600);
-        data[z].runtime2 = parseInt(diff/1200);
+    data[z].runtime = parseInt(diff/3600);
+    data[z].runtime2 = parseInt(diff/1200);
 
-        data[z].buttons = data[z].data;
-    }
+    data[z].buttons = data[z].data;
+}
 
-    var number_of_authors = Object.keys(uniq_author_count).length;
+var number_of_authors = Object.keys(uniq_author_count).length;
 
-    data.forEach(function (d) {
-        d.dd = dateFormatParser(d.date);
-        d.month = d3.timeMonth(d.dd); // pre-calculate month for better performance
-        //d.year = d3.timeYear(d.dd);
-    });
-
-
-//  Create Crossfilter Dimensions and Groups
-//  See the [crossfilter API](https://github.com/square/crossfilter/wiki/API-Reference) for reference.
-
-var RenderChartCollection = function( the_data, layout_spec ) {
-
-    console.dir( the_data );
-    var GLOB_DAT = the_data;
-    //  ST.MakeNiceData.make( the_data );
-    //          options.buckets = ['0-0.3', '0.3-0.6', '0.6-10', '10-15', '15-20'];
+data.forEach(function (d) {
+    d.dd = dateFormatParser(d.date);
+    d.month = d3.timeMonth(d.dd); // pre-calculate month for better performance
+    //d.year = d3.timeYear(d.dd);
+});
 
 
-    //  ST.ReturnedDataStub.data
-    var ndx = crossfilter( the_data );
-    var all = ndx.groupAll();
+ST.ChartCollection = function() {
+    //  Create Crossfilter Dimensions and Groups
+    //  See the [crossfilter API](https://github.com/square/crossfilter/wiki/API-Reference) for reference.
 
-    ST.NDX = ndx;
+    var RenderChartCollection = function (the_data, layout_spec) {
 
-    // Dimension by full date
-    var dateDimension = ndx.dimension(function (d) {
-        return dateFormatParser(d.date);
-    });
-
-    //  Do Layoutspec validation
-    if( !layout_spec.charts ) {
-
-        var mes = layout_spec.chart ? "chart specification should be plural: charts, not chart.  " : "";
-        alert(mes + '   <b>charts</b> is not defined in layout file.')
-    }
-
-    if( layout_spec.charts.length === undefined ) {
-        alert('Layout charts must be of type array.')
-    }
-
-    var layout_charts = layout_spec.charts;
-    var original_lc = $.extend( true, {}, layout_charts);
-
-    console.dir(original_lc);
-
-    ST.LayoutAugmenterModel.get(layout_charts, the_data);
-    ST.UserPreferences.render( original_lc );
-
-    for (var dimension in layout_charts) {
-
-        var spec = layout_charts[dimension];
-        var viz = spec.viz;
-        var orig = original_lc[dimension];
-
-        if (ST[viz] && ST[viz].render ) {
-
-            ST[viz].render(ndx, spec);
-        } else {
-            console.log('Sorry.  Viz type viz=' + viz + ' is not supported.');
-        }
-    }
+        console.dir(the_data);
+        var GLOB_DAT = the_data;
+        //  ST.MakeNiceData.make( the_data );
+        //          options.buckets = ['0-0.3', '0.3-0.6', '0.6-10', '10-15', '15-20'];
 
 
-    var dataCount = dc.dataCount('.dc-data-count');
-    runTable = dc.dataTable('.dc-data-table');
+        //  ST.ReturnedDataStub.data
+        var ndx = crossfilter(the_data);
+        var all = ndx.groupAll();
 
-    dataCount /* dc.dataCount('.dc-data-count', 'chartGroup'); */
-        .dimension(ndx)
-        .group(all)
-        // (_optional_) `.html` sets different html when some records or all records are selected.
-        // `.html` replaces everything in the anchor with the html given using the following function.
-        // `%filter-count` and `%total-count` are replaced with the values obtained.
-        .html({
-            some: '<strong>%filter-count</strong> selected out of <strong>%total-count</strong> records' +
-            ' | <a href=\'javascript:dc.filterAll(); dc.renderAll(); ST.UrlStateManager.remove_all_chart_pars();\'>Reset All</a>',
-            all: 'All records selected. Please click on the graph to apply filters.'
+        ST.NDX = ndx;
+
+        // Dimension by full date
+        var dateDimension = ndx.dimension(function (d) {
+            return dateFormatParser(d.date);
         });
 
-    //#### Data Table
+        //  Do Layoutspec validation
+        if (!layout_spec.charts) {
 
-    // Create a data table widget and use the given css selector as anchor. You can also specify
-    // an optional chart group for this chart to be scoped within. When a chart belongs
-    // to a specific group then any interaction with such chart will only trigger redraw
-    // on other charts within the same chart group.
-    // <br>API: [Data Table Widget](https://github.com/dc-js/dc.js/blob/master/web/docs/api-latest.md#data-table-widget)
-    //
-    // You can statically define the headers like in
-    //
-    // ```html
-    //    <!-- anchor div for data table -->
-    //    <div id='data-table'>
-    //       <!-- create a custom header -->
-    //       <div class='header'>
-    //           <span>Date</span>
-    //           <span>Open</span>
-    //           <span>Close</span>
-    //           <span>Change</span>
-    //           <span>Volume</span>
-    //       </div>
-    //       <!-- data rows will filled in here -->
-    //    </div>
-    // ```
-    // or do it programmatically using `.columns()`.
-    var columns = [];
+            var mes = layout_spec.chart ? "chart specification should be plural: charts, not chart.  " : "";
+            alert(mes + '   <b>charts</b> is not defined in layout file.')
+        }
 
-    for (var z in layout_spec.table) {
+        if (layout_spec.charts.length === undefined) {
+            alert('Layout charts must be of type array.')
+        }
 
-        var tab = layout_spec.table[z];
+        var layout_charts = layout_spec.charts;
+        var original_lc = $.extend(true, {}, layout_charts);
 
-        if( tab.type === "date" ) {
+        console.dir(original_lc);
 
-            columns.push({
-                label: tab.label,
-                format: function (d) {
-                    return ST.Utility.format_date( d.launchdate );
-                }
+        ST.LayoutAugmenterModel.get(layout_charts, the_data);
+        ST.UserPreferences.render(original_lc);
+
+        for (var dimension in layout_charts) {
+
+            var spec = layout_charts[dimension];
+            var viz = spec.viz;
+            var orig = original_lc[dimension];
+
+            if (ST[viz] && ST[viz].render) {
+
+                ST[viz].render(ndx, spec);
+            } else {
+                console.log('Sorry.  Viz type viz=' + viz + ' is not supported.');
+            }
+        }
+
+
+        var dataCount = dc.dataCount('.dc-data-count');
+        runTable = dc.dataTable('.dc-data-table');
+
+        dataCount /* dc.dataCount('.dc-data-count', 'chartGroup'); */
+            .dimension(ndx)
+            .group(all)
+            // (_optional_) `.html` sets different html when some records or all records are selected.
+            // `.html` replaces everything in the anchor with the html given using the following function.
+            // `%filter-count` and `%total-count` are replaced with the values obtained.
+            .html({
+                some: '<strong>%filter-count</strong> selected out of <strong>%total-count</strong> records' +
+                ' | <a href=\'javascript:dc.filterAll(); dc.renderAll(); ST.UrlStateManager.remove_all_chart_pars();\'>Reset All</a>',
+                all: 'All records selected. Please click on the graph to apply filters.'
             });
 
-        } else {
+        //#### Data Table
 
-            columns.push(tab.dimension);
-        }
-    }
+        // Create a data table widget and use the given css selector as anchor. You can also specify
+        // an optional chart group for this chart to be scoped within. When a chart belongs
+        // to a specific group then any interaction with such chart will only trigger redraw
+        // on other charts within the same chart group.
+        // <br>API: [Data Table Widget](https://github.com/dc-js/dc.js/blob/master/web/docs/api-latest.md#data-table-widget)
+        //
+        // You can statically define the headers like in
+        //
+        // ```html
+        //    <!-- anchor div for data table -->
+        //    <div id='data-table'>
+        //       <!-- create a custom header -->
+        //       <div class='header'>
+        //           <span>Date</span>
+        //           <span>Open</span>
+        //           <span>Close</span>
+        //           <span>Change</span>
+        //           <span>Volume</span>
+        //       </div>
+        //       <!-- data rows will filled in here -->
+        //    </div>
+        // ```
+        // or do it programmatically using `.columns()`.
+        var columns = [];
 
-    columns.push({
-        label: 'Operations',
-        format: function (d) {
+        for (var z in layout_spec.table) {
 
-            var buts = "";
+            var tab = layout_spec.table[z];
 
-            for (var x in d.drilldown) {
+            if (tab.type === "date") {
 
-                var but = d.drilldown[x];
-                buts += '<div run_id="' + d.run_id + '" class="drilldown myButton">' + but.toUpperCase() + '</div>';
+                columns.push({
+                    label: tab.label,
+                    format: function (d) {
+                        return ST.Utility.format_date(d.launchdate);
+                    }
+                });
+
+            } else {
+
+                columns.push(tab.dimension);
             }
-
-            var hidden = '<div class="hidden key">' + d.key + '</div>';
-
-            return buts + hidden;
         }
-    });
 
+        columns.push({
+            label: 'Operations',
+            format: function (d) {
 
-    render_compare_arguments( the_data[0] );
+                var buts = "";
 
-    //  https://github.com/HamsterHuey/intothevoid.io/blob/master/code/2017/dcjs%20sortable%20table/dcjsSortableTable.html
+                for (var x in d.drilldown) {
 
-    runTable
-        .dimension(dateDimension)
-        // Data table does not use crossfilter group but rather a closure
-        // as a grouping function
-        .group(function (d) {
+                    var but = d.drilldown[x];
+                    buts += '<div run_id="' + d.run_id + '" class="drilldown myButton">' + but.toUpperCase() + '</div>';
+                }
 
-            var format = d3.format('02d');
-            var date = new Date(d.date * 1000);  // used to be epoch_date
-            //return date.getFullYear() + '/' + format((date.getMonth() + 1));
-            return 1;
-        })
-        // (_optional_) max number of records to be shown, `default = 25`
-        .size( 100 )    //  ST.params.max
-        // There are several ways to specify the columns; see the data-table documentation.
-        // This code demonstrates generating the column header automatically based on the columns.
-        .columns(columns)
+                var hidden = '<div class="hidden key">' + d.key + '</div>';
 
-        // (_optional_) sort using the given field, `default = function(d){return d;}`
-        .sortBy(function (d) {
-
-            var col = "runtime"; // "Region Balance";
-            return d[col]; // d.date;
-        })
-        // (_optional_) sort order, `default = d3.ascending`
-        .order(d3.ascending)
-        // (_optional_) custom renderlet to post-process chart using [D3](http://d3js.org)
-        .on('renderlet', function (table) {
-
-            table.selectAll('.dc-table-group').classed('info', true);
-
-            //  Make this happen after the render table.
-            jQuery('.compare_button, .dc-table-column .drilldown').unbind('click').bind('click', ST.CallSpot.drilldown );
-
-            bind_sort();
+                return buts + hidden;
+            }
         });
 
 
-    //simply call `.renderAll()` to render all charts on the page
-    dc.renderAll();
-    ST.BarChart.load_filter();
-    ST.PieChart.load_filter();
-    ST.LeftHorizontalBarChart.load_filter();
+        render_compare_arguments(the_data[0]);
 
-    dc.redrawAll();
+        //  https://github.com/HamsterHuey/intothevoid.io/blob/master/code/2017/dcjs%20sortable%20table/dcjsSortableTable.html
+
+        runTable
+            .dimension(dateDimension)
+            // Data table does not use crossfilter group but rather a closure
+            // as a grouping function
+            .group(function (d) {
+
+                var format = d3.format('02d');
+                var date = new Date(d.date * 1000);  // used to be epoch_date
+                //return date.getFullYear() + '/' + format((date.getMonth() + 1));
+                return 1;
+            })
+            // (_optional_) max number of records to be shown, `default = 25`
+            .size(100)    //  ST.params.max
+            // There are several ways to specify the columns; see the data-table documentation.
+            // This code demonstrates generating the column header automatically based on the columns.
+            .columns(columns)
+
+            // (_optional_) sort using the given field, `default = function(d){return d;}`
+            .sortBy(function (d) {
+
+                var col = "runtime"; // "Region Balance";
+                return d[col]; // d.date;
+            })
+            // (_optional_) sort order, `default = d3.ascending`
+            .order(d3.ascending)
+            // (_optional_) custom renderlet to post-process chart using [D3](http://d3js.org)
+            .on('renderlet', function (table) {
+
+                table.selectAll('.dc-table-group').classed('info', true);
+
+                //  Make this happen after the render table.
+                jQuery('.compare_button, .dc-table-column .drilldown').unbind('click').bind('click', ST.CallSpot.drilldown);
+
+                bind_sort();
+            });
 
 
-    for (var z in layout_spec.table) {
+        //simply call `.renderAll()` to render all charts on the page
+        dc.renderAll();
+        ST.BarChart.load_filter();
+        ST.PieChart.load_filter();
+        ST.LeftHorizontalBarChart.load_filter();
 
-        var tab = layout_spec.table[z];
+        dc.redrawAll();
 
-        var nth = parseInt(z) + 1;
-        var column = $('th:nth-child(' + nth + '), ._' + z);
 
-        if( !tab.show ) {
+        for (var z in layout_spec.table) {
+
+            var tab = layout_spec.table[z];
+            show_column_(z, tab.show);
+        }
+
+        bind_sort();
+    };
+
+
+    var show_column_ = function (index, show) {
+
+        var nth = parseInt(index) + 1;
+        var column = $('th:nth-child(' + nth + '), ._' + index);
+
+        if (!show) {
             column.hide();
         } else {
             column.show();
         }
-    }
-
-    bind_sort();
-};
-
-
-var get_farr = function( fields ) {
-
-    var farr = ST.Utility.to_array( fields );
-
-    farr.sort( function(a, b) {
-
-        a = a.toLowerCase();
-        b = b.toLowerCase();
-
-        if( a < b ) {
-            return -1;
-        }
-        if( a > b ) {
-            return 1;
-        }
-
-        return 0;
-    });
-
-    console.dir(farr);
-    return farr;
-};
-
-
-var render_compare_arguments = function( fields ) {
-
-    var options = "<option value=''></option>";
-    var farr = get_farr( fields );
-
-    for( var x=0; x < farr.length; x++ ) {
-
-        var field = farr[x];
-        options += '<option value="' + field + '">' + field + '</option>';
-    }
-
-    //  '<a id="bookmarkme" href="javascript: void(0)" rel="sidebar">Bookmark</a>' +
-    var ht = '<select class="xaxis">' + options + '</select>' +
-            '<select class="groupby">' + options + '</select>' +
-        '<div class="xaxis_label">Xaxis:</div>' +
-        '<div class="groupby_label">Group By:</div>';
-
-    $('.compare_arguments').html( ht );
-
-    $('.compare_arguments .xaxis, .compare_arguments .groupby').unbind('change').bind('change', function() {
-
-        var cla = $(this).attr('class');
-        var val = $(this).val();
-        val = val.replace(/#/, '');
-
-        ST.UrlStateManager.update_url( cla, val );
-    });
-
-    var last_days = ST.Utility.get_param(ST.LAST_DAYS) || "";
-
-    $('.bottom_table').prepend('<div class="launcher">' +
-        '<div class="days_label">launchdate days ago: </div>' +
-        '<input type="text" class="launchdate_days_ago" value="' + last_days + '"/>' +
-        '<div class="launch_button myButton">RELOAD</div>' +
-        '</div>');
-
-    $('.launch_button').unbind('click').bind('click', function() {
-
-        var val = $('.launchdate_days_ago').val();
-        ST.UrlStateManager.update_url("launchdate_days_ago", val);
-        location.reload();
-    });
-
-    load_compare();
-};
-
-
-
-var load_compare = function() {
-
-    var xaxis = ST.Utility.get_param('xaxis', true);
-    var groupby = ST.Utility.get_param('groupby', true);
-
-    if( xaxis !== 'undefined') {
-        $('.compare_arguments .xaxis').val(xaxis);
-    }
-
-    if( groupby !== 'undefined') {
-        $('.compare_arguments .groupby').val(groupby);
-    }
-};
-
-
-var bind_sort = function() {
-
-    //  for some reason, dc.js capitalizes column headings, thus messing up the sort
-    //  reference when they click on the arrow click.
-    var normalize_indexes_ = function( obj ) {
-
-        var nobj = {};
-
-        for( var x in obj ) {
-            var lower = x.toLowerCase();
-            nobj[lower] = obj[x];
-        }
-
-        return nobj;
     };
 
 
-    $('.dc-data-table th').ArrowFunctions({
-        arrow_click: function sort_me() {
+    var get_farr = function (fields) {
 
-            var target = $(event.target);
-            var is_up = target.hasClass('up_arrow');
-            var what_sort = target.parent().html();
+        var farr = ST.Utility.to_array(fields);
 
-            what_sort = what_sort.split('<')[0].toLowerCase();
+        farr.sort(function (a, b) {
 
-            console.log("now sort by: " + what_sort);
-            runTable.sortBy( function(d) {
+            a = a.toLowerCase();
+            b = b.toLowerCase();
 
-                var nobj = normalize_indexes_(d);
+            if (a < b) {
+                return -1;
+            }
+            if (a > b) {
+                return 1;
+            }
 
-                var col = "Region Balance";
-                return nobj[what_sort]; // d.date;
-            })
-                .order( is_up ? d3.ascending : d3.descending );
+            return 0;
+        });
 
-            dc.renderAll();
-            dc.redrawAll();
+        console.dir(farr);
+        return farr;
+    };
 
-            bind_sort();
+
+    var render_compare_arguments = function (fields) {
+
+        var options = "<option value=''></option>";
+        var farr = get_farr(fields);
+
+        for (var x = 0; x < farr.length; x++) {
+
+            var field = farr[x];
+            options += '<option value="' + field + '">' + field + '</option>';
         }
+
+        //  '<a id="bookmarkme" href="javascript: void(0)" rel="sidebar">Bookmark</a>' +
+        var ht = '<select class="xaxis">' + options + '</select>' +
+            '<select class="groupby">' + options + '</select>' +
+            '<div class="xaxis_label">Xaxis:</div>' +
+            '<div class="groupby_label">Group By:</div>';
+
+        $('.compare_arguments').html(ht);
+
+        $('.compare_arguments .xaxis, .compare_arguments .groupby').unbind('change').bind('change', function () {
+
+            var cla = $(this).attr('class');
+            var val = $(this).val();
+            val = val.replace(/#/, '');
+
+            ST.UrlStateManager.update_url(cla, val);
+        });
+
+        var last_days = ST.Utility.get_param(ST.LAST_DAYS) || "";
+
+        $('.bottom_table').prepend('<div class="launcher">' +
+            '<div class="days_label">launchdate days ago: </div>' +
+            '<input type="text" class="launchdate_days_ago" value="' + last_days + '"/>' +
+            '<div class="launch_button myButton">RELOAD</div>' +
+            '</div>');
+
+        $('.launch_button').unbind('click').bind('click', function () {
+
+            var val = $('.launchdate_days_ago').val();
+            ST.UrlStateManager.update_url("launchdate_days_ago", val);
+            location.reload();
+        });
+
+        load_compare();
+    };
+
+
+    var load_compare = function () {
+
+        var xaxis = ST.Utility.get_param('xaxis', true);
+        var groupby = ST.Utility.get_param('groupby', true);
+
+        if (xaxis !== 'undefined') {
+            $('.compare_arguments .xaxis').val(xaxis);
+        }
+
+        if (groupby !== 'undefined') {
+            $('.compare_arguments .groupby').val(groupby);
+        }
+    };
+
+
+    var bind_sort = function () {
+
+        //  for some reason, dc.js capitalizes column headings, thus messing up the sort
+        //  reference when they click on the arrow click.
+        var normalize_indexes_ = function (obj) {
+
+            var nobj = {};
+
+            for (var x in obj) {
+                var lower = x.toLowerCase();
+                nobj[lower] = obj[x];
+            }
+
+            return nobj;
+        };
+
+
+        $('.dc-data-table th').ArrowFunctions({
+            arrow_click: function sort_me() {
+
+                var target = $(event.target);
+                var is_up = target.hasClass('up_arrow');
+                var what_sort = target.parent().html();
+
+                what_sort = what_sort.split('<')[0].toLowerCase();
+
+                console.log("now sort by: " + what_sort);
+                runTable.sortBy(function (d) {
+
+                    var nobj = normalize_indexes_(d);
+
+                    var col = "Region Balance";
+                    return nobj[what_sort]; // d.date;
+                })
+                    .order(is_up ? d3.ascending : d3.descending);
+
+                dc.renderAll();
+                dc.redrawAll();
+
+                bind_sort();
+            }
+        });
+    };
+
+
+    $.fn.ArrowFunctions = function (obj) {
+
+        var arrows = "<div class='up_arrow'></div>" +
+            "<div class='down_arrow'></div>";
+
+        return this.each(function () {
+
+            $(this).append(arrows);
+            $(this).find('.up_arrow, .down_arrow').unbind('click').bind('click', obj.arrow_click);
+        });
+    };
+
+
+    $(document).ready(function () {
+
+        var file = ST.Utility.get_file();
+        ST.Utility.init_params();
+
+        help_icon_(file, ST.params);
+
+        var layout = ST.params.layout ? ' --layout=' + ST.params.layout : "";
+
+        ST.CallSpot.ajax({
+            file: file,
+            type: 'summary',
+            layout: layout
+        });
     });
-};
 
-
-$.fn.ArrowFunctions = function( obj ) {
-
-    var arrows = "<div class='up_arrow'></div>" +
-        "<div class='down_arrow'></div>";
-
-    return this.each( function() {
-
-        $(this).append(arrows);
-        $(this).find('.up_arrow, .down_arrow').unbind('click').bind('click', obj.arrow_click );
-    });
-};
-
-
-$(document).ready( function() {
-
-    var file = ST.Utility.get_file();
-    ST.Utility.init_params();
-
-    help_icon_(file, ST.params );
-
-    var layout = ST.params.layout ? ' --layout=' + ST.params.layout : "";
-
-    ST.CallSpot.ajax({
-        file: file,
-        type: 'summary',
-        layout: layout
-    });
-});
+    return {
+        RenderChartCollection: RenderChartCollection,
+        bind_sort: bind_sort
+    }
+}();

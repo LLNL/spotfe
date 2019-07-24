@@ -79,7 +79,8 @@ ST.PieChart = function() {
             var instance_num = $(this).parent().attr('instance_num');
             quarterChart[instance_num].filterAll();
             dc.redrawAll();
-            bind_sort();
+
+            ST.ChartCollection.bind_sort();
         },
         load_filter: function() {
 

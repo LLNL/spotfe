@@ -13,6 +13,8 @@ DONE - put the correct format of date in table - not the unix epoch time.
 DONE - spot2 redirect or deploy there and level it up 1 step from web/
     * https://lc.llnl.gov/spot2/
     * https://rzlc.llnl.gov/spot2/?sf=/usr/gapps/spot/datasets/lulesh_new
+
+RECENTLY DONE:
 DONE - alphabetize the drop down.
 DONE - Table HTML -> for the pieCharts and barCharts - maintain left/right position.
 
@@ -26,7 +28,8 @@ List of Joe's working on:
 
 Next:
 - dynamic table row show/hide fix.
-    * You need to render ALL columns, then after initialization, call hide() on each column that needs to be hidden
+    * Also, make sure that sorting still works
+    * make sure that random columns don't keep showing up as we play with the filters.
     * then again call show/hide whenever some chart/column gets checked/unchecked.
 - if sf file is not there then spit out an error.
 - for now an input box.  "Please provide a directory that contains dot cali files."

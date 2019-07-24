@@ -159,7 +159,7 @@ ST.UrlStateManager = function() {
         }
 
         //dc.redrawAll();
-        bind_sort();
+        ST.ChartCollection.bind_sort();
     };
 
 

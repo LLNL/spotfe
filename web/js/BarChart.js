@@ -320,7 +320,7 @@ ST.BarChart = function() {
             inst_[instance_num].filterAll();
 
             dc.redrawAll();
-            bind_sort();
+            ST.ChartCollection.bind_sort();
 
             ST.UrlStateManager.remove_param( 'BarChart' + instance_num );
         },

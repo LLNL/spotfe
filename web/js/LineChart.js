@@ -146,10 +146,12 @@ ST.LineChart = function() {
     return {
         render: render_,
         reset: function() {
+
             moveChart_.filterAll();
             volumeChart_.filterAll();
             dc.redrawAll();
-            bind_sort();
+
+            ST.ChartCollection.bind_sort();
         }
     }
 }();

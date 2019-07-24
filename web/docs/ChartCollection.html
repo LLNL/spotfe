@@ -36,24 +36,15 @@
 <span class="hljs-keyword">var</span> ST = ST || {};
 <span class="hljs-keyword">var</span> runTable;
 
-<span class="hljs-keyword">var</span> reduce_authors = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> data </span>) </span>{
-
-    <span class="hljs-keyword">for</span>( <span class="hljs-keyword">var</span> z=<span class="hljs-number">0</span>; z &lt; data.length; z++ ) {
-
-        <span class="hljs-keyword">var</span> rt = <span class="hljs-built_in">Math</span>.floor((data[z].end - data[z].start)/<span class="hljs-number">3600</span>);
-        <span class="hljs-keyword">var</span> mod = rt + <span class="hljs-number">10</span>;
-        data[z].author = data[z % mod].author;
-    }
-};
 
 
-    <span class="hljs-keyword">var</span> dateFormatSpecifier = <span class="hljs-string">'%m/%d/%Y'</span>;
-    <span class="hljs-keyword">var</span> dateFormat = d3.timeFormat(dateFormatSpecifier);
-    <span class="hljs-keyword">var</span> dateFormatParser = d3.timeParse(dateFormatSpecifier);
-    ST.numberFormat = d3.format(<span class="hljs-string">'.2f'</span>);
+<span class="hljs-keyword">var</span> dateFormatSpecifier = <span class="hljs-string">'%m/%d/%Y'</span>;
+<span class="hljs-keyword">var</span> dateFormat = d3.timeFormat(dateFormatSpecifier);
+<span class="hljs-keyword">var</span> dateFormatParser = d3.timeParse(dateFormatSpecifier);
+ST.numberFormat = d3.format(<span class="hljs-string">'.2f'</span>);
 
 
-    <span class="hljs-keyword">var</span> data = SPOT_DATA.runs;</pre></div></div>
+<span class="hljs-keyword">var</span> data = SPOT_DATA.runs;</pre></div></div>
             
         </li>
         
@@ -70,34 +61,34 @@ reduce_authors(data);</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>
-    <span class="hljs-keyword">var</span> uniq_author_count = {};
+<span class="hljs-keyword">var</span> uniq_author_count = {};
 
-    <span class="hljs-keyword">for</span>( <span class="hljs-keyword">var</span> z=<span class="hljs-number">0</span>; z &lt; data.length; z++ ) {
+<span class="hljs-keyword">for</span>( <span class="hljs-keyword">var</span> z=<span class="hljs-number">0</span>; z &lt; data.length; z++ ) {
 
-        uniq_author_count[data[z].author] = <span class="hljs-number">1</span>;
+    uniq_author_count[data[z].author] = <span class="hljs-number">1</span>;
 
-        <span class="hljs-keyword">var</span> spot_date = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>( data[z].start * <span class="hljs-number">1000</span> );
+    <span class="hljs-keyword">var</span> spot_date = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>( data[z].start * <span class="hljs-number">1000</span> );
 
-        <span class="hljs-keyword">var</span> month = spot_date.getMonth() + <span class="hljs-number">1</span>;
-        <span class="hljs-keyword">var</span> day = spot_date.getDate();
-        <span class="hljs-keyword">var</span> year = spot_date.getFullYear();
+    <span class="hljs-keyword">var</span> month = spot_date.getMonth() + <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">var</span> day = spot_date.getDate();
+    <span class="hljs-keyword">var</span> year = spot_date.getFullYear();
 
-        data[z].date = month + <span class="hljs-string">"/"</span> + day + <span class="hljs-string">"/"</span> + year;
-        data[z].year = year;
+    data[z].date = month + <span class="hljs-string">"/"</span> + day + <span class="hljs-string">"/"</span> + year;
+    data[z].year = year;
 
-        <span class="hljs-keyword">var</span> diff = data[z].end - data[z].start;
+    <span class="hljs-keyword">var</span> diff = data[z].end - data[z].start;
 
-        data[z].runtime = <span class="hljs-built_in">parseInt</span>(diff/<span class="hljs-number">3600</span>);
-        data[z].runtime2 = <span class="hljs-built_in">parseInt</span>(diff/<span class="hljs-number">1200</span>);
+    data[z].runtime = <span class="hljs-built_in">parseInt</span>(diff/<span class="hljs-number">3600</span>);
+    data[z].runtime2 = <span class="hljs-built_in">parseInt</span>(diff/<span class="hljs-number">1200</span>);
 
-        data[z].buttons = data[z].data;
-    }
+    data[z].buttons = data[z].data;
+}
 
-    <span class="hljs-keyword">var</span> number_of_authors = <span class="hljs-built_in">Object</span>.keys(uniq_author_count).length;
+<span class="hljs-keyword">var</span> number_of_authors = <span class="hljs-built_in">Object</span>.keys(uniq_author_count).length;
 
-    data.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{
-        d.dd = dateFormatParser(d.date);
-        d.month = d3.timeMonth(d.dd); <span class="hljs-comment">// pre-calculate month for better performance</span></pre></div></div>
+data.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{
+    d.dd = dateFormatParser(d.date);
+    d.month = d3.timeMonth(d.dd); <span class="hljs-comment">// pre-calculate month for better performance</span></pre></div></div>
             
         </li>
         
@@ -112,7 +103,10 @@ reduce_authors(data);</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    });</pre></div></div>
+            <div class="content"><div class='highlight'><pre>});
+
+
+ST.ChartCollection = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{</pre></div></div>
             
         </li>
         
@@ -129,10 +123,10 @@ reduce_authors(data);</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>
-<span class="hljs-keyword">var</span> RenderChartCollection = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> the_data, layout_spec </span>) </span>{
+    <span class="hljs-keyword">var</span> RenderChartCollection = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">the_data, layout_spec</span>) </span>{
 
-    <span class="hljs-built_in">console</span>.dir( the_data );
-    <span class="hljs-keyword">var</span> GLOB_DAT = the_data;</pre></div></div>
+        <span class="hljs-built_in">console</span>.dir(the_data);
+        <span class="hljs-keyword">var</span> GLOB_DAT = the_data;</pre></div></div>
             
         </li>
         
@@ -161,10 +155,10 @@ reduce_authors(data);</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> ndx = crossfilter( the_data );
-    <span class="hljs-keyword">var</span> all = ndx.groupAll();
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">var</span> ndx = crossfilter(the_data);
+        <span class="hljs-keyword">var</span> all = ndx.groupAll();
 
-    ST.NDX = ndx;</pre></div></div>
+        ST.NDX = ndx;</pre></div></div>
             
         </li>
         
@@ -179,9 +173,9 @@ reduce_authors(data);</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> dateDimension = ndx.dimension(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{
-        <span class="hljs-keyword">return</span> dateFormatParser(d.date);
-    });</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">var</span> dateDimension = ndx.dimension(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{
+            <span class="hljs-keyword">return</span> dateFormatParser(d.date);
+        });</pre></div></div>
             
         </li>
         
@@ -196,45 +190,45 @@ reduce_authors(data);</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">if</span>( !layout_spec.charts ) {
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">if</span> (!layout_spec.charts) {
 
-        <span class="hljs-keyword">var</span> mes = layout_spec.chart ? <span class="hljs-string">"chart specification should be plural: charts, not chart.  "</span> : <span class="hljs-string">""</span>;
-        alert(mes + <span class="hljs-string">'   &lt;b&gt;charts&lt;/b&gt; is not defined in layout file.'</span>)
-    }
-
-    <span class="hljs-keyword">if</span>( layout_spec.charts.length === <span class="hljs-literal">undefined</span> ) {
-        alert(<span class="hljs-string">'Layout charts must be of type array.'</span>)
-    }
-
-    <span class="hljs-keyword">var</span> layout_charts = layout_spec.charts;
-    <span class="hljs-keyword">var</span> original_lc = $.extend( <span class="hljs-literal">true</span>, {}, layout_charts);
-
-    <span class="hljs-built_in">console</span>.dir(original_lc);
-
-    ST.LayoutAugmenterModel.get(layout_charts, the_data);
-    ST.UserPreferences.render( original_lc );
-
-    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> dimension <span class="hljs-keyword">in</span> layout_charts) {
-
-        <span class="hljs-keyword">var</span> spec = layout_charts[dimension];
-        <span class="hljs-keyword">var</span> viz = spec.viz;
-        <span class="hljs-keyword">var</span> orig = original_lc[dimension];
-
-        <span class="hljs-keyword">if</span> (ST[viz] &amp;&amp; ST[viz].render ) {
-
-            ST[viz].render(ndx, spec);
-        } <span class="hljs-keyword">else</span> {
-            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Sorry.  Viz type viz='</span> + viz + <span class="hljs-string">' is not supported.'</span>);
+            <span class="hljs-keyword">var</span> mes = layout_spec.chart ? <span class="hljs-string">"chart specification should be plural: charts, not chart.  "</span> : <span class="hljs-string">""</span>;
+            alert(mes + <span class="hljs-string">'   &lt;b&gt;charts&lt;/b&gt; is not defined in layout file.'</span>)
         }
-    }
+
+        <span class="hljs-keyword">if</span> (layout_spec.charts.length === <span class="hljs-literal">undefined</span>) {
+            alert(<span class="hljs-string">'Layout charts must be of type array.'</span>)
+        }
+
+        <span class="hljs-keyword">var</span> layout_charts = layout_spec.charts;
+        <span class="hljs-keyword">var</span> original_lc = $.extend(<span class="hljs-literal">true</span>, {}, layout_charts);
+
+        <span class="hljs-built_in">console</span>.dir(original_lc);
+
+        ST.LayoutAugmenterModel.get(layout_charts, the_data);
+        ST.UserPreferences.render(original_lc);
+
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> dimension <span class="hljs-keyword">in</span> layout_charts) {
+
+            <span class="hljs-keyword">var</span> spec = layout_charts[dimension];
+            <span class="hljs-keyword">var</span> viz = spec.viz;
+            <span class="hljs-keyword">var</span> orig = original_lc[dimension];
+
+            <span class="hljs-keyword">if</span> (ST[viz] &amp;&amp; ST[viz].render) {
+
+                ST[viz].render(ndx, spec);
+            } <span class="hljs-keyword">else</span> {
+                <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Sorry.  Viz type viz='</span> + viz + <span class="hljs-string">' is not supported.'</span>);
+            }
+        }
 
 
-    <span class="hljs-keyword">var</span> dataCount = dc.dataCount(<span class="hljs-string">'.dc-data-count'</span>);
-    runTable = dc.dataTable(<span class="hljs-string">'.dc-data-table'</span>);
+        <span class="hljs-keyword">var</span> dataCount = dc.dataCount(<span class="hljs-string">'.dc-data-count'</span>);
+        runTable = dc.dataTable(<span class="hljs-string">'.dc-data-table'</span>);
 
-    dataCount <span class="hljs-comment">/* dc.dataCount('.dc-data-count', 'chartGroup'); */</span>
-        .dimension(ndx)
-        .group(all)</pre></div></div>
+        dataCount <span class="hljs-comment">/* dc.dataCount('.dc-data-count', 'chartGroup'); */</span>
+            .dimension(ndx)
+            .group(all)</pre></div></div>
             
         </li>
         
@@ -251,11 +245,11 @@ reduce_authors(data);</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        .html({
-            <span class="hljs-attr">some</span>: <span class="hljs-string">'&lt;strong&gt;%filter-count&lt;/strong&gt; selected out of &lt;strong&gt;%total-count&lt;/strong&gt; records'</span> +
-            <span class="hljs-string">' | &lt;a href=\'javascript:dc.filterAll(); dc.renderAll(); ST.UrlStateManager.remove_all_chart_pars();\'&gt;Reset All&lt;/a&gt;'</span>,
-            <span class="hljs-attr">all</span>: <span class="hljs-string">'All records selected. Please click on the graph to apply filters.'</span>
-        });</pre></div></div>
+            <div class="content"><div class='highlight'><pre>            .html({
+                <span class="hljs-attr">some</span>: <span class="hljs-string">'&lt;strong&gt;%filter-count&lt;/strong&gt; selected out of &lt;strong&gt;%total-count&lt;/strong&gt; records'</span> +
+                <span class="hljs-string">' | &lt;a href=\'javascript:dc.filterAll(); dc.renderAll(); ST.UrlStateManager.remove_all_chart_pars();\'&gt;Reset All&lt;/a&gt;'</span>,
+                <span class="hljs-attr">all</span>: <span class="hljs-string">'All records selected. Please click on the graph to apply filters.'</span>
+            });</pre></div></div>
             
         </li>
         
@@ -302,47 +296,47 @@ on other charts within the same chart group.
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> columns = [];
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">var</span> columns = [];
 
-    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> z <span class="hljs-keyword">in</span> layout_spec.table) {
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> z <span class="hljs-keyword">in</span> layout_spec.table) {
 
-        <span class="hljs-keyword">var</span> tab = layout_spec.table[z];
+            <span class="hljs-keyword">var</span> tab = layout_spec.table[z];
 
-        <span class="hljs-keyword">if</span>( tab.type === <span class="hljs-string">"date"</span> ) {
+            <span class="hljs-keyword">if</span> (tab.type === <span class="hljs-string">"date"</span>) {
 
-            columns.push({
-                <span class="hljs-attr">label</span>: tab.label,
-                <span class="hljs-attr">format</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{
-                    <span class="hljs-keyword">return</span> ST.Utility.format_date( d.launchdate );
-                }
-            });
+                columns.push({
+                    <span class="hljs-attr">label</span>: tab.label,
+                    <span class="hljs-attr">format</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{
+                        <span class="hljs-keyword">return</span> ST.Utility.format_date(d.launchdate);
+                    }
+                });
 
-        } <span class="hljs-keyword">else</span> {
+            } <span class="hljs-keyword">else</span> {
 
-            columns.push(tab.dimension);
-        }
-    }
-
-    columns.push({
-        <span class="hljs-attr">label</span>: <span class="hljs-string">'Operations'</span>,
-        <span class="hljs-attr">format</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{
-
-            <span class="hljs-keyword">var</span> buts = <span class="hljs-string">""</span>;
-
-            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> x <span class="hljs-keyword">in</span> d.drilldown) {
-
-                <span class="hljs-keyword">var</span> but = d.drilldown[x];
-                buts += <span class="hljs-string">'&lt;div run_id="'</span> + d.run_id + <span class="hljs-string">'" class="drilldown myButton"&gt;'</span> + but.toUpperCase() + <span class="hljs-string">'&lt;/div&gt;'</span>;
+                columns.push(tab.dimension);
             }
-
-            <span class="hljs-keyword">var</span> hidden = <span class="hljs-string">'&lt;div class="hidden key"&gt;'</span> + d.key + <span class="hljs-string">'&lt;/div&gt;'</span>;
-
-            <span class="hljs-keyword">return</span> buts + hidden;
         }
-    });
+
+        columns.push({
+            <span class="hljs-attr">label</span>: <span class="hljs-string">'Operations'</span>,
+            <span class="hljs-attr">format</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{
+
+                <span class="hljs-keyword">var</span> buts = <span class="hljs-string">""</span>;
+
+                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> x <span class="hljs-keyword">in</span> d.drilldown) {
+
+                    <span class="hljs-keyword">var</span> but = d.drilldown[x];
+                    buts += <span class="hljs-string">'&lt;div run_id="'</span> + d.run_id + <span class="hljs-string">'" class="drilldown myButton"&gt;'</span> + but.toUpperCase() + <span class="hljs-string">'&lt;/div&gt;'</span>;
+                }
+
+                <span class="hljs-keyword">var</span> hidden = <span class="hljs-string">'&lt;div class="hidden key"&gt;'</span> + d.key + <span class="hljs-string">'&lt;/div&gt;'</span>;
+
+                <span class="hljs-keyword">return</span> buts + hidden;
+            }
+        });
 
 
-    render_compare_arguments( the_data[<span class="hljs-number">0</span>] );</pre></div></div>
+        render_compare_arguments(the_data[<span class="hljs-number">0</span>]);</pre></div></div>
             
         </li>
         
@@ -358,8 +352,8 @@ on other charts within the same chart group.
             </div>
             
             <div class="content"><div class='highlight'><pre>
-    runTable
-        .dimension(dateDimension)</pre></div></div>
+        runTable
+            .dimension(dateDimension)</pre></div></div>
             
         </li>
         
@@ -375,10 +369,10 @@ as a grouping function</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        .group(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{
+            <div class="content"><div class='highlight'><pre>            .group(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{
 
-            <span class="hljs-keyword">var</span> format = d3.format(<span class="hljs-string">'02d'</span>);
-            <span class="hljs-keyword">var</span> date = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(d.date * <span class="hljs-number">1000</span>);  <span class="hljs-comment">// used to be epoch_date</span></pre></div></div>
+                <span class="hljs-keyword">var</span> format = d3.format(<span class="hljs-string">'02d'</span>);
+                <span class="hljs-keyword">var</span> date = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(d.date * <span class="hljs-number">1000</span>);  <span class="hljs-comment">// used to be epoch_date</span></pre></div></div>
             
         </li>
         
@@ -393,8 +387,8 @@ as a grouping function</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
-        })</pre></div></div>
+            <div class="content"><div class='highlight'><pre>                <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+            })</pre></div></div>
             
         </li>
         
@@ -409,7 +403,7 @@ as a grouping function</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        .size( <span class="hljs-number">100</span> )    <span class="hljs-comment">//  ST.params.max</span></pre></div></div>
+            <div class="content"><div class='highlight'><pre>            .size(<span class="hljs-number">100</span>)    <span class="hljs-comment">//  ST.params.max</span></pre></div></div>
             
         </li>
         
@@ -425,7 +419,7 @@ This code demonstrates generating the column header automatically based on the c
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        .columns(columns)</pre></div></div>
+            <div class="content"><div class='highlight'><pre>            .columns(columns)</pre></div></div>
             
         </li>
         
@@ -440,11 +434,11 @@ This code demonstrates generating the column header automatically based on the c
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        .sortBy(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{
+            <div class="content"><div class='highlight'><pre>            .sortBy(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{
 
-            <span class="hljs-keyword">var</span> col = <span class="hljs-string">"runtime"</span>; <span class="hljs-comment">// "Region Balance";</span>
-            <span class="hljs-keyword">return</span> d[col]; <span class="hljs-comment">// d.date;</span>
-        })</pre></div></div>
+                <span class="hljs-keyword">var</span> col = <span class="hljs-string">"runtime"</span>; <span class="hljs-comment">// "Region Balance";</span>
+                <span class="hljs-keyword">return</span> d[col]; <span class="hljs-comment">// d.date;</span>
+            })</pre></div></div>
             
         </li>
         
@@ -459,7 +453,7 @@ This code demonstrates generating the column header automatically based on the c
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        .order(d3.ascending)</pre></div></div>
+            <div class="content"><div class='highlight'><pre>            .order(d3.ascending)</pre></div></div>
             
         </li>
         
@@ -474,9 +468,9 @@ This code demonstrates generating the column header automatically based on the c
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        .on(<span class="hljs-string">'renderlet'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">table</span>) </span>{
+            <div class="content"><div class='highlight'><pre>            .on(<span class="hljs-string">'renderlet'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">table</span>) </span>{
 
-            table.selectAll(<span class="hljs-string">'.dc-table-group'</span>).classed(<span class="hljs-string">'info'</span>, <span class="hljs-literal">true</span>);</pre></div></div>
+                table.selectAll(<span class="hljs-string">'.dc-table-group'</span>).classed(<span class="hljs-string">'info'</span>, <span class="hljs-literal">true</span>);</pre></div></div>
             
         </li>
         
@@ -491,10 +485,10 @@ This code demonstrates generating the column header automatically based on the c
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            jQuery(<span class="hljs-string">'.compare_button, .dc-table-column .drilldown'</span>).unbind(<span class="hljs-string">'click'</span>).bind(<span class="hljs-string">'click'</span>, ST.CallSpot.drilldown );
+            <div class="content"><div class='highlight'><pre>                jQuery(<span class="hljs-string">'.compare_button, .dc-table-column .drilldown'</span>).unbind(<span class="hljs-string">'click'</span>).bind(<span class="hljs-string">'click'</span>, ST.CallSpot.drilldown);
 
-            bind_sort();
-        });</pre></div></div>
+                bind_sort();
+            });</pre></div></div>
             
         </li>
         
@@ -509,66 +503,71 @@ This code demonstrates generating the column header automatically based on the c
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    dc.renderAll();
-    ST.BarChart.load_filter();
-    ST.PieChart.load_filter();
-    ST.LeftHorizontalBarChart.load_filter();
+            <div class="content"><div class='highlight'><pre>        dc.renderAll();
+        ST.BarChart.load_filter();
+        ST.PieChart.load_filter();
+        ST.LeftHorizontalBarChart.load_filter();
 
-    dc.redrawAll();
+        dc.redrawAll();
 
 
-    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> z <span class="hljs-keyword">in</span> layout_spec.table) {
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> z <span class="hljs-keyword">in</span> layout_spec.table) {
 
-        <span class="hljs-keyword">var</span> tab = layout_spec.table[z];
+            <span class="hljs-keyword">var</span> tab = layout_spec.table[z];
+            show_column_(z, tab.show);
+        }
 
-        <span class="hljs-keyword">var</span> nth = <span class="hljs-built_in">parseInt</span>(z) + <span class="hljs-number">1</span>;
-        <span class="hljs-keyword">var</span> column = $(<span class="hljs-string">'th:nth-child('</span> + nth + <span class="hljs-string">'), ._'</span> + z);
+        bind_sort();
+    };
 
-        <span class="hljs-keyword">if</span>( !tab.show ) {
+
+    <span class="hljs-keyword">var</span> show_column_ = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">index, show</span>) </span>{
+
+        <span class="hljs-keyword">var</span> nth = <span class="hljs-built_in">parseInt</span>(index) + <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">var</span> column = $(<span class="hljs-string">'th:nth-child('</span> + nth + <span class="hljs-string">'), ._'</span> + index);
+
+        <span class="hljs-keyword">if</span> (!show) {
             column.hide();
         } <span class="hljs-keyword">else</span> {
             column.show();
         }
-    }
-
-    bind_sort();
-};
+    };
 
 
-<span class="hljs-keyword">var</span> get_farr = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> fields </span>) </span>{
+    <span class="hljs-keyword">var</span> get_farr = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">fields</span>) </span>{
 
-    <span class="hljs-keyword">var</span> farr = ST.Utility.to_array( fields );
+        <span class="hljs-keyword">var</span> farr = ST.Utility.to_array(fields);
 
-    farr.sort( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">a, b</span>) </span>{
+        farr.sort(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">a, b</span>) </span>{
 
-        a = a.toLowerCase();
-        b = b.toLowerCase();
+            a = a.toLowerCase();
+            b = b.toLowerCase();
 
-        <span class="hljs-keyword">if</span>( a &lt; b ) {
-            <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
-        }
-        <span class="hljs-keyword">if</span>( a &gt; b ) {
-            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
-        }
+            <span class="hljs-keyword">if</span> (a &lt; b) {
+                <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+            }
+            <span class="hljs-keyword">if</span> (a &gt; b) {
+                <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+            }
 
-        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-    });
+            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+        });
 
-    <span class="hljs-built_in">console</span>.dir(farr);
-    <span class="hljs-keyword">return</span> farr;
-};
+        <span class="hljs-built_in">console</span>.dir(farr);
+        <span class="hljs-keyword">return</span> farr;
+    };
 
 
-<span class="hljs-keyword">var</span> render_compare_arguments = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> fields </span>) </span>{
+    <span class="hljs-keyword">var</span> render_compare_arguments = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">fields</span>) </span>{
 
-    <span class="hljs-keyword">var</span> options = <span class="hljs-string">"&lt;option value=''&gt;&lt;/option&gt;"</span>;
-    <span class="hljs-keyword">var</span> farr = get_farr( fields );
+        <span class="hljs-keyword">var</span> options = <span class="hljs-string">"&lt;option value=''&gt;&lt;/option&gt;"</span>;
+        <span class="hljs-keyword">var</span> farr = get_farr(fields);
 
-    <span class="hljs-keyword">for</span>( <span class="hljs-keyword">var</span> x=<span class="hljs-number">0</span>; x &lt; farr.length; x++ ) {
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> x = <span class="hljs-number">0</span>; x &lt; farr.length; x++) {
 
-        <span class="hljs-keyword">var</span> field = farr[x];
-        options += <span class="hljs-string">'&lt;option value="'</span> + field + <span class="hljs-string">'"&gt;'</span> + field + <span class="hljs-string">'&lt;/option&gt;'</span>;
-    }</pre></div></div>
+            <span class="hljs-keyword">var</span> field = farr[x];
+            options += <span class="hljs-string">'&lt;option value="'</span> + field + <span class="hljs-string">'"&gt;'</span> + field + <span class="hljs-string">'&lt;/option&gt;'</span>;
+        }</pre></div></div>
             
         </li>
         
@@ -583,58 +582,57 @@ This code demonstrates generating the column header automatically based on the c
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> ht = <span class="hljs-string">'&lt;select class="xaxis"&gt;'</span> + options + <span class="hljs-string">'&lt;/select&gt;'</span> +
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">var</span> ht = <span class="hljs-string">'&lt;select class="xaxis"&gt;'</span> + options + <span class="hljs-string">'&lt;/select&gt;'</span> +
             <span class="hljs-string">'&lt;select class="groupby"&gt;'</span> + options + <span class="hljs-string">'&lt;/select&gt;'</span> +
-        <span class="hljs-string">'&lt;div class="xaxis_label"&gt;Xaxis:&lt;/div&gt;'</span> +
-        <span class="hljs-string">'&lt;div class="groupby_label"&gt;Group By:&lt;/div&gt;'</span>;
+            <span class="hljs-string">'&lt;div class="xaxis_label"&gt;Xaxis:&lt;/div&gt;'</span> +
+            <span class="hljs-string">'&lt;div class="groupby_label"&gt;Group By:&lt;/div&gt;'</span>;
 
-    $(<span class="hljs-string">'.compare_arguments'</span>).html( ht );
+        $(<span class="hljs-string">'.compare_arguments'</span>).html(ht);
 
-    $(<span class="hljs-string">'.compare_arguments .xaxis, .compare_arguments .groupby'</span>).unbind(<span class="hljs-string">'change'</span>).bind(<span class="hljs-string">'change'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        $(<span class="hljs-string">'.compare_arguments .xaxis, .compare_arguments .groupby'</span>).unbind(<span class="hljs-string">'change'</span>).bind(<span class="hljs-string">'change'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
 
-        <span class="hljs-keyword">var</span> cla = $(<span class="hljs-keyword">this</span>).attr(<span class="hljs-string">'class'</span>);
-        <span class="hljs-keyword">var</span> val = $(<span class="hljs-keyword">this</span>).val();
-        val = val.replace(<span class="hljs-regexp">/#/</span>, <span class="hljs-string">''</span>);
+            <span class="hljs-keyword">var</span> cla = $(<span class="hljs-keyword">this</span>).attr(<span class="hljs-string">'class'</span>);
+            <span class="hljs-keyword">var</span> val = $(<span class="hljs-keyword">this</span>).val();
+            val = val.replace(<span class="hljs-regexp">/#/</span>, <span class="hljs-string">''</span>);
 
-        ST.UrlStateManager.update_url( cla, val );
-    });
+            ST.UrlStateManager.update_url(cla, val);
+        });
 
-    <span class="hljs-keyword">var</span> last_days = ST.Utility.get_param(ST.LAST_DAYS) || <span class="hljs-string">""</span>;
+        <span class="hljs-keyword">var</span> last_days = ST.Utility.get_param(ST.LAST_DAYS) || <span class="hljs-string">""</span>;
 
-    $(<span class="hljs-string">'.bottom_table'</span>).prepend(<span class="hljs-string">'&lt;div class="launcher"&gt;'</span> +
-        <span class="hljs-string">'&lt;div class="days_label"&gt;launchdate days ago: &lt;/div&gt;'</span> +
-        <span class="hljs-string">'&lt;input type="text" class="launchdate_days_ago" value="'</span> + last_days + <span class="hljs-string">'"/&gt;'</span> +
-        <span class="hljs-string">'&lt;div class="launch_button myButton"&gt;RELOAD&lt;/div&gt;'</span> +
-        <span class="hljs-string">'&lt;/div&gt;'</span>);
+        $(<span class="hljs-string">'.bottom_table'</span>).prepend(<span class="hljs-string">'&lt;div class="launcher"&gt;'</span> +
+            <span class="hljs-string">'&lt;div class="days_label"&gt;launchdate days ago: &lt;/div&gt;'</span> +
+            <span class="hljs-string">'&lt;input type="text" class="launchdate_days_ago" value="'</span> + last_days + <span class="hljs-string">'"/&gt;'</span> +
+            <span class="hljs-string">'&lt;div class="launch_button myButton"&gt;RELOAD&lt;/div&gt;'</span> +
+            <span class="hljs-string">'&lt;/div&gt;'</span>);
 
-    $(<span class="hljs-string">'.launch_button'</span>).unbind(<span class="hljs-string">'click'</span>).bind(<span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        $(<span class="hljs-string">'.launch_button'</span>).unbind(<span class="hljs-string">'click'</span>).bind(<span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
 
-        <span class="hljs-keyword">var</span> val = $(<span class="hljs-string">'.launchdate_days_ago'</span>).val();
-        ST.UrlStateManager.update_url(<span class="hljs-string">"launchdate_days_ago"</span>, val);
-        location.reload();
-    });
+            <span class="hljs-keyword">var</span> val = $(<span class="hljs-string">'.launchdate_days_ago'</span>).val();
+            ST.UrlStateManager.update_url(<span class="hljs-string">"launchdate_days_ago"</span>, val);
+            location.reload();
+        });
 
-    load_compare();
-};
-
-
-
-<span class="hljs-keyword">var</span> load_compare = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
-
-    <span class="hljs-keyword">var</span> xaxis = ST.Utility.get_param(<span class="hljs-string">'xaxis'</span>, <span class="hljs-literal">true</span>);
-    <span class="hljs-keyword">var</span> groupby = ST.Utility.get_param(<span class="hljs-string">'groupby'</span>, <span class="hljs-literal">true</span>);
-
-    <span class="hljs-keyword">if</span>( xaxis !== <span class="hljs-string">'undefined'</span>) {
-        $(<span class="hljs-string">'.compare_arguments .xaxis'</span>).val(xaxis);
-    }
-
-    <span class="hljs-keyword">if</span>( groupby !== <span class="hljs-string">'undefined'</span>) {
-        $(<span class="hljs-string">'.compare_arguments .groupby'</span>).val(groupby);
-    }
-};
+        load_compare();
+    };
 
 
-<span class="hljs-keyword">var</span> bind_sort = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{</pre></div></div>
+    <span class="hljs-keyword">var</span> load_compare = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+
+        <span class="hljs-keyword">var</span> xaxis = ST.Utility.get_param(<span class="hljs-string">'xaxis'</span>, <span class="hljs-literal">true</span>);
+        <span class="hljs-keyword">var</span> groupby = ST.Utility.get_param(<span class="hljs-string">'groupby'</span>, <span class="hljs-literal">true</span>);
+
+        <span class="hljs-keyword">if</span> (xaxis !== <span class="hljs-string">'undefined'</span>) {
+            $(<span class="hljs-string">'.compare_arguments .xaxis'</span>).val(xaxis);
+        }
+
+        <span class="hljs-keyword">if</span> (groupby !== <span class="hljs-string">'undefined'</span>) {
+            $(<span class="hljs-string">'.compare_arguments .groupby'</span>).val(groupby);
+        }
+    };
+
+
+    <span class="hljs-keyword">var</span> bind_sort = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{</pre></div></div>
             
         </li>
         
@@ -650,75 +648,81 @@ This code demonstrates generating the column header automatically based on the c
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> normalize_indexes_ = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> obj </span>) </span>{
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">var</span> normalize_indexes_ = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">obj</span>) </span>{
 
-        <span class="hljs-keyword">var</span> nobj = {};
+            <span class="hljs-keyword">var</span> nobj = {};
 
-        <span class="hljs-keyword">for</span>( <span class="hljs-keyword">var</span> x <span class="hljs-keyword">in</span> obj ) {
-            <span class="hljs-keyword">var</span> lower = x.toLowerCase();
-            nobj[lower] = obj[x];
-        }
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> x <span class="hljs-keyword">in</span> obj) {
+                <span class="hljs-keyword">var</span> lower = x.toLowerCase();
+                nobj[lower] = obj[x];
+            }
 
-        <span class="hljs-keyword">return</span> nobj;
+            <span class="hljs-keyword">return</span> nobj;
+        };
+
+
+        $(<span class="hljs-string">'.dc-data-table th'</span>).ArrowFunctions({
+            <span class="hljs-attr">arrow_click</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sort_me</span>(<span class="hljs-params"></span>) </span>{
+
+                <span class="hljs-keyword">var</span> target = $(event.target);
+                <span class="hljs-keyword">var</span> is_up = target.hasClass(<span class="hljs-string">'up_arrow'</span>);
+                <span class="hljs-keyword">var</span> what_sort = target.parent().html();
+
+                what_sort = what_sort.split(<span class="hljs-string">'&lt;'</span>)[<span class="hljs-number">0</span>].toLowerCase();
+
+                <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"now sort by: "</span> + what_sort);
+                runTable.sortBy(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{
+
+                    <span class="hljs-keyword">var</span> nobj = normalize_indexes_(d);
+
+                    <span class="hljs-keyword">var</span> col = <span class="hljs-string">"Region Balance"</span>;
+                    <span class="hljs-keyword">return</span> nobj[what_sort]; <span class="hljs-comment">// d.date;</span>
+                })
+                    .order(is_up ? d3.ascending : d3.descending);
+
+                dc.renderAll();
+                dc.redrawAll();
+
+                bind_sort();
+            }
+        });
     };
 
 
-    $(<span class="hljs-string">'.dc-data-table th'</span>).ArrowFunctions({
-        <span class="hljs-attr">arrow_click</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sort_me</span>(<span class="hljs-params"></span>) </span>{
+    $.fn.ArrowFunctions = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">obj</span>) </span>{
 
-            <span class="hljs-keyword">var</span> target = $(event.target);
-            <span class="hljs-keyword">var</span> is_up = target.hasClass(<span class="hljs-string">'up_arrow'</span>);
-            <span class="hljs-keyword">var</span> what_sort = target.parent().html();
+        <span class="hljs-keyword">var</span> arrows = <span class="hljs-string">"&lt;div class='up_arrow'&gt;&lt;/div&gt;"</span> +
+            <span class="hljs-string">"&lt;div class='down_arrow'&gt;&lt;/div&gt;"</span>;
 
-            what_sort = what_sort.split(<span class="hljs-string">'&lt;'</span>)[<span class="hljs-number">0</span>].toLowerCase();
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.each(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
 
-            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"now sort by: "</span> + what_sort);
-            runTable.sortBy( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">d</span>) </span>{
+            $(<span class="hljs-keyword">this</span>).append(arrows);
+            $(<span class="hljs-keyword">this</span>).find(<span class="hljs-string">'.up_arrow, .down_arrow'</span>).unbind(<span class="hljs-string">'click'</span>).bind(<span class="hljs-string">'click'</span>, obj.arrow_click);
+        });
+    };
 
-                <span class="hljs-keyword">var</span> nobj = normalize_indexes_(d);
 
-                <span class="hljs-keyword">var</span> col = <span class="hljs-string">"Region Balance"</span>;
-                <span class="hljs-keyword">return</span> nobj[what_sort]; <span class="hljs-comment">// d.date;</span>
-            })
-                .order( is_up ? d3.ascending : d3.descending );
+    $(<span class="hljs-built_in">document</span>).ready(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
 
-            dc.renderAll();
-            dc.redrawAll();
+        <span class="hljs-keyword">var</span> file = ST.Utility.get_file();
+        ST.Utility.init_params();
 
-            bind_sort();
-        }
+        help_icon_(file, ST.params);
+
+        <span class="hljs-keyword">var</span> layout = ST.params.layout ? <span class="hljs-string">' --layout='</span> + ST.params.layout : <span class="hljs-string">""</span>;
+
+        ST.CallSpot.ajax({
+            <span class="hljs-attr">file</span>: file,
+            <span class="hljs-attr">type</span>: <span class="hljs-string">'summary'</span>,
+            <span class="hljs-attr">layout</span>: layout
+        });
     });
-};
 
-
-$.fn.ArrowFunctions = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> obj </span>) </span>{
-
-    <span class="hljs-keyword">var</span> arrows = <span class="hljs-string">"&lt;div class='up_arrow'&gt;&lt;/div&gt;"</span> +
-        <span class="hljs-string">"&lt;div class='down_arrow'&gt;&lt;/div&gt;"</span>;
-
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.each( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
-
-        $(<span class="hljs-keyword">this</span>).append(arrows);
-        $(<span class="hljs-keyword">this</span>).find(<span class="hljs-string">'.up_arrow, .down_arrow'</span>).unbind(<span class="hljs-string">'click'</span>).bind(<span class="hljs-string">'click'</span>, obj.arrow_click );
-    });
-};
-
-
-$(<span class="hljs-built_in">document</span>).ready( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
-
-    <span class="hljs-keyword">var</span> file = ST.Utility.get_file();
-    ST.Utility.init_params();
-
-    help_icon_(file, ST.params );
-
-    <span class="hljs-keyword">var</span> layout = ST.params.layout ? <span class="hljs-string">' --layout='</span> + ST.params.layout : <span class="hljs-string">""</span>;
-
-    ST.CallSpot.ajax({
-        <span class="hljs-attr">file</span>: file,
-        <span class="hljs-attr">type</span>: <span class="hljs-string">'summary'</span>,
-        <span class="hljs-attr">layout</span>: layout
-    });
-});</pre></div></div>
+    <span class="hljs-keyword">return</span> {
+        <span class="hljs-attr">RenderChartCollection</span>: RenderChartCollection,
+        <span class="hljs-attr">bind_sort</span>: bind_sort
+    }
+}();</pre></div></div>
             
         </li>
         

@@ -85,7 +85,7 @@ ST.LeftHorizontalBarChart = function() {
             horizontalStackedChart_.filterAll();
 
             dc.redrawAll();
-            bind_sort();
+            ST.ChartCollection.bind_sort();
         },
         load_filter: function() {
 
