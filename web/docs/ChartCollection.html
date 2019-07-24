@@ -517,27 +517,7 @@ This code demonstrates generating the column header automatically based on the c
 
         dc.redrawAll();
 
-
-        <span class="hljs-comment">/*for (var z in layout_spec.table) {
-
-            var tab = layout_spec.table[z];
-            show_column_(z, tab.show);
-        }*/</span>
-
         bind_sort();
-    };
-
-
-    <span class="hljs-keyword">var</span> show_column_ = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">index, show</span>) </span>{
-
-        <span class="hljs-keyword">var</span> nth = <span class="hljs-built_in">parseInt</span>(index) + <span class="hljs-number">1</span>;
-        <span class="hljs-keyword">var</span> column = $(<span class="hljs-string">'th:nth-child('</span> + nth + <span class="hljs-string">'), ._'</span> + index);
-
-        <span class="hljs-keyword">if</span> (!show) {
-            column.hide();
-        } <span class="hljs-keyword">else</span> {
-            column.show();
-        }
     };
 
 
@@ -606,7 +586,7 @@ This code demonstrates generating the column header automatically based on the c
 
         <span class="hljs-keyword">var</span> last_days = ST.Utility.get_param(ST.LAST_DAYS) || <span class="hljs-string">""</span>;
 
-        $(<span class="hljs-string">'.bottom_table'</span>).prepend(<span class="hljs-string">'&lt;div class="launcher"&gt;'</span> +
+        $(<span class="hljs-string">'.launch_container'</span>).html(<span class="hljs-string">'&lt;div class="launcher"&gt;'</span> +
             <span class="hljs-string">'&lt;div class="days_label"&gt;launchdate days ago: &lt;/div&gt;'</span> +
             <span class="hljs-string">'&lt;input type="text" class="launchdate_days_ago" value="'</span> + last_days + <span class="hljs-string">'"/&gt;'</span> +
             <span class="hljs-string">'&lt;div class="launch_button myButton"&gt;RELOAD&lt;/div&gt;'</span> +

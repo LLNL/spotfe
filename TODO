@@ -17,6 +17,7 @@ DONE - spot2 redirect or deploy there and level it up 1 step from web/
 RECENTLY DONE:
 DONE - alphabetize the drop down.
 DONE - Table HTML -> for the pieCharts and barCharts - maintain left/right position.
+DONE - dynamic table row show/hide fix.
 
 
 List of Joe's working on:
@@ -27,10 +28,6 @@ List of Joe's working on:
 
 
 Next:
-- dynamic table row show/hide fix.
-    * Also, make sure that sorting still works
-    * make sure that random columns don't keep showing up as we play with the filters.
-    * then again call show/hide whenever some chart/column gets checked/unchecked.
 - if sf file is not there then spit out an error.
 - for now an input box.  "Please provide a directory that contains dot cali files."
 - Naming of Barchat => dimension ("Iteration")
@@ -39,7 +36,9 @@ Next:
 - RightMost BIN is cut in half for some reason.
 - File Upload browser on landing Page.
 - Apply xUnits to sub-integer charts.
+    * this should fix the not being able to save bucketed charts.
 - xTics astethetics, don't show 1.2,1.4 in the 1,2,3 data
+- Reload button is partially covered (can't click bottom of it)
 - Nulls
 - STrings plus more than 12 unique values then we need to have a left horizontal bar.
 

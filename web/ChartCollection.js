@@ -240,27 +240,7 @@ ST.ChartCollection = function() {
 
         dc.redrawAll();
 
-
-        /*for (var z in layout_spec.table) {
-
-            var tab = layout_spec.table[z];
-            show_column_(z, tab.show);
-        }*/
-
         bind_sort();
-    };
-
-
-    var show_column_ = function (index, show) {
-
-        var nth = parseInt(index) + 1;
-        var column = $('th:nth-child(' + nth + '), ._' + index);
-
-        if (!show) {
-            column.hide();
-        } else {
-            column.show();
-        }
     };
 
 
@@ -317,7 +297,7 @@ ST.ChartCollection = function() {
 
         var last_days = ST.Utility.get_param(ST.LAST_DAYS) || "";
 
-        $('.bottom_table').prepend('<div class="launcher">' +
+        $('.launch_container').html('<div class="launcher">' +
             '<div class="days_label">launchdate days ago: </div>' +
             '<input type="text" class="launchdate_days_ago" value="' + last_days + '"/>' +
             '<div class="launch_button myButton">RELOAD</div>' +
