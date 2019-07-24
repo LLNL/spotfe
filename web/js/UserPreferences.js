@@ -1,8 +1,36 @@
 ST.UserPreferences = function() {
 
+    var update_layout_ = function( chart_dimension, checked ) {
+
+        chart_dimension = chart_dimension.toLowerCase();
+
+        var charts = ST.layout_used.charts;
+        var tables = ST.layout_used.table;
+
+        for( var x=0; x < charts.length; x++ ) {
+
+            var chart = charts[x];
+
+            if( chart.dimension.toLowerCase() === chart_dimension ) {
+                chart.show = checked;
+            }
+        }
+
+        for( var y=0; y < tables.length; y++ ) {
+
+            var table = tables[y];
+
+            if( table.dimension.toLowerCase() === chart_dimension ) {
+                table.show = checked;
+            }
+        }
+    };
+
+
     var render_ = function() {
 
-        var charts = ST.LayoutAugmenterModel.get_model();
+        var lay = $.extend( true, {}, ST.layout_used );
+        var charts = ST.layout_used.charts; // ST.LayoutAugmenterModel.get_model();
 
         charts.sort( function( a, b ) {
 
@@ -10,6 +38,12 @@ ST.UserPreferences = function() {
             if(a.dimension > b.dimension) { return 1; }
             return 0;
         });
+
+        console.dir( charts );
+        if( $('.user_pref_icon').length > 0 ) {
+            //  Means it's already rendered and thus should auto update.
+            return true;
+        }
 
         Vue.component('user-preferences', {
             data: function() {
@@ -32,9 +66,14 @@ ST.UserPreferences = function() {
                 check: function( chart_dimension, val ) {
 
                     var checked = val.target.checked;
-                    var dome = checked ? "show" : "hide";
 
-                    $('[chart-dimension="' + chart_dimension.toLowerCase() + '"]')[dome]();
+                    update_layout_( chart_dimension, checked );
+
+                    //  Need to reload the whole page otherwise there's no way to dynamically remove columns from table.
+                    ST.ChartCollection.RenderChartCollection(ST.newp, ST.layout_used);
+
+                    //var dome = checked ? "show" : "hide";
+                    //$('[chart-dimension="' + chart_dimension.toLowerCase() + '"]')[dome]();
 
                     var hide = checked ? " " : " --hide ";
                     var begin = ST.CallSpot.get_command_begin();

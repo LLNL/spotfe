@@ -35,7 +35,6 @@ ST.BarChart = function() {
 
     var render_ = function( ndx, options ) {
 
-        console.log( 'show='+ options.show );
         //  STUB
         options.buckets = typeof options.buckets === "string" ? eval(options.buckets) : options.buckets;
 
@@ -70,8 +69,6 @@ ST.BarChart = function() {
 
             return ret;
         });
-
-        console.dir(counts);
 
         if( ST.cali_valid === false ) {
             //  Error on screen.

@@ -60,6 +60,7 @@ ST.ChartCollection = function() {
         //  ST.MakeNiceData.make( the_data );
         //          options.buckets = ['0-0.3', '0.3-0.6', '0.6-10', '10-15', '15-20'];
 
+        $('.chart_container').html("");
 
         //  ST.ReturnedDataStub.data
         var ndx = crossfilter(the_data);
@@ -84,22 +85,23 @@ ST.ChartCollection = function() {
         }
 
         var layout_charts = layout_spec.charts;
-        var original_lc = $.extend(true, {}, layout_charts);
+        var original_lc = layout_charts; // $.extend(true, {}, layout_charts);
 
         console.dir(original_lc);
 
         ST.LayoutAugmenterModel.get(layout_charts, the_data);
-        ST.UserPreferences.render(original_lc);
+        ST.UserPreferences.render();
 
         for (var dimension in layout_charts) {
 
             var spec = layout_charts[dimension];
             var viz = spec.viz;
-            var orig = original_lc[dimension];
 
             if (ST[viz] && ST[viz].render) {
 
-                ST[viz].render(ndx, spec);
+                if( spec.show ) {
+                    ST[viz].render(ndx, spec);
+                }
             } else {
                 console.log('Sorry.  Viz type viz=' + viz + ' is not supported.');
             }
@@ -152,18 +154,21 @@ ST.ChartCollection = function() {
 
             var tab = layout_spec.table[z];
 
-            if (tab.type === "date") {
+            if( tab.show ) {
 
-                columns.push({
-                    label: tab.label,
-                    format: function (d) {
-                        return ST.Utility.format_date(d.launchdate);
-                    }
-                });
+                if (tab.type === "date") {
 
-            } else {
+                    columns.push({
+                        label: tab.label,
+                        format: function (d) {
+                            return ST.Utility.format_date(d.launchdate);
+                        }
+                    });
 
-                columns.push(tab.dimension);
+                } else {
+
+                    columns.push(tab.dimension);
+                }
             }
         }
 
@@ -236,11 +241,11 @@ ST.ChartCollection = function() {
         dc.redrawAll();
 
 
-        for (var z in layout_spec.table) {
+        /*for (var z in layout_spec.table) {
 
             var tab = layout_spec.table[z];
             show_column_(z, tab.show);
-        }
+        }*/
 
         bind_sort();
     };
@@ -278,7 +283,6 @@ ST.ChartCollection = function() {
             return 0;
         });
 
-        console.dir(farr);
         return farr;
     };
 
