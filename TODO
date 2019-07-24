@@ -38,7 +38,6 @@ Next:
 - Apply xUnits to sub-integer charts.
     * this should fix the not being able to save bucketed charts.
 - xTics astethetics, don't show 1.2,1.4 in the 1,2,3 data
-- Reload button is partially covered (can't click bottom of it)
 - Nulls
 - STrings plus more than 12 unique values then we need to have a left horizontal bar.
 
