@@ -210,32 +210,6 @@ ST.BarChart = function() {
     };
 
 
-    var get_yrange_ = function( counts ) {
-
-        var min = 10000000;
-        var max = 0;
-
-        for( var z in counts ) {
-
-            var cc = counts[z];
-
-            if( cc > max ) {
-                max = cc;
-            }
-
-            if( cc < min ) {
-                min = cc;
-            }
-        }
-
-        var pad = (max - min) * 0.1;
-        var minp = min - pad;
-        minp = minp < 0 ? 0 : minp;
-
-        return [minp, max];
-    };
-
-
     String.prototype.hashCode = function() {
 
         var hash = 0, i, chr;
@@ -306,7 +280,31 @@ ST.BarChart = function() {
         return v2 / 10;
     };
 
+    var get_yrange_ = function( counts ) {
 
+        var min = 10000000;
+        var max = 0;
+
+        for( var z in counts ) {
+
+            var cc = counts[z];
+
+            if( cc > max ) {
+                max = cc;
+            }
+
+            if( cc < min ) {
+                min = cc;
+            }
+        }
+
+        var pad = (max - min) * 0.1;
+        var minp = min - pad;
+        minp = minp < 0 ? 0 : minp;
+
+        return [minp, max];
+    };
+    
     return {
         render: render_,
         reset: function(that) {

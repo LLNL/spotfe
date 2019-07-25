@@ -1,12 +1,19 @@
 var help_icon_ = function( file, params ) {
 
-    var urls = [
+    var old_urls = [
         "https://rzlc.llnl.gov/spot/dcvis/web/?sf=/usr/gapps/spot/datasets/jit_data&layout=/usr/gapps/spot/datasets/jit.json",
         "https://lc.llnl.gov/spot/dcvis/web/?sf=/usr/global/web-pages/lc/www/spot/lulesh2small",
         //Asperational: https://lc.llnl.gov/spot/dcvis/web/?sf=/usr/global/web-pages/lc/www/spot/lulesh2small&machine=oslic&command=/usr/tce/bin/python3%20/usr/global/web-pages/lc/www/spot/spot.py&get_rundata_url=https://lc.llnl.gov/lorenz/lora/lora.cgi/command/oslic",
         "https://lc.llnl.gov/spot/dcvis/web/?sf=/usr/gapps/spot/datasets/lulesh2small&layout=/usr/gapps/spot/datasets/enhanced_layout.json",
         "https://lc.llnl.gov/spot/dcvis/web/?sf=/usr/gapps/spot/datasets/lulesh2small&layout=/usr/gapps/spot/datasets/enhanced_layout_label.json",
         "https://lc.llnl.gov/spot/dcvis/web/?sf=/usr/gapps/spot/datasets/lulesh2small&layout=/usr/gapps/spot/datasets/enhanced_layout.json&" + ST.LAST_DAYS + "=70&exe_compare=1"
+    ];
+
+    var urls = [
+        "https://lc.llnl.gov/spot/dcvis/",
+        "https://rzlc.llnl.gov/spot/dcvis/",
+        "https://lc.llnl.gov/spot2/",
+        "https://rzlc.llnl.gov/spot2/",
     ];
 
     var working_html = "";
@@ -46,7 +53,7 @@ var help_icon_ = function( file, params ) {
         <br>You can specify the <b>command</b> with command= in the url bar.\
         \
         <br><a href="../web/doc.html" target="_blank">more...</a> \
-        <div>Some Working Urls</div>' +
+        <div>Urls:</div>' +
         working_html + '</div> ' +
         '</div>',
         methods: {
