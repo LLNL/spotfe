@@ -67,9 +67,14 @@ ST.Utility = function() {
     var get_file_ = function() {
 
         var file = ST.Utility.get_param('sf');
-        var default_file = "/usr/gapps/spot/datasets/lulesh2small"; // "/usr/gapps/wf/web/spot/data/lulesh_maximal";
+        //var default_file = "/usr/gapps/spot/datasets/lulesh2small"; // "/usr/gapps/wf/web/spot/data/lulesh_maximal";
 
-        return file || default_file;
+        if( !file ) {
+            var url = location.host + "/?sf=/g/g0/myname/mycalifiles/";
+            error_("Please provide a directory that contains dot cali files.  You can specify this in the URL like so: <br>" + url);
+        }
+
+        return file;
     };
 
 

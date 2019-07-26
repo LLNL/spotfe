@@ -304,7 +304,7 @@ ST.BarChart = function() {
 
         return [minp, max];
     };
-    
+
     return {
         render: render_,
         reset: function(that) {

@@ -26,6 +26,7 @@ List of Joe's working on:
 - Jupyter call not returning stuff
 - Durations call not returning stuff
 - Getting the following to not crash: RZ ONLY: ~/testresults
+- Figure out why the Summary JSONP call is taking 8 seconds to respond.
 
 
 Next:
