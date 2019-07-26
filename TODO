@@ -19,6 +19,7 @@ DONE - alphabetize the drop down.
 DONE - Table HTML -> for the pieCharts and barCharts - maintain left/right position.
 DONE - dynamic table row show/hide fix.
 DONE - Added Dev and Prod URLs to documentation url list, to make it easier to remember the URLs.
+DONE - if sf file is not there then spit out an error.
 
 
 List of Joe's working on:
@@ -30,7 +31,6 @@ List of Joe's working on:
 
 
 Next:
-- if sf file is not there then spit out an error.
 - for now an input box.  "Please provide a directory that contains dot cali files."
 - Naming of Barchat => dimension ("Iteration")
     * don't mess up the URLs (dont use BarChart0, BarChart1, etc)
@@ -42,31 +42,8 @@ Next:
 - xTics astethetics, don't show 1.2,1.4 in the 1,2,3 data
 - Nulls
 - STrings plus more than 12 unique values then we need to have a left horizontal bar.
+- On the Spot1 page, be able to change the xAxis and GroupBy URLs based on the select drop down change.
 
-
-
-HIGHEST TODO:
-TEST: 1. On Date Type show date instead of 1e9
-3. From UserPreferences Module -> make table change right away.
-    * Load all columns, then hide the ones not checked: $('._4').hide()/ .show()
-    * when the person checks a checkbox or uncheckboxes it.
-0. Fix Iterations -> xUnit()  -> set # of buckets.
-2. Ideally set the bar width
-    * Next best option is to get the Bar Off the Y Axis, by having the range be +/- 5%
-3.5 Be able to have a date type to show date (month/year) if layout says it's a date.
-3.6 X-tics take a look if it's just integers?
-=================================================================================
-4. Naming of Barchat => dimension ("Iteration")
-    * don't mess up the URLs (dont use BarChart0, BarChart1, etc)
-5. Redirect from /spot2 to our deployment area.
-    * https://lc.llnl.gov/content/
-    * spot2 -> I already made the content directory request.
-6. File upload browser on landing page.
-7. Make tic marks at the beginning of the barChart.
-9. On the Spot1 page, be able to change the xAxis and GroupBy URLs based on the select drop down change.
-10. Currently NO support for SubInteger URL -> because it uses bucketing.
-    * this means you can't run the dashboard if that's being used
-11. Some day do NULL.
 
 
 https://stackoverflow.com/questions/15191258/properly-display-bin-width-in-barchart-using-dc-js-and-crossfilter-js

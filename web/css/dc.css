@@ -307,6 +307,16 @@ body .dc-chart g.row text {
 .inner_container {
   display: inline-block;
   width: 1480px; }
+  .inner_container .instructions {
+    color: #888888; }
+  .inner_container .directory {
+    padding: 7px;
+    width: 400px;
+    color: #555555; }
+  .inner_container .update_button {
+    position: relative;
+    top: -5px;
+    left: 6px; }
 
 #runtime-chart strong {
   display: block; }
@@ -323,8 +333,8 @@ body .dc-chart g.row text {
   border: 1px solid red;
   padding: 15px;
   font-size: 16px;
-  line-height: 1.5;
-  background-color: #ffdddd; }
+  line-height: 1.6;
+  background-color: #ffeeee; }
 
 .container {
   /* make room for rotated labels. */
