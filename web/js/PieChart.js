@@ -81,6 +81,7 @@ ST.PieChart = function() {
             dc.redrawAll();
 
             ST.ChartCollection.bind_sort();
+            ST.UrlStateManager.remove_param( 'PieChart' + instance_num );
         },
         load_filter: function() {
 

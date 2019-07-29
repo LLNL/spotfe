@@ -8,6 +8,7 @@ ST.UrlStateManager = function() {
         var instance_num = +aname.replace(/\D/g, '');
         var range = filters[0];
         var param = type + instance_num;
+        var dimension = $('#' + aname).attr('chart-dimension').toLowerCase();
 
         //console.log(instance_num);
 
@@ -28,7 +29,7 @@ ST.UrlStateManager = function() {
                 paramValue = range[0] + ',' + range[1];
             }
 
-            update_url_( param, paramValue );
+            update_url_( type + "_" + dimension, paramValue );
         }
     };
 
@@ -117,6 +118,10 @@ ST.UrlStateManager = function() {
         }
 
         ST.CallSpot.bind();
+    };
+
+    var load_one_filter_ = function() {
+
     };
 
 
