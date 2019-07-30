@@ -321,10 +321,7 @@ ST.CallSpot = function() {
             var xaxis = $('.compare_arguments .xaxis').val();
             var groupby = $('.compare_arguments .groupby').val();
 
-            //localStorage.setItem('xaxis', xaxis);
-            //localStorage.setItem('groupby', groupby);
             localStorage.setItem('calis', keys);
-            //localStorage.setItem('location.href', location.href);
 
             var directory = ST.Utility.get_file();
             var command = ST.Utility.get_param('command');
