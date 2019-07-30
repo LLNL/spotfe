@@ -8,7 +8,7 @@ ST.UrlStateManager = function() {
         var instance_num = +aname.replace(/\D/g, '');
         var range = filters[0];
         var param = type + instance_num;
-        var dimension = $('#' + aname).attr('chart-dimension').toLowerCase();
+        var dimension = $(aname).attr('chart-dimension').toLowerCase();
 
         //console.log(instance_num);
 
@@ -20,16 +20,20 @@ ST.UrlStateManager = function() {
             if (type === 'PieChart') {
 
                 for (var x = 0; x < filters.length; x++) {
-                    paramValue += "," + filters[x];
+                    paramValue += "," + encodeURIComponent(filters[x]);
                 }
 
                 paramValue = paramValue.substr(1);
 
             } else {
-                paramValue = range[0] + ',' + range[1];
+                paramValue = encodeURIComponent(range[0]) + ',' + encodeURIComponent(range[1]);
             }
 
-            update_url_( type + "_" + dimension, paramValue );
+            update_url_( dimension, paramValue );
+        } else {
+
+            //  This means they unclicked all the filters for that one.
+            remove_param_( dimension );
         }
     };
 
@@ -96,23 +100,33 @@ ST.UrlStateManager = function() {
     //  Happens on page load, when we need to load the filters present in the URL bar.
     var load_filter_ = function( inst_, type ) {
 
-        for( var z=0; z < 10; z++ ) {
+        for( var dimension in inst_ ) {
 
-            var params = ST.Utility.get_param( type + z );
+            var inst = inst_[dimension];
+            var params = ST.Utility.get_param(dimension);
 
             if( params ) {
 
+                console.log(params);
                 var sp = params.split(',');
 
                 if( type === "PieChart" ) {
 
                     console.dir(sp);
                     for( var y=0; y < sp.length; y++ ) {
-                        inst_[z].filter(sp[y]);
+
+                        var comp = decodeURIComponent(sp[y]);
+                        inst.filter(comp);
                     }
 
                 } else {
-                    inst_[z].filter(dc.filters.RangedFilter(sp[0], sp[1]));
+
+                    var part0 = decodeURIComponent(sp[0]);
+                    var part1 = decodeURIComponent(sp[1]);
+
+                    var rfilter = dc.filters.RangedFilter( part0, part1);
+
+                    inst.filter(rfilter);
                 }
             }
         }
@@ -120,27 +134,18 @@ ST.UrlStateManager = function() {
         ST.CallSpot.bind();
     };
 
-    var load_one_filter_ = function() {
-
-    };
 
 
     var get_chart_pars_ = function() {
 
         var pars = "";
 
+        var charts = ST.layout_used.charts;
+
         //  Happens on page load, when we need to load the filters present in the URL bar.
-        for( var z=0; z < 10; z++ ) {
+        for( var z=0; z < charts.length; z++ ) {
 
-            var tag = "PieChart" + z;
-            var par = ST.Utility.get_param(tag);
-
-            if( par ) {
-                pars += '&' + tag + '=' + par;
-            }
-
-
-            var tag = "BarChart" + z;
+            var tag = charts[z].dimension.toLowerCase();
             var par = ST.Utility.get_param(tag);
 
             if( par ) {

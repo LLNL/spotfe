@@ -3,7 +3,6 @@ var ST = ST || {};
 ST.PieChart = function() {
 
     var quarterChart = [];
-    var id_ = 0;
 
     var render_ = function( ndx, spec ) {
 
@@ -11,12 +10,12 @@ ST.PieChart = function() {
         var height = spec.height || 180;
         var radius = spec.radius || 80;
         var inner_radius = spec.inner_radius || 0;
-        var dl = spec.dimension.toLowerCase();
+        var dimension_low = spec.dimension.toLowerCase();
 
         var style = spec.show ? "display: block;" : "display: none;";
 
-        var rcht =     '<div instance_num="' + id_ + '"  ' +
-            'style="' + style + '" id="quarter-chart' + id_ + '"  chart-dimension="' + dl + '">  \
+        var rcht =     '<div instance_num="' + dimension_low + '"  ' +
+            'style="' + style + '" class="quarter-chart-' + dimension_low + '"  chart-dimension="' + dimension_low + '">  \
         <strong>' + spec.title + '</strong> \
         <a class="reset pie_reset"  style="display: none;">reset</a> \
         <div class="clearfix"></div> \
@@ -44,8 +43,8 @@ ST.PieChart = function() {
 
         var colors = ST.Utility.get_colors( spec.dimension, true );
 
-        quarterChart[id_] = dc.pieChart('#quarter-chart' + id_ );
-        quarterChart[id_] /* dc.pieChart('#quarter-chart', 'chartGroup') */
+        quarterChart[dimension_low] = dc.pieChart('.quarter-chart-' + dimension_low );
+        quarterChart[dimension_low] /* dc.pieChart('#quarter-chart', 'chartGroup') */
             .width( width )
             .height(height )
             .radius( radius )
@@ -68,8 +67,9 @@ ST.PieChart = function() {
                 '#dd2277'
             ]);
 
+        //quarterChart[dl].dimension = spec.dimension;
+
         $('.pie_reset').unbind('click').bind('click', ST.PieChart.reset);
-        id_++;
     };
 
     return {

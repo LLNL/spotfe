@@ -40,7 +40,6 @@ Next:
 - Nulls
 - STrings plus more than 12 unique values then we need to have a left horizontal bar.
 - On the Spot1 page, be able to change the xAxis and GroupBy URLs based on the select drop down change.
-- BUG: Unclicking the last pieChart.
 
 
 https://stackoverflow.com/questions/15191258/properly-display-bin-width-in-barchart-using-dc-js-and-crossfilter-js

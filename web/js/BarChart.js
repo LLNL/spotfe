@@ -4,8 +4,8 @@ ST.NUM_BINS = 20;
 
 ST.BarChart = function() {
 
-    var inst_ = [],
-        inst_num_ = 0;
+    var inst_ = [];
+        //inst_num_ = 0;
 
     var upper_ = function( lower ) {
         return lower.charAt(0).toUpperCase() + lower.substr(1);
@@ -100,8 +100,9 @@ ST.BarChart = function() {
         var ylabel = options["y-label"] || "";
 
         var style = options.show ? "display: block;" : "display: none;";
+        var dimension_low = dimension.toLowerCase();
 
-        var rcht = '<div class="runtime-chart' + inst_num_ + '" style="' + style + '" chart-dimension="' + dimension.toLowerCase() + '"> \
+        var rcht = '<div class="runtime-chart' + dimension_low + '" style="' + style + '" chart-dimension="' + dimension_low + '"> \
             <div class="top_left"> \
                 <strong>' + upper_( options.title || dimension) + '</strong> \
                 <a class="reset" onclick="ST.BarChart.reset(this);" style="display: none;">reset</a>\
@@ -113,10 +114,10 @@ ST.BarChart = function() {
         $('.row:eq(0)').append(rcht);
 
 
-        inst_[inst_num_] = dc.barChart('.runtime-chart' + inst_num_ );
+        inst_[dimension_low] = dc.barChart('.runtime-chart' + dimension_low );
 
-        var one_i = inst_[inst_num_];
-        $('.runtime-chart' + inst_num_).attr('instance_num', inst_num_);
+        var one_i = inst_[dimension_low];
+        $('.runtime-chart' + dimension_low).attr('instance_num', dimension_low);
 
 
 
@@ -172,6 +173,8 @@ ST.BarChart = function() {
             }); //.gap(5);
         }
 
+        //one_i.dimension = options.dimension;
+
 
         //  if we're going to calculate the yrange correctly it's going to get tough.
         //  https://github.com/dc-js/dc.js/issues/667
@@ -206,7 +209,7 @@ ST.BarChart = function() {
 
         one_i.yAxis().ticks( options["y-ticks"] || 5);
 
-        inst_num_++;
+        //inst_num_++;
     };
 
 
