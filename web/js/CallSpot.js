@@ -136,7 +136,7 @@ ST.CallSpot = function() {
                     valid_obj[DATE_KEY] = valid_obj[DATE_KEY] || made_up;
 
                     if( USE_TINY_STUB ) {
-                        valid_obj['Tiny Nums'] = 2.7023 + (Math.random() / 10);
+                        valid_obj['tiny_nums'] = 52.7023 + (Math.random() * 0.3);
                     }
 
                     //  Generate a random date for now.
@@ -195,9 +195,15 @@ ST.CallSpot = function() {
 
             if( USE_TINY_STUB ) {
                 ST.layout_used.charts.push({
-                    dimension: "Tiny Nums",
+                    dimension: "tiny_nums",
                     title: "Tiny Nums",
-                    viz: "BarChart"
+                    viz: "BarChart",
+                    show: true
+                });
+
+                ST.layout_used.table.push({
+                    dimension: "tiny_nums",
+                    title: "tiny_nums"
                 });
             }
 

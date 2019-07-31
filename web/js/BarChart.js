@@ -62,7 +62,7 @@ ST.BarChart = function() {
             if( use_buckets ) {
                 ret = get_bucket_( options.buckets, dim );
             } else {
-                ret = Math.round(dim);
+                ret = options.has_decimal ? dim : Math.round(dim);
             }
 
             counts[ ret ] = counts[ ret ] || 0;
@@ -94,7 +94,11 @@ ST.BarChart = function() {
 
                 var bw = Math.floor(d / binWidth);
                 var mbw = bw * binWidth;
-                console.log(d, bw, mbw);
+
+                if( options.dimension === "tiny_nums") {
+                    console.log("d="+d + "   bw="+ bw + "   mbw=" + mbw);
+                }
+
                 return mbw;
             } );
         } else {
@@ -211,8 +215,10 @@ ST.BarChart = function() {
                 return v + (options.xsuffix !== undefined ? options.xsuffix : '');
             });
 
-        if( xrange < 10 ) {
+        if( xrange < 10 && !options.has_decimal ) {
             xticks.ticks( xrange );
+        } else if( bin_me ) {
+            xticks.ticks( ST.NUM_BINS );
         }
 
         if( options["x-ticks"] ) {
