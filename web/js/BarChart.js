@@ -154,9 +154,9 @@ ST.BarChart = function() {
             // (_optional_) set gap between bars manually in px, `default=2`
             .gap(1)
             // (_optional_) set filter brush rounding
-            .round(dc.round.floor)
+            .round( bin_me ? function(v) { return v;} : dc.round.floor)
             //.xUnits(function() {return 20;})   //  not a function.
-            .alwaysUseRounding(true)
+            //.alwaysUseRounding(true)
             .x( use_buckets ? xinput2 : xinput )
             .elasticY(true)
             //  This can correctly get and set the yrange, but there will be a problem when you select other charts, thus altering
@@ -218,7 +218,7 @@ ST.BarChart = function() {
         if( xrange < 10 && !options.has_decimal ) {
             xticks.ticks( xrange );
         } else if( bin_me ) {
-            xticks.ticks( ST.NUM_BINS );
+            xticks.ticks( ST.NUM_BINS - 2 );
         }
 
         if( options["x-ticks"] ) {
