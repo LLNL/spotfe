@@ -1,5 +1,6 @@
 var ST = ST || {};
 
+ST.BIN_THRESHOLD = 25;
 ST.NUM_BINS = 20;
 
 ST.BarChart = function() {
@@ -80,14 +81,21 @@ ST.BarChart = function() {
         //domain = [0,80];
         var xrange = domain[1] - domain[0];
 
-        var bin_me = xrange > 30;
+        var bin_me = xrange > ST.BIN_THRESHOLD;
         var runtime_group;
 
         if( bin_me ) {
 
+            xrange = domain[1] - domain[0];
+
             var binWidth = xrange / ST.NUM_BINS;
+
             runtime_group = runtime_dimension.group( function(d){
-                return Math.floor(d / binWidth) * binWidth;
+
+                var bw = Math.floor(d / binWidth);
+                var mbw = bw * binWidth;
+                console.log(d, bw, mbw);
+                return mbw;
             } );
         } else {
             runtime_group = runtime_dimension.group();
@@ -202,6 +210,10 @@ ST.BarChart = function() {
 
                 return v + (options.xsuffix !== undefined ? options.xsuffix : '');
             });
+
+        if( xrange < 10 ) {
+            xticks.ticks( xrange );
+        }
 
         if( options["x-ticks"] ) {
             xticks.ticks( options["x-ticks"] );

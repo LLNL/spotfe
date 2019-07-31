@@ -85,24 +85,26 @@ ST.LayoutAugmenterModel = function() {
                 spec[attr].distance = spec[attr].max - spec[attr].min;
 
                 var bar_width;
+                var first_bar_barrier = 0;
 
-                if (spec[attr].distance >= ST.NUM_BINS || !spec[attr].has_decimal ) {
+                //  Use buckets to create sub-integer support.
+                if( spec[attr].distance <= ST.BIN_THRESHOLD ) {
                     bar_width = 1;
                 } else {
-                    //  Use buckets to create sub-integer support.
                     bar_width = spec[attr].distance / ST.NUM_BINS;
-
-                    //options.buckets = "['0-0.2', '0.2-0.4', '0.4-0.6', '0.6-1', '1-10']";
+                    first_bar_barrier = bar_width;
                 }
+
+                //options.buckets = "['0-0.2', '0.2-0.4', '0.4-0.6', '0.6-1', '1-10']";
 
                 spec[attr].min = +spec[attr].min;
                 spec[attr].max = +spec[attr].max;
 
-                model[mx].xrange = [spec[attr].min, spec[attr].max + bar_width];
+                model[mx].xrange = [spec[attr].min - first_bar_barrier, spec[attr].max + bar_width];
 
                 var xr = model[mx].xrange;
 
-                if( bar_width !== 1 ) {
+                if( bar_width !== 1 && false ) {
 
                     var before_dash = xr[0];
                     var after_dash = xr[0] + bar_width;
@@ -126,7 +128,7 @@ ST.LayoutAugmenterModel = function() {
                     model[mx].buckets = JSON.stringify( model[mx].buckets );
                 }
 
-                //console.dir(mod);
+                console.dir(mod);
             }
         }
     };
