@@ -88,11 +88,12 @@ ST.LayoutAugmenterModel = function() {
                 var first_bar_barrier = 0;
 
                 //  Use buckets to create sub-integer support.
-                if( spec[attr].distance <= ST.BIN_THRESHOLD ) {
-                    bar_width = 1;
-                } else {
+                if( ST.BarChart.should_i_bin( spec[attr].distance, spec[attr].has_decimal ) ) {
+
                     bar_width = spec[attr].distance / ST.NUM_BINS;
                     first_bar_barrier = bar_width;
+                } else {
+                    bar_width = 1;
                 }
 
                 //options.buckets = "['0-0.2', '0.2-0.4', '0.4-0.6', '0.6-1', '1-10']";
@@ -101,6 +102,8 @@ ST.LayoutAugmenterModel = function() {
                 spec[attr].max = +spec[attr].max;
 
                 model[mx].xrange = [spec[attr].min - first_bar_barrier, spec[attr].max + bar_width];
+                model[mx].has_decimal = spec[attr].has_decimal;
+
 
                 var xr = model[mx].xrange;
 

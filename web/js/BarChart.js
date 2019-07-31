@@ -81,7 +81,7 @@ ST.BarChart = function() {
         //domain = [0,80];
         var xrange = domain[1] - domain[0];
 
-        var bin_me = xrange > ST.BIN_THRESHOLD;
+        var bin_me = should_i_bin_( xrange, options.has_decimal );
         var runtime_group;
 
         if( bin_me ) {
@@ -320,6 +320,10 @@ ST.BarChart = function() {
         return [minp, max];
     };
 
+    var should_i_bin_ = function( xrange, has_decimal ) {
+        return xrange > ST.BIN_THRESHOLD || has_decimal;
+    };
+
     return {
         render: render_,
         reset: function(that) {
@@ -337,6 +341,7 @@ ST.BarChart = function() {
         load_filter: function() {
 
             ST.UrlStateManager.load_filter( inst_, 'BarChart' );
-        }
+        },
+        should_i_bin: should_i_bin_
     }
 }();

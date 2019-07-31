@@ -22,6 +22,9 @@ DONE - Added Dev and Prod URLs to documentation url list, to make it easier to r
 DONE - if sf file is not there then spit out an error.
 DONE - for now an input box.  "Please provide a directory that contains dot cali files."
 DONE - Naming of Barchat => dimension ("Iteration")
+DONE - xTics astethetics, don't show 1.2,1.4 in the 1,2,3 data
+DONE - LeftMost BIN does not show up.
+DONE - RightMost BIN is cut in half for some reason.
 
 
 https://lc.llnl.gov/spot/dcvis/?sf=/usr/gapps/spot/datasets/lulesh_new
@@ -30,12 +33,10 @@ https://rzlc.llnl.gov/spot/dcvis/?sf=/g/g0/pascal/testresults&xaxis=ccompiler&gr
 
 
 Next:
-- LeftMost BIN does not show up.
-- RightMost BIN is cut in half for some reason.
-- File Upload browser on landing Page.
 - Apply xUnits to sub-integer charts.
+    * Need to detect if a particular dimension contains sub-integer, if so, then you should use bins (should_i_bin_() should return true).
     * this should fix the not being able to save bucketed charts.
-- xTics astethetics, don't show 1.2,1.4 in the 1,2,3 data
+- File Upload browser on landing Page.
 - Nulls
 - STrings plus more than 12 unique values then we need to have a left horizontal bar.
 - On the Spot1 page, be able to change the xAxis and GroupBy URLs based on the select drop down change.
