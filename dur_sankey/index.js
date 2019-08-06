@@ -77,4 +77,14 @@ var init = function( dat ) {
     app.ports.setData.send(data);
     app.ports.setXaxis.send(xaxis);     // set Xaxis here
     app.ports.setGroupBy.send(groupby);  // set Groupby
+
+    app.ports.xAxisChanged.subscribe( function( val ) {
+
+        ST.UrlStateManager.update_url('xaxis', val);
+    });
+
+    app.ports.groupByChanged.subscribe( function( val ) {
+
+        ST.UrlStateManager.update_url('groupby', val);
+    });
 };
