@@ -160,8 +160,14 @@ ST.ChartCollection = function() {
 
                     columns.push({
                         label: tab.label,
-                        format: function (d) {
-                            return ST.Utility.format_date(d.launchdate);
+                        format: function (cali_obj, spec) {
+
+                            console.dir(spec);
+
+                            var dimension = this.label;
+                            var val = cali_obj[ dimension ];
+                            
+                            return ST.Utility.format_date(val);
                         }
                     });
 
