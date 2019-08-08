@@ -11,8 +11,8 @@ DONE - made x-axis 45 degrees vertical
 DONE - for X-axis: match date to duration format of the other spot page.  (multi-line, OR vertically)
 DONE - put the correct format of date in table - not the unix epoch time.
 DONE - spot2 redirect or deploy there and level it up 1 step from web/
-    * https://lc.llnl.gov/spot2/
-    * https://rzlc.llnl.gov/spot2/?sf=/usr/gapps/spot/datasets/lulesh_new
+    * https://lc.llnl.gov/spot2/?sf=/usr/gapps/spot/datasets/lulesh_new
+    * https://rzlc.llnl.gov/spot2/?sf=/g/g0/pascal/testresults
 
 
 RECENTLY DONE:
@@ -33,10 +33,11 @@ DONE - bug fixed: filter brush selection is limited to integers instead of allow
 
 https://lc.llnl.gov/spot/dcvis/?sf=/usr/gapps/spot/datasets/lulesh_new
 https://rzlc.llnl.gov/spot/dcvis/?sf=/g/g0/pascal/testresults&xaxis=ccompiler&groupby=codename
-
+https://rzlc.llnl.gov/spot2/?sf=/g/g0/pascal/test_results/1/test_results
 
 
 Next:
+- If you mis-type a path from the rzlc.llnl.gov/spot2 dialog, it takes you to rzlc.llnl.gov.  It should instead just print an error.
 - On the Spot1 page, be able to change the xAxis and GroupBy URLs based on the select drop down change.
 - File Upload browser on landing Page.
 - Nulls

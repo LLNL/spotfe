@@ -180,6 +180,7 @@ ST.CallSpot = function() {
 
             if( num_total === 0 ) {
                 alert('I got 0 data objects.');
+                return true;
             }
 
             if( num_past_min_date === 0 && num_total > 0 ) {

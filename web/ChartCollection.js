@@ -166,7 +166,7 @@ ST.ChartCollection = function() {
 
                             var dimension = this.label;
                             var val = cali_obj[ dimension ];
-                            
+
                             return ST.Utility.format_date(val);
                         }
                     });
