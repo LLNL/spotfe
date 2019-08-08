@@ -66,6 +66,10 @@ var init = function( dat ) {
     //console.log('xaxis=' + xaxis + '   groupby=' + groupby);
     var xaxis = ST.Utility.get_param('xaxis', true);
     var groupby = ST.Utility.get_param('groupby', true);
+    var yaxis = ST.Utility.get_param('yaxis', true);
+    yaxis = decodeURIComponent(yaxis);
+
+    var aggregate = ST.Utility.get_param('aggregate', true);
 
 
     // elm init from main.js
@@ -74,9 +78,9 @@ var init = function( dat ) {
             node: document.querySelector('#durations-chart'),
         });
 
+    console.dir(app.ports);
+
     app.ports.setData.send(data);
-    app.ports.setXaxis.send(xaxis);     // set Xaxis here
-    app.ports.setGroupBy.send(groupby);  // set Groupby
 
     app.ports.xAxisChanged.subscribe( function( val ) {
 
@@ -87,4 +91,20 @@ var init = function( dat ) {
 
         ST.UrlStateManager.update_url('groupby', val);
     });
+
+    app.ports.yAxisChanged.subscribe( function( val ) {
+
+        var component = encodeURIComponent(val);
+        ST.UrlStateManager.update_url('yaxis', component);
+    });
+
+    app.ports.aggregateChanged.subscribe( function( val) {
+
+        ST.UrlStateManager.update_url('aggregate', val);
+    });
+
+    app.ports.setXaxis.send(xaxis);     // set Xaxis here
+    app.ports.setGroupBy.send(groupby);  // set Groupby
+    app.ports.setYaxis.send(yaxis);
+    app.ports.setAggregate.send(aggregate);
 };

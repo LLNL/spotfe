@@ -29,6 +29,7 @@ DONE - Fixed RightMost BIN is cut in half for some reason.
 DONE - Apply xUnits to sub-integer charts.  This means you can now select ranges on sub-integers.
     * this should fix the not being able to save bucketed charts.
 DONE - bug fixed: filter brush selection is limited to integers instead of allowing anywhere.
+DONE - If you mis-type a path from the rzlc.llnl.gov/spot2 dialog, it takes you to rzlc.llnl.gov.  It should instead just print an error.
 
 
 https://lc.llnl.gov/spot/dcvis/?sf=/usr/gapps/spot/datasets/lulesh_new
@@ -36,12 +37,19 @@ https://rzlc.llnl.gov/spot/dcvis/?sf=/g/g0/pascal/testresults&xaxis=ccompiler&gr
 https://rzlc.llnl.gov/spot2/?sf=/g/g0/pascal/test_results/1/test_results
 
 
+/usr/gapps/spot/spottempw key chunk# data
+- attempt to throw as many as possible.
+
 Next:
-- If you mis-type a path from the rzlc.llnl.gov/spot2 dialog, it takes you to rzlc.llnl.gov.  It should instead just print an error.
+- Need to have multiple requests to send all the cali files.
+- prevent alert, and show in screen, if no user actions yet, don't say "got 0 data points."
+    * key: if no user actions yet.
+- physicsstr and "test" - STrings plus more than 8 unique values then we need to have a left horizontal bar in place of the pieChart.  make it scroll.
 - On the Spot1 page, be able to change the xAxis and GroupBy URLs based on the select drop down change.
 - File Upload browser on landing Page.
 - Nulls
-- STrings plus more than 12 unique values then we need to have a left horizontal bar.
+- it'd be nice if the tics would line up with the bar charts.
+- think about 10,11,12 xrange if you only have 11s, think about 1 value graphs and how to make it obvious to user of what it is.
 
 
 
