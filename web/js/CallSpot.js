@@ -51,11 +51,12 @@ ST.CallSpot = function() {
         console.log('final command=' + final_command);
         console.log('url=' + ST.params.get_rundata_url);
 
-        var rtype = ST.params.type;
-        rtype = "POST";
+        if( is_h ) {
+            rtype = "POST";
+        }
 
-        return $.ajax({
-            //dataType:'jsonp',
+        var rtype = ST.params.type;
+        var obj = {
             type: rtype,
             method: rtype,
             url: ST.params.get_rundata_url,
@@ -64,7 +65,13 @@ ST.CallSpot = function() {
                 'route'  : '/command/' + ST.params.machine,      //  rzgenie
                 'command': final_command
             }
-        }).done( success ).error( handle_error_ );
+        };
+
+        if( !is_h ) {
+            obj.dataType = "jsonp";
+        }
+
+        return $.ajax(obj).done( success ).error( handle_error_ );
     };
 
 
