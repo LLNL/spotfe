@@ -10,7 +10,7 @@ var get_dirs_ = function() {
     var calis = localStorage.getItem('calis');
     var spi = calis.split(' ');
 
-    spi = spi.splice(0,68);
+    //spi = spi.splice(0,68);
     calis = spi.join(' ');
     return calis;
 

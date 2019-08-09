@@ -39,6 +39,7 @@ ST.CallSpot = function() {
         var type = obj.type;
         var success = obj.success || handle_success_;
         var layout = obj.layout || "";
+        var is_h = type === 'hierarchical';
 
 
         ST.Utility.init_params();
@@ -50,12 +51,13 @@ ST.CallSpot = function() {
         console.log('final command=' + final_command);
         console.log('url=' + ST.params.get_rundata_url);
 
-        type = ST.params.type;
+        var rtype = ST.params.type;
+        rtype = "POST";
 
         return $.ajax({
             //dataType:'jsonp',
-            type: type,
-            method: type,
+            type: rtype,
+            method: rtype,
             url: ST.params.get_rundata_url,
             data:   {
                 'via'    : 'post',
