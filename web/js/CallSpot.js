@@ -52,8 +52,8 @@ ST.CallSpot = function() {
 
         type = ST.params.type;
 
-        $.ajax({
-            dataType:'jsonp',
+        return $.ajax({
+            //dataType:'jsonp',
             type: type,
             method: type,
             url: ST.params.get_rundata_url,
