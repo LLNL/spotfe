@@ -24,9 +24,9 @@ $(document).ready(  function() {
     ST.Utility.init_params();
 
     var dirs = dirme("180926-171347_114610_dFcHlCXdiuQG.cali") +
-                dirme("180926-171354_114737_llIMtdhrtFBl.cali") +
-                dirme("180926-171351_45280_H6AUaDgoCQ0n.cali") +
-                dirme("180926-171348_171822_1yPFpzkcG7G3.cali");
+        dirme("180926-171354_114737_llIMtdhrtFBl.cali") +
+        dirme("180926-171351_45280_H6AUaDgoCQ0n.cali") +
+        dirme("180926-171348_171822_1yPFpzkcG7G3.cali");
 
     dirs = get_dirs_();
     console.dir(dirs);
@@ -39,22 +39,24 @@ $(document).ready(  function() {
     var command = ST.Utility.get_param('command');
     command = decodeURIComponent(command);
 
-    ST.CallSpot.ajax({
-        file: predir + dirs,
-        command: command,
-        type: 'hierarchical',
-        success: init
-    });
+    ST.SeriesHier.run( predir, dirs, command );
 });
+
 
 
 var init = function( dat ) {
 
-    if( dat.error ) {
-        $('body').append( '<span class="error">' + dat.error + '</span>');
+    if (dat.error) {
+        $('body').append('<span class="error">' + dat.error + '</span>');
     }
 
     const data = JSON.parse(dat.output.command_out);// put data from server here obtained from "spot.py durations2 <filepath1> [filepath2]*"
+
+    init_with_ar_( data );
+};
+
+
+var init_with_ar_ = function(data) {
 
     console.dir(data);
 

@@ -51,11 +51,12 @@ ST.CallSpot = function() {
         console.log('final command=' + final_command);
         console.log('url=' + ST.params.get_rundata_url);
 
-        if( is_h ) {
-            rtype = "POST";
-        }
 
         var rtype = ST.params.type;
+        if( is_h ) {
+           // rtype = "POST";
+        }
+
         var obj = {
             type: rtype,
             method: rtype,
@@ -67,12 +68,17 @@ ST.CallSpot = function() {
             }
         };
 
+        obj.dataType = "jsonp";
         if( !is_h ) {
-            obj.dataType = "jsonp";
         }
 
-        return $.ajax(obj).done( success ).error( handle_error_ );
+        if( is_h ) {
+            return $.ajax(obj);
+        } else {
+            return $.ajax(obj).done(success).error(handle_error_);
+        }
     };
+
 
 
     var objs_by_run_id_ = {};
@@ -405,6 +411,7 @@ ST.CallSpot = function() {
 
 
     return {
+        handle_success: handle_success_,
         get_command_begin: get_command_begin_,
         drilldown: drill_down_,
         bind: bind_,
