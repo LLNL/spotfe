@@ -1,7 +1,7 @@
 ST.SeriesHier = function() {
 
     //  Apache request limit is 4K.  But, we need room for some extra stuff too.  let's not raise this above 3000.
-    var MAX_REQUEST_LENGTH = 130;
+    var MAX_REQUEST_LENGTH = 3000;
     var all_responses_, not_done_, section_;
 
     var handle_one_response_ = function( ret ) {
