@@ -1,6 +1,7 @@
 ST.SeriesHier = function() {
 
-    var all_responses_, not_done_;
+    var MAX_REQUEST_LENGTH = 100;
+    var all_responses_, not_done_, section_;
 
     var handle_one_response_ = function( ret ) {
 
@@ -11,9 +12,15 @@ ST.SeriesHier = function() {
     };
 
 
-    var get_input_section_ = function( total ) {
+    var increment_section_ = function( request_arr ) {
 
-        return total.splice( index, 20 );
+        var str_ver = request_arr.join(' ');
+
+        if( str_ver.length > MAX_REQUEST_LENGTH ) {
+
+            //  GO on to the next request.
+            section_++;
+        }
     };
 
 
@@ -22,22 +29,23 @@ ST.SeriesHier = function() {
         all_responses_ = [];
         var jax_calls = [];
         not_done_ = false;
-        var sections = [];
+        var requests = [];
 
         var my_dirs = dirs.split(' ');
+        section_ = 0;
 
         for( var z=0; z < my_dirs.length; z++ ) {
 
-            var section = parseInt(z / 10);
+            requests[ section_ ] = requests[ section_ ] || [];
+            requests[ section_ ].push( my_dirs[z] );
 
-            sections[ section ] = sections[ section ] || [];
-            sections[ section ].push( my_dirs[z] );
+            increment_section_( requests[ section_ ] );
         }
 
 
-        for( var u =0; u < sections.length; u++ ) {
+        for( var u =0; u < requests.length; u++ ) {
 
-            var sec = sections[u];
+            var sec = requests[u];
             var sec_str = sec.join(' ');
 
             var jj = ST.CallSpot.ajax({
@@ -48,6 +56,7 @@ ST.SeriesHier = function() {
 
             jax_calls.push( jj );
         }
+
 
         $.when.apply($, jax_calls).then( function() {
 

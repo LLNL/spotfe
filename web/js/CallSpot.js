@@ -342,6 +342,8 @@ ST.CallSpot = function() {
             var machine = "machine=" + ST.params.machine + "&";
             var xaxis = $('.compare_arguments .xaxis').val();
             var groupby = $('.compare_arguments .groupby').val();
+            var yaxis = ST.Utility.get_param('yaxis');
+            var aggregate = ST.Utility.get_param('aggregate');
 
             localStorage.setItem('calis', keys);
 
@@ -350,12 +352,15 @@ ST.CallSpot = function() {
             var comm = command ? '&command=' + command : "";
             var xaxis_par = '&xaxis=' + xaxis;
             var groupby_par = '&groupby=' + groupby + ST.UrlStateManager.get_chart_pars();
+            var yaxis_par = yaxis ? '&yaxis=' + yaxis : "";
+            var agg_par = aggregate ? '&aggregate=' + aggregate : "";
 
             var days_ago = ST.Utility.get_param(ST.LAST_DAYS);
             var last_days = days_ago ? ( "&" + ST.LAST_DAYS + "=" + days_ago ) : "";
 
             var goto_url = 'dur_sankey/?' + machine + 'calis=local&sf=' + directory +
-                comm + xaxis_par + groupby_par + last_days;
+                comm + xaxis_par + groupby_par +
+                yaxis_par + agg_par + last_days;
 
             if( exe_compare_() ) {
                 location.href = goto_url;

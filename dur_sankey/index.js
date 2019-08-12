@@ -86,27 +86,46 @@ var init_with_ar_ = function(data) {
 
     app.ports.xAxisChanged.subscribe( function( val ) {
 
-        ST.UrlStateManager.update_url('xaxis', val);
+        if( val && val !== "undefined" ) {
+            ST.UrlStateManager.update_url('xaxis', val);
+        }
     });
 
     app.ports.groupByChanged.subscribe( function( val ) {
 
-        ST.UrlStateManager.update_url('groupby', val);
+        if( val && val !== "undefined" ) {
+            ST.UrlStateManager.update_url('groupby', val);
+        }
     });
 
     app.ports.yAxisChanged.subscribe( function( val ) {
 
-        var component = encodeURIComponent(val);
-        ST.UrlStateManager.update_url('yaxis', component);
+        if( val && val !== "undefined" ) {
+            var component = encodeURIComponent(val);
+            ST.UrlStateManager.update_url('yaxis', component);
+        }
     });
 
     app.ports.aggregateChanged.subscribe( function( val) {
 
-        ST.UrlStateManager.update_url('aggregate', val);
+        if( val && val !== "undefined" ) {
+            ST.UrlStateManager.update_url('aggregate', val);
+        }
     });
 
-    app.ports.setXaxis.send(xaxis);     // set Xaxis here
-    app.ports.setGroupBy.send(groupby);  // set Groupby
-    app.ports.setYaxis.send(yaxis);
-    app.ports.setAggregate.send(aggregate);
+    if( xaxis && xaxis !== "" ) {
+        app.ports.setXaxis.send(xaxis);     // set Xaxis here
+    }
+
+    if( groupby && groupby !== "" ) {
+        app.ports.setGroupBy.send(groupby);  // set Groupby
+    }
+
+    if( yaxis && yaxis !== "" ) {
+        app.ports.setYaxis.send(yaxis);
+    }
+
+    if( aggregate && aggregate !== "" ) {
+        app.ports.setAggregate.send(aggregate);
+    }
 };
