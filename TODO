@@ -33,7 +33,7 @@ DONE - If you mis-type a path from the rzlc.llnl.gov/spot2 dialog, it takes you 
 
 
 https://lc.llnl.gov/spot/dcvis/?sf=/usr/gapps/spot/datasets/lulesh_new
-https://rzlc.llnl.gov/spot/dcvis/?sf=/g/g0/pascal/testresults&xaxis=ccompiler&groupby=codename
+https://rzlc.llnl.gov/spot/dcvis/?sf=/g/g0/pascal/testresults0&xaxis=ccompiler&groupby=codename
 https://rzlc.llnl.gov/spot2/?sf=/g/g0/pascal/test_results/1/test_results
 
 

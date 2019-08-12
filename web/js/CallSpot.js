@@ -58,6 +58,7 @@ ST.CallSpot = function() {
         }
 
         var obj = {
+            timeout: 600000,
             type: rtype,
             method: rtype,
             url: ST.params.get_rundata_url,
