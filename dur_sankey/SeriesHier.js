@@ -1,14 +1,22 @@
 ST.SeriesHier = function() {
 
-    var MAX_REQUEST_LENGTH = 100;
+    //  Apache request limit is 4K.  But, we need room for some extra stuff too.  let's not raise this above 3000.
+    var MAX_REQUEST_LENGTH = 130;
     var all_responses_, not_done_, section_;
 
     var handle_one_response_ = function( ret ) {
 
-        var command_out = ret[0].output.command_out;
-        var pcom = JSON.parse(command_out);
+        //  If 1 request is sent or more than 1, the return parameters are different.
+        if( ret !== "success" ) {
+            var blo = ret[0] || ret;
 
-        all_responses_ = all_responses_.concat( pcom );
+            if( blo.output ) {
+                var command_out = blo.output.command_out;
+                var pcom = JSON.parse(command_out);
+
+                all_responses_ = all_responses_.concat(pcom);
+            }
+        }
     };
 
 
@@ -63,6 +71,7 @@ ST.SeriesHier = function() {
             for(var arg = 0; arg < arguments.length; ++ arg) {
 
                 var arr = arguments[arg];
+
                 handle_one_response_(arr);
             }
 
