@@ -113,19 +113,23 @@ var init_with_ar_ = function(data) {
         }
     });
 
-    if( xaxis && xaxis !== "" ) {
+    if( is_defined(xaxis) ) {
         app.ports.setXaxis.send(xaxis);     // set Xaxis here
     }
 
-    if( groupby && groupby !== "" ) {
+    if( is_defined(groupby) ) {
         app.ports.setGroupBy.send(groupby);  // set Groupby
     }
 
-    if( yaxis && yaxis !== "" ) {
+    if( is_defined(yaxis) ) {
         app.ports.setYaxis.send(yaxis);
     }
 
-    if( aggregate && aggregate !== "" ) {
+    if( is_defined(aggregate) ) {
         app.ports.setAggregate.send(aggregate);
     }
+};
+
+var is_defined = function( str ) {
+    return str && str !== "" && str !== "undefined";
 };
