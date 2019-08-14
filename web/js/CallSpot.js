@@ -317,12 +317,14 @@ ST.CallSpot = function() {
 
         var str = "";
         var count = 0;
+        var all = ST.all_data;
+        var len = all.length;
 
-        $('.dc-table-row .key').each( function() {
+        for( var c=0; c < len; c++ ) {
 
-            var cali_key = $(this).html();
+            var cali_key = all[c].key;
             str += ' ' + cali_key;
-        });
+        }
 
         return str.substr(1);
     };

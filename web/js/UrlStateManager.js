@@ -8,7 +8,13 @@ ST.UrlStateManager = function() {
         var instance_num = +aname.replace(/\D/g, '');
         var range = filters[0];
         var param = type + instance_num;
-        var dimension = $(aname).attr('chart-dimension').toLowerCase();
+        var cdim = $(aname).attr('chart-dimension');
+
+        if( !cdim ) {
+            return false;
+        }
+
+        var dimension = cdim.toLowerCase();
 
         //console.log(instance_num);
 

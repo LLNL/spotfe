@@ -416,7 +416,7 @@ as a grouping function</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            .size(<span class="hljs-number">10000</span>)    <span class="hljs-comment">//  ST.params.max</span></pre></div></div>
+            <div class="content"><div class='highlight'><pre>            .size(<span class="hljs-number">50</span>)    <span class="hljs-comment">//  ST.params.max</span></pre></div></div>
             
         </li>
         
@@ -501,7 +501,11 @@ This code demonstrates generating the column header automatically based on the c
             <div class="content"><div class='highlight'><pre>                jQuery(<span class="hljs-string">'.compare_button, .dc-table-column .drilldown'</span>).unbind(<span class="hljs-string">'click'</span>).bind(<span class="hljs-string">'click'</span>, ST.CallSpot.drilldown);
 
                 bind_sort();
-            });</pre></div></div>
+            });
+
+
+        ST.all_data = dateDimension.top(<span class="hljs-number">10000</span>);
+        <span class="hljs-built_in">console</span>.dir(ST.all_data);</pre></div></div>
             
         </li>
         

@@ -213,7 +213,7 @@ ST.ChartCollection = function() {
                 return 1;
             })
             // (_optional_) max number of records to be shown, `default = 25`
-            .size(10000)    //  ST.params.max
+            .size(50)    //  ST.params.max
             // There are several ways to specify the columns; see the data-table documentation.
             // This code demonstrates generating the column header automatically based on the columns.
             .columns(columns)
@@ -237,6 +237,9 @@ ST.ChartCollection = function() {
                 bind_sort();
             });
 
+
+        ST.all_data = dateDimension.top(80000);
+        console.dir(ST.all_data);
 
         //simply call `.renderAll()` to render all charts on the page
         dc.renderAll();
