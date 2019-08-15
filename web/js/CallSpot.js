@@ -378,7 +378,7 @@ ST.CallSpot = function() {
         var subject = $(this).html().toLowerCase();
         var file = ST.Utility.get_file();
         var key = objs_by_run_id_[run_id].key;
-        var appended = file + '/' + key;
+        var appended = objs_by_run_id_[run_id].filepath;    //file + '/' + key;
 
 
         console.log( "ri=" + run_id + '  do_this=' + subject );
