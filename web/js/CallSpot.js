@@ -204,12 +204,8 @@ ST.CallSpot = function() {
                     '(' + ST.LAST_DAYS + '=' + ST.params.last_days + ').  If you wish to eliminate this constraint, remove "' + ST.LAST_DAYS + '" from the URL parameter list.');
             }
 
-            newp[0]['Code Builder'] = "Filler0";
-            newp[1]['Code Builder'] = "Filler1";
-            /*newp[2]['Compiler Name'] = "GNU Filler";*/
 
             //  STUB!!
-
             if( USE_TINY_STUB ) {
                 ST.layout_used.charts.push({
                     dimension: "tiny_nums",
