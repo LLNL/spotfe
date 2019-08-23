@@ -213,7 +213,7 @@ ST.ChartCollection = function() {
                 return 1;
             })
             // (_optional_) max number of records to be shown, `default = 25`
-            .size(50)    //  ST.params.max
+            .size(50000)    //  ST.params.max
             // There are several ways to specify the columns; see the data-table documentation.
             // This code demonstrates generating the column header automatically based on the columns.
             .columns(columns)

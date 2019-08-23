@@ -31,10 +31,12 @@ DONE - Apply xUnits to sub-integer charts.  This means you can now select ranges
 DONE - bug fixed: filter brush selection is limited to integers instead of allowing anywhere.
 DONE - If you mis-type a path from the rzlc.llnl.gov/spot2 dialog, it takes you to rzlc.llnl.gov.  It should instead just print an error.
 DONE - Need to have multiple requests to send all the cali files.
-DONE - Optimize the check/uncheck box -> right now it re-initializes.
-    * can we just load 100 of the table? but still be able to extract all that were selected.
+
+------------------------------------------------------
+DONE - Optimize the FE loading of charts to prevent long loading times
 DONE - prevent alert, and show in screen, if no user actions yet, don't say "got 0 data points."
     * key: if no user actions yet.
+DONE - fix case where you only have 1 cali file.
 
 
 https://lc.llnl.gov/spot/dcvis/?sf=/usr/gapps/spot/datasets/lulesh_new
@@ -50,11 +52,18 @@ https://rzlc.llnl.gov/spot/dcvis/?machine=rzgenie&calis=local&sf=/g/g0/pascal/te
 - attempt to throw as many as possible.
 
 Next:
-- fix case where you only have 1 cali file.
+DONE - turn off the 100 limit
+- Update -> URL parameters.- On the compare page, be able to change the dropdowns URLs based on the select drop down change.
+- Regression test the last N Days
+- TEST and roll out S2.
+- work on Joe Chavez being able to roll out: S2.
+
 - physicsstr and "test" - STrings plus more than 8 unique values then we need to have a left horizontal bar in place of the pieChart.  make it scroll.
-- On the Spot1 page, be able to change the xAxis and GroupBy URLs based on the select drop down change.
-- File Upload browser on landing Page.
 - Nulls
+    * assuming we create a newbar with a lower bar, we'll have a problem:
+    * if someone gets new data, "what is considered a null" will change.
+    * if we make the lowest bucket (null bucket) min int, we won't have to worry about going up to the URL bar.
+- File Upload browser on landing Page.
 - it'd be nice if the tics would line up with the bar charts.
 - think about 10,11,12 xrange if you only have 11s, think about 1 value graphs and how to make it obvious to user of what it is.
 - spin notification
