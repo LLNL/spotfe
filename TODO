@@ -42,11 +42,10 @@ DONE - fix case where you only have 1 cali file.
 https://lc.llnl.gov/spot/dcvis/?sf=/usr/gapps/spot/datasets/lulesh_new
 https://rzlc.llnl.gov/spot/dcvis/?sf=/g/g0/pascal/testresults0&xaxis=ccompiler&groupby=codename
 https://rzlc.llnl.gov/spot2/?sf=/g/g0/pascal/test_results/1/test_results
-
+https://rzlc.llnl.gov/spot2/?sf=/g/g0/pascal/test_results1500
 
 Works:
-https://rzlc.llnl.gov/spot/dcvis/?machine=rzgenie&calis=local&sf=/g/g0/pascal/test_results1500&xaxis=&exe_compare=1&yaxis=max%23inclusive%23sum%23time.duration&aggregate=sum&groupby=executable
-
+https://rzlc.llnl.gov/spot2/?machine=rzgenie&calis=local&sf=/g/g0/pascal/test_results1500&xaxis=&groupby=&exe_compare=1
 
 /usr/gapps/spot/spottempw key chunk# data
 - attempt to throw as many as possible.

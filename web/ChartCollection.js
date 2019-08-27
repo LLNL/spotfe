@@ -253,29 +253,6 @@ ST.ChartCollection = function() {
     };
 
 
-    var get_farr = function (fields) {
-
-        var farr = ST.Utility.to_array(fields);
-
-        farr.sort(function (a, b) {
-
-            a = a.toLowerCase();
-            b = b.toLowerCase();
-
-            if (a < b) {
-                return -1;
-            }
-            if (a > b) {
-                return 1;
-            }
-
-            return 0;
-        });
-
-        return farr;
-    };
-
-
     var render_compare_arguments = function (fields) {
 
         var options = "<option value=''></option>";
@@ -335,6 +312,29 @@ ST.ChartCollection = function() {
         if (groupby !== 'undefined') {
             $('.compare_arguments .groupby').val(groupby);
         }
+    };
+
+
+    var get_farr = function (fields) {
+
+        var farr = ST.Utility.to_array(fields);
+
+        farr.sort(function (a, b) {
+
+            a = a.toLowerCase();
+            b = b.toLowerCase();
+
+            if (a < b) {
+                return -1;
+            }
+            if (a > b) {
+                return 1;
+            }
+
+            return 0;
+        });
+
+        return farr;
     };
 
 
