@@ -81,7 +81,7 @@ ST.ChartCollection = function() {
         }
 
         if (layout_spec.charts.length === undefined) {
-            alert('Layout charts must be of type array.')
+            alert('Layout charts must be of type array.');
         }
 
         var layout_charts = layout_spec.charts;
@@ -96,6 +96,10 @@ ST.ChartCollection = function() {
 
             var spec = layout_charts[dimension];
             var viz = spec.viz;
+
+            if( false && viz === "PieChart" ) {
+                viz = "HorizontalBarChart";
+            }
 
             if (ST[viz] && ST[viz].render) {
 

@@ -200,7 +200,7 @@ ST.ChartCollection = <span class="hljs-function"><span class="hljs-keyword">func
         }
 
         <span class="hljs-keyword">if</span> (layout_spec.charts.length === <span class="hljs-literal">undefined</span>) {
-            alert(<span class="hljs-string">'Layout charts must be of type array.'</span>)
+            alert(<span class="hljs-string">'Layout charts must be of type array.'</span>);
         }
 
         <span class="hljs-keyword">var</span> layout_charts = layout_spec.charts;
@@ -215,6 +215,10 @@ ST.ChartCollection = <span class="hljs-function"><span class="hljs-keyword">func
 
             <span class="hljs-keyword">var</span> spec = layout_charts[dimension];
             <span class="hljs-keyword">var</span> viz = spec.viz;
+
+            <span class="hljs-keyword">if</span>( <span class="hljs-literal">false</span> &amp;&amp; viz === <span class="hljs-string">"PieChart"</span> ) {
+                viz = <span class="hljs-string">"HorizontalBarChart"</span>;
+            }
 
             <span class="hljs-keyword">if</span> (ST[viz] &amp;&amp; ST[viz].render) {
 
