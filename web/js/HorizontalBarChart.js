@@ -2,15 +2,16 @@ var ST = ST || {};
 
 ST.HorizontalBarChart = function() {
 
-    var stackedChart_;
+    var stackedChart_ = [];
 
     var render_ = function( ndx, options ) {
 
         var dimension_low = options.dimension.toLowerCase();
-        var style = spec.show ? "display: block;" : "display: none;";
+        var style = options.show ? "display: block;" : "display: none;";
+        var className = 'horizontal-bar-chart-' + dimension_low;
 
         var rcht =     '<div instance_num="' + dimension_low + '"  ' +
-            'style="' + style + '" class="quarter-chart-' + dimension_low + '"  chart-dimension="' + dimension_low + '">  \
+            'style="' + style + '" class="' + className + '"  chart-dimension="' + dimension_low + '">  \
         <strong>' + options.title + '</strong> \
         <a class="reset horiz_reset"  style="display: none;">reset</a> \
         <div class="clearfix"></div> \
@@ -19,9 +20,14 @@ ST.HorizontalBarChart = function() {
 
         $('.row:eq(0)').append(rcht);
 
-        stackedChart_ = dc.rowChart('#day-of-week-chart');
-        var colors = ['#3182bd', '#6baed6', '#9ecae1', '#c6dbef', '#dadaeb'];
-        colors = ['#9ecae1']; //,'#3182bd','#3182bd','#3182bd','#3182bd'];
+        stackedChart_[dimension_low] = dc.rowChart('.' + className );
+        var colors = [
+            '#9ecae1',
+            '#3182bd',
+            '#5ebd8d',
+            '#bda665',
+            '#bd59a1'
+        ];
 
         var uniq_counts = {};
 
@@ -55,14 +61,15 @@ ST.HorizontalBarChart = function() {
             "Filler1" : "dboehma",
             "dzpolia" : "dzpolia"
         };
+
         // Create a row chart and use the given css selector as anchor. You can also specify
         // an optional chart group for this chart to be scoped within. When a chart belongs
         // to a specific group then any interaction with such chart will only trigger redraw
         // on other charts within the same chart group.
         // <br>API: [Row Chart](https://github.com/dc-js/dc.js/blob/master/web/docs/api-latest.md#row-chart)
-        stackedChart_ /* dc.rowChart('#day-of-week-chart', 'chartGroup') */
-            .width(240)
-            .height(height)
+        stackedChart_[dimension_low] /* dc.rowChart('#day-of-week-chart', 'chartGroup') */
+            .width(options.width)
+            .height(options.height)
             .margins({top: 20, left: 10, right: 10, bottom: 20})
             .group(dayOfWeekGroup)
             .dimension(dayOfWeek)
@@ -70,7 +77,7 @@ ST.HorizontalBarChart = function() {
             .ordinalColors(colors)
             .label(function (d) {
                 //return d.key.split('.')[1];
-                return translate_[d.key] || "Jim";
+                return d.key; //translate_[d.key] || "Jim";
             })
             // Title sets the row text
             .title(function (d) {
