@@ -97,7 +97,10 @@ ST.ChartCollection = function() {
             var spec = layout_charts[dimension];
             var viz = spec.viz;
 
-            if( viz === "PieChart" ) {
+            var counts = count_unique_values_in_chart_( ndx, spec.dimension );
+            console.log( counts );
+
+            if( viz === "PieChart" && counts > 8 ) {
                 viz = "HorizontalBarChart";
             }
 
@@ -254,6 +257,20 @@ ST.ChartCollection = function() {
         dc.redrawAll();
 
         bind_sort();
+    };
+
+
+    var count_unique_values_in_chart_ = function( ndx, dimension ) {
+
+        var uniq_counts = {};
+
+        var ndim = ndx.dimension(function (cali_object) {
+
+            uniq_counts[ cali_object[ dimension ] ] = 1;
+            return cali_object[ dimension ];
+        });
+
+        return Object.keys( uniq_counts ).length;
     };
 
 

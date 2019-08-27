@@ -29,17 +29,12 @@ ST.HorizontalBarChart = function() {
             '#bd59a1'
         ];
 
-        var uniq_counts = {};
 
         // Counts per weekday
         var dayOfWeek = ndx.dimension(function (cali_object) {
 
             ST.Utility.validate_cali_object( cali_object, options.dimension );
-
-            //var day = d.dd.getDay();
-            var name = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-            uniq_counts[ cali_object[ options.dimension ] ] = 1;
-            return cali_object[ options.dimension ];// || "none";// day + '.' + name[day];
+            return cali_object[ options.dimension ];
         });
 
         if( ST.cali_valid === false ) {
@@ -49,11 +44,6 @@ ST.HorizontalBarChart = function() {
 
         var dayOfWeekGroup = dayOfWeek.group();
 
-        console.dir(uniq_counts);
-
-        var number_of_authors = Object.keys( uniq_counts ).length;
-        console.log(number_of_authors);
-        var height = number_of_authors * 35;
 
         var translate_ = {
             "willEmailYouToComplain" : "mlegendre",

@@ -216,7 +216,10 @@ ST.ChartCollection = <span class="hljs-function"><span class="hljs-keyword">func
             <span class="hljs-keyword">var</span> spec = layout_charts[dimension];
             <span class="hljs-keyword">var</span> viz = spec.viz;
 
-            <span class="hljs-keyword">if</span>( viz === <span class="hljs-string">"PieChart"</span> ) {
+            <span class="hljs-keyword">var</span> counts = count_unique_values_in_chart_( ndx, spec.dimension );
+            <span class="hljs-built_in">console</span>.log( counts );
+
+            <span class="hljs-keyword">if</span>( viz === <span class="hljs-string">"PieChart"</span> &amp;&amp; counts &gt; <span class="hljs-number">8</span> ) {
                 viz = <span class="hljs-string">"HorizontalBarChart"</span>;
             }
 
@@ -532,6 +535,20 @@ This code demonstrates generating the column header automatically based on the c
         dc.redrawAll();
 
         bind_sort();
+    };
+
+
+    <span class="hljs-keyword">var</span> count_unique_values_in_chart_ = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> ndx, dimension </span>) </span>{
+
+        <span class="hljs-keyword">var</span> uniq_counts = {};
+
+        <span class="hljs-keyword">var</span> ndim = ndx.dimension(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">cali_object</span>) </span>{
+
+            uniq_counts[ cali_object[ dimension ] ] = <span class="hljs-number">1</span>;
+            <span class="hljs-keyword">return</span> cali_object[ dimension ];
+        });
+
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">Object</span>.keys( uniq_counts ).length;
     };
 
 

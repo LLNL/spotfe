@@ -58,6 +58,10 @@ DONE - TEST and roll out S2.
 
 - work on Joe Chavez being able to roll out: S2.
 - physicsstr and "test" - STrings plus more than 8 unique values then we need to have a left horizontal bar in place of the pieChart.  make it scroll.
+    * make each bar height taller
+    * allow for scrolling if too much
+    * get rid of top offset (right now it's too low)
+    * test for 100s or 1000s of values.
 
 - Nulls
     * assuming we create a newbar with a lower bar, we'll have a problem:
