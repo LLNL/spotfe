@@ -97,7 +97,7 @@ ST.ChartCollection = function() {
             var spec = layout_charts[dimension];
             var viz = spec.viz;
 
-            if( false && viz === "PieChart" ) {
+            if( viz === "PieChart" ) {
                 viz = "HorizontalBarChart";
             }
 

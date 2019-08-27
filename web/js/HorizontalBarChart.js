@@ -2,17 +2,24 @@ var ST = ST || {};
 
 ST.HorizontalBarChart = function() {
 
-    var horizontalStackedChart_;
+    var stackedChart_;
 
     var render_ = function( ndx, options ) {
 
-        $('.left_side').append('<div id="day-of-week-chart"> \
-    <strong>User</strong> \
-    <a class="reset" href="javascript: ST.LeftHorizontalBarChart.reset();" style="display: none;">reset</a> \
-    <div class="clearfix"></div> \
-    </div> ');
+        var dimension_low = options.dimension.toLowerCase();
+        var style = spec.show ? "display: block;" : "display: none;";
 
-        horizontalStackedChart_ = dc.rowChart('#day-of-week-chart');
+        var rcht =     '<div instance_num="' + dimension_low + '"  ' +
+            'style="' + style + '" class="quarter-chart-' + dimension_low + '"  chart-dimension="' + dimension_low + '">  \
+        <strong>' + options.title + '</strong> \
+        <a class="reset horiz_reset"  style="display: none;">reset</a> \
+        <div class="clearfix"></div> \
+    </div> ';
+
+
+        $('.row:eq(0)').append(rcht);
+
+        stackedChart_ = dc.rowChart('#day-of-week-chart');
         var colors = ['#3182bd', '#6baed6', '#9ecae1', '#c6dbef', '#dadaeb'];
         colors = ['#9ecae1']; //,'#3182bd','#3182bd','#3182bd','#3182bd'];
 
@@ -53,7 +60,7 @@ ST.HorizontalBarChart = function() {
         // to a specific group then any interaction with such chart will only trigger redraw
         // on other charts within the same chart group.
         // <br>API: [Row Chart](https://github.com/dc-js/dc.js/blob/master/web/docs/api-latest.md#row-chart)
-        horizontalStackedChart_ /* dc.rowChart('#day-of-week-chart', 'chartGroup') */
+        stackedChart_ /* dc.rowChart('#day-of-week-chart', 'chartGroup') */
             .width(240)
             .height(height)
             .margins({top: 20, left: 10, right: 10, bottom: 20})
@@ -76,20 +83,21 @@ ST.HorizontalBarChart = function() {
             //});
 
 
+        $('.pie_reset').unbind('click').bind('click', ST.HorizontalBarChart.reset);
     };
 
     return {
         render: render_,
         reset: function() {
 
-            horizontalStackedChart_.filterAll();
+            stackedChart_.filterAll();
 
             dc.redrawAll();
             ST.ChartCollection.bind_sort();
         },
         load_filter: function() {
 
-            ST.UrlStateManager.load_filter( horizontalStackedChart_, 'LeftHorizontalBarChart' );
+            ST.UrlStateManager.load_filter( stackedChart_, 'LeftHorizontalBarChart' );
         }
 
     }
