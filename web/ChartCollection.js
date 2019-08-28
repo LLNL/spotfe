@@ -99,9 +99,8 @@ ST.ChartCollection = function() {
 
             var counts = count_unique_values_in_chart_( ndx, spec.dimension );
             spec.counts = counts;
-            console.log( counts );
 
-            if( viz === "PieChart" && counts > 8 ) {
+            if( viz === "PieChart" && counts >= 8 ) {
                 viz = "HorizontalBarChart";
             }
 

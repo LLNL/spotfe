@@ -58,7 +58,7 @@ DONE - TEST and roll out S2.
 
 - work on Joe Chavez being able to roll out: S2.
 - physicsstr and "test" - STrings plus more than 8 unique values then we need to have a left horizontal bar in place of the pieChart.  make it scroll.
-    * fix reset link
+    * Need to support multiple selections for URL loading (also need to encode all those special characters in cmdline variable)
     * add URL loading and saving
     * allow for scrolling if too much (right now it scrolls the whole way, but it would look better if it scrolled only the main chart interior part)
     * test for 100s or 1000s of values.

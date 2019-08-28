@@ -64,7 +64,7 @@ ST.HorizontalBarChart = function() {
             // Assign colors to each value in the x scale domain
             .ordinalColors(colors)
             .label(function (d) {
-                return d.key; 
+                return d.key;
             })
             // Title sets the row text
             .title(function (d) {

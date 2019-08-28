@@ -23,7 +23,7 @@ ST.UrlStateManager = function() {
 
             var paramValue = "";
 
-            if (type === 'PieChart') {
+            if (type === 'PieChart' || type === "HorizontalBarChart" ) {
 
                 for (var x = 0; x < filters.length; x++) {
                     paramValue += "," + encodeURIComponent(filters[x]);
@@ -31,7 +31,7 @@ ST.UrlStateManager = function() {
 
                 paramValue = paramValue.substr(1);
 
-            } else {
+            } else if( type === "BarChart" ) {
                 paramValue = encodeURIComponent(range[0]) + ',' + encodeURIComponent(range[1]);
             }
 
@@ -116,7 +116,7 @@ ST.UrlStateManager = function() {
                 console.log(params);
                 var sp = params.split(',');
 
-                if( type === "PieChart" ) {
+                if( type === "PieChart" || type === "HorizontalBarChart" ) {
 
                     console.dir(sp);
                     for( var y=0; y < sp.length; y++ ) {
