@@ -248,9 +248,11 @@ ST.ChartCollection = function() {
 
         //simply call `.renderAll()` to render all charts on the page
         dc.renderAll();
+        
         ST.BarChart.load_filter();
         ST.PieChart.load_filter();
         ST.LeftHorizontalBarChart.load_filter();
+        ST.HorizontalBarChart.load_filter();
 
         dc.redrawAll();
 
