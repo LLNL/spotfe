@@ -11,7 +11,7 @@ ST.HorizontalBarChart = function() {
         var className = 'horizontal-bar-chart-' + dimension_low;
 
         var rcht =     '<div instance_num="' + dimension_low + '"  ' +
-            'style="' + style + '" class="' + className + '"  chart-dimension="' + dimension_low + '">  \
+            'style="' + style + '" class="horizontal-bar-chart ' + className + '"  chart-dimension="' + dimension_low + '">  \
         <strong>' + options.title + '</strong> \
         <a class="reset horiz_reset"  style="display: none;">reset</a> \
         <div class="clearfix"></div> \
@@ -45,12 +45,7 @@ ST.HorizontalBarChart = function() {
         var dayOfWeekGroup = dayOfWeek.group();
 
 
-        var translate_ = {
-            "willEmailYouToComplain" : "mlegendre",
-            "Filler0" : "paschwanden",
-            "Filler1" : "dboehma",
-            "dzpolia" : "dzpolia"
-        };
+        options.height = options.counts * 30;
 
         // Create a row chart and use the given css selector as anchor. You can also specify
         // an optional chart group for this chart to be scoped within. When a chart belongs
@@ -62,12 +57,14 @@ ST.HorizontalBarChart = function() {
             .height(options.height)
             .margins({top: 20, left: 10, right: 10, bottom: 20})
             .group(dayOfWeekGroup)
+            .on('filtered', function(chart) {
+                ST.UrlStateManager.user_filtered(chart, 'HorizontalBarChart');
+            })
             .dimension(dayOfWeek)
             // Assign colors to each value in the x scale domain
             .ordinalColors(colors)
             .label(function (d) {
-                //return d.key.split('.')[1];
-                return d.key; //translate_[d.key] || "Jim";
+                return d.key; 
             })
             // Title sets the row text
             .title(function (d) {
@@ -80,21 +77,23 @@ ST.HorizontalBarChart = function() {
             //});
 
 
-        $('.pie_reset').unbind('click').bind('click', ST.HorizontalBarChart.reset);
+        $('.horiz_reset').unbind('click').bind('click', ST.HorizontalBarChart.reset);
     };
 
     return {
         render: render_,
         reset: function() {
 
-            stackedChart_.filterAll();
-
+            var instance_num = $(this).parent().attr('instance_num');
+            stackedChart_[instance_num].filterAll();
             dc.redrawAll();
+
             ST.ChartCollection.bind_sort();
+            ST.UrlStateManager.remove_param( 'HorizontalBarChart' + instance_num );
         },
         load_filter: function() {
 
-            ST.UrlStateManager.load_filter( stackedChart_, 'LeftHorizontalBarChart' );
+            ST.UrlStateManager.load_filter( stackedChart_, 'HorizontalBarChart' );
         }
 
     }

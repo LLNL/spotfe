@@ -38,6 +38,11 @@ div.dc-chart {
     float: left;
 }
 
+div.horizontal-bar-chart {
+    padding-top: 30px;
+    overflow-y: scroll;
+}
+
 .row:nth-child(1) {
 
     .dc-chart {

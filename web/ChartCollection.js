@@ -98,6 +98,7 @@ ST.ChartCollection = function() {
             var viz = spec.viz;
 
             var counts = count_unique_values_in_chart_( ndx, spec.dimension );
+            spec.counts = counts;
             console.log( counts );
 
             if( viz === "PieChart" && counts > 8 ) {
@@ -168,8 +169,6 @@ ST.ChartCollection = function() {
                     columns.push({
                         label: tab.label,
                         format: function (cali_obj, spec) {
-
-                            console.dir(spec);
 
                             var dimension = this.label;
                             var val = cali_obj[ dimension ];
