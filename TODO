@@ -56,12 +56,15 @@ DONE - Update -> URL parameters.- On the compare page, be able to change the dro
 DONE - Regression test the last N Days
 DONE - TEST and roll out S2.
 
+DONE - Need to support multiple selections for URL loading (also need to encode all those special characters in cmdline variable)
+DONE - add URL loading and saving
+
 - work on Joe Chavez being able to roll out: S2.
 - physicsstr and "test" - STrings plus more than 8 unique values then we need to have a left horizontal bar in place of the pieChart.  make it scroll.
-    * Need to support multiple selections for URL loading (also need to encode all those special characters in cmdline variable)
-    * add URL loading and saving
     * allow for scrolling if too much (right now it scrolls the whole way, but it would look better if it scrolled only the main chart interior part)
     * test for 100s or 1000s of values.
+    * test multiple horizontal scrollbar graphs.
+
 
 - Nulls
     * assuming we create a newbar with a lower bar, we'll have a problem:

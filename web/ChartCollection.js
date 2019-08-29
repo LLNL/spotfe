@@ -248,7 +248,7 @@ ST.ChartCollection = function() {
 
         //simply call `.renderAll()` to render all charts on the page
         dc.renderAll();
-        
+
         ST.BarChart.load_filter();
         ST.PieChart.load_filter();
         ST.LeftHorizontalBarChart.load_filter();
@@ -257,20 +257,6 @@ ST.ChartCollection = function() {
         dc.redrawAll();
 
         bind_sort();
-    };
-
-
-    var count_unique_values_in_chart_ = function( ndx, dimension ) {
-
-        var uniq_counts = {};
-
-        var ndim = ndx.dimension(function (cali_object) {
-
-            uniq_counts[ cali_object[ dimension ] ] = 1;
-            return cali_object[ dimension ];
-        });
-
-        return Object.keys( uniq_counts ).length;
     };
 
 
@@ -359,6 +345,21 @@ ST.ChartCollection = function() {
     };
 
 
+    var count_unique_values_in_chart_ = function( ndx, dimension ) {
+
+        var uniq_counts = {};
+
+        var ndim = ndx.dimension(function (cali_object) {
+
+            uniq_counts[ cali_object[ dimension ] ] = 1;
+            return cali_object[ dimension ];
+        });
+
+        return Object.keys( uniq_counts ).length;
+    };
+
+
+
     var bind_sort = function () {
 
         //  for some reason, dc.js capitalizes column headings, thus messing up the sort
@@ -404,19 +405,6 @@ ST.ChartCollection = function() {
     };
 
 
-    $.fn.ArrowFunctions = function (obj) {
-
-        var arrows = "<div class='up_arrow'></div>" +
-            "<div class='down_arrow'></div>";
-
-        return this.each(function () {
-
-            $(this).append(arrows);
-            $(this).find('.up_arrow, .down_arrow').unbind('click').bind('click', obj.arrow_click);
-        });
-    };
-
-
     $(document).ready(function () {
 
         var file = ST.Utility.get_file();
@@ -432,6 +420,20 @@ ST.ChartCollection = function() {
             layout: layout
         });
     });
+
+
+    $.fn.ArrowFunctions = function (obj) {
+
+        var arrows = "<div class='up_arrow'></div>" +
+            "<div class='down_arrow'></div>";
+
+        return this.each(function () {
+
+            $(this).append(arrows);
+            $(this).find('.up_arrow, .down_arrow').unbind('click').bind('click', obj.arrow_click);
+        });
+    };
+
 
     return {
         RenderChartCollection: RenderChartCollection,

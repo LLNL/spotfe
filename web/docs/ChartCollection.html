@@ -526,7 +526,7 @@ This code demonstrates generating the column header automatically based on the c
             </div>
             
             <div class="content"><div class='highlight'><pre>        dc.renderAll();
-        
+
         ST.BarChart.load_filter();
         ST.PieChart.load_filter();
         ST.LeftHorizontalBarChart.load_filter();
@@ -535,20 +535,6 @@ This code demonstrates generating the column header automatically based on the c
         dc.redrawAll();
 
         bind_sort();
-    };
-
-
-    <span class="hljs-keyword">var</span> count_unique_values_in_chart_ = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> ndx, dimension </span>) </span>{
-
-        <span class="hljs-keyword">var</span> uniq_counts = {};
-
-        <span class="hljs-keyword">var</span> ndim = ndx.dimension(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">cali_object</span>) </span>{
-
-            uniq_counts[ cali_object[ dimension ] ] = <span class="hljs-number">1</span>;
-            <span class="hljs-keyword">return</span> cali_object[ dimension ];
-        });
-
-        <span class="hljs-keyword">return</span> <span class="hljs-built_in">Object</span>.keys( uniq_counts ).length;
     };
 
 
@@ -649,6 +635,21 @@ This code demonstrates generating the column header automatically based on the c
     };
 
 
+    <span class="hljs-keyword">var</span> count_unique_values_in_chart_ = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> ndx, dimension </span>) </span>{
+
+        <span class="hljs-keyword">var</span> uniq_counts = {};
+
+        <span class="hljs-keyword">var</span> ndim = ndx.dimension(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">cali_object</span>) </span>{
+
+            uniq_counts[ cali_object[ dimension ] ] = <span class="hljs-number">1</span>;
+            <span class="hljs-keyword">return</span> cali_object[ dimension ];
+        });
+
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">Object</span>.keys( uniq_counts ).length;
+    };
+
+
+
     <span class="hljs-keyword">var</span> bind_sort = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{</pre></div></div>
             
         </li>
@@ -706,19 +707,6 @@ This code demonstrates generating the column header automatically based on the c
     };
 
 
-    $.fn.ArrowFunctions = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">obj</span>) </span>{
-
-        <span class="hljs-keyword">var</span> arrows = <span class="hljs-string">"&lt;div class='up_arrow'&gt;&lt;/div&gt;"</span> +
-            <span class="hljs-string">"&lt;div class='down_arrow'&gt;&lt;/div&gt;"</span>;
-
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.each(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
-
-            $(<span class="hljs-keyword">this</span>).append(arrows);
-            $(<span class="hljs-keyword">this</span>).find(<span class="hljs-string">'.up_arrow, .down_arrow'</span>).unbind(<span class="hljs-string">'click'</span>).bind(<span class="hljs-string">'click'</span>, obj.arrow_click);
-        });
-    };
-
-
     $(<span class="hljs-built_in">document</span>).ready(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
 
         <span class="hljs-keyword">var</span> file = ST.Utility.get_file();
@@ -734,6 +722,20 @@ This code demonstrates generating the column header automatically based on the c
             <span class="hljs-attr">layout</span>: layout
         });
     });
+
+
+    $.fn.ArrowFunctions = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">obj</span>) </span>{
+
+        <span class="hljs-keyword">var</span> arrows = <span class="hljs-string">"&lt;div class='up_arrow'&gt;&lt;/div&gt;"</span> +
+            <span class="hljs-string">"&lt;div class='down_arrow'&gt;&lt;/div&gt;"</span>;
+
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.each(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+
+            $(<span class="hljs-keyword">this</span>).append(arrows);
+            $(<span class="hljs-keyword">this</span>).find(<span class="hljs-string">'.up_arrow, .down_arrow'</span>).unbind(<span class="hljs-string">'click'</span>).bind(<span class="hljs-string">'click'</span>, obj.arrow_click);
+        });
+    };
+
 
     <span class="hljs-keyword">return</span> {
         <span class="hljs-attr">RenderChartCollection</span>: RenderChartCollection,
