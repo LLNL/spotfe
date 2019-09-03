@@ -100,7 +100,8 @@ ST.ChartCollection = function() {
             var counts = count_unique_values_in_chart_( ndx, spec.dimension );
             spec.counts = counts;
 
-            if( viz === "PieChart" && counts >= 8 ) {
+            //  keep disabled for now.
+            if( viz === "PieChart" && counts >= 8 && false ) {
                 viz = "HorizontalBarChart";
             }
 
