@@ -11,11 +11,24 @@ div.dc-chart {
 
 div.horizontal-bar-chart {
   padding-top: 30px;
-  overflow-y: scroll; }
+  overflow-y: scroll;
+  z-index: 10;
+  position: relative; }
 
 .row:nth-child(1) .dc-chart {
   height: 410px;
   margin: 37px 0 0 0; }
+
+.outer_holder {
+  position: relative;
+  float: left;
+  display: inline-block; }
+  .outer_holder .the_bar {
+    position: absolute; }
+    .outer_holder .the_bar .row {
+      display: none; }
+    .outer_holder .the_bar g.the_axis {
+      transform: translate(0, 375px); }
 
 .dc-chart {
   position: relative; }

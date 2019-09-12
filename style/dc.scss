@@ -41,6 +41,8 @@ div.dc-chart {
 div.horizontal-bar-chart {
     padding-top: 30px;
     overflow-y: scroll;
+    z-index: 10;
+    position: relative;
 }
 
 .row:nth-child(1) {
@@ -48,6 +50,24 @@ div.horizontal-bar-chart {
     .dc-chart {
         height: 410px;
         margin: 37px 0 0 0;
+    }
+}
+
+.outer_holder {
+    position: relative;
+    float: left;
+    display: inline-block;
+
+    .the_bar {
+        position: absolute;
+
+        .row {
+            display: none;
+        }
+
+        g.the_axis {
+            transform: translate(0,375px);
+        }
     }
 }
 

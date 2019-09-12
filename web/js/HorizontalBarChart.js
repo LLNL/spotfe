@@ -2,31 +2,34 @@ var ST = ST || {};
 
 ST.HorizontalBarChart = function() {
 
-    var stackedChart_ = [];
+    var stackedChart_ = [],
+        axis_chart_;
 
     var render_ = function( ndx, options ) {
 
         var dimension_low = options.dimension.toLowerCase();
         var style = options.show ? "display: block;" : "display: none;";
         var className = 'horizontal-bar-chart-' + dimension_low;
+        var axis_chart_name = className + '_bar';
 
-        var rcht =     '<div instance_num="' + dimension_low + '"  ' +
+        var rcht = '<div class="outer_holder">' +
+            '<div instance_num="' + dimension_low + '"  ' +
             'style="' + style + '" class="horizontal-bar-chart ' + className + '"  chart-dimension="' + dimension_low + '">  \
         <strong>' + options.title + '</strong> \
         <a class="reset horiz_reset"  style="display: none;">reset</a> \
         <div class="clearfix"></div> \
-    </div> ';
+    </div>\
+    <div class="' + axis_chart_name + ' the_bar"></div>' +
+            '</div>';
 
 
         $('.row:eq(0)').append(rcht);
 
+        axis_chart_ = dc.rowChart('.' + axis_chart_name);
+
         stackedChart_[dimension_low] = dc.rowChart('.' + className );
         var colors = [
-            '#9ecae1',
-            '#3182bd',
-            '#5ebd8d',
-            '#bda665',
-            '#bd59a1'
+            '#9ecae1'
         ];
 
 
@@ -52,7 +55,8 @@ ST.HorizontalBarChart = function() {
         // to a specific group then any interaction with such chart will only trigger redraw
         // on other charts within the same chart group.
         // <br>API: [Row Chart](https://github.com/dc-js/dc.js/blob/master/web/docs/api-latest.md#row-chart)
-        stackedChart_[dimension_low] /* dc.rowChart('#day-of-week-chart', 'chartGroup') */
+
+        stackedChart_[dimension_low]
             .width(options.width)
             .height(options.height)
             .margins({top: 20, left: 10, right: 10, bottom: 20})
@@ -72,13 +76,43 @@ ST.HorizontalBarChart = function() {
             })
             .elasticX(true)
             .xAxis().ticks(4);
-            //.on('filtered', function(chart) {
-            //    ST.UrlStateManager.user_filtered(chart, 'LeftHorizontalBarChart');
-            //});
 
+
+        var dayOfWeek2 = ndx.dimension(function (cali_object) {
+
+            ST.Utility.validate_cali_object( cali_object, options.dimension );
+            return cali_object[ options.dimension ];
+        });
+
+        var dayOfWeekGroup2 = dayOfWeek2.group();
+
+        axis_chart_.width(options.width)
+            .height(options.height)
+            .margins({top: 20, left: 10, right: 10, bottom: 20})
+            .group(dayOfWeekGroup2)
+            .dimension(dayOfWeek2)
+            // Assign colors to each value in the x scale domain
+            .ordinalColors(colors)
+            .label(function (d) {
+                return d.key;
+            })
+            // Title sets the row text
+            .title(function (d) {
+                return d.author;  //  d.value
+            })
+            .elasticX(true)
+            .xAxis().ticks(4);
+
+        //$('.' + axis_chart_name + ' .row').hide();
+
+        if( ST.cali_valid === false ) {
+            //  Error on screen.
+            return false;
+        }
 
         $('.horiz_reset').unbind('click').bind('click', ST.HorizontalBarChart.reset);
     };
+
 
     return {
         render: render_,

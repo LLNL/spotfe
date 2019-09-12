@@ -59,23 +59,32 @@ DONE - TEST and roll out S2.
 DONE - Need to support multiple selections for URL loading (also need to encode all those special characters in cmdline variable)
 DONE - add URL loading and saving
 
-- work on Joe Chavez being able to roll out: S2.
+
+- make bars all the same color.
 - physicsstr and "test" - STrings plus more than 8 unique values then we need to have a left horizontal bar in place of the pieChart.  make it scroll.
     * allow for scrolling if too much (right now it scrolls the whole way, but it would look better if it scrolled only the main chart interior part)
     * test for 100s or 1000s of values.
     * test multiple horizontal scrollbar graphs.
+- make color based on a hash of the graph name.
+- Make sure Spot page supports 10K.
+    * Paging of the Table, can we do just top 100, 200, etc.
+        * or does it need actual paginated tabs?
+    * Joe: Working on pageing of the table.
+    Joe is owrking on showing the compare on the actual spot2 page where the table is now.
+- Icons - actual icons
+- File Upload browser on landing Page.
+- Curves & Sets - figure out how to show this in crossfilter (sets is one of the things)
+- work on Joe Chavez being able to roll out: S2.
 
 
 - Nulls
     * assuming we create a newbar with a lower bar, we'll have a problem:
     * if someone gets new data, "what is considered a null" will change.
     * if we make the lowest bucket (null bucket) min int, we won't have to worry about going up to the URL bar.
-- File Upload browser on landing Page.
 - it'd be nice if the tics would line up with the bar charts.
 - think about 10,11,12 xrange if you only have 11s, think about 1 value graphs and how to make it obvious to user of what it is.
 - spin notification
 
-- Curves & Sets - figure out how to show this in crossfilter (sets is one of the things)
 
 
 
