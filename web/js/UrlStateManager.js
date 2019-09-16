@@ -18,7 +18,7 @@ ST.UrlStateManager = function() {
 
         //  need to manually show reset because reset link is outside of horizontal-bar-chart
         var horBar = $('[chart-dimension="' + dimension + '"]');
-        horBar.parent().find('.horiz_reset').show();
+        horBar.closest('.outer_holder').find('.horiz_reset').show();
 
 
         //console.log(instance_num);
