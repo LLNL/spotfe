@@ -61,13 +61,16 @@ div.horizontal-bar-chart {
     a.horiz_reset {
         position: absolute;
         left: 10px;
+        top: -6px;
         z-index: 100;
+        background-color: white;
+        padding: 0 5px 0 0;
     }
 
     .options_title {
         position: absolute;
         left: 10px;
-        top: -20px;
+        top: -23px;
     }
 
     .horizontal-bar-chart {

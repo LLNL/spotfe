@@ -119,7 +119,7 @@ ST.HorizontalBarChart = function() {
         reset: function() {
 
             var instance_num = $(this).parent().find('[instance_num]').attr('instance_num');
-            
+
             stackedChart_[instance_num].filterAll();
             dc.redrawAll();
 
