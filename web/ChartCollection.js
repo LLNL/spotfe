@@ -101,7 +101,7 @@ ST.ChartCollection = function() {
             spec.counts = counts;
 
             //  keep disabled for now.
-            if( viz === "PieChart" && counts >= 2 ) {
+            if( viz === "PieChart" && counts >= 8 ) {
                 viz = "HorizontalBarChart";
             }
 
