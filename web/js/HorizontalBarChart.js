@@ -125,6 +125,10 @@ ST.HorizontalBarChart = function() {
 
             ST.ChartCollection.bind_sort();
             ST.UrlStateManager.remove_param( 'HorizontalBarChart' + instance_num );
+
+            //  HorizontalBarChart needs to hide reset anchor manually because anchor position is outside of other div.
+            //  Do this last just in case there's an error.
+            $(this).hide();
         },
         load_filter: function() {
 
