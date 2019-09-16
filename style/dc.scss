@@ -58,6 +58,27 @@ div.horizontal-bar-chart {
     float: left;
     display: inline-block;
 
+    a.horiz_reset {
+        position: absolute;
+        left: 10px;
+        z-index: 100;
+    }
+
+    .options_title {
+        position: absolute;
+        left: 10px;
+        top: -20px;
+    }
+
+    .horizontal-bar-chart {
+
+        padding-top: 0;
+
+        g.axis {
+            display: none;
+        }
+    }
+
     .the_bar {
         position: absolute;
 
@@ -65,8 +86,8 @@ div.horizontal-bar-chart {
             display: none;
         }
 
-        g.the_axis {
-            transform: translate(0,375px);
+        g.axis {
+            transform: translate(0,345px);
         }
     }
 }

@@ -12,11 +12,11 @@ ST.HorizontalBarChart = function() {
         var className = 'horizontal-bar-chart-' + dimension_low;
         var axis_chart_name = className + '_bar';
 
-        var rcht = '<div class="outer_holder">' +
-            '<div instance_num="' + dimension_low + '"  ' +
-            'style="' + style + '" class="horizontal-bar-chart ' + className + '"  chart-dimension="' + dimension_low + '">  \
-        <strong>' + options.title + '</strong> \
+        var rcht = '<div class="outer_holder"> \
+        <strong class="options_title">' + options.title + '</strong> \
         <a class="reset horiz_reset"  style="display: none;">reset</a> \
+            <div instance_num="' + dimension_low + '"  ' +
+            'style="' + style + '" class="horizontal-bar-chart ' + className + '"  chart-dimension="' + dimension_low + '">  \
         <div class="clearfix"></div> \
     </div>\
     <div class="' + axis_chart_name + ' the_bar"></div>' +
@@ -62,6 +62,7 @@ ST.HorizontalBarChart = function() {
             .margins({top: 20, left: 10, right: 10, bottom: 20})
             .group(dayOfWeekGroup)
             .on('filtered', function(chart) {
+
                 ST.UrlStateManager.user_filtered(chart, 'HorizontalBarChart');
             })
             .dimension(dayOfWeek)
@@ -103,7 +104,6 @@ ST.HorizontalBarChart = function() {
             .elasticX(true)
             .xAxis().ticks(4);
 
-        //$('.' + axis_chart_name + ' .row').hide();
 
         if( ST.cali_valid === false ) {
             //  Error on screen.
@@ -118,7 +118,8 @@ ST.HorizontalBarChart = function() {
         render: render_,
         reset: function() {
 
-            var instance_num = $(this).parent().attr('instance_num');
+            var instance_num = $(this).parent().find('[instance_num]').attr('instance_num');
+            
             stackedChart_[instance_num].filterAll();
             dc.redrawAll();
 
@@ -129,6 +130,5 @@ ST.HorizontalBarChart = function() {
 
             ST.UrlStateManager.load_filter( stackedChart_, 'HorizontalBarChart' );
         }
-
     }
 }();

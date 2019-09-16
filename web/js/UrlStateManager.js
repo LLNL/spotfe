@@ -16,6 +16,11 @@ ST.UrlStateManager = function() {
 
         var dimension = cdim.toLowerCase();
 
+        //  need to manually show reset because reset link is outside of horizontal-bar-chart
+        var horBar = $('[chart-dimension="' + dimension + '"]');
+        horBar.parent().find('.horiz_reset').show();
+
+
         //console.log(instance_num);
 
         if (range) {
