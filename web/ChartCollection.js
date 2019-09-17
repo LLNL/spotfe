@@ -4,6 +4,8 @@
 var ST = ST || {};
 var runTable;
 
+var SHOW_MORE_INCREASE = 10;
+ST.MAX_SHOW = SHOW_MORE_INCREASE;
 
 
 var dateFormatSpecifier = '%m/%d/%Y';
@@ -219,7 +221,7 @@ ST.ChartCollection = function() {
                 return 1;
             })
             // (_optional_) max number of records to be shown, `default = 25`
-            .size(50000)    //  ST.params.max
+            .size(ST.MAX_SHOW)    //  ST.params.max
             // There are several ways to specify the columns; see the data-table documentation.
             // This code demonstrates generating the column header automatically based on the columns.
             .columns(columns)
@@ -406,7 +408,14 @@ ST.ChartCollection = function() {
     };
 
 
-    $(document).ready(function () {
+    var show_more_ = function() {
+
+        ST.MAX_SHOW += SHOW_MORE_INCREASE;
+        init();
+    };
+
+
+    function init () {
 
         var file = ST.Utility.get_file();
         ST.Utility.init_params();
@@ -420,7 +429,9 @@ ST.ChartCollection = function() {
             type: 'summary',
             layout: layout
         });
-    });
+    };
+
+    $(document).ready(init);
 
 
     $.fn.ArrowFunctions = function (obj) {
@@ -437,6 +448,7 @@ ST.ChartCollection = function() {
 
 
     return {
+        show_more: show_more_,
         RenderChartCollection: RenderChartCollection,
         bind_sort: bind_sort
     }

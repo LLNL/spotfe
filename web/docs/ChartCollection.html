@@ -36,6 +36,8 @@
 <span class="hljs-keyword">var</span> ST = ST || {};
 <span class="hljs-keyword">var</span> runTable;
 
+<span class="hljs-keyword">var</span> SHOW_MORE_INCREASE = <span class="hljs-number">10</span>;
+ST.MAX_SHOW = SHOW_MORE_INCREASE;
 
 
 <span class="hljs-keyword">var</span> dateFormatSpecifier = <span class="hljs-string">'%m/%d/%Y'</span>;
@@ -232,7 +234,7 @@ ST.ChartCollection = <span class="hljs-function"><span class="hljs-keyword">func
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">if</span>( viz === <span class="hljs-string">"PieChart"</span> &amp;&amp; counts &gt;= <span class="hljs-number">2</span> ) {
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">if</span>( viz === <span class="hljs-string">"PieChart"</span> &amp;&amp; counts &gt;= <span class="hljs-number">8</span> ) {
                 viz = <span class="hljs-string">"HorizontalBarChart"</span>;
             }
 
@@ -434,7 +436,7 @@ as a grouping function</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            .size(<span class="hljs-number">50000</span>)    <span class="hljs-comment">//  ST.params.max</span></pre></div></div>
+            <div class="content"><div class='highlight'><pre>            .size(ST.MAX_SHOW)    <span class="hljs-comment">//  ST.params.max</span></pre></div></div>
             
         </li>
         
@@ -720,7 +722,14 @@ This code demonstrates generating the column header automatically based on the c
     };
 
 
-    $(<span class="hljs-built_in">document</span>).ready(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">var</span> show_more_ = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+
+        ST.MAX_SHOW += SHOW_MORE_INCREASE;
+        init();
+    };
+
+
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">init</span> (<span class="hljs-params"></span>) </span>{
 
         <span class="hljs-keyword">var</span> file = ST.Utility.get_file();
         ST.Utility.init_params();
@@ -734,7 +743,9 @@ This code demonstrates generating the column header automatically based on the c
             <span class="hljs-attr">type</span>: <span class="hljs-string">'summary'</span>,
             <span class="hljs-attr">layout</span>: layout
         });
-    });
+    };
+
+    $(<span class="hljs-built_in">document</span>).ready(init);
 
 
     $.fn.ArrowFunctions = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">obj</span>) </span>{
@@ -751,6 +762,7 @@ This code demonstrates generating the column header automatically based on the c
 
 
     <span class="hljs-keyword">return</span> {
+        <span class="hljs-attr">show_more</span>: show_more_,
         <span class="hljs-attr">RenderChartCollection</span>: RenderChartCollection,
         <span class="hljs-attr">bind_sort</span>: bind_sort
     }

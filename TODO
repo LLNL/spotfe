@@ -60,7 +60,6 @@ DONE - Need to support multiple selections for URL loading (also need to encode 
 DONE - add URL loading and saving
 
 
-- Reset -> make this show up.  for some reason the show call is not working.
 - physicsstr and "test" - STrings plus more than 8 unique values then we need to have a left horizontal bar in place of the pieChart.  make it scroll.
     * allow for scrolling if too much (right now it scrolls the whole way, but it would look better if it scrolled only the main chart interior part)
     * test for 100s or 1000s of values.

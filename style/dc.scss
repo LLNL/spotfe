@@ -529,6 +529,12 @@ body .dc-chart g.row text {
 
 .container {
 
+    .contain_show_more {
+
+        text-align: center;
+        padding: 0 0 15px 0;
+    }
+
     /* make room for rotated labels. */
     svg[height="370"] {
         height: 450px;
