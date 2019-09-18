@@ -524,6 +524,8 @@ This code demonstrates generating the column header automatically based on the c
             });
 
 
+        render_more_link_( the_data.length );
+
         ST.all_data = dateDimension.top(<span class="hljs-number">80000</span>);
         <span class="hljs-built_in">console</span>.dir(ST.all_data);</pre></div></div>
             
@@ -550,6 +552,13 @@ This code demonstrates generating the column header automatically based on the c
         dc.redrawAll();
 
         bind_sort();
+    };
+
+
+    <span class="hljs-keyword">var</span> render_more_link_ = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> count </span>) </span>{
+
+        <span class="hljs-keyword">var</span> show = ST.MAX_SHOW &lt;= count ? <span class="hljs-string">'show'</span> : <span class="hljs-string">'hide'</span>;
+        $(<span class="hljs-string">'.contain_show_more'</span>)[show]();
     };
 
 

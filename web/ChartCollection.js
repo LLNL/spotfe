@@ -246,6 +246,8 @@ ST.ChartCollection = function() {
             });
 
 
+        render_more_link_( the_data.length );
+
         ST.all_data = dateDimension.top(80000);
         console.dir(ST.all_data);
 
@@ -260,6 +262,13 @@ ST.ChartCollection = function() {
         dc.redrawAll();
 
         bind_sort();
+    };
+
+
+    var render_more_link_ = function( count ) {
+
+        var show = ST.MAX_SHOW <= count ? 'show' : 'hide';
+        $('.contain_show_more')[show]();
     };
 
 
