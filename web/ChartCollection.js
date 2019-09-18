@@ -4,7 +4,7 @@
 var ST = ST || {};
 var runTable;
 
-var SHOW_MORE_INCREASE = 10;
+var SHOW_MORE_INCREASE = 100;
 ST.MAX_SHOW = SHOW_MORE_INCREASE;
 
 
@@ -12,43 +12,6 @@ var dateFormatSpecifier = '%m/%d/%Y';
 var dateFormat = d3.timeFormat(dateFormatSpecifier);
 var dateFormatParser = d3.timeParse(dateFormatSpecifier);
 ST.numberFormat = d3.format('.2f');
-
-
-var data = SPOT_DATA.runs;
-
-//  Reduce # of authors
-//reduce_authors(data);
-
-var uniq_author_count = {};
-
-for( var z=0; z < data.length; z++ ) {
-
-    uniq_author_count[data[z].author] = 1;
-
-    var spot_date = new Date( data[z].start * 1000 );
-
-    var month = spot_date.getMonth() + 1;
-    var day = spot_date.getDate();
-    var year = spot_date.getFullYear();
-
-    data[z].date = month + "/" + day + "/" + year;
-    data[z].year = year;
-
-    var diff = data[z].end - data[z].start;
-
-    data[z].runtime = parseInt(diff/3600);
-    data[z].runtime2 = parseInt(diff/1200);
-
-    data[z].buttons = data[z].data;
-}
-
-var number_of_authors = Object.keys(uniq_author_count).length;
-
-data.forEach(function (d) {
-    d.dd = dateFormatParser(d.date);
-    d.month = d3.timeMonth(d.dd); // pre-calculate month for better performance
-    //d.year = d3.timeYear(d.dd);
-});
 
 
 ST.ChartCollection = function() {
