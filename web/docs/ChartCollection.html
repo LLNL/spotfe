@@ -307,7 +307,7 @@ on other charts within the same chart group.
         });
 
 
-        render_compare_arguments(the_data[<span class="hljs-number">0</span>]);</pre></div></div>
+        ST.CompareArguments.render(the_data[<span class="hljs-number">0</span>]);</pre></div></div>
             
         </li>
         
@@ -500,103 +500,6 @@ This code demonstrates generating the column header automatically based on the c
     };
 
 
-    <span class="hljs-keyword">var</span> render_compare_arguments = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">fields</span>) </span>{
-
-        <span class="hljs-keyword">var</span> options = <span class="hljs-string">"&lt;option value=''&gt;&lt;/option&gt;"</span>;
-        <span class="hljs-keyword">var</span> farr = get_farr(fields);
-
-        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> x = <span class="hljs-number">0</span>; x &lt; farr.length; x++) {
-
-            <span class="hljs-keyword">var</span> field = farr[x];
-            options += <span class="hljs-string">'&lt;option value="'</span> + field + <span class="hljs-string">'"&gt;'</span> + field + <span class="hljs-string">'&lt;/option&gt;'</span>;
-        }</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-21">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-21">&#182;</a>
-              </div>
-              <p> ‘<a id="bookmarkme" href="javascript: void(0)" rel="sidebar">Bookmark</a>‘ +</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">var</span> ht = <span class="hljs-string">'&lt;select class="xaxis"&gt;'</span> + options + <span class="hljs-string">'&lt;/select&gt;'</span> +
-            <span class="hljs-string">'&lt;select class="groupby"&gt;'</span> + options + <span class="hljs-string">'&lt;/select&gt;'</span> +
-            <span class="hljs-string">'&lt;div class="xaxis_label"&gt;Xaxis:&lt;/div&gt;'</span> +
-            <span class="hljs-string">'&lt;div class="groupby_label"&gt;Group By:&lt;/div&gt;'</span>;
-
-        $(<span class="hljs-string">'.compare_arguments'</span>).html(ht);
-
-        $(<span class="hljs-string">'.compare_arguments .xaxis, .compare_arguments .groupby'</span>).unbind(<span class="hljs-string">'change'</span>).bind(<span class="hljs-string">'change'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
-
-            <span class="hljs-keyword">var</span> cla = $(<span class="hljs-keyword">this</span>).attr(<span class="hljs-string">'class'</span>);
-            <span class="hljs-keyword">var</span> val = $(<span class="hljs-keyword">this</span>).val();
-            val = val.replace(<span class="hljs-regexp">/#/</span>, <span class="hljs-string">''</span>);
-
-            ST.UrlStateManager.update_url(cla, val);
-        });
-
-        <span class="hljs-keyword">var</span> last_days = ST.Utility.get_param(ST.LAST_DAYS) || <span class="hljs-string">""</span>;
-
-        $(<span class="hljs-string">'.launch_container'</span>).html(<span class="hljs-string">'&lt;div class="launcher"&gt;'</span> +
-            <span class="hljs-string">'&lt;div class="days_label"&gt;launchdate days ago: &lt;/div&gt;'</span> +
-            <span class="hljs-string">'&lt;input type="text" class="launchdate_days_ago" value="'</span> + last_days + <span class="hljs-string">'"/&gt;'</span> +
-            <span class="hljs-string">'&lt;div class="launch_button myButton"&gt;RELOAD&lt;/div&gt;'</span> +
-            <span class="hljs-string">'&lt;/div&gt;'</span>);
-
-        $(<span class="hljs-string">'.launch_button'</span>).unbind(<span class="hljs-string">'click'</span>).bind(<span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
-
-            <span class="hljs-keyword">var</span> val = $(<span class="hljs-string">'.launchdate_days_ago'</span>).val();
-            ST.UrlStateManager.update_url(<span class="hljs-string">"launchdate_days_ago"</span>, val);
-            location.reload();
-        });
-
-        load_compare();
-    };
-
-
-    <span class="hljs-keyword">var</span> load_compare = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
-
-        <span class="hljs-keyword">var</span> xaxis = ST.Utility.get_param(<span class="hljs-string">'xaxis'</span>, <span class="hljs-literal">true</span>);
-        <span class="hljs-keyword">var</span> groupby = ST.Utility.get_param(<span class="hljs-string">'groupby'</span>, <span class="hljs-literal">true</span>);
-
-        <span class="hljs-keyword">if</span> (xaxis !== <span class="hljs-string">'undefined'</span>) {
-            $(<span class="hljs-string">'.compare_arguments .xaxis'</span>).val(xaxis);
-        }
-
-        <span class="hljs-keyword">if</span> (groupby !== <span class="hljs-string">'undefined'</span>) {
-            $(<span class="hljs-string">'.compare_arguments .groupby'</span>).val(groupby);
-        }
-    };
-
-
-    <span class="hljs-keyword">var</span> get_farr = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">fields</span>) </span>{
-
-        <span class="hljs-keyword">var</span> farr = ST.Utility.to_array(fields);
-
-        farr.sort(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">a, b</span>) </span>{
-
-            a = a.toLowerCase();
-            b = b.toLowerCase();
-
-            <span class="hljs-keyword">if</span> (a &lt; b) {
-                <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
-            }
-            <span class="hljs-keyword">if</span> (a &gt; b) {
-                <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
-            }
-
-            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-        });
-
-        <span class="hljs-keyword">return</span> farr;
-    };
-
-
     <span class="hljs-keyword">var</span> count_unique_values_in_chart_ = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> ndx, dimension </span>) </span>{
 
         <span class="hljs-keyword">var</span> uniq_counts = {};
@@ -617,11 +520,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-22">
+        <li id="section-21">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-22">&#182;</a>
+                <a class="pilcrow" href="#section-21">&#182;</a>
               </div>
               <p> for some reason, dc.js capitalizes column headings, thus messing up the sort
  reference when they click on the arrow click.</p>
