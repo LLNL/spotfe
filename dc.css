@@ -400,7 +400,7 @@ body .dc-chart g.row text {
   .container a {
     cursor: pointer; }
   .container .help_icon, .container .user_pref_icon {
-    padding: 8px;
+    padding: 8px 7px 8px 8px;
     display: inline-block;
     cursor: pointer;
     text-align: center;
@@ -414,8 +414,11 @@ body .dc-chart g.row text {
       -webkit-filter: invert(100%);
       /* Safari/Chrome */
       filter: invert(100%); }
+  .container .help_icon div {
+    background-image: url(/web/img/info.png);
+    background-size: 100% 100%; }
   .container .user_pref_icon {
-    right: 40px; }
+    right: 50px; }
     .container .user_pref_icon div {
       background-image: url(/web/img/check.png);
       background-size: 100% 100%; }

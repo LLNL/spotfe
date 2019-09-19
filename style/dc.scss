@@ -587,7 +587,7 @@ body .dc-chart g.row text {
     }
 
     .help_icon, .user_pref_icon {
-        padding: 8px;
+        padding: 8px 7px 8px 8px;
         display: inline-block;
         cursor: pointer;
         text-align: center;
@@ -604,8 +604,16 @@ body .dc-chart g.row text {
         }
     }
 
+    .help_icon {
+
+        div {
+            background-image: url(/web/img/info.png);
+            background-size: 100% 100%;
+        }
+    }
+
     .user_pref_icon {
-        right: 40px;
+        right: 50px;
 
         div {
             background-image: url(/web/img/check.png);

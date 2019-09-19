@@ -37,7 +37,7 @@ var help_icon_ = function( file, params ) {
             }
         },
         template: '<div>' +
-        '<div class="help_icon" v-on:click="seen=(!seen)">?</div>\
+        '<div class="help_icon myButton" v-on:click="seen=(!seen)"><div class="inner"></div></div>\
         <div class="help_body" v-if="seen">\
         Using file: <span class="txt">{{ file }}</span>\
         <br>Using max: <span class="max">{{ max }}</span>\
