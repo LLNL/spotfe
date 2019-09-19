@@ -10,9 +10,10 @@ ST.FileUpload = function() {
             }
         },
         template: '<form action="javascript:void(0);" method="post">' +
-        '<div class="instructions">Directory containing cali files:</div>' +
+        //'<div class="instructions">Directory containing cali files:</div>' +
         '<input type="text" class="directory" v-model:value="directory_val" v-on:keyup="keyup( $event )"/>' +
-        '<div class="update_button myButton" v-on:click="update( $event )">UPDATE</div>' +
+        '<div class="update_button myButton icon" v-on:click="update( $event )">' +
+        '<div class="inner"></div></div>' +
         '</form>',
         methods: {
             keyup: function(e) {

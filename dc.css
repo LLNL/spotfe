@@ -338,17 +338,10 @@ body .dc-chart g.row text {
 
 .inner_container {
   display: inline-block;
-  width: 1480px; }
+  width: 1480px;
+  padding-top: 60px; }
   .inner_container .instructions {
     color: #888888; }
-  .inner_container .directory {
-    padding: 7px;
-    width: 400px;
-    color: #555555; }
-  .inner_container .update_button {
-    position: relative;
-    top: -5px;
-    left: 6px; }
 
 #runtime-chart strong {
   display: block; }
@@ -366,7 +359,36 @@ body .dc-chart g.row text {
   padding: 15px;
   font-size: 16px;
   line-height: 1.6;
-  background-color: #ffeeee; }
+  background-color: #ffeeee;
+  margin: 60px 0 0 0; }
+
+#file_upload {
+  background-color: #e6e6e6;
+  border-bottom: 1px solid #d6d6d6;
+  height: 49px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  margin-bottom: 30px; }
+  #file_upload div.update_button {
+    position: relative;
+    top: 8px;
+    left: 432px;
+    right: auto;
+    padding: 7px; }
+    #file_upload div.update_button div {
+      background-image: url(/web/img/refresh.png);
+      background-size: 100% 100%;
+      width: 17px;
+      height: 17px; }
+  #file_upload .directory {
+    padding: 7px;
+    width: 400px;
+    position: absolute;
+    left: 8px;
+    top: 7px;
+    color: #555555; }
 
 .container {
   /* make room for rotated labels. */
@@ -408,7 +430,7 @@ body .dc-chart g.row text {
     top: 5px;
     right: 5px;
     z-index: 1000; }
-    .container .icon div {
+    .container .icon .inner {
       width: 20px;
       height: 20px;
       -webkit-filter: invert(100%);
