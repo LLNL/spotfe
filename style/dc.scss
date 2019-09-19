@@ -587,21 +587,30 @@ body .dc-chart g.row text {
     }
 
     .help_icon, .user_pref_icon {
-        background-color: #f2f2f2;
-        border: 1px solid #cccccc;
-        padding: 3px;
+        padding: 8px;
         display: inline-block;
-        width: 20px;
         cursor: pointer;
         text-align: center;
         position: absolute;
         top: 5px;
         right: 5px;
         z-index: 1000;
+
+        div {
+            width: 20px;
+            height: 20px;
+            -webkit-filter: invert(100%); /* Safari/Chrome */
+            filter: invert(100%);
+        }
     }
 
     .user_pref_icon {
         right: 40px;
+
+        div {
+            background-image: url(/web/img/check.png);
+            background-size: 100% 100%;
+        }
     }
 }
 

@@ -53,7 +53,9 @@ ST.UserPreferences = function() {
                 }
             },
             template: '<div>\
-            <div class="user_pref_icon" v-on:click="seen=(!seen)">=</div>\
+            <div class="user_pref_icon myButton" v-on:click="seen=(!seen)">\
+            <div class="inner"></div>\
+            </div>\
             <div class="user_pref_body" v-if="seen">\
                 <div v-for="chart in mcharts" class="prow">\
                     <input type="checkbox" v-bind:checked="chart.show" v-on:click="check( chart.dimension, $event )"/>\
