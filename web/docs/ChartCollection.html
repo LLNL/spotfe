@@ -300,7 +300,9 @@ on other charts within the same chart group.
                     <span class="hljs-keyword">var</span> drill_icon = but.toLowerCase();
 
                     buts += <span class="hljs-string">'&lt;div run_id="'</span> + d.run_id + <span class="hljs-string">'" '</span> +
-                        <span class="hljs-string">'class="drilldown myButton '</span> + drill_icon + <span class="hljs-string">'"&gt;'</span> + but.toUpperCase() + <span class="hljs-string">'&lt;/div&gt;'</span>;
+                        <span class="hljs-string">'subject="'</span> + drill_icon + <span class="hljs-string">'" class="drilldown myButton '</span> + drill_icon + <span class="hljs-string">' icon"&gt;'</span> +
+                        <span class="hljs-string">'&lt;div class="inner"&gt;&lt;/div&gt;'</span> +
+                        <span class="hljs-string">'&lt;/div&gt;'</span>;
                 }
 
                 <span class="hljs-keyword">var</span> hidden = <span class="hljs-string">'&lt;div class="hidden key"&gt;'</span> + d.key + <span class="hljs-string">'&lt;/div&gt;'</span>;

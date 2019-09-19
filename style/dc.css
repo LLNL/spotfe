@@ -423,6 +423,16 @@ body .dc-chart g.row text {
       background-image: url(/web/img/check.png);
       background-size: 100% 100%; }
 
+.dc-data-table .walltime {
+  position: static; }
+  .dc-data-table .walltime div {
+    background-image: url(/web/img/walltime.png);
+    background-size: 100% 100%; }
+.dc-data-table .jupyter {
+  position: static; }
+  .dc-data-table .jupyter div {
+    background-image: url(/web/img/jupyter.png);
+    background-size: 100% 100%; }
 .dc-data-table th {
   position: relative; }
 .dc-data-table .up_arrow {

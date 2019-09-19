@@ -161,7 +161,9 @@ ST.ChartCollection = function() {
                     var drill_icon = but.toLowerCase();
 
                     buts += '<div run_id="' + d.run_id + '" ' +
-                        'class="drilldown myButton ' + drill_icon + '">' + but.toUpperCase() + '</div>';
+                        'subject="' + drill_icon + '" class="drilldown myButton ' + drill_icon + ' icon">' +
+                        '<div class="inner"></div>' +
+                        '</div>';
                 }
 
                 var hidden = '<div class="hidden key">' + d.key + '</div>';
