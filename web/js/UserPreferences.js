@@ -53,7 +53,7 @@ ST.UserPreferences = function() {
                 }
             },
             template: '<div>\
-            <div class="user_pref_icon myButton" v-on:click="seen=(!seen)">\
+            <div class="user_pref_icon icon myButton" v-on:click="seen=(!seen)">\
             <div class="inner"></div>\
             </div>\
             <div class="user_pref_body" v-if="seen">\

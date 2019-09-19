@@ -399,7 +399,7 @@ body .dc-chart g.row text {
       zoom: 1.5; }
   .container a {
     cursor: pointer; }
-  .container .help_icon, .container .user_pref_icon {
+  .container .icon {
     padding: 8px 7px 8px 8px;
     display: inline-block;
     cursor: pointer;
@@ -408,7 +408,7 @@ body .dc-chart g.row text {
     top: 5px;
     right: 5px;
     z-index: 1000; }
-    .container .help_icon div, .container .user_pref_icon div {
+    .container .icon div {
       width: 20px;
       height: 20px;
       -webkit-filter: invert(100%);
