@@ -556,6 +556,18 @@ body .dc-chart g.row text {
 
 .container {
 
+    div.launch_button {
+        padding: 7px;
+        width: 20px;
+
+        div {
+            background-image: url(/web/img/refresh.png);
+            background-size: 100% 100%;
+            width: 17px;
+            height: 17px
+        }
+    }
+
     .contain_show_more {
 
         text-align: center;

@@ -33,7 +33,9 @@ ST.CompareArguments = function() {
         $('.launch_container').html('<div class="launcher">' +
             '<div class="days_label">launchdate days ago: </div>' +
             '<input type="text" class="launchdate_days_ago" value="' + last_days + '"/>' +
-            '<div class="launch_button myButton">RELOAD</div>' +
+            '<div class="launch_button myButton icon">' +
+            '<div class="inner"></div>' +
+            '</div>' +
             '</div>');
 
         $('.launch_button').unbind('click').bind('click', function () {
