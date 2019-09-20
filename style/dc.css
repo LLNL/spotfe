@@ -450,10 +450,13 @@ body .dc-chart g.row text {
   .dc-data-table .walltime div {
     background-image: url(/web/img/walltime.png);
     background-size: 100% 100%; }
-.dc-data-table .jupyter {
-  position: static; }
-  .dc-data-table .jupyter div {
-    background-image: url(/web/img/jupyter.png);
+.dc-data-table .jupyter.icon {
+  position: static;
+  padding: 10px 7px 10px 8px; }
+  .dc-data-table .jupyter.icon div {
+    height: 16px;
+    /* jupyter.png, planet.png, notes.png */
+    background-image: url(/web/img/planet.png);
     background-size: 100% 100%; }
 .dc-data-table th {
   position: relative; }

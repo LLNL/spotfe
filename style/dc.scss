@@ -662,12 +662,15 @@ body .dc-chart g.row text {
         }
     }
 
-    .jupyter {
+    .jupyter.icon {
 
         position: static;
+        padding: 10px 7px 10px 8px;
 
         div {
-            background-image: url(/web/img/jupyter.png);
+            height: 16px;
+            /* jupyter.png, planet.png, notes.png */
+            background-image: url(/web/img/planet.png);
             background-size: 100% 100%;
         }
     }
