@@ -4,7 +4,8 @@
 class CaliGen:
     def make(self):
 
-        template_loc = "/g/g0/pascal/lulesh_gen/template"
+        output_loc = "/g/g0/pascal/lulesh_gen/"
+        template_loc = "template"
 
         file = open( template_loc, "r" )
         template = file.read()
