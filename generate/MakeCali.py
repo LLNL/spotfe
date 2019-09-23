@@ -1,6 +1,8 @@
 #!/usr/global/tools/lorenz/python/narf-env/bin/python
 from pprint import pprint
 from random import randint
+from random import uniform
+from random import choice
 
 class CaliGen:
     def __init__(self):
@@ -14,12 +16,14 @@ class CaliGen:
 
         output_loc = "/g/g0/pascal/lulesh_gen/"
 
-        index = "0"
-        file = open( output_loc + index + ".cali", "w")
+        for i in range(0,20):
 
-        output = self.get_output()
-        file.write( output )
-        file.close()
+            index = str(i)
+
+            file = open( output_loc + index + ".cali", "w")
+            output = self.get_output()
+            file.write( output )
+            file.close()
 
 
 
@@ -55,9 +59,9 @@ class CaliGen:
             range = value["range"]
 
             if vtype == "float":
-                val = 2038
+                val = uniform( range[0], range[1] )
             elif vtype == "string":
-                val = "string"
+                val = choice( range )
             elif vtype == "integer":
                 val = randint( range[0], range[1] )
 

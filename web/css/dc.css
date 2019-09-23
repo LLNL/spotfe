@@ -378,7 +378,7 @@ body .dc-chart g.row text {
     right: auto;
     padding: 7px; }
     #file_upload div.update_button div {
-      background-image: url(/web/img/refresh.png);
+      background-image: url(../img/refresh.png);
       background-size: 100% 100%;
       width: 17px;
       height: 17px; }
@@ -397,7 +397,7 @@ body .dc-chart g.row text {
     padding: 7px;
     width: 20px; }
     .container div.launch_button div {
-      background-image: url(/web/img/refresh.png);
+      background-image: url(../img/refresh.png);
       background-size: 100% 100%;
       width: 17px;
       height: 17px; }
@@ -445,18 +445,18 @@ body .dc-chart g.row text {
       /* Safari/Chrome */
       filter: invert(100%); }
   .container .help_icon div {
-    background-image: url(/web/img/info.png);
+    background-image: url(../img/info.png);
     background-size: 100% 100%; }
   .container .user_pref_icon {
     right: 50px; }
     .container .user_pref_icon div {
-      background-image: url(/web/img/check.png);
+      background-image: url(../img/check.png);
       background-size: 100% 100%; }
 
 .dc-data-table .walltime {
   position: static; }
   .dc-data-table .walltime div {
-    background-image: url(/web/img/walltime.png);
+    background-image: url(../img/walltime.png);
     background-size: 100% 100%; }
 
 .dc-data-table .jupyter.icon {
@@ -465,7 +465,7 @@ body .dc-chart g.row text {
   .dc-data-table .jupyter.icon div {
     height: 16px;
     /* jupyter.png, planet.png, notes.png */
-    background-image: url(/web/img/planet.png);
+    background-image: url(../img/planet.png);
     background-size: 100% 100%; }
 
 .dc-data-table th {

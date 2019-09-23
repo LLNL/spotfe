@@ -536,7 +536,7 @@ body .dc-chart g.row text {
         padding: 7px;
 
         div {
-            background-image: url(/web/img/refresh.png);
+            background-image: url(../img/refresh.png);
             background-size: 100% 100%;
             width: 17px;
             height: 17px
@@ -561,7 +561,7 @@ body .dc-chart g.row text {
         width: 20px;
 
         div {
-            background-image: url(/web/img/refresh.png);
+            background-image: url(../img/refresh.png);
             background-size: 100% 100%;
             width: 17px;
             height: 17px
@@ -646,7 +646,7 @@ body .dc-chart g.row text {
     .help_icon {
 
         div {
-            background-image: url(/web/img/info.png);
+            background-image: url(../img/info.png);
             background-size: 100% 100%;
         }
     }
@@ -655,7 +655,7 @@ body .dc-chart g.row text {
         right: 50px;
 
         div {
-            background-image: url(/web/img/check.png);
+            background-image: url(../img/check.png);
             background-size: 100% 100%;
         }
     }
@@ -669,7 +669,7 @@ body .dc-chart g.row text {
         position: static;
 
         div {
-            background-image: url(/web/img/walltime.png);
+            background-image: url(../img/walltime.png);
             background-size: 100% 100%;
         }
     }
@@ -682,7 +682,7 @@ body .dc-chart g.row text {
         div {
             height: 16px;
             /* jupyter.png, planet.png, notes.png */
-            background-image: url(/web/img/planet.png);
+            background-image: url(../img/planet.png);
             background-size: 100% 100%;
         }
     }
