@@ -4,6 +4,7 @@ from random import randint
 from random import uniform
 from random import choice
 import sys
+import time
 
 
 class CaliGen:
@@ -30,6 +31,8 @@ class CaliGen:
 
 
     def get_output(self):
+
+        unow = int(time.time())
 
         stub_values = {
             "FIGURE_OF_MERIT": {
@@ -61,6 +64,14 @@ class CaliGen:
                           "/bin",
                           "/g/g90/johnson234/exe/STRIP_HEADER/toss17/impending4.8-3472",
                           "/g/home/exe-no-exceptions/bin/"],
+                "type": "string"
+            },
+            "LAUNCHDATE": {
+                "range": [unow - 4800200, unow],
+                "type": "integer"
+            },
+            "CMDLINE": {
+                "range": ["[lulesh2.0, -P, spot, -b, 1, -s,60,-c,1]", "[-CFLAGS]", "[-runtime,-p,-3]", "[-cm,-blank]"],
                 "type": "string"
             }
         }
@@ -94,6 +105,8 @@ class CaliGen:
 
 
 mycali = CaliGen()
-mycali.make( sys.argv[1] )
+output_dir = sys.argv.length > 0
+
+mycali.make( sys.argv[1],  )
 
 
