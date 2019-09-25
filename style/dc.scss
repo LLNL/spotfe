@@ -55,13 +55,14 @@ div.horizontal-bar-chart {
 
 .outer_holder {
     position: relative;
+    padding-top: 55px;
     float: left;
     display: inline-block;
 
     a.horiz_reset {
         position: absolute;
         left: 10px;
-        top: -6px;
+        top: 55px;
         z-index: 100;
         background-color: white;
         padding: 0 5px 0 0;
@@ -70,7 +71,7 @@ div.horizontal-bar-chart {
     .options_title {
         position: absolute;
         left: 10px;
-        top: -23px;
+        top: 33px;
     }
 
     .horizontal-bar-chart {

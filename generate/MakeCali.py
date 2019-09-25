@@ -73,6 +73,20 @@ class CaliGen:
             "CMDLINE": {
                 "range": ["[lulesh2.0, -P, spot, -b, 1, -s,60,-c,1]", "[-CFLAGS]", "[-runtime,-p,-3]", "[-cm,-blank]"],
                 "type": "string"
+            },
+            "LIBRARIES": {
+                "range": ["GCC-4.93", "lib/fortran/sur/tc", "gilib", "libc/package",
+                          "quant/etc/package", "lulesh4834.23", "jasdf-lulesh", "packaged-soup/etc/home",
+                          "shrimp", "jasdf/72343/asdfjasdf", 'sanda-fkasdfj/asdf',
+                          "/home/pak", "/etc/fin/etc/home.jafd"],
+                "type": "string"
+            },
+            "CLUSTER": {
+                "range": ["quartz", "diamond", "mustard", "treetops",
+                          "greenquartz", "bluequartz", "bluerocks", "greenrocks", "yellowrocks",
+                          "rockbrick", "rockpattern", "rock0", "rock2038", "skyrock", "Rockville", "rocktissue", "rockB", "rockc",
+                          "rocketc", "rockberry", "rockbook", "temprock", "rockfiro"],
+                "type": "string"
             }
         }
 
@@ -105,8 +119,8 @@ class CaliGen:
 
 
 mycali = CaliGen()
-output_dir = sys.argv.length > 0
+#output_dir = sys.argv.length > 0
 
-mycali.make( sys.argv[1],  )
+mycali.make( sys.argv[1] )
 
 

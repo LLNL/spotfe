@@ -21,19 +21,20 @@ div.horizontal-bar-chart {
 
 .outer_holder {
   position: relative;
+  padding-top: 55px;
   float: left;
   display: inline-block; }
   .outer_holder a.horiz_reset {
     position: absolute;
     left: 10px;
-    top: -6px;
+    top: 55px;
     z-index: 100;
     background-color: white;
     padding: 0 5px 0 0; }
   .outer_holder .options_title {
     position: absolute;
     left: 10px;
-    top: -23px; }
+    top: 33px; }
   .outer_holder .horizontal-bar-chart {
     padding-top: 0; }
     .outer_holder .horizontal-bar-chart g.axis {

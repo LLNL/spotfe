@@ -48,7 +48,7 @@ ST.HorizontalBarChart = function() {
         var dayOfWeekGroup = dayOfWeek.group();
 
 
-        options.height = 20 + (options.counts * 30);
+        options.height = 30 + (options.counts * 30);
 
         // Create a row chart and use the given css selector as anchor. You can also specify
         // an optional chart group for this chart to be scoped within. When a chart belongs
