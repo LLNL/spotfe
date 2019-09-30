@@ -1,3 +1,24 @@
+List:
+0. Licensing for icons, check.
+1. Checkbox Persistance
+2. Rebind "show more" after any selective event occurs
+3. Reset link needs to not appear after reset_all was clicked.
+DONE - 4. Fix wrap fo the horizBarChart
+5. Be able to owverwrite exiting cali files.
+6. Fix compare page for cali files -> make sure tmepalte is not included.
+7. More template paramters.
+8. Add a curve, so it's not homogenous.
+9. Create a testing index.html page.
+    * Make all tests RZ.
+    * email Nathan to get spot.py URL for them.
+10. Integrate with Joe Chavez.
+
+
+Eventually:
+Memory stuff.
+
+
+
 
 next:
 DONE - alphabetize the the checkboxes, so you dont have to hunt.
@@ -378,3 +399,7 @@ via: post
 route: /command/oslic
 command: /usr/tce/bin/python3 /usr/gapps/spot/spot.py hierarchical  /usr/gapps/spot/datasets/lulesh2small 'sum#time.inclusive.duration'  --filenames 190115-142600_90550_tF8hgrdsY0NZ.cali 190115-134904_151764_PZ3aWdEJn6zG.cali 190115-134904_151836_F0Wmp8EHByce.cali 190115-134904_151908_Ngpf2ZLqdeXZ.cali 190115-134904_151980_UIClZXD7wmGo.cali 190115-134904_152052_YbyzpvgGD244.cali 190115-134904_152125_7c59tNMwu4EF.cali 190115-134905_152197_62iXAbF1nUNc.cali 190115-134905_152269_ulQX2X1r0KNy.cali 190115-134905_152341_EbvolZauto97.cali 190115-134905_152413_dQKcssLWrqpq.cali 190115-134905_152485_WE4QgCQSkFCt.cali 190115-134905_152557_6VlkJa8zoAyA.cali 190115-134905_152629_NARoapxWdwiI.cali 190115-134905_152701_TqrTRsFfBa4A.cali 190115-134905_152773_k7L8GtPnbVQz.cali 190115-134905_152845_sPnTKCVUUExL.cali 190115-134905_152917_uYg1rqDmtOKC.cali 190115-134905_152989_DesHW9w8FfyM.cali 190115-134905_153061_4e2LbKS8qhUi.cali 190115-134905_153133_Z6zO8tU4NgW3.cali 190115-134905_153205_isDQFcHpOCMU.cali 190115-134905_153277_imeOwVqybbbH.cali 190115-134906_153349_7JOA7QBen7Pf.cali 190115-134906_153421_VXfb4lIozEv5.cali 190115-134906_153493_7udfPtc23Y0t.cali 190115-134906_153565_B65L4lgNL5cU.cali 190115-134906_153638_9yNPpZ6mrcnG.cali 190115-134906_153711_qWYqOz49T842.cali 190115-134906_153783_AJusvvEtMHzk.cali 190115-134906_153855_t3SX3AM8p5U8.cali 190115-134906_153927_yOzIP8dy7JM6.cali 190115-134906_153999_E2EvgHM93iLH.cali 190115-134906_154071_hEURs1OpmQtT.cali 190115-134906_154143_bIUf7k2nAd0W.cali 190115-134906_154215_SP6paXxYeByF.cali 190115-134907_154287_MZNqYfTQNOo7.cali 190115-134907_154359_z9owlQyhfKrL.cali 190115-134907_154431_kF4IOYDzPeS7.cali 190115-134907_154503_PrKN3MsbGoJL.cali 190115-134907_154576_HHq0kyAeuwQU.cali 190115-134907_154649_JBNpYVLxwsIC.cali 190115-134907_154722_Avch5qlsE9Ia.cali 190115-134907_154794_sFJscl8HAFVB.cali 190115-134907_154866_3p6TpAOhyLLV.cali 190115-134907_154938_YpiynFlHi2ke.cali 190115-134907_155010_8casHb0PyxyC.cali 190115-134907_155082_HyckHZWFQn7A.cali 190115-134907_155154_gRqVl2tH81Fq.cali 190115-134907_155226_T0FUGSGNqR1O.cali 190115-134908_155298_Sw0o4us1mYRD.cali 190115-134908_155370_Geks0cQEogcS.cali 190115-134908_155442_agCrV9ge5yyU.cali 190115-134908_155515_IyGNrUlVPre3.cali 190115-134908_155587_wKNodgWmPfuN.cali 190115-134908_155659_z7fZmBEvzuwG.cali 190115-134908_155731_QqgnGgSfagWA.cali 190115-134908_155803_pwy6KmBc3vdi.cali 190115-134908_155875_39nzy6RJSVMa.cali 190115-134908_155948_outGiCzUvUkD.cali 190115-134908_156020_L47ywpBpe2qR.cali 190115-134908_156092_LNofJy3YSpOB.cali 190115-134908_156164_yfTfxWbZCA2r.cali 190115-134909_156237_scWUwuJt6hy7.cali 190115-134909_156313_uUryT9p6QM3E.cali 190115-134909_156385_tAWXVKoCv0pR.cali 190115-134909_156457_J4mKcgZdD1Xc.cali 190115-134909_156529_7wlkrYUVPJKu.cali
 _: 1562627379824
+
+
+
+

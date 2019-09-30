@@ -662,6 +662,9 @@ body .dc-chart g.row text {
     }
 }
 
+.none_here {
+    display: none;
+}
 
 .dc-data-table {
 
@@ -683,7 +686,7 @@ body .dc-chart g.row text {
         div {
             height: 16px;
             /* jupyter.png, planet.png, notes.png */
-            background-image: url(../img/planet.png);
+            background-image: url(../img/planet.gif);
             background-size: 100% 100%;
         }
     }

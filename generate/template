@@ -109,5 +109,5 @@ __rec=node,id=83,attr=82,data=1,parent=75
 __rec=node,id=93,attr=92,data=1,parent=83
 __rec=node,id=108,attr=107,data=ELAPSED_TIME,parent=93
 __rec=node,id=127,attr=126,data=FIGURE_OF_MERIT,parent=108
-__rec=node,id=130,attr=129,data=avg#inclusive#sum#time.duration\,min#inclusive#sum#time.duration\,max#inclusive#sum#time.duration,parent=127
+__rec=node,id=130,attr=129,data=SPOT_METRICS,parent=127
 __rec=globals,ref=130

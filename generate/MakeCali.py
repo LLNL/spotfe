@@ -87,6 +87,25 @@ class CaliGen:
                           "rockbrick", "rockpattern", "rock0", "rock2038", "skyrock", "Rockville", "rocktissue", "rockB", "rockc",
                           "rocketc", "rockberry", "rockbook", "temprock", "rockfiro"],
                 "type": "string"
+            },
+            "SPOT_METRICS": {
+                "range": [
+                    "avg#inclusive#sum#time.duration\,min#inclusive#sum#time.duration\,max#inclusive#sum#time.duration",
+                          "min#inclusive#max#time.dur",
+                          "max#include#sum#time#duration\,min#max#inclusive",
+                          "avg#face.duration#inclusive#sum",
+                          "#sum.sum#duration#inclusive",
+                          "min#min.min#max#.duration",
+                          "avg#face.duration#inclusive#sumwert",
+                          "#sum.sum#duration#inclusivewert",
+                          "min#min.min#max#.durationwret",
+                          "avg#face.duration#inclusive#sum5345",
+                          "#sum.sum#duration#inclusive45345",
+                          "min#min.min#max#.duratio3454n",
+                          "max#duration",
+                          "small#avg.duration.insclusive",
+                          "optional#max#duration"],
+                "type": "string"
             }
         }
 
