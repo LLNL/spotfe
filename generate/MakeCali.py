@@ -5,7 +5,8 @@ from random import uniform
 from random import choice
 import sys
 import time
-
+import os
+from pathlib import Path
 
 class CaliGen:
     def __init__(self ):
@@ -18,6 +19,11 @@ class CaliGen:
     def make(self, make_num ):
 
         output_loc = "/g/g0/pascal/lulesh_gen/"
+        spot_file = output_loc + ".spot_cache1.pkl"
+        file = Path( spot_file )
+
+        if file.is_file():
+            os.unlink( spot_file )
 
         for i in range(0, int(make_num)):
 
@@ -66,12 +72,49 @@ class CaliGen:
                           "/g/home/exe-no-exceptions/bin/"],
                 "type": "string"
             },
+            "JOBSIZE": {
+                "range": [1, 5],
+                "type": "integer"
+            },
+            "THREADS": {
+                "range": [31, 125],
+                "type": "integer"
+            },
             "LAUNCHDATE": {
                 "range": [unow - 4800200, unow],
                 "type": "integer"
             },
+            "PROBLEM_SIZE": {
+                "range": [50, 85],
+                "type": "integer"
+            },
+            "REGION_BALANCE": {
+                "range": [0,12],
+                "type": "integer"
+            },
+            "REGION_COST": {
+                "range": [3,5],
+                "type": "integer"
+            },
             "CMDLINE": {
-                "range": ["[lulesh2.0, -P, spot, -b, 1, -s,60,-c,1]", "[-CFLAGS]", "[-runtime,-p,-3]", "[-cm,-blank]"],
+                "range": ["[lulesh2.0, -P, spot, -b, 1, -s,60,-c,1]",
+                          "[-CFLAGS]", "[-runtime,-p,-3]",
+                          "[-cm,-blank]",
+                          "[-simmer 89]",
+                          "[-runflag -f, 60,-83, -NONULL_ACTIV]",
+                          "[-ksy active, 47, feature89]",
+                          "[-kysjqkqj, FFIM]",
+                          "[-SIM Mac, emploer8934]",
+                          "[-JIM, -48473, mac10,20, mac2015, 2019]",
+                          "[-Epsonprinter8389, 2341234]",
+                          "[-dash fin]",
+                          "[-COM regs]",
+                          "[-active COM, etc//ban/bk]",
+                          "[-user/etc/]",
+                          "[-bin]",
+                          "[-exe]",
+                          "[-28343-b83, bin/active/sender/grid.fjs]",
+                          ],
                 "type": "string"
             },
             "LIBRARIES": {
@@ -103,6 +146,12 @@ class CaliGen:
                           "#sum.sum#duration#inclusive45345",
                           "min#min.min#max#.duratio3454n",
                           "max#duration",
+                          "duration#sim",
+                          "dur/etcation#sim",
+                          "durat4234ion#sim",
+                          "duration#trertsim",
+                          "duration#simwtert",
+                          "duration#sim5849358345",
                           "small#avg.duration.insclusive",
                           "optional#max#duration"],
                 "type": "string"
@@ -124,7 +173,17 @@ class CaliGen:
             elif vtype == "string":
                 val = choice( range )
             elif vtype == "integer":
-                val = randint( range[0], range[1] )
+
+                first = key[:1]
+                ha = hash(first)
+                mod = ha % 8
+
+                #pprint( mod )
+                low = range[0]
+                high = range[1]
+                diff = high - low
+
+                val = randint( low, high )
 
             cali_con = cali_con.replace( key, str(val) )
 

@@ -1,13 +1,14 @@
 List:
-0. Licensing for icons, check.
-1. Checkbox Persistance
-2. Rebind "show more" after any selective event occurs
+-1. Be able to set the output directory.
+DONE - 0. Licensing for icons, check.
+2. Rebind "show more" after any selective event occurs -> like you select a pie chart or a bar chart or something.
 3. Reset link needs to not appear after reset_all was clicked.
 DONE - 4. Fix wrap fo the horizBarChart
-5. Be able to owverwrite exiting cali files.
+DONE - 5. Be able to owverwrite exiting cali files.
 6. Fix compare page for cali files -> make sure tmepalte is not included.
-7. More template paramters.
+DONE - 7. More template paramters.
 8. Add a curve, so it's not homogenous.
+9. Fix [brackets] for command line, it's not showing up.
 9. Create a testing index.html page.
     * Make all tests RZ.
     * email Nathan to get spot.py URL for them.
@@ -18,6 +19,10 @@ Eventually:
 Memory stuff.
 
 
+
+How to use:
+cd /usr/global/web-pages/lc/www/spot/dcvis/generate/
+python3 MakeCali.py 4905
 
 
 next:
