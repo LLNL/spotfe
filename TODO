@@ -1,11 +1,12 @@
 List:
+DONE - be able to remove existing files.
 -1. Be able to set the output directory.
 DONE - 0. Licensing for icons, check.
 2. Rebind "show more" after any selective event occurs -> like you select a pie chart or a bar chart or something.
 3. Reset link needs to not appear after reset_all was clicked.
 DONE - 4. Fix wrap fo the horizBarChart
 DONE - 5. Be able to owverwrite exiting cali files.
-6. Fix compare page for cali files -> make sure tmepalte is not included.
+DONE - 6. (one working case is there) Fix compare page for cali files -> make sure tmepalte is not included.
 DONE - 7. More template paramters.
 8. Add a curve, so it's not homogenous.
 9. Fix [brackets] for command line, it's not showing up.

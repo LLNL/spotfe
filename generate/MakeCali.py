@@ -7,6 +7,7 @@ import sys
 import time
 import os
 from pathlib import Path
+import glob, os, os.path
 
 class CaliGen:
     def __init__(self ):
@@ -21,6 +22,12 @@ class CaliGen:
         output_loc = "/g/g0/pascal/lulesh_gen/"
         spot_file = output_loc + ".spot_cache1.pkl"
         file = Path( spot_file )
+
+        # remove all the previous *.cali files.
+        filelist = glob.glob(os.path.join(output_loc, "*.cali"))
+        for f in filelist:
+            os.remove( f )
+
 
         if file.is_file():
             os.unlink( spot_file )
@@ -169,26 +176,53 @@ class CaliGen:
             range = value["range"]
 
             if vtype == "float":
-                val = uniform( range[0], range[1] )
+                val = self.get_rand(key, range)
+
             elif vtype == "string":
                 val = choice( range )
+
             elif vtype == "integer":
-
-                first = key[:1]
-                ha = hash(first)
-                mod = ha % 8
-
-                #pprint( mod )
-                low = range[0]
-                high = range[1]
-                diff = high - low
-
-                val = randint( low, high )
+                val = self.get_rand( key, range )
+                val = int(round(val))
 
             cali_con = cali_con.replace( key, str(val) )
 
-
         return cali_con
+
+
+    def get_rand(self, key, range ):
+
+        dist = [
+            [0,0.1,0.15, 0.17,0.2, 0.24, 0.28,0.3,0.4,0.5,0.6,0.7,0.8,0.9, 0.85, 0.95, 0.98, 0.93, 0.82, 0.78, 1],
+            [0, 0.05, 0.07, 0.1, 0.12, 0.14, 0.16, 0.17, 0.18, 0.19, 0.20, 0.22, 0.72, 0,85, 0.98, 0.95, 0.99, 0.90],
+            [0, 0.03, 0.07, 0.10, 0.61, 0.62, 0.63, 0.64, 0.65, 0.76, 0.77, 0.78, 0.89, 1],
+            [0, 0.02, 0.04, 0.06, 0.27, 0.41, 0.42, 0.46, 0.48, 0.53, 0.56, 0.60, 0.58, 0.79, 0.85, 1],
+            [0, 0.01, 0.22, 0.43, 0.47, 0.45, 0.46, 0.57, 0.58, 0.59, 0.62, 0.67, 0, .70, 0.9, 0.95, 0.98, 1],
+            [0,0.05, 0.07, 0.1, 0.12, 0.14, 0.18, 0.21, 0.5, 0.8, 0.83, 0.88, 0.90],
+            [0,0.05, 0.08, 0.03, 0.11, 0.45, 0.48, 0.52, 0.81, 0.2, 0.3, 0.4, 0.83, 0.85, 0.88, 0.90, 0.92, 0.97, 0.99],
+            [0.02, 0.03, 0.05, 0.07, 0.1, 0.13, 0.15, 0.16, 0.17, 0.72, 0.74, 0.75, 0.79, 0.82, 0.84, 0.85],
+            [0.02, 0.03, 0.05, 0.07, 0.1, 0.13, 0.15, 0.23,0.23,0.23,0.3, 0.4, 0.46, 0.57, 0.72, 0.74, 0.75, 0.79, 0.82, 0.84, 0.85],
+            [0.02, 0.03, 0.05, 0.07, 0.1, 0.23, 0.25, 0.16, 0.17, 0.3, 0.4, 0.5, 0.6, 0.7, 0.72, 0.74, 0.75, 0.76, 0.77, 0.78, 0.78,0.78,0.78,0.78, 0.79, 0.82, 0.84, 0.85],
+            [0.02, 0.03, 0.05, 0.07, 0.1, 0.13, 0.15, 0.16, 0.17, 0.2, 0.3, 0.4, 0.5, 0.6, 0.611, 0.613, 0.615, 0.61, 0.62, 0.63, 0.64, 0.65, 0.66, 0.68, 0.72, 0.74, 0.75, 0.79, 0.82, 0.84, 0.85],
+        ]
+
+
+        first = key
+        ha = hash(first)
+        distribution = ha % len(dist)
+        dist_arr = dist[distribution]
+        offset_per = choice( dist_arr )
+
+        #pprint( key )
+        #pprint( dist_arr )
+
+        low = range[0]
+        high = range[1]
+        diff = high - low
+        offset = diff * offset_per
+
+        val = low + offset
+        return val
 
 
     def dump(self, obj):
