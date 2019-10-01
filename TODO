@@ -1,6 +1,7 @@
 List:
 DONE - be able to remove existing files.
 -1. Be able to set the output directory.
+    * suffix name with _# of cali files
 DONE - 0. Licensing for icons, check.
 2. Rebind "show more" after any selective event occurs -> like you select a pie chart or a bar chart or something.
 3. Reset link needs to not appear after reset_all was clicked.
@@ -19,7 +20,10 @@ DONE - 7. More template paramters.
 Eventually:
 Memory stuff.
 
-
+32000 entires takes 46s to load.
+14500 entries take 24 seconds to load, slight delay when checkboxing.
+2000 entries take 3.85 seconds to load
+95000 got a gtaeway time-out probably because it took too long.
 
 How to use:
 cd /usr/global/web-pages/lc/www/spot/dcvis/generate/
