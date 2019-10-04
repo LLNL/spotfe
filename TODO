@@ -1,16 +1,26 @@
 List:
-DONE - be able to remove existing files.
--1. Be able to set the output directory.
-    * suffix name with _# of cali files
-DONE - 0. Licensing for icons, check.
 2. Rebind "show more" after any selective event occurs -> like you select a pie chart or a bar chart or something.
+10. Show more optimization -> make it so it doesnt makea  summary call, just use the data we have.
 3. Reset link needs to not appear after reset_all was clicked.
+- make deployment group owned by spotdev
+    * group should be rwx
+    * world should be r x
+    * chmod -R g+rwX,o+rX the-base-dir
+    * chgrp -R spotdev
+- get SCF accounts -> Jeff -> deploy spot there.
+    * md5 sum to see if it pushed correctly.
+    * through FIS (file interchange service) into SCF
+    * Get SCF account then do this: https://lc.llnl.gov/confluence/display/RAM/FIS
+DONE - be able to remove existing files.
+- let joe and matt know about new test directories.
+DONE - 0. Licensing for icons, check.
 DONE - 4. Fix wrap fo the horizBarChart
 DONE - 5. Be able to owverwrite exiting cali files.
 DONE - 6. (one working case is there) Fix compare page for cali files -> make sure tmepalte is not included.
 DONE - 7. More template paramters.
-8. Add a curve, so it's not homogenous.
-9. Fix [brackets] for command line, it's not showing up.
+DONE - 8. Add a curve, so it's not homogenous for bar Chart
+DONE - add curve to horiz bar chart and pie chart.
+9. Fix [brackets] for command line, it's not showing up. (make sure it's not a problem in dc.js)
 9. Create a testing index.html page.
     * Make all tests RZ.
     * email Nathan to get spot.py URL for them.
@@ -22,6 +32,7 @@ Memory stuff.
 
 32000 entires takes 46s to load.
 14500 entries take 24 seconds to load, slight delay when checkboxing.
+10000 entries take 16 seconds to load
 2000 entries take 3.85 seconds to load
 95000 got a gtaeway time-out probably because it took too long.
 
@@ -29,6 +40,7 @@ How to use:
 cd /usr/global/web-pages/lc/www/spot/dcvis/generate/
 python3 MakeCali.py 4905
 
+https://lc.llnl.gov/spot/dcvis/index.html?sf=/g/g0/pascal/lulesh_gen/15
 
 next:
 DONE - alphabetize the the checkboxes, so you dont have to hunt.

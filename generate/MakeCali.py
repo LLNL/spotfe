@@ -183,7 +183,11 @@ class CaliGen:
                 val = self.get_rand(key, range)
 
             elif vtype == "string":
-                val = choice( range )
+
+                str_range = [0, len(range) - 1 ]
+                val = self.get_rand(key, str_range)
+                val = int(round(val))
+                val = range[val]
 
             elif vtype == "integer":
                 val = self.get_rand( key, range )

@@ -303,7 +303,7 @@ ST.ChartCollection = function() {
     var show_more_ = function() {
 
         ST.MAX_SHOW += SHOW_MORE_INCREASE;
-        init();
+        ST.ChartCollection.RenderChartCollection(ST.newp, ST.layout_used);
     };
 
 
