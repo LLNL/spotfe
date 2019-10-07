@@ -520,7 +520,9 @@ This code demonstrates generating the column header automatically based on the c
 
 
 
-    <span class="hljs-keyword">var</span> bind_sort = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{</pre></div></div>
+    <span class="hljs-keyword">var</span> bind_sort = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+
+        $(<span class="hljs-string">'.contain_show_more a'</span>).unbind(<span class="hljs-string">'click'</span>).bind(<span class="hljs-string">'click'</span>, ST.ChartCollection.show_more);</pre></div></div>
             
         </li>
         

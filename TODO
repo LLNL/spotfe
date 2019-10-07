@@ -1,6 +1,6 @@
 List:
 2. Rebind "show more" after any selective event occurs -> like you select a pie chart or a bar chart or something.
-10. Show more optimization -> make it so it doesnt makea  summary call, just use the data we have.
+DONE - 10. Show more optimization -> make it so it doesnt makea  summary call, just use the data we have.
 3. Reset link needs to not appear after reset_all was clicked.
 - make deployment group owned by spotdev
     * group should be rwx

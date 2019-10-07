@@ -257,6 +257,8 @@ ST.ChartCollection = function() {
 
     var bind_sort = function () {
 
+        $('.contain_show_more a').unbind('click').bind('click', ST.ChartCollection.show_more);
+
         //  for some reason, dc.js capitalizes column headings, thus messing up the sort
         //  reference when they click on the arrow click.
         var normalize_indexes_ = function (obj) {
