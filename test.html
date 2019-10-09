@@ -3,19 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Testing page</title>
+
+    <style>
+        .testing td {
+            width: 200px;
+            padding: 7px;
+            background-color: #e2e2e2;
+            font-family: Tahoma;
+        }
+
+        .testing thead td {
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
 
-<table>
-    <tr>
-        <td>Test Page</td>
-        <td>CZ D2</td>
-        <td>RZ D2</td>
-        <td>CZ L2</td>
-        <td>RZ L2</td>
-    </tr>
+<div id="app">
 
-</table>
+    <link-rows></link-rows>
+</div>
+
+<script src="web/js/vue.js"></script>
+<script src="web/js/TestPage.js"></script>
 
 </body>
 </html>
