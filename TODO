@@ -1,13 +1,15 @@
 List:
 DONE - 2. Rebind "show more" after any selective event occurs -> like you select a pie chart or a bar chart or something.
 DONE - 10. Show more optimization -> make it so it doesnt makea  summary call, just use the data we have.
+DONE - finished training: https://caas.llnl.gov/mycaas
+DONE - 9. Create a testing index.html page. * Make all tests RZ.
+    * email Nathan to get spot.py URL for them.
 - make deployment group owned by spotdev
     * group should be rwx
     * world should be r x
     * chmod -R g+rwX,o+rX the-base-dir
     * chgrp -R spotdev
 - get SCF accounts -> Jeff -> deploy spot there.
-    * finished training: https://caas.llnl.gov/mycaas
     * md5 sum to see if it pushed correctly.
     * through FIS (file interchange service) into SCF
     * Get SCF account then do this: https://lc.llnl.gov/confluence/display/RAM/FIS
@@ -19,9 +21,6 @@ DONE - 6. (one working case is there) Fix compare page for cali files -> make su
 DONE - 7. More template paramters.
 DONE - 8. Add a curve, so it's not homogenous for bar Chart
 DONE - add curve to horiz bar chart and pie chart.
-9. Create a testing index.html page.
-    * Make all tests RZ.
-    * email Nathan to get spot.py URL for them.
 10. Integrate with Joe Chavez.
 3. Reset link needs to not appear after reset_all was clicked.
 9. Fix [brackets] for command line, it's not showing up. (make sure it's not a problem in dc.js)
