@@ -1,7 +1,6 @@
 List:
-2. Rebind "show more" after any selective event occurs -> like you select a pie chart or a bar chart or something.
+DONE - 2. Rebind "show more" after any selective event occurs -> like you select a pie chart or a bar chart or something.
 DONE - 10. Show more optimization -> make it so it doesnt makea  summary call, just use the data we have.
-3. Reset link needs to not appear after reset_all was clicked.
 - make deployment group owned by spotdev
     * group should be rwx
     * world should be r x
@@ -12,7 +11,6 @@ DONE - 10. Show more optimization -> make it so it doesnt makea  summary call, j
     * through FIS (file interchange service) into SCF
     * Get SCF account then do this: https://lc.llnl.gov/confluence/display/RAM/FIS
 DONE - be able to remove existing files.
-- let joe and matt know about new test directories.
 DONE - 0. Licensing for icons, check.
 DONE - 4. Fix wrap fo the horizBarChart
 DONE - 5. Be able to owverwrite exiting cali files.
@@ -20,11 +18,12 @@ DONE - 6. (one working case is there) Fix compare page for cali files -> make su
 DONE - 7. More template paramters.
 DONE - 8. Add a curve, so it's not homogenous for bar Chart
 DONE - add curve to horiz bar chart and pie chart.
-9. Fix [brackets] for command line, it's not showing up. (make sure it's not a problem in dc.js)
 9. Create a testing index.html page.
     * Make all tests RZ.
     * email Nathan to get spot.py URL for them.
 10. Integrate with Joe Chavez.
+3. Reset link needs to not appear after reset_all was clicked.
+9. Fix [brackets] for command line, it's not showing up. (make sure it's not a problem in dc.js)
 
 
 Eventually:
