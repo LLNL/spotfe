@@ -1,32 +1,44 @@
 var TEST = function() {
 
-    var num = [15,100,500,1000,2000,5000,10000,14500,32000,96000];
     var testList = [];
 
-    for( var x in num ) {
+    var add_test_ = function( count, luly, show ) {
 
-        var count = num[x];
-
-        var luly = '?sf=/g/g0/pascal/lulesh_gen/' + count;
+        show = show || [];
 
         testList.push({
-            id: x,
-            page: count,
-            "localhost": "http://localhost:8888/" + luly,
-            "cz_d2": 'https://lc.llnl.gov/spot/dcvis/' + luly,
-            "rz_d2": 'https://rzlc.llnl.gov/spot/dcvis/' + luly,
-            "cz_l2": 'https://lc.llnl.gov/spot2/' + luly,
-            "rz_l2": 'https://rzlc.llnl.gov/spot2/' + luly
+            "page": count,
+            "localhost": show[0] === 0 ? "" : "http://localhost:8888/" + luly,
+            "cz_d2": show[1] === 0 ? "" : 'https://lc.llnl.gov/spot/dcvis/' + luly,
+            "rz_d2": show[2] === 0 ? "" : 'https://rzlc.llnl.gov/spot/dcvis/' + luly,
+            "cz_l2": show[3] === 0 ? "" : 'https://lc.llnl.gov/spot2/' + luly,
+            "rz_l2": show[4] === 0 ? "" : 'https://rzlc.llnl.gov/spot2/' + luly
         });
-    }
+    };
 
-    Vue.component('link-rows', {
-        data: function() {
-            return {
-                testList: testList
-            }
-        },
-        template: '    <table class="testing">\
+
+    var init_ = function() {
+
+        var num = [15, 100, 500, 1000, 2000, 5000, 10000, 14500, 32000, 96000];
+
+        for (var x in num) {
+
+            var count = num[x];
+
+            var luly = '?sf=/g/g0/pascal/lulesh_gen/' + count;
+            add_test_( count, luly );
+        }
+
+        add_test_( "nathan", '?machine=rztopaz&command=/collab/usr/gapps/wf/spot/sina-spot-dev.py&sf=/usr/gapps/wf/siboka_team/sina/uqacam_FS.sqlite', [0,0,1,0,1]);
+
+
+        Vue.component('link-rows', {
+            data: function () {
+                return {
+                    testList: testList
+                }
+            },
+            template: '    <table class="testing">\
         <thead>\
             <tr>\
                 <td>Test Page</td>\
@@ -50,9 +62,12 @@ var TEST = function() {
         </tbody>\
 \
     </table>'
-    });
+        });
 
-    var app = new Vue({
-        el: "#app"
-    })
+        var app = new Vue({
+            el: "#app"
+        })
+    };
+
+    init_();
 }();
