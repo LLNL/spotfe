@@ -29,7 +29,7 @@ var TEST = function() {
             add_test_( count, luly );
         }
 
-        add_test_( "nathan", '?machine=rztopaz&command=/collab/usr/gapps/wf/spot/sina-spot-dev.py&sf=/usr/gapps/wf/siboka_team/sina/uqacam_FS.sqlite', [0,0,1,0,1]);
+        add_test_( "RZ Only Siboka/nathan", '?machine=rztopaz&command=/collab/usr/gapps/wf/spot/sina-spot-dev.py&sf=/usr/gapps/wf/siboka_team/sina/uqacam_FS.sqlite', [0,0,1,0,1]);
 
 
         Vue.component('link-rows', {
@@ -52,12 +52,28 @@ var TEST = function() {
 \
         <tbody>\
             <tr v-for="row in testList">\
+            \
             <td>{{row.page}}</td>\
-            <td><a v-bind:href="row.localhost" target="_blank">{{row.page}}</a></td>\
-            <td><a v-bind:href="row.cz_d2" target="_blank">{{row.page}}</a></td>\
-            <td><a v-bind:href="row.rz_d2" target="_blank">{{row.page}}</a></td>\
-            <td><a v-bind:href="row.cz_l2" target="_blank">{{row.page}}</a></td>\
-            <td><a v-bind:href="row.rz_l2" target="_blank">{{row.page}}</a></td>\
+            \
+            <td>\
+                <a v-if="row.localhost !== \'\'" v-bind:href="row.localhost" target="_blank">{{row.page}}</a>\
+            </td>\
+            \
+            <td>\
+                <a v-if="row.cz_d2 !== \'\'" v-bind:href="row.cz_d2" target="_blank">{{row.page}}</a>\
+            </td>\
+            \
+            <td>\
+                <a v-if="row.rz_d2 !== \'\'" v-bind:href="row.rz_d2" target="_blank">{{row.page}}</a>\
+            </td>\
+            \
+            <td>\
+                <a v-if="row.cz_l2 !== \'\'" v-bind:href="row.cz_l2" target="_blank">{{row.page}}</a>\
+            </td>\
+            \
+            <td>\
+                <a v-if="row.rz_l2 !== \'\'" v-bind:href="row.rz_l2" target="_blank">{{row.page}}</a>\
+            </td>\
             </tr>\
         </tbody>\
 \
