@@ -25,7 +25,7 @@ var TEST = function() {
 
             var count = num[x];
 
-            var luly = '?sf=/g/g0/pascal/lulesh_gen/' + count;
+            var luly = '?sf=/usr/gapps/spot/datasets/lulesh_gen/' + count;
             add_test_( count, luly );
         }
 
