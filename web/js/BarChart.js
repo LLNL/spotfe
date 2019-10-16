@@ -114,7 +114,13 @@ ST.BarChart = function() {
         var style = options.show ? "display: block;" : "display: none;";
         var dimension_low = dimension.toLowerCase();
 
-        var rcht = '<div class="runtime-chart' + dimension_low + '" style="' + style + '" chart-dimension="' + dimension_low + '"> \
+        var DOM_safe_dimension = filter_specials_( dimension_low );
+        console.log('DOM_safe_dimension = ' + DOM_safe_dimension);
+
+        //  Just for testing.
+        //console.log(filter_specials_("shape_model_initial_modes:(4,3)!@#$$%^&*(8342347-+={{{}}}}[[[[]]\\..//,,,"));
+
+        var rcht = '<div class="runtime-chart' + DOM_safe_dimension + '" style="' + style + '" chart-dimension="' + dimension_low + '"> \
             <div class="top_left"> \
                 <strong>' + upper_( options.title || dimension) + '</strong> \
                 <a class="reset" onclick="ST.BarChart.reset(this);" style="display: none;">reset</a>\
@@ -125,12 +131,10 @@ ST.BarChart = function() {
 
         $('.row:eq(0)').append(rcht);
 
-
-        inst_[dimension_low] = dc.barChart('.runtime-chart' + dimension_low );
+        inst_[dimension_low] = dc.barChart('.runtime-chart' + DOM_safe_dimension );
 
         var one_i = inst_[dimension_low];
-        $('.runtime-chart' + dimension_low).attr('instance_num', dimension_low);
-
+        $('.runtime-chart' + DOM_safe_dimension).attr('instance_num', dimension_low);
 
 
         var xinput = d3.scaleLinear(0.25).domain( domain );
@@ -228,6 +232,19 @@ ST.BarChart = function() {
         one_i.yAxis().ticks( options["y-ticks"] || 5);
 
         //inst_num_++;
+    };
+
+
+    //  User generated IDs sometimes have special characters which mess up the DOM parser.
+    //  For instance: Shape_model_initial_modes:(4,3)  This key caused the following error:
+    //  "DOMException: Failed to execute 'querySelector' on 'Document': 'runtime-chartshape_model_initial_modes:(4,3)' is not a valid selector.
+    //
+    //  SOLUTION:
+    //      Filter out those pesky special characters
+    //
+    var filter_specials_ = function( user_generated ) {
+
+        return user_generated.replace(/[^a-z0-9_]+/gi, '');
     };
 
 
