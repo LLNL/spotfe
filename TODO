@@ -4,10 +4,9 @@ https://myconfluence.llnl.gov/display/RAM/ClassifiedLCAccess
 Do I need to use "AdditionalMachineAccess":
 https://myconfluence.llnl.gov/display/RAM/AdditionalMachineAccess
 
-3. Reset link needs to not appear after reset_all was clicked.
-    * check to make sure that reset_all still works as intended.
 
 List:
+DONE - Reset link needs to not appear after reset_all was clicked.
 DONE - Fixed Nathan's customers problem about the strange key names with (2,4): in it.
 DONE - 2. Rebind "show more" after any selective event occurs -> like you select a pie chart or a bar chart or something.
 DONE - 10. Show more optimization -> make it so it doesnt makea  summary call, just use the data we have.
