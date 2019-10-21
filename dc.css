@@ -402,6 +402,10 @@ body .dc-chart g.row text {
       background-size: 100% 100%;
       width: 17px;
       height: 17px; }
+  .container .reset_all {
+    color: #0c7cd5;
+    text-decoration: underline;
+    cursor: pointer; }
   .container .contain_show_more {
     text-align: center;
     padding: 0 0 15px 0; }

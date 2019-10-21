@@ -1,14 +1,18 @@
+https://lc.llnl.gov/confluence/display/RAM/FIS
+https://myconfluence.llnl.gov/display/RAM/ClassifiedLCAccess
+
+Do I need to use "AdditionalMachineAccess":
+https://myconfluence.llnl.gov/display/RAM/AdditionalMachineAccess
+
+3. Reset link needs to not appear after reset_all was clicked.
+    * check to make sure that reset_all still works as intended.
+
 List:
+DONE - Fixed Nathan's customers problem about the strange key names with (2,4): in it.
 DONE - 2. Rebind "show more" after any selective event occurs -> like you select a pie chart or a bar chart or something.
 DONE - 10. Show more optimization -> make it so it doesnt makea  summary call, just use the data we have.
 DONE - finished training: https://caas.llnl.gov/mycaas
-DONE - 9. Create a testing index.html page. * Make all tests RZ.
-    * email Nathan to get spot.py URL for them.
-- make deployment group owned by spotdev
-    * group should be rwx
-    * world should be r x
-    * chmod -R g+rwX,o+rX the-base-dir
-    * chgrp -R spotdev
+DONE - 9. Create a testing index.html page. * Make all tests RZ.   * email Nathan to get spot.py URL for them.
 - get SCF accounts -> Jeff -> deploy spot there.
     * md5 sum to see if it pushed correctly.
     * through FIS (file interchange service) into SCF
@@ -22,7 +26,6 @@ DONE - 7. More template paramters.
 DONE - 8. Add a curve, so it's not homogenous for bar Chart
 DONE - add curve to horiz bar chart and pie chart.
 10. Integrate with Joe Chavez.
-3. Reset link needs to not appear after reset_all was clicked.
 9. Fix [brackets] for command line, it's not showing up. (make sure it's not a problem in dc.js)
 
 
@@ -34,6 +37,13 @@ Memory stuff.
 10000 entries take 16 seconds to load
 2000 entries take 3.85 seconds to load
 95000 got a gtaeway time-out probably because it took too long.
+
+
+- make deployment group owned by spotdev
+    * group should be rwx
+    * world should be r x
+    * chmod -R g+rwX,o+rX the-base-dir
+    * chgrp -R spotdev
 
 How to use:
 cd /usr/global/web-pages/lc/www/spot/dcvis/generate/

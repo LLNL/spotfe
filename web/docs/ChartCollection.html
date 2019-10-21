@@ -211,7 +211,7 @@ ST.ChartCollection = <span class="hljs-function"><span class="hljs-keyword">func
             
             <div class="content"><div class='highlight'><pre>            .html({
                 <span class="hljs-attr">some</span>: <span class="hljs-string">'&lt;strong&gt;%filter-count&lt;/strong&gt; selected out of &lt;strong&gt;%total-count&lt;/strong&gt; records'</span> +
-                <span class="hljs-string">' | &lt;a href=\'javascript:dc.filterAll(); dc.renderAll(); ST.UrlStateManager.remove_all_chart_pars();\'&gt;Reset All&lt;/a&gt;'</span>,
+                <span class="hljs-string">' | &lt;div class="reset_all"&gt;Reset All&lt;/div&gt;'</span>,
                 <span class="hljs-attr">all</span>: <span class="hljs-string">'All records selected. Please click on the graph to apply filters.'</span>
             });</pre></div></div>
             
@@ -498,6 +498,29 @@ This code demonstrates generating the column header automatically based on the c
     };
 
 
+    <span class="hljs-keyword">var</span> reset_all_ = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+
+        dc.filterAll();
+        dc.renderAll();
+        ST.UrlStateManager.remove_all_chart_pars();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-21">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-21">&#182;</a>
+              </div>
+              <p> The horizontal charts  have a slightly different structure where the reset link
+ is not inside the div that gets redrawn, so we need to manually hide the horizontal reset link.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        $(<span class="hljs-string">'.horiz_reset'</span>).hide();
+    };
+
     <span class="hljs-keyword">var</span> render_more_link_ = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> count </span>) </span>{
 
         <span class="hljs-keyword">var</span> show = ST.MAX_SHOW &lt;= count ? <span class="hljs-string">'show'</span> : <span class="hljs-string">'hide'</span>;
@@ -522,16 +545,18 @@ This code demonstrates generating the column header automatically based on the c
 
     <span class="hljs-keyword">var</span> bind_sort = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
 
+        $(<span class="hljs-string">'.reset_all'</span>).unbind(<span class="hljs-string">'click'</span>).bind(<span class="hljs-string">"click"</span>, reset_all_);
+
         $(<span class="hljs-string">'.contain_show_more a'</span>).unbind(<span class="hljs-string">'click'</span>).bind(<span class="hljs-string">'click'</span>, ST.ChartCollection.show_more);</pre></div></div>
             
         </li>
         
         
-        <li id="section-21">
+        <li id="section-22">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-21">&#182;</a>
+                <a class="pilcrow" href="#section-22">&#182;</a>
               </div>
               <p> for some reason, dc.js capitalizes column headings, thus messing up the sort
  reference when they click on the arrow click.</p>

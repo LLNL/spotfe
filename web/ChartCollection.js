@@ -92,9 +92,10 @@ ST.ChartCollection = function() {
             // `%filter-count` and `%total-count` are replaced with the values obtained.
             .html({
                 some: '<strong>%filter-count</strong> selected out of <strong>%total-count</strong> records' +
-                ' | <a href=\'javascript:dc.filterAll(); dc.renderAll(); ST.UrlStateManager.remove_all_chart_pars();\'>Reset All</a>',
+                ' | <div class="reset_all">Reset All</div>',
                 all: 'All records selected. Please click on the graph to apply filters.'
             });
+
 
         //#### Data Table
 
@@ -233,6 +234,17 @@ ST.ChartCollection = function() {
     };
 
 
+    var reset_all_ = function() {
+
+        dc.filterAll();
+        dc.renderAll();
+        ST.UrlStateManager.remove_all_chart_pars();
+
+        //  The horizontal charts  have a slightly different structure where the reset link
+        //  is not inside the div that gets redrawn, so we need to manually hide the horizontal reset link.
+        $('.horiz_reset').hide();
+    };
+
     var render_more_link_ = function( count ) {
 
         var show = ST.MAX_SHOW <= count ? 'show' : 'hide';
@@ -256,6 +268,8 @@ ST.ChartCollection = function() {
 
 
     var bind_sort = function () {
+
+        $('.reset_all').unbind('click').bind("click", reset_all_);
 
         $('.contain_show_more a').unbind('click').bind('click', ST.ChartCollection.show_more);
 
