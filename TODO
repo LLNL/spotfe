@@ -4,6 +4,9 @@ https://myconfluence.llnl.gov/display/RAM/ClassifiedLCAccess
 Do I need to use "AdditionalMachineAccess":
 https://myconfluence.llnl.gov/display/RAM/AdditionalMachineAccess
 
+How to get a FIS account:
+https://myconfluence.llnl.gov/display/RAM/FIS#FIS-DoIhaveaFISaccount?
+Left Off: Sent the form to Jeff.  Waiting for approval, so I can start using Hopper to do deployments (still need the directories of where to move stuff).
 
 List:
 DONE - Reset link needs to not appear after reset_all was clicked.
@@ -26,6 +29,7 @@ DONE - 8. Add a curve, so it's not homogenous for bar Chart
 DONE - add curve to horiz bar chart and pie chart.
 10. Integrate with Joe Chavez.
 9. Fix [brackets] for command line, it's not showing up. (make sure it's not a problem in dc.js)
+- Fix horizontal brackets lining up with the actual bar charts.
 
 
 Eventually:

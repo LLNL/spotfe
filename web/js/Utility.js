@@ -50,15 +50,16 @@ ST.Utility = function() {
                 dimensions_available += ', ' + x;
             }
 
-            ST.Utility.error('From layout_spec, could not find dimension <b>' + dimension + '</b> in Data Set.  ' +
+            console.log('In the layout_spec I found <b>' + dimension + '</b>, but I could NOT find dimension <b>' + dimension + '</b> in the Data Set.  ' +
                 'Data set contains the following dimensions: ' + dimensions_available.substr(1) + '.  ' +
                 '<br><br>You can solve this problem in 1 of 2 ways: <ul>' +
                 '<li>Add <b>' + dimension + '</b> to the dataset OR</li>' +
                 '<li>Remove <b>' + dimension + '</b> from the layout file.</li>' +
                 '</ul>');
 
-            ST.cali_valid = false;
-            return false;
+            cali_object[dimension] = "not defined";
+            //ST.cali_valid = false;
+            //return false;
         }
 
         return true;
