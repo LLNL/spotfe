@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>SPOT</title>
+
+    <!-- include client script -->
+    <script src="./client.js"></script>
+
+</head>
+<body>
+    <button onclick="compare(['190716-14485511815.cali', '190716-14491411914.cali'])">compare2</button>
+    <button onclick="setXAxis('num_regions')">Xaxis num_regions</button>
+
+    <script >
+        // first set listeners:
+            // you
+        addRunSetChangeListener(summary => {
+            console.log('summary', summary)
+        })
+
+        addXAxisChangeListener(xAxis => {
+            console.log('xAxis', xAxis)
+        })
+        addYAxisChangeListener(yAxis => {
+            console.log('yAxis', yAxis)
+        })
+
+        addAggregateChangeListener(yAxis => {
+            console.log('aggregate', aggregate)
+        })
+
+        addGroupByChangeListener(groupBy => {
+            console.log('groupBy', groupBy)
+        })
+
+        
+        // open compare page (you can do this later or on user request)
+        setDirectory('/usr/gapps/spot/datasets/lulesh_new')
+        openCompareWindow();
+
+    </script>
+
+</body>
+</html> 
