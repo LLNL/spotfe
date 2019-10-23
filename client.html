@@ -12,6 +12,11 @@
     <button onclick="setXAxis('num_regions')">Xaxis num_regions</button>
 
     <script >
+        /*
+        So first you need to addRunSetChangeListener()
+        that will be your summary callback
+        When you call setDirectory() after that it will callback your summary data
+         */
         // first set listeners:
             // you
         addRunSetChangeListener(summary => {

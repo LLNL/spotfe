@@ -332,6 +332,12 @@ ST.ChartCollection = function() {
 
         var layout = ST.params.layout ? ' --layout=' + ST.params.layout : "";
 
+        //addRunSetChangeListener( ST.CallSpot.handle_success );
+
+        //setDirectory( file )
+
+        //openCompareWindow()
+
         ST.CallSpot.ajax({
             file: file,
             type: 'summary',

@@ -8,17 +8,27 @@ How to get a FIS account:
 https://myconfluence.llnl.gov/display/RAM/FIS#FIS-DoIhaveaFISaccount?
 Left Off: Sent the form to Jeff.  Waiting for approval, so I can start using Hopper to do deployments (still need the directories of where to move stuff).
 
+Next:
+1. Support Undefined values (some cali's have them defined, some don't)
+    * "not defined", 0 if Int.
+    * make some test files to test it.
+2. SCF:  Fis.
+3. Integrate with Joe Chavez.
+
+3PM meeting 4159 Morgan Territory.
+
 List:
-DONE - Reset link needs to not appear after reset_all was clicked.
 DONE - Fixed Nathan's customers problem about the strange key names with (2,4): in it.
-DONE - 2. Rebind "show more" after any selective event occurs -> like you select a pie chart or a bar chart or something.
-DONE - 10. Show more optimization -> make it so it doesnt makea  summary call, just use the data we have.
+DONE - Reset link needs to not appear after reset_all was clicked. (horizontal barcharts)
+DONE - Rebind "show more" after any selective event occurs -> like you select a pie chart or a bar chart or something.
+DONE - Show more optimization -> make it so it doesnt makea  summary call, just use the data we have.
 DONE - finished training: https://caas.llnl.gov/mycaas
 DONE - 9. Create a testing index.html page. * Make all tests RZ.   * email Nathan to get spot.py URL for them.
-- get SCF accounts -> Jeff -> deploy spot there.
+DONE - get SCF accounts -> Jeff -> deploy spot there.
     * md5 sum to see if it pushed correctly.
     * through FIS (file interchange service) into SCF
-    * Get SCF account then do this: https://lc.llnl.gov/confluence/display/RAM/FIS
+    * DONE Get SCF account then do this: https://lc.llnl.gov/confluence/display/RAM/FIS
+    * DONE access to machines + Livit meeting for SCF access.
 DONE - be able to remove existing files.
 DONE - 0. Licensing for icons, check.
 DONE - 4. Fix wrap fo the horizBarChart
@@ -34,6 +44,22 @@ DONE - add curve to horiz bar chart and pie chart.
 
 Eventually:
 Memory stuff.
+
+Rooms: 2069, 4009, 4013, 4017
+The easiest way to use FIS:
+
+On an RZ system: tar up your data into a tar file.
+On RZ system: scp myfile.tar rzfis:TO/ (use your LC username and RZ OTP)
+Wait ~10 min
+On SCF system:
+sftp fis  (use LC username and SCF OTP)
+cd FROM
+get myfile.tar
+rm myfile.tar
+quit
+
+
+
 
 32000 entires takes 46s to load.
 14500 entries take 24 seconds to load, slight delay when checkboxing.

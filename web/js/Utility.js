@@ -57,7 +57,7 @@ ST.Utility = function() {
                 '<li>Remove <b>' + dimension + '</b> from the layout file.</li>' +
                 '</ul>');
 
-            cali_object[dimension] = "not defined";
+            cali_object[dimension] = 0; // "not defined";
             //ST.cali_valid = false;
             //return false;
         }
