@@ -41,18 +41,22 @@ DONE - add curve to horiz bar chart and pie chart.
 9. Fix [brackets] for command line, it's not showing up. (make sure it's not a problem in dc.js)
 - Fix horizontal brackets lining up with the actual bar charts.
 
+https://lc.llnl.gov/spot/dcvis/?sf=/usr/gapps/spot/datasets/lulesh_gen/100
 
 Eventually:
 Memory stuff.
 
 Rooms: 2069, 4009, 4013, 4017
 The easiest way to use FIS:
+On RZ, use the ts alias I created.
 
 On an RZ system: tar up your data into a tar file.
 On RZ system: scp myfile.tar rzfis:TO/ (use your LC username and RZ OTP)
+scp dc.tar rzfis:TO/dc.tar    # use RZ token.
+
 Wait ~10 min
 On SCF system:
-sftp fis  (use LC username and SCF OTP)
+sftp pascal@fis  (use LC username and SCF OTP)
 cd FROM
 get myfile.tar
 rm myfile.tar
