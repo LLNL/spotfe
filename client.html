@@ -8,20 +8,12 @@
 
 </head>
 <body>
-    <button onclick="compare(['190716-14485511815.cali', '190716-14491411914.cali'])">compare2</button>
+    <button onclick="requestSummary()">requestSummary</button>
+    <button onclick="openCompareWindow()">Open compare page</button>
+    <button onclick="compare(['0.cali', '3.cali'])">compare2</button>
     <button onclick="setXAxis('num_regions')">Xaxis num_regions</button>
 
     <script >
-        /*
-        So first you need to addRunSetChangeListener()
-        that will be your summary callback
-        When you call setDirectory() after that it will callback your summary data
-         */
-        // first set listeners:
-            // you
-        addRunSetChangeListener(summary => {
-            console.log('summary', summary)
-        });
 
         addXAxisChangeListener(xAxis => {
             console.log('xAxis', xAxis)
@@ -38,10 +30,13 @@
             console.log('groupBy', groupBy)
         });
 
-        
-        // open compare page (you can do this later or on user request)
-        setDirectory('/usr/gapps/spot/datasets/lulesh_new')
-        openCompareWindow();
+
+        function requestSummary(){
+            getSummary('rzgenie', '/usr/gapps/spot/datasets/lulesh_gen/1000')
+                .then((summ) => {
+                    console.log('summary', summ)
+                })
+        }
 
     </script>
 
