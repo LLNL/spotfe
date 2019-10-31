@@ -768,6 +768,7 @@ body .dc-chart g.row text {
         top: 30px;
         right: 120px;
         z-index: 10;
+        width: 904px;
 
         select {
             height: 35px;
@@ -787,6 +788,18 @@ body .dc-chart g.row text {
         .groupby_label {
             position: absolute;
             left: 227px;
+            top: -20px;
+        }
+
+        .yaxis_label {
+            position: absolute;
+            left: 452px;
+            top: -20px;
+        }
+
+        .aggregate_label {
+            position: absolute;
+            left: 679px;
             top: -20px;
         }
     }

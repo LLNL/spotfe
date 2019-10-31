@@ -530,7 +530,8 @@ body .dc-chart g.row text {
     position: absolute;
     top: 30px;
     right: 120px;
-    z-index: 10; }
+    z-index: 10;
+    width: 904px; }
     .bottom_table .compare_arguments select {
       height: 35px;
       margin: 0 5px  0 0; }
@@ -543,6 +544,14 @@ body .dc-chart g.row text {
     .bottom_table .compare_arguments .groupby_label {
       position: absolute;
       left: 227px;
+      top: -20px; }
+    .bottom_table .compare_arguments .yaxis_label {
+      position: absolute;
+      left: 452px;
+      top: -20px; }
+    .bottom_table .compare_arguments .aggregate_label {
+      position: absolute;
+      left: 679px;
       top: -20px; }
   .bottom_table .hidden {
     display: none; }

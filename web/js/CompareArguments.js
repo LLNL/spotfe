@@ -15,15 +15,21 @@ ST.CompareArguments = function() {
         var ht = '<select class="xaxis">' + options + '</select>' +
             '<select class="groupby">' + options + '</select>' +
             '<div class="xaxis_label">Xaxis:</div>' +
-            '<div class="groupby_label">Group By:</div>';
+            '<div class="groupby_label">Group By:</div>' +
+            '<div class="yaxis_label">Yaxis:</div>' +
+            '<div class="aggregate_label">Aggregate:</div>' +
+            '<select class="yaxis"><option>min#inclusive#sum#time.duration</option><option>avg#inclusive#sum#time.duration</option><option>max#inclusive#sum#time.duration</option></select>' +
+            '<select class="aggregate"><option></option><option>sum</option><option>avg</option><option>min</option><option>max</option></select>';
 
         $('.compare_arguments').html(ht);
 
-        $('.compare_arguments .xaxis, .compare_arguments .groupby').unbind('change').bind('change', function () {
+        $('.compare_arguments .xaxis, .compare_arguments .groupby, .compare_arguments .yaxis, .compare_arguments .aggregate').unbind('change').bind('change', function () {
 
             var cla = $(this).attr('class');
             var val = $(this).val();
-            val = val.replace(/#/, '');
+
+            //  # in duration specification is not a valid URL component.
+            val = encodeURIComponent(val);
 
             ST.UrlStateManager.update_url(cla, val);
         });
@@ -53,6 +59,8 @@ ST.CompareArguments = function() {
 
         var xaxis = ST.Utility.get_param('xaxis', true);
         var groupby = ST.Utility.get_param('groupby', true);
+        var yaxis = ST.Utility.get_param('yaxis', true);
+        var aggregate = ST.Utility.get_param('aggregate', true);
 
         if (xaxis !== 'undefined') {
 
@@ -71,6 +79,26 @@ ST.CompareArguments = function() {
 
                     var gval = $(this).val();
                     setGroupBy(gval);
+                });
+        }
+
+        if (yaxis !== 'undefined') {
+
+            $('.compare_arguments .yaxis').val(yaxis)
+                .change( function() {
+
+                    var val = $(this).val();
+                    setYAxis(val);
+                });
+        }
+
+        if (aggregate !== 'undefined') {
+
+            $('.compare_arguments .aggregate').val(aggregate)
+                .change( function() {
+
+                    var gval = $(this).val();
+                    setAggregate(gval);
                 });
         }
     };

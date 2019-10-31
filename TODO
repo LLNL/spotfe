@@ -9,10 +9,13 @@ https://myconfluence.llnl.gov/display/RAM/FIS#FIS-DoIhaveaFISaccount?
 Left Off: Sent the form to Jeff.  Waiting for approval, so I can start using Hopper to do deployments (still need the directories of where to move stuff).
 
 Next:
-1. SCF:  Fis.
+DONE 1. SCF:  Fis.
+- Fix link to Documentation
 2. Spot Scalability - to 1 million.
     * I need the AJAX request to not timeout -> which means, getting the request time down to about 5 seconds or less.
 2. Integrate with Joe Chavez.
+    * Make the other 2 dropdowns, and make them work
+    * Make the 2 tabs which will show the results.
 2.5 Tabs for teh Table vs Compare page on Summary page.
     * verify that this isn't a major Task.
 3. Update the optvis deployment
