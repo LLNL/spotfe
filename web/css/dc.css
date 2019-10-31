@@ -575,5 +575,6 @@ body .dc-chart g.row text {
       top: 4px; }
     .bottom_table .bottom_tab_outer .active {
       border-bottom: 4px solid white; }
-  .bottom_table #compare_bottom_outer {
-    min-height: 500px; }
+
+#compare_bottom_outer {
+  min-height: 500px; }
