@@ -388,6 +388,7 @@ ST.CallSpot = function() {
 
                 var groupby = $('.compare_arguments .groupby').val();
                 setGroupBy( groupby );
+                console.log('set xaxis=' + xaxis + '  gp=' + groupby);
 
             }, 1000);
 

@@ -555,3 +555,25 @@ body .dc-chart g.row text {
       top: -20px; }
   .bottom_table .hidden {
     display: none; }
+  .bottom_table .bottom_tab_outer {
+    border-bottom: 1px solid #bbb;
+    margin: 100px 0 5px 0; }
+    .bottom_table .bottom_tab_outer .table-tab, .bottom_table .bottom_tab_outer .compare-tab {
+      padding: 4px;
+      border: 1px solid #999;
+      width: 80px;
+      display: inline-block;
+      margin: 0 0 0 15px;
+      text-align: center;
+      font-size: 13px;
+      color: #666;
+      font-family: tahoma;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      cursor: pointer;
+      position: relative;
+      top: 4px; }
+    .bottom_table .bottom_tab_outer .active {
+      border-bottom: 4px solid white; }
+  .bottom_table #compare_bottom_outer {
+    min-height: 500px; }

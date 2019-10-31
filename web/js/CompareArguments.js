@@ -52,6 +52,43 @@ ST.CompareArguments = function() {
         });
 
         load_compare();
+        load_tabs_();
+    };
+
+
+    var load_tabs_ = function() {
+
+        Vue.component('bottom-tabs', {
+            data: function() {
+                return {
+                    "isTableActive": true
+                }
+            },
+            template: '<div class="bottom_tab_outer">' +
+                '<div v-bind:class="{ active: isTableActive }" class="table-tab" v-on:click="tableActive()">TABLE</div>' +
+                '<div v-bind:class="{ active: !isTableActive }" class="compare-tab" v-on:click="compareActive()">COMPARE</div>' +
+                '</div>',
+            methods: {
+                tableActive: function() {
+                    console.log('ta');
+                    this.isTableActive = true;
+
+                    $('.dc-data-table').show();
+                    $('.compare_bottom_outer').hide();
+                },
+                compareActive: function() {
+                    console.log('com');
+                    this.isTableActive = false;
+
+                    $('.dc-data-table').hide();
+                    $('.compare_bottom_outer').show();
+                }
+            }
+        });
+
+        new Vue({
+            el: "bottom-tabs"
+        });
     };
 
 
