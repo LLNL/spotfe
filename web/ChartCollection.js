@@ -338,11 +338,21 @@ ST.ChartCollection = function() {
 
         //openCompareWindow()
 
-        ST.CallSpot.ajax({
+        function requestSummary(){
+            getSummary('rzgenie', file)
+                .then((summ) => {
+                    console.log('summary', summ);
+                    ST.CallSpot.handle_success2(summ);
+                });
+        }
+
+        requestSummary();
+
+        /*ST.CallSpot.ajax({
             file: file,
             type: 'summary',
             layout: layout
-        });
+        });*/
     };
 
     $(document).ready(init);

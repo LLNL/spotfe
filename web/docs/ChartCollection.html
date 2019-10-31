@@ -660,11 +660,21 @@ This code demonstrates generating the column header automatically based on the c
             </div>
             
             <div class="content"><div class='highlight'><pre>
-        ST.CallSpot.ajax({
-            <span class="hljs-attr">file</span>: file,
-            <span class="hljs-attr">type</span>: <span class="hljs-string">'summary'</span>,
-            <span class="hljs-attr">layout</span>: layout
-        });
+        <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">requestSummary</span>(<span class="hljs-params"></span>)</span>{
+            getSummary(<span class="hljs-string">'rzgenie'</span>, file)
+                .then(<span class="hljs-function">(<span class="hljs-params">summ</span>) =&gt;</span> {
+                    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'summary'</span>, summ);
+                    ST.CallSpot.handle_success2(summ);
+                });
+        }
+
+        requestSummary();
+
+        <span class="hljs-comment">/*ST.CallSpot.ajax({
+            file: file,
+            type: 'summary',
+            layout: layout
+        });*/</span>
     };
 
     $(<span class="hljs-built_in">document</span>).ready(init);

@@ -9,11 +9,24 @@ https://myconfluence.llnl.gov/display/RAM/FIS#FIS-DoIhaveaFISaccount?
 Left Off: Sent the form to Jeff.  Waiting for approval, so I can start using Hopper to do deployments (still need the directories of where to move stuff).
 
 Next:
-1. Support Undefined values (some cali's have them defined, some don't)
+1. SCF:  Fis.
+2. Spot Scalability - to 1 million.
+    * I need the AJAX request to not timeout -> which means, getting the request time down to about 5 seconds or less.
+2. Integrate with Joe Chavez.
+2.5 Tabs for teh Table vs Compare page on Summary page.
+    * verify that this isn't a major Task.
+3. Update the optvis deployment
+4. Optvis -> use the script that Matt provides: a c++ program executable that i will run that will generate a file that i should delete after reading
+    * command_out -> will contain the output of the command of this program.
+    * the input files, I'll get them from a different source, probably embedded in the JSON.
+    *
+5- Possibly Unknown Priority number - Later on Scalability of Optviz.
+    * make sure to pass Matt a UserID
+    * make sure to tell him when session has closed, or assume it's closed 5 min after no action.
+    * send session start to matt.
+1. FIXED - Support Undefined values (some cali's have them defined, some don't)
     * "not defined", 0 if Int.
     * make some test files to test it.
-2. SCF:  Fis.
-3. Integrate with Joe Chavez.
 
 3PM meeting 4159 Morgan Territory.
 
@@ -40,6 +53,8 @@ DONE - add curve to horiz bar chart and pie chart.
 10. Integrate with Joe Chavez.
 9. Fix [brackets] for command line, it's not showing up. (make sure it's not a problem in dc.js)
 - Fix horizontal brackets lining up with the actual bar charts.
+- Test Data the Jupyter notebooks don't seem to work.
+
 
 https://lc.llnl.gov/spot/dcvis/?sf=/usr/gapps/spot/datasets/lulesh_gen/100
 
@@ -56,12 +71,14 @@ scp dc.tar rzfis:TO/dc.tar    # use RZ token.
 
 Wait ~10 min
 On SCF system:
+ssh pascal@cslic
 sftp pascal@fis  (use LC username and SCF OTP)
 cd FROM
 get myfile.tar
 rm myfile.tar
 quit
 
+/usr/gapps/spot
 
 
 

@@ -55,11 +55,23 @@ ST.CompareArguments = function() {
         var groupby = ST.Utility.get_param('groupby', true);
 
         if (xaxis !== 'undefined') {
-            $('.compare_arguments .xaxis').val(xaxis);
+
+            $('.compare_arguments .xaxis').val(xaxis)
+                .change( function() {
+
+                    var val = $(this).val();
+                    setXAxis(val);
+                });
         }
 
         if (groupby !== 'undefined') {
-            $('.compare_arguments .groupby').val(groupby);
+
+            $('.compare_arguments .groupby').val(groupby)
+                .change( function() {
+
+                    var gval = $(this).val();
+                    setGroupBy(gval);
+                });
         }
     };
 
