@@ -571,6 +571,8 @@ body .dc-chart g.row text {
       border-bottom: 4px solid white; }
 
 #compare_bottom_outer {
-  min-height: 500px; }
+  min-height: 500px;
+  background-color: #f2f2f2;
+  display: none; }
 
 /*# sourceMappingURL=dc.css.map */

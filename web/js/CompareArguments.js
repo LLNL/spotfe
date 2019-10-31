@@ -73,15 +73,15 @@ ST.CompareArguments = function() {
                     console.log('ta');
                     this.isTableActive = true;
 
-                    $('.dc-data-table').show();
-                    $('.compare_bottom_outer').hide();
+                    $('.table-outer').show();
+                    $('#compare_bottom_outer').hide();
                 },
                 compareActive: function() {
                     console.log('com');
                     this.isTableActive = false;
 
-                    $('.dc-data-table').hide();
-                    $('.compare_bottom_outer').show();
+                    $('.table-outer').hide();
+                    $('#compare_bottom_outer').show();
                 }
             }
         });
