@@ -660,16 +660,50 @@ This code demonstrates generating the column header automatically based on the c
             </div>
             
             <div class="content"><div class='highlight'><pre>
+        ST.graph = <span class="hljs-keyword">new</span> Graph(<span class="hljs-string">'#compare_bottom_outer'</span>);
+
+        ST.graph.setDirectory(<span class="hljs-string">"rzgenie"</span>, file)
+            .then(<span class="hljs-function"><span class="hljs-params">summary</span> =&gt;</span> {
+                <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'summary:'</span>, summary);
+                ST.CallSpot.handle_success2(summary);
+            });
+
+
         <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">requestSummary</span>(<span class="hljs-params"></span>)</span>{
             getSummary(<span class="hljs-string">'rzgenie'</span>, file)
-                .then(<span class="hljs-function">(<span class="hljs-params">summ</span>) =&gt;</span> {
-                    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'summary'</span>, summ);
-                    ST.CallSpot.handle_success2(summ);
-                });
-        }
+                .then(<span class="hljs-function">(<span class="hljs-params">summ</span>) =&gt;</span> {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-26">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-26">&#182;</a>
+              </div>
+              <pre><code>             <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'summary'</span>, summ);
+               ST.CallSpot.handle_success2(summ);
+</code></pre>
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                });
+        }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-27">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-27">&#182;</a>
+              </div>
+              <p>   requestSummary();</p>
 
-        requestSummary();
-
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
         <span class="hljs-comment">/*ST.CallSpot.ajax({
             file: file,
             type: 'summary',

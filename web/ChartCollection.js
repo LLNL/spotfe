@@ -338,15 +338,24 @@ ST.ChartCollection = function() {
 
         //openCompareWindow()
 
+        ST.graph = new Graph('#compare_bottom_outer');
+
+        ST.graph.setDirectory("rzgenie", file)
+            .then(summary => {
+                console.log('summary:', summary);
+                ST.CallSpot.handle_success2(summary);
+            });
+
+
         function requestSummary(){
             getSummary('rzgenie', file)
                 .then((summ) => {
-                    console.log('summary', summ);
-                    ST.CallSpot.handle_success2(summ);
+  //                  console.log('summary', summ);
+//                    ST.CallSpot.handle_success2(summ);
                 });
         }
 
-        requestSummary();
+    //    requestSummary();
 
         /*ST.CallSpot.ajax({
             file: file,

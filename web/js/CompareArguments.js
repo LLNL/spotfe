@@ -70,18 +70,18 @@ ST.CompareArguments = function() {
                 '</div>',
             methods: {
                 tableActive: function() {
-                    console.log('ta');
+
                     this.isTableActive = true;
 
                     $('.table-outer').show();
-                    $('#compare_bottom_outer').hide();
+                    $('#compare_bottom_outer, #compare-window').hide();
                 },
                 compareActive: function() {
-                    console.log('com');
+
                     this.isTableActive = false;
 
                     $('.table-outer').hide();
-                    $('#compare_bottom_outer').show();
+                    $('#compare_bottom_outer, #compare-window').show();
                 }
             }
         });
@@ -89,6 +89,8 @@ ST.CompareArguments = function() {
         new Vue({
             el: "bottom-tabs"
         });
+
+        //$('body:eq(0)').scrollTo(0);
     };
 
 

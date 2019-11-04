@@ -378,16 +378,16 @@ ST.CallSpot = function() {
             var akeys = keys.split(' ');
             console.dir(akeys);
 
-            compare( akeys );
-            openCompareWindow();
+            ST.graph.compare( akeys );
+            //openCompareWindow();
 
             setTimeout( function() {
 
                 var xaxis = $('.compare_arguments .xaxis').val();
-                setXAxis( xaxis );
+                //ST.graph.setXAxis( xaxis );
 
                 var groupby = $('.compare_arguments .groupby').val();
-                setGroupBy( groupby );
+                //ST.graph.setGroupBy( groupby );
                 console.log('set xaxis=' + xaxis + '  gp=' + groupby);
 
             }, 1000);
