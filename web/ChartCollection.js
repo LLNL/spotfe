@@ -92,7 +92,7 @@ ST.ChartCollection = function() {
             // `%filter-count` and `%total-count` are replaced with the values obtained.
             .html({
                 some: '<strong>%filter-count</strong> selected out of <strong>%total-count</strong> records' +
-                ' | <div class="reset_all">Reset All</div>',
+                    ' | <div class="reset_all">Reset All</div>',
                 all: 'All records selected. Please click on the graph to apply filters.'
             });
 
@@ -333,9 +333,7 @@ ST.ChartCollection = function() {
         var layout = ST.params.layout ? ' --layout=' + ST.params.layout : "";
 
         //addRunSetChangeListener( ST.CallSpot.handle_success );
-
         //setDirectory( file )
-
         //openCompareWindow()
 
         ST.graph = new Graph('#compare_bottom_outer');
@@ -346,16 +344,48 @@ ST.ChartCollection = function() {
                 ST.CallSpot.handle_success2(summary);
             });
 
+        // listen from chart
+        ST.graph.addXAxisChangeListener(xAxis => {
+            console.log('xAxis', xAxis);
+
+            if( xAxis && xAxis !== "undefined" ) {
+                ST.UrlStateManager.update_url('xaxis', xAxis);
+            }
+        });
+
+        ST.graph.addYAxisChangeListener(yAxis => {
+            console.log('yAxis', yAxis);
+
+            if( yAxis && yAxis !== "undefined" ) {
+                var component = encodeURIComponent(yAxis);
+                ST.UrlStateManager.update_url('yaxis', component);
+            }
+        });
+
+        ST.graph.addAggregateTypeChangeListener(agg =>{
+            console.log('aggregate', agg);
+            if( agg && agg !== "undefined" ) {
+                ST.UrlStateManager.update_url('aggregate', agg);
+            }
+        });
+
+        ST.graph.addGroupByChangeListener(groupBy => {
+
+            console.log('groupBy', groupBy );
+            if( groupBy && groupBy !== "undefined" ) {
+                ST.UrlStateManager.update_url('groupby', groupBy);
+            }
+        });
 
         function requestSummary(){
             getSummary('rzgenie', file)
                 .then((summ) => {
-  //                  console.log('summary', summ);
+                    //                  console.log('summary', summ);
 //                    ST.CallSpot.handle_success2(summ);
                 });
         }
 
-    //    requestSummary();
+        //    requestSummary();
 
         /*ST.CallSpot.ajax({
             file: file,
