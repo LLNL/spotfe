@@ -14,11 +14,9 @@ DONE 1. SCF:  Fis.
 2. Spot Scalability - to 1 million.
     * I need the AJAX request to not timeout -> which means, getting the request time down to about 5 seconds or less.
 2. Integrate with Joe Chavez.
-    1. Fix load_compare so it only loads the ones that are actually seelcted via the filters.
-    1.5 make sure load_comapre gets called after every selction
     2. On page load make sure that the compare page is fully hidden
     3. Get rid of drop downs that are reducenat the 4 net to the compare button
-    4 Propate URL changes to drop downs on page load.
+    4. Propate URL changes to drop downs on page load.
 2.5 Tabs for teh Table vs Compare page on Summary page.
     * verify that this isn't a major Task.
 3. Update the optvis deployment

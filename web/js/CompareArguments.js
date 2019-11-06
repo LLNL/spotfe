@@ -21,7 +21,7 @@ ST.CompareArguments = function() {
             '<select class="yaxis"><option>min#inclusive#sum#time.duration</option><option>avg#inclusive#sum#time.duration</option><option>max#inclusive#sum#time.duration</option></select>' +
             '<select class="aggregate"><option></option><option>sum</option><option>avg</option><option>min</option><option>max</option></select>';
 
-        $('.compare_arguments').html(ht);
+        $('.compare_arguments').html("");
 
         $('.compare_arguments .xaxis, .compare_arguments .groupby, .compare_arguments .yaxis, .compare_arguments .aggregate').unbind('change').bind('change', function () {
 
