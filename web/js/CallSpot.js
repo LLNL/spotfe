@@ -345,55 +345,18 @@ ST.CallSpot = function() {
 
             //  compare button
             var keys = get_keys_();
-            var machine = "machine=" + ST.params.machine + "&";
-            var xaxis = $('.compare_arguments .xaxis').val();
-            var groupby = $('.compare_arguments .groupby').val();
-            var yaxis = ST.Utility.get_param('yaxis');
-            var aggregate = ST.Utility.get_param('aggregate');
-
             localStorage.setItem('calis', keys);
 
-            var directory = ST.Utility.get_file();
-            var command = ST.Utility.get_param('command');
-            var comm = command ? '&command=' + command : "";
-            var xaxis_par = '&xaxis=' + xaxis;
-            var groupby_par = '&groupby=' + groupby + ST.UrlStateManager.get_chart_pars();
-            var yaxis_par = yaxis ? '&yaxis=' + yaxis : "";
-            var agg_par = aggregate ? '&aggregate=' + aggregate : "";
-
-            var days_ago = ST.Utility.get_param(ST.LAST_DAYS);
-            var last_days = days_ago ? ( "&" + ST.LAST_DAYS + "=" + days_ago ) : "";
-
-            var goto_url = 'dur_sankey/?' + machine + 'calis=local&sf=' + directory +
-                comm + xaxis_par + groupby_par +
-                yaxis_par + agg_par + last_days;
-
-            if( exe_compare_() ) {
-                //location.href = goto_url;
-
-            } else {
-                //window.open( goto_url );
-            }
 
             var akeys = keys.split(' ');
             console.dir(akeys);
 
             ST.graph.compare( akeys );
-            //openCompareWindow();
-
-            setTimeout( function() {
-
-                var xaxis = $('.compare_arguments .xaxis').val();
-                //ST.graph.setXAxis( xaxis );
-
-                var groupby = $('.compare_arguments .groupby').val();
-                //ST.graph.setGroupBy( groupby );
-                console.log('set xaxis=' + xaxis + '  gp=' + groupby);
-
-            }, 1000);
 
             return false;
         }
+
+        var command = ST.Utility.get_param('command');
 
         var run_id = $(this).attr('run_id');
         var subject = $(this).attr('subject').toLowerCase();
