@@ -52,7 +52,9 @@ ST.PieChart = function() {
             .dimension(quarter)
             .group(quarterGroup)
             .on('filtered', function(chart) {
+
                 ST.UrlStateManager.user_filtered(chart, 'PieChart');
+                ST.CallSpot.load_compare();
             })
             .ordinalColors([
                 '#9bdb8d',

@@ -338,21 +338,24 @@ ST.CallSpot = function() {
         return ST.params.exe_compare === "1";
     };
 
+    var load_compare_ = function() {
+
+        //  compare button
+        var keys = get_keys_();
+        localStorage.setItem('calis', keys);
+
+
+        var akeys = keys.split(' ');
+        console.dir(akeys);
+
+        ST.graph.compare( akeys );
+    };
 
     var drill_down_ = function() {
 
         if( !$(this).hasClass('drilldown')) {
 
-            //  compare button
-            var keys = get_keys_();
-            localStorage.setItem('calis', keys);
-
-
-            var akeys = keys.split(' ');
-            console.dir(akeys);
-
-            ST.graph.compare( akeys );
-
+            load_compare_();
             return false;
         }
 
@@ -403,6 +406,7 @@ ST.CallSpot = function() {
 
 
     return {
+        load_compare: load_compare_,
         handle_success2: handle_success2_,
         handle_success: handle_success_,
         get_command_begin: get_command_begin_,
