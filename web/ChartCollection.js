@@ -34,7 +34,7 @@ ST.ChartCollection = function() {
         ST.NDX = ndx;
 
         // Dimension by full date
-        var dateDimension = ndx.dimension(function (d) {
+        ST.dateDimension = ndx.dimension(function (d) {
             return dateFormatParser(d.date);
         });
 
@@ -179,7 +179,7 @@ ST.ChartCollection = function() {
         //  https://github.com/HamsterHuey/intothevoid.io/blob/master/code/2017/dcjs%20sortable%20table/dcjsSortableTable.html
 
         runTable
-            .dimension(dateDimension)
+            .dimension(ST.dateDimension)
             // Data table does not use crossfilter group but rather a closure
             // as a grouping function
             .group(function (d) {
@@ -217,8 +217,9 @@ ST.ChartCollection = function() {
 
         render_more_link_( the_data.length );
 
-        ST.all_data = dateDimension.top(80000);
+        ST.all_data = ST.dateDimension.top(80000);
         console.dir(ST.all_data);
+        //console.dir(runTable.top(80000));
 
         //simply call `.renderAll()` to render all charts on the page
         dc.renderAll();

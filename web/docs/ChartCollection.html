@@ -116,7 +116,7 @@ ST.ChartCollection = <span class="hljs-function"><span class="hljs-keyword">func
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">var</span> dateDimension = ndx.dimension(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{
+            <div class="content"><div class='highlight'><pre>        ST.dateDimension = ndx.dimension(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{
             <span class="hljs-keyword">return</span> dateFormatParser(d.date);
         });</pre></div></div>
             
@@ -329,7 +329,7 @@ on other charts within the same chart group.
             
             <div class="content"><div class='highlight'><pre>
         runTable
-            .dimension(dateDimension)</pre></div></div>
+            .dimension(ST.dateDimension)</pre></div></div>
             
         </li>
         
@@ -469,7 +469,7 @@ This code demonstrates generating the column header automatically based on the c
 
         render_more_link_( the_data.length );
 
-        ST.all_data = dateDimension.top(<span class="hljs-number">80000</span>);
+        ST.all_data = ST.dateDimension.top(<span class="hljs-number">80000</span>);
         <span class="hljs-built_in">console</span>.dir(ST.all_data);</pre></div></div>
             
         </li>
@@ -480,6 +480,19 @@ This code demonstrates generating the column header automatically based on the c
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-20">&#182;</a>
+              </div>
+              <p>console.dir(runTable.top(80000));</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-21">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-21">&#182;</a>
               </div>
               <p>simply call <code>.renderAll()</code> to render all charts on the page</p>
 
@@ -507,11 +520,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-21">
+        <li id="section-22">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-21">&#182;</a>
+                <a class="pilcrow" href="#section-22">&#182;</a>
               </div>
               <p> The horizontal charts  have a slightly different structure where the reset link
  is not inside the div that gets redrawn, so we need to manually hide the horizontal reset link.</p>
@@ -552,11 +565,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-22">
+        <li id="section-23">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-22">&#182;</a>
+                <a class="pilcrow" href="#section-23">&#182;</a>
               </div>
               <p> for some reason, dc.js capitalizes column headings, thus messing up the sort
  reference when they click on the arrow click.</p>
@@ -623,11 +636,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-23">
+        <li id="section-24">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-23">&#182;</a>
+                <a class="pilcrow" href="#section-24">&#182;</a>
               </div>
               <p>addRunSetChangeListener( ST.CallSpot.handle_success );
 setDirectory( file )
@@ -647,11 +660,11 @@ openCompareWindow()</p>
         </li>
         
         
-        <li id="section-24">
+        <li id="section-25">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-24">&#182;</a>
+                <a class="pilcrow" href="#section-25">&#182;</a>
               </div>
               <p>listen from chart</p>
 
@@ -696,11 +709,11 @@ openCompareWindow()</p>
         </li>
         
         
-        <li id="section-25">
+        <li id="section-26">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-25">&#182;</a>
+                <a class="pilcrow" href="#section-26">&#182;</a>
               </div>
               <pre><code>             <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'summary'</span>, summ);
                ST.CallSpot.handle_success2(summ);
@@ -713,11 +726,11 @@ openCompareWindow()</p>
         </li>
         
         
-        <li id="section-26">
+        <li id="section-27">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-26">&#182;</a>
+                <a class="pilcrow" href="#section-27">&#182;</a>
               </div>
               <p>   requestSummary();</p>
 

@@ -320,7 +320,7 @@ ST.CallSpot = function() {
 
         var str = "";
         var count = 0;
-        var all = ST.all_data;
+        var all = ST.dateDimension.top(Infinity);
         var len = all.length;
 
         for( var c=0; c < len; c++ ) {
