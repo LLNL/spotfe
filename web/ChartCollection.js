@@ -346,15 +346,16 @@ ST.ChartCollection = function() {
 
         help_icon_(file, ST.params);
 
-        var layout = ST.params.layout ? ' --layout=' + ST.params.layout : "";
+        var is_rz_target = ST.Utility.on_rz();
+        var host = is_rz_target ? "rzgenie" : "oslic";
+        var machine = ST.Utility.get_param('machine');
 
-        //addRunSetChangeListener( ST.CallSpot.handle_success );
-        //setDirectory( file )
-        //openCompareWindow()
+        host = machine || host;
 
         ST.graph = new Graph('#compare_bottom_outer');
+        console.log('Using host: ' + host);
 
-        ST.graph.setDirectory("rzgenie", file)
+        ST.graph.setDirectory(host, file)
             .then(summary => {
                 console.log('summary:', summary);
                 ST.CallSpot.handle_success2(summary);

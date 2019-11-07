@@ -659,7 +659,19 @@ This code demonstrates generating the column header automatically based on the c
 
         help_icon_(file, ST.params);
 
-        <span class="hljs-keyword">var</span> layout = ST.params.layout ? <span class="hljs-string">' --layout='</span> + ST.params.layout : <span class="hljs-string">""</span>;</pre></div></div>
+        <span class="hljs-keyword">var</span> is_rz_target = ST.Utility.on_rz();
+        <span class="hljs-keyword">var</span> host = is_rz_target ? <span class="hljs-string">"rzgenie"</span> : <span class="hljs-string">"oslic"</span>;
+        <span class="hljs-keyword">var</span> machine = ST.Utility.get_param(<span class="hljs-string">'machine'</span>);
+
+        host = machine || host;
+
+        ST.graph = <span class="hljs-keyword">new</span> Graph(<span class="hljs-string">'#compare_bottom_outer'</span>);
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Using host: '</span> + host);
+
+        ST.graph.setDirectory(host, file)
+            .then(<span class="hljs-function"><span class="hljs-params">summary</span> =&gt;</span> {
+                <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'summary:'</span>, summary);
+                ST.CallSpot.handle_success2(summary);</pre></div></div>
             
         </li>
         
@@ -669,29 +681,6 @@ This code demonstrates generating the column header automatically based on the c
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-25">&#182;</a>
-              </div>
-              <p>addRunSetChangeListener( ST.CallSpot.handle_success );
-setDirectory( file )
-openCompareWindow()</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>
-        ST.graph = <span class="hljs-keyword">new</span> Graph(<span class="hljs-string">'#compare_bottom_outer'</span>);
-
-        ST.graph.setDirectory(<span class="hljs-string">"rzgenie"</span>, file)
-            .then(<span class="hljs-function"><span class="hljs-params">summary</span> =&gt;</span> {
-                <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'summary:'</span>, summary);
-                ST.CallSpot.handle_success2(summary);</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-26">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-26">&#182;</a>
               </div>
               <p> just for now.</p>
 
@@ -703,11 +692,11 @@ openCompareWindow()</p>
         </li>
         
         
-        <li id="section-27">
+        <li id="section-26">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-27">&#182;</a>
+                <a class="pilcrow" href="#section-26">&#182;</a>
               </div>
               <p>listen from chart</p>
 
@@ -752,11 +741,11 @@ openCompareWindow()</p>
         </li>
         
         
-        <li id="section-28">
+        <li id="section-27">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-28">&#182;</a>
+                <a class="pilcrow" href="#section-27">&#182;</a>
               </div>
               <pre><code>             <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'summary'</span>, summ);
                ST.CallSpot.handle_success2(summ);
@@ -769,11 +758,11 @@ openCompareWindow()</p>
         </li>
         
         
-        <li id="section-29">
+        <li id="section-28">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-29">&#182;</a>
+                <a class="pilcrow" href="#section-28">&#182;</a>
               </div>
               <p>   requestSummary();</p>
 
