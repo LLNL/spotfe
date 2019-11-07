@@ -61,7 +61,7 @@ ST.CompareArguments = function() {
         Vue.component('bottom-tabs', {
             data: function() {
                 return {
-                    "isTableActive": true
+                    "isTableActive": false
                 }
             },
             template: '<div class="bottom_tab_outer">' +
@@ -82,6 +82,9 @@ ST.CompareArguments = function() {
 
                     $('.table-outer').hide();
                     $('#compare_bottom_outer, #compare-window').show();
+                },
+                mount: function() {
+                    this.compareActive();
                 }
             }
         });

@@ -9,16 +9,16 @@ https://myconfluence.llnl.gov/display/RAM/FIS#FIS-DoIhaveaFISaccount?
 Left Off: Sent the form to Jeff.  Waiting for approval, so I can start using Hopper to do deployments (still need the directories of where to move stuff).
 
 Next:
+- Make sure Matt's Demo on thursday can use DEV.
+- Bring up: talk about: Nathan.  Compare functionality does work for their data.
 DONE 1. SCF:  Fis.
 - Fix link to Documentation
+2. Integrate with Joe Chavez.
+    7. On page load make sure that whatever default tab is open is shown and the other one is fully hidden.
+    9. Propate URL changes to drop downs on page load.
+    10. Do lots of testing.
 2. Spot Scalability - to 1 million.
     * I need the AJAX request to not timeout -> which means, getting the request time down to about 5 seconds or less.
-2. Integrate with Joe Chavez.
-    2. On page load make sure that the compare page is fully hidden
-    3. Get rid of drop downs that are reducenat the 4 net to the compare button
-    4. Propate URL changes to drop downs on page load.
-2.5 Tabs for teh Table vs Compare page on Summary page.
-    * verify that this isn't a major Task.
 3. Update the optvis deployment
 4. Optvis -> use the script that Matt provides: a c++ program executable that i will run that will generate a file that i should delete after reading
     * command_out -> will contain the output of the command of this program.

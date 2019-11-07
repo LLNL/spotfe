@@ -323,6 +323,21 @@ ST.ChartCollection = function() {
         ST.ChartCollection.RenderChartCollection(ST.newp, ST.layout_used);
     };
 
+    var setup_pars_ = function() {
+
+        var xaxis = ST.Utility.get_param('xaxis');
+        var groupby = ST.Utility.get_param('groupby');
+        var yaxis = ST.Utility.get_param('yaxis');
+        var aggregate = ST.Utility.get_param('aggregate');
+        yaxis = decodeURIComponent(yaxis);
+        //yaxis = yaxis.replace('\%25252523', '#');
+
+        ST.graph.setXaxis(xaxis);
+        ST.graph.setGroupBy(groupby);
+        ST.graph.setYAxis(yaxis);
+        ST.graph.setAggregateType(aggregate);
+    };
+
 
     function init () {
 
@@ -343,6 +358,9 @@ ST.ChartCollection = function() {
             .then(summary => {
                 console.log('summary:', summary);
                 ST.CallSpot.handle_success2(summary);
+
+                //  just for now.
+                setTimeout( setup_pars_, 1000);
             });
 
         // listen from chart
