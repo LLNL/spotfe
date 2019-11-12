@@ -13,6 +13,7 @@ Next:
 - Bring up: talk about: Nathan.  Compare functionality does work for their data.
 DONE 1. SCF:  Fis.
 - Fix link to Documentation
+- Check default machine to make sure RZ isn't required for CZ.
 2. Integrate with Joe Chavez.
     7. On page load make sure that whatever default tab is open is shown and the other one is fully hidden.
     9. Propate URL changes to drop downs on page load.
