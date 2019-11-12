@@ -1,20 +1,30 @@
 <html>
 <head>
-    <title>Sankey Example</title>
-    <script src="vue.js"></script>
-    <script src="d3.js"></script>
-    <script src="d3-sankey.js"></script>
-    <script src="sankey_component.js"></script>
+    <title></title>
 </head>
 <body>
 
-    <div id="app">
-        <sankey-diagram :run-data='myInputData' />
-    </div>
+    <main></main>
+    <script src="./localforage.js"></script>
+    <script src="./main.js"></script>
+    <script>
+        let [_, path, filename] = window.location.href.match(/durations%20\%20(.*)\/+(.*\.cali)/)
+        localforage.getItem(path)
+            .then(runSet => {
+                const fileData = runSet.Runs[filename]
+                for (const [key, val] of Object.entries(runSet.RunGlobalMeta)){
+                    fileData.Globals[key] = {value: fileData.Globals[key], type: runSet.RunGlobalMeta[key].type}
+                }
+                const flags = {data: fileData.Data, meta: fileData.Globals}
+                return Elm.Main.init(
+                    { node: document.querySelector('main')
+                    , flags
+                    }
+                )
+            })
+        document.title = filename
 
-    <script src="../web/js/jquery-1.11.0.min.js"></script>
-    <script src="../web/js/Utility.js"></script>
-    <script src="main.js"></script>
+    </script>
 
 </body>
 </html>
