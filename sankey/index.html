@@ -15,7 +15,7 @@
                 for (const [key, val] of Object.entries(runSet.RunGlobalMeta)){
                     fileData.Globals[key] = {value: fileData.Globals[key], type: runSet.RunGlobalMeta[key].type}
                 }
-                const flags = {data: fileData.Data, meta: fileData.Globals}
+                const flags = {filename, data: fileData.Data, meta: fileData.Globals}
                 return Elm.Main.init(
                     { node: document.querySelector('main')
                     , flags
