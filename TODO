@@ -8,14 +8,36 @@ How to get a FIS account:
 https://myconfluence.llnl.gov/display/RAM/FIS#FIS-DoIhaveaFISaccount?
 Left Off: Sent the form to Jeff.  Waiting for approval, so I can start using Hopper to do deployments (still need the directories of where to move stuff).
 
+Matt - leave - next three weeks in and out, starting week of nov 19th
+1. DONE - Title -
+2. test.html - add matt's new directory.
+
 Next:
-1. Support Undefined values (some cali's have them defined, some don't)
+- Make sure Matt's Demo on thursday can use DEV.
+- Bring up: talk about: Nathan.  Compare functionality does work for their data.
+DONE 1. SCF:  Fis.
+- Fix link to Documentation
+- Check default machine to make sure RZ isn't required for CZ.
+2. Integrate with Joe Chavez.
+    7. On page load make sure that whatever default tab is open is shown and the other one is fully hidden.
+    9. Propate URL changes to drop downs on page load.
+    10. Do lots of testing.
+2. Spot Scalability - to 1 million.
+    * I need the AJAX request to not timeout -> which means, getting the request time down to about 5 seconds or less.
+3. Update the optvis deployment
+4. Optvis -> use the script that Matt provides: a c++ program executable that i will run that will generate a file that i should delete after reading
+    * command_out -> will contain the output of the command of this program.
+    * the input files, I'll get them from a different source, probably embedded in the JSON.
+    *
+5. go back to jira list and check what can be forward progress -> like sets on dc page.
+5- Possibly Unknown Priority number - Later on Scalability of Optviz.
+    * make sure to pass Matt a UserID
+    * make sure to tell him when session has closed, or assume it's closed 5 min after no action.
+    * send session start to matt.
+1. FIXED - Support Undefined values (some cali's have them defined, some don't)
     * "not defined", 0 if Int.
     * make some test files to test it.
-2. SCF:  Fis.
-3. Integrate with Joe Chavez.
 
-3PM meeting 4159 Morgan Territory.
 
 List:
 DONE - Fixed Nathan's customers problem about the strange key names with (2,4): in it.
@@ -40,6 +62,8 @@ DONE - add curve to horiz bar chart and pie chart.
 10. Integrate with Joe Chavez.
 9. Fix [brackets] for command line, it's not showing up. (make sure it's not a problem in dc.js)
 - Fix horizontal brackets lining up with the actual bar charts.
+- Test Data the Jupyter notebooks don't seem to work.
+
 
 https://lc.llnl.gov/spot/dcvis/?sf=/usr/gapps/spot/datasets/lulesh_gen/100
 
@@ -56,12 +80,14 @@ scp dc.tar rzfis:TO/dc.tar    # use RZ token.
 
 Wait ~10 min
 On SCF system:
+ssh pascal@cslic
 sftp pascal@fis  (use LC username and SCF OTP)
 cd FROM
 get myfile.tar
 rm myfile.tar
 quit
 
+/usr/gapps/spot
 
 
 

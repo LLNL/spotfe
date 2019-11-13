@@ -54,7 +54,7 @@ ST.CallSpot = function() {
 
         var rtype = ST.params.type;
         if( is_h ) {
-           // rtype = "POST";
+            // rtype = "POST";
         }
 
         var obj = {
@@ -89,9 +89,9 @@ ST.CallSpot = function() {
 
         var command_out = value.output ? value.output.command_out : value.responseText;
 
-        if( value.error !== "" && !value.responseText) {
+        if (value.error !== "" && !value.responseText) {
 
-            ST.Utility.error( value.error );
+            ST.Utility.error(value.error);
 
         } else {
 
@@ -101,16 +101,16 @@ ST.CallSpot = function() {
             var command_out2;
             var parsed;
 
-            if( parsed_whole.error ) {
+            if (parsed_whole.error) {
 
                 var er = parsed_whole.error;
                 var additional = "";
 
-                if( er.indexOf('Failed to run command') > -1 && er.indexOf('No such file or directory') > -1 ) {
+                if (er.indexOf('Failed to run command') > -1 && er.indexOf('No such file or directory') > -1) {
                     additional = "<br><br>Usually, this means you need to specify a command.  For example, try adding the following to the URL: &command=/usr/tce/bin/python3%20/usr/global/web-pages/lc/www/spot/spot.py";
                 }
 
-                ST.Utility.error( er + additional);
+                ST.Utility.error(er + additional);
 
 
             } else {
@@ -125,126 +125,133 @@ ST.CallSpot = function() {
                     ST.layout_used = data.layout;
                 }
             }
-
-
-            //console.dir(parsed);
-            var USE_TINY_STUB = ST.Utility.get_param('tiny') === 'yes';
-
-            var now = Math.round( Date.now() / 1000);
-            var since = ST.params.last_days * 24 * 3600;
-            var min_date = ST.params.last_days == 0 ? 0 : (now - since);
-
-            var DATE_KEY = "launchdate";
-
-            var newp = [];
-
-            for (var key in parsed) {
-
-                if (newp.length < ST.params.max) {
-
-                    var valid_obj = parsed[key];
-
-                    //  This is a STUB!!!!!!!  STUB STUB STUB.
-                    var rb = valid_obj['Region Balance'];
-                    var deterministic = valid_obj.FigureOfMerit || rb || 0.5;
-                    var made_up = 1557354304 - Math.floor( deterministic * 380 * 86000);
-
-                    valid_obj[DATE_KEY] = valid_obj[DATE_KEY] || made_up;
-
-                    if( USE_TINY_STUB ) {
-                        valid_obj['tiny_nums'] = 52.7023 + (Math.random() * 0.3);
-                    }
-
-                    //  Generate a random date for now.
-                    var date = valid_obj[DATE_KEY];
-
-                    if( !date || date > min_date ) {
-
-                        var spot_date = new Date(date * 1000);
-
-                        var month = spot_date.getMonth() + 1;
-                        var day = spot_date.getDate();
-                        var year = spot_date.getFullYear();
-
-                        //  This is just for stub
-                        //valid_obj.epoch_date = date;
-                        valid_obj.formatdate = month + "/" + day + "/" + year;
-                        valid_obj.run_id = "id_" + Math.floor(Math.random() * 10000);
-                        valid_obj.drilldown = ['Jupyter', 'walltime'];
-                        valid_obj.key = valid_obj.key || key;
-
-                        for (var dimension in valid_obj) {
-
-                            var what_is_it = ST.Utility.match_expression(valid_obj[dimension]);
-                            var sda = sort_dimension_as_number_(dimension);
-
-                            if (what_is_it.onlyNumbers || sda) {
-                                valid_obj[dimension] = +valid_obj[dimension];
-                            }
-                        }
-
-
-                        newp.push(valid_obj);
-                        objs_by_run_id_[valid_obj.run_id] = valid_obj;
-                    }
-                }
-            }
-
-
-            var num_total = Object.keys(parsed).length;
-            var num_past_min_date = newp.length;
-
-            if( num_total === 0 ) {
-                alert('I got 0 data objects.');
-                return true;
-            }
-
-            if( num_past_min_date === 0 && num_total > 0 ) {
-                alert('Although you have ' + num_total + ' total data objects, you only 0 data objects with a "' + DATE_KEY + '" greater than ' + min_date +
-                    '(' + ST.LAST_DAYS + '=' + ST.params.last_days + ').  If you wish to eliminate this constraint, remove "' + ST.LAST_DAYS + '" from the URL parameter list.');
-            }
-
-
-            //  STUB!!
-            if( USE_TINY_STUB ) {
-                ST.layout_used.charts.push({
-                    dimension: "tiny_nums",
-                    title: "Tiny Nums",
-                    viz: "BarChart",
-                    show: true
-                });
-
-                ST.layout_used.table.push({
-                    dimension: "tiny_nums",
-                    title: "tiny_nums"
-                });
-            }
-
-
-            //  This is quite lousy but drill_down needs to happen after RenderChartCollection
-            //  Currently RenderChartCollection has a fatal javascript error coming from dc.js
-            //  which needs to get fixed.
-            try {
-                if (ST && ST.ChartCollection ) {
-
-                    ST.newp = newp;
-                    ST.ChartCollection.RenderChartCollection(ST.newp, ST.layout_used);  //  ST.ReturnedDataStub.layout); //
-                }
-            } catch(e) {
-                console.log("caught an error.");
-                console.dir(e);
-
-            } finally {
-
-                //  execute compare right away, if we're exe_compare
-                if( exe_compare_() ) {
-                    drill_down_();
-                }
-
-                bind_();
-            }
         }
     };
+
+
+    var handle_success2_ = function( summ ) {
+
+        ST.layout_used = summ.layout;
+        parsed = summ.data;
+
+        //console.dir(parsed);
+        var USE_TINY_STUB = ST.Utility.get_param('tiny') === 'yes';
+
+        var now = Math.round( Date.now() / 1000);
+        var since = ST.params.last_days * 24 * 3600;
+        var min_date = ST.params.last_days == 0 ? 0 : (now - since);
+
+        var DATE_KEY = "launchdate";
+
+        var newp = [];
+
+        for (var key in parsed) {
+
+            if (newp.length < ST.params.max) {
+
+                var valid_obj = parsed[key];
+
+                //  This is a STUB!!!!!!!  STUB STUB STUB.
+                var rb = valid_obj['Region Balance'];
+                var deterministic = valid_obj.FigureOfMerit || rb || 0.5;
+                var made_up = 1557354304 - Math.floor( deterministic * 380 * 86000);
+
+                valid_obj[DATE_KEY] = valid_obj[DATE_KEY] || made_up;
+
+                if( USE_TINY_STUB ) {
+                    valid_obj['tiny_nums'] = 52.7023 + (Math.random() * 0.3);
+                }
+
+                //  Generate a random date for now.
+                var date = valid_obj[DATE_KEY];
+
+                if( !date || date > min_date ) {
+
+                    var spot_date = new Date(date * 1000);
+
+                    var month = spot_date.getMonth() + 1;
+                    var day = spot_date.getDate();
+                    var year = spot_date.getFullYear();
+
+                    //  This is just for stub
+                    //valid_obj.epoch_date = date;
+                    valid_obj.formatdate = month + "/" + day + "/" + year;
+                    valid_obj.run_id = "id_" + Math.floor(Math.random() * 10000);
+                    valid_obj.drilldown = ['Jupyter', 'walltime'];
+                    valid_obj.key = valid_obj.key || key;
+
+                    for (var dimension in valid_obj) {
+
+                        var what_is_it = ST.Utility.match_expression(valid_obj[dimension]);
+                        var sda = sort_dimension_as_number_(dimension);
+
+                        if (what_is_it.onlyNumbers || sda) {
+                            valid_obj[dimension] = +valid_obj[dimension];
+                        }
+                    }
+
+
+                    newp.push(valid_obj);
+                    objs_by_run_id_[valid_obj.run_id] = valid_obj;
+                }
+            }
+        }
+
+
+        var num_total = Object.keys(parsed).length;
+        var num_past_min_date = newp.length;
+
+        if( num_total === 0 ) {
+            alert('I got 0 data objects.');
+            return true;
+        }
+
+        if( num_past_min_date === 0 && num_total > 0 ) {
+            alert('Although you have ' + num_total + ' total data objects, you only 0 data objects with a "' + DATE_KEY + '" greater than ' + min_date +
+                '(' + ST.LAST_DAYS + '=' + ST.params.last_days + ').  If you wish to eliminate this constraint, remove "' + ST.LAST_DAYS + '" from the URL parameter list.');
+        }
+
+
+        //  STUB!!
+        if( USE_TINY_STUB ) {
+            ST.layout_used.charts.push({
+                dimension: "tiny_nums",
+                title: "Tiny Nums",
+                viz: "BarChart",
+                show: true
+            });
+
+            ST.layout_used.table.push({
+                dimension: "tiny_nums",
+                title: "tiny_nums"
+            });
+        }
+
+
+        //  This is quite lousy but drill_down needs to happen after RenderChartCollection
+        //  Currently RenderChartCollection has a fatal javascript error coming from dc.js
+        //  which needs to get fixed.
+        try {
+            if (ST && ST.ChartCollection ) {
+
+                ST.newp = newp;
+                ST.ChartCollection.RenderChartCollection(ST.newp, ST.layout_used);  //  ST.ReturnedDataStub.layout); //
+            }
+        } catch(e) {
+            console.log("caught an error.");
+            console.dir(e);
+
+        } finally {
+
+            //  execute compare right away, if we're exe_compare
+            if( exe_compare_() ) {
+                drill_down_();
+            }
+
+            bind_();
+        }
+    };
+
 
 
 
@@ -269,9 +276,9 @@ ST.CallSpot = function() {
     };
 
 
-    //  Certain events like filtering unbind the buttons, so need to rebind.
+//  Certain events like filtering unbind the buttons, so need to rebind.
     var bind_ = function() {
-       $('.dc-table-row .drilldown').unbind('click').bind('click', drill_down_ );
+        $('.dc-table-row .drilldown').unbind('click').bind('click', drill_down_ );
     };
 
     var handle_error_ = function( data ) {
@@ -313,7 +320,7 @@ ST.CallSpot = function() {
 
         var str = "";
         var count = 0;
-        var all = ST.all_data;
+        var all = ST.dateDimension.top(Infinity);
         var len = all.length;
 
         for( var c=0; c < len; c++ ) {
@@ -331,44 +338,28 @@ ST.CallSpot = function() {
         return ST.params.exe_compare === "1";
     };
 
+    var load_compare_ = function() {
+
+        //  compare button
+        var keys = get_keys_();
+        localStorage.setItem('calis', keys);
+
+
+        var akeys = keys.split(' ');
+        console.dir(akeys);
+
+        ST.graph.compare( akeys );
+    };
 
     var drill_down_ = function() {
 
         if( !$(this).hasClass('drilldown')) {
 
-            //  compare button
-            var keys = get_keys_();
-            var machine = "machine=" + ST.params.machine + "&";
-            var xaxis = $('.compare_arguments .xaxis').val();
-            var groupby = $('.compare_arguments .groupby').val();
-            var yaxis = ST.Utility.get_param('yaxis');
-            var aggregate = ST.Utility.get_param('aggregate');
-
-            localStorage.setItem('calis', keys);
-
-            var directory = ST.Utility.get_file();
-            var command = ST.Utility.get_param('command');
-            var comm = command ? '&command=' + command : "";
-            var xaxis_par = '&xaxis=' + xaxis;
-            var groupby_par = '&groupby=' + groupby + ST.UrlStateManager.get_chart_pars();
-            var yaxis_par = yaxis ? '&yaxis=' + yaxis : "";
-            var agg_par = aggregate ? '&aggregate=' + aggregate : "";
-
-            var days_ago = ST.Utility.get_param(ST.LAST_DAYS);
-            var last_days = days_ago ? ( "&" + ST.LAST_DAYS + "=" + days_ago ) : "";
-
-            var goto_url = 'dur_sankey/?' + machine + 'calis=local&sf=' + directory +
-                comm + xaxis_par + groupby_par +
-                yaxis_par + agg_par + last_days;
-
-            if( exe_compare_() ) {
-                location.href = goto_url;
-            } else {
-                window.open( goto_url );
-            }
-
+            load_compare_();
             return false;
         }
+
+        var command = ST.Utility.get_param('command');
 
         var run_id = $(this).attr('run_id');
         var subject = $(this).attr('subject').toLowerCase();
@@ -415,6 +406,8 @@ ST.CallSpot = function() {
 
 
     return {
+        load_compare: load_compare_,
+        handle_success2: handle_success2_,
         handle_success: handle_success_,
         get_command_begin: get_command_begin_,
         drilldown: drill_down_,

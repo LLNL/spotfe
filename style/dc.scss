@@ -768,6 +768,7 @@ body .dc-chart g.row text {
         top: 30px;
         right: 120px;
         z-index: 10;
+        width: 904px;
 
         select {
             height: 35px;
@@ -789,9 +790,57 @@ body .dc-chart g.row text {
             left: 227px;
             top: -20px;
         }
+
+        .yaxis_label {
+            position: absolute;
+            left: 452px;
+            top: -20px;
+        }
+
+        .aggregate_label {
+            position: absolute;
+            left: 679px;
+            top: -20px;
+        }
     }
 
     .hidden {
         display: none;
     }
+
+    .bottom_tab_outer {
+
+        border-bottom: 1px solid #bbb;
+        margin: 100px 0 5px 0;
+
+        .table-tab, .compare-tab {
+            padding: 4px;
+            border: 1px solid #999;
+            width: 80px;
+            display: inline-block;
+            margin: 0 0 0 15px;
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+            font-family: tahoma;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            cursor: pointer;
+            position: relative;
+            top: 4px;
+        }
+
+        .active {
+            border-bottom: 4px solid white;
+        }
+    }
+}
+
+#compare_bottom_outer {
+    min-height: 500px;
+    background-color: #f2f2f2;
+    display: none;
+}
+
+.bg-color-255-255-255-0, #compare-window {
 }

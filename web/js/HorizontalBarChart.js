@@ -64,6 +64,7 @@ ST.HorizontalBarChart = function() {
             .on('filtered', function(chart) {
 
                 ST.UrlStateManager.user_filtered(chart, 'HorizontalBarChart');
+                ST.CallSpot.load_compare();
             })
             .dimension(dayOfWeek)
             // Assign colors to each value in the x scale domain

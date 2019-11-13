@@ -74,45 +74,6 @@ var init_with_ar_ = function(data) {
     var aggregate = ST.Utility.get_param('aggregate', true);
 
 
-    // elm init from main.js
-    let app = Elm.Main.init(
-        {
-            node: document.querySelector('#durations-chart'),
-        });
-
-    console.dir(app.ports);
-
-    app.ports.setData.send(data);
-
-    app.ports.xAxisChanged.subscribe( function( val ) {
-
-        if( val && val !== "undefined" ) {
-            ST.UrlStateManager.update_url('xaxis', val);
-        }
-    });
-
-    app.ports.groupByChanged.subscribe( function( val ) {
-
-        if( val && val !== "undefined" ) {
-            ST.UrlStateManager.update_url('groupby', val);
-        }
-    });
-
-    app.ports.yAxisChanged.subscribe( function( val ) {
-
-        if( val && val !== "undefined" ) {
-            var component = encodeURIComponent(val);
-            ST.UrlStateManager.update_url('yaxis', component);
-        }
-    });
-
-    app.ports.aggregateChanged.subscribe( function( val) {
-
-        if( val && val !== "undefined" ) {
-            ST.UrlStateManager.update_url('aggregate', val);
-        }
-    });
-
     if( is_defined(xaxis) ) {
         app.ports.setXaxis.send(xaxis);     // set Xaxis here
     }

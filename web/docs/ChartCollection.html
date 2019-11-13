@@ -116,7 +116,7 @@ ST.ChartCollection = <span class="hljs-function"><span class="hljs-keyword">func
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">var</span> dateDimension = ndx.dimension(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{
+            <div class="content"><div class='highlight'><pre>        ST.dateDimension = ndx.dimension(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{
             <span class="hljs-keyword">return</span> dateFormatParser(d.date);
         });</pre></div></div>
             
@@ -211,7 +211,7 @@ ST.ChartCollection = <span class="hljs-function"><span class="hljs-keyword">func
             
             <div class="content"><div class='highlight'><pre>            .html({
                 <span class="hljs-attr">some</span>: <span class="hljs-string">'&lt;strong&gt;%filter-count&lt;/strong&gt; selected out of &lt;strong&gt;%total-count&lt;/strong&gt; records'</span> +
-                <span class="hljs-string">' | &lt;div class="reset_all"&gt;Reset All&lt;/div&gt;'</span>,
+                    <span class="hljs-string">' | &lt;div class="reset_all"&gt;Reset All&lt;/div&gt;'</span>,
                 <span class="hljs-attr">all</span>: <span class="hljs-string">'All records selected. Please click on the graph to apply filters.'</span>
             });</pre></div></div>
             
@@ -329,7 +329,7 @@ on other charts within the same chart group.
             
             <div class="content"><div class='highlight'><pre>
         runTable
-            .dimension(dateDimension)</pre></div></div>
+            .dimension(ST.dateDimension)</pre></div></div>
             
         </li>
         
@@ -469,7 +469,7 @@ This code demonstrates generating the column header automatically based on the c
 
         render_more_link_( the_data.length );
 
-        ST.all_data = dateDimension.top(<span class="hljs-number">80000</span>);
+        ST.all_data = ST.dateDimension.top(<span class="hljs-number">80000</span>);
         <span class="hljs-built_in">console</span>.dir(ST.all_data);</pre></div></div>
             
         </li>
@@ -480,6 +480,19 @@ This code demonstrates generating the column header automatically based on the c
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-20">&#182;</a>
+              </div>
+              <p>console.dir(runTable.top(80000));</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-21">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-21">&#182;</a>
               </div>
               <p>simply call <code>.renderAll()</code> to render all charts on the page</p>
 
@@ -507,11 +520,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-21">
+        <li id="section-22">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-21">&#182;</a>
+                <a class="pilcrow" href="#section-22">&#182;</a>
               </div>
               <p> The horizontal charts  have a slightly different structure where the reset link
  is not inside the div that gets redrawn, so we need to manually hide the horizontal reset link.</p>
@@ -552,11 +565,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-22">
+        <li id="section-23">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-22">&#182;</a>
+                <a class="pilcrow" href="#section-23">&#182;</a>
               </div>
               <p> for some reason, dc.js capitalizes column headings, thus messing up the sort
  reference when they click on the arrow click.</p>
@@ -610,28 +623,13 @@ This code demonstrates generating the column header automatically based on the c
         ST.ChartCollection.RenderChartCollection(ST.newp, ST.layout_used);
     };
 
+    <span class="hljs-keyword">var</span> setup_pars_ = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
 
-    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">init</span> (<span class="hljs-params"></span>) </span>{
-
-        <span class="hljs-keyword">var</span> file = ST.Utility.get_file();
-        ST.Utility.init_params();
-
-        help_icon_(file, ST.params);
-
-        <span class="hljs-keyword">var</span> layout = ST.params.layout ? <span class="hljs-string">' --layout='</span> + ST.params.layout : <span class="hljs-string">""</span>;</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-23">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-23">&#182;</a>
-              </div>
-              <p>addRunSetChangeListener( ST.CallSpot.handle_success );</p>
-
-            </div>
+        <span class="hljs-keyword">var</span> xaxis = ST.Utility.get_param(<span class="hljs-string">'xaxis'</span>);
+        <span class="hljs-keyword">var</span> groupby = ST.Utility.get_param(<span class="hljs-string">'groupby'</span>);
+        <span class="hljs-keyword">var</span> yaxis = ST.Utility.get_param(<span class="hljs-string">'yaxis'</span>);
+        <span class="hljs-keyword">var</span> aggregate = ST.Utility.get_param(<span class="hljs-string">'aggregate'</span>);
+        yaxis = <span class="hljs-built_in">decodeURIComponent</span>(yaxis);</pre></div></div>
             
         </li>
         
@@ -642,9 +640,38 @@ This code demonstrates generating the column header automatically based on the c
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-24">&#182;</a>
               </div>
-              <p>setDirectory( file )</p>
+              <p>yaxis = yaxis.replace(‘\%25252523’, ‘#’);</p>
 
             </div>
+            
+            <div class="content"><div class='highlight'><pre>
+        ST.graph.setXaxis(xaxis);
+        ST.graph.setGroupBy(groupby);
+        ST.graph.setYAxis(yaxis);
+        ST.graph.setAggregateType(aggregate);
+    };
+
+
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">init</span> (<span class="hljs-params"></span>) </span>{
+
+        <span class="hljs-keyword">var</span> file = ST.Utility.get_file();
+        ST.Utility.init_params();
+
+        help_icon_(file, ST.params);
+
+        <span class="hljs-keyword">var</span> is_rz_target = ST.Utility.on_rz();
+        <span class="hljs-keyword">var</span> host = is_rz_target ? <span class="hljs-string">"rzgenie"</span> : <span class="hljs-string">"oslic"</span>;
+        <span class="hljs-keyword">var</span> machine = ST.Utility.get_param(<span class="hljs-string">'machine'</span>);
+
+        host = machine || host;
+
+        ST.graph = <span class="hljs-keyword">new</span> Graph(<span class="hljs-string">'#compare_bottom_outer'</span>);
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Using host: '</span> + host);
+
+        ST.graph.setDirectory(host, file)
+            .then(<span class="hljs-function"><span class="hljs-params">summary</span> =&gt;</span> {
+                <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'summary:'</span>, summary);
+                ST.CallSpot.handle_success2(summary);</pre></div></div>
             
         </li>
         
@@ -655,16 +682,98 @@ This code demonstrates generating the column header automatically based on the c
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-25">&#182;</a>
               </div>
-              <p>openCompareWindow()</p>
+              <p> just for now.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                setTimeout( setup_pars_, <span class="hljs-number">1000</span>);
+            });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-26">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-26">&#182;</a>
+              </div>
+              <p>listen from chart</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        ST.graph.addXAxisChangeListener(<span class="hljs-function"><span class="hljs-params">xAxis</span> =&gt;</span> {
+            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'xAxis'</span>, xAxis);
+
+            <span class="hljs-keyword">if</span>( xAxis &amp;&amp; xAxis !== <span class="hljs-string">"undefined"</span> ) {
+                ST.UrlStateManager.update_url(<span class="hljs-string">'xaxis'</span>, xAxis);
+            }
+        });
+
+        ST.graph.addYAxisChangeListener(<span class="hljs-function"><span class="hljs-params">yAxis</span> =&gt;</span> {
+            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'yAxis'</span>, yAxis);
+
+            <span class="hljs-keyword">if</span>( yAxis &amp;&amp; yAxis !== <span class="hljs-string">"undefined"</span> ) {
+                <span class="hljs-keyword">var</span> component = <span class="hljs-built_in">encodeURIComponent</span>(yAxis);
+                ST.UrlStateManager.update_url(<span class="hljs-string">'yaxis'</span>, component);
+            }
+        });
+
+        ST.graph.addAggregateTypeChangeListener(<span class="hljs-function"><span class="hljs-params">agg</span> =&gt;</span>{
+            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'aggregate'</span>, agg);
+            <span class="hljs-keyword">if</span>( agg &amp;&amp; agg !== <span class="hljs-string">"undefined"</span> ) {
+                ST.UrlStateManager.update_url(<span class="hljs-string">'aggregate'</span>, agg);
+            }
+        });
+
+        ST.graph.addGroupByChangeListener(<span class="hljs-function"><span class="hljs-params">groupBy</span> =&gt;</span> {
+
+            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'groupBy'</span>, groupBy );
+            <span class="hljs-keyword">if</span>( groupBy &amp;&amp; groupBy !== <span class="hljs-string">"undefined"</span> ) {
+                ST.UrlStateManager.update_url(<span class="hljs-string">'groupby'</span>, groupBy);
+            }
+        });
+
+        <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">requestSummary</span>(<span class="hljs-params"></span>)</span>{
+            getSummary(<span class="hljs-string">'rzgenie'</span>, file)
+                .then(<span class="hljs-function">(<span class="hljs-params">summ</span>) =&gt;</span> {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-27">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-27">&#182;</a>
+              </div>
+              <pre><code>             <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'summary'</span>, summ);
+               ST.CallSpot.handle_success2(summ);
+</code></pre>
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                });
+        }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-28">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-28">&#182;</a>
+              </div>
+              <p>   requestSummary();</p>
 
             </div>
             
             <div class="content"><div class='highlight'><pre>
-        ST.CallSpot.ajax({
-            <span class="hljs-attr">file</span>: file,
-            <span class="hljs-attr">type</span>: <span class="hljs-string">'summary'</span>,
-            <span class="hljs-attr">layout</span>: layout
-        });
+        <span class="hljs-comment">/*ST.CallSpot.ajax({
+            file: file,
+            type: 'summary',
+            layout: layout
+        });*/</span>
     };
 
     $(<span class="hljs-built_in">document</span>).ready(init);

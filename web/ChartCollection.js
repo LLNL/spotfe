@@ -34,7 +34,7 @@ ST.ChartCollection = function() {
         ST.NDX = ndx;
 
         // Dimension by full date
-        var dateDimension = ndx.dimension(function (d) {
+        ST.dateDimension = ndx.dimension(function (d) {
             return dateFormatParser(d.date);
         });
 
@@ -92,7 +92,7 @@ ST.ChartCollection = function() {
             // `%filter-count` and `%total-count` are replaced with the values obtained.
             .html({
                 some: '<strong>%filter-count</strong> selected out of <strong>%total-count</strong> records' +
-                ' | <div class="reset_all">Reset All</div>',
+                    ' | <div class="reset_all">Reset All</div>',
                 all: 'All records selected. Please click on the graph to apply filters.'
             });
 
@@ -179,7 +179,7 @@ ST.ChartCollection = function() {
         //  https://github.com/HamsterHuey/intothevoid.io/blob/master/code/2017/dcjs%20sortable%20table/dcjsSortableTable.html
 
         runTable
-            .dimension(dateDimension)
+            .dimension(ST.dateDimension)
             // Data table does not use crossfilter group but rather a closure
             // as a grouping function
             .group(function (d) {
@@ -217,8 +217,9 @@ ST.ChartCollection = function() {
 
         render_more_link_( the_data.length );
 
-        ST.all_data = dateDimension.top(80000);
+        ST.all_data = ST.dateDimension.top(80000);
         console.dir(ST.all_data);
+        //console.dir(runTable.top(80000));
 
         //simply call `.renderAll()` to render all charts on the page
         dc.renderAll();
@@ -322,6 +323,21 @@ ST.ChartCollection = function() {
         ST.ChartCollection.RenderChartCollection(ST.newp, ST.layout_used);
     };
 
+    var setup_pars_ = function() {
+
+        var xaxis = ST.Utility.get_param('xaxis');
+        var groupby = ST.Utility.get_param('groupby');
+        var yaxis = ST.Utility.get_param('yaxis');
+        var aggregate = ST.Utility.get_param('aggregate');
+        yaxis = decodeURIComponent(yaxis);
+        //yaxis = yaxis.replace('\%25252523', '#');
+
+        ST.graph.setXaxis(xaxis);
+        ST.graph.setGroupBy(groupby);
+        ST.graph.setYAxis(yaxis);
+        ST.graph.setAggregateType(aggregate);
+    };
+
 
     function init () {
 
@@ -330,19 +346,72 @@ ST.ChartCollection = function() {
 
         help_icon_(file, ST.params);
 
-        var layout = ST.params.layout ? ' --layout=' + ST.params.layout : "";
+        var is_rz_target = ST.Utility.on_rz();
+        var host = is_rz_target ? "rzgenie" : "oslic";
+        var machine = ST.Utility.get_param('machine');
 
-        //addRunSetChangeListener( ST.CallSpot.handle_success );
+        host = machine || host;
 
-        //setDirectory( file )
+        ST.graph = new Graph('#compare_bottom_outer');
+        console.log('Using host: ' + host);
 
-        //openCompareWindow()
+        ST.graph.setDirectory(host, file)
+            .then(summary => {
+                console.log('summary:', summary);
+                ST.CallSpot.handle_success2(summary);
 
-        ST.CallSpot.ajax({
+                //  just for now.
+                setTimeout( setup_pars_, 1000);
+            });
+
+        // listen from chart
+        ST.graph.addXAxisChangeListener(xAxis => {
+            console.log('xAxis', xAxis);
+
+            if( xAxis && xAxis !== "undefined" ) {
+                ST.UrlStateManager.update_url('xaxis', xAxis);
+            }
+        });
+
+        ST.graph.addYAxisChangeListener(yAxis => {
+            console.log('yAxis', yAxis);
+
+            if( yAxis && yAxis !== "undefined" ) {
+                var component = encodeURIComponent(yAxis);
+                ST.UrlStateManager.update_url('yaxis', component);
+            }
+        });
+
+        ST.graph.addAggregateTypeChangeListener(agg =>{
+            console.log('aggregate', agg);
+            if( agg && agg !== "undefined" ) {
+                ST.UrlStateManager.update_url('aggregate', agg);
+            }
+        });
+
+        ST.graph.addGroupByChangeListener(groupBy => {
+
+            console.log('groupBy', groupBy );
+            if( groupBy && groupBy !== "undefined" ) {
+                ST.UrlStateManager.update_url('groupby', groupBy);
+            }
+        });
+
+        function requestSummary(){
+            getSummary('rzgenie', file)
+                .then((summ) => {
+                    //                  console.log('summary', summ);
+//                    ST.CallSpot.handle_success2(summ);
+                });
+        }
+
+        //    requestSummary();
+
+        /*ST.CallSpot.ajax({
             file: file,
             type: 'summary',
             layout: layout
-        });
+        });*/
     };
 
     $(document).ready(init);

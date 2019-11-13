@@ -57,7 +57,7 @@
 
             <div class="launch_container"></div>
             <div class="compare_arguments"></div>
-            <div class="compare_button myButton">COMPARE</div>
+            <!--<div class="compare_button myButton">COMPARE</div>-->
 
             <div>
                 <div class="dc-data-count">
@@ -66,12 +66,17 @@
                 </div>
             </div>
 
-            <table class="table table-hover dc-data-table">
-            </table>
-        </div>
+            <bottom-tabs id="bottom-tabs"></bottom-tabs>
 
-        <div class="contain_show_more">
-            <a>show more</a>
+            <div class="table-outer">
+
+                <table class="table table-hover dc-data-table">
+                </table>
+
+                <div class="contain_show_more">
+                    <a>show more</a>
+                </div>
+            </div>
         </div>
 
         <div class="clearfix"></div>
@@ -84,13 +89,15 @@
 
 </div>
 
+<div id="compare_bottom_outer"></div>
+
 
 
 
 <script type="text/javascript" src="web/js/d3.js"></script>
 <script type="text/javascript" src="web/js/crossfilter.js"></script>
 <script type="text/javascript" src="web/js/dc.js"></script>
-<script type="text/javascript" src="client.js"></script>
+<script type="text/javascript" src="compare.js"></script>
 
 <script src="web/js/chavez-spot.js"></script>
 <script src="web/js/BarChart.js?a"></script>

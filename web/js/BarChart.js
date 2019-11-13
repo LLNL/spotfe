@@ -177,6 +177,7 @@ ST.BarChart = function() {
             }).on('filtered', function( chart ) {
 
                 ST.UrlStateManager.user_filtered( chart, 'BarChart');
+                ST.CallSpot.load_compare();
             });
 
 

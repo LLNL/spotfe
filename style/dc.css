@@ -524,7 +524,8 @@ body .dc-chart g.row text {
     position: absolute;
     top: 30px;
     right: 120px;
-    z-index: 10; }
+    z-index: 10;
+    width: 904px; }
     .bottom_table .compare_arguments select {
       height: 35px;
       margin: 0 5px  0 0; }
@@ -538,7 +539,40 @@ body .dc-chart g.row text {
       position: absolute;
       left: 227px;
       top: -20px; }
+    .bottom_table .compare_arguments .yaxis_label {
+      position: absolute;
+      left: 452px;
+      top: -20px; }
+    .bottom_table .compare_arguments .aggregate_label {
+      position: absolute;
+      left: 679px;
+      top: -20px; }
   .bottom_table .hidden {
     display: none; }
+  .bottom_table .bottom_tab_outer {
+    border-bottom: 1px solid #bbb;
+    margin: 100px 0 5px 0; }
+    .bottom_table .bottom_tab_outer .table-tab, .bottom_table .bottom_tab_outer .compare-tab {
+      padding: 4px;
+      border: 1px solid #999;
+      width: 80px;
+      display: inline-block;
+      margin: 0 0 0 15px;
+      text-align: center;
+      font-size: 13px;
+      color: #666;
+      font-family: tahoma;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      cursor: pointer;
+      position: relative;
+      top: 4px; }
+    .bottom_table .bottom_tab_outer .active {
+      border-bottom: 4px solid white; }
+
+#compare_bottom_outer {
+  min-height: 500px;
+  background-color: #f2f2f2;
+  display: none; }
 
 /*# sourceMappingURL=dc.css.map */
