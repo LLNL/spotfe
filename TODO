@@ -8,6 +8,10 @@ How to get a FIS account:
 https://myconfluence.llnl.gov/display/RAM/FIS#FIS-DoIhaveaFISaccount?
 Left Off: Sent the form to Jeff.  Waiting for approval, so I can start using Hopper to do deployments (still need the directories of where to move stuff).
 
+Matt - leave - next three weeks in and out, starting week of nov 19th
+1. - Title -
+2. test.html - add matt's new directory.
+
 Next:
 - Make sure Matt's Demo on thursday can use DEV.
 - Bring up: talk about: Nathan.  Compare functionality does work for their data.
@@ -25,6 +29,7 @@ DONE 1. SCF:  Fis.
     * command_out -> will contain the output of the command of this program.
     * the input files, I'll get them from a different source, probably embedded in the JSON.
     *
+5. go back to jira list and check what can be forward progress -> like sets on dc page.
 5- Possibly Unknown Priority number - Later on Scalability of Optviz.
     * make sure to pass Matt a UserID
     * make sure to tell him when session has closed, or assume it's closed 5 min after no action.
@@ -33,7 +38,6 @@ DONE 1. SCF:  Fis.
     * "not defined", 0 if Int.
     * make some test files to test it.
 
-3PM meeting 4159 Morgan Territory.
 
 List:
 DONE - Fixed Nathan's customers problem about the strange key names with (2,4): in it.
