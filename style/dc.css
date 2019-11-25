@@ -575,4 +575,7 @@ body .dc-chart g.row text {
   background-color: #f2f2f2;
   display: none; }
 
+body .bg-color-255-255-255-0 {
+  display: none; }
+
 /*# sourceMappingURL=dc.css.map */

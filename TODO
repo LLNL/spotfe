@@ -13,11 +13,7 @@ Matt - leave - next three weeks in and out, starting week of nov 19th
 2. test.html - add matt's new directory.
 
 Next:
-- Make sure Matt's Demo on thursday can use DEV.
-- Bring up: talk about: Nathan.  Compare functionality does work for their data.
-DONE 1. SCF:  Fis.
 - Fix link to Documentation
-- Check default machine to make sure RZ isn't required for CZ.
 2. Integrate with Joe Chavez.
     7. On page load make sure that whatever default tab is open is shown and the other one is fully hidden.
     9. Propate URL changes to drop downs on page load.
@@ -338,96 +334,6 @@ RECENTLY DONE:
 - DONE: Got MPI working on CZ.
 
 
-
-TODO LIST
-=================================================
-- Joy Kitson -> make some trips there. (Matt here mon,tues,wed)  Matt leaving thursday
-    * she's coming on monday.  first week is LTrain, getting a system, cafeteria, dada.
-
-- Check Left column to make sure that it's not hard coded.
-- Hi Pascal! I get a syntax error in Spot2 in ChartCollection.js:78:32 in Firefox. It doesn't like the regex there. Works fine in Chrome.
-- Need to get access to /usr/gapps/spot/datasets  (dzpolia currently owns it)  I can't add layout files there.
-- Bar Charts different colors for each one.
-- may 3rd is David Poliakoff's last day
-- Units.
-- Bucketing algorithms.
-- Floating point numbers on the X-Axis.
-    * Bucketing might fix this issue, if we make sure to use whole numbers.
-- Jupyter/MPI clicking on CZ.
-- Write some stuff about the front end:
-    - visualizations that we can do
-    - the data and layout interface.
-- be able to run on CZ:
-    - default cz to cz jsonp
-    - default rz to rz jsonp
-- Work on Sorting, data needs to work with the following:
-    {"Compiler Version": {
-        label: "6.1.1",
-        value: 6001001
-    }
-        * support just value as well.
-        * look into in-place sort.
-- Ravel: Expand entity lanes so that we can make it more vertically spaced.
-    * set height of this element: physical split split-vertical physical-div to 1800px
-- put help in it's own vue file.
-- Once sabin sends index.html, i can try and launch it.
-    * what would it take to run it on LC, give it a try.
-- Start providing support for larger MPI files: /g/g0/pascal/lulesh/lulesh_ravel_traces
-    * Support actual render, make sure it can handle the data render.
-- Labels -> instead of the cali key, try specifying the field based on the last sorted field on the spot 2 page.
-- Integration: send cali file run IDs.  this specifies which ravel trace to use by the cali file name.
-    * This Integration won't be possible until we have those files in the proper location with the right cali filenames.
-    * After that, I should be able to just pass in the location of the file with absolute directories: /g/g0/pascal/lulesh/lulesh_ravel_traces/xxxxx.cali
-- Error message: “If you don’t have an account on [whatever the specified machine was], try picking a machine you have access to, like [the current URL]&machine=rzslic,” essentially debugging messages. Low priority, but useful.
-- Host on Both RZ and CZ.
-- Group By?  need to ask exactly what this is.
-- Find a way to do in-order sorting.
-    * Investigate: Is there an option for this?
-    * Can we specify a sort function?
-- Icons
-- tooltip suggestion from Tammy Dahlgren
-- Custom X-axis titles.
-
-
-
-https://lc.llnl.gov/spot/dcvis/web/?sf=/usr/gapps/spot/datasets/lulesh2small&layout=/usr/gapps/spot/datasets/enhanced_layout.json
-            var maximal = '/usr/gapps/wf/web/spot/data/lulesh_maximal/';
-
-
-Sorting
-Value
-Cardinality
-Instantiation - version number, this is a string, a double
-
-
-DONE
-1.  Genericize the CallSpot.js so it can be used in any project
-2.  Enable usage of CallSpot.js from new dur_sankey along with the parameters.
-3.  Construct STUB data from CallSpot: spot.py durations2 <filepath1.cali> [filepath2.cali]*
-4.  Get dur_sankey working with the STUB data.
-5.  Get dur_sankey working for any filepathX.cali
-6.  Make Spot 2 compare button and extract all runIDs/filepathX.cali
-7.  Integrate Spot 2 cali extraction with the new dur_sankey project page.
-8.  Ravel with new API integration, now able to make post request ad handle response, use response to show graph.
-
-RECENTLY DONE:
-- Allow the person to specify an Endpoint to call, an input box for dan laney.
-- Fixed Title overlapping Graph Bug.
-- A few minor error message modifications.
-
-RAVEL:
-- Pass cali_key to ravel page and prep it to be sent to BE.
-- First pass of reductionSplicer which reduces the events and messages to a certain step index for example 0 - 100.
-
-
-Future features:
-1. Allow user to specify columns with some UI widget
-2. Chart overlap issue
-3. Ability to overwrite column names on table (aliases)
-
-
-
-
 lulesh_x27_ravel.js   lulesh_x27_ravel.json lulesh_x8_ravel.js
 aschwanden1@doc ~/Downloads: pwd
 /Users/aschwanden1/Downloads
@@ -438,22 +344,6 @@ Show all Hosts:
 https://lc.llnl.gov/lorenz/lora/lora.cgi/user/ME/hosts
 
 
-
-Error reporting feature:
- was helping Dan Laney through using the Spot 2.0 page, I started him at this URL
-
-https://lc.llnl.gov/spot/dcvis/web/?sf=/usr/gapps/spot/datasets/lulesh2small&layout=/usr/gapps/spot/datasets/enhanced_layout.json
-
-First he got the “log in to the RZ” message, which confuses people, while still being a good error message. It would be nice if we could have an RZ and a CZ hosting.
-
-Then he got a “Lorenz Error, failed to run command…” message, which came from him not having an account on Genie. This was easily solvable, but it might be nice to add warnings like
-“If you don’t have an account on [whatever the specified machine was], try picking a machine you have access to, like [the current URL]&machine=rzslic,” essentially debugging messages. Low priority, but useful.
-
-Also really nice work on the error messages, it was possible to talk Dan through a session over Jabber pretty easily, that’s paying dividends.
-
-Best,
-
-David P
 
 ----------------------------
 HSTS error:
@@ -480,16 +370,6 @@ data output, so that they all print to the same format.
 
 Problem: too many physists use different
 data storage formats.
-
-
-
-
-allback: jQuery111008860544177602576_1562627379823
-via: post
-route: /command/oslic
-command: /usr/tce/bin/python3 /usr/gapps/spot/spot.py hierarchical  /usr/gapps/spot/datasets/lulesh2small 'sum#time.inclusive.duration'  --filenames 190115-142600_90550_tF8hgrdsY0NZ.cali 190115-134904_151764_PZ3aWdEJn6zG.cali 190115-134904_151836_F0Wmp8EHByce.cali 190115-134904_151908_Ngpf2ZLqdeXZ.cali 190115-134904_151980_UIClZXD7wmGo.cali 190115-134904_152052_YbyzpvgGD244.cali 190115-134904_152125_7c59tNMwu4EF.cali 190115-134905_152197_62iXAbF1nUNc.cali 190115-134905_152269_ulQX2X1r0KNy.cali 190115-134905_152341_EbvolZauto97.cali 190115-134905_152413_dQKcssLWrqpq.cali 190115-134905_152485_WE4QgCQSkFCt.cali 190115-134905_152557_6VlkJa8zoAyA.cali 190115-134905_152629_NARoapxWdwiI.cali 190115-134905_152701_TqrTRsFfBa4A.cali 190115-134905_152773_k7L8GtPnbVQz.cali 190115-134905_152845_sPnTKCVUUExL.cali 190115-134905_152917_uYg1rqDmtOKC.cali 190115-134905_152989_DesHW9w8FfyM.cali 190115-134905_153061_4e2LbKS8qhUi.cali 190115-134905_153133_Z6zO8tU4NgW3.cali 190115-134905_153205_isDQFcHpOCMU.cali 190115-134905_153277_imeOwVqybbbH.cali 190115-134906_153349_7JOA7QBen7Pf.cali 190115-134906_153421_VXfb4lIozEv5.cali 190115-134906_153493_7udfPtc23Y0t.cali 190115-134906_153565_B65L4lgNL5cU.cali 190115-134906_153638_9yNPpZ6mrcnG.cali 190115-134906_153711_qWYqOz49T842.cali 190115-134906_153783_AJusvvEtMHzk.cali 190115-134906_153855_t3SX3AM8p5U8.cali 190115-134906_153927_yOzIP8dy7JM6.cali 190115-134906_153999_E2EvgHM93iLH.cali 190115-134906_154071_hEURs1OpmQtT.cali 190115-134906_154143_bIUf7k2nAd0W.cali 190115-134906_154215_SP6paXxYeByF.cali 190115-134907_154287_MZNqYfTQNOo7.cali 190115-134907_154359_z9owlQyhfKrL.cali 190115-134907_154431_kF4IOYDzPeS7.cali 190115-134907_154503_PrKN3MsbGoJL.cali 190115-134907_154576_HHq0kyAeuwQU.cali 190115-134907_154649_JBNpYVLxwsIC.cali 190115-134907_154722_Avch5qlsE9Ia.cali 190115-134907_154794_sFJscl8HAFVB.cali 190115-134907_154866_3p6TpAOhyLLV.cali 190115-134907_154938_YpiynFlHi2ke.cali 190115-134907_155010_8casHb0PyxyC.cali 190115-134907_155082_HyckHZWFQn7A.cali 190115-134907_155154_gRqVl2tH81Fq.cali 190115-134907_155226_T0FUGSGNqR1O.cali 190115-134908_155298_Sw0o4us1mYRD.cali 190115-134908_155370_Geks0cQEogcS.cali 190115-134908_155442_agCrV9ge5yyU.cali 190115-134908_155515_IyGNrUlVPre3.cali 190115-134908_155587_wKNodgWmPfuN.cali 190115-134908_155659_z7fZmBEvzuwG.cali 190115-134908_155731_QqgnGgSfagWA.cali 190115-134908_155803_pwy6KmBc3vdi.cali 190115-134908_155875_39nzy6RJSVMa.cali 190115-134908_155948_outGiCzUvUkD.cali 190115-134908_156020_L47ywpBpe2qR.cali 190115-134908_156092_LNofJy3YSpOB.cali 190115-134908_156164_yfTfxWbZCA2r.cali 190115-134909_156237_scWUwuJt6hy7.cali 190115-134909_156313_uUryT9p6QM3E.cali 190115-134909_156385_tAWXVKoCv0pR.cali 190115-134909_156457_J4mKcgZdD1Xc.cali 190115-134909_156529_7wlkrYUVPJKu.cali
-_: 1562627379824
-
 
 
 

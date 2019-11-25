@@ -81,11 +81,12 @@ ST.CompareArguments = function() {
                     this.isTableActive = false;
 
                     $('.table-outer').hide();
-                    $('#compare_bottom_outer, #compare-window').show();
-                },
-                mount: function() {
-                    this.compareActive();
+                    $('#compare_bottom_outer, #compare-window, .bg-color-255-255-255-0').show();
                 }
+            },
+            created: function() {
+                this.tableActive();
+                window.scrollTo(0,0);
             }
         });
 
