@@ -368,7 +368,7 @@ ST.ChartCollection = function() {
         ST.graph.addXAxisChangeListener(xAxis => {
             console.log('xAxis', xAxis);
 
-            if( xAxis && xAxis !== "undefined" ) {
+            if( xAxis !== "undefined" ) {
                 ST.UrlStateManager.update_url('xaxis', xAxis);
             }
         });
@@ -376,7 +376,7 @@ ST.ChartCollection = function() {
         ST.graph.addYAxisChangeListener(yAxis => {
             console.log('yAxis', yAxis);
 
-            if( yAxis && yAxis !== "undefined" ) {
+            if( yAxis !== "undefined" ) {
                 var component = encodeURIComponent(yAxis);
                 ST.UrlStateManager.update_url('yaxis', component);
             }
@@ -384,7 +384,7 @@ ST.ChartCollection = function() {
 
         ST.graph.addAggregateTypeChangeListener(agg =>{
             console.log('aggregate', agg);
-            if( agg && agg !== "undefined" ) {
+            if( agg !== "undefined" ) {
                 ST.UrlStateManager.update_url('aggregate', agg);
             }
         });
@@ -392,7 +392,7 @@ ST.ChartCollection = function() {
         ST.graph.addGroupByChangeListener(groupBy => {
 
             console.log('groupBy', groupBy );
-            if( groupBy && groupBy !== "undefined" ) {
+            if( groupBy !== "undefined" ) {
                 ST.UrlStateManager.update_url('groupby', groupBy);
             }
         });

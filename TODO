@@ -16,8 +16,7 @@ Next:
 - Fix link to Documentation
 2. Integrate with Joe Chavez.
     DONE - On page load make sure that whatever default tab is open is shown and the other one is fully hidden.
-    9. Propate URL changes to drop downs on page load.
-    10. Do lots of testing.
+    DONE - Propate URL changes to drop downs on page load.
 2. Spot Scalability - to 1 million.
     * I need the AJAX request to not timeout -> which means, getting the request time down to about 5 seconds or less.
 3. Update the optvis deployment

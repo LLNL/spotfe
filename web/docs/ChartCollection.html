@@ -705,7 +705,7 @@ This code demonstrates generating the column header automatically based on the c
             <div class="content"><div class='highlight'><pre>        ST.graph.addXAxisChangeListener(<span class="hljs-function"><span class="hljs-params">xAxis</span> =&gt;</span> {
             <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'xAxis'</span>, xAxis);
 
-            <span class="hljs-keyword">if</span>( xAxis &amp;&amp; xAxis !== <span class="hljs-string">"undefined"</span> ) {
+            <span class="hljs-keyword">if</span>( xAxis !== <span class="hljs-string">"undefined"</span> ) {
                 ST.UrlStateManager.update_url(<span class="hljs-string">'xaxis'</span>, xAxis);
             }
         });
@@ -713,7 +713,7 @@ This code demonstrates generating the column header automatically based on the c
         ST.graph.addYAxisChangeListener(<span class="hljs-function"><span class="hljs-params">yAxis</span> =&gt;</span> {
             <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'yAxis'</span>, yAxis);
 
-            <span class="hljs-keyword">if</span>( yAxis &amp;&amp; yAxis !== <span class="hljs-string">"undefined"</span> ) {
+            <span class="hljs-keyword">if</span>( yAxis !== <span class="hljs-string">"undefined"</span> ) {
                 <span class="hljs-keyword">var</span> component = <span class="hljs-built_in">encodeURIComponent</span>(yAxis);
                 ST.UrlStateManager.update_url(<span class="hljs-string">'yaxis'</span>, component);
             }
@@ -721,7 +721,7 @@ This code demonstrates generating the column header automatically based on the c
 
         ST.graph.addAggregateTypeChangeListener(<span class="hljs-function"><span class="hljs-params">agg</span> =&gt;</span>{
             <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'aggregate'</span>, agg);
-            <span class="hljs-keyword">if</span>( agg &amp;&amp; agg !== <span class="hljs-string">"undefined"</span> ) {
+            <span class="hljs-keyword">if</span>( agg !== <span class="hljs-string">"undefined"</span> ) {
                 ST.UrlStateManager.update_url(<span class="hljs-string">'aggregate'</span>, agg);
             }
         });
@@ -729,7 +729,7 @@ This code demonstrates generating the column header automatically based on the c
         ST.graph.addGroupByChangeListener(<span class="hljs-function"><span class="hljs-params">groupBy</span> =&gt;</span> {
 
             <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'groupBy'</span>, groupBy );
-            <span class="hljs-keyword">if</span>( groupBy &amp;&amp; groupBy !== <span class="hljs-string">"undefined"</span> ) {
+            <span class="hljs-keyword">if</span>( groupBy !== <span class="hljs-string">"undefined"</span> ) {
                 ST.UrlStateManager.update_url(<span class="hljs-string">'groupby'</span>, groupBy);
             }
         });
