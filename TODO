@@ -17,14 +17,19 @@ Next:
 2. Integrate with Joe Chavez.
     DONE - On page load make sure that whatever default tab is open is shown and the other one is fully hidden.
     DONE - Propate URL changes to drop downs on page load.
+- redeploy to cz and rz and Test it.
+
 2. Spot Scalability - to 1 million.
     * I need the AJAX request to not timeout -> which means, getting the request time down to about 5 seconds or less.
+
 3. Update the optvis deployment
+
 4. Optvis -> use the script that Matt provides: a c++ program executable that i will run that will generate a file that i should delete after reading
     * command_out -> will contain the output of the command of this program.
     * the input files, I'll get them from a different source, probably embedded in the JSON.
-    *
+
 5. go back to jira list and check what can be forward progress -> like sets on dc page.
+
 5- Possibly Unknown Priority number - Later on Scalability of Optviz.
     * make sure to pass Matt a UserID
     * make sure to tell him when session has closed, or assume it's closed 5 min after no action.

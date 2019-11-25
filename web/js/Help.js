@@ -52,7 +52,7 @@ var help_icon_ = function( file, params ) {
         <br>You can specify the <b>get_rundata_url</b> with get_rundata_url= in the url bar.\
         <br>You can specify the <b>command</b> with command= in the url bar.\
         \
-        <br><a href="../web/doc.html" target="_blank">more...</a> \
+        <br><a href="web/doc.html" target="_blank">more...</a> \
         <div>Urls:</div>' +
         working_html + '</div> ' +
         '</div>',
