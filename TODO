@@ -15,7 +15,7 @@ Matt - leave - next three weeks in and out, starting week of nov 19th
 Next:
 - Fix link to Documentation
 2. Integrate with Joe Chavez.
-    7. On page load make sure that whatever default tab is open is shown and the other one is fully hidden.
+    DONE - On page load make sure that whatever default tab is open is shown and the other one is fully hidden.
     9. Propate URL changes to drop downs on page load.
     10. Do lots of testing.
 2. Spot Scalability - to 1 million.

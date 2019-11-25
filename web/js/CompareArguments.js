@@ -11,29 +11,6 @@ ST.CompareArguments = function() {
             options += '<option value="' + field + '">' + field + '</option>';
         }
 
-        //  '<a id="bookmarkme" href="javascript: void(0)" rel="sidebar">Bookmark</a>' +
-        var ht = '<select class="xaxis">' + options + '</select>' +
-            '<select class="groupby">' + options + '</select>' +
-            '<div class="xaxis_label">Xaxis:</div>' +
-            '<div class="groupby_label">Group By:</div>' +
-            '<div class="yaxis_label">Yaxis:</div>' +
-            '<div class="aggregate_label">Aggregate:</div>' +
-            '<select class="yaxis"><option>min#inclusive#sum#time.duration</option><option>avg#inclusive#sum#time.duration</option><option>max#inclusive#sum#time.duration</option></select>' +
-            '<select class="aggregate"><option></option><option>sum</option><option>avg</option><option>min</option><option>max</option></select>';
-
-        $('.compare_arguments').html("");
-
-        $('.compare_arguments .xaxis, .compare_arguments .groupby, .compare_arguments .yaxis, .compare_arguments .aggregate').unbind('change').bind('change', function () {
-
-            var cla = $(this).attr('class');
-            var val = $(this).val();
-
-            //  # in duration specification is not a valid URL component.
-            val = encodeURIComponent(val);
-
-            ST.UrlStateManager.update_url(cla, val);
-        });
-
         var last_days = ST.Utility.get_param(ST.LAST_DAYS) || "";
 
         $('.launch_container').html('<div class="launcher">' +
@@ -93,8 +70,6 @@ ST.CompareArguments = function() {
         new Vue({
             el: "bottom-tabs"
         });
-
-        //$('body:eq(0)').scrollTo(0);
     };
 
 
@@ -106,43 +81,19 @@ ST.CompareArguments = function() {
         var aggregate = ST.Utility.get_param('aggregate', true);
 
         if (xaxis !== 'undefined') {
-
-            $('.compare_arguments .xaxis').val(xaxis)
-                .change( function() {
-
-                    var val = $(this).val();
-                    setXAxis(val);
-                });
+            ST.graph.setXaxis(xaxis);
         }
 
         if (groupby !== 'undefined') {
-
-            $('.compare_arguments .groupby').val(groupby)
-                .change( function() {
-
-                    var gval = $(this).val();
-                    setGroupBy(gval);
-                });
+            ST.graph.setGroupBy(groupby);
         }
 
         if (yaxis !== 'undefined') {
-
-            $('.compare_arguments .yaxis').val(yaxis)
-                .change( function() {
-
-                    var val = $(this).val();
-                    setYAxis(val);
-                });
+            ST.graph.setYAxis(yaxis);
         }
 
         if (aggregate !== 'undefined') {
-
-            $('.compare_arguments .aggregate').val(aggregate)
-                .change( function() {
-
-                    var gval = $(this).val();
-                    setAggregate(gval);
-                });
+            ST.graph.setAggregateType(aggregate);
         }
     };
 
