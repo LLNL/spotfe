@@ -836,6 +836,14 @@ body .dc-chart g.row text {
     }
 }
 
+#compare-window select {
+    height: 40px;
+    padding: 0;
+    position: relative;
+    top:4px;
+    left: 2px;
+}
+
 #compare_bottom_outer {
     min-height: 500px;
     background-color: #f2f2f2;

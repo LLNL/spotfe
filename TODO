@@ -10,14 +10,22 @@ Left Off: Sent the form to Jeff.  Waiting for approval, so I can start using Hop
 
 Matt - leave - next three weeks in and out, starting week of nov 19th
 1. DONE - Title -
-2. test.html - add matt's new directory.
+2. test.html - add matt's new directory.  He wanted me to add a directory to the test page.
+
+
+
+Boehma is able to reproduce the issue about the select drop down height.  Let's fix that.
+Then test.
+Then release to live on OCF and SCF.
+
+2. David Boehma's dataset is causing some issue for one of the piecharts not showing up.
 
 Next:
-- Fix link to Documentation
+DONE - Fix link to Documentation
 2. Integrate with Joe Chavez.
     DONE - On page load make sure that whatever default tab is open is shown and the other one is fully hidden.
-    DONE - Propate URL changes to drop downs on page load.
-- redeploy to cz and rz and Test it.
+    DONE - Propate URL changes to drop downs in the compare page on page load.
+DONE - redeploy to cz and rz and Test it.
 
 2. Spot Scalability - to 1 million.
     * I need the AJAX request to not timeout -> which means, getting the request time down to about 5 seconds or less.

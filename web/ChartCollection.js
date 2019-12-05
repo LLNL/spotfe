@@ -349,13 +349,15 @@ ST.ChartCollection = function() {
         var is_rz_target = ST.Utility.on_rz();
         var host = is_rz_target ? "rzgenie" : "oslic";
         var machine = ST.Utility.get_param('machine');
+        var command = ST.Utility.get_param('command');
+        console.log('command=' + command);
 
         host = machine || host;
 
         ST.graph = new Graph('#compare_bottom_outer');
         console.log('Using host: ' + host);
 
-        ST.graph.setDirectory(host, file)
+        ST.graph.setDirectory(host, file, "jimy")
             .then(summary => {
                 console.log('summary:', summary);
                 ST.CallSpot.handle_success2(summary);
@@ -363,7 +365,6 @@ ST.ChartCollection = function() {
                 //  just for now.
                 setTimeout( setup_pars_, 1000);
             });
-
         // listen from chart
         ST.graph.addXAxisChangeListener(xAxis => {
             console.log('xAxis', xAxis);
