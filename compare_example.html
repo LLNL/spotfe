@@ -17,46 +17,33 @@
 
     <script src="./compare.js"></script>
     <script>
+        const graph = new Graph('#graph');
 
-        const graph = new Graph('#graph')
+        graph.getData("rztopaz", "/usr/gapps/spot/dev_spot.py getData", "/usr/gapps/spot/datasets/lulesh_gen/1000").then(summary => {
 
-        graph.setDirectory("rztopaz", "/usr/gapps/spot/datasets/lulesh_gen/1000")
-            .then(summary => {
-                console.log('summary:', summary)
-            })
+        console.log('summary:', summary);
+        }); // listen from chart  
 
-        // listen from chart  
         graph.addXAxisChangeListener(xAxis => {
-            console.log('xAxis', xAxis)
-        })
-
+        console.log('xAxis', xAxis);
+        });
         graph.addYAxisChangeListener(yAxis => {
-            console.log('yAxis', yAxis)
-        })
-        graph.addAggregateTypeChangeListener(agg =>{
-            console.log('aggregate', agg)
-
-        })
+        console.log('yAxis', yAxis);
+        });
+        graph.addAggregateTypeChangeListener(agg => {
+        console.log('aggregate', agg);
+        });
         graph.addGroupByChangeListener(groupBy => {
-            console.log('groupBy', groupBy )
-        })
-
-                
-        // setting vals:
-
-        // graph.setDirectory(newValue)
-
-        //graph.compare(filenames)
-
-        // graph.setXaxis(event.newValue)
-
-        // graph.setYaxis(event.newValue)
-
-        // graph.setAggregate(event.newValue)
-
-        // graph.setGroupBy(event.newValue)
-
+        console.log('groupBy', groupBy);
+        }); 
         
+        // setting vals:
+        // graph.setDirectory(newValue)
+        //graph.compare(filenames)
+        // graph.setXaxis(event.newValue)
+        // graph.setYaxis(event.newValue)
+        // graph.setAggregate(event.newValue)
+        // graph.setGroupBy(event.newValue)
     </script>
 </body>
 </html>
