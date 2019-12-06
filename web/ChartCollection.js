@@ -350,6 +350,9 @@ ST.ChartCollection = function() {
         var host = is_rz_target ? "rzgenie" : "oslic";
         var machine = ST.Utility.get_param('machine');
         var command = ST.Utility.get_param('command');
+        command = command || '/usr/gapps/spot/dev_spot.py';
+        command = command + " getData";
+
         console.log('command=' + command);
 
         host = machine || host;
@@ -357,7 +360,7 @@ ST.ChartCollection = function() {
         ST.graph = new Graph('#compare_bottom_outer');
         console.log('Using host: ' + host);
 
-        ST.graph.setDirectory(host, file, "jimy")
+        ST.graph.getData(host, command, file)
             .then(summary => {
                 console.log('summary:', summary);
                 ST.CallSpot.handle_success2(summary);

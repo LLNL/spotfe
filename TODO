@@ -13,8 +13,17 @@ Matt - leave - next three weeks in and out, starting week of nov 19th
 2. test.html - add matt's new directory.  He wanted me to add a directory to the test page.
 
 
+- Help fix Stephanie's problem:
+    /usr/gapps/spot: vi /usr/gapps/spot/templates/TemplateNotebook.ipynb
+    I will modify this sys.path.append('/usr/gapps/spot/hatchet')\n do be her new directory.
 
-Boehma is able to reproduce the issue about the select drop down height.  Let's fix that.
+
+DONE - Fix Nathan's issue about not being able to send the command.
+    * worked with Joe to integrate new command propogation.
+DONE - Boehma is able to reproduce the issue about the select drop down height.  Let's fix that.
+- Make button for multi jupyter request and /usr/tce/bin/python3 /usr/gapps/spot/spot.py multi_jupyter /usr/gapps/spot/datasets/lulesh_gen/1000/333.cali
+    * on dev_spot.py create def multi_jupyter to allow for multipole jupyter files.
+- On dev_spot.py replace /usr/gapps/spot/hatchet with a template string and set it in def jupyter (copy of def jupyter)
 Then test.
 Then release to live on OCF and SCF.
 

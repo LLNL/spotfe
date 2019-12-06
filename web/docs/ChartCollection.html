@@ -663,6 +663,9 @@ This code demonstrates generating the column header automatically based on the c
         <span class="hljs-keyword">var</span> host = is_rz_target ? <span class="hljs-string">"rzgenie"</span> : <span class="hljs-string">"oslic"</span>;
         <span class="hljs-keyword">var</span> machine = ST.Utility.get_param(<span class="hljs-string">'machine'</span>);
         <span class="hljs-keyword">var</span> command = ST.Utility.get_param(<span class="hljs-string">'command'</span>);
+        command = command || <span class="hljs-string">'/usr/gapps/spot/dev_spot.py'</span>;
+        command = command + <span class="hljs-string">" getData"</span>;
+
         <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'command='</span> + command);
 
         host = machine || host;
@@ -670,7 +673,7 @@ This code demonstrates generating the column header automatically based on the c
         ST.graph = <span class="hljs-keyword">new</span> Graph(<span class="hljs-string">'#compare_bottom_outer'</span>);
         <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Using host: '</span> + host);
 
-        ST.graph.setDirectory(host, file, <span class="hljs-string">"jimy"</span>)
+        ST.graph.getData(host, command, file)
             .then(<span class="hljs-function"><span class="hljs-params">summary</span> =&gt;</span> {
                 <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'summary:'</span>, summary);
                 ST.CallSpot.handle_success2(summary);</pre></div></div>
