@@ -663,8 +663,8 @@ This code demonstrates generating the column header automatically based on the c
         <span class="hljs-keyword">var</span> host = is_rz_target ? <span class="hljs-string">"rzgenie"</span> : <span class="hljs-string">"oslic"</span>;
         <span class="hljs-keyword">var</span> machine = ST.Utility.get_param(<span class="hljs-string">'machine'</span>);
         <span class="hljs-keyword">var</span> command = ST.Utility.get_param(<span class="hljs-string">'command'</span>);
-        command = command || <span class="hljs-string">'/usr/gapps/spot/dev_spot.py'</span>;
-        command = command + <span class="hljs-string">" getData"</span>;
+        command = command || <span class="hljs-string">'/usr/gapps/spot/dev_spot.py getData'</span>;
+        command = command;
 
         <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'command='</span> + command);
 

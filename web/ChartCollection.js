@@ -350,8 +350,8 @@ ST.ChartCollection = function() {
         var host = is_rz_target ? "rzgenie" : "oslic";
         var machine = ST.Utility.get_param('machine');
         var command = ST.Utility.get_param('command');
-        command = command || '/usr/gapps/spot/dev_spot.py';
-        command = command + " getData";
+        command = command || '/usr/gapps/spot/dev_spot.py getData';
+        command = command;
 
         console.log('command=' + command);
 
