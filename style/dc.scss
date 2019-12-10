@@ -810,8 +810,15 @@ body .dc-chart g.row text {
 
     .bottom_tab_outer {
 
+        position: relative;
         border-bottom: 1px solid #bbb;
         margin: 100px 0 5px 0;
+
+        .multi_jupyter {
+            position: absolute;
+            bottom: 5px;
+            top: auto;
+        }
 
         .table-tab, .compare-tab {
             padding: 4px;

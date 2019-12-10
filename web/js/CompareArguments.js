@@ -44,6 +44,7 @@ ST.CompareArguments = function() {
             template: '<div class="bottom_tab_outer">' +
                 '<div v-bind:class="{ active: isTableActive }" class="table-tab" v-on:click="tableActive()">TABLE</div>' +
                 '<div v-bind:class="{ active: !isTableActive }" class="compare-tab" v-on:click="compareActive()">COMPARE</div>' +
+                '<div class="myButton icon multi_jupyter" v-on:click="multiJupyter()">MJ</div>' +
                 '</div>',
             methods: {
                 tableActive: function() {
@@ -59,6 +60,10 @@ ST.CompareArguments = function() {
 
                     $('.table-outer').hide();
                     $('#compare_bottom_outer, #compare-window, .bg-color-255-255-255-0').show();
+                },
+                multiJupyter: function() {
+
+                    console.dir( ST.str_cali_keys );
                 }
             },
             created: function() {

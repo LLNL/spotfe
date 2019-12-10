@@ -550,8 +550,13 @@ body .dc-chart g.row text {
   .bottom_table .hidden {
     display: none; }
   .bottom_table .bottom_tab_outer {
+    position: relative;
     border-bottom: 1px solid #bbb;
     margin: 100px 0 5px 0; }
+    .bottom_table .bottom_tab_outer .multi_jupyter {
+      position: absolute;
+      bottom: 5px;
+      top: auto; }
     .bottom_table .bottom_tab_outer .table-tab, .bottom_table .bottom_tab_outer .compare-tab {
       padding: 4px;
       border: 1px solid #999;

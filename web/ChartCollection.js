@@ -351,7 +351,7 @@ ST.ChartCollection = function() {
         var machine = ST.Utility.get_param('machine');
         var command = ST.Utility.get_param('command');
         command = command || '/usr/gapps/spot/dev_spot.py getData';
-        command = command;
+        //command = command;
 
         console.log('command=' + command);
 

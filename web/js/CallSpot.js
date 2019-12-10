@@ -343,7 +343,7 @@ ST.CallSpot = function() {
         //  compare button
         var keys = get_keys_();
         localStorage.setItem('calis', keys);
-
+        ST.str_cali_keys = keys;
 
         var akeys = keys.split(' ');
         console.dir(akeys);
