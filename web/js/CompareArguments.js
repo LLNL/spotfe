@@ -63,7 +63,25 @@ ST.CompareArguments = function() {
                 },
                 multiJupyter: function() {
 
-                    console.dir( ST.str_cali_keys );
+                    //  cali_path is /usr/gapps/spot/datasets/lulesh_gen/500/5.cali
+                    //  "cali_filepath=" +
+                    var file_path = $('.directory').val();
+
+                    ST.CallSpot.ajax({
+                        file: file_path + " \"" + ST.str_cali_keys + "\"",
+                        type: "multi_jupyter",
+                        "success": function(data) {
+
+                            ST.Utility.check_error( data );
+                            var command_out = data.output.command_out;
+                            var url = command_out;
+                            console.log('co=' + command_out);
+
+                            window.open(url);
+                            // now go to the URL that BE tells us to go to.
+                        }
+                    });
+
                 }
             },
             created: function() {

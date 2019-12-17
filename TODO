@@ -1,19 +1,32 @@
+- Fix the "Highlight My Shifts" on LC new branch that I made, somehow it's broken.
 DONE - Fix stephanies immediate problem with regards to being able to update the template file
 DONE - Fix Nathan's issue about not being able to send the command.
     * worked with Joe to integrate new command propogation.
 DONE - Boehma is able to reproduce the issue about the select drop down height.  Let's fix that.
 
-- make spot_dev.py for dev and spot.py for live.
+DONE - make spot_dev.py for dev and spot.py for live.
 - Make button for multi jupyter request and /usr/tce/bin/python3 /usr/gapps/spot/spot.py multi_jupyter /usr/gapps/spot/datasets/lulesh_gen/1000/333.cali
     * on dev_spot.py create def multi_jupyter to allow for multipole jupyter files.
+    * send all cali files selected in multiJupyter() function.
+    * replace MULTI_CALI_FILES with new format.
+- Hover over tet to say: "Open all file for jupyter" on the MJ button.
+- Hover over buttons for Jupyter and Clock.
+- Recommended next step: Merge spot.py into the main codebase:
+- merge joes code into my own, not in minified form?
 
-- On dev_spot.py replace /usr/gapps/spot/hatchet with a template string and set it in def jupyter (copy of def jupyter)
-Then test.
-Then release to live on OCF and SCF.
+New format:
+cali_file1 = "myfileA.cali"
+cali_file2 = "myfileB.cali"
+cali_file3 = "myfileC.cali"
+
 - test.html - add matt's new directory.  He wanted me to add a directory to the test page.
 
 2. David Boehma's dataset is causing some issue for one of the piecharts not showing up.
 
+
+may still need to do this:
+cali_file = CALI_FILES[0]["cali_file"]
+cali_file2 = CALI_FILES[1]["cali_file"]
 
 Next:
 DONE - Fix link to Documentation

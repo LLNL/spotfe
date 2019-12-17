@@ -338,6 +338,11 @@ ST.ChartCollection = function() {
         ST.graph.setAggregateType(aggregate);
     };
 
+    $(document).ready( function() {
+        setInterval( function() {
+          //  $('.multi_jupyter').trigger('click');
+        }, 4000);
+    });
 
     function init () {
 
@@ -349,9 +354,7 @@ ST.ChartCollection = function() {
         var is_rz_target = ST.Utility.on_rz();
         var host = is_rz_target ? "rzgenie" : "oslic";
         var machine = ST.Utility.get_param('machine');
-        var command = ST.Utility.get_param('command');
-        command = command || '/usr/gapps/spot/dev_spot.py getData';
-        //command = command;
+        var command = ST.Utility.get_command();
 
         console.log('command=' + command);
 
@@ -362,12 +365,17 @@ ST.ChartCollection = function() {
 
         ST.graph.getData(host, command, file)
             .then(summary => {
+
+                ST.Utility.check_error( summary );
                 console.log('summary:', summary);
                 ST.CallSpot.handle_success2(summary);
 
                 //  just for now.
                 setTimeout( setup_pars_, 1000);
-            });
+            }).finally( summary => {
+                ST.Utility.check_error( summary );
+        });
+
         // listen from chart
         ST.graph.addXAxisChangeListener(xAxis => {
             console.log('xAxis', xAxis);
@@ -400,22 +408,6 @@ ST.ChartCollection = function() {
                 ST.UrlStateManager.update_url('groupby', groupBy);
             }
         });
-
-        function requestSummary(){
-            getSummary('rzgenie', file)
-                .then((summ) => {
-                    //                  console.log('summary', summ);
-//                    ST.CallSpot.handle_success2(summ);
-                });
-        }
-
-        //    requestSummary();
-
-        /*ST.CallSpot.ajax({
-            file: file,
-            type: 'summary',
-            layout: layout
-        });*/
     };
 
     $(document).ready(init);

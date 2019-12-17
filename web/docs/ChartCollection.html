@@ -651,6 +651,24 @@ This code demonstrates generating the column header automatically based on the c
         ST.graph.setAggregateType(aggregate);
     };
 
+    $(<span class="hljs-built_in">document</span>).ready( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        setInterval( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-25">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-25">&#182;</a>
+              </div>
+              <p> $(‘.multi_jupyter’).trigger(‘click’);</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        }, <span class="hljs-number">4000</span>);
+    });
 
     <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">init</span> (<span class="hljs-params"></span>) </span>{
 
@@ -662,23 +680,8 @@ This code demonstrates generating the column header automatically based on the c
         <span class="hljs-keyword">var</span> is_rz_target = ST.Utility.on_rz();
         <span class="hljs-keyword">var</span> host = is_rz_target ? <span class="hljs-string">"rzgenie"</span> : <span class="hljs-string">"oslic"</span>;
         <span class="hljs-keyword">var</span> machine = ST.Utility.get_param(<span class="hljs-string">'machine'</span>);
-        <span class="hljs-keyword">var</span> command = ST.Utility.get_param(<span class="hljs-string">'command'</span>);
-        command = command || <span class="hljs-string">'/usr/gapps/spot/dev_spot.py getData'</span>;</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-25">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-25">&#182;</a>
-              </div>
-              <p>command = command;</p>
+        <span class="hljs-keyword">var</span> command = ST.Utility.get_command();
 
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>
         <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'command='</span> + command);
 
         host = machine || host;
@@ -688,6 +691,8 @@ This code demonstrates generating the column header automatically based on the c
 
         ST.graph.getData(host, command, file)
             .then(<span class="hljs-function"><span class="hljs-params">summary</span> =&gt;</span> {
+
+                ST.Utility.check_error( summary );
                 <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'summary:'</span>, summary);
                 ST.CallSpot.handle_success2(summary);</pre></div></div>
             
@@ -705,7 +710,9 @@ This code demonstrates generating the column header automatically based on the c
             </div>
             
             <div class="content"><div class='highlight'><pre>                setTimeout( setup_pars_, <span class="hljs-number">1000</span>);
-            });</pre></div></div>
+            }).finally( <span class="hljs-function"><span class="hljs-params">summary</span> =&gt;</span> {
+                ST.Utility.check_error( summary );
+        });</pre></div></div>
             
         </li>
         
@@ -751,47 +758,6 @@ This code demonstrates generating the column header automatically based on the c
                 ST.UrlStateManager.update_url(<span class="hljs-string">'groupby'</span>, groupBy);
             }
         });
-
-        <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">requestSummary</span>(<span class="hljs-params"></span>)</span>{
-            getSummary(<span class="hljs-string">'rzgenie'</span>, file)
-                .then(<span class="hljs-function">(<span class="hljs-params">summ</span>) =&gt;</span> {</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-28">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-28">&#182;</a>
-              </div>
-              <pre><code>             <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'summary'</span>, summ);
-               ST.CallSpot.handle_success2(summ);
-</code></pre>
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>                });
-        }</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-29">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-29">&#182;</a>
-              </div>
-              <p>   requestSummary();</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>
-        <span class="hljs-comment">/*ST.CallSpot.ajax({
-            file: file,
-            type: 'summary',
-            layout: layout
-        });*/</span>
     };
 
     $(<span class="hljs-built_in">document</span>).ready(init);

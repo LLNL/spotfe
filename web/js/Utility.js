@@ -30,6 +30,22 @@ ST.Utility = function() {
     };
 
 
+    var assert_ = function( bool, str ) {
+
+        if( !bool ) {
+            error_( str );
+        }
+    };
+
+    var check_error_ = function( data ) {
+
+        $('.error_statement').remove();
+
+        if( data && data.error ) {
+            error_( data.error );
+        }
+    };
+
     var error_ = function( str ) {
 
         if( $('.error_statement').length === 0 ) {
@@ -67,7 +83,7 @@ ST.Utility = function() {
 
     var get_file_ = function() {
 
-        var file = ST.Utility.get_param('sf');
+        var file = ST.Utility.get_param("sf");
         //var default_file = "/usr/gapps/spot/datasets/lulesh2small"; // "/usr/gapps/wf/web/spot/data/lulesh_maximal";
 
         if( !file ) {
@@ -243,7 +259,22 @@ ST.Utility = function() {
     };
 
 
+    var get_command_ = function() {
+
+        var command = ST.Utility.get_param('command');
+        return command || '/usr/gapps/spot/dev_spot.py getData';
+    };
+
+    var is_live_ = function() {
+        return location.href.indexOf('llnl.gov/spot2') > -1;
+    };
+
+
     return {
+        check_error: check_error_,
+        assert: assert_,
+        is_live: is_live_,
+        get_command: get_command_,
         to_array: to_array_,
         format_date: format_date_,
         get_colors: get_colors_,
@@ -256,3 +287,5 @@ ST.Utility = function() {
         error: error_
     }
 }();
+
+var Assert = ST.Utility.assert;

@@ -4,8 +4,8 @@ ST.CallSpot = function() {
 
     var get_command_begin_ = function() {
 
-        //var czcommand = "/usr/tce/bin/python3%20/usr/global/web-pages/lc/www/spot/spot.py";
-        var czcommand = "/usr/tce/bin/python3%20/usr/gapps/spot/spot.py";
+        var dev_prefix = ST.Utility.is_live() ? "" : "dev_";
+        var czcommand = "/usr/tce/bin/python3%20/usr/gapps/spot/" + dev_prefix + "spot.py";
         var rzcommand = ST.Default.COMMAND;
 
         is_rzlc_target = ST.Utility.on_rz();
@@ -48,8 +48,7 @@ ST.CallSpot = function() {
 
         var final_command = get_command_( type, file, layout );
 
-        console.log('final command=' + final_command);
-        console.log('url=' + ST.params.get_rundata_url);
+        //console.log('final command=' + final_command);
 
 
         var rtype = ST.params.type;
@@ -130,6 +129,8 @@ ST.CallSpot = function() {
 
 
     var handle_success2_ = function( summ ) {
+
+        ST.Utility.check_error( summ );
 
         ST.layout_used = summ.layout;
         parsed = summ.data;
