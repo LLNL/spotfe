@@ -352,6 +352,7 @@ ST.CallSpot = function() {
         ST.graph.compare( akeys );
     };
 
+
     var drill_down_ = function() {
 
         if( !$(this).hasClass('drilldown')) {

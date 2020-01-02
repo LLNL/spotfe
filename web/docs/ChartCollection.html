@@ -757,7 +757,22 @@ This code demonstrates generating the column header automatically based on the c
             <span class="hljs-keyword">if</span>( groupBy !== <span class="hljs-string">"undefined"</span> ) {
                 ST.UrlStateManager.update_url(<span class="hljs-string">'groupby'</span>, groupBy);
             }
-        });
+        });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-28">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-28">&#182;</a>
+              </div>
+              <p> preload ST.str_cali_keys so you can click MJ right away.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        ST.CallSpot.load_compare();
     };
 
     $(<span class="hljs-built_in">document</span>).ready(init);

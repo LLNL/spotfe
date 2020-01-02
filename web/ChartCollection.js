@@ -408,6 +408,9 @@ ST.ChartCollection = function() {
                 ST.UrlStateManager.update_url('groupby', groupBy);
             }
         });
+
+        //  preload ST.str_cali_keys so you can click MJ right away.
+        ST.CallSpot.load_compare();
     };
 
     $(document).ready(init);

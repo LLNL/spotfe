@@ -1,24 +1,17 @@
-- Fix the "Highlight My Shifts" on LC new branch that I made, somehow it's broken.
-DONE - Fix stephanies immediate problem with regards to being able to update the template file
-DONE - Fix Nathan's issue about not being able to send the command.
-    * worked with Joe to integrate new command propogation.
-DONE - Boehma is able to reproduce the issue about the select drop down height.  Let's fix that.
 
-DONE - make spot_dev.py for dev and spot.py for live.
+- BUG: Need to make a selection first bug.  without the selection, "Undefined" gets sent to the BE.
+- Hover over tet to say: "Open all file for jupyter" on the MJ button.
+- Hover over buttons for Jupyter and Clock.
+- then do lots of testing to make sure everything works.
+
 - Make button for multi jupyter request and /usr/tce/bin/python3 /usr/gapps/spot/spot.py multi_jupyter /usr/gapps/spot/datasets/lulesh_gen/1000/333.cali
     * on dev_spot.py create def multi_jupyter to allow for multipole jupyter files.
     * send all cali files selected in multiJupyter() function.
     * replace MULTI_CALI_FILES with new format.
-- Hover over tet to say: "Open all file for jupyter" on the MJ button.
-- Hover over buttons for Jupyter and Clock.
-- Recommended next step: Merge spot.py into the main codebase:
+
+
+
 - merge joes code into my own, not in minified form?
-
-New format:
-cali_file1 = "myfileA.cali"
-cali_file2 = "myfileB.cali"
-cali_file3 = "myfileC.cali"
-
 - test.html - add matt's new directory.  He wanted me to add a directory to the test page.
 
 2. David Boehma's dataset is causing some issue for one of the piecharts not showing up.
@@ -56,6 +49,11 @@ DONE - redeploy to cz and rz and Test it.
 
 
 List:
+DONE - Fix stephanies immediate problem with regards to being able to update the template file
+DONE - Fix Nathan's issue about not being able to send the command.
+    * worked with Joe to integrate new command propogation.
+DONE - Boehma is able to reproduce the issue about the select drop down height.  Let's fix that.
+DONE - make spot_dev.py for dev and spot.py for live.
 DONE - Fixed Nathan's customers problem about the strange key names with (2,4): in it.
 DONE - Reset link needs to not appear after reset_all was clicked. (horizontal barcharts)
 DONE - Rebind "show more" after any selective event occurs -> like you select a pie chart or a bar chart or something.
