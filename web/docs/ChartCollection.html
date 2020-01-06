@@ -665,11 +665,27 @@ This code demonstrates generating the column header automatically based on the c
             </div>
             
             <div class="content"><div class='highlight'><pre>
-        ST.graph.setXaxis(xaxis);
-        ST.graph.setGroupBy(groupby);
-        ST.graph.setYAxis(yaxis);
-        ST.graph.setAggregateType(aggregate);
+        <span class="hljs-keyword">if</span>( defined_(xaxis) ) {
+            ST.graph.setXaxis(xaxis);
+        }
+
+        <span class="hljs-keyword">if</span>( defined_(groupby)) {
+            ST.graph.setGroupBy(groupby);
+        }
+
+        <span class="hljs-keyword">if</span>( defined_(yaxis)) {
+            ST.graph.setYAxis(yaxis);
+        }
+
+        <span class="hljs-keyword">if</span>( defined_(aggregate)) {
+            ST.graph.setAggregateType(aggregate);
+        }
     };
+
+    <span class="hljs-keyword">var</span> defined_ = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> str </span>) </span>{
+        <span class="hljs-keyword">return</span> str !== <span class="hljs-literal">undefined</span> &amp;&amp; str !== <span class="hljs-string">"undefined"</span>;
+    };
+
 
     $(<span class="hljs-built_in">document</span>).ready( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
         setInterval( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{</pre></div></div>

@@ -340,11 +340,27 @@ ST.ChartCollection = function() {
         yaxis = decodeURIComponent(yaxis);
         //yaxis = yaxis.replace('\%25252523', '#');
 
-        ST.graph.setXaxis(xaxis);
-        ST.graph.setGroupBy(groupby);
-        ST.graph.setYAxis(yaxis);
-        ST.graph.setAggregateType(aggregate);
+        if( defined_(xaxis) ) {
+            ST.graph.setXaxis(xaxis);
+        }
+
+        if( defined_(groupby)) {
+            ST.graph.setGroupBy(groupby);
+        }
+
+        if( defined_(yaxis)) {
+            ST.graph.setYAxis(yaxis);
+        }
+
+        if( defined_(aggregate)) {
+            ST.graph.setAggregateType(aggregate);
+        }
     };
+
+    var defined_ = function( str ) {
+        return str !== undefined && str !== "undefined";
+    };
+
 
     $(document).ready( function() {
         setInterval( function() {
