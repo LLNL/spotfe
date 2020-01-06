@@ -510,7 +510,22 @@ This code demonstrates generating the column header automatically based on the c
         ST.LeftHorizontalBarChart.load_filter();
         ST.HorizontalBarChart.load_filter();
 
-        dc.redrawAll();
+        dc.redrawAll();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-22">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-22">&#182;</a>
+              </div>
+              <p> preload ST.str_cali_keys so you can click MJ right away.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        ST.CallSpot.load_compare();
 
         bind_sort();
     };
@@ -525,11 +540,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-22">
+        <li id="section-23">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-22">&#182;</a>
+                <a class="pilcrow" href="#section-23">&#182;</a>
               </div>
               <p> The horizontal charts  have a slightly different structure where the reset link
  is not inside the div that gets redrawn, so we need to manually hide the horizontal reset link.</p>
@@ -570,11 +585,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-23">
+        <li id="section-24">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-23">&#182;</a>
+                <a class="pilcrow" href="#section-24">&#182;</a>
               </div>
               <p> for some reason, dc.js capitalizes column headings, thus messing up the sort
  reference when they click on the arrow click.</p>
@@ -639,11 +654,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-24">
+        <li id="section-25">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-24">&#182;</a>
+                <a class="pilcrow" href="#section-25">&#182;</a>
               </div>
               <p>yaxis = yaxis.replace(‘\%25252523’, ‘#’);</p>
 
@@ -662,11 +677,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-25">
+        <li id="section-26">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-25">&#182;</a>
+                <a class="pilcrow" href="#section-26">&#182;</a>
               </div>
               <p> $(‘.multi_jupyter’).trigger(‘click’);</p>
 
@@ -704,11 +719,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-26">
+        <li id="section-27">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-26">&#182;</a>
+                <a class="pilcrow" href="#section-27">&#182;</a>
               </div>
               <p> just for now.</p>
 
@@ -722,11 +737,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-27">
+        <li id="section-28">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-27">&#182;</a>
+                <a class="pilcrow" href="#section-28">&#182;</a>
               </div>
               <p>listen from chart</p>
 
@@ -762,22 +777,7 @@ This code demonstrates generating the column header automatically based on the c
             <span class="hljs-keyword">if</span>( groupBy !== <span class="hljs-string">"undefined"</span> ) {
                 ST.UrlStateManager.update_url(<span class="hljs-string">'groupby'</span>, groupBy);
             }
-        });</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-28">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-28">&#182;</a>
-              </div>
-              <p> preload ST.str_cali_keys so you can click MJ right away.</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>        ST.CallSpot.load_compare();
+        });
     };
 
     $(<span class="hljs-built_in">document</span>).ready(init);
