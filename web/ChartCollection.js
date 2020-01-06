@@ -155,6 +155,10 @@ ST.ChartCollection = function() {
             format: function (d) {
 
                 var buts = "";
+                var title = {
+                    "jupyter" : "Jupyter View",
+                    "walltime" : "Walltime View"
+                };
 
                 for (var x in d.drilldown) {
 
@@ -162,6 +166,7 @@ ST.ChartCollection = function() {
                     var drill_icon = but.toLowerCase();
 
                     buts += '<div run_id="' + d.run_id + '" ' +
+                        'title="' + title[ drill_icon ] + '" ' +
                         'subject="' + drill_icon + '" class="drilldown myButton ' + drill_icon + ' icon">' +
                         '<div class="inner"></div>' +
                         '</div>';
