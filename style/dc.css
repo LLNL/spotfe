@@ -458,6 +458,21 @@ body .dc-chart g.row text {
       background-image: url(../img/check.png);
       background-size: 100% 100%; }
 
+.multi_jupyter.icon {
+  position: static;
+  padding: 12px 11px 12px 11px; }
+  .multi_jupyter.icon div.inner {
+    height: 35px;
+    width: 35px;
+    /*background-image: url(../img/multi_jupyter.png);*/
+    background-image: url(../img/planet.gif);
+    background-size: 100% 100%; }
+  .multi_jupyter.icon .tiny_letter {
+    font-size: 13px;
+    position: absolute;
+    right: 5px;
+    top: -1px; }
+
 .none_here {
   display: none; }
 

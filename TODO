@@ -1,20 +1,29 @@
 
-- BUG: Need to make a selection first bug.  without the selection, "Undefined" gets sent to the BE.
-- Hover over tet to say: "Open all file for jupyter" on the MJ button.
-- Hover over buttons for Jupyter and Clock.
-- then do lots of testing to make sure everything works.
+DONE: Need to make a selection first bug.  without the selection, "Undefined" gets sent to the BE.
+DONE - Hover over tet to say: "Open all file for jupyter" on the MJ button.
+DONE - Hover over buttons for Jupyter and Clock.
+DONE - some hatchet modifications to the jupyter file: dictionary of cali files/durations.
+- then do lots of testing to make sure everything works. (keep in mind MJ limit of about 300 or so due to request size limit.).
 
-- Make button for multi jupyter request and /usr/tce/bin/python3 /usr/gapps/spot/spot.py multi_jupyter /usr/gapps/spot/datasets/lulesh_gen/1000/333.cali
+DONE - Make button for multi jupyter request and /usr/tce/bin/python3 /usr/gapps/spot/spot.py multi_jupyter /usr/gapps/spot/datasets/lulesh_gen/1000/333.cali
     * on dev_spot.py create def multi_jupyter to allow for multipole jupyter files.
     * send all cali files selected in multiJupyter() function.
     * replace MULTI_CALI_FILES with new format.
+
+- steph talk to about not having errors.
+- why did checkboxes break?  spot.py error.
+- MJ make it an icon.
+- add a dialog popup if they select more than 300 or so.
+2. David Boehma's dataset is causing some issue for one of the piecharts not showing up.
+- get rid of console logging too much.
+
+Matt gone tue, wed, thur of next week.
 
 
 
 - merge joes code into my own, not in minified form?
 - test.html - add matt's new directory.  He wanted me to add a directory to the test page.
 
-2. David Boehma's dataset is causing some issue for one of the piecharts not showing up.
 
 
 may still need to do this:
