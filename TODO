@@ -10,9 +10,9 @@ DONE - Make button for multi jupyter request and /usr/tce/bin/python3 /usr/gapps
     * send all cali files selected in multiJupyter() function.
     * replace MULTI_CALI_FILES with new format.
 
-- steph talk to about not having errors.
+DONE - steph talk to about not having errors in the Hatchet page..
 - why did checkboxes break?  spot.py error.
-- MJ make it an icon.
+DONE - MJ make it an icon.
 - add a dialog popup if they select more than 300 or so.
 2. David Boehma's dataset is causing some issue for one of the piecharts not showing up.
 - get rid of console logging too much.
