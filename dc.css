@@ -616,36 +616,39 @@ body .bg-color-255-255-255-0 {
   height: 100%;
   background-color: #cccccc;
   opacity: 0.65;
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
-  z-index: 15; }
+  z-index: 1500; }
 
 .modal {
   margin: auto auto;
   background-color: white;
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -60%);
   border: 1px solid #000000;
   -webkit-box-shadow: 3px 3px 3px #333333;
-  z-index: 16; }
+  z-index: 1501; }
 
 .modal .body {
   padding: 30px;
-  min-width: 400px;
-  min-height: 200px; }
+  min-width: 280px;
+  min-height: 180px;
+  font-size: 15px; }
 
 .modal .close {
   position: absolute;
-  top: 1px;
-  right: 4px; }
+  top: 7px;
+  right: 7px;
+  opacity: 1; }
 
 .modal .close.black_button .inner_button {
   padding: 4px 4px 4px 7px;
   width: 16px;
-  font-size: 14px; }
+  color: white;
+  font-size: 22px; }
 
 .outer_modal {
   width: 100%;
@@ -666,7 +669,7 @@ body .bg-color-255-255-255-0 {
   font-weight: bold;
   padding: 11px;
   font-family: Tahoma;
-  font-size: 13px;
+  font-size: 15px;
   letter-spacing: 1pt;
   -webkit-text-shadow: -1px -1px 0 #000000;
   -moz-text-shadow: -1px -1px 0 #000000;

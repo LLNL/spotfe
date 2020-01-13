@@ -66,6 +66,16 @@ ST.CompareArguments = function() {
                 },
                 multiJupyter: function() {
 
+                    var num_rows_selected = ST.str_cali_keys.split(' ').length;
+                    var max_select = 200;
+
+                    if( num_rows_selected > max_select ) {
+
+                        ReusableView.modal({
+                            "header": "Warning",
+                            "body": "Too many rows selected.  Please narrow the selection criteria to fewer than " + max_select + " rows."
+                        });
+                    }
                     //  cali_path is /usr/gapps/spot/datasets/lulesh_gen/500/5.cali
                     //  "cali_filepath=" +
                     var file_path = $('.directory').val();
