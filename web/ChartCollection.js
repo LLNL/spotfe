@@ -306,7 +306,6 @@ ST.ChartCollection = function() {
 
                 what_sort = what_sort.split('<')[0].toLowerCase();
 
-                console.log("now sort by: " + what_sort);
                 runTable.sortBy(function (d) {
 
                     var nobj = normalize_indexes_(d);
@@ -385,7 +384,6 @@ ST.ChartCollection = function() {
         host = machine || host;
 
         ST.graph = new Graph('#compare_bottom_outer');
-        console.log('Using host: ' + host);
 
         ST.graph.getData(host, command, file)
             .then(summary => {
@@ -402,7 +400,6 @@ ST.ChartCollection = function() {
 
         // listen from chart
         ST.graph.addXAxisChangeListener(xAxis => {
-            console.log('xAxis', xAxis);
 
             if( xAxis !== "undefined" ) {
                 ST.UrlStateManager.update_url('xaxis', xAxis);
@@ -410,7 +407,6 @@ ST.ChartCollection = function() {
         });
 
         ST.graph.addYAxisChangeListener(yAxis => {
-            console.log('yAxis', yAxis);
 
             if( yAxis !== "undefined" ) {
                 var component = encodeURIComponent(yAxis);
@@ -419,7 +415,7 @@ ST.ChartCollection = function() {
         });
 
         ST.graph.addAggregateTypeChangeListener(agg =>{
-            console.log('aggregate', agg);
+
             if( agg !== "undefined" ) {
                 ST.UrlStateManager.update_url('aggregate', agg);
             }
@@ -427,7 +423,6 @@ ST.ChartCollection = function() {
 
         ST.graph.addGroupByChangeListener(groupBy => {
 
-            console.log('groupBy', groupBy );
             if( groupBy !== "undefined" ) {
                 ST.UrlStateManager.update_url('groupby', groupBy);
             }

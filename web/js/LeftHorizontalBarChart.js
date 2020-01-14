@@ -36,10 +36,7 @@ ST.LeftHorizontalBarChart = function() {
 
         var dayOfWeekGroup = dayOfWeek.group();
 
-        console.dir(uniq_counts);
-
         var number_of_authors = Object.keys( uniq_counts ).length;
-        console.log(number_of_authors);
         var height = number_of_authors * 35;
 
         var translate_ = {

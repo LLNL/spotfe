@@ -11,9 +11,9 @@ DONE - Make button for multi jupyter request and /usr/tce/bin/python3 /usr/gapps
     * replace MULTI_CALI_FILES with new format.
 
 DONE - steph talk to about not having errors in the Hatchet page..
-- why did checkboxes break?  spot.py error.
+JOE WORKING - why did checkboxes break?  spot.py error.
 DONE - MJ make it an icon.
-- add a dialog popup if they select more than 300 or so.
+DONE - add a dialog popup if they select more than 300 or so.
 2. David Boehma's dataset is causing some issue for one of the piecharts not showing up.
 - get rid of console logging too much.
 

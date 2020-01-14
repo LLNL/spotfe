@@ -21,10 +21,7 @@ ST.UrlStateManager = function() {
         horBar.closest('.outer_holder').find('.horiz_reset').show();
 
 
-        //console.log(instance_num);
-
         if (range) {
-            //console.log('range:', range[0], range[1]);
 
             var paramValue = "";
 

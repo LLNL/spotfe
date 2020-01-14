@@ -50,8 +50,6 @@ ST.CallSpot = function() {
 
         var final_command = get_command_( type, file, layout );
 
-        //console.log('final command=' + final_command);
-
 
         var rtype = ST.params.type;
         if( is_h ) {
@@ -349,7 +347,6 @@ ST.CallSpot = function() {
         ST.str_cali_keys = keys;
 
         var akeys = keys.split(' ');
-        console.dir(akeys);
 
         ST.graph.compare( akeys );
     };
@@ -371,8 +368,6 @@ ST.CallSpot = function() {
         var key = objs_by_run_id_[run_id].key;
         var appended = objs_by_run_id_[run_id].filepath;    //file + '/' + key;
 
-
-        console.log( "ri=" + run_id + '  do_this=' + subject );
 
         if (subject === 'mpi') {
 
