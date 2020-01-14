@@ -14,8 +14,10 @@ DONE - steph talk to about not having errors in the Hatchet page..
 JOE WORKING - why did checkboxes break?  spot.py error.
 DONE - MJ make it an icon.
 DONE - add a dialog popup if they select more than 300 or so.
+DONE - get rid of console logging too much.
 2. David Boehma's dataset is causing some issue for one of the piecharts not showing up.
-- get rid of console logging too much.
+- investigate "vue.js:597 [Vue warn]: Cannot find element: bottom-tabs"
+
 
 Matt gone tue, wed, thur of next week.
 

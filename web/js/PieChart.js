@@ -11,6 +11,7 @@ ST.PieChart = function() {
         var radius = spec.radius || 80;
         var inner_radius = spec.inner_radius || 0;
         var dimension_low = spec.dimension.toLowerCase();
+        dimension_low = dimension_low.replace('.', '');
 
         var style = spec.show ? "display: block;" : "display: none;";
 
@@ -68,8 +69,6 @@ ST.PieChart = function() {
                 '#77bb22',
                 '#dd2277'
             ]);
-
-        //quarterChart[dl].dimension = spec.dimension;
 
         $('.pie_reset').unbind('click').bind('click', ST.PieChart.reset);
     };
