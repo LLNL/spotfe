@@ -74,27 +74,8 @@ ST.UserPreferences = function() {
                     //  Need to reload the whole page otherwise there's no way to dynamically remove columns from table.
                     ST.ChartCollection.RenderChartCollection(ST.newp, ST.layout_used);
 
-                    //var dome = checked ? "show" : "hide";
-                    //$('[chart-dimension="' + chart_dimension.toLowerCase() + '"]')[dome]();
-
-                    var hide = checked ? " " : " --hide ";
-                    var begin = ST.CallSpot.get_command_begin();
-
-                    //  dirpath is the the Spot File <sf>
-                    var sf = ST.Utility.get_file();
-
-                    var command = begin + " showChart " + hide + " " + sf + " '" + chart_dimension + "'";
-
-                    //  Make an AJAX call to BE about chart_dimension and value.
-                    $.ajax({
-                        type: 'GET',
-                        url: ST.params.get_rundata_url,
-                        data:   {
-                            'via'    : 'post',
-                            'route'  : '/command/' + ST.params.machine,      //  rzgenie
-                            'command': command
-                        }
-                    }).done( success_ );
+                    //  Persist checkbox changes in localStorage.
+                    ST.graph.setChartVisible( chart_dimension, checked );
                 }
             }
         });
