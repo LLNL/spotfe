@@ -374,8 +374,7 @@ ST.ChartCollection = function() {
 
         help_icon_(file, ST.params);
 
-        var is_rz_target = ST.Utility.on_rz();
-        var host = is_rz_target ? "rzgenie" : "oslic";
+        var host = ST.Utility.get_default_machine();
         var machine = ST.Utility.get_param('machine');
         var command = ST.Utility.get_command();
 

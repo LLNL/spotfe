@@ -11,13 +11,18 @@ DONE - Make button for multi jupyter request and /usr/tce/bin/python3 /usr/gapps
     * replace MULTI_CALI_FILES with new format.
 
 DONE - steph talk to about not having errors in the Hatchet page..
-JOE WORKING - why did checkboxes break?  spot.py error.
+DONE - why did checkboxes break?  spot.py error.
 DONE - MJ make it an icon.
 DONE - add a dialog popup if they select more than 300 or so.
 DONE - get rid of console logging too much.
 DONE - David Boehma's dataset is causing some issue for one of the piecharts not showing up.
 
+
 - Can you update the SPOT code to test for SCF, and use cslic if we’re running there?
+    * I think he's talking about the machine that get's selected.
+
+- Create tests for Subfolder testing. this is "a key part of their workflow"
+
 - investigate "vue.js:597 [Vue warn]: Cannot find element: bottom-tabs"
 
 
@@ -97,21 +102,25 @@ DONE - add curve to horiz bar chart and pie chart.
 
 https://lc.llnl.gov/spot/dcvis/?sf=/usr/gapps/spot/datasets/lulesh_gen/100
 
-Eventually:
-Memory stuff.
 
-Rooms: 2069, 4009, 4013, 4017
+Rooms: 2063, 2065, 3117, 3150, 3152, 3154
+
 The easiest way to use FIS:
 On RZ, use the ts alias I created.
 
-On an RZ system: tar up your data into a tar file.
-On RZ system: scp myfile.tar rzfis:TO/ (use your LC username and RZ OTP)
-scp dc.tar rzfis:TO/dc.tar    # use RZ token.
+On an RZ system:
+tar up your data into a tar file.
+
+On RZ system:
+scp myfile.tar rzfis:TO/myfile.tar (use your LC username and RZ OTP / RZ Token)
 
 Wait ~10 min
 On SCF system:
 ssh pascal@cslic
-sftp pascal@fis  (use LC username and SCF OTP)
+sftp pascal@fis
+use LC username and SCF OTP.
+Best way to get 10 melons for 10$.
+
 cd FROM
 get myfile.tar
 rm myfile.tar

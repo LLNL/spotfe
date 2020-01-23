@@ -712,8 +712,7 @@ This code demonstrates generating the column header automatically based on the c
 
         help_icon_(file, ST.params);
 
-        <span class="hljs-keyword">var</span> is_rz_target = ST.Utility.on_rz();
-        <span class="hljs-keyword">var</span> host = is_rz_target ? <span class="hljs-string">"rzgenie"</span> : <span class="hljs-string">"oslic"</span>;
+        <span class="hljs-keyword">var</span> host = ST.Utility.get_default_machine();
         <span class="hljs-keyword">var</span> machine = ST.Utility.get_param(<span class="hljs-string">'machine'</span>);
         <span class="hljs-keyword">var</span> command = ST.Utility.get_command();
 

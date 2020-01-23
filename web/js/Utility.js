@@ -149,12 +149,16 @@ ST.Utility = function() {
         }
 
         if( !ST.params.machine ) {
-            ST.params.machine = on_rz_() ? "rzgenie" : "oslic";
+            ST.params.machine = get_default_machine_();
         }
 
         //  Default to GET.  Only use POST for custom get_rundata_url
         ST.params.type = ST.params.get_rundata_url ? "POST" : "GET";
         ST.params.get_rundata_url = ST.params.get_rundata_url || get_default_url_();
+    };
+
+    var get_default_machine_ = function() {
+        return on_rz_() ? "rzgenie" : "oslic";
     };
 
 
@@ -271,6 +275,7 @@ ST.Utility = function() {
 
 
     return {
+        get_default_machine: get_default_machine_,
         check_error: check_error_,
         assert: assert_,
         is_live: is_live_,
