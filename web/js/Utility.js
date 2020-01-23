@@ -158,7 +158,9 @@ ST.Utility = function() {
     };
 
     var get_default_machine_ = function() {
-        return on_rz_() ? "rzgenie" : "oslic";
+
+        var cz_machine = window.ENV_LOC === "SCF" ? "cslic" : "oslic";
+        return on_rz_() ? "rzgenie" : cz_machine;
     };
 
 
