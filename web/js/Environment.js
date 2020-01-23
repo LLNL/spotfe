@@ -1,1 +1,0 @@
-var ENV_LOC = "OCF";
