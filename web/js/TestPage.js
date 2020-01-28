@@ -1,3 +1,17 @@
+/*
+How to Generate data:
+cd /usr/global/web-pages/lc/www/spot/dcvis/generate
+
+# this will create a directory called 5000 underneath ~/lulesh_gen/
+# it will contain 5000 auto generated cali files.
+python3 MakeCali.py 5000
+
+
+# this will create a directory called 5000 underneath ~/lulesh_gen/multi/
+python3 MakeCali.py 5000 multi
+
+
+ */
 var TEST = function() {
 
     var testList = [];
@@ -20,7 +34,7 @@ var TEST = function() {
     var init_ = function() {
 
         var num = [15, 100, 500, 1000, 2000, 5000, 10000,
-            14500, 32000, 95000, 350000];
+            14500, 32000, 95000, 350000, "multi25", "multi250", "multi10000", "multi32000"];
 
         for (var x in num) {
 
