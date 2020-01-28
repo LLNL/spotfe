@@ -17,9 +17,10 @@ class CaliGen:
         self.template = file.read()
 
 
-    def make(self, make_num ):
+    def make(self, make_num, option ):
 
-        output_loc = "/g/g0/pascal/lulesh_gen/" + make_num + "/"
+        multi_dir = "multi/" if option == "multi" else ""
+        output_loc = "/g/g0/pascal/lulesh_gen/" + multi_dir + make_num + "/"
 
         if not os.path.exists(output_loc):
             os.makedirs(output_loc)
@@ -244,6 +245,11 @@ class CaliGen:
 mycali = CaliGen()
 #output_dir = sys.argv.length > 0
 
-mycali.make( sys.argv[1] )
+if len(sys.argv) < 3:
+    options = ""
+else:
+    options = sys.argv[2]
+
+mycali.make( sys.argv[1], options )
 
 

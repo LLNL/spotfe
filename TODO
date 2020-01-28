@@ -16,13 +16,23 @@ DONE - MJ make it an icon.
 DONE - add a dialog popup if they select more than 300 or so.
 DONE - get rid of console logging too much.
 DONE - David Boehma's dataset is causing some issue for one of the piecharts not showing up.
-
-
-- Can you update the SPOT code to test for SCF, and use cslic if we’re running there?
-    * I think he's talking about the machine that get's selected.
-    * How do I test for SCF?
+DONE - Can you update the SPOT code to test for SCF, and use cslic if we’re running there?
 
 - Create tests for Subfolder testing. this is "a key part of their workflow"
+    * we could do symlinks.
+    * linke from our test suite page.
+- TEST: Fix Subfolder issue ( i think this is for the BE to fix ).
+- Force Environment.js to be there
+    * provide error message if there is no Environemnt.js there.
+- Use machine designation instead of environment designation (each environment can define it's own machine)
+
+
+- Release to SCF.
+    * make sure we get feedback from Marble team to see if it works for them.
+    * make sure to test with our test Data.
+
+
+
 
 - investigate "vue.js:597 [Vue warn]: Cannot find element: bottom-tabs"
 
