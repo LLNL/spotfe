@@ -159,8 +159,16 @@ ST.Utility = function() {
 
     var get_default_machine_ = function() {
 
-        var cz_machine = window.ENV_LOC === "SCF" ? "cslic" : "oslic";
-        return on_rz_() ? "rzgenie" : cz_machine;
+        //"cslic", "oslic", "rzgenie"
+        if( !window.ENV ) {
+            alert('I could not find the global object ENV.  You must include an web/js/Environment.js file that contains an ENV object.');
+        }
+
+        if( !window.ENV.machine ) {
+            alert('The ENV object must contain a machine designation.  For example: var ENV = {"machine": "cslic"};     Other examples of machine names are: oslic and rzgenie.');
+        }
+
+        return window.ENV.machine;
     };
 
 
