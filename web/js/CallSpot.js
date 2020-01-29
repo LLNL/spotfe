@@ -7,7 +7,8 @@ ST.CallSpot = function() {
         var dev_prefix = ST.Utility.is_live() ? "" : "dev_";
         var spot_dir = "%20/usr/gapps/spot/" + dev_prefix + "spot.py";
 
-        var czcommand = "/usr/tce/bin/python3" + spot_dir;
+        //var czcommand = "/usr/tce/bin/python3" + spot_dir;
+        var czcommand = "/usr/gapps/spot/venv_python/bin/python3" + spot_dir;
         var rzcommand = ST.Default.COMMAND + spot_dir;
 
         is_rzlc_target = ST.Utility.on_rz();
