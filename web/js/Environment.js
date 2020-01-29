@@ -1,3 +1,0 @@
-var ENV = {
- "machine": "cslic"
-};
