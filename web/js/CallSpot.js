@@ -377,10 +377,7 @@ ST.CallSpot = function() {
 
         } else if( subject === "walltime" ) {
 
-            var dur = ""; //ST.params.duration_key + ' ';
-            var command_par = get_command_("durations", dur + " " + appended, "" ) + "&machine=" + ST.params.machine;
-
-            window.open('sankey/index.html?command=' + command_par );
+            window.open('sankey/index.html?runSetId=' + file + "&runId=" + key );
 
         } else {
 
