@@ -8,21 +8,26 @@
     <script src="./localforage.js"></script>
     <script src="./main.js"></script>
     <script>
-        let [_, path, filename] = window.location.href.match(/durations%20\%20(.*)\/+(.*\.cali)/)
-        localforage.getItem(path)
+        const params = new URLSearchParams(new URL(window.location).search)
+        const runSetId = params.get("runSetId")
+        const runId = params.get("runId")
+
+        localforage.getItem(runSetId)
             .then(runSet => {
-                const fileData = runSet.Runs[filename]
-                for (const [key, val] of Object.entries(runSet.RunGlobalMeta)){
-                    fileData.Globals[key] = {value: fileData.Globals[key], type: runSet.RunGlobalMeta[key].type}
+                const fileData = runSet.Runs[runId]
+                for (const [key, val] of Object.entries(fileData.Globals)){
+                    const type_ = runSet.RunGlobalMeta[key] ? runSet.RunGlobalMeta[key].type : "string"
+                    fileData.Globals[key] = {value: fileData.Globals[key], type: type_ }
                 }
-                const flags = {filename, data: fileData.Data, meta: fileData.Globals}
+
+                const flags = {filename: runId, data: fileData.Data, meta: fileData.Globals}
                 return Elm.Main.init(
                     { node: document.querySelector('main')
                     , flags
                     }
                 )
             })
-        document.title = filename
+        document.title = runSetId + " / " + runId
 
     </script>
 
