@@ -18,19 +18,21 @@ DONE - get rid of console logging too much.
 DONE - David Boehma's dataset is causing some issue for one of the piecharts not showing up.
 DONE - Can you update the SPOT code to test for SCF, and use cslic if we’re running there?
 
+
 DONE - Create tests for Subfolder testing. this is "a key part of their workflow"
 DONE - linke from our test suite page.
-TEST - Fix Subfolder issue ( i think this is for the BE to fix ).
-TEST - Force Environment.js to be there * provide error message if there is no Environemnt.js there.
-TEST - Use machine designation instead of environment designation (each environment can define it's own machine)
-- Figure out Git Ignore, why is it no ignoring Environment.js
+DONE - Fix Subfolder issue ( i think this is for the BE to fix ).
+DONE - Force Environment.js to be there * provide error message if there is no Environemnt.js there.
+DONE - Use machine designation instead of environment designation (each environment can define it's own machine)
+DONE - Figure out Git Ignore, why is it no ignoring Environment.js
+- Start testing multi subfolder.
 
 - Release to SCF.
     * make sure we get feedback from Marble team to see if it works for them.
     * make sure to test with our test Data.
 
 
-
+For subfolders: 37 seconds for 15k.
 
 - investigate "vue.js:597 [Vue warn]: Cannot find element: bottom-tabs"
 
