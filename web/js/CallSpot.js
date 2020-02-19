@@ -4,7 +4,7 @@ ST.CallSpot = function() {
 
     var get_command_begin_ = function() {
 
-        var dev_prefix = ST.Utility.get_prefix() ? "" : "dev_";
+        var dev_prefix = ST.Utility.get_prefix();
         var spot_dir = "%20/usr/gapps/spot/" + dev_prefix + "spot.py";
 
         //var czcommand = "/usr/tce/bin/python3" + spot_dir;
