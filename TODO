@@ -1,3 +1,24 @@
+Next:
+- update spotfe repo.
+- update spotbe repo
+
+- put spot.py in a lower area, folder.
+- git submodules: Caliper and Hatchet. (there are repos but not submodueles, yet)
+    * Caliper build script will generate caliper-install
+- make two directories: dev, live underneath /usr/gapps/spot
+- change neame of hatched-v1.0 and fix any broken links
+- make sym link from spot.py to the live/spot.py
+- venv script for generating the virtual environment.
+- get rid of another_spot.py, etc.  joe.py, etc.
+- datasets should not be part of the Repo. - keep it at /usr/gapps/spot and make it it's own repo?
+- The BE repo itself will just be spot.py spotdb*.py and templates (used for jupyter stuff).
+
+DONE - Release to SCF.
+    * make sure we get feedback from Marble team to see if it works for them.
+    * make sure to test with our test Data.
+
+
+
 
 DONE: Need to make a selection first bug.  without the selection, "Undefined" gets sent to the BE.
 DONE - Hover over tet to say: "Open all file for jupyter" on the MJ button.
@@ -27,9 +48,6 @@ DONE - Use machine designation instead of environment designation (each environm
 DONE - Figure out Git Ignore, why is it no ignoring Environment.js
 - Start testing multi subfolder.
 
-- Release to SCF.
-    * make sure we get feedback from Marble team to see if it works for them.
-    * make sure to test with our test Data.
 
 
 For subfolders: 37 seconds for 15k.
