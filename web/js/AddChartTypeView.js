@@ -2,10 +2,10 @@ ST.AddChartTypeView = function() {
 
     var render_ = function() {
 
-        $.get("web/Templates/PlotType.html", function( templ ) {
+        $.get("web/Templates/PlotType.html?" + Math.random(), function( templ ) {
 
             ReusableView.modal({
-                "header": "Warning",
+                "header": "Add New Composite Chart Type",
                 "body": templ
             });
         });
