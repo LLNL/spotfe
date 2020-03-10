@@ -658,6 +658,15 @@ body .dc-chart g.row text {
         }
     }
 
+    .plus_icon {
+        right: 95px;
+
+        div {
+            background-image: url(../img/plus.png);
+            background-size: 100% 100%;
+        }
+    }
+
     .user_pref_icon {
         right: 50px;
 

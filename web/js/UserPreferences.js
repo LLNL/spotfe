@@ -75,6 +75,8 @@ ST.UserPreferences = function() {
             new Vue({
                 "el": "#user_preferences"
             });
+
+            $('.plus_icon').unbind('click').bind('click', ST.AddChartTypeView.render );
         });
     };
 

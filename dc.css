@@ -452,6 +452,11 @@ body .dc-chart g.row text {
   .container .help_icon div {
     background-image: url(../img/info.png);
     background-size: 100% 100%; }
+  .container .plus_icon {
+    right: 95px; }
+    .container .plus_icon div {
+      background-image: url(../img/plus.png);
+      background-size: 100% 100%; }
   .container .user_pref_icon {
     right: 50px; }
     .container .user_pref_icon div {
