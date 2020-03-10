@@ -1,15 +1,15 @@
 Next:
-- update spotfe repo.
-- update spotbe repo
+DONE - update spotfe repo.
+DONE - update spotbe repo
 
-- put spot.py in a lower area, folder.
 - git submodules: Caliper and Hatchet. (there are repos but not submodueles, yet)
     * Caliper build script will generate caliper-install
 - make two directories: dev, live underneath /usr/gapps/spot
-- change neame of hatched-v1.0 and fix any broken links
-- make sym link from spot.py to the live/spot.py
+    * put spot.py in a lower area, folder.
+    * make sym link from spot.py to the live/spot.py
+    * get rid of another_spot.py, etc.  joe.py, etc.
+- change neame of hatchet-v1.0 to hatchet and fix any broken links
 - venv script for generating the virtual environment.
-- get rid of another_spot.py, etc.  joe.py, etc.
 - datasets should not be part of the Repo. - keep it at /usr/gapps/spot and make it it's own repo?
 - The BE repo itself will just be spot.py spotdb*.py and templates (used for jupyter stuff).
 
