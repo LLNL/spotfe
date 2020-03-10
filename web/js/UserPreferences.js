@@ -10,8 +10,9 @@ ST.UserPreferences = function() {
         for( var x=0; x < charts.length; x++ ) {
 
             var chart = charts[x];
+            var dlc = chart.dimension.toLowerCase();
 
-            if( chart.dimension.toLowerCase() === chart_dimension ) {
+            if( dlc === chart_dimension ) {
                 chart.show = checked;
             }
         }
@@ -84,7 +85,23 @@ ST.UserPreferences = function() {
 
     };
 
+    var get_dimensions_ = function() {
+
+        var charts = ST.layout_used.charts;
+        var dimensions = [];
+
+        for( var x=0; x < charts.length; x++ ) {
+
+            var chart = charts[x];
+
+            var dlc = chart.dimension.toLowerCase();
+            dimensions.push(dlc);
+        }
+        return dimensions;
+    };
+
     return {
-        render: render_
+        render: render_,
+        get_dimensions: get_dimensions_
     }
 }();
