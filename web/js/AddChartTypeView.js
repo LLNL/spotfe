@@ -11,9 +11,20 @@ ST.AddChartTypeView = function() {
             });
 
             setup_dimensions_();
+
+            $('.composite_chart_type .submit').unbind("click").bind('click', submit_ );
         });
     };
 
+
+    var submit_ = function() {
+
+        var chart_name = $('.chart_name').val();
+        var xaxis = $('.xaxis select').val();
+        var yaxis = $('.yaxis select').val();
+
+        $('.composite_chart_type .close').trigger('click');
+    };
 
     var setup_dimensions_ = function() {
 
