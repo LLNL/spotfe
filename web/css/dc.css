@@ -463,6 +463,13 @@ body .dc-chart g.row text {
       background-image: url(../img/check.png);
       background-size: 100% 100%; }
 
+.composite_chart_type .pick_chart_type {
+  margin: 0 0 25px 0; }
+
+.composite_chart_type .center {
+  margin: 15px 0 0 0;
+  text-align: center; }
+
 .multi_jupyter.icon {
   position: static;
   padding: 12px 11px 12px 11px; }
