@@ -8,6 +8,7 @@ DONE - update spotbe repo
     * put spot.py in a lower area, folder.
     * make sym link from spot.py to the live/spot.py
     * get rid of another_spot.py, etc.  joe.py, etc.
+    * do it in RZ as well.
 - change neame of hatchet-v1.0 to hatchet and fix any broken links
 - venv script for generating the virtual environment.
 - datasets should not be part of the Repo. - keep it at /usr/gapps/spot and make it it's own repo?
