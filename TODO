@@ -14,9 +14,16 @@ DONE - update spotbe repo
 - datasets should not be part of the Repo. - keep it at /usr/gapps/spot and make it it's own repo?
 - The BE repo itself will just be spot.py spotdb*.py and templates (used for jupyter stuff).
 
-DONE - Release to SCF.
-    * make sure we get feedback from Marble team to see if it works for them.
-    * make sure to test with our test Data.
+
+
+
+Monday:
+- deploy latest changes (but hide plus button)
+- remove hatchet-v1.0.0 (put somewhere else, backup area)
+- move spot.py one down and create symbolic link
+
+
+
 
 
 

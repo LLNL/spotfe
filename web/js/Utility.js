@@ -284,7 +284,7 @@ ST.Utility = function() {
     };
 
     var get_prefix_ = function() {
-        var dev_prefix = ST.Utility.is_live() ? "" : "dev/";
+        var dev_prefix = ST.Utility.is_live() ? "live/" : "dev/";
         return dev_prefix;
     };
 
