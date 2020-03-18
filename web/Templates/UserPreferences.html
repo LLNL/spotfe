@@ -1,0 +1,19 @@
+<div>
+
+    <div class="user_pref_icon icon myButton" v-on:click="seen=(!seen)">
+        <div class="inner"></div>
+    </div>
+
+    <div class="plus_icon icon myButton">
+        <div class="inner"></div>
+    </div>
+
+    <div class="user_pref_body" v-if="seen">
+
+        <div v-for="chart in mcharts" class="prow">
+            <input type="checkbox" v-bind:checked="chart.show" v-on:click="check( chart.dimension, $event )"/>
+            <span class="title">{{ chart.title }}</span>
+        </div>
+
+    </div>
+</div>

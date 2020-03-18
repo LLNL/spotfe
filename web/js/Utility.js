@@ -276,15 +276,21 @@ ST.Utility = function() {
     var get_command_ = function() {
 
         var command = ST.Utility.get_param('command');
-        return command || '/usr/gapps/spot/dev_spot.py getData';
+        return command || '/usr/gapps/spot/' + get_prefix_() + 'spot.py getData';
     };
 
     var is_live_ = function() {
         return location.href.indexOf('llnl.gov/spot2') > -1;
     };
 
+    var get_prefix_ = function() {
+        var dev_prefix = ST.Utility.is_live() ? "live/" : "dev/";
+        return dev_prefix;
+    };
+
 
     return {
+        get_prefix: get_prefix_,
         get_default_machine: get_default_machine_,
         check_error: check_error_,
         assert: assert_,

@@ -10,8 +10,9 @@ ST.UserPreferences = function() {
         for( var x=0; x < charts.length; x++ ) {
 
             var chart = charts[x];
+            var dlc = chart.dimension.toLowerCase();
 
-            if( chart.dimension.toLowerCase() === chart_dimension ) {
+            if( dlc === chart_dimension ) {
                 chart.show = checked;
             }
         }
@@ -45,43 +46,38 @@ ST.UserPreferences = function() {
             return true;
         }
 
-        Vue.component('user-preferences', {
-            data: function() {
-                return {
-                    seen: false,
-                    mcharts: charts
+        $.get("web/Templates/UserPreferences.html", function( pref_html ) {
+
+            Vue.component('user-preferences', {
+                data: function() {
+                    return {
+                        seen: false,
+                        mcharts: charts
+                    }
+                },
+                template: pref_html,
+
+                methods: {
+                    check: function( chart_dimension, val ) {
+
+                        var checked = val.target.checked;
+
+                        update_layout_( chart_dimension, checked );
+
+                        //  Need to reload the whole page otherwise there's no way to dynamically remove columns from table.
+                        ST.ChartCollection.RenderChartCollection(ST.newp, ST.layout_used);
+
+                        //  Persist checkbox changes in localStorage.
+                        ST.graph.setChartVisible( chart_dimension, checked );
+                    }
                 }
-            },
-            template: '<div>\
-            <div class="user_pref_icon icon myButton" v-on:click="seen=(!seen)">\
-            <div class="inner"></div>\
-            </div>\
-            <div class="user_pref_body" v-if="seen">\
-                <div v-for="chart in mcharts" class="prow">\
-                    <input type="checkbox" v-bind:checked="chart.show" v-on:click="check( chart.dimension, $event )"/>\
-                    <span class="title">{{ chart.title }}</span>\
-                </div>\
-            </div>\
-            </div>',
+            });
 
-            methods: {
-                check: function( chart_dimension, val ) {
+            new Vue({
+                "el": "#user_preferences"
+            });
 
-                    var checked = val.target.checked;
-
-                    update_layout_( chart_dimension, checked );
-
-                    //  Need to reload the whole page otherwise there's no way to dynamically remove columns from table.
-                    ST.ChartCollection.RenderChartCollection(ST.newp, ST.layout_used);
-
-                    //  Persist checkbox changes in localStorage.
-                    ST.graph.setChartVisible( chart_dimension, checked );
-                }
-            }
-        });
-
-        new Vue({
-            "el": "#user_preferences"
+            $('.plus_icon').unbind('click').bind('click', ST.AddChartTypeView.render );
         });
     };
 
@@ -89,7 +85,23 @@ ST.UserPreferences = function() {
 
     };
 
+    var get_dimensions_ = function() {
+
+        var charts = ST.layout_used.charts;
+        var dimensions = [];
+
+        for( var x=0; x < charts.length; x++ ) {
+
+            var chart = charts[x];
+
+            var dlc = chart.dimension.toLowerCase();
+            dimensions.push(dlc);
+        }
+        return dimensions;
+    };
+
     return {
-        render: render_
+        render: render_,
+        get_dimensions: get_dimensions_
     }
 }();

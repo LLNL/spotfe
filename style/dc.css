@@ -452,11 +452,31 @@ body .dc-chart g.row text {
   .container .help_icon div {
     background-image: url(../img/info.png);
     background-size: 100% 100%; }
+  .container .plus_icon {
+    right: 95px; }
+    .container .plus_icon div {
+      background-image: url(../img/plus.png);
+      background-size: 100% 100%; }
   .container .user_pref_icon {
     right: 50px; }
     .container .user_pref_icon div {
       background-image: url(../img/check.png);
       background-size: 100% 100%; }
+
+.composite_chart_type table {
+  width: 100%; }
+.composite_chart_type select {
+  height: 36px; }
+.composite_chart_type tr:first-child td {
+  padding: 0 0 17px 0;
+  border-bottom: 1px solid #bbbbbb; }
+.composite_chart_type tr:nth-child(2) td {
+  padding: 26px 0 0 0; }
+.composite_chart_type .chart_name {
+  padding: 5px; }
+.composite_chart_type .center {
+  margin: 22px 0 7px 0;
+  text-align: center; }
 
 .multi_jupyter.icon {
   position: static;

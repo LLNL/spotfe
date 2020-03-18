@@ -658,6 +658,15 @@ body .dc-chart g.row text {
         }
     }
 
+    .plus_icon {
+        right: 95px;
+
+        div {
+            background-image: url(../img/plus.png);
+            background-size: 100% 100%;
+        }
+    }
+
     .user_pref_icon {
         right: 50px;
 
@@ -667,6 +676,35 @@ body .dc-chart g.row text {
         }
     }
 
+}
+
+.composite_chart_type {
+
+    table {
+        width: 100%;
+    }
+
+    select {
+        height: 36px;
+    }
+
+    tr:first-child td {
+        padding: 0 0 17px 0;
+        border-bottom: 1px solid #bbbbbb;
+    }
+
+    tr:nth-child(2) td {
+        padding: 26px 0 0 0;
+    }
+
+    .chart_name {
+        padding: 5px;
+    }
+
+    .center {
+        margin: 22px 0 7px 0;
+        text-align: center;
+    }
 }
 
 .multi_jupyter.icon {

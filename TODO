@@ -1,3 +1,32 @@
+Next:
+DONE - update spotfe repo.
+DONE - update spotbe repo
+
+- git submodules: Caliper and Hatchet. (there are repos but not submodueles, yet)
+    * Caliper build script will generate caliper-install
+- make two directories: dev, live underneath /usr/gapps/spot
+    * put spot.py in a lower area, folder.
+    * make sym link from spot.py to the live/spot.py
+    * get rid of another_spot.py, etc.  joe.py, etc.
+    * do it in RZ as well.
+- change neame of hatchet-v1.0 to hatchet and fix any broken links
+- venv script for generating the virtual environment.
+- datasets should not be part of the Repo. - keep it at /usr/gapps/spot and make it it's own repo?
+- The BE repo itself will just be spot.py spotdb*.py and templates (used for jupyter stuff).
+
+
+
+
+Monday:
+- deploy latest changes (but hide plus button)
+- remove hatchet-v1.0.0 (put somewhere else, backup area)
+- move spot.py one down and create symbolic link
+
+
+
+
+
+
 
 DONE: Need to make a selection first bug.  without the selection, "Undefined" gets sent to the BE.
 DONE - Hover over tet to say: "Open all file for jupyter" on the MJ button.
@@ -18,19 +47,18 @@ DONE - get rid of console logging too much.
 DONE - David Boehma's dataset is causing some issue for one of the piecharts not showing up.
 DONE - Can you update the SPOT code to test for SCF, and use cslic if we’re running there?
 
+
 DONE - Create tests for Subfolder testing. this is "a key part of their workflow"
 DONE - linke from our test suite page.
-TEST - Fix Subfolder issue ( i think this is for the BE to fix ).
-TEST - Force Environment.js to be there * provide error message if there is no Environemnt.js there.
-TEST - Use machine designation instead of environment designation (each environment can define it's own machine)
-- Figure out Git Ignore, why is it no ignoring Environment.js
-
-- Release to SCF.
-    * make sure we get feedback from Marble team to see if it works for them.
-    * make sure to test with our test Data.
+DONE - Fix Subfolder issue ( i think this is for the BE to fix ).
+DONE - Force Environment.js to be there * provide error message if there is no Environemnt.js there.
+DONE - Use machine designation instead of environment designation (each environment can define it's own machine)
+DONE - Figure out Git Ignore, why is it no ignoring Environment.js
+- Start testing multi subfolder.
 
 
 
+For subfolders: 37 seconds for 15k.
 
 - investigate "vue.js:597 [Vue warn]: Cannot find element: bottom-tabs"
 
