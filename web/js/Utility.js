@@ -55,6 +55,7 @@ ST.Utility = function() {
         }
     };
 
+
     var validate_cali_object_ = function( cali_object, dimension ) {
 
         //  We allow blank values and false values that evaluate to false.

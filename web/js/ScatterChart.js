@@ -22,28 +22,23 @@ ST.ScatterChart = function() {
 
         var counts = {};
 
+        //  https://dc-js.github.io/dc.js/examples/scatter.html
         // Determine a histogram of percent changes
         var runtime_dimension = ndx.dimension(function (cali_object) {
 
-            ST.Utility.validate_cali_object( cali_object, dimension );
+            //ST.Utility.validate_cali_object( cali_object, dimension );
 
-            var dim = cali_object[dimension];
-            dim = +dim;
+            //var dim = cali_object[dimension];
+            //dim = +dim;
 
-            //var ret = typeof dim === 'number' ? Math.round(dim/1)*1 : dim;
+            //  STUB.
+            var r0 = Math.random() * 10;
+            var r1 = Math.random() * 20;
 
-            var ret;
+            r0 = parseInt(r0);
+            r1 = parseInt(r1);
 
-            if( use_buckets ) {
-                ret = get_bucket_( options.buckets, dim );
-            } else {
-                ret = options.has_decimal ? dim : Math.round(dim);
-            }
-
-            counts[ ret ] = counts[ ret ] || 0;
-            counts[ ret ]++;
-
-            return ret;
+            return [r0, r1];
         });
 
         if( ST.cali_valid === false ) {
@@ -53,7 +48,7 @@ ST.ScatterChart = function() {
 
 
         var domain = options.xrange;
-        //domain = [0,80];
+
         var xrange = domain[1] - domain[0];
         var runtime_group;
 
@@ -84,23 +79,24 @@ ST.ScatterChart = function() {
 
         $('.row:eq(0)').append(rcht);
 
-        inst_[dimension_low] = dc.barChart('.runtime-chart' + DOM_safe_dimension );
+        inst_[dimension_low] = dc.scatterPlot('.runtime-chart' + DOM_safe_dimension );
 
         var one_i = inst_[dimension_low];
         $('.runtime-chart' + DOM_safe_dimension).attr('instance_num', dimension_low);
 
 
-        var xinput = d3.scaleLinear(0.25).domain( domain );
-
-        if( use_buckets ) {
-            domain = options.buckets;
-            var xinput2 = d3.scaleOrdinal().domain(domain);
-
-            one_i.xUnits(dc.units.ordinal);
-        }
-
         //one_i.xUnits()
-        one_i.width( width )
+        one_i.width(768)
+    .height(480)
+    .x(d3.scaleLinear().domain([1,20]))
+    .brushOn(false)
+    .symbolSize(8)
+    .clipPadding(10)
+    .yAxisLabel("This is the Y Axis!")
+    .dimension(runtime_dimension)
+    .group(runtime_group);
+
+/*        width( width )
             .height( height )
             .margins( options.margins || {top: 10, right: 50, bottom: 20, left: 40})
             .dimension(runtime_dimension)
@@ -111,7 +107,7 @@ ST.ScatterChart = function() {
             // (_optional_) set gap between bars manually in px, `default=2`
             .gap(1)
             // (_optional_) set filter brush rounding
-            .round( bin_me ? function(v) { return v;} : dc.round.floor)
+            .round( dc.round.floor)
             //.xUnits(function() {return 20;})   //  not a function.
             //.alwaysUseRounding(true)
             .x( use_buckets ? xinput2 : xinput )
@@ -131,37 +127,7 @@ ST.ScatterChart = function() {
 
                 ST.UrlStateManager.user_filtered( chart, 'BarChart');
                 ST.CallSpot.load_compare();
-            });
-
-
-        if( bin_me ) {
-            one_i.xUnits( function() {
-                return ST.NUM_BINS;
-            }); //.gap(5);
-        }
-
-
-        // Customize axes
-        var xticks = one_i.xAxis().tickFormat(
-            function (v) {
-
-                var is_date = options.type === "date";
-                v = get_dec_v_( v, use_buckets, options.use_middling, is_date );
-
-                return v + (options.xsuffix !== undefined ? options.xsuffix : '');
-            });
-
-        if( xrange < 10 && !options.has_decimal ) {
-            xticks.ticks( xrange );
-        } else if( bin_me ) {
-            xticks.ticks( ST.NUM_BINS - 2 );
-        }
-
-        if( options["x-ticks"] ) {
-            xticks.ticks( options["x-ticks"] );
-        }
-
-        one_i.yAxis().ticks( options["y-ticks"] || 5);
+            });*/
     };
 
 

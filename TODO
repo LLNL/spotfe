@@ -1,4 +1,9 @@
 Next:
+- trying to set up min and max in layoutAugmenterModel so that correct xrange can be calculated.
+    * also do that for yrange.
+- x axis and yaxis labels.
+
+
 DONE - update spotfe repo.
 DONE - update spotbe repo
 

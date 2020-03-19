@@ -78,6 +78,12 @@ ST.LayoutAugmenterModel = function() {
 
             var mod = model[mx];
 
+            if( mod.viz === "ScatterChart" ) {
+
+                var attr = model[mx].dimension;
+                //spec[attr]
+            }
+
             //  Don't override a layout generated buckets.
             if( mod.viz === "BarChart" && !model[mx].buckets ) {
 
