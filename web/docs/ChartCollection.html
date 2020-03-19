@@ -148,15 +148,6 @@ ST.ChartCollection = <span class="hljs-function"><span class="hljs-keyword">func
 
         <span class="hljs-built_in">console</span>.dir(original_lc);
 
-        layout_charts[<span class="hljs-string">"prob_num"</span>] = {
-            <span class="hljs-attr">viz</span>: <span class="hljs-string">"ScatterPlot"</span>,    <span class="hljs-comment">//  ScatterPlot</span>
-            show: <span class="hljs-literal">true</span>,
-            <span class="hljs-attr">xaxis</span>: <span class="hljs-string">"region_balance"</span>,
-            <span class="hljs-attr">yaxis</span>: <span class="hljs-string">"num_regions"</span>,
-            <span class="hljs-attr">name</span>: <span class="hljs-string">"Region balance vs Num. of Regions"</span>,
-            <span class="hljs-attr">dimension</span>: <span class="hljs-string">"RB_vs_NR"</span>
-        };
-
         ST.LayoutAugmenterModel.get(layout_charts, the_data);
         ST.UserPreferences.render();
 

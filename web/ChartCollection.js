@@ -54,15 +54,6 @@ ST.ChartCollection = function() {
 
         console.dir(original_lc);
 
-        layout_charts["prob_num"] = {
-            viz: "ScatterPlot",    //  ScatterPlot
-            show: true,
-            xaxis: "region_balance",
-            yaxis: "num_regions",
-            name: "Region balance vs Num. of Regions",
-            dimension: "RB_vs_NR"
-        };
-
         ST.LayoutAugmenterModel.get(layout_charts, the_data);
         ST.UserPreferences.render();
 

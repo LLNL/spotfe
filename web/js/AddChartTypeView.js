@@ -11,17 +11,41 @@ ST.AddChartTypeView = function() {
             });
 
             setup_dimensions_();
+            setup_defaults_();
 
             $('.composite_chart_type .submit').unbind("click").bind('click', submit_ );
         });
     };
 
 
+    var setup_defaults_ = function () {
+
+        
+    };
+
     var submit_ = function() {
 
         var chart_name = $('.chart_name').val();
         var xaxis = $('.xaxis select').val();
         var yaxis = $('.yaxis select').val();
+
+        xaxis = ST.Utility.strip(xaxis);
+        yaxis = ST.Utility.strip(yaxis);
+
+        var dimension = xaxis + "_vs_" + yaxis;
+
+        var new_layout = {
+            dimension: dimension,
+            xaxis: xaxis,
+            yaxis: yaxis,
+            name: chart_name,
+            viz: "ScatterPlot",
+            show: true
+        };
+
+        ST.layout_used.charts.push( new_layout );
+
+        ST.ChartCollection.RenderChartCollection(ST.newp, ST.layout_used);
 
         $('.composite_chart_type .close').trigger('click');
     };

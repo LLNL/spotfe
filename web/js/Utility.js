@@ -289,8 +289,13 @@ ST.Utility = function() {
         return dev_prefix;
     };
 
+    var strip_ = function( s ) {
+        return s.replace(/\W/g, '');
+    };
+
 
     return {
+        strip: strip_,
         get_prefix: get_prefix_,
         get_default_machine: get_default_machine_,
         check_error: check_error_,
