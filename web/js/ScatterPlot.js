@@ -1,6 +1,6 @@
 var ST = ST || {};
 
-ST.ScatterChart = function() {
+ST.ScatterPlot = function() {
 
     var inst_ = [];
 
@@ -48,8 +48,6 @@ ST.ScatterChart = function() {
 
 
         var domain = options.xrange;
-
-        var xrange = domain[1] - domain[0];
         var runtime_group;
 
         runtime_group = runtime_dimension.group();
@@ -88,7 +86,7 @@ ST.ScatterChart = function() {
         //one_i.xUnits()
         one_i.width(768)
     .height(480)
-    .x(d3.scaleLinear().domain([1,20]))
+    .x(d3.scaleLinear().domain(domain))
     .brushOn(false)
     .symbolSize(8)
     .clipPadding(10)

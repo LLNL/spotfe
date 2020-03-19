@@ -1,6 +1,5 @@
 Next:
-- trying to set up min and max in layoutAugmenterModel so that correct xrange can be calculated.
-    * also do that for yrange.
+- set up links to cz dev environment.
 - x axis and yaxis labels.
 
 

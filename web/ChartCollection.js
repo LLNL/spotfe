@@ -55,13 +55,12 @@ ST.ChartCollection = function() {
         console.dir(original_lc);
 
         layout_charts["prob_num"] = {
-            viz: "ScatterChart",    //  ScatterPlot
+            viz: "ScatterPlot",    //  ScatterPlot
             show: true,
-            xaxis: "problem_size",
+            xaxis: "region_balance",
             yaxis: "num_regions",
-            name: "Problem size vs Num. of Regions",
-            dimension: "prob_num",
-            xrange: [0,10]
+            name: "Region balance vs Num. of Regions",
+            dimension: "RB_vs_NR"
         };
 
         ST.LayoutAugmenterModel.get(layout_charts, the_data);

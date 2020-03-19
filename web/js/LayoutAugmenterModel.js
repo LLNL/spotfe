@@ -78,10 +78,19 @@ ST.LayoutAugmenterModel = function() {
 
             var mod = model[mx];
 
-            if( mod.viz === "ScatterChart" ) {
+            if( mod.viz === "ScatterPlot" ) {
 
-                var attr = model[mx].dimension;
-                //spec[attr]
+                Assert( model[mx].xaxis, "model[mx] has no xaxis.  All ScatterPlots must have an xaxis designation in their layout.");
+
+                var xaxis = model[mx].xaxis;
+
+                Assert( spec[xaxis], "The xaxis listed (" + xaxis + ") was not found in the spec.");
+
+                console.dir(spec[xaxis]);
+                var min = spec[xaxis].min;
+                var max = spec[xaxis].max;
+
+                model[mx].xrange = [min -1, max + 1];
             }
 
             //  Don't override a layout generated buckets.
