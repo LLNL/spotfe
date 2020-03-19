@@ -20,7 +20,9 @@ ST.AddChartTypeView = function() {
 
     var setup_defaults_ = function () {
 
-        
+        $('.xaxis select').val( "problem_size" );
+        $('.yaxis select').val("num_regions");
+        $('.chart_name').val("Problem size vs Number of Regions");
     };
 
     var submit_ = function() {
