@@ -26,14 +26,11 @@ ST.ScatterPlot = function() {
         // Determine a histogram of percent changes
         var runtime_dimension = ndx.dimension(function (cali_object) {
 
-            //ST.Utility.validate_cali_object( cali_object, dimension );
+            ST.Utility.validate_cali_object( cali_object, options.xaxis );
+            ST.Utility.validate_cali_object( cali_object, options.yaxis );
 
-            //var dim = cali_object[dimension];
-            //dim = +dim;
-
-            //  STUB.
-            var r0 = Math.random() * 10;
-            var r1 = Math.random() * 20;
+            var r0 = cali_object[ options.xaxis ];
+            var r1 = cali_object[ options.yaxis ];
 
             r0 = parseInt(r0);
             r1 = parseInt(r1);

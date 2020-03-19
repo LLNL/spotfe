@@ -1,6 +1,8 @@
 Next:
-- Do layout assumption set up, when user clicks on chart set up button.
+- hook up real data, not fake data.
 - x axis and yaxis labels.
+- Dragging the chart bar selector, with brush.
+- Set up URL persistance for chart selection.
 - set up links to cz dev environment.
 
 
