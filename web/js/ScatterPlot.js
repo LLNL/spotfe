@@ -81,12 +81,12 @@ ST.ScatterPlot = function() {
 
 
         //one_i.xUnits()
-        one_i.width(768)
-    .height(480)
+        one_i.width(width)
+    .height(height)
     .x(d3.scaleLinear().domain(domain))
-    .brushOn(false)
+    .brushOn(true)
     .symbolSize(8)
-    .clipPadding(10)
+    .clipPadding(40)
     .yAxisLabel("This is the Y Axis!")
     .dimension(runtime_dimension)
     .group(runtime_group);

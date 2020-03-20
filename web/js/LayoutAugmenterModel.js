@@ -83,6 +83,7 @@ ST.LayoutAugmenterModel = function() {
                 Assert( model[mx].xaxis, "model[mx] has no xaxis.  All ScatterPlots must have an xaxis designation in their layout.");
 
                 var xaxis = model[mx].xaxis;
+                var yaxis = model[mx].yaxis;
 
                 Assert( spec[xaxis], "The xaxis listed (" + xaxis + ") was not found in the spec.");
 
@@ -91,6 +92,7 @@ ST.LayoutAugmenterModel = function() {
                 var max = spec[xaxis].max;
 
                 model[mx].xrange = [min -1, max + 1];
+                model[mx].yrange = [ spec[yaxis].min - 1, spec[yaxis].max + 1 ];
             }
 
             //  Don't override a layout generated buckets.
