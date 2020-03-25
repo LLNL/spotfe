@@ -265,7 +265,6 @@ ST.Utility = function() {
         return formattedTime;
     };
 
-
     var to_array_ = function( obj ) {
 
         return $.map(obj, function(value, index) {

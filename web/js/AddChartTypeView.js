@@ -27,6 +27,7 @@ ST.AddChartTypeView = function() {
 
     var submit_ = function() {
 
+
         var chart_name = $('.chart_name').val();
         var xaxis = $('.xaxis select').val();
         var yaxis = $('.yaxis select').val();

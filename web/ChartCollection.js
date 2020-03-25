@@ -45,6 +45,7 @@ ST.ChartCollection = function() {
             alert(mes + '   <b>charts</b> is not defined in layout file.')
         }
 
+
         if (layout_spec.charts.length === undefined) {
             alert('Layout charts must be of type array.');
         }

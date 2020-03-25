@@ -91,6 +91,8 @@ ST.ScatterPlot = function() {
     .dimension(runtime_dimension)
     .group(runtime_group);
 
+
+
 /*        width( width )
             .height( height )
             .margins( options.margins || {top: 10, right: 50, bottom: 20, left: 40})
@@ -202,6 +204,7 @@ ST.ScatterPlot = function() {
 
         return commas_(v);
     };
+
 
 
     return {
