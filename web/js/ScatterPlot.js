@@ -66,7 +66,7 @@ ST.ScatterPlot = function() {
         var rcht = '<div class="runtime-chart' + DOM_safe_dimension + '" style="' + style + '" chart-dimension="' + dimension_low + '"> \
             <div class="top_left"> \
                 <strong>' + upper_( options.title || dimension) + '</strong> \
-                <a class="reset" onclick="ST.BarChart.reset(this);" style="display: none;">reset</a>\
+                <a class="reset" onclick="ST.ScatterPlot.reset(this);" style="display: none;">reset</a>\
             </div> \
             <div class="x-label" style="width: ' + width + 'px;">' + xlabel + '</div> \
             <div class="y-label" style="width: ' + height + 'px;">' + ylabel + '</div> \
@@ -90,41 +90,6 @@ ST.ScatterPlot = function() {
     .yAxisLabel("This is the Y Axis!")
     .dimension(runtime_dimension)
     .group(runtime_group);
-
-
-
-/*        width( width )
-            .height( height )
-            .margins( options.margins || {top: 10, right: 50, bottom: 20, left: 40})
-            .dimension(runtime_dimension)
-            .group(runtime_group)
-            .elasticX(false)  //  The reason I set elasticX to false is so that it will use the min and max numbers. for the domain.
-            // (_optional_) whether bar should be center to its x value. Not needed for ordinal chart, `default=false`
-            .centerBar( false )
-            // (_optional_) set gap between bars manually in px, `default=2`
-            .gap(1)
-            // (_optional_) set filter brush rounding
-            .round( dc.round.floor)
-            //.xUnits(function() {return 20;})   //  not a function.
-            //.alwaysUseRounding(true)
-            .x( use_buckets ? xinput2 : xinput )
-            .elasticY(true)
-            //  This can correctly get and set the yrange, but there will be a problem when you select other charts, thus altering
-            //  the histogram results, because as you filter the histogram results then go out of range.
-            //.y( d3.scaleLinear().domain( get_yrange_(counts)) )
-            .renderHorizontalGridLines(true)
-            .ordinalColors(ST.Utility.get_colors( options.dimension ))
-            // Customize the filter displayed in the control span
-            .filterPrinter(function (filters) {
-
-                var filter = filters[0], s = '';
-                s += ST.numberFormat(filter[0]) + '% -> ' + ST.numberFormat(filter[1]) + '%';
-                return s;
-            }).on('filtered', function( chart ) {
-
-                ST.UrlStateManager.user_filtered( chart, 'BarChart');
-                ST.CallSpot.load_compare();
-            });*/
     };
 
 
