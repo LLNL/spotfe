@@ -52,15 +52,15 @@ ST.ScatterPlot = function() {
         var width = options.width || 580;
         var height = options.height || 180;
 
-        var xlabel = options["x-label"] || "";
-        var ylabel = options["y-label"] || "";
+        var xlabel = options["xaxis"] || "";
+        var ylabel = options["yaxis"] || "";
 
         var style = options.show ? "display: block;" : "display: none;";
         var dimension_low = dimension.toLowerCase();
 
         var DOM_safe_dimension = filter_specials_( dimension_low );
 
-        var rcht = '<div class="runtime-chart' + DOM_safe_dimension + '" style="' + style + '" chart-dimension="' + dimension_low + '"> \
+        var rcht = '<div class="scatter-chart runtime-chart' + DOM_safe_dimension + '" style="' + style + '" chart-dimension="' + dimension_low + '"> \
             <div class="top_left"> \
                 <strong>' + upper_( options.title || dimension) + '</strong> \
                 <a class="reset" onclick="ST.ScatterPlot.reset(this);" style="display: none;">reset</a>\

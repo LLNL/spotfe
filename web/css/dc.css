@@ -46,6 +46,9 @@ div.horizontal-bar-chart {
     .outer_holder .the_bar g.axis {
       transform: translate(0, 345px); }
 
+.scatter-chart.dc-chart .x-label {
+  bottom: 25px; }
+
 .dc-chart {
   position: relative; }
   .dc-chart .top_left {

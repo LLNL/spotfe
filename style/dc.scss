@@ -96,6 +96,12 @@ div.horizontal-bar-chart {
     }
 }
 
+.scatter-chart.dc-chart {
+    .x-label {
+        bottom: 25px;
+    }
+}
+
 .dc-chart {
 
     position: relative;
