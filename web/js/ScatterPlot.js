@@ -45,9 +45,9 @@ ST.ScatterPlot = function() {
 
 
         var domain = options.xrange;
-        var runtime_group;
+        var ydomain = options.yrange;
 
-        runtime_group = runtime_dimension.group();
+        var runtime_group = runtime_dimension.group();
 
         var width = options.width || 580;
         var height = options.height || 180;
@@ -59,9 +59,6 @@ ST.ScatterPlot = function() {
         var dimension_low = dimension.toLowerCase();
 
         var DOM_safe_dimension = filter_specials_( dimension_low );
-
-        //  Just for testing.
-        //console.log(filter_specials_("shape_model_initial_modes:(4,3)!@#$$%^&*(8342347-+={{{}}}}[[[[]]\\..//,,,"));
 
         var rcht = '<div class="runtime-chart' + DOM_safe_dimension + '" style="' + style + '" chart-dimension="' + dimension_low + '"> \
             <div class="top_left"> \
@@ -79,11 +76,10 @@ ST.ScatterPlot = function() {
         var one_i = inst_[dimension_low];
         $('.runtime-chart' + DOM_safe_dimension).attr('instance_num', dimension_low);
 
-
-        //one_i.xUnits()
         one_i.width(width)
     .height(height)
     .x(d3.scaleLinear().domain(domain))
+            .y(d3.scaleLinear().domain(ydomain))
     .brushOn(true)
     .symbolSize(8)
     .clipPadding(40)

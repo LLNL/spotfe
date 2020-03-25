@@ -89,11 +89,14 @@ ST.LayoutAugmenterModel = function() {
                 Assert( spec[xaxis], "The xaxis listed (" + xaxis + ") was not found in the spec.");
 
                 console.dir(spec[xaxis]);
-                var min = spec[xaxis].min;
-                var max = spec[xaxis].max;
+                var xmin = spec[xaxis].min - 1;
+                var xmax = (+spec[xaxis].max) + 1;
 
-                model[mx].xrange = [min -1, max + 1];
-                model[mx].yrange = [ spec[yaxis].min - 1, spec[yaxis].max + 1 ];
+                var ymin = spec[yaxis].min - 1;
+                var ymax = spec[yaxis].max + 1;
+
+                model[mx].xrange = [ xmin, xmax];
+                model[mx].yrange = [ ymin, ymax ];
             }
 
             //  Don't override a layout generated buckets.

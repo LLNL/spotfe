@@ -248,7 +248,7 @@ ST.ChartCollection = function() {
 
         dc.filterAll();
         dc.renderAll();
-        
+
         ST.UrlStateManager.remove_all_chart_pars();
 
         //  The horizontal charts  have a slightly different structure where the reset link

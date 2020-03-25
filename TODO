@@ -1,7 +1,7 @@
 Next:
-- use yrange calcualted, so as to add +1 to top and -1 to bottom.
+DONE - Do reset link for ScatterChart.
+DONE - use yrange calcualted, so as to add +1 to top and -1 to bottom.
 - x axis and yaxis labels.
-- Do reset link for ScatterChart.
 - Set up URL persistance for chart addition.
     * persistance for chart checked/unchecked.
     * URL bar persistance both: saving and loading.
