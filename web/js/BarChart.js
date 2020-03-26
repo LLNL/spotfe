@@ -116,9 +116,6 @@ ST.BarChart = function() {
 
         var DOM_safe_dimension = filter_specials_( dimension_low );
 
-        //  Just for testing.
-        //console.log(filter_specials_("shape_model_initial_modes:(4,3)!@#$$%^&*(8342347-+={{{}}}}[[[[]]\\..//,,,"));
-
         var rcht = '<div class="runtime-chart' + DOM_safe_dimension + '" style="' + style + '" chart-dimension="' + dimension_low + '"> \
             <div class="top_left"> \
                 <strong>' + upper_( options.title || dimension) + '</strong> \

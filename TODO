@@ -2,7 +2,7 @@ Next:
 DONE - Do reset link for ScatterChart.
 DONE - use yrange calcualted, so as to add +1 to top and -1 to bottom.
 DONE - x axis and yaxis labels.
-- set up links to cz dev environment.
+DONE - set up links to cz dev environment.
 * URL bar persistance both: saving and loading.
 - make test data.
 - Set up URL persistance for chart addition.

@@ -174,6 +174,9 @@ ST.UrlStateManager = function() {
 
             var tag = "BarChart" + z;
             remove_param_(tag);
+
+            var tag = "ScatterPlot" + z;
+            remove_param_(tag);
         }
 
         //dc.redrawAll();

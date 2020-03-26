@@ -77,15 +77,26 @@ ST.ScatterPlot = function() {
         $('.runtime-chart' + DOM_safe_dimension).attr('instance_num', dimension_low);
 
         one_i.width(width)
-    .height(height)
-    .x(d3.scaleLinear().domain(domain))
+            .height(height)
+            .x(d3.scaleLinear().domain(domain))
             .y(d3.scaleLinear().domain(ydomain))
-    .brushOn(true)
-    .symbolSize(8)
-    .clipPadding(40)
-    .yAxisLabel("This is the Y Axis!")
-    .dimension(runtime_dimension)
-    .group(runtime_group);
+            .brushOn(true)
+            .symbolSize(8)
+            .clipPadding(40)
+            .yAxisLabel("This is the Y Axis!")
+            .dimension(runtime_dimension)
+            .group(runtime_group)
+            .filterPrinter(function (filters) {
+
+                var filter = filters[0], s = '';
+                s += ST.numberFormat(filter[0]) + '% -> ' + ST.numberFormat(filter[1]) + '%';
+                return s;
+            }).on('filtered', function( chart ) {
+
+            ST.UrlStateManager.user_filtered( chart, 'ScatterPlot');
+            ST.CallSpot.load_compare();
+        });
+
     };
 
 
