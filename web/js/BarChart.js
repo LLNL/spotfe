@@ -167,9 +167,9 @@ ST.BarChart = function() {
             // Customize the filter displayed in the control span
             .filterPrinter(function (filters) {
 
-                var filter = filters[0], s = '';
-                s += ST.numberFormat(filter[0]) + '% -> ' + ST.numberFormat(filter[1]) + '%';
-                return s;
+                //var filter = filters[0], s = '';
+                //s += ST.numberFormat(filter[0]) + '% -> ' + ST.numberFormat(filter[1]) + '%';
+                return "";
             }).on('filtered', function( chart ) {
 
                 ST.UrlStateManager.user_filtered( chart, 'BarChart');

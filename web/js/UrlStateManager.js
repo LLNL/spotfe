@@ -35,6 +35,10 @@ ST.UrlStateManager = function() {
 
             } else if( type === "BarChart" ) {
                 paramValue = encodeURIComponent(range[0]) + ',' + encodeURIComponent(range[1]);
+
+            } else if( type === "ScatterPlot" ) {
+                paramValue = encodeURIComponent(range[0][0]) + ',' + encodeURIComponent(range[0][1]) + ',' +
+                             encodeURIComponent(range[1][0]) + ',' + encodeURIComponent(range[1][1]);
             }
 
             update_url_( dimension, paramValue );

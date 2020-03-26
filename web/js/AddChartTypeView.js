@@ -53,6 +53,7 @@ ST.AddChartTypeView = function() {
         $('.composite_chart_type .close').trigger('click');
     };
 
+    
     var setup_dimensions_ = function() {
 
         var dims = ST.UserPreferences.get_dimensions();

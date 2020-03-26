@@ -234,6 +234,7 @@ ST.ChartCollection = function() {
         ST.PieChart.load_filter();
         ST.LeftHorizontalBarChart.load_filter();
         ST.HorizontalBarChart.load_filter();
+        ST.ScatterPlot.load_filter();
 
         dc.redrawAll();
 

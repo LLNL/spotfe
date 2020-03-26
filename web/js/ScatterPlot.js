@@ -191,11 +191,11 @@ ST.ScatterPlot = function() {
             dc.redrawAll();
             ST.ChartCollection.bind_sort();
 
-            ST.UrlStateManager.remove_param( 'BarChart' + instance_num );
+            ST.UrlStateManager.remove_param( 'ScatterPlot' + instance_num );
         },
         load_filter: function() {
 
-            ST.UrlStateManager.load_filter( inst_, 'BarChart' );
+            ST.UrlStateManager.load_filter( inst_, 'ScatterPlot' );
         }
     }
 }();
