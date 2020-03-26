@@ -39,6 +39,7 @@ ST.AddChartTypeView = function() {
 
         var new_layout = {
             dimension: dimension,
+            title: chart_name,
             xaxis: xaxis,
             yaxis: yaxis,
             name: chart_name,

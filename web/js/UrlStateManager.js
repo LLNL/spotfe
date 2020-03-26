@@ -139,6 +139,9 @@ ST.UrlStateManager = function() {
                     var rfilter = dc.filters.RangedFilter( part0, part1);
 
                     inst.filter(rfilter);
+                } else if( type === ST.CONSTS.SCATTER_PLOT ) {
+
+
                 }
             }
         }

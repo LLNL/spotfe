@@ -3,10 +3,12 @@ DONE - Do reset link for ScatterChart.
 DONE - use yrange calcualted, so as to add +1 to top and -1 to bottom.
 DONE - x axis and yaxis labels.
 DONE - set up links to cz dev environment.
-* URL bar persistance both: saving and loading.
+* the checkbox text in Preferences.
+* URL bar persistance both: saving and loading. (URLStateManager: line 144)
 - make test data.
 - Set up URL persistance for chart addition.
     * persistance for chart checked/unchecked.
+- Investigate Adiak + Spot.
 
 
 DONE - update spotfe repo.
