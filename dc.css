@@ -3,7 +3,7 @@
   stroke-opacity: 0.5; }
 
 .chart_container .dc-chart {
-  height: 420px; }
+  height: 440px; }
 
 div.dc-chart {
   padding-top: 55px;
@@ -47,7 +47,7 @@ div.horizontal-bar-chart {
       transform: translate(0, 345px); }
 
 .scatter-chart.dc-chart .x-label {
-  bottom: 25px; }
+  bottom: 35px; }
 
 .dc-chart {
   position: relative; }
