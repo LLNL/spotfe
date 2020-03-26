@@ -93,7 +93,7 @@ ST.ScatterPlot = function() {
                 return s;
             }).on('filtered', function( chart ) {
 
-            ST.UrlStateManager.user_filtered( chart, 'ScatterPlot');
+            ST.UrlStateManager.user_filtered( chart, ST.CONSTS.SCATTER_PLOT);
             ST.CallSpot.load_compare();
         });
 
@@ -191,11 +191,11 @@ ST.ScatterPlot = function() {
             dc.redrawAll();
             ST.ChartCollection.bind_sort();
 
-            ST.UrlStateManager.remove_param( 'ScatterPlot' + instance_num );
+            ST.UrlStateManager.remove_param( ST.CONSTS.SCATTER_PLOT + instance_num );
         },
         load_filter: function() {
 
-            ST.UrlStateManager.load_filter( inst_, 'ScatterPlot' );
+            ST.UrlStateManager.load_filter( inst_, ST.CONSTS.SCATTER_PLOT );
         }
     }
 }();

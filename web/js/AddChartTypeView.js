@@ -42,18 +42,17 @@ ST.AddChartTypeView = function() {
             xaxis: xaxis,
             yaxis: yaxis,
             name: chart_name,
-            viz: "ScatterPlot",
+            viz: ST.CONSTS.SCATTER_PLOT,
             show: true
         };
 
-        ST.layout_used.charts.push( new_layout );
-
-        ST.ChartCollection.RenderChartCollection(ST.newp, ST.layout_used);
-
         $('.composite_chart_type .close').trigger('click');
+
+        ST.layout_used.charts.push( new_layout );
+        ST.ChartCollection.RenderChartCollection(ST.newp, ST.layout_used);
     };
 
-    
+
     var setup_dimensions_ = function() {
 
         var dims = ST.UserPreferences.get_dimensions();

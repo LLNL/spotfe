@@ -79,7 +79,7 @@ ST.LayoutAugmenterModel = function() {
 
             var mod = model[mx];
 
-            if( mod.viz === "ScatterPlot" ) {
+            if( mod.viz === ST.CONSTS.SCATTER_PLOT ) {
 
                 Assert( model[mx].xaxis, "model[mx] has no xaxis.  All ScatterPlots must have an xaxis designation in their layout.");
 

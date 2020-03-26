@@ -7,6 +7,10 @@ ST.Default = {
 
 ST.LAST_DAYS = "launchdate_days_ago";
 
+ST.CONSTS = {
+    "SCATTER_PLOT" : "ScatterPlot"
+};
+
 ST.Utility = function() {
 
     function getUrlVars_() {

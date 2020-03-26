@@ -36,7 +36,7 @@ ST.UrlStateManager = function() {
             } else if( type === "BarChart" ) {
                 paramValue = encodeURIComponent(range[0]) + ',' + encodeURIComponent(range[1]);
 
-            } else if( type === "ScatterPlot" ) {
+            } else if( type === ST.CONSTS.SCATTER_PLOT ) {
                 paramValue = encodeURIComponent(range[0][0]) + ',' + encodeURIComponent(range[0][1]) + ',' +
                              encodeURIComponent(range[1][0]) + ',' + encodeURIComponent(range[1][1]);
             }
@@ -131,7 +131,7 @@ ST.UrlStateManager = function() {
                         inst.filter(comp);
                     }
 
-                } else {
+                } else if( type === "BarChart" ) {
 
                     var part0 = decodeURIComponent(sp[0]);
                     var part1 = decodeURIComponent(sp[1]);
@@ -179,7 +179,7 @@ ST.UrlStateManager = function() {
             var tag = "BarChart" + z;
             remove_param_(tag);
 
-            var tag = "ScatterPlot" + z;
+            var tag = ST.CONSTS.SCATTER_PLOT + z;
             remove_param_(tag);
         }
 
