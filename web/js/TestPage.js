@@ -23,6 +23,7 @@ var TEST = function() {
         testList.push({
             "page": count,
             "localhost": show[0] === 0 ? "" : "http://localhost:8888/" + luly,
+            "cz_pascal": show[1] === 0 ? "" : "https://lc.llnl.gov/lorenz_base/dev/pascal/dcvis/" + luly,
             "cz_d2": show[1] === 0 ? "" : 'https://lc.llnl.gov/spot/dcvis/' + luly,
             "rz_d2": show[2] === 0 ? "" : 'https://rzlc.llnl.gov/spot/dcvis/' + luly,
             "cz_l2": show[3] === 0 ? "" : 'https://lc.llnl.gov/spot2/' + luly,
@@ -58,6 +59,7 @@ var TEST = function() {
             <tr>\
                 <td>Test Page</td>\
                 <td>Localhost</td>\
+                <td>CZ Pascal</td>\
                 <td>CZ D2  - Dev</td>\
                 <td>RZ D2  - Dev</td>\
                 <td>CZ L2  - Live</td>\
@@ -72,6 +74,10 @@ var TEST = function() {
             \
             <td>\
                 <a v-if="row.localhost !== \'\'" v-bind:href="row.localhost" target="_blank">{{row.page}}</a>\
+            </td>\
+            \
+            <td>\
+                <a v-if="row.cz_pascal !== \'\'" v-bind:href="row.cz_pascal" target="_blank">{{row.page}}</a>\
             </td>\
             \
             <td>\
