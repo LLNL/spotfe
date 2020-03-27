@@ -3,16 +3,16 @@ DONE - Do reset link for ScatterChart.
 DONE - use yrange calcualted, so as to add +1 to top and -1 to bottom.
 DONE - x axis and yaxis labels.
 DONE - set up links to cz dev environment.
-DONE - the checkbox text in Preferences.
-- Fix "513 selected out of 500 records" - for some reason this is now incorrect.
-DONE - Fix https://lc.llnl.gov/lorenz_base/dev/pascal/dcvis/?sf=/g/g0/pascal/time
+DONE - the checkbox text in Preferences, making sure it shows up.
+DONE - Fixed the chart not showing up (Benjamin Corbette's bug), where some charts not showing up: "numThreads min"
+    * https://lc.llnl.gov/lorenz_base/dev/pascal/dcvis/?sf=/g/g0/pascal/time
+DONE - Fix https://lc.llnl.gov/lorenz_base/dev/pascal/dcvis/?sf=/g/g0/pascal/time (adiak and spot).
     * Why are these two charts doubled up on each other? high water mark mean / high water mark min.
     * does it have anything to do with dimension, instance_num refactor?c
 * URL bar persistance both: saving and loading. (URLStateManager: line 144)
-- make test data.
+    * wait for joe to finish the persistance.
 - Set up URL persistance for chart addition.
     * persistance for chart checked/unchecked.
-- Investigate Adiak + Spot.
 
 
 DONE - update spotfe repo.
