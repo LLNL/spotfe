@@ -60,7 +60,9 @@ ST.ScatterPlot = function() {
 
         var DOM_safe_dimension = filter_specials_( dimension_low );
 
-        var rcht = '<div class="scatter-chart runtime-chart' + DOM_safe_dimension + '" style="' + style + '" chart-dimension="' + dimension_low + '"> \
+        var rcht = '<div class="scatter-chart runtime-chart' + DOM_safe_dimension + '" ' +
+            'style="' + style + '" ' +
+            'chart-dimension="' + DOM_safe_dimension + '"> \
             <div class="top_left"> \
                 <strong>' + upper_( options.title || dimension) + '</strong> \
                 <a class="reset" onclick="ST.ScatterPlot.reset(this);" style="display: none;">reset</a>\
@@ -74,7 +76,7 @@ ST.ScatterPlot = function() {
         inst_[dimension_low] = dc.scatterPlot('.runtime-chart' + DOM_safe_dimension );
 
         var one_i = inst_[dimension_low];
-        $('.runtime-chart' + DOM_safe_dimension).attr('instance_num', dimension_low);
+        $('.runtime-chart' + DOM_safe_dimension).attr('instance_num', DOM_safe_dimension);
 
         one_i.width(width)
             .height(height)

@@ -113,10 +113,10 @@ ST.BarChart = function() {
 
         var style = options.show ? "display: block;" : "display: none;";
         var dimension_low = dimension.toLowerCase();
+        var DOM_safe_dimension = ST.Utility.filter_special( dimension_low );
 
-        var DOM_safe_dimension = filter_specials_( dimension_low );
-
-        var rcht = '<div class="runtime-chart' + DOM_safe_dimension + '" style="' + style + '" chart-dimension="' + dimension_low + '"> \
+        var rcht = '<div class="runtime-chart' + DOM_safe_dimension + '" style="' + style + '" ' +
+            'chart-dimension="' + DOM_safe_dimension + '"> \
             <div class="top_left"> \
                 <strong>' + upper_( options.title || dimension) + '</strong> \
                 <a class="reset" onclick="ST.BarChart.reset(this);" style="display: none;">reset</a>\
@@ -130,7 +130,7 @@ ST.BarChart = function() {
         inst_[dimension_low] = dc.barChart('.runtime-chart' + DOM_safe_dimension );
 
         var one_i = inst_[dimension_low];
-        $('.runtime-chart' + DOM_safe_dimension).attr('instance_num', dimension_low);
+        $('.runtime-chart' + DOM_safe_dimension).attr('instance_num', DOM_safe_dimension);
 
 
         var xinput = d3.scaleLinear(0.25).domain( domain );
@@ -167,9 +167,9 @@ ST.BarChart = function() {
             // Customize the filter displayed in the control span
             .filterPrinter(function (filters) {
 
-                //var filter = filters[0], s = '';
-                //s += ST.numberFormat(filter[0]) + '% -> ' + ST.numberFormat(filter[1]) + '%';
-                return "";
+                var filter = filters[0], s = '';
+                s += ST.numberFormat(filter[0]) + '% -> ' + ST.numberFormat(filter[1]) + '%';
+                return s;
             }).on('filtered', function( chart ) {
 
                 ST.UrlStateManager.user_filtered( chart, 'BarChart');
@@ -229,19 +229,6 @@ ST.BarChart = function() {
         one_i.yAxis().ticks( options["y-ticks"] || 5);
 
         //inst_num_++;
-    };
-
-
-    //  User generated IDs sometimes have special characters which mess up the DOM parser.
-    //  For instance: Shape_model_initial_modes:(4,3)  This key caused the following error:
-    //  "DOMException: Failed to execute 'querySelector' on 'Document': 'runtime-chartshape_model_initial_modes:(4,3)' is not a valid selector.
-    //
-    //  SOLUTION:
-    //      Filter out those pesky special characters
-    //
-    var filter_specials_ = function( user_generated ) {
-
-        return user_generated.replace(/[^a-z0-9_]+/gi, '');
     };
 
 

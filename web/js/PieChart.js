@@ -13,10 +13,13 @@ ST.PieChart = function() {
         var dimension_low = spec.dimension.toLowerCase();
         dimension_low = dimension_low.replace('.', '');
 
+        var DOM_safe_dimension = ST.Utility.filter_special( dimension_low );
+
         var style = spec.show ? "display: block;" : "display: none;";
 
-        var rcht =     '<div instance_num="' + dimension_low + '"  ' +
-            'style="' + style + '" class="quarter-chart-' + dimension_low + '"  chart-dimension="' + dimension_low + '">  \
+        var rcht =     '<div instance_num="' + DOM_safe_dimension + '"  ' +
+            'style="' + style + '" class="quarter-chart-' + DOM_safe_dimension + '"  ' +
+            'chart-dimension="' + DOM_safe_dimension + '">  \
         <strong>' + spec.title + '</strong> \
         <a class="reset pie_reset"  style="display: none;">reset</a> \
         <div class="clearfix"></div> \
@@ -44,8 +47,8 @@ ST.PieChart = function() {
 
         var colors = ST.Utility.get_colors( spec.dimension, true );
 
-        quarterChart[dimension_low] = dc.pieChart('.quarter-chart-' + dimension_low );
-        quarterChart[dimension_low] /* dc.pieChart('#quarter-chart', 'chartGroup') */
+        quarterChart[DOM_safe_dimension] = dc.pieChart('.quarter-chart-' + DOM_safe_dimension );
+        quarterChart[DOM_safe_dimension] /* dc.pieChart('#quarter-chart', 'chartGroup') */
             .width( width )
             .height(height )
             .radius( radius )

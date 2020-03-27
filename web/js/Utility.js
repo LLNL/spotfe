@@ -297,8 +297,23 @@ ST.Utility = function() {
     };
 
 
+    //  User generated IDs sometimes have special characters which mess up the DOM parser.
+    //  For instance: Shape_model_initial_modes:(4,3)  This key caused the following error:
+    //  "DOMException: Failed to execute 'querySelector' on 'Document': 'runtime-chartshape_model_initial_modes:(4,3)' is not a valid selector.
+    //
+    //  SOLUTION:
+    //      Filter out those pesky special characters
+    //
+    var filter_specials_ = function( user_generated ) {
+
+        user_generated = user_generated.replace(/ /gi, '_');
+        return user_generated.replace(/[^a-z0-9_]+/gi, '');
+    };
+
+
     return {
         strip: strip_,
+        filter_special: filter_specials_,
         get_prefix: get_prefix_,
         get_default_machine: get_default_machine_,
         check_error: check_error_,

@@ -9,14 +9,16 @@ ST.HorizontalBarChart = function() {
 
         var dimension_low = options.dimension.toLowerCase();
         var style = options.show ? "display: block;" : "display: none;";
-        var className = 'horizontal-bar-chart-' + dimension_low;
+        var DOM_safe_dimension = ST.Utility.filter_special( dimension_low );
+        var className = 'horizontal-bar-chart-' + DOM_safe_dimension;
         var axis_chart_name = className + '_bar';
 
         var rcht = '<div class="outer_holder"> \
         <strong class="options_title">' + options.title + '</strong> \
         <a class="reset horiz_reset"  style="display: none;">reset</a> \
-            <div instance_num="' + dimension_low + '"  ' +
-            'style="' + style + '" class="horizontal-bar-chart ' + className + '"  chart-dimension="' + dimension_low + '">  \
+            <div instance_num="' + DOM_safe_dimension + '"  ' +
+            'style="' + style + '" class="horizontal-bar-chart ' + className + '"  ' +
+            'chart-dimension="' + DOM_safe_dimension + '">  \
         <div class="clearfix"></div> \
     </div>\
     <div class="' + axis_chart_name + ' the_bar"></div>' +
@@ -27,7 +29,7 @@ ST.HorizontalBarChart = function() {
 
         axis_chart_ = dc.rowChart('.' + axis_chart_name);
 
-        stackedChart_[dimension_low] = dc.rowChart('.' + className );
+        stackedChart_[DOM_safe_dimension] = dc.rowChart('.' + className );
         var colors = [
             '#9ecae1'
         ];
@@ -56,7 +58,7 @@ ST.HorizontalBarChart = function() {
         // on other charts within the same chart group.
         // <br>API: [Row Chart](https://github.com/dc-js/dc.js/blob/master/web/docs/api-latest.md#row-chart)
 
-        stackedChart_[dimension_low]
+        stackedChart_[DOM_safe_dimension]
             .width(options.width)
             .height(options.height)
             .margins({top: 20, left: 10, right: 10, bottom: 20})
