@@ -100,7 +100,7 @@ ST.ScatterPlot = function() {
         });
 
     };
-    
+
 
     String.prototype.hashCode = function() {
 

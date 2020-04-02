@@ -58,8 +58,11 @@ ST.UrlStateManager = function() {
 
     var format_url_piece_ = function( n ) {
 
+        //  toFixed needs an actual number, so change type from string to number.
+        n = +n;
+
         var places = +n < 1 ? 5 : 2;
-        if( +n > 100 ) {
+        if( n > 100 ) {
             places = 0;
         }
 
@@ -153,13 +156,20 @@ ST.UrlStateManager = function() {
                     var part1 = decodeURIComponent(sp[1]);
 
                     var rfilter = dc.filters.RangedFilter( part0, part1);
-
                     inst.filter(rfilter);
+
                 } else if( type === ST.CONSTS.SCATTER_PLOT ) {
 
                     console.dir(sp);
 
+                    var double_arr = [
+                        [decodeURIComponent(sp[0]), decodeURIComponent(sp[1])],
+                        [decodeURIComponent(sp[2]), decodeURIComponent(sp[3])]
+                    ];
 
+                    //  https://dc-js.github.io/dc.js/docs/html/filters.RangedTwoDimensionalFilter.html
+                    var pfilter = dc.filters.RangedTwoDimensionalFilter(double_arr);
+                    inst.filter(pfilter);
                 }
             }
         }
