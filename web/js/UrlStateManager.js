@@ -37,8 +37,14 @@ ST.UrlStateManager = function() {
                 paramValue = encodeURIComponent(range[0]) + ',' + encodeURIComponent(range[1]);
 
             } else if( type === ST.CONSTS.SCATTER_PLOT ) {
-                paramValue = encodeURIComponent(range[0][0]) + ',' + encodeURIComponent(range[0][1]) + ',' +
-                             encodeURIComponent(range[1][0]) + ',' + encodeURIComponent(range[1][1]);
+
+                var ran0 = format_url_piece_( range[0][0] );
+                var ran1 = format_url_piece_( range[0][1] );
+                var ran2 = format_url_piece_( range[1][0] );
+                var ran3 = format_url_piece_( range[1][1] );
+
+                paramValue = encodeURIComponent(ran0) + ',' + encodeURIComponent(ran1) + ',' +
+                             encodeURIComponent(ran2) + ',' + encodeURIComponent(ran3);
             }
 
             update_url_( dimension, paramValue );
@@ -47,6 +53,17 @@ ST.UrlStateManager = function() {
             //  This means they unclicked all the filters for that one.
             remove_param_( dimension );
         }
+    };
+
+
+    var format_url_piece_ = function( n ) {
+
+        var places = +n < 1 ? 5 : 2;
+        if( +n > 100 ) {
+            places = 0;
+        }
+
+        return n.toFixed(places);
     };
 
 
@@ -125,6 +142,7 @@ ST.UrlStateManager = function() {
                 if( type === "PieChart" || type === "HorizontalBarChart" ) {
 
                     console.dir(sp);
+
                     for( var y=0; y < sp.length; y++ ) {
 
                         var comp = decodeURIComponent(sp[y]);
