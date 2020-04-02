@@ -141,8 +141,6 @@ ST.UrlStateManager = function() {
 
                 if( type === "PieChart" || type === "HorizontalBarChart" ) {
 
-                    console.dir(sp);
-
                     for( var y=0; y < sp.length; y++ ) {
 
                         var comp = decodeURIComponent(sp[y]);
@@ -158,6 +156,8 @@ ST.UrlStateManager = function() {
 
                     inst.filter(rfilter);
                 } else if( type === ST.CONSTS.SCATTER_PLOT ) {
+
+                    console.dir(sp);
 
 
                 }

@@ -58,7 +58,7 @@ ST.ScatterPlot = function() {
         var style = options.show ? "display: block;" : "display: none;";
         var dimension_low = dimension.toLowerCase();
 
-        var DOM_safe_dimension = filter_specials_( dimension_low );
+        var DOM_safe_dimension = ST.Utility.filter_special( dimension_low );
 
         var rcht = '<div class="scatter-chart runtime-chart' + DOM_safe_dimension + '" ' +
             'style="' + style + '" ' +
@@ -100,20 +100,7 @@ ST.ScatterPlot = function() {
         });
 
     };
-
-
-    //  User generated IDs sometimes have special characters which mess up the DOM parser.
-    //  For instance: Shape_model_initial_modes:(4,3)  This key caused the following error:
-    //  "DOMException: Failed to execute 'querySelector' on 'Document': 'runtime-chartshape_model_initial_modes:(4,3)' is not a valid selector.
-    //
-    //  SOLUTION:
-    //      Filter out those pesky special characters
-    //
-    var filter_specials_ = function( user_generated ) {
-
-        return user_generated.replace(/[^a-z0-9_]+/gi, '');
-    };
-
+    
 
     String.prototype.hashCode = function() {
 
@@ -126,59 +113,6 @@ ST.ScatterPlot = function() {
         }
         return hash;
     };
-
-
-    var get_middling_ = function( v ) {
-
-        var spli = v.split('-');
-        var before_dash = +spli[0];
-        var after_dash = +spli[1];
-        var avg = (before_dash + after_dash) / 2;
-
-        return round2_(before_dash);
-    };
-
-
-    var round2_ = function( i ) {
-        return Math.round( i * 10000 ) / 10000;
-    };
-
-
-    var commas_ = function(x) {
-        var parts = x.toString().split(".");
-        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        return parts.join(".");
-    };
-
-
-    var get_dec_v_ = function(v, use_buckets, use_middling, is_date ) {
-
-        if( is_date ) {
-            return ST.Utility.format_date(v);
-        }
-
-        if( use_buckets ) {
-            return use_middling ? get_middling_(v) : commas_(v);
-        }
-
-        for( var x=13; x < 30; x++ ) {
-
-            v = +v;
-
-            var low = Math.pow( 10, x );
-            var lowp = Math.pow( 10, x + 1 );
-
-            if ( v >= low && v < lowp ) {
-
-                var mv = parseInt(v / low );
-
-                return mv + 'e' + x;
-            }
-        }
-
-        return commas_(v);
-    };
-
 
 
     return {
