@@ -37,8 +37,8 @@ ST.AddChartTypeView = function() {
 
         var dimension = xaxis + "_vs_" + yaxis;
 
-        
-        var new_layout = {
+
+        var new_layout2 = {
             dimension: dimension,
             title: chart_name,
             xaxis: xaxis,
@@ -47,6 +47,8 @@ ST.AddChartTypeView = function() {
             viz: ST.CONSTS.SCATTER_PLOT,
             show: true
         };
+
+        var new_layout = $.extend({}, new_layout2 );
 
         $('.composite_chart_type .close').trigger('click');
 
