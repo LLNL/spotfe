@@ -20,6 +20,10 @@ ST.ChartCollection = function() {
 
     var RenderChartCollection = function (the_data, layout_spec) {
 
+        if( layout_spec.scatterplots ) {
+            layout_spec.charts = layout_spec.charts.concat(layout_spec.scatterplots);
+        }
+
         console.dir(the_data);
         var GLOB_DAT = the_data;
         //  ST.MakeNiceData.make( the_data );

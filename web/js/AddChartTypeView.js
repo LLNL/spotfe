@@ -37,6 +37,7 @@ ST.AddChartTypeView = function() {
 
         var dimension = xaxis + "_vs_" + yaxis;
 
+        
         var new_layout = {
             dimension: dimension,
             title: chart_name,
@@ -51,6 +52,8 @@ ST.AddChartTypeView = function() {
 
         ST.layout_used.charts.push( new_layout );
         ST.ChartCollection.RenderChartCollection(ST.newp, ST.layout_used);
+
+        ST.graph.addScatterplot(new_layout);
     };
 
 
