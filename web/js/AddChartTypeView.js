@@ -37,7 +37,8 @@ ST.AddChartTypeView = function() {
 
         var dimension = xaxis + "_vs_" + yaxis;
 
-        var new_layout = {
+
+        var new_layout2 = {
             dimension: dimension,
             title: chart_name,
             xaxis: xaxis,
@@ -47,10 +48,14 @@ ST.AddChartTypeView = function() {
             show: true
         };
 
+        var new_layout = $.extend({}, new_layout2 );
+
         $('.composite_chart_type .close').trigger('click');
 
         ST.layout_used.charts.push( new_layout );
         ST.ChartCollection.RenderChartCollection(ST.newp, ST.layout_used);
+
+        ST.graph.addScatterplot(new_layout);
     };
 
 

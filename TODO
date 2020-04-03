@@ -9,10 +9,9 @@ DONE - Fixed the chart not showing up (Benjamin Corbette's bug), where some char
 DONE - Fix https://lc.llnl.gov/lorenz_base/dev/pascal/dcvis/?sf=/g/g0/pascal/time (adiak and spot).
     * Why are these two charts doubled up on each other? high water mark mean / high water mark min.
     * does it have anything to do with dimension, instance_num refactor?c
-* URL bar persistance both: saving and loading. (URLStateManager: line 144)
-    * wait for joe to finish the persistance.
-- Set up URL persistance for chart addition.
-    * persistance for chart checked/unchecked.
+TEST - URL bar persistance both: saving and loading. (URLStateManager: line 144)
+- Integrate with Joe's URL persistance for chart checked/unchecked.
+
 
 
 DONE - update spotfe repo.
