@@ -20,13 +20,24 @@ ST.AddChartTypeView = function() {
 
     var setup_defaults_ = function () {
 
-        $('.xaxis select').val( "problem_size" );
-        $('.yaxis select').val("jobsize");
-        $('.chart_name').val("Problem size vs Jobsize");
+        $('.xaxis select').val( "problem_size" ).change(update_chart_name_);
+        $('.yaxis select').val("jobsize").change(update_chart_name_);
+        $('.composite_chart_type .chart_name').val("Problem size vs Jobsize");
     };
 
-    var submit_ = function() {
 
+    var update_chart_name_ = function() {
+
+        var xaxis = $('.xaxis select').val();
+        var yaxis = $('.yaxis select').val();
+
+        var name = xaxis + " vs " + yaxis;
+
+        $('.composite_chart_type .chart_name').val( name );
+    };
+
+
+    var submit_ = function() {
 
         var chart_name = $('.chart_name').val();
         var xaxis = $('.xaxis select').val();

@@ -1,4 +1,11 @@
 Next:
+DONE - David's Paper - read it and mention if anything is unclear.
+- select drop downs should update chart type name.
+- Selecting nothing will put things in a weird state.
+- figure of merit on y-axis Fix: it's not showing the entire width.
+- launchDate * dates on y-axis need to show as dates.
+
+
 DONE - Do reset link for ScatterChart.
 DONE - use yrange calcualted, so as to add +1 to top and -1 to bottom.
 DONE - x axis and yaxis labels.
@@ -9,20 +16,19 @@ DONE - Fixed the chart not showing up (Benjamin Corbette's bug), where some char
 DONE - Fix https://lc.llnl.gov/lorenz_base/dev/pascal/dcvis/?sf=/g/g0/pascal/time (adiak and spot).
     * Why are these two charts doubled up on each other? high water mark mean / high water mark min.
     * does it have anything to do with dimension, instance_num refactor?c
-TEST - URL bar persistance both: saving and loading. (URLStateManager: line 144)
-- Integrate with Joe's URL persistance for chart checked/unchecked.
-
+DONE - Integrate with Joe's URL persistance for chart checked/unchecked.
+TEST - URL bar persistance and all ScatterChart capabilities
 
 
 DONE - update spotfe repo.
 DONE - update spotbe repo
 
+* make sym link from spot.py to the live/spot.py
+    * make our app point to dev/spot.py OR live/spot.py and Test!
 - git submodules: Caliper and Hatchet. (there are repos but not submodueles, yet)
     * Caliper build script will generate caliper-install
 - make two directories: dev, live underneath /usr/gapps/spot
     * put spot.py in a lower area, folder.
-    * make sym link from spot.py to the live/spot.py
-    * get rid of another_spot.py, etc.  joe.py, etc.
     * do it in RZ as well.
 - change neame of hatchet-v1.0 to hatchet and fix any broken links
 - venv script for generating the virtual environment.
