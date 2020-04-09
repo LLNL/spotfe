@@ -1,7 +1,7 @@
 Next:
 DONE - David's Paper - read it and mention if anything is unclear.
-- select drop downs should update chart type name.
-- Selecting nothing will put things in a weird state.
+DONE - select drop downs should update chart type name.
+DONE - Selecting nothing will put things in a weird state.
 - figure of merit on y-axis Fix: it's not showing the entire width.
 - launchDate * dates on y-axis need to show as dates.
 

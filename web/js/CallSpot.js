@@ -349,7 +349,13 @@ ST.CallSpot = function() {
 
         var akeys = keys.split(' ');
 
-        ST.graph.compare( akeys );
+        try {
+            ST.graph.compare(akeys);
+        } catch( e ) {
+            //  we end up here when akeys is empty, which happens when the user
+            //  doesn't select anything in the ScatterPlot.
+            console.dir(e);
+        }
     };
 
 
