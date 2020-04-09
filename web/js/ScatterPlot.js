@@ -99,19 +99,15 @@ ST.ScatterPlot = function() {
             ST.CallSpot.load_compare();
         });
 
-    };
+        // Customize axes
+        var xticks = one_i.xAxis().tickFormat(
+            function (v) {
 
+                var is_date = options.type === "date";
+                //v = get_dec_v_( v, use_buckets, options.use_middling, is_date );
 
-    String.prototype.hashCode = function() {
-
-        var hash = 0, i, chr;
-        if (this.length === 0) return hash;
-        for (i = 0; i < this.length; i++) {
-            chr   = this.charCodeAt(i);
-            hash  = ((hash << 5) - hash) + chr;
-            hash |= 0; // Convert to 32bit integer
-        }
-        return hash;
+                return v + (options.xsuffix !== undefined ? options.xsuffix : '');
+            });
     };
 
 

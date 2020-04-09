@@ -82,6 +82,7 @@ ST.UserPreferences = function() {
         $('.plus_icon').unbind('click').bind('click', ST.AddChartTypeView.render );
     };
 
+    var axis_selection_types = ["double", "long", "int", "date"];
 
     var get_dimensions_ = function() {
 
@@ -93,7 +94,7 @@ ST.UserPreferences = function() {
             var chart = charts[x];
             var dlc = chart.dimension.toLowerCase();
 
-            if( chart.type === "double" || chart.type === "long" || chart.type === "int" ) {
+            if( axis_selection_types.indexOf(chart.type) > -1 ) {
                 dimensions.push(dlc);
             }
         }
