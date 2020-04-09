@@ -63,10 +63,30 @@ ST.AddChartTypeView = function() {
 
         $('.composite_chart_type .close').trigger('click');
 
-        ST.layout_used.charts.push( new_layout );
-        ST.ChartCollection.RenderChartCollection(ST.newp, ST.layout_used);
+        if( validate_have_( ST.layout_used, new_layout )) {
 
-        ST.graph.addScatterplot(new_layout);
+            var mess = "You already have a chart with x-axis: <b>" + xaxis + "</b> and y-axis: <b>"+ yaxis + "</b>";
+            ReusableView.alert("Warning", mess );
+        } else {
+
+            ST.layout_used.charts.push(new_layout);
+            ST.ChartCollection.RenderChartCollection(ST.newp, ST.layout_used);
+
+            ST.graph.addScatterplot(new_layout);
+        }
+    };
+
+
+    var validate_have_ = function( ls, new_layout ) {
+
+        for( var y=0; y < ls.charts.length; y++ ) {
+
+            var ch = ls.charts[y];
+            if( ch.xaxis === new_layout.xaxis && ch.yaxis === new_layout.yaxis ) {
+                return true;
+            }
+        }
+        return false;
     };
 
 
