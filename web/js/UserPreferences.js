@@ -91,9 +91,11 @@ ST.UserPreferences = function() {
         for( var x=0; x < charts.length; x++ ) {
 
             var chart = charts[x];
-
             var dlc = chart.dimension.toLowerCase();
-            dimensions.push(dlc);
+
+            if( chart.type === "double" || chart.type === "long" || chart.type === "int" ) {
+                dimensions.push(dlc);
+            }
         }
         return dimensions;
     };
