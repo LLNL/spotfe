@@ -18,11 +18,35 @@ ST.ChartCollection = function() {
     //  Create Crossfilter Dimensions and Groups
     //  See the [crossfilter API](https://github.com/square/crossfilter/wiki/API-Reference) for reference.
 
+    var amend_charts_ = function( ls ) {
+
+        if( ls.scatterplots ) {
+
+            var dims_present = {};
+            for( var x=0;  x < ls.charts.length; x++ ) {
+
+                var sp = ls.charts[x];
+                dims_present[ sp.dimension.toLowerCase() ] = 1;
+            }
+
+            console.dir(dims_present);
+
+            for( var z=0; z < ls.scatterplots.length; z++ ) {
+
+                var sp2 = ls.scatterplots[z];
+
+                if( !dims_present[sp2.dimension] ) {
+                    ls.charts = ls.charts.concat(sp2);
+                }
+            }
+
+        }
+    };
+
+
     var RenderChartCollection = function (the_data, layout_spec) {
 
-        if( layout_spec.scatterplots ) {
-            layout_spec.charts = layout_spec.charts.concat(layout_spec.scatterplots);
-        }
+        amend_charts_( layout_spec );
 
         console.dir(the_data);
         var GLOB_DAT = the_data;
