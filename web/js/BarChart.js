@@ -95,10 +95,6 @@ ST.BarChart = function() {
                 var bw = Math.floor(d / binWidth);
                 var mbw = bw * binWidth;
 
-                if( options.dimension === "tiny_nums") {
-                    console.log("d="+d + "   bw="+ bw + "   mbw=" + mbw);
-                }
-
                 return mbw;
             } );
         } else {
