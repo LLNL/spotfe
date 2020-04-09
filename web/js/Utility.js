@@ -279,7 +279,7 @@ ST.Utility = function() {
             minutes = "0" + minutes;
         }
 
-        var formattedTime = year + '-' + mon + '-' + day + "   " + hour + ":" + minutes;
+        var formattedTime = mon + '-' + day + "   " + hour + ":" + minutes;
         return formattedTime;
     };
 

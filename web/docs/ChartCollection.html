@@ -63,7 +63,35 @@ ST.ChartCollection = <span class="hljs-function"><span class="hljs-keyword">func
             </div>
             
             <div class="content"><div class='highlight'><pre>
+    <span class="hljs-keyword">var</span> amend_charts_ = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> ls </span>) </span>{
+
+        <span class="hljs-keyword">if</span>( ls.scatterplots ) {
+
+            <span class="hljs-keyword">var</span> dims_present = {};
+            <span class="hljs-keyword">for</span>( <span class="hljs-keyword">var</span> x=<span class="hljs-number">0</span>;  x &lt; ls.charts.length; x++ ) {
+
+                <span class="hljs-keyword">var</span> sp = ls.charts[x];
+                dims_present[ sp.dimension.toLowerCase() ] = <span class="hljs-number">1</span>;
+            }
+
+            <span class="hljs-built_in">console</span>.dir(dims_present);
+
+            <span class="hljs-keyword">for</span>( <span class="hljs-keyword">var</span> z=<span class="hljs-number">0</span>; z &lt; ls.scatterplots.length; z++ ) {
+
+                <span class="hljs-keyword">var</span> sp2 = ls.scatterplots[z];
+
+                <span class="hljs-keyword">if</span>( !dims_present[sp2.dimension] ) {
+                    ls.charts = ls.charts.concat(sp2);
+                }
+            }
+
+        }
+    };
+
+
     <span class="hljs-keyword">var</span> RenderChartCollection = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">the_data, layout_spec</span>) </span>{
+
+        amend_charts_( layout_spec );
 
         <span class="hljs-built_in">console</span>.dir(the_data);
         <span class="hljs-keyword">var</span> GLOB_DAT = the_data;</pre></div></div>

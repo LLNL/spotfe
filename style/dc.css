@@ -47,7 +47,7 @@ div.horizontal-bar-chart {
       transform: translate(0, 345px); }
 
 .scatter-chart.dc-chart .x-label {
-  bottom: 35px; }
+  bottom: 10px; }
 
 .dc-chart {
   position: relative; }
@@ -58,7 +58,7 @@ div.horizontal-bar-chart {
   .dc-chart .x-label {
     position: absolute;
     left: 0;
-    bottom: -15px;
+    bottom: 10px;
     width: 400px;
     text-align: center; }
   .dc-chart .y-label {
