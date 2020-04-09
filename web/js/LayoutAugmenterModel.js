@@ -160,11 +160,26 @@ ST.LayoutAugmenterModel = function() {
         return i; //Math.round( i * 10 ) / 10;
     };
 
+    var get_type_ = function( dimension ) {
+
+        for( var x=0; x < model_.length; x++ ) {
+
+            var mod = model_[x];
+
+            if( dimension === mod.dimension ) {
+                return mod.type;
+            }
+        }
+
+        return "dimension_not_found";
+    };
+
 
     return {
         get: get_,
         get_model: function() {
             return model_;
-        }
+        },
+        get_type: get_type_
     }
 }();

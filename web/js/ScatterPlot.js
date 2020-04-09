@@ -103,8 +103,12 @@ ST.ScatterPlot = function() {
         var xticks = one_i.xAxis().tickFormat(
             function (v) {
 
-                var is_date = options.type === "date";
-                //v = get_dec_v_( v, use_buckets, options.use_middling, is_date );
+                var xax_type = ST.LayoutAugmenterModel.get_type( options.xaxis );
+                var is_date = xax_type === "date";
+
+                if( is_date ) {
+                    return ST.Utility.format_date(v);
+                }
 
                 return v + (options.xsuffix !== undefined ? options.xsuffix : '');
             });
