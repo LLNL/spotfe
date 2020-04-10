@@ -268,7 +268,7 @@ ST.Utility = function() {
         var date = new Date(d*1000);
         var month = parseInt(date.getMonth());
         var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-        var mon = months[month];
+        var mon = month + 1; //months[month];
         var day = date.getDate();
         var year = date.getFullYear(); //  -2000
 
@@ -279,7 +279,7 @@ ST.Utility = function() {
             minutes = "0" + minutes;
         }
 
-        var formattedTime = mon + '-' + day + "   " + hour + ":" + minutes;
+        var formattedTime = mon + '/' + day + "   " + hour + ":" + minutes;
         return formattedTime;
     };
 

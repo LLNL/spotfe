@@ -47,7 +47,7 @@ div.horizontal-bar-chart {
       transform: translate(0, 345px); }
 
 .scatter-chart.dc-chart .x-label {
-  bottom: 10px; }
+  bottom: 26px; }
 
 .dc-chart {
   position: relative; }
@@ -55,22 +55,32 @@ div.horizontal-bar-chart {
     position: absolute;
     top: 30px;
     left: 0; }
+    .dc-chart .top_left strong {
+      font-size: 15px; }
   .dc-chart .x-label {
     position: absolute;
     left: 0;
-    bottom: 10px;
+    bottom: 26px;
     width: 400px;
-    text-align: center; }
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px; }
+  .dc-chart .x-label:first-letter {
+    text-transform: capitalize; }
   .dc-chart .y-label {
     position: absolute;
     left: -190px;
-    bottom: 185px;
+    bottom: 205px;
     text-align: center;
     -webkit-transform: rotate(-90deg);
     -moz-transform: rotate(-90deg);
     -o-transform: rotate(-90deg);
     -ms-transform: rotate(-90deg);
-    transform: rotate(-90deg); }
+    transform: rotate(-90deg);
+    font-size: 14px;
+    font-weight: bold; }
+  .dc-chart .y-label:first-letter {
+    text-transform: capitalize; }
   .dc-chart rect.bar {
     stroke: none;
     cursor: pointer; }

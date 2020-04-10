@@ -98,7 +98,7 @@ div.horizontal-bar-chart {
 
 .scatter-chart.dc-chart {
     .x-label {
-        bottom: 10px;
+        bottom: 26px;
     }
 }
 
@@ -110,26 +110,42 @@ div.horizontal-bar-chart {
         position: absolute;
         top: 30px;
         left: 0;
+
+        strong {
+            font-size: 15px;
+        }
     }
 
     .x-label {
         position: absolute;
         left: 0;
-        bottom: 10px;
+        bottom: 26px;
         width: 400px;
         text-align: center;
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    .x-label:first-letter {
+        text-transform: capitalize;
     }
 
     .y-label {
         position: absolute;
         left: -190px;
-        bottom: 185px;
+        bottom: 205px;
         text-align: center;
         -webkit-transform: rotate(-90deg);
         -moz-transform: rotate(-90deg);
         -o-transform: rotate(-90deg);
         -ms-transform: rotate(-90deg);
         transform: rotate(-90deg);
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .y-label:first-letter {
+        text-transform: capitalize;
     }
 
     rect {
