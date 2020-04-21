@@ -120,12 +120,12 @@ ST.ScatterPlot = function() {
 
             if( is_date ) {
 
-                var opts = {"stack_vertical": true};
+                var opts = {"only_first_part": true};
                 return ST.Utility.format_date(v, opts);
             }
 
             var v = +v;
-            
+
             if( v >= 10000 ) {
                 return ST.Utility.round_exp(v);
             }

@@ -263,7 +263,9 @@ ST.Utility = function() {
     };
 
 
-    var format_date_ = function( d ) {
+    var format_date_ = function( d, opts ) {
+
+        opts = opts || {};
 
         var date = new Date(d*1000);
         var month = parseInt(date.getMonth());
@@ -279,8 +281,11 @@ ST.Utility = function() {
             minutes = "0" + minutes;
         }
 
-        var formattedTime = mon + '/' + day + "   " + hour + ":" + minutes;
-        return formattedTime;
+        var first_part = mon + '/' + day;
+        var break_str = "   ";
+        var formattedTime = first_part + break_str + hour + ":" + minutes;
+
+        return opts.only_first_part ? first_part : formattedTime;
     };
 
     var to_array_ = function( obj ) {
