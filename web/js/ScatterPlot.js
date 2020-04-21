@@ -100,7 +100,7 @@ ST.ScatterPlot = function() {
         });
 
         // Customize axes
-        var xticks = one_i.xAxis().tickFormat(
+        one_i.xAxis().tickFormat(
             function (v) {
 
                 var xax_type = ST.LayoutAugmenterModel.get_type( options.xaxis );
@@ -112,6 +112,15 @@ ST.ScatterPlot = function() {
 
                 return v + (options.xsuffix !== undefined ? options.xsuffix : '');
             });
+
+        one_i.yAxis().tickFormat( function(v) {
+
+            var v = +v;
+            if( v >= 10000 ) {
+                return ST.Utility.round_exp(v);
+            }
+            return v;
+        });
     };
 
 

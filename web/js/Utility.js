@@ -324,9 +324,22 @@ ST.Utility = function() {
         return user_generated.replace(/[^a-z0-9_]+/gi, '');
     };
 
+    var round_exp_ = function( n, places ) {
+
+        places = places || 0;
+
+        if( n < 10 ) {
+            var num = Math.round(n*10)/10;
+            var suff = places === 0 ? "" : " e" + places;
+            return num + suff;
+        }
+
+        return round_exp_( n/10, ++places );
+    };
 
     return {
         strip: strip_,
+        round_exp: round_exp_,
         filter_special: filter_specials_,
         get_prefix: get_prefix_,
         get_default_machine: get_default_machine_,

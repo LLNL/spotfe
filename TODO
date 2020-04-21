@@ -2,12 +2,14 @@ Next:
 DONE - David's Paper - read it and mention if anything is unclear.
 DONE - select drop downs should update chart type name.
 DONE - Selecting nothing will put things in a weird state.
-DONE - launchDate * dates on y-axis need to show as dates.
+DONE - launchDate * dates on x-axis need to show as dates.
 DONE - unchecking things causes problems -> not reflecting correctly on FE
 DONE - Prevent the user from adding a chart that they already have
-- move x-axis label down if it's a date type.
-- check back with Joe about uncheck persistance.
+DONE - move x-axis label down if it's a date type.
+DONE - persistance integration complete.
 - figure of merit on y-axis Fix: it's not showing the entire width.
+- launchDate on y-axis need to show as dates.
+- y-axis be able to show very long numbers as abbreviated.
 
 
 Next:
