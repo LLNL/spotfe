@@ -115,7 +115,17 @@ ST.ScatterPlot = function() {
 
         one_i.yAxis().tickFormat( function(v) {
 
+            var yax_type = ST.LayoutAugmenterModel.get_type( options.yaxis );
+            var is_date = yax_type === "date";
+
+            if( is_date ) {
+
+                var opts = {"stack_vertical": true};
+                return ST.Utility.format_date(v, opts);
+            }
+
             var v = +v;
+            
             if( v >= 10000 ) {
                 return ST.Utility.round_exp(v);
             }
