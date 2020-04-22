@@ -10,10 +10,31 @@ DONE - persistance integration complete.
 DONE - y-axis be able to show very long numbers as abbreviated.
 DONE - figure of merit on y-axis Fix: it's not showing the entire width.
 DONE - launchDate on y-axis need to show as dates.
+DONE - documentation and learnings on Permissions and deployment issues.
 
 
 Next:
-- Should we have a delete scatterChart type?
+- target 2.2 release
+    * live/spot.py fix.
+    * Delete button
+
+- Pop up dialog for a chart: Edit stuff
+    * export to vector graphics to be downloaded (kenny's request), for a slideshow.
+    * possibly Delete button is here
+    * ability to change name
+    * ability to change X axis or y axis
+        - research this.
+    * future configurations
+    * ranges on the axis.
+
+- Should we have a delete new checkbox scatterChart type?
+- Modify link page to include padebug directories and machines.
+- Deploy: /usr/gapps/spot/live/spot.py (verify in code this new /live/spot.py is there)
+    * can we deprecate the old /usr/gapps/spot/spot.py ?
+- if Strings are easy to do, look into doing.
+- Error messaging:
+- LTRAIN - 1 hour.
+
 
 
 DONE - Do reset link for ScatterChart.

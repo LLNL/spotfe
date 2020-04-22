@@ -16,18 +16,24 @@ var TEST = function() {
 
     var testList = [];
 
-    var add_test_ = function( count, luly, show ) {
+    var add_test_ = function( count, luly, show, machines ) {
 
         show = show || [];
+        machines = machines || [];
+        machines[0] = machines[0] || "";
+        machines[1] = machines[1] || "";
+        machines[2] = machines[2] || "";
+        machines[3] = machines[3] || "";
+        machines[4] = machines[4] || "";
 
         testList.push({
             "page": count,
-            "localhost": show[0] === 0 ? "" : "http://localhost:8888/" + luly,
-            "cz_pascal": show[1] === 0 ? "" : "https://lc.llnl.gov/lorenz_base/dev/pascal/dcvis/" + luly,
-            "cz_d2": show[1] === 0 ? "" : 'https://lc.llnl.gov/spot/dcvis/' + luly,
-            "rz_d2": show[2] === 0 ? "" : 'https://rzlc.llnl.gov/spot/dcvis/' + luly,
-            "cz_l2": show[3] === 0 ? "" : 'https://lc.llnl.gov/spot2/' + luly,
-            "rz_l2": show[4] === 0 ? "" : 'https://rzlc.llnl.gov/spot2/' + luly
+            "localhost": show[0] === 0 ? "" : "http://localhost:8888/" + luly + machines[0],
+            "cz_pascal": show[1] === 0 ? "" : "https://lc.llnl.gov/lorenz_base/dev/pascal/dcvis/" + luly + machines[1],
+            "cz_d2": show[1] === 0 ? "" : 'https://lc.llnl.gov/spot/dcvis/' + luly + machines[1],
+            "rz_d2": show[2] === 0 ? "" : 'https://rzlc.llnl.gov/spot/dcvis/' + luly + machines[2],
+            "cz_l2": show[3] === 0 ? "" : 'https://lc.llnl.gov/spot2/' + luly + machines[3],
+            "rz_l2": show[4] === 0 ? "" : 'https://rzlc.llnl.gov/spot2/' + luly + machines[4]
         });
     };
 
@@ -47,6 +53,16 @@ var TEST = function() {
 
         add_test_( "RZ Only Siboka/nathan", '?machine=rztopaz&command=/collab/usr/gapps/wf/spot/sina-spot-dev.py&sf=/usr/gapps/wf/siboka_team/sina/uqacam_FS.sqlite', [0,0,1,0,1]);
 
+
+        var machines = ["&machine=oslic", "&machine=oslic", "&machine=rzslic", "&machine=oslic", "&machine=rzslic"];
+        
+        for (var x in num) {
+
+            var count = num[x];
+            var luly = '?sf=/g/g0/padebug/datasets/lulesh_gen/' + count;
+
+            add_test_( "padebug " + count, luly, [1,1,0,1], machines );
+        }
 
         Vue.component('link-rows', {
             data: function () {
