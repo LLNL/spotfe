@@ -8,8 +8,8 @@ DONE - Prevent the user from adding a chart that they already have
 DONE - move x-axis label down if it's a date type.
 DONE - persistance integration complete.
 DONE - y-axis be able to show very long numbers as abbreviated.
-- figure of merit on y-axis Fix: it's not showing the entire width.
-- launchDate on y-axis need to show as dates.
+DONE - figure of merit on y-axis Fix: it's not showing the entire width.
+DONE - launchDate on y-axis need to show as dates.
 
 
 Next:
