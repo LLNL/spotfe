@@ -66,7 +66,8 @@ ST.CompareArguments = function() {
                 },
                 multiJupyter: function() {
 
-                    var num_rows_selected = ST.str_cali_keys.split(' ').length;
+                    var cali_keys = ST.CallSpot.get_keys();
+                    var num_rows_selected = cali_keys.split(' ').length;
                     var max_select = 200;
 
                     if( num_rows_selected > max_select ) {
@@ -81,7 +82,7 @@ ST.CompareArguments = function() {
                     var file_path = $('.directory').val();
 
                     ST.CallSpot.ajax({
-                        file: file_path + " \"" + ST.str_cali_keys + "\"",
+                        file: file_path + " \"" + cali_keys + "\"",
                         type: "multi_jupyter",
                         "success": function(data) {
 

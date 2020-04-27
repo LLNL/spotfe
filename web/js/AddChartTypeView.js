@@ -86,6 +86,7 @@ ST.AddChartTypeView = function() {
                 return true;
             }
         }
+
         return false;
     };
 

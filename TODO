@@ -1,4 +1,21 @@
 Next:
+- ChartCollection.js - Line 220
+    * let's see if we don't need to run load_compare after the first time from here?
+- target 2.2 release
+    * live/spot.py fix.
+    * Delete button
+
+- Pop up dialog for a chart: Edit stuff
+    * export to vector graphics to be downloaded (kenny's request), for a slideshow.
+        * perhaps there is a nifty js package that can do this? E.g. export a div as an svg?
+    * possibly Delete button is here
+    * ability to change name
+    * ability to change X axis or y axis
+        - research this.
+    * future configurations
+    * ranges on the axis.
+
+Next:
 DONE - David's Paper - read it and mention if anything is unclear.
 DONE - select drop downs should update chart type name.
 DONE - Selecting nothing will put things in a weird state.
@@ -13,19 +30,6 @@ DONE - launchDate on y-axis need to show as dates.
 DONE - documentation and learnings on Permissions and deployment issues.
 
 
-Next:
-- target 2.2 release
-    * live/spot.py fix.
-    * Delete button
-
-- Pop up dialog for a chart: Edit stuff
-    * export to vector graphics to be downloaded (kenny's request), for a slideshow.
-    * possibly Delete button is here
-    * ability to change name
-    * ability to change X axis or y axis
-        - research this.
-    * future configurations
-    * ranges on the axis.
 
 - Should we have a delete new checkbox scatterChart type?
 - Modify link page to include padebug directories and machines.
@@ -33,7 +37,6 @@ Next:
     * can we deprecate the old /usr/gapps/spot/spot.py ?
 - if Strings are easy to do, look into doing.
 - Error messaging:
-- LTRAIN - 1 hour.
 
 
 

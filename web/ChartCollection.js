@@ -266,8 +266,14 @@ ST.ChartCollection = function() {
 
         dc.redrawAll();
 
-        //  preload ST.str_cali_keys so you can click MJ right away.
-        ST.CallSpot.load_compare();
+        //  Only load this once, otherwise when you check/uncheck
+        //  the load_compare will slow things down too much.
+        if( !ST.has_loaded_compare ) {
+
+            ST.has_loaded_compare = 1;
+            //  preload ST.str_cali_keys so you can click MJ right away.
+            ST.CallSpot.load_compare();
+        }
 
         bind_sort();
     };

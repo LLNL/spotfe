@@ -55,7 +55,7 @@ var TEST = function() {
 
 
         var machines = ["&machine=oslic", "&machine=oslic", "&machine=rzslic", "&machine=oslic", "&machine=rzslic"];
-        
+
         for (var x in num) {
 
             var count = num[x];

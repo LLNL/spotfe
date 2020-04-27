@@ -340,12 +340,13 @@ ST.CallSpot = function() {
         return ST.params.exe_compare === "1";
     };
 
+
+
     var load_compare_ = function() {
 
         //  compare button
         var keys = get_keys_();
         localStorage.setItem('calis', keys);
-        ST.str_cali_keys = keys;
 
         var akeys = keys.split(' ');
 
@@ -409,6 +410,7 @@ ST.CallSpot = function() {
 
 
     return {
+        get_keys: get_keys_,
         load_compare: load_compare_,
         handle_success2: handle_success2_,
         handle_success: handle_success_,
