@@ -157,7 +157,7 @@ ST.CallSpot = function() {
 
                 //  stub.  for debugging.
                 valid_obj.key = (Math.random()*10000) + "";
-                valid_obj.cmdline = valid_obj.cmdline.substr(0,100); //first || "test";
+                //valid_obj.cmdline = valid_obj.cmdline.substr(0,100); //first || "test";
 
                 if( !valid_obj[DATE_KEY] ) {
                     valid_obj[DATE_KEY] = get_made_up_date_();

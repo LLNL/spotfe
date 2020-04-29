@@ -8,7 +8,9 @@ ST.Default = {
 ST.LAST_DAYS = "launchdate_days_ago";
 
 ST.CONSTS = {
-    "SCATTER_PLOT" : "ScatterPlot"
+    "SCATTER_PLOT" : "ScatterPlot",
+    "UNIQUE_STR": 50,
+    "MAX_HOR_BAR_CHART_STR_LEN": 100
 };
 
 ST.Utility = function() {
@@ -343,11 +345,42 @@ ST.Utility = function() {
     };
 
 
-    var limit_unique_values_ = function() {
+    var limit_unique_values_ = function( cali_obj, dimension ) {
 
+        unique_str_[dimension] = unique_str_[dimension] || {};
+
+        var ud = unique_str_[dimension];
+
+        var keys = Object.keys(ud);
+
+        if( keys.length > ST.CONSTS.UNIQUE_STR ) {
+
+            //  Return last str because we don't want more than UNIQUE_STR different strings
+            //  because it causes the HorizontalBarChart to mess up.
+            return "Etc bucket... " + last_uniq_str_.substr(0, ST.CONSTS.MAX_HOR_BAR_CHART_STR_LEN );
+        } else {
+
+            ud[ cali_obj[dimension] ] = 1;
+
+            //  return real actual value.
+            last_uniq_str_ = cali_obj[dimension];
+            return cali_obj[dimension].substr(0, ST.CONSTS.MAX_HOR_BAR_CHART_STR_LEN);
+        }
     };
 
+    var unique_str_ = {},
+        last_uniq_str_ = "";
+
+    var get_unique_value_count_ = function( dimension ) {
+
+        var ud = unique_str_[dimension];
+        var keys = Object.keys(ud);
+        return keys.length;
+    };
+
+
     return {
+        get_unique_value_count: get_unique_value_count_,
         limit_unique_values: limit_unique_values_,
         strip: strip_,
         round_exp: round_exp_,

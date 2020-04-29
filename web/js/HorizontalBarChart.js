@@ -39,7 +39,7 @@ ST.HorizontalBarChart = function() {
         var dayOfWeek = ndx.dimension(function (cali_object) {
 
             ST.Utility.validate_cali_object( cali_object, options.dimension );
-            return cali_object[ options.dimension ];
+            return ST.Utility.limit_unique_values( cali_object, options.dimension );
         });
 
         if( ST.cali_valid === false ) {
@@ -49,7 +49,8 @@ ST.HorizontalBarChart = function() {
 
         var dayOfWeekGroup = dayOfWeek.group();
 
-
+        // num of values has changed because of limit_unique_values
+        options.counts = ST.Utility.get_unique_value_count( options.dimension );
         options.height = 30 + (options.counts * 30);
 
         // Create a row chart and use the given css selector as anchor. You can also specify
@@ -72,7 +73,7 @@ ST.HorizontalBarChart = function() {
             // Assign colors to each value in the x scale domain
             .ordinalColors(colors)
             .label(function (d) {
-                return d.key.substr(0,100);
+                return d.key;
             })
             // Title sets the row text
             .title(function (d) {
