@@ -342,7 +342,13 @@ ST.Utility = function() {
         return round_exp_( n/10, ++places );
     };
 
+
+    var limit_unique_values_ = function() {
+
+    };
+
     return {
+        limit_unique_values: limit_unique_values_,
         strip: strip_,
         round_exp: round_exp_,
         filter_special: filter_specials_,

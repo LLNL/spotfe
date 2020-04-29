@@ -1,5 +1,7 @@
 Next:
 - Do error message for MJ based on the length of URL string.
+- prevent cmdLine or any other attribute from having more than 100 unique values or so.
+- get to know users, Question form.
 - ChartCollection.js - Line 220
     * DONE - let's see if we don't need to run load_compare after the first time from here?
     * Eliminate data from dataset to see which part is making it soo slow.

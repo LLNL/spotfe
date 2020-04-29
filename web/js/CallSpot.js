@@ -136,9 +136,6 @@ ST.CallSpot = function() {
         ST.layout_used = summ.layout;
         parsed = summ.data;
 
-        //console.dir(parsed);
-        var USE_TINY_STUB = ST.Utility.get_param('tiny') === 'yes';
-
         var now = Math.round( Date.now() / 1000);
         var since = ST.params.last_days * 24 * 3600;
         var min_date = ST.params.last_days == 0 ? 0 : (now - since);
@@ -160,17 +157,10 @@ ST.CallSpot = function() {
 
                 //  stub.  for debugging.
                 valid_obj.key = (Math.random()*10000) + "";
-                //valid_obj.cmdline = first || "test";
+                valid_obj.cmdline = valid_obj.cmdline.substr(0,100); //first || "test";
 
-                //  This is a STUB!!!!!!!  STUB STUB STUB.
-                var rb = valid_obj['Region Balance'];
-                var deterministic = valid_obj.FigureOfMerit || rb || 0.5;
-                var made_up = 1557354304 - Math.floor( deterministic * 380 * 86000);
-
-                valid_obj[DATE_KEY] = valid_obj[DATE_KEY] || made_up;
-
-                if( USE_TINY_STUB ) {
-                    valid_obj['tiny_nums'] = 52.7023 + (Math.random() * 0.3);
+                if( !valid_obj[DATE_KEY] ) {
+                    valid_obj[DATE_KEY] = get_made_up_date_();
                 }
 
                 //  Generate a random date for now.
@@ -223,22 +213,6 @@ ST.CallSpot = function() {
         }
 
 
-        //  STUB!!
-        if( USE_TINY_STUB ) {
-            ST.layout_used.charts.push({
-                dimension: "tiny_nums",
-                title: "Tiny Nums",
-                viz: "BarChart",
-                show: true
-            });
-
-            ST.layout_used.table.push({
-                dimension: "tiny_nums",
-                title: "tiny_nums"
-            });
-        }
-
-
         //  This is quite lousy but drill_down needs to happen after RenderChartCollection
         //  Currently RenderChartCollection has a fatal javascript error coming from dc.js
         //  which needs to get fixed.
@@ -264,6 +238,16 @@ ST.CallSpot = function() {
     };
 
 
+    //  Just in case they didn't give us a launchdate, still need it for filtering purposes.
+    //  that input box at the left side above the table.
+    var get_made_up_date_ = function() {
+
+        //  This is a STUB!!!!!!!  STUB STUB STUB.
+        var rb = valid_obj['Region Balance'];
+        var deterministic = valid_obj.FigureOfMerit || rb || 0.5;
+        var made_up = 1557354304 - Math.floor( deterministic * 380 * 86000);
+        return made_up;
+    };
 
 
     var are_numbers_ = null;
