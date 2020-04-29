@@ -146,12 +146,21 @@ ST.CallSpot = function() {
         var DATE_KEY = "launchdate";
 
         var newp = [];
+        var first = "";
 
         for (var key in parsed) {
 
             if (newp.length < ST.params.max) {
 
                 var valid_obj = parsed[key];
+
+                if( first === "" && valid_obj.cmdline) {
+                    first = valid_obj.cmdline;
+                }
+
+                //  stub.  for debugging.
+                valid_obj.key = (Math.random()*10000) + "";
+                //valid_obj.cmdline = first || "test";
 
                 //  This is a STUB!!!!!!!  STUB STUB STUB.
                 var rb = valid_obj['Region Balance'];

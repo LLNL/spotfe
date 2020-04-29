@@ -1,6 +1,14 @@
 Next:
+- Do error message for MJ based on the length of URL string.
 - ChartCollection.js - Line 220
-    * let's see if we don't need to run load_compare after the first time from here?
+    * DONE - let's see if we don't need to run load_compare after the first time from here?
+    * Eliminate data from dataset to see which part is making it soo slow.
+- Dc.js - is there a way to give it ALL the data,
+but only load some of it visually, to speed up the loading speed?
+Problem is it's only sorting the first 100 or so, but all need to be sorted
+if we load all of it then it'll load too slow.
+
+
 - target 2.2 release
     * live/spot.py fix.
     * Delete button
