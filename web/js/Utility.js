@@ -345,6 +345,8 @@ ST.Utility = function() {
     };
 
 
+    // num of values has changed because of limit_unique_values
+    // options.counts = ST.Utility.get_unique_value_count( options.dimension );
     var limit_unique_values_ = function( cali_obj, dimension ) {
 
         unique_str_[dimension] = unique_str_[dimension] || {};

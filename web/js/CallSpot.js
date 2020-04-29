@@ -159,6 +159,13 @@ ST.CallSpot = function() {
                 valid_obj.key = (Math.random()*10000) + "";
                 //valid_obj.cmdline = valid_obj.cmdline.substr(0,100); //first || "test";
 
+                for( var att in valid_obj ) {
+
+                    if( att === "cmdline" ) {
+                        valid_obj[att] = ST.Utility.limit_unique_values( valid_obj, att );
+                    }
+                }
+
                 if( !valid_obj[DATE_KEY] ) {
                     valid_obj[DATE_KEY] = get_made_up_date_();
                 }
