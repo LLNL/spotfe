@@ -1,11 +1,13 @@
 Next:
 - Do error message for MJ based on the length of URL string.
-- prevent cmdLine or any other attribute from having more than 100 unique values or so.
-- get to know users, Question form.
-- ChartCollection.js - Line 220
-    * DONE - let's see if we don't need to run load_compare after the first time from here?
-    * Eliminate data from dataset to see which part is making it soo slow.
-- Dc.js - is there a way to give it ALL the data,
+- hatchet -> once steph updates the dev/hatch and dev/templates, get it hooked up to that location.
+
+DONE - load_compare optimization to optimize checkboxing speed:
+    * ChartCollection.js - Line 220 - let's see if we don't need to run load_compare after the first time from here?
+DONE - prevent cmdLine or any other attribute from having more than 100 unique values or so.
+
+
+- For Sorting issue - Dc.js - is there a way to give it ALL the data,
 but only load some of it visually, to speed up the loading speed?
 Problem is it's only sorting the first 100 or so, but all need to be sorted
 if we load all of it then it'll load too slow.
@@ -24,6 +26,12 @@ if we load all of it then it'll load too slow.
         - research this.
     * future configurations
     * ranges on the axis.
+
+Previously Debugging:
+- Fix MJ error, seems to come and go.
+    * ST.str_cali_keys is wrong.  it should be like this: "65.cali 98.cali 97.cali 96.cali 95.cali 94.cali 93.cali 92.cali
+    * defaultKey: file path=/g/g0/pascal/test2/ardra.spot.smoke/8140.144792561766
+
 
 Next:
 DONE - David's Paper - read it and mention if anything is unclear.

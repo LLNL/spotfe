@@ -156,7 +156,10 @@ ST.CallSpot = function() {
                 }
 
                 //  stub.  for debugging.
-                valid_obj.key = (Math.random()*10000) + "";
+                valid_obj.file_path = valid_obj.key;
+                //valid_obj.key = (Math.random()*10000) + "";
+
+
                 //valid_obj.cmdline = valid_obj.cmdline.substr(0,100); //first || "test";
 
                 for( var att in valid_obj ) {

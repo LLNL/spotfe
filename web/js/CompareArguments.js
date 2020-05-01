@@ -66,23 +66,26 @@ ST.CompareArguments = function() {
                 },
                 multiJupyter: function() {
 
-                    var cali_keys = ST.CallSpot.get_keys();
-                    var num_rows_selected = cali_keys.split(' ').length;
-                    var max_select = 200;
+                    var cali_keys = ST.CallSpot.get_keys();// ST.str_cali_keys;
 
-                    if( num_rows_selected > max_select ) {
-
-                        ReusableView.modal({
-                            "header": "Warning",
-                            "body": "Too many rows selected.  Please narrow the selection criteria to fewer than " + max_select + " rows."
-                        });
-                    }
                     //  cali_path is /usr/gapps/spot/datasets/lulesh_gen/500/5.cali
                     //  "cali_filepath=" +
                     var file_path = $('.directory').val();
+                    var total_send = file_path + " \"" + cali_keys + "\"";
+                    var limit = 3500;
+                    var t_count = total_send.length;
+
+                    if( t_count > limit ) {
+
+                        ReusableView.modal({
+                            "header": "Warning",
+                            "body": "Too many rows selected.  Please narrow the selection.  <br>" +
+                                "request chars = " + t_count + "  limit = " + limit
+                        });
+                    }
 
                     ST.CallSpot.ajax({
-                        file: file_path + " \"" + cali_keys + "\"",
+                        file: total_send,
                         type: "multi_jupyter",
                         "success": function(data) {
 
