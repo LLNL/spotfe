@@ -160,6 +160,10 @@ ST.LayoutAugmenterModel = function() {
         return i; //Math.round( i * 10 ) / 10;
     };
 
+    var get_viz_ = function( dimension ) {
+
+    };
+
     var get_type_ = function( dimension ) {
 
         for( var x=0; x < model_.length; x++ ) {
@@ -174,12 +178,19 @@ ST.LayoutAugmenterModel = function() {
         return "dimension_not_found";
     };
 
+    var is_unique_limited_ = function( dimension, layout ) {
+
+        model_ = layout;
+        var type = get_type_( dimension );
+        return type === "string" || type === "set of string";
+    };
 
     return {
         get: get_,
         get_model: function() {
             return model_;
         },
-        get_type: get_type_
+        get_type: get_type_,
+        is_unique_limited: is_unique_limited_
     }
 }();

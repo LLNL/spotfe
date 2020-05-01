@@ -1,10 +1,14 @@
 Next:
-- Do error message for MJ based on the length of URL string.
-- hatchet -> once steph updates the dev/hatch and dev/templates, get it hooked up to that location.
+- TEST: right now testing with abbreviated key.
+    * CallSpot ln 162, need to generalize to all String types that have more than 50
+- jobsize is an "unsigned int", so why is it's charttype HorizontalBarChart
 
 DONE - load_compare optimization to optimize checkboxing speed:
     * ChartCollection.js - Line 220 - let's see if we don't need to run load_compare after the first time from here?
 DONE - prevent cmdLine or any other attribute from having more than 100 unique values or so.
+DONE - Do error message for MJ based on the length of URL string.
+- hatchet -> once steph updates the dev/hatch and dev/templates, get it hooked up to that location.
+    * make sure those things can run through the whole program
 
 
 - For Sorting issue - Dc.js - is there a way to give it ALL the data,

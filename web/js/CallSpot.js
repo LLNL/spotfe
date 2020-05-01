@@ -128,6 +128,7 @@ ST.CallSpot = function() {
         }
     };
 
+    var file_path_ = [];
 
     var handle_success2_ = function( summ ) {
 
@@ -143,7 +144,7 @@ ST.CallSpot = function() {
         var DATE_KEY = "launchdate";
 
         var newp = [];
-        var first = "";
+        var new_index = 0;
 
         for (var key in parsed) {
 
@@ -151,20 +152,16 @@ ST.CallSpot = function() {
 
                 var valid_obj = parsed[key];
 
-                if( first === "" && valid_obj.cmdline) {
-                    first = valid_obj.cmdline;
-                }
+                file_path_[new_index] = key;
+                valid_obj.key = new_index;
+                new_index++;
 
-                //  stub.  for debugging.
-                valid_obj.file_path = valid_obj.key;
-                //valid_obj.key = (Math.random()*10000) + "";
-
-
-                //valid_obj.cmdline = valid_obj.cmdline.substr(0,100); //first || "test";
 
                 for( var att in valid_obj ) {
 
-                    if( att === "cmdline" ) {
+                    if( ST.LayoutAugmenterModel.is_unique_limited( att, ST.layout_used.charts ) ) {
+
+                        //console.log('optimized type: ' + att);
                         valid_obj[att] = ST.Utility.limit_unique_values( valid_obj, att );
                     }
                 }
@@ -189,7 +186,6 @@ ST.CallSpot = function() {
                     valid_obj.formatdate = month + "/" + day + "/" + year;
                     valid_obj.run_id = "id_" + Math.floor(Math.random() * 10000);
                     valid_obj.drilldown = ['Jupyter', 'walltime'];
-                    valid_obj.key = valid_obj.key || key;
 
                     for (var dimension in valid_obj) {
 
@@ -330,7 +326,8 @@ ST.CallSpot = function() {
 
         for( var c=0; c < len; c++ ) {
 
-            var cali_key = all[c].key;
+            var new_index = all[c].key;
+            var cali_key = file_path_[new_index];
             str += ' ' + cali_key;
         }
 
