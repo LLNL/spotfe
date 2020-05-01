@@ -162,25 +162,33 @@ ST.LayoutAugmenterModel = function() {
 
     var get_viz_ = function( dimension ) {
 
+        var mod = get_mod_(dimension);
+        return mod ? mod.viz : "mod not found";
     };
 
-    var get_type_ = function( dimension ) {
+    var get_mod_ = function( dimension ) {
 
         for( var x=0; x < model_.length; x++ ) {
 
             var mod = model_[x];
 
             if( dimension === mod.dimension ) {
-                return mod.type;
+                return mod;
             }
         }
 
-        return "dimension_not_found";
+        return false;
     };
 
-    var is_unique_limited_ = function( dimension, layout ) {
+    var get_type_ = function( dimension ) {
 
-        model_ = layout;
+        var mod = get_mod_(dimension);
+        return mod ? mod.type : "mod not found";
+    };
+
+    var is_unique_limited_ = function( dimension ) {
+
+        model_ = ST.layout_used.charts;
         var type = get_type_( dimension );
         return type === "string" || type === "set of string";
     };
@@ -190,6 +198,7 @@ ST.LayoutAugmenterModel = function() {
         get_model: function() {
             return model_;
         },
+        get_viz: get_viz_,
         get_type: get_type_,
         is_unique_limited: is_unique_limited_
     }

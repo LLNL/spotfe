@@ -154,14 +154,15 @@ ST.CallSpot = function() {
 
                 file_path_[new_index] = key;
                 valid_obj.key = new_index;
+//                valid_obj.filepath = "override";
                 new_index++;
 
 
                 for( var att in valid_obj ) {
 
-                    if( ST.LayoutAugmenterModel.is_unique_limited( att, ST.layout_used.charts ) ) {
+                    if( ST.LayoutAugmenterModel.is_unique_limited( att ) ) {
 
-                        //console.log('optimized type: ' + att);
+                        console.log('optimized type: ' + att);
                         valid_obj[att] = ST.Utility.limit_unique_values( valid_obj, att );
                     }
                 }

@@ -69,7 +69,6 @@ ST.CompareArguments = function() {
                     var cali_keys = ST.CallSpot.get_keys();// ST.str_cali_keys;
 
                     //  cali_path is /usr/gapps/spot/datasets/lulesh_gen/500/5.cali
-                    //  "cali_filepath=" +
                     var file_path = $('.directory').val();
                     var total_send = file_path + " \"" + cali_keys + "\"";
                     var limit = 3500;
