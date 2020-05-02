@@ -374,18 +374,20 @@ ST.CallSpot = function() {
         var run_id = $(this).attr('run_id');
         var subject = $(this).attr('subject').toLowerCase();
         var file = ST.Utility.get_file();
-        var key = objs_by_run_id_[run_id].key;
-        var appended = objs_by_run_id_[run_id].filepath;    //file + '/' + key;
 
+        var obj = objs_by_run_id_[run_id];
+        var key = obj.key;
+        var appended = obj.filepath;    //file + '/' + key;
+        var cali_fp = file_path_[key];
 
         if (subject === 'mpi') {
 
             //  http://localhost:8888
-            window.open('../ravel/index.html?cali_key=' + key );
+            window.open('../ravel/index.html?cali_key=' + cali_fp );
 
         } else if( subject === "walltime" ) {
 
-            window.open('sankey/index.html?runSetId=' + file + "&runId=" + key );
+            window.open('sankey/index.html?runSetId=' + file + "&runId=" + cali_fp );
 
         } else {
 
