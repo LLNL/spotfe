@@ -145,6 +145,7 @@ ST.CallSpot = function() {
 
         var newp = [];
         var new_index = 0;
+        var treat_as_number = ["timeval", "float", "double", "int", "integer"];
 
         for (var key in parsed) {
 
@@ -165,7 +166,9 @@ ST.CallSpot = function() {
                         valid_obj[att] = ST.Utility.limit_unique_values( valid_obj, att );
                     }
 
-                    if( ST.LayoutAugmenterModel.get_type( att ) === "timeval" ) {
+                    var ty = ST.LayoutAugmenterModel.get_type( att );
+
+                    if( treat_as_number.indexOf(ty) > -1 ) {
                         valid_obj[att] = +valid_obj[att];
                     }
                 }
