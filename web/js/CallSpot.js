@@ -164,6 +164,10 @@ ST.CallSpot = function() {
 
                         valid_obj[att] = ST.Utility.limit_unique_values( valid_obj, att );
                     }
+
+                    if( ST.LayoutAugmenterModel.get_type( att ) === "timeval" ) {
+                        valid_obj[att] = +valid_obj[att];
+                    }
                 }
 
                 if( !valid_obj[DATE_KEY] ) {
