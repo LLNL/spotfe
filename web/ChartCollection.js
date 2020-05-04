@@ -29,8 +29,6 @@ ST.ChartCollection = function() {
                 dims_present[ sp.dimension.toLowerCase() ] = 1;
             }
 
-            console.dir(dims_present);
-
             for( var z=0; z < ls.scatterplots.length; z++ ) {
 
                 var sp2 = ls.scatterplots[z];
@@ -343,7 +341,7 @@ ST.ChartCollection = function() {
 
                 what_sort = what_sort.split('<')[0].toLowerCase();
 
-                runTable.sortBy(function (d) {
+                runTable.size(Infinity).sortBy(function (d) {
 
                     var nobj = normalize_indexes_(d);
 

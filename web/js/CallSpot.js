@@ -162,7 +162,6 @@ ST.CallSpot = function() {
 
                     if( ST.LayoutAugmenterModel.is_unique_limited( att ) ) {
 
-                        console.log('optimized type: ' + att);
                         valid_obj[att] = ST.Utility.limit_unique_values( valid_obj, att );
                     }
                 }
