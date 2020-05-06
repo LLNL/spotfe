@@ -1,8 +1,22 @@
 Next:
-- walltime runId is incorrect: needs to be the name of the cali file.
-- TEST: right now testing with abbreviated key.
-    * CallSpot ln 162, need to generalize to all String types that have more than 50
-    * why sometimes not performance optimized?
+- RZ Venv permissions or group were changed.
+    * I need to create a new RZ Venv and start using that.
+    * Previous one not working: /usr/gapps/wf/web/spot/virtenv/bin/python
+
+For PADebug: this does not work anymore because the python venv permissions I guess were changed.
+drwxrwx--- 10 workflow wciuser  4096 May  9  2019 spot
+
+[padebug@rzslic9:~]$
+/usr/gapps/wf/web/spot/virtenv/bin/python /usr/gapps/spot/spot.py multi_jupyter /g/g0/padebug/datasets/lulesh_gen/100 "65.cali 98.cali 97.cali 96.cali 95.cali 94.cali 93.cali 92.cali 91.cali 90.cali 89.cali 88.cali 87.cali 86.cali 85.cali 84.cali 83.cali 82.cali 81.cali 80.cali 79.cali 78.cali 77.cali 76.cali 75.cali 74.cali 73.cali 72.cali 71.cali 70.cali 69.cali 68.cali 67.cali 66.cali 99.cali 64.cali 63.cali 62.cali 61.cali 60.cali 59.cali 58.cali 57.cali 56.cali 55.cali 54.cali 53.cali 52.cali 51.cali 50.cali 49.cali 48.cali 47.cali 46.cali 45.cali 44.cali 43.cali 42.cali 41.cali 40.cali 39.cali 38.cali 37.cali 36.cali 35.cali 34.cali 0.cali 32.cali 31.cali 30.cali 29.cali 28.cali 27.cali 26.cali 25.cali 24.cali 23.cali 22.cali 21.cali 20.cali 19.cali 18.cali 17.cali 16.cali 15.cali 14.cali 13.cali 12.cali 11.cali 10.cali 9.cali 8.cali 7.cali 6.cali 5.cali 4.cali 3.cali 2.cali 1.cali 33.cali"
+
+
+
+- Work with Steph to get Hatchet and hatchet templates using the dev/ version
+- Wall Durations
+DONE - Investigate the sorting issue some more
+- Look into getting the actual MJ to run, in the jupyter notebook.  Still some issues on the 3rd box down.
+- Create a deployment script for hatchet and code deployment to maximize robustness.
+
 
 DONE - load_compare optimization to optimize checkboxing speed: etc bucket feature.
     * ChartCollection.js - Line 220 - let's see if we don't need to run load_compare after the first time from here?
@@ -36,6 +50,11 @@ Previously Debugging:
 - Fix MJ error, seems to come and go.
     * ST.str_cali_keys is wrong.  it should be like this: "65.cali 98.cali 97.cali 96.cali 95.cali 94.cali 93.cali 92.cali
     * defaultKey: file path=/g/g0/pascal/test2/ardra.spot.smoke/8140.144792561766
+
+[Lorenz::REST::Command::runApprovedCommand] Failed to run command: '/usr/gapps/spot/venv_python/bin/python3 /usr/gapps/spot/spot.py jupyter /g/g0/padebug/datasets/lulesh_gen/100/19.cali' on oslic: cali-query: Error: Could not read file /g/g0/padebug/datasets/lulesh_gen/100/19.cali Traceback (most recent call last): File "/usr/gapps/spot/spot.py", line 361, in <module> args.func(args) File "/usr/gapps/spot/spot.py", line 100, in jupyter metric_name = defaultKey(str(cali_path)) File "/usr/gapps/spot/spot.py", line 22, in defaultKey key = (list(records[0].keys())[0])
+IndexError: list index out of range
+    * this error above was because we were sending the wrong cali file strings in the argument list (i think)
+
 
 
 Next:

@@ -9,7 +9,12 @@ ST.CallSpot = function() {
 
         //var czcommand = "/usr/tce/bin/python3" + spot_dir;
         var czcommand = "/usr/gapps/spot/venv_python/bin/python3" + spot_dir;
-        var rzcommand = ST.Default.COMMAND + spot_dir;
+        //var rzcommand = ST.Default.COMMAND + spot_dir;
+
+        //  We're now using this one because the one above I think the permissions were changed
+        //  which prevented non-wci users from using it
+        //  this won't work: drwxrwxr-x 5 chavez35 chavez35  4096 Oct  3  2018 virtenv
+        var rzcommand = "/usr/global/tools/lorenz/python/optvis-env2/bin/python" + spot_dir;
 
         is_rzlc_target = ST.Utility.on_rz();
 
