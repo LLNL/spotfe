@@ -1,6 +1,27 @@
 ST.EtcBucket = function() {
 
-        var handle_etc_buckets_ = function() {
+    var make_column_index_ = function( table_spec ) {
+
+        var di = [];
+        var col_num = 0;
+
+        for( var v = 0; v < table_spec.length; v++ ) {
+
+            var spec = table_spec[v];
+
+            if( spec.show === true ) {
+                di[col_num++] = spec.dimension;
+            }
+        }
+
+        return di;
+    };
+
+
+    var handle_etc_buckets_ = function() {
+
+        var dim_to_idx_ = make_column_index_( ST.layout_used.table );
+        console.dir( dim_to_idx_ );
 
         for( var x=0; x < ST.cali_obj_by_key.length; x++ ) {
 
