@@ -133,7 +133,7 @@ ST.CallSpot = function() {
         }
     };
 
-    var file_path_ = [];
+    var cali_obj_by_key_ = [];
 
     var handle_success2_ = function( summ ) {
 
@@ -160,7 +160,9 @@ ST.CallSpot = function() {
 
                 var valid_obj = parsed[key];
 
-                file_path_[new_index] = key;
+                cali_obj_by_key_[new_index] = valid_obj;
+                cali_obj_by_key_[new_index].file_path = key;
+
                 valid_obj.key = new_index;
 
                 //  valid_obj.filepath = "override";
@@ -341,7 +343,7 @@ ST.CallSpot = function() {
         for( var c=0; c < len; c++ ) {
 
             var new_index = all[c].key;
-            var cali_key = file_path_[new_index];
+            var cali_key = cali_obj_by_key_[new_index].file_path;
             str += ' ' + cali_key;
         }
 
@@ -374,6 +376,12 @@ ST.CallSpot = function() {
     };
 
 
+    var get_cali_obj_att_ = function( key, attribute ) {
+
+        var wmes = "attribute does not exist: " + attribute;
+        return cali_obj_by_key_[ key ][ attribute ] || wmes;
+    };
+
     var drill_down_ = function() {
 
         if( !$(this).hasClass('drilldown')) {
@@ -391,7 +399,7 @@ ST.CallSpot = function() {
         var obj = objs_by_run_id_[run_id];
         var key = obj.key;
         var appended = obj.filepath;    //file + '/' + key;
-        var cali_fp = file_path_[key];
+        var cali_fp = cali_obj_by_key_[key].file_path;
 
         if (subject === 'mpi') {
 
@@ -426,6 +434,7 @@ ST.CallSpot = function() {
 
 
     return {
+        get_cali_obj_att: get_cali_obj_att_,
         get_keys: get_keys_,
         load_compare: load_compare_,
         handle_success2: handle_success2_,

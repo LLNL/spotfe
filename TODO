@@ -11,10 +11,12 @@ DONE - Fix git problems on RZ/CZ, check in spot.py changes
 Next:
 - Deploy optvis to live, the feature?
 - Etc Bucket, don't put it in the Table - feature.
-  * FIRST: Fix the damn count is wrong bug, where counts are messed up.
-    * Replace with just: "Etc Bucket" and then post load the real values.
-    * Create cache (or find the one we have) of cali objects indexed to key
-    * Iterate through all "Etc Bucket" DOM elements, for each extract key and dimension, look up correct Value
+    * DONE - Replace with just: "Etc Bucket" and then post load the real values.
+    * DONE - Create cache (or find the one we have) of cali objects indexed to key
+    * Create dimension_index of layout_used.table and get methods.
+    * Iterate through all "Etc Bucket" DOM elements, for each extract key and row_index,
+    * Use row_index to find out the dimension from dimension_index
+    * look up correct Value: ST.CallSpot.get_cali_obj_att( key: 89, dimension: "cputime")
     * Replace Etc Bucket with the correct value, above.
 - make sure dates have the year.
     "UNIQUE_STR": 200, ->could be configurable for the popup.
@@ -39,7 +41,8 @@ Next:
 check if it's working:
 ht.__version__
 
-
+  * FIRST: Fix the damn count is wrong bug, where counts are messed up.
+        * this was fixed somehow by itself???  weird how it's now working for no reason.
 
 DONE - RZ Venv permissions or group were changed.
     * I need to create a new RZ Venv and start using that.
