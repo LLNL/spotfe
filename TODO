@@ -14,10 +14,11 @@ Next:
     * DONE - Replace with just: "Etc Bucket" and then post load the real values.
     * DONE - Create cache (or find the one we have) of cali objects indexed to key
     * Create dimension_index of layout_used.table and get methods.
-    * Iterate through all "Etc Bucket" DOM elements, for each extract key and row_index,
+    * Iterate through all cali_obj_by_key_ and check for "Etc Bucket", for each extract key and row_index,
     * Use row_index to find out the dimension from dimension_index
     * look up correct Value: ST.CallSpot.get_cali_obj_att( key: 89, dimension: "cputime")
-    * Replace Etc Bucket with the correct value, above.
+    * Replace Etc Bucket with the correct value, above. $('[key=" + key + "]').parent().parent().find("_" + row_index).html( val )
+    * make the above happen inside a setInterval call, so it doesn't lock up the browser.
 - make sure dates have the year.
     "UNIQUE_STR": 200, ->could be configurable for the popup.
     "MAX_HOR_BAR_CHART_STR_LEN": 100 -> could be configurable for the popu p.

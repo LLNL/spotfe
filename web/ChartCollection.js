@@ -199,7 +199,7 @@ ST.ChartCollection = function() {
                         '</div>';
                 }
 
-                var hidden = '<div class="hidden key">' + d.key + '</div>';
+                var hidden = '<div class="hidden key" key="' + d.key + '">' + d.key + '</div>';
 
                 return buts + hidden;
             }
