@@ -382,6 +382,24 @@ ST.CallSpot = function() {
         return cali_obj_by_key_[ key ][ attribute ] || wmes;
     };
 
+
+    var handle_etc_buckets_ = function() {
+
+        for( var x=0; x < cali_obj_by_key_.length; x++ ) {
+
+            var cobj = cali_obj_by_key_[x];
+
+            for( var att in cobj ) {
+
+                if( cobj[att] === ST.CONSTS.ETC_BUCKET ) {
+
+                    console.log( "key: " + x + "  att: " + att );
+                }
+            }
+        }
+    };
+
+    
     var drill_down_ = function() {
 
         if( !$(this).hasClass('drilldown')) {
@@ -434,6 +452,7 @@ ST.CallSpot = function() {
 
 
     return {
+        handle_etc_bucket: handle_etc_buckets_,
         get_cali_obj_att: get_cali_obj_att_,
         get_keys: get_keys_,
         load_compare: load_compare_,
