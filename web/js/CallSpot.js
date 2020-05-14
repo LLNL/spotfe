@@ -133,7 +133,8 @@ ST.CallSpot = function() {
         }
     };
 
-    var cali_obj_by_key_ = [];
+    var cali_obj_by_key_ = [],
+        orig_obj_by_key_ = [];
 
     var handle_success2_ = function( summ ) {
 
@@ -162,6 +163,7 @@ ST.CallSpot = function() {
 
                 cali_obj_by_key_[new_index] = valid_obj;
                 cali_obj_by_key_[new_index].file_path = key;
+                orig_obj_by_key_[new_index] = $.extend({}, valid_obj);
 
                 valid_obj.key = new_index;
 
@@ -393,13 +395,14 @@ ST.CallSpot = function() {
 
                 if( cobj[att] === ST.CONSTS.ETC_BUCKET ) {
 
-                    console.log( "key: " + x + "  att: " + att );
+                    var actual_val = orig_obj_by_key_[ x ][ att ];
+                    console.log( "key: " + x + "  att: " + att + "   actual: " + actual_val);
                 }
             }
         }
     };
 
-    
+
     var drill_down_ = function() {
 
         if( !$(this).hasClass('drilldown')) {
