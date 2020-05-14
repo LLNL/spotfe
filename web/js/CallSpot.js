@@ -152,6 +152,8 @@ ST.CallSpot = function() {
         var new_index = 0;
         var treat_as_number = ["timeval", "float", "double", "int", "integer"];
 
+        ST.LayoutAugmenterModel.set_model( ST.layout_used.charts );
+
         for (var key in parsed) {
 
             if (newp.length < ST.params.max) {
@@ -160,6 +162,7 @@ ST.CallSpot = function() {
 
                 file_path_[new_index] = key;
                 valid_obj.key = new_index;
+
                 //  valid_obj.filepath = "override";
                 new_index++;
 
@@ -167,7 +170,6 @@ ST.CallSpot = function() {
                 for( var att in valid_obj ) {
 
                     if( ST.LayoutAugmenterModel.is_unique_limited( att ) ) {
-
                         valid_obj[att] = ST.Utility.limit_unique_values( valid_obj, att );
                     }
 

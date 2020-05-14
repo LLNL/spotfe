@@ -50,6 +50,7 @@ ST.HorizontalBarChart = function() {
 
         var dayOfWeekGroup = dayOfWeek.group();
 
+        //options.counts = ST.Utility.get_unique_value_count( options.dimension );
         options.height = 30 + (options.counts * 30);
 
         // Create a row chart and use the given css selector as anchor. You can also specify

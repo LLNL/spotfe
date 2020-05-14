@@ -193,7 +193,12 @@ ST.LayoutAugmenterModel = function() {
         return type === "string" || type === "set of string";
     };
 
+    var set_model_ = function( model ) {
+        model_ = model;
+    };
+
     return {
+        set_model: set_model_,
         get: get_,
         get_model: function() {
             return model_;

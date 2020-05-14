@@ -1,7 +1,67 @@
+DONE - spot.py and Templates/Template*.py are all pointing at live/templates and live/hatchet
+    * not spot.py is a symbolic link to live/spot.py, for now.
+DONE - make "dev", or "live" specified in spot.py instead of hard coding it.
+    * it should figure out where it is and set CONFIG vars appropriately.
+
+DONE - Fix git problems on RZ/CZ, check in spot.py changes
+    * ask steph to rm hatchet in dev/hatchet
+    * then recheckout /usr/gapps/spot/dev and recheckout hatchet
+    * do the same on CZ.
+
 Next:
-- RZ Venv permissions or group were changed.
+- Deploy optvis to live, the feature?
+- Etc Bucket, don't put it in the Table - feature.
+  * FIRST: Fix the damn count is wrong bug, where counts are messed up.
+    * Replace with just: "Etc Bucket" and then post load the real values.
+    * Create cache (or find the one we have) of cali objects indexed to key
+    * Iterate through all "Etc Bucket" DOM elements, for each extract key and dimension, look up correct Value
+    * Replace Etc Bucket with the correct value, above.
+- make sure dates have the year.
+    "UNIQUE_STR": 200, ->could be configurable for the popup.
+    "MAX_HOR_BAR_CHART_STR_LEN": 100 -> could be configurable for the popu p.
+- check to see if we can do hovers for the horizontal bar value
+- Joe: URL for Jupyter needs to change?
+- Deal with issue sys.path.append(....)  how to get directory string without duplicating the function?
+- Configuration popup for changing things like x-axis and yaxis
+- Work with Steph to get Hatchet and hatchet templates using the dev/ version
+    * actually deploy it to live for dev/hatchet stuff.
+- Create a deployment script for hatchet and code deployment to maximize robustness.
+- CmdLine - Set feature.
+    * We'll have to discuss how we break the command line into several parts.
+    * set feature for things like: hostlist, cmdline
+    * hidden fields.
+- Stephanie suggestion: would be helpful to get an error message, maybe even beforehand indicating that there are too many files in the directory
+
+"# Add hatchet to PYTHONPATH\n",
+    "sys.path.append('/usr/gapps/spot/dev/hatchet')\n",
+    "import hatchet as ht"
+
+check if it's working:
+ht.__version__
+
+
+
+DONE - RZ Venv permissions or group were changed.
     * I need to create a new RZ Venv and start using that.
     * Previous one not working: /usr/gapps/wf/web/spot/virtenv/bin/python
+- After stephanie sets the permission of the /usr/gapps/spot/templates/* to 644
+the padebug user in firefox should be able to do the following with MJ/J
+https://rzlc.llnl.gov/spot2/?sf=/g/g0/padebug/datasets/lulesh_gen/100&machine=rzslic
+
+
+Recently done:
+- mostly helping to fix issues brought up by Ardra.
+- Rendering speed:
+    * added feature for Etc Bucket - due to 1800 left horizontal bars of 300+ characters.
+    * checkbox/uncheckbox optimization.
+- Fixed sorting issue where it only sorted the first 50
+    * needs to show all the results, not just the first 50.  before couldn't do because checkbox optimiztion
+- soring for timeval in the table make sure that's using number, not sorting as string
+- RZ Venv permissions changed preventing non-spot from working for jupyter
+    * so created pointed RZ venv to our own venv.
+
+- Starting tomorrow we'll be able to test non-wci accounts in RZ Dev, makes testing much easier
+
 
 For PADebug: this does not work anymore because the python venv permissions I guess were changed.
 drwxrwx--- 10 workflow wciuser  4096 May  9  2019 spot
@@ -11,11 +71,10 @@ drwxrwx--- 10 workflow wciuser  4096 May  9  2019 spot
 
 
 
-- Work with Steph to get Hatchet and hatchet templates using the dev/ version
+
 - Wall Durations
 DONE - Investigate the sorting issue some more
 - Look into getting the actual MJ to run, in the jupyter notebook.  Still some issues on the 3rd box down.
-- Create a deployment script for hatchet and code deployment to maximize robustness.
 
 
 DONE - load_compare optimization to optimize checkboxing speed: etc bucket feature.
