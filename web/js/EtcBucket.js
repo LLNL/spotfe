@@ -2,7 +2,7 @@ ST.EtcBucket = function() {
 
     var make_column_index_ = function( table_spec ) {
 
-        var di = [];
+        var di = {};
         var col_num = 0;
 
         for( var v = 0; v < table_spec.length; v++ ) {
@@ -10,7 +10,7 @@ ST.EtcBucket = function() {
             var spec = table_spec[v];
 
             if( spec.show === true ) {
-                di[col_num++] = spec.dimension;
+                di[ spec.dimension ] = col_num++;
             }
         }
 
