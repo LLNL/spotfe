@@ -133,8 +133,8 @@ ST.CallSpot = function() {
         }
     };
 
-    var cali_obj_by_key_ = [],
-        orig_obj_by_key_ = [];
+    ST.cali_obj_by_key = [];
+    ST.orig_obj_by_key = [];
 
     var handle_success2_ = function( summ ) {
 
@@ -161,9 +161,9 @@ ST.CallSpot = function() {
 
                 var valid_obj = parsed[key];
 
-                cali_obj_by_key_[new_index] = valid_obj;
-                cali_obj_by_key_[new_index].file_path = key;
-                orig_obj_by_key_[new_index] = $.extend({}, valid_obj);
+                ST.cali_obj_by_key[new_index] = valid_obj;
+                ST.cali_obj_by_key[new_index].file_path = key;
+                ST.orig_obj_by_key[new_index] = $.extend({}, valid_obj);
 
                 valid_obj.key = new_index;
 
@@ -345,7 +345,7 @@ ST.CallSpot = function() {
         for( var c=0; c < len; c++ ) {
 
             var new_index = all[c].key;
-            var cali_key = cali_obj_by_key_[new_index].file_path;
+            var cali_key = ST.cali_obj_by_key[new_index].file_path;
             str += ' ' + cali_key;
         }
 
@@ -378,31 +378,6 @@ ST.CallSpot = function() {
     };
 
 
-    var get_cali_obj_att_ = function( key, attribute ) {
-
-        var wmes = "attribute does not exist: " + attribute;
-        return cali_obj_by_key_[ key ][ attribute ] || wmes;
-    };
-
-
-    var handle_etc_buckets_ = function() {
-
-        for( var x=0; x < cali_obj_by_key_.length; x++ ) {
-
-            var cobj = cali_obj_by_key_[x];
-
-            for( var att in cobj ) {
-
-                if( cobj[att] === ST.CONSTS.ETC_BUCKET ) {
-
-                    var actual_val = orig_obj_by_key_[ x ][ att ];
-                    console.log( "key: " + x + "  att: " + att + "   actual: " + actual_val);
-                }
-            }
-        }
-    };
-
-
     var drill_down_ = function() {
 
         if( !$(this).hasClass('drilldown')) {
@@ -420,7 +395,7 @@ ST.CallSpot = function() {
         var obj = objs_by_run_id_[run_id];
         var key = obj.key;
         var appended = obj.filepath;    //file + '/' + key;
-        var cali_fp = cali_obj_by_key_[key].file_path;
+        var cali_fp = ST.cali_obj_by_key[key].file_path;
 
         if (subject === 'mpi') {
 
@@ -455,8 +430,6 @@ ST.CallSpot = function() {
 
 
     return {
-        handle_etc_bucket: handle_etc_buckets_,
-        get_cali_obj_att: get_cali_obj_att_,
         get_keys: get_keys_,
         load_compare: load_compare_,
         handle_success2: handle_success2_,
