@@ -25,44 +25,47 @@ ST.EtcBucket = function() {
         console.dir(dim_to_idx_);
 
         cali_key_ = 0;
-
-        setInterval(interval_handle_buckets_, 100);
     };
-
 
     var interval_handle_buckets_ = function() {
 
         //  This means about 500 per second.
         var end = parseInt(cali_key_) + 50;
 
-        for( cali_key_ = cali_key_; cali_key_ < ST.cali_obj_by_key.length; cali_key_++ ) {
+        if( ST.cali_obj_by_key ) {
 
-            var cobj = ST.cali_obj_by_key[cali_key_];
+            for (cali_key_ = cali_key_; cali_key_ < ST.cali_obj_by_key.length; cali_key_++) {
 
-            for( var att in cobj ) {
+                var cobj = ST.cali_obj_by_key[cali_key_];
 
-                if( cobj[att] === ST.CONSTS.ETC_BUCKET ) {
+                for (var att in cobj) {
 
-                    var actual_val = ST.orig_obj_by_key[ cali_key_ ][ att ];
-                    console.log( "key: " + cali_key_ + "  att: " + att + "   actual: " + actual_val);
+                    if (cobj[att] === ST.CONSTS.ETC_BUCKET) {
 
-                    var column = dim_to_idx_[ att ];
+                        var actual_val = ST.orig_obj_by_key[cali_key_][att];
+                        console.log("key: " + cali_key_ + "  att: " + att + "   actual: " + actual_val);
 
-                    var krow = $('[key="' + cali_key_ + '"]').parent().parent();
-                    var dc_table_column = krow.find("._" + column);
+                        var column = dim_to_idx_[att];
 
-                    dc_table_column.html( actual_val );
+                        var krow = $('[key="' + cali_key_ + '"]').parent().parent();
+                        var dc_table_column = krow.find("._" + column);
+
+                        dc_table_column.html(actual_val);
+                    }
                 }
-            }
 
-            if( cali_key_ > end ) {
-                return true;
+                if (cali_key_ > end) {
+                    return true;
+                }
             }
         }
     };
 
+    setInterval(interval_handle_buckets_, 100);
+
 
     return {
+        //  call this everytime there's an input change or a render.
         handle_etc_buckets: handle_etc_buckets_
     }
 }();

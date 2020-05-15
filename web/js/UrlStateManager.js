@@ -53,6 +53,8 @@ ST.UrlStateManager = function() {
             //  This means they unclicked all the filters for that one.
             remove_param_( dimension );
         }
+
+        ST.EtcBucket.handle_etc_buckets();
     };
 
 

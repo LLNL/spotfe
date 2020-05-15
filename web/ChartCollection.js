@@ -274,6 +274,7 @@ ST.ChartCollection = function() {
         }
 
         bind_sort();
+        ST.EtcBucket.handle_etc_buckets();
     };
 
 
@@ -354,6 +355,7 @@ ST.ChartCollection = function() {
                 dc.redrawAll();
 
                 bind_sort();
+                ST.EtcBucket.handle_etc_buckets();
             }
         });
     };
