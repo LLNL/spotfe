@@ -360,7 +360,7 @@ ST.Utility = function() {
 
             //  Return last str because we don't want more than UNIQUE_STR different strings
             //  because it causes the HorizontalBarChart to mess up.
-            return ""; // + last_uniq_str_.substr(0, ST.CONSTS.MAX_HOR_BAR_CHART_STR_LEN );
+            return ST.CONSTS.ETC_BUCKET; // + last_uniq_str_.substr(0, ST.CONSTS.MAX_HOR_BAR_CHART_STR_LEN );
         } else {
 
             ud[ cali_obj[dimension] ] = 1;
