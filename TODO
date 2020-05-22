@@ -7,9 +7,6 @@ DONE - Fix git problems on RZ/CZ, check in spot.py changes
     * ask steph to rm hatchet in dev/hatchet
     * then recheckout /usr/gapps/spot/dev and recheckout hatchet
     * do the same on CZ.
-
-Next:
-- Deploy optvis to live, the feature?
 - Etc Bucket, don't put it in the Table - feature.
     * DONE - Replace with just: "Etc Bucket" and then post load the real values.
     * DONE - Create cache (or find the one we have) of cali objects indexed to key
@@ -19,29 +16,34 @@ Next:
     * DONE - look up correct Value: ST.CallSpot.get_cali_obj_att( key: 89, dimension: "cputime")
     * DONE - Replace Etc Bucket with the correct value, above. $('[key=" + key + "]').parent().parent().find("_" + row_index).html( val )
     * DONE - make the above happen inside a setInterval call, so it doesn't lock up the browser.
-    * Run it after intial load: ST.EtcBucket.handle_etc_buckets()
-    * Rerun it, after sorting up/down arrow
-    * Rerun it after any kind of selection occurs
+    * DONE - Run it after intial load: ST.EtcBucket.handle_etc_buckets()
+    * DONE - Rerun it, after sorting up/down arrow
+    * DONE - Rerun it after any kind of selection occurs
+DONE - Send matt the Venv location and commands: Don't need to because we're using lora.cgi to run the persistance layer
 
+Next:
+- Fix Git on my computer: MacPatch messed up my computer really bad.
 - make sure dates have the year.
+    * ready to checkin.
+- Configuration popup for changing things like x-axis and yaxis
     "UNIQUE_STR": 200, ->could be configurable for the popup.
     "MAX_HOR_BAR_CHART_STR_LEN": 100 -> could be configurable for the popu p.
 - check to see if we can do hovers for the horizontal bar value
 - Joe: URL for Jupyter needs to change?
 - Deal with issue sys.path.append(....)  how to get directory string without duplicating the function?
-- Configuration popup for changing things like x-axis and yaxis
-- Work with Steph to get Hatchet and hatchet templates using the dev/ version
-    * actually deploy it to live for dev/hatchet stuff.
 - Create a deployment script for hatchet and code deployment to maximize robustness.
 - CmdLine - Set feature.
     * We'll have to discuss how we break the command line into several parts.
     * set feature for things like: hostlist, cmdline
     * hidden fields.
-- Stephanie suggestion: would be helpful to get an error message, maybe even beforehand indicating that there are too many files in the directory
 
 "# Add hatchet to PYTHONPATH\n",
     "sys.path.append('/usr/gapps/spot/dev/hatchet')\n",
     "import hatchet as ht"
+
+Workflow:
+Checkperms
+SetPerms
 
 check if it's working:
 ht.__version__
