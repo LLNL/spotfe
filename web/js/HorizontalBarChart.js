@@ -19,6 +19,7 @@ ST.HorizontalBarChart = function() {
             <div instance_num="' + DOM_safe_dimension + '"  ' +
             'style="' + style + '" class="horizontal-bar-chart ' + className + '"  ' +
             'chart-dimension="' + DOM_safe_dimension + '">  \
+            <div class="popup_menu">=</div>\
         <div class="clearfix"></div> \
     </div>\
     <div class="' + axis_chart_name + ' the_bar"></div>' +

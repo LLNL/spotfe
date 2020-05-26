@@ -22,6 +22,7 @@ ST.PieChart = function() {
             'chart-dimension="' + DOM_safe_dimension + '">  \
         <strong>' + spec.title + '</strong> \
         <a class="reset pie_reset"  style="display: none;">reset</a> \
+        <div class="popup_menu">=</div>\
         <div class="clearfix"></div> \
     </div> ';
 
