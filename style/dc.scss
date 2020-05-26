@@ -106,6 +106,17 @@ div.horizontal-bar-chart {
 
     position: relative;
 
+    .popup_menu {
+        position: absolute;
+        top: 20px;
+        right: 40px;
+        color: black;
+        font-size: 22px;
+        border-bottom: 2px solid black;
+        cursor: pointer;
+        width: 12px;
+    }
+
     .top_left {
         position: absolute;
         top: 30px;

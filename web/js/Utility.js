@@ -284,7 +284,7 @@ ST.Utility = function() {
             minutes = "0" + minutes;
         }
 
-        var first_part = year + '/' + mon + '/' + day;
+        var first_part = mon + '/' + day + '/' + year;
         var break_str = "   ";
         var formattedTime = first_part + break_str + hour + ":" + minutes;
 

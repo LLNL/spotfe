@@ -51,6 +51,15 @@ div.horizontal-bar-chart {
 
 .dc-chart {
   position: relative; }
+  .dc-chart .popup_menu {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    color: black;
+    font-size: 22px;
+    border-bottom: 2px solid black;
+    cursor: pointer;
+    width: 12px; }
   .dc-chart .top_left {
     position: absolute;
     top: 30px;

@@ -74,8 +74,6 @@ ST.ChartCollection = <span class="hljs-function"><span class="hljs-keyword">func
                 dims_present[ sp.dimension.toLowerCase() ] = <span class="hljs-number">1</span>;
             }
 
-            <span class="hljs-built_in">console</span>.dir(dims_present);
-
             <span class="hljs-keyword">for</span>( <span class="hljs-keyword">var</span> z=<span class="hljs-number">0</span>; z &lt; ls.scatterplots.length; z++ ) {
 
                 <span class="hljs-keyword">var</span> sp2 = ls.scatterplots[z];
@@ -201,7 +199,7 @@ ST.ChartCollection = <span class="hljs-function"><span class="hljs-keyword">func
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">if</span>( viz === <span class="hljs-string">"PieChart"</span> &amp;&amp; counts &gt;= <span class="hljs-number">8</span> ) {
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">if</span>( viz === <span class="hljs-string">"PieChart"</span> &amp;&amp; counts &gt;= <span class="hljs-number">15</span> ) {
                 viz = <span class="hljs-string">"HorizontalBarChart"</span>;
             }
 
@@ -339,7 +337,7 @@ on other charts within the same chart group.
                         <span class="hljs-string">'&lt;/div&gt;'</span>;
                 }
 
-                <span class="hljs-keyword">var</span> hidden = <span class="hljs-string">'&lt;div class="hidden key"&gt;'</span> + d.key + <span class="hljs-string">'&lt;/div&gt;'</span>;
+                <span class="hljs-keyword">var</span> hidden = <span class="hljs-string">'&lt;div class="hidden key" key="'</span> + d.key + <span class="hljs-string">'"&gt;'</span> + d.key + <span class="hljs-string">'&lt;/div&gt;'</span>;
 
                 <span class="hljs-keyword">return</span> buts + hidden;
             }
@@ -551,13 +549,33 @@ This code demonstrates generating the column header automatically based on the c
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-22">&#182;</a>
               </div>
+              <p> Only load this once, otherwise when you check/uncheck
+ the load_compare will slow things down too much.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">if</span>( !ST.has_loaded_compare ) {
+
+            ST.has_loaded_compare = <span class="hljs-number">1</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-23">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-23">&#182;</a>
+              </div>
               <p> preload ST.str_cali_keys so you can click MJ right away.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        ST.CallSpot.load_compare();
+            <div class="content"><div class='highlight'><pre>            ST.CallSpot.load_compare();
+        }
 
         bind_sort();
+        ST.EtcBucket.handle_etc_buckets();
     };
 
 
@@ -571,11 +589,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-23">
+        <li id="section-24">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-23">&#182;</a>
+                <a class="pilcrow" href="#section-24">&#182;</a>
               </div>
               <p> The horizontal charts  have a slightly different structure where the reset link
  is not inside the div that gets redrawn, so we need to manually hide the horizontal reset link.</p>
@@ -616,11 +634,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-24">
+        <li id="section-25">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-24">&#182;</a>
+                <a class="pilcrow" href="#section-25">&#182;</a>
               </div>
               <p> for some reason, dc.js capitalizes column headings, thus messing up the sort
  reference when they click on the arrow click.</p>
@@ -649,7 +667,7 @@ This code demonstrates generating the column header automatically based on the c
 
                 what_sort = what_sort.split(<span class="hljs-string">'&lt;'</span>)[<span class="hljs-number">0</span>].toLowerCase();
 
-                runTable.sortBy(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{
+                runTable.size(<span class="hljs-literal">Infinity</span>).sortBy(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{
 
                     <span class="hljs-keyword">var</span> nobj = normalize_indexes_(d);
 
@@ -662,6 +680,7 @@ This code demonstrates generating the column header automatically based on the c
                 dc.redrawAll();
 
                 bind_sort();
+                ST.EtcBucket.handle_etc_buckets();
             }
         });
     };
@@ -684,11 +703,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-25">
+        <li id="section-26">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-25">&#182;</a>
+                <a class="pilcrow" href="#section-26">&#182;</a>
               </div>
               <p>yaxis = yaxis.replace(‘\%25252523’, ‘#’);</p>
 
@@ -723,11 +742,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-26">
+        <li id="section-27">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-26">&#182;</a>
+                <a class="pilcrow" href="#section-27">&#182;</a>
               </div>
               <p> $(‘.multi_jupyter’).trigger(‘click’);</p>
 
@@ -763,11 +782,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-27">
+        <li id="section-28">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-27">&#182;</a>
+                <a class="pilcrow" href="#section-28">&#182;</a>
               </div>
               <p> just for now.</p>
 
@@ -781,11 +800,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-28">
+        <li id="section-29">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-28">&#182;</a>
+                <a class="pilcrow" href="#section-29">&#182;</a>
               </div>
               <p>listen from chart</p>
 

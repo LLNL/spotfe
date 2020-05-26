@@ -22,12 +22,12 @@ DONE - Fix git problems on RZ/CZ, check in spot.py changes
 DONE - Send matt the Venv location and commands: Don't need to because we're using lora.cgi to run the persistance layer
 
 Next:
-- Fix Git on my computer: MacPatch messed up my computer really bad.
-- make sure dates have the year.
+DONE - Fix Git on my computer: MacPatch messed up my computer really bad.
+DONE - make sure dates have the year.
     * ready to checkin.
 - Configuration popup for changing things like x-axis and yaxis
     "UNIQUE_STR": 200, ->could be configurable for the popup.
-    "MAX_HOR_BAR_CHART_STR_LEN": 100 -> could be configurable for the popu p.
+    "MAX_HOR_BAR_CHART_STR_LEN": 100 -> could be configurable for the popup.
 - check to see if we can do hovers for the horizontal bar value
 - Joe: URL for Jupyter needs to change?
 - Deal with issue sys.path.append(....)  how to get directory string without duplicating the function?
