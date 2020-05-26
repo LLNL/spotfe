@@ -1,13 +1,15 @@
 ST.AddChartTypeView = function() {
 
-    var render_ = function() {
+    var render_ = function( edit_mode ) {
 
         $.get("web/Templates/PlotType.html?" + Math.random(), function( templ ) {
 
+            var mode = edit_mode === true ? "Edit": "Add";
+
             ReusableView.modal({
-                "header": "Add New Composite Chart Type",
+                "header": mode + " Composite Chart Type",
                 "body": templ,
-                "classes" : "composite_chart_type"
+                "classes" : "composite_chart_type " + mode.toLowerCase() + "_mode"
             });
 
             setup_dimensions_();

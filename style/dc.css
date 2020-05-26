@@ -485,6 +485,14 @@ body .dc-chart g.row text {
       background-image: url(../img/check.png);
       background-size: 100% 100%; }
 
+.composite_chart_type.edit_mode .myButton.submit {
+  display: inline-block; }
+.composite_chart_type.edit_mode .myButton.delete {
+  display: inline-block; }
+.composite_chart_type.add_mode .myButton.submit {
+  display: inline-block; }
+.composite_chart_type.add_mode .myButton.delete {
+  display: none; }
 .composite_chart_type table {
   width: 100%; }
 .composite_chart_type select {

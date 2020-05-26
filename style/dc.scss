@@ -713,6 +713,24 @@ body .dc-chart g.row text {
 
 .composite_chart_type {
 
+    &.edit_mode {
+        .myButton.submit {
+            display: inline-block;
+        }
+        .myButton.delete {
+            display: inline-block;
+        }
+    }
+
+    &.add_mode {
+        .myButton.submit {
+            display: inline-block;
+        }
+        .myButton.delete {
+            display: none;
+        }
+    }
+
     table {
         width: 100%;
     }

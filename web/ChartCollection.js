@@ -314,6 +314,11 @@ ST.ChartCollection = function() {
 
     var bind_sort = function () {
 
+        $('.chart_container .popup_menu').unbind('click').bind('click', function() {
+
+            ST.AddChartTypeView.render( true );
+        });
+
         $('.reset_all').unbind('click').bind("click", reset_all_);
 
         $('.contain_show_more a').unbind('click').bind('click', ST.ChartCollection.show_more);
