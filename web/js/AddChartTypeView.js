@@ -27,6 +27,7 @@ ST.AddChartTypeView = function() {
             }
 
             $('.composite_chart_type .submit').unbind("click").bind('click', submit_ );
+            $('.composite_chart_type .delete').unbind("click").bind('click', delete_ );
         });
     };
 
@@ -51,6 +52,16 @@ ST.AddChartTypeView = function() {
         $('.composite_chart_type .chart_name').val( name );
     };
 
+
+    var delete_ = function() {
+
+        remove_by_dimension_( ST.layout_used.charts, loaded_dimension_ );
+        remove_by_dimension_( ST.layout_used.scatterplots, loaded_dimension_ );
+
+        ST.ChartCollection.RenderChartCollection(ST.newp, ST.layout_used);
+
+        $('.composite_chart_type .close').trigger('click');
+    };
 
     var submit_ = function() {
 
