@@ -1,10 +1,15 @@
 ST.AddChartTypeView = function() {
 
-    var render_ = function( edit_mode ) {
+    var edit_mode_, loaded_dimension_;
+
+    var render_ = function( edit_mode, dimension, is_scatter_chart ) {
+
+        loaded_dimension_ = dimension;
+        edit_mode_ = edit_mode === true;
 
         $.get("web/Templates/PlotType.html?" + Math.random(), function( templ ) {
 
-            var mode = edit_mode === true ? "Edit": "Add";
+            var mode = edit_mode_ ? "Edit": "Add";
 
             ReusableView.modal({
                 "header": mode + " Composite Chart Type",
@@ -15,6 +20,12 @@ ST.AddChartTypeView = function() {
             setup_dimensions_();
             setup_defaults_();
 
+            if( !is_scatter_chart && edit_mode_ ) {
+                $('.composite_chart_type .axis_row').hide();
+            } else {
+                $('.composite_chart_type .axis_row').show();
+            }
+
             $('.composite_chart_type .submit').unbind("click").bind('click', submit_ );
         });
     };
@@ -22,9 +33,11 @@ ST.AddChartTypeView = function() {
 
     var setup_defaults_ = function () {
 
+        var ch_name = loaded_dimension_ || "Problem size vs Jobsize";
+
         $('.xaxis select').val( "problem_size" ).change(update_chart_name_);
         $('.yaxis select').val("jobsize").change(update_chart_name_);
-        $('.composite_chart_type .chart_name').val("Problem size vs Jobsize");
+        $('.composite_chart_type .chart_name').val( ch_name );
     };
 
 
@@ -65,19 +78,45 @@ ST.AddChartTypeView = function() {
 
         $('.composite_chart_type .close').trigger('click');
 
-        if( validate_have_( ST.layout_used, new_layout )) {
+        if( edit_mode_ ) {
 
-            var mess = "You already have a chart with x-axis: <b>" + xaxis + "</b> and y-axis: <b>"+ yaxis + "</b>";
-            ReusableView.alert("Warning", mess );
+            var old_layout = remove_by_dimension_( ST.layout_used.charts, loaded_dimension_ );
+            old_layout.name = chart_name;
+            old_layout.title = chart_name;
+
+            ST.layout_used.charts.push(old_layout);
+            ST.ChartCollection.RenderChartCollection(ST.newp, ST.layout_used);
+            //  ST.graph.editScatterplot(new_layout);
         } else {
 
-            ST.layout_used.charts.push(new_layout);
-            ST.ChartCollection.RenderChartCollection(ST.newp, ST.layout_used);
+            if( validate_have_( ST.layout_used, new_layout )) {
 
-            ST.graph.addScatterplot(new_layout);
+                var mess = "You already have a chart with x-axis: <b>" + xaxis + "</b> and y-axis: <b>"+ yaxis + "</b>";
+                ReusableView.alert("Warning", mess );
+            } else {
+
+                ST.layout_used.charts.push(new_layout);
+                ST.ChartCollection.RenderChartCollection(ST.newp, ST.layout_used);
+
+                ST.graph.addScatterplot(new_layout);
+            }
         }
     };
 
+
+    var remove_by_dimension_ = function( charts, dimension ) {
+
+        for( var x=0; x < charts.length; x++ ) {
+
+            var chart = charts[x];
+            if( dimension === chart.dimension ) {
+
+                var old = $.extend({}, charts[x] );
+                charts.splice( x, 1 );
+                return old;
+            }
+        }
+    };
 
     var validate_have_ = function( ls, new_layout ) {
 

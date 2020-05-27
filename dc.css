@@ -511,7 +511,8 @@ body .dc-chart g.row text {
   padding: 26px 0 0 0; }
 
 .composite_chart_type .chart_name {
-  padding: 5px; }
+  padding: 5px;
+  margin: 10px 0 0 0; }
 
 .composite_chart_type .center {
   margin: 22px 0 7px 0;

@@ -316,7 +316,11 @@ ST.ChartCollection = function() {
 
         $('.chart_container .popup_menu').unbind('click').bind('click', function() {
 
-            ST.AddChartTypeView.render( true );
+            var par = $(this).parent();
+            var dim = par.attr('chart-dimension');
+            var is_scatter_chart = par.hasClass('scatter-chart');
+
+            ST.AddChartTypeView.render( true, dim, is_scatter_chart );
         });
 
         $('.reset_all').unbind('click').bind("click", reset_all_);

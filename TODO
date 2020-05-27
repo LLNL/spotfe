@@ -24,7 +24,8 @@ DONE - Send matt the Venv location and commands: Don't need to because we're usi
 Next:
 DONE - Fix Git on my computer: MacPatch messed up my computer really bad.
 DONE - make sure dates have the year.
-    * ready to checkin.
+- edit functionality on FE
+- delete functionality on FE
 - check to see if we can do hovers for the horizontal bar value
 - Configuration popup for changing things like x-axis and yaxis
     "UNIQUE_STR": 200, ->could be configurable for the popup.
