@@ -632,8 +632,15 @@ This code demonstrates generating the column header automatically based on the c
             <span class="hljs-keyword">var</span> par = $(<span class="hljs-keyword">this</span>).parent();
             <span class="hljs-keyword">var</span> dim = par.attr(<span class="hljs-string">'chart-dimension'</span>);
             <span class="hljs-keyword">var</span> is_scatter_chart = par.hasClass(<span class="hljs-string">'scatter-chart'</span>);
+            <span class="hljs-keyword">var</span> x_label = par.find(<span class="hljs-string">'.x-label'</span>).html();
+            <span class="hljs-keyword">var</span> y_label = par.find(<span class="hljs-string">'.y-label'</span>).html();
 
-            ST.AddChartTypeView.render( <span class="hljs-literal">true</span>, dim, is_scatter_chart );
+            ST.AddChartTypeView.render( <span class="hljs-literal">true</span>, {
+                <span class="hljs-attr">dimension</span>: dim,
+                <span class="hljs-attr">is_scatter_chart</span>: is_scatter_chart,
+                <span class="hljs-attr">x_label</span>: x_label,
+                <span class="hljs-attr">y_label</span>: y_label
+            } );
         });
 
         $(<span class="hljs-string">'.reset_all'</span>).unbind(<span class="hljs-string">'click'</span>).bind(<span class="hljs-string">"click"</span>, reset_all_);

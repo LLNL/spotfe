@@ -319,8 +319,15 @@ ST.ChartCollection = function() {
             var par = $(this).parent();
             var dim = par.attr('chart-dimension');
             var is_scatter_chart = par.hasClass('scatter-chart');
+            var x_label = par.find('.x-label').html();
+            var y_label = par.find('.y-label').html();
 
-            ST.AddChartTypeView.render( true, dim, is_scatter_chart );
+            ST.AddChartTypeView.render( true, {
+                dimension: dim,
+                is_scatter_chart: is_scatter_chart,
+                x_label: x_label,
+                y_label: y_label
+            } );
         });
 
         $('.reset_all').unbind('click').bind("click", reset_all_);

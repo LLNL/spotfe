@@ -1,10 +1,11 @@
 ST.AddChartTypeView = function() {
 
-    var edit_mode_, loaded_dimension_;
+    var edit_mode_, loaded_dimension_, load_obj_;
 
-    var render_ = function( edit_mode, dimension, is_scatter_chart ) {
+    var render_ = function( edit_mode, load_obj ) {
 
-        loaded_dimension_ = dimension;
+        load_obj_ = load_obj;
+        loaded_dimension_ = load_obj.dimension;
         edit_mode_ = edit_mode === true;
 
         $.get("web/Templates/PlotType.html?" + Math.random(), function( templ ) {
@@ -20,7 +21,7 @@ ST.AddChartTypeView = function() {
             setup_dimensions_();
             setup_defaults_();
 
-            if( !is_scatter_chart && edit_mode_ ) {
+            if( !load_obj.is_scatter_chart && edit_mode_ ) {
                 $('.composite_chart_type .axis_row').hide();
             } else {
                 $('.composite_chart_type .axis_row').show();
@@ -35,9 +36,12 @@ ST.AddChartTypeView = function() {
     var setup_defaults_ = function () {
 
         var ch_name = loaded_dimension_ || "Problem size vs Jobsize";
+        var xaxis = load_obj_["x_label"] || "problem_size";
+        var yaxis = load_obj_["y_label"] || "jobsize";
 
-        $('.xaxis select').val( "problem_size" ).change(update_chart_name_);
-        $('.yaxis select').val("jobsize").change(update_chart_name_);
+        $('.xaxis select').val( xaxis ).change(update_chart_name_);
+        $('.yaxis select').val( yaxis ).change(update_chart_name_);
+
         $('.composite_chart_type .chart_name').val( ch_name );
     };
 
