@@ -96,8 +96,11 @@ ST.AddChartTypeView = function() {
         if( edit_mode_ ) {
 
             var old_layout = remove_by_dimension_( ST.layout_used.charts, loaded_dimension_ );
+
             old_layout.name = chart_name;
             old_layout.title = chart_name;
+            old_layout.axis = xaxis;
+            old_layout.yaxis = yaxis;
 
             ST.layout_used.charts.push(old_layout);
             ST.ChartCollection.RenderChartCollection(ST.newp, ST.layout_used);
