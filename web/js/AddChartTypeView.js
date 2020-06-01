@@ -22,9 +22,13 @@ ST.AddChartTypeView = function() {
             setup_defaults_();
 
             if( !load_obj.is_scatter_chart && edit_mode_ ) {
-                $('.composite_chart_type .axis_row').hide();
+
+                //  is NOT a scatter chart
+                $('.composite_chart_type .axis_row, .composite_chart_type .delete').hide();
             } else {
-                $('.composite_chart_type .axis_row').show();
+
+                //  is scatter chart
+                $('.composite_chart_type .axis_row, .composite_chart_type .delete').show();
             }
 
             $('.composite_chart_type .submit').unbind("click").bind('click', submit_ );
