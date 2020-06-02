@@ -43,7 +43,7 @@ ST.EtcBucket = function() {
                     if (cobj[att] === ST.CONSTS.ETC_BUCKET) {
 
                         var actual_val = ST.orig_obj_by_key[cali_key_][att];
-                        console.log("key: " + cali_key_ + "  att: " + att + "   actual: " + actual_val);
+                        //console.log("key: " + cali_key_ + "  att: " + att + "   actual: " + actual_val);
 
                         var column = dim_to_idx_[att];
 
