@@ -45,6 +45,7 @@ ST.EtcBucket = function() {
                         var actual_val = ST.orig_obj_by_key[cali_key_][att];
                         //console.log("key: " + cali_key_ + "  att: " + att + "   actual: " + actual_val);
 
+
                         var column = dim_to_idx_[att];
 
                         var krow = $('[key="' + cali_key_ + '"]').parent().parent();

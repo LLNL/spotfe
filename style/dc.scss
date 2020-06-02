@@ -29,6 +29,16 @@ $font_sans_serif: sans-serif;
     stroke-opacity: 0.5;
 }
 
+#tooltip {
+    position: absolute;
+    display: none;
+    background: cornsilk;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px;
+    z-index: 4000;
+}
+
 .chart_container .dc-chart {
     height: 440px;
 }

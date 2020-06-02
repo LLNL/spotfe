@@ -381,8 +381,23 @@ ST.Utility = function() {
         return keys.length;
     };
 
+    function show_tooltip_(evt, text) {
+
+        let tooltip = document.getElementById("tooltip");
+        tooltip.innerHTML = text;
+        tooltip.style.display = "block";
+        tooltip.style.left = evt.pageX + 10 + 'px';
+        tooltip.style.top = evt.pageY + 10 + 'px';
+    }
+
+    function hide_tooltip_() {
+        var tooltip = document.getElementById("tooltip");
+        tooltip.style.display = "none";
+    }
 
     return {
+        show_tooltip: show_tooltip_,
+        hide_tooltip: hide_tooltip_,
         get_unique_value_count: get_unique_value_count_,
         limit_unique_values: limit_unique_values_,
         strip: strip_,
