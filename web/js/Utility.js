@@ -353,7 +353,6 @@ ST.Utility = function() {
         unique_str_[dimension] = unique_str_[dimension] || {};
 
         var ud = unique_str_[dimension];
-
         var keys = Object.keys(ud);
 
         if( keys.length > ST.CONSTS.UNIQUE_STR ) {
@@ -367,12 +366,21 @@ ST.Utility = function() {
 
             //  return real actual value.
             last_uniq_str_ = cali_obj[dimension];
-            return cali_obj[dimension].substr(0, ST.CONSTS.MAX_HOR_BAR_CHART_STR_LEN);
+            var short = cali_obj[dimension].substr(0, ST.CONSTS.MAX_HOR_BAR_CHART_STR_LEN);
+            orig_str_lookup_[ short ] = cali_obj[dimension];
+
+            return short;
         }
     };
 
+
+    var lookup_orig_str_ = function( s ) {
+        return orig_str_lookup_[s] || s;
+    };
+
     var unique_str_ = {},
-        last_uniq_str_ = "";
+        last_uniq_str_ = "",
+        orig_str_lookup_ = {};
 
     var get_unique_value_count_ = function( dimension ) {
 
@@ -383,8 +391,10 @@ ST.Utility = function() {
 
     function show_tooltip_(evt, text) {
 
+        var ht = $(event.target).parent().find('text').html();
+
         let tooltip = document.getElementById("tooltip");
-        tooltip.innerHTML = text;
+        tooltip.innerHTML = ht;
         tooltip.style.display = "block";
         tooltip.style.left = evt.pageX + 10 + 'px';
         tooltip.style.top = evt.pageY + 10 + 'px';
@@ -396,6 +406,7 @@ ST.Utility = function() {
     }
 
     return {
+        lookup_orig_str: lookup_orig_str_,
         show_tooltip: show_tooltip_,
         hide_tooltip: hide_tooltip_,
         get_unique_value_count: get_unique_value_count_,

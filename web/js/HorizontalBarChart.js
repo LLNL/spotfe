@@ -54,6 +54,7 @@ ST.HorizontalBarChart = function() {
         //options.counts = ST.Utility.get_unique_value_count( options.dimension );
         options.height = 30 + (options.counts * 30);
 
+
         // Create a row chart and use the given css selector as anchor. You can also specify
         // an optional chart group for this chart to be scoped within. When a chart belongs
         // to a specific group then any interaction with such chart will only trigger redraw
@@ -76,12 +77,13 @@ ST.HorizontalBarChart = function() {
             .label(function (d) {
                 return d.key;
             })
-            // Title sets the row text
+            // Title sets the hover over.
             .title(function (d) {
-                return d.author;  //  d.value
+                return ST.Utility.lookup_orig_str( d.key );  //  d.value
             })
             .elasticX(true)
             .xAxis().ticks(4);
+
 
 
         var dayOfWeek2 = ndx.dimension(function (cali_object) {

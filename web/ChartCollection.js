@@ -314,8 +314,8 @@ ST.ChartCollection = function() {
 
     var bind_sort = function () {
 
-        $('rect').attr("onmousemove", "ST.Utility.show_tooltip(evt, 'This is blue');")
-            .attr('onmouseout', "ST.Utility.hide_tooltip();");
+        //$('rect').attr("onmousemove", "ST.Utility.show_tooltip(evt, 'This is blue');")
+        //    .attr('onmouseout', "ST.Utility.hide_tooltip();");
 
         $('.chart_container .popup_menu').unbind('click').bind('click', function() {
 

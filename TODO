@@ -30,6 +30,7 @@ DONE - edit functionality on FE
     * DONE - show/hide delete button based on chart type
 DONE - delete functionality on FE
 - check to see if we can do hovers for the horizontal bar value
+- Next: Create a deployment script for deploying to live, that includes caliper/hatchet
 - Next: Suggest I work on integrating joe's persistence layer into the source code.
 - Do persistence for edits on the BE.
 - Configuration popup for changing things like x-axis and yaxis
