@@ -4,8 +4,10 @@ ST.AddChartTypeView = function() {
 
     var render_ = function( edit_mode, load_obj ) {
 
+        load_obj = load_obj || {};
         load_obj_ = load_obj;
-        loaded_dimension_ = load_obj.dimension;
+
+        loaded_dimension_ = load_obj ? load_obj.dimension : false;
         edit_mode_ = edit_mode === true;
 
         $.get("web/Templates/PlotType.html?" + Math.random(), function( templ ) {
@@ -28,7 +30,8 @@ ST.AddChartTypeView = function() {
             } else {
 
                 //  is scatter chart
-                $('.composite_chart_type .axis_row, .composite_chart_type .delete').show();
+                $('.composite_chart_type .axis_row');
+                $(' .composite_chart_type .delete').attr('display', 'inline-block');
             }
 
             $('.composite_chart_type .submit').unbind("click").bind('click', submit_ );
@@ -38,6 +41,8 @@ ST.AddChartTypeView = function() {
 
 
     var setup_defaults_ = function () {
+
+        load_obj_ = load_obj_ || {};
 
         var ch_name = loaded_dimension_ || "Problem size vs Jobsize";
         var xaxis = load_obj_["x_label"] || "problem_size";
