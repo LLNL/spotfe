@@ -9,10 +9,11 @@ DONE - check to see if we can do hovers for the horizontal bar value
 
 Next:
 - make sure dates have the year.
-- Help David deploy his stuff on dev on CZ and RZ.
+- openJupyter integration.
+DONE - Help David deploy his stuff on dev on CZ and RZ.
     * DONE - actual directory and perms is deployed
     * still need to modify the actual templates, does stephanie do that or me?
-- Replace: cali_query_path = "/usr/gapps/spot/caliper-install/bin"
+DONE - Replace: cali_query_path = "/usr/gapps/spot/caliper-install/bin"
 
 - Set up an error message to popup if the user only has 1 file selected when clicking multiJupyter
 - Next: Suggest I work on integrating joe's persistence layer into the source code.
