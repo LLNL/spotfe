@@ -410,6 +410,7 @@ ST.CallSpot = function() {
 
             var host = ST.params.machine;
             var command = get_command_( "jupyter", file, "" );
+            console.log("ST.graph.openJupyter( " + file + ", " + host + ", " + command + " );");
 
             ST.graph.openJupyter( file, host, command ).then( function(data) {
 
