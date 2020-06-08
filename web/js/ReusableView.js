@@ -70,8 +70,16 @@ ReusableView = function() {
         $('.outer_modal').remove();
     };
 
+    var warning_ = function( s ) {
+
+        ReusableView.modal({
+            "header": "Warning",
+            "body": s
+        });
+    };
 
     return {
+        warning: warning_,
         close: close_,
         alert: alert_,
         prompt: prompt_,

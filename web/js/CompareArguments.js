@@ -67,6 +67,7 @@ ST.CompareArguments = function() {
                 multiJupyter: function() {
 
                     var cali_keys = ST.CallSpot.get_keys();// ST.str_cali_keys;
+                    var cali_count = cali_keys.split(' ').length;
 
                     //  cali_path is /usr/gapps/spot/datasets/lulesh_gen/500/5.cali
                     var file_path = $('.directory').val();
@@ -74,13 +75,16 @@ ST.CompareArguments = function() {
                     var limit = 3500;
                     var t_count = total_send.length;
 
+                    if( cali_count <= 1 ) {
+                        ReusableView.warning("Less than 2 rows are selected.  Please select 2 or more rows to compare.");
+                        return false;
+                    }
+
                     if( t_count > limit ) {
 
-                        ReusableView.modal({
-                            "header": "Warning",
-                            "body": "Too many rows selected.  Please narrow the selection.  <br>" +
-                                "request chars = " + t_count + "  limit = " + limit
-                        });
+                        ReusableView.warning("Too many rows selected.  Please narrow the selection.  <br>" +
+                                "request chars = " + t_count + "  limit = " + limit);
+                        return false;
                     }
 
                     ST.CallSpot.ajax({

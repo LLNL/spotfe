@@ -8,8 +8,8 @@ DONE - delete functionality on FE
 DONE - check to see if we can do hovers for the horizontal bar value
 
 Next:
-- make sure dates have the year.
-- openJupyter integration.
+DONE - make sure dates have the year.
+DONE - openJupyter integration.
 DONE - Help David deploy his stuff on dev on CZ and RZ.
     * DONE - actual directory and perms is deployed
     * still need to modify the actual templates, does stephanie do that or me?
