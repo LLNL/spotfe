@@ -16,7 +16,7 @@ DONE - Help David deploy his stuff on dev on CZ and RZ.
 DONE - Replace: cali_query_path = "/usr/gapps/spot/caliper-install/bin"
 
 - Set up an error message to popup if the user only has 1 file selected when clicking multiJupyter
-- Next: Suggest I work on integrating joe's persistence layer into the source code.
+- integrating joe's persistence layer into the source code.
 - Do persistence for edits on the BE.
 
 
