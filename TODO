@@ -9,13 +9,15 @@ DONE - check to see if we can do hovers for the horizontal bar value
 
 Next:
 DONE - make sure dates have the year.
-DONE - openJupyter integration.
 DONE - Help David deploy his stuff on dev on CZ and RZ.
     * DONE - actual directory and perms is deployed
-    * still need to modify the actual templates, does stephanie do that or me?
+    * DONE - modified the templates such that cali_query_path is set correctly and will run fine.
 DONE - Replace: cali_query_path = "/usr/gapps/spot/caliper-install/bin"
+DONE - Set up an error message to popup if the user only has 1 file selected when clicking multiJupyter
+- The architecture lookup needs to go directly into the notebook
 
-- Set up an error message to popup if the user only has 1 file selected when clicking multiJupyter
+
+- openJupyter integration.
 - integrating joe's persistence layer into the source code.
 - Do persistence for edits on the BE.
 

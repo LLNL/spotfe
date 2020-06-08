@@ -394,7 +394,7 @@ ST.CallSpot = function() {
 
         var obj = objs_by_run_id_[run_id];
         var key = obj.key;
-        var appended = obj.filepath;    //file + '/' + key;
+        var file = obj.filepath;    //file + '/' + key;
         var cali_fp = ST.cali_obj_by_key[key].file_path;
 
         if (subject === 'mpi') {
@@ -408,9 +408,21 @@ ST.CallSpot = function() {
 
         } else {
 
-            //  subject must be jupyter or walltime
+            var host = ST.params.machine;
+            var command = get_command_( "jupyter", file, "" );
+
+            ST.graph.openJupyter( file, host, command ).then( function(data) {
+
+                var command_out = data.output.command_out;
+                var url = command_out;
+
+                window.open(url);
+                // now go to the URL that BE tells us to go to.
+            });
+
+            /*  subject must be jupyter or walltime
             ajax_({
-                file: appended,
+                file: file,
                 type: "jupyter",
                 command: command,
                 "success": function(data) {
@@ -421,7 +433,7 @@ ST.CallSpot = function() {
                     window.open(url);
                     // now go to the URL that BE tells us to go to.
                 }
-            });
+            });*/
         }
     };
 
