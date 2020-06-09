@@ -413,12 +413,13 @@ ST.CallSpot = function() {
             //get_command_( "jupyter", file, "" );
             console.log("ST.graph.openJupyter( \"" + file + "\", \"" + host + "\", \"" + command + "\" );");
 
-            ST.graph.openJupyter( file, host, command ).then( function(data) {
+            ST.graph.openJupyter( file, host, command ).then( function( data ) {
 
-                var command_out = data.output.command_out;
-                var url = command_out;
+                console.dir(data);
+                //var command_out = data.output.command_out;
+                //var url = command_out;
 
-                window.open(url);
+                //window.open(url);
                 // now go to the URL that BE tells us to go to.
             });
 
