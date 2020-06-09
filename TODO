@@ -12,12 +12,10 @@ DONE - make sure dates have the year.
 DONE - Help David deploy his stuff on dev on CZ and RZ.
     * DONE - actual directory and perms is deployed
     * DONE - modified the templates such that cali_query_path is set correctly and will run fine.
-DONE - Replace: cali_query_path = "/usr/gapps/spot/caliper-install/bin"
+    * The architecture lookup needs to go directly into the notebook
 DONE - Set up an error message to popup if the user only has 1 file selected when clicking multiJupyter
-- The architecture lookup needs to go directly into the notebook
+DONE - openJupyter integration.
 
-
-- openJupyter integration.
 - integrating joe's persistence layer into the source code.
 - Do persistence for edits on the BE.
 

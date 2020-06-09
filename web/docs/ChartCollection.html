@@ -869,6 +869,10 @@ This code demonstrates generating the column header automatically based on the c
                 ST.UrlStateManager.update_url(<span class="hljs-string">'groupby'</span>, groupBy);
             }
         });
+
+        <span class="hljs-keyword">if</span>( ENV.turn_off_add_chart_feature ) {
+            $(<span class="hljs-string">'body'</span>).addClass(<span class="hljs-string">'turn_off_add_chart_feature'</span>);
+        }
     };
 
     $(<span class="hljs-built_in">document</span>).ready(init);

@@ -482,6 +482,10 @@ ST.ChartCollection = function() {
                 ST.UrlStateManager.update_url('groupby', groupBy);
             }
         });
+
+        if( ENV.turn_off_add_chart_feature ) {
+            $('body').addClass('turn_off_add_chart_feature');
+        }
     };
 
     $(document).ready(init);

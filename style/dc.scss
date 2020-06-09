@@ -106,6 +106,13 @@ div.horizontal-bar-chart {
     }
 }
 
+.turn_off_add_chart_feature {
+    div.popup_menu,
+    div.plus_icon {
+        display: none;
+    }
+}
+
 .scatter-chart.dc-chart {
     .x-label {
         bottom: 18px;
