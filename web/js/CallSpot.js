@@ -140,7 +140,14 @@ ST.CallSpot = function() {
 
         ST.Utility.check_error( summ );
 
-        ST.layout_used = summ.layout;
+        ST.layout_used = sqs.layout_used || summ.layout;
+
+        if( !sqs.layout_used ) {
+            sqs.layout_used = summ.layout;
+        }
+
+        console.dir(ST.layout_used);
+
         parsed = summ.data;
 
         var now = Math.round( Date.now() / 1000);

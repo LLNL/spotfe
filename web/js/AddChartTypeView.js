@@ -123,9 +123,12 @@ ST.AddChartTypeView = function() {
             } else {
 
                 ST.layout_used.charts.push(new_layout);
+                sqs.layout_used.charts.push(new_layout);
+                sq.save();
+
                 ST.ChartCollection.RenderChartCollection(ST.newp, ST.layout_used);
 
-                ST.graph.addScatterplot(new_layout);
+                //ST.graph.addScatterplot(new_layout);
             }
         }
     };

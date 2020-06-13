@@ -1,4 +1,5 @@
-//  Global Storage, shortcut for sq.stat.
+//  Global Storage, shortcut for sqs.
+var sqs = {};
 var sq = function() {
 
     var table_name = 'a13';
@@ -12,26 +13,27 @@ var sq = function() {
         }
 
         var my_data = JSON.parse(localStorage.getItem(table_name)) || {};
-        sq.stat = $.extend({}, my_data, sq.stat );
+        sqs = $.extend({}, my_data, sqs );
 
         hasLoaded_ = true;
         callback();
     }
+
+    $(document).ready( function() {
+
+        load( function() {
+
+            //sqs.layout_used = sqs.layout_used || {};
+        });
+    });
 
 
     function save() {
 
         if( hasLoaded_ ) {
 
-            var stat_str = JSON.stringify(sq.stat);
+            var stat_str = JSON.stringify(sqs);
             localStorage.setItem(table_name, stat_str);
-
-            if( sq.stat.signed_in ) {
-                /*ajax({
-                    context: 'Save',
-                    stat: stat_str
-                });*/
-            }
 
         } else {
             log("Can't save stat before loading it.");
@@ -43,13 +45,12 @@ var sq = function() {
         save: save,
         /*
          *  PRECONDITION:
-         *              load must be called before the sq.stat can be used.
+         *              load must be called before the sqs can be used.
          *              And, you shouldn't continue until the callback is reached.
          */
         load: load,
         /*
          *  This is the object to which you can store stuff in freely.
          */
-        stat: {}
     }
 }();

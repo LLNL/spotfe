@@ -70,7 +70,18 @@ ST.UserPreferences = function() {
                     ST.ChartCollection.RenderChartCollection(ST.newp, ST.layout_used);
 
                     //  Persist checkbox changes in localStorage.
-                    ST.graph.setChartVisible( chart_dimension, checked );
+                    //ST.graph.setChartVisible( chart_dimension, checked );
+
+                    for( var x in sqs.layout_used.charts ) {
+
+                        var chart = sqs.layout_used.charts[x];
+
+                        if( chart.dimension === chart_dimension ) {
+                            console.log("checked: " + checked);
+                            chart.show = checked;
+                            sq.save();
+                        }
+                    }
                 }
             }
         });

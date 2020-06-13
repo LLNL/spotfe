@@ -6,6 +6,12 @@ DONE - edit functionality on FE
     * DONE - show/hide delete button based on chart type
 DONE - delete functionality on FE
 DONE - check to see if we can do hovers for the horizontal bar value
+DONE - Create new localStorage persistance layer
+- Integrate new persistance layer into existing functionality.
+    * why does region balance vs job size have extra labels below it?
+- Do edit persistance
+- Do delete persistance
+
 
 Next:
 DONE - make sure dates have the year.
