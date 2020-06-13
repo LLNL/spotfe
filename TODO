@@ -1,4 +1,12 @@
 Next:
+DONE - make sure dates have the year.
+DONE - Help David deploy his stuff on dev on CZ and RZ.
+    * DONE - actual directory and perms is deployed
+    * DONE - modified the templates such that cali_query_path is set correctly and will run fine.
+    * DONE - The architecture lookup needs to go directly into the notebook
+DONE - Set up an error message to popup if the user only has 1 file selected when clicking multiJupyter
+DONE - openJupyter integration.
+    * DONE - Off switch for ScatterChart/Edit Chart feature
 DONE - Fix Git on my computer: MacPatch messed up my computer really bad.
 DONE - edit functionality on FE
     * DONE - load correct select dropdown.
@@ -10,25 +18,15 @@ DONE - Create new localStorage persistance layer
 DONE - Integrate new persistance layer into existing functionality.
 DONE - Do delete persistance
 DONE - Do edit name of chart
-- Add Chart make it use the new pers layer: why is it adding 2 charts?
+DONE - Add Chart make it use the new pers layer
 - Do edit x-axis and y-axis persistance
 
 
 Next:
-DONE - make sure dates have the year.
-DONE - Help David deploy his stuff on dev on CZ and RZ.
-    * DONE - actual directory and perms is deployed
-    * DONE - modified the templates such that cali_query_path is set correctly and will run fine.
-    * DONE - The architecture lookup needs to go directly into the notebook
-DONE - Set up an error message to popup if the user only has 1 file selected when clicking multiJupyter
-DONE - openJupyter integration.
-    * DONE - Off switch for ScatterChart/Edit Chart feature
+- encode a hash, everytime someone adds or edits or deletes a chart
+- append hash to URL
+- on page load, read URL hash and use it to set up localStorage sqs.
 
-- integrating joe's persistence layer into the source code.
-- Do persistence for edits on the BE.
-
-
-- Encoding URL.
 
 - Next: Create a deployment script for deploying to live, that includes caliper/hatchet
 - Configuration popup for changing things like x-axis and yaxis
