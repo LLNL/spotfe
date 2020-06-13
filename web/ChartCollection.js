@@ -44,7 +44,7 @@ ST.ChartCollection = function() {
 
     var RenderChartCollection = function (the_data, layout_spec) {
 
-        amend_charts_( layout_spec );
+        //amend_charts_( layout_spec );
 
         console.dir(the_data);
         var GLOB_DAT = the_data;

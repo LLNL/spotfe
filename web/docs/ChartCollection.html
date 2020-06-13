@@ -87,12 +87,7 @@ ST.ChartCollection = <span class="hljs-function"><span class="hljs-keyword">func
     };
 
 
-    <span class="hljs-keyword">var</span> RenderChartCollection = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">the_data, layout_spec</span>) </span>{
-
-        amend_charts_( layout_spec );
-
-        <span class="hljs-built_in">console</span>.dir(the_data);
-        <span class="hljs-keyword">var</span> GLOB_DAT = the_data;</pre></div></div>
+    <span class="hljs-keyword">var</span> RenderChartCollection = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">the_data, layout_spec</span>) </span>{</pre></div></div>
             
         </li>
         
@@ -102,6 +97,23 @@ ST.ChartCollection = <span class="hljs-function"><span class="hljs-keyword">func
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>amend_charts_( layout_spec );</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+        <span class="hljs-built_in">console</span>.dir(the_data);
+        <span class="hljs-keyword">var</span> GLOB_DAT = the_data;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
               <p> ST.MakeNiceData.make( the_data );
          options.buckets = [‘0-0.3’, ‘0.3-0.6’, ‘0.6-10’, ‘10-15’, ‘15-20’];</p>
@@ -114,11 +126,11 @@ ST.ChartCollection = <span class="hljs-function"><span class="hljs-keyword">func
         </li>
         
         
-        <li id="section-4">
+        <li id="section-5">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-4">&#182;</a>
+                <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
               <p> ST.ReturnedDataStub.data</p>
 
@@ -132,11 +144,11 @@ ST.ChartCollection = <span class="hljs-function"><span class="hljs-keyword">func
         </li>
         
         
-        <li id="section-5">
+        <li id="section-6">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-5">&#182;</a>
+                <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
               <p>Dimension by full date</p>
 
@@ -149,11 +161,11 @@ ST.ChartCollection = <span class="hljs-function"><span class="hljs-keyword">func
         </li>
         
         
-        <li id="section-6">
+        <li id="section-7">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-6">&#182;</a>
+                <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
               <p> Do Layoutspec validation</p>
 
@@ -189,11 +201,11 @@ ST.ChartCollection = <span class="hljs-function"><span class="hljs-keyword">func
         </li>
         
         
-        <li id="section-7">
+        <li id="section-8">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-7">&#182;</a>
+                <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
               <p> keep disabled for now.</p>
 
@@ -224,11 +236,11 @@ ST.ChartCollection = <span class="hljs-function"><span class="hljs-keyword">func
         </li>
         
         
-        <li id="section-8">
+        <li id="section-9">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-8">&#182;</a>
+                <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
               <p>(<em>optional</em>) <code>.html</code> sets different html when some records or all records are selected.
 <code>.html</code> replaces everything in the anchor with the html given using the following function.
@@ -245,11 +257,11 @@ ST.ChartCollection = <span class="hljs-function"><span class="hljs-keyword">func
         </li>
         
         
-        <li id="section-9">
+        <li id="section-10">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-9">&#182;</a>
+                <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
               <h4 id="data-table">Data Table</h4>
 
@@ -258,11 +270,11 @@ ST.ChartCollection = <span class="hljs-function"><span class="hljs-keyword">func
         </li>
         
         
-        <li id="section-10">
+        <li id="section-11">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-10">&#182;</a>
+                <a class="pilcrow" href="#section-11">&#182;</a>
               </div>
               <p>Create a data table widget and use the given css selector as anchor. You can also specify
 an optional chart group for this chart to be scoped within. When a chart belongs
@@ -349,11 +361,11 @@ on other charts within the same chart group.
         </li>
         
         
-        <li id="section-11">
+        <li id="section-12">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-11">&#182;</a>
+                <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
               <p> <a href="https://github.com/HamsterHuey/intothevoid.io/blob/master/code/2017/dcjs%20sortable%20table/dcjsSortableTable.html">https://github.com/HamsterHuey/intothevoid.io/blob/master/code/2017/dcjs%20sortable%20table/dcjsSortableTable.html</a></p>
 
@@ -366,11 +378,11 @@ on other charts within the same chart group.
         </li>
         
         
-        <li id="section-12">
+        <li id="section-13">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-12">&#182;</a>
+                <a class="pilcrow" href="#section-13">&#182;</a>
               </div>
               <p>Data table does not use crossfilter group but rather a closure
 as a grouping function</p>
@@ -385,11 +397,11 @@ as a grouping function</p>
         </li>
         
         
-        <li id="section-13">
+        <li id="section-14">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-13">&#182;</a>
+                <a class="pilcrow" href="#section-14">&#182;</a>
               </div>
               <p>return date.getFullYear() + ‘/‘ + format((date.getMonth() + 1));</p>
 
@@ -401,11 +413,11 @@ as a grouping function</p>
         </li>
         
         
-        <li id="section-14">
+        <li id="section-15">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-14">&#182;</a>
+                <a class="pilcrow" href="#section-15">&#182;</a>
               </div>
               <p>(<em>optional</em>) max number of records to be shown, <code>default = 25</code></p>
 
@@ -416,11 +428,11 @@ as a grouping function</p>
         </li>
         
         
-        <li id="section-15">
+        <li id="section-16">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-15">&#182;</a>
+                <a class="pilcrow" href="#section-16">&#182;</a>
               </div>
               <p>There are several ways to specify the columns; see the data-table documentation.
 This code demonstrates generating the column header automatically based on the columns.</p>
@@ -432,11 +444,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-16">
+        <li id="section-17">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-16">&#182;</a>
+                <a class="pilcrow" href="#section-17">&#182;</a>
               </div>
               <p>(<em>optional</em>) sort using the given field, <code>default = function(d){return d;}</code></p>
 
@@ -451,11 +463,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-17">
+        <li id="section-18">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-17">&#182;</a>
+                <a class="pilcrow" href="#section-18">&#182;</a>
               </div>
               <p>(<em>optional</em>) sort order, <code>default = d3.ascending</code></p>
 
@@ -466,11 +478,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-18">
+        <li id="section-19">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-18">&#182;</a>
+                <a class="pilcrow" href="#section-19">&#182;</a>
               </div>
               <p>(<em>optional</em>) custom renderlet to post-process chart using <a href="http://d3js.org">D3</a></p>
 
@@ -483,11 +495,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-19">
+        <li id="section-20">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-19">&#182;</a>
+                <a class="pilcrow" href="#section-20">&#182;</a>
               </div>
               <p> Make this happen after the render table.</p>
 
@@ -507,11 +519,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-20">
+        <li id="section-21">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-20">&#182;</a>
+                <a class="pilcrow" href="#section-21">&#182;</a>
               </div>
               <p>console.dir(runTable.top(80000));</p>
 
@@ -520,11 +532,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-21">
+        <li id="section-22">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-21">&#182;</a>
+                <a class="pilcrow" href="#section-22">&#182;</a>
               </div>
               <p>simply call <code>.renderAll()</code> to render all charts on the page</p>
 
@@ -543,11 +555,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-22">
+        <li id="section-23">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-22">&#182;</a>
+                <a class="pilcrow" href="#section-23">&#182;</a>
               </div>
               <p> Only load this once, otherwise when you check/uncheck
  the load_compare will slow things down too much.</p>
@@ -561,11 +573,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-23">
+        <li id="section-24">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-23">&#182;</a>
+                <a class="pilcrow" href="#section-24">&#182;</a>
               </div>
               <p> preload ST.str_cali_keys so you can click MJ right away.</p>
 
@@ -589,11 +601,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-24">
+        <li id="section-25">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-24">&#182;</a>
+                <a class="pilcrow" href="#section-25">&#182;</a>
               </div>
               <p> The horizontal charts  have a slightly different structure where the reset link
  is not inside the div that gets redrawn, so we need to manually hide the horizontal reset link.</p>
@@ -630,11 +642,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-25">
+        <li id="section-26">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-25">&#182;</a>
+                <a class="pilcrow" href="#section-26">&#182;</a>
               </div>
               <p>$(‘rect’).attr(“onmousemove”, “ST.Utility.show_tooltip(evt, ‘This is blue’);”)
    .attr(‘onmouseout’, “ST.Utility.hide_tooltip();”);</p>
@@ -665,11 +677,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-26">
+        <li id="section-27">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-26">&#182;</a>
+                <a class="pilcrow" href="#section-27">&#182;</a>
               </div>
               <p> for some reason, dc.js capitalizes column headings, thus messing up the sort
  reference when they click on the arrow click.</p>
@@ -734,11 +746,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-27">
+        <li id="section-28">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-27">&#182;</a>
+                <a class="pilcrow" href="#section-28">&#182;</a>
               </div>
               <p>yaxis = yaxis.replace(‘\%25252523’, ‘#’);</p>
 
@@ -773,11 +785,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-28">
+        <li id="section-29">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-28">&#182;</a>
+                <a class="pilcrow" href="#section-29">&#182;</a>
               </div>
               <p> $(‘.multi_jupyter’).trigger(‘click’);</p>
 
@@ -813,11 +825,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-29">
+        <li id="section-30">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-29">&#182;</a>
+                <a class="pilcrow" href="#section-30">&#182;</a>
               </div>
               <p> just for now.</p>
 
@@ -831,11 +843,11 @@ This code demonstrates generating the column header automatically based on the c
         </li>
         
         
-        <li id="section-30">
+        <li id="section-31">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-30">&#182;</a>
+                <a class="pilcrow" href="#section-31">&#182;</a>
               </div>
               <p>listen from chart</p>
 

@@ -71,6 +71,9 @@ ST.AddChartTypeView = function() {
         remove_by_dimension_( ST.layout_used.charts, loaded_dimension_ );
         remove_by_dimension_( ST.layout_used.scatterplots, loaded_dimension_ );
 
+        sqs.layout_used = ST.layout_used;
+        sq.save();
+
         ST.ChartCollection.RenderChartCollection(ST.newp, ST.layout_used);
 
         $('.composite_chart_type .close').trigger('click');
