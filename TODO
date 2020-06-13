@@ -7,10 +7,11 @@ DONE - edit functionality on FE
 DONE - delete functionality on FE
 DONE - check to see if we can do hovers for the horizontal bar value
 DONE - Create new localStorage persistance layer
-- Integrate new persistance layer into existing functionality.
-    * why does region balance vs job size have extra labels below it?
-- Do edit persistance
-- Do delete persistance
+DONE - Integrate new persistance layer into existing functionality.
+DONE - Do delete persistance
+DONE - Do edit name of chart
+- Add Chart make it use the new pers layer: why is it adding 2 charts?
+- Do edit x-axis and y-axis persistance
 
 
 Next:

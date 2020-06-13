@@ -125,8 +125,9 @@ ST.AddChartTypeView = function() {
                 ReusableView.alert("Warning", mess );
             } else {
 
-                ST.layout_used.charts.push(new_layout);
                 sqs.layout_used.charts.push(new_layout);
+                ST.layout_used = sqs.layout_used;
+                
                 sq.save();
 
                 ST.ChartCollection.RenderChartCollection(ST.newp, ST.layout_used);
