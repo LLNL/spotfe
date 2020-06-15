@@ -78,6 +78,10 @@ ST.AddChartTypeView = function() {
         $('.composite_chart_type .close').trigger('click');
     };
 
+    var make_new_dimension_ = function( xaxis, yaxis ) {
+        return xaxis + "_vs_" + yaxis;
+    };
+
     var submit_ = function() {
 
         var chart_name = $('.chart_name').val();
@@ -87,7 +91,7 @@ ST.AddChartTypeView = function() {
         xaxis = ST.Utility.strip(xaxis);
         yaxis = ST.Utility.strip(yaxis);
 
-        var dimension = xaxis + "_vs_" + yaxis;
+        var dimension = make_new_dimension_( xaxis, yaxis );
 
 
         var new_layout2 = {
@@ -108,9 +112,10 @@ ST.AddChartTypeView = function() {
 
             var old_layout = remove_by_dimension_( sqs.layout_used.charts, loaded_dimension_ );
 
+            old_layout.dimension = make_new_dimension_(xaxis, yaxis);
             old_layout.name = chart_name;
             old_layout.title = chart_name;
-            old_layout.axis = xaxis;
+            old_layout.xaxis = xaxis;
             old_layout.yaxis = yaxis;
 
             sqs.layout_used.charts.push(old_layout);
