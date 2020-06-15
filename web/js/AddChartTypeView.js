@@ -30,7 +30,6 @@ ST.AddChartTypeView = function() {
             } else {
 
                 //  is scatter chart
-                $('.composite_chart_type .axis_row');
                 $(' .composite_chart_type .delete').attr('display', 'inline-block');
             }
 
@@ -44,7 +43,7 @@ ST.AddChartTypeView = function() {
 
         load_obj_ = load_obj_ || {};
 
-        var ch_name = loaded_dimension_ || "Problem size vs Jobsize";
+        var ch_name = load_obj_.chart_name || "Problem size vs Jobsize";
         var xaxis = load_obj_["x_label"] || "problem_size";
         var yaxis = load_obj_["y_label"] || "jobsize";
 
@@ -107,14 +106,18 @@ ST.AddChartTypeView = function() {
 
         if( edit_mode_ ) {
 
-            var old_layout = remove_by_dimension_( ST.layout_used.charts, loaded_dimension_ );
+            var old_layout = remove_by_dimension_( sqs.layout_used.charts, loaded_dimension_ );
 
             old_layout.name = chart_name;
             old_layout.title = chart_name;
             old_layout.axis = xaxis;
             old_layout.yaxis = yaxis;
 
-            ST.layout_used.charts.push(old_layout);
+            sqs.layout_used.charts.push(old_layout);
+            sq.save();
+
+            ST.layout_used = sqs.layout_used;
+
             ST.ChartCollection.RenderChartCollection(ST.newp, ST.layout_used);
             //  ST.graph.editScatterplot(new_layout);
         } else {

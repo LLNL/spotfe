@@ -322,10 +322,13 @@ ST.ChartCollection = function() {
             var par = $(this).parent();
             var dim = par.attr('chart-dimension');
             var is_scatter_chart = par.hasClass('scatter-chart');
+
             var x_label = par.find('.x-label').html();
             var y_label = par.find('.y-label').html();
+            var chart_name = par.find('strong').html();
 
             ST.AddChartTypeView.render( true, {
+                chart_name: chart_name,
                 dimension: dim,
                 is_scatter_chart: is_scatter_chart,
                 x_label: x_label,
