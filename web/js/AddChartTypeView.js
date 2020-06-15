@@ -15,7 +15,7 @@ ST.AddChartTypeView = function() {
             var mode = edit_mode_ ? "Edit": "Add";
 
             ReusableView.modal({
-                "header": mode + " Composite Chart Type",
+                "header": mode + "  Chart",
                 "body": templ,
                 "classes" : "composite_chart_type " + mode.toLowerCase() + "_mode"
             });
@@ -26,7 +26,7 @@ ST.AddChartTypeView = function() {
             if( !load_obj.is_scatter_chart && edit_mode_ ) {
 
                 //  is NOT a scatter chart
-                $('.composite_chart_type .axis_row, .composite_chart_type .delete').hide();
+                $('.composite_chart_type .axis_row, .composite_chart_type .delete, .composite_chart_type .pick_chart_type').hide();
             } else {
 
                 //  is scatter chart

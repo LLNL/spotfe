@@ -320,9 +320,9 @@ ST.ChartCollection = function() {
         $('.chart_container .popup_menu').unbind('click').bind('click', function() {
 
             var par = $(this).parent();
+
             var dim = par.attr('chart-dimension');
             var is_scatter_chart = par.hasClass('scatter-chart');
-
             var x_label = par.find('.x-label').html();
             var y_label = par.find('.y-label').html();
             var chart_name = par.find('strong').html();
