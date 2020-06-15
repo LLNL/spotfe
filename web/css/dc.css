@@ -64,6 +64,8 @@ div.horizontal-bar-chart {
 
 .dc-chart {
   position: relative; }
+  .dc-chart.horizontal-bar-chart .popup_menu {
+    top: -9px; }
   .dc-chart .popup_menu {
     position: absolute;
     top: 20px;

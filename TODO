@@ -1,5 +1,4 @@
 Next:
-- check in the edit code, and the title loading fix.
 TEST - Do edit x-axis and y-axis persistance and name of chart
 Line 325 -> instead of getting from DOM get it from ST.layout_used
     * where is this code.

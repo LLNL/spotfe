@@ -123,6 +123,10 @@ div.horizontal-bar-chart {
 
     position: relative;
 
+    &.horizontal-bar-chart .popup_menu {
+        top: -9px;
+    }
+
     .popup_menu {
         position: absolute;
         top: 20px;
