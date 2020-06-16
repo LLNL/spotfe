@@ -103,6 +103,8 @@ ST.LayoutAugmenterModel = function() {
             if( mod.viz === "BarChart" && !model[mx].buckets ) {
 
                 var attr = model[mx].dimension;
+                spec[attr] = spec[attr] || {};
+
                 spec[attr].distance = spec[attr].max - spec[attr].min;
 
                 var bar_width;

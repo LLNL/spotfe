@@ -85,8 +85,8 @@ ST.AddChartTypeView = function() {
     var submit_ = function() {
 
         var chart_name = $('.chart_name').val();
-        var xaxis = $('.xaxis select').val();
-        var yaxis = $('.yaxis select').val();
+        var xaxis = $('.xaxis select').val() || "";
+        var yaxis = $('.yaxis select').val() || "";
 
         xaxis = ST.Utility.strip(xaxis);
         yaxis = ST.Utility.strip(yaxis);
@@ -94,29 +94,21 @@ ST.AddChartTypeView = function() {
         var dimension = make_new_dimension_( xaxis, yaxis );
 
 
-        var new_layout2 = {
-            dimension: dimension,
-            title: chart_name,
-            xaxis: xaxis,
-            yaxis: yaxis,
-            name: chart_name,
-            viz: ST.CONSTS.SCATTER_PLOT,
-            show: true
-        };
-
-        var new_layout = $.extend({}, new_layout2 );
-
         $('.composite_chart_type .close').trigger('click');
 
         if( edit_mode_ ) {
 
             var old_layout = remove_by_dimension_( sqs.layout_used.charts, loaded_dimension_ );
 
-            old_layout.dimension = make_new_dimension_(xaxis, yaxis);
+            if( load_obj_.is_scatter_chart ) {
+
+                old_layout.dimension = make_new_dimension_(xaxis, yaxis);
+                old_layout.xaxis = xaxis;
+                old_layout.yaxis = yaxis;
+            }
+
             old_layout.name = chart_name;
             old_layout.title = chart_name;
-            old_layout.xaxis = xaxis;
-            old_layout.yaxis = yaxis;
 
             sqs.layout_used.charts.push(old_layout);
             sq.save();
@@ -126,6 +118,18 @@ ST.AddChartTypeView = function() {
             ST.ChartCollection.RenderChartCollection(ST.newp, ST.layout_used);
             //  ST.graph.editScatterplot(new_layout);
         } else {
+
+            var new_layout2 = {
+                dimension: dimension,
+                title: chart_name,
+                xaxis: xaxis,
+                yaxis: yaxis,
+                name: chart_name,
+                viz: ST.CONSTS.SCATTER_PLOT,
+                show: true
+            };
+
+            var new_layout = $.extend({}, new_layout2 );
 
             if( validate_have_( ST.layout_used, new_layout )) {
 
