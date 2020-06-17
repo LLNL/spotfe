@@ -18,7 +18,8 @@ ST.PieChart = function() {
         var style = spec.show ? "display: block;" : "display: none;";
 
         var rcht =     '<div instance_num="' + DOM_safe_dimension + '"  ' +
-            'style="' + style + '" class="quarter-chart-' + DOM_safe_dimension + '"  ' +
+            'style="' + style + '" ' +
+            'class="outer_cont quarter-chart-' + DOM_safe_dimension + '"  ' +
             'chart-dimension="' + DOM_safe_dimension + '">  \
         <strong class="text_chart_name">' + spec.title + '</strong> \
         <a class="reset pie_reset"  style="display: none;">reset</a> \

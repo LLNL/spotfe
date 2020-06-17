@@ -320,12 +320,13 @@ ST.ChartCollection = function() {
         $('.chart_container .popup_menu').unbind('click').bind('click', function() {
 
             var par = $(this).parent();
+            var grand = $(this).closest(".outer_cont");
 
             var dim = par.attr('chart-dimension');
             var is_scatter_chart = par.hasClass('scatter-chart');
             var x_label = par.find('.x-label').html();
             var y_label = par.find('.y-label').html();
-            var chart_name = par.find('.text_chart_name').html();
+            var chart_name = grand.find('.text_chart_name').html();
 
             ST.AddChartTypeView.render( true, {
                 chart_name: chart_name,

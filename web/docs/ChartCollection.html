@@ -657,12 +657,13 @@ This code demonstrates generating the column header automatically based on the c
         $(<span class="hljs-string">'.chart_container .popup_menu'</span>).unbind(<span class="hljs-string">'click'</span>).bind(<span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
 
             <span class="hljs-keyword">var</span> par = $(<span class="hljs-keyword">this</span>).parent();
+            <span class="hljs-keyword">var</span> grand = $(<span class="hljs-keyword">this</span>).closest(<span class="hljs-string">".outer_cont"</span>);
 
             <span class="hljs-keyword">var</span> dim = par.attr(<span class="hljs-string">'chart-dimension'</span>);
             <span class="hljs-keyword">var</span> is_scatter_chart = par.hasClass(<span class="hljs-string">'scatter-chart'</span>);
             <span class="hljs-keyword">var</span> x_label = par.find(<span class="hljs-string">'.x-label'</span>).html();
             <span class="hljs-keyword">var</span> y_label = par.find(<span class="hljs-string">'.y-label'</span>).html();
-            <span class="hljs-keyword">var</span> chart_name = par.find(<span class="hljs-string">'.text_chart_name'</span>).html();
+            <span class="hljs-keyword">var</span> chart_name = grand.find(<span class="hljs-string">'.text_chart_name'</span>).html();
 
             ST.AddChartTypeView.render( <span class="hljs-literal">true</span>, {
                 <span class="hljs-attr">chart_name</span>: chart_name,

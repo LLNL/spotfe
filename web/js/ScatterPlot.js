@@ -60,7 +60,7 @@ ST.ScatterPlot = function() {
 
         var DOM_safe_dimension = ST.Utility.filter_special( dimension_low );
 
-        var rcht = '<div class="scatter-chart runtime-chart' + DOM_safe_dimension + '" ' +
+        var rcht = '<div class="outer_cont scatter-chart runtime-chart' + DOM_safe_dimension + '" ' +
             'style="' + style + '" ' +
             'chart-dimension="' + DOM_safe_dimension + '"> \
             <div class="top_left"> \

@@ -13,16 +13,17 @@ ST.HorizontalBarChart = function() {
         var className = 'horizontal-bar-chart-' + DOM_safe_dimension;
         var axis_chart_name = className + '_bar';
 
-        var rcht = '<div class="outer_holder"> \
+        var rcht = '\
+    <div class="outer_holder outer_cont"> \
         <strong class="text_chart_name">' + options.title + '</strong> \
         <a class="reset horiz_reset"  style="display: none;">reset</a> \
-            <div instance_num="' + DOM_safe_dimension + '"  ' +
+        <div instance_num="' + DOM_safe_dimension + '"  ' +
             'style="' + style + '" class="horizontal-bar-chart ' + className + '"  ' +
             'chart-dimension="' + DOM_safe_dimension + '">  \
             <div class="popup_menu">=</div>\
-        <div class="clearfix"></div> \
-    </div>\
-    <div class="' + axis_chart_name + ' the_bar"></div>' +
+            <div class="clearfix"></div> \
+        </div>\
+        <div class="' + axis_chart_name + ' the_bar"></div>' +
             '</div>';
 
 

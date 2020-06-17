@@ -111,7 +111,7 @@ ST.BarChart = function() {
         var dimension_low = dimension.toLowerCase();
         var DOM_safe_dimension = ST.Utility.filter_special( dimension_low );
 
-        var rcht = '<div class="runtime-chart' + DOM_safe_dimension + '" style="' + style + '" ' +
+        var rcht = '<div class="outer_cont runtime-chart' + DOM_safe_dimension + '" style="' + style + '" ' +
             'chart-dimension="' + DOM_safe_dimension + '"> \
             <div class="top_left"> \
                 <strong class="text_chart_name">' + upper_( options.title || dimension) + '</strong> \
