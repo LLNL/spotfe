@@ -35,6 +35,8 @@ ST.AddChartTypeView = function() {
 
             $('.composite_chart_type .submit').unbind("click").bind('click', submit_ );
             $('.composite_chart_type .delete').unbind("click").bind('click', delete_ );
+
+            $('.chart_name:eq(0)').focus();
         });
     };
 

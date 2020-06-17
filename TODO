@@ -1,7 +1,4 @@
 Next:
-TEST - Do edit x-axis and y-axis persistance and name of chart
-Line 325 -> instead of getting from DOM get it from ST.layout_used
-    * where is this code.
 DONE - make sure dates have the year.
 DONE - Help David deploy his stuff on dev on CZ and RZ.
     * DONE - actual directory and perms is deployed
@@ -22,6 +19,7 @@ DONE - Integrate new persistance layer into existing functionality.
 DONE - Do delete persistance
 DONE - Do edit name of chart
 DONE - Add Chart make it use the new pers layer
+DONE - Auto focus for the initial input field.
 
 
 Next:
@@ -29,6 +27,8 @@ Next:
 - encode a hash, everytime someone adds or edits or deletes a chart
 - append hash to URL
 - on page load, read URL hash and use it to set up localStorage sqs.
+Line 325 -> instead of getting from DOM get it from ST.layout_used
+    * where is this code.
 
 
 - Next: Create a deployment script for deploying to live, that includes caliper/hatchet
