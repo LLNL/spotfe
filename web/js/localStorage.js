@@ -4,13 +4,17 @@ var sq = function() {
 
     //  Don't change the naem of the table or the get_directory encoding
     //  otherwise it'll reset everyone's localStorage.
-    var table_name = 'a0';
+    var table_name = 'chart_meta_';
     var hasLoaded_ = false;
 
     var get_directory_str_ = function() {
 
         var dir = $('#file_upload .directory').val();
         return dir;
+    };
+
+    var get_key_ = function() {
+        return table_name + get_directory_str_();
     };
 
     function load( callback ) {
@@ -20,9 +24,10 @@ var sq = function() {
             return false;
         }
 
-        var dir = get_directory_str_();
-        var my_data = JSON.parse(localStorage.getItem(table_name)) || {};
-        var dat = my_data[dir] || "";
+        var key = get_key_();
+        var my_data = JSON.parse(localStorage.getItem(key)) || {};
+        var dat = my_data || "";
+
         sqs = $.extend({}, dat, sqs );
 
         hasLoaded_ = true;
@@ -41,13 +46,11 @@ var sq = function() {
     function save() {
 
         if( hasLoaded_ ) {
+            
+            var stat_str = JSON.stringify(sqs);
+            var key = get_key_();
 
-            var dir = get_directory_str_();
-            var all = {};
-            all[dir] = sqs;
-
-            var stat_str = JSON.stringify(all);
-            localStorage.setItem(table_name, stat_str);
+            localStorage.setItem(key, stat_str);
 
         } else {
             log("Can't save stat before loading it.");
