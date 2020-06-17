@@ -5,7 +5,7 @@ DONE - Help David deploy his stuff on dev on CZ and RZ.
     * DONE - modified the templates such that cali_query_path is set correctly and will run fine.
     * DONE - The architecture lookup needs to go directly into the notebook
 DONE - Set up an error message to popup if the user only has 1 file selected when clicking multiJupyter
-DONE - openJupyter integration.
+DONE - openJupyter integration with Joe's container.
     * DONE - Off switch for ScatterChart/Edit Chart feature
 DONE - Fix Git on my computer: MacPatch messed up my computer really bad.
 DONE - edit functionality on FE
@@ -13,20 +13,44 @@ DONE - edit functionality on FE
     * DONE - ensure that x-label and y-label are affected when changing them on scatterPlots
     * DONE - show/hide delete button based on chart type
 DONE - delete functionality on FE
-DONE - check to see if we can do hovers for the horizontal bar value
 DONE - Create new localStorage persistance layer
 DONE - Integrate new persistance layer into existing functionality.
 DONE - Do delete persistance
 DONE - Do edit name of chart
 DONE - Add Chart make it use the new pers layer
 DONE - Auto focus for the initial input field.
+DONE - check to see if we can do hovers for the horizontal bar value
+
+For New Release:
+- new version of caliper
+- joe's flamegraph
+- David's x86 platform feature.
+- Turn off hamburgers, + plus scatter. (in dev for now). -> send email
+- make sure to save everything based on the spot file (sf)
+    * part of new localStorage integration.
+
+- I do the Deploy to live.
 
 
 Next:
-- maintain order consistency
-- encode a hash, everytime someone adds or edits or deletes a chart
-- append hash to URL
-- on page load, read URL hash and use it to set up localStorage sqs.
+- multiJupyter integrating for Joe's container.
+- maintain order consistency of the charts
+    * right now when you edit a chart, the chart edited can appear in a new position
+- encode a URL string, everytime someone adds or edits or deletes a chart
+    - append hash to URL
+    - on page load, read URL hash and use it to set up localStorage sqs.
+- SPOT visualization for memory, some kind of line graph.
+    * will reuse for other time series data.
+    * need support for x100 or more.
+    * memory bandwidth, energy { both are per node, data comes in per node. }
+    * they might want to see 1 node or all nodes.
+    * if they select all we could do an aggregation: max, min, average to show one line
+    * David will give me a Cali Query call which i can call python.( a new spot.py call)
+    * this data won't be present in every cali file.
+    * this will be a third button that only appears if the data is in it.
+    * will need zoom ability -> find this one in the dc.js charts.
+
+
 Line 325 -> instead of getting from DOM get it from ST.layout_used
     * where is this code.
 

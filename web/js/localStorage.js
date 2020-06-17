@@ -2,8 +2,16 @@
 var sqs = {};
 var sq = function() {
 
-    var table_name = 'a13';
+    //  Don't change the naem of the table or the get_directory encoding
+    //  otherwise it'll reset everyone's localStorage.
+    var table_name = 'a0';
     var hasLoaded_ = false;
+
+    var get_directory_str_ = function() {
+
+        var dir = $('#file_upload .directory').val();
+        return dir;
+    };
 
     function load( callback ) {
 
@@ -12,8 +20,10 @@ var sq = function() {
             return false;
         }
 
+        var dir = get_directory_str_();
         var my_data = JSON.parse(localStorage.getItem(table_name)) || {};
-        sqs = $.extend({}, my_data, sqs );
+        var dat = my_data[dir] || "";
+        sqs = $.extend({}, dat, sqs );
 
         hasLoaded_ = true;
         callback();
@@ -32,7 +42,11 @@ var sq = function() {
 
         if( hasLoaded_ ) {
 
-            var stat_str = JSON.stringify(sqs);
+            var dir = get_directory_str_();
+            var all = {};
+            all[dir] = sqs;
+
+            var stat_str = JSON.stringify(all);
             localStorage.setItem(table_name, stat_str);
 
         } else {
