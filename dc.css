@@ -40,7 +40,7 @@ div.horizontal-bar-chart {
     z-index: 100;
     background-color: white;
     padding: 0 5px 0 0; }
-  .outer_holder .options_title {
+  .outer_holder .text_chart_name {
     position: absolute;
     left: 10px;
     top: 33px; }

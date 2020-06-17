@@ -20,7 +20,7 @@ ST.PieChart = function() {
         var rcht =     '<div instance_num="' + DOM_safe_dimension + '"  ' +
             'style="' + style + '" class="quarter-chart-' + DOM_safe_dimension + '"  ' +
             'chart-dimension="' + DOM_safe_dimension + '">  \
-        <strong>' + spec.title + '</strong> \
+        <strong class="text_chart_name">' + spec.title + '</strong> \
         <a class="reset pie_reset"  style="display: none;">reset</a> \
         <div class="popup_menu">=</div>\
         <div class="clearfix"></div> \

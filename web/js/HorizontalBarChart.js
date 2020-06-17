@@ -14,7 +14,7 @@ ST.HorizontalBarChart = function() {
         var axis_chart_name = className + '_bar';
 
         var rcht = '<div class="outer_holder"> \
-        <strong class="options_title">' + options.title + '</strong> \
+        <strong class="text_chart_name">' + options.title + '</strong> \
         <a class="reset horiz_reset"  style="display: none;">reset</a> \
             <div instance_num="' + DOM_safe_dimension + '"  ' +
             'style="' + style + '" class="horizontal-bar-chart ' + className + '"  ' +

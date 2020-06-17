@@ -43,7 +43,12 @@ ST.AddChartTypeView = function() {
 
         load_obj_ = load_obj_ || {};
 
-        var ch_name = load_obj_.chart_name || "Problem size vs Jobsize";
+        var ch_name = load_obj_.chart_name;
+
+        if( load_obj_.is_scatter_chart && !load_obj_.chart_name ) {
+            ch_name = "Problem size vs Jobsize";
+        }
+
         var xaxis = load_obj_["x_label"] || "problem_size";
         var yaxis = load_obj_["y_label"] || "jobsize";
 
@@ -61,7 +66,7 @@ ST.AddChartTypeView = function() {
 
         var name = xaxis + " vs " + yaxis;
 
-        $('.composite_chart_type .chart_name').val( name );
+        $('.composite_chart_type .text_chart_name').val( name );
     };
 
 

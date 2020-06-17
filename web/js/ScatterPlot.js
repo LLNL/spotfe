@@ -64,7 +64,7 @@ ST.ScatterPlot = function() {
             'style="' + style + '" ' +
             'chart-dimension="' + DOM_safe_dimension + '"> \
             <div class="top_left"> \
-                <strong>' + upper_( options.title || dimension) + '</strong> \
+                <strong class="text_chart_name">' + upper_( options.title || dimension) + '</strong> \
                 <a class="reset" onclick="ST.ScatterPlot.reset(this);" style="display: none;">reset</a>\
             </div> \
             <div class="popup_menu">=</div>\
