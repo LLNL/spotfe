@@ -68,7 +68,7 @@ ST.AddChartTypeView = function() {
 
         var name = xaxis + " vs " + yaxis;
 
-        $('.composite_chart_type .text_chart_name').val( name );
+        $('.composite_chart_type .chart_name').val( name );
     };
 
 
