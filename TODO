@@ -25,6 +25,7 @@ DONE - Add Chart make it use the new pers layer
 
 
 Next:
+- maintain order consistency
 - encode a hash, everytime someone adds or edits or deletes a chart
 - append hash to URL
 - on page load, read URL hash and use it to set up localStorage sqs.
