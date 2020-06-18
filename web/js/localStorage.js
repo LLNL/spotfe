@@ -46,7 +46,7 @@ var sq = function() {
     function save() {
 
         if( hasLoaded_ ) {
-            
+
             var stat_str = JSON.stringify(sqs);
             var key = get_key_();
 

@@ -384,6 +384,12 @@ ST.CallSpot = function() {
         }
     };
 
+    var strip_right_ = function( s ) {
+
+        var last_index = s.lastIndexOf('/');
+        return s.substr( 0, last_index );
+    };
+
 
     var drill_down_ = function() {
 
@@ -411,7 +417,8 @@ ST.CallSpot = function() {
 
         } else if( subject === "walltime" ) {
 
-            window.open('sankey/index.html?runSetId=' + file + "&runId=" + cali_fp );
+            var file_left = strip_right_( file );
+            window.open('sankey/index.html?runSetId=' + file_left + "&runId=" + cali_fp );
 
         } else {
 

@@ -1,4 +1,11 @@
 Next:
+- make spot-dev email list.
+- make Release script that copies directories (hatchet, caliper) from dev to live
+    * first run git fetch, git pull on live dir.
+- multiJupyter integrating for Joe's container.
+- maintain order consistency of the charts
+    * right now when you edit a chart, the chart edited can appear in a new position
+
 DONE - make sure dates have the year.
 DONE - Help David deploy his stuff on dev on CZ and RZ.
     * DONE - actual directory and perms is deployed
@@ -28,14 +35,16 @@ For New Release:
 - Turn off hamburgers, + plus scatter. (in dev for now). -> send email
 - make sure to save everything based on the spot file (sf)
     * part of new localStorage integration.
+- new localstorage implementation for show/hide of checkboxes.
+
+
+- Add/Edit/Delete of charts will not be in this release.
+
 
 - I do the Deploy to live.
 
 
 Next:
-- multiJupyter integrating for Joe's container.
-- maintain order consistency of the charts
-    * right now when you edit a chart, the chart edited can appear in a new position
 - encode a URL string, everytime someone adds or edits or deletes a chart
     - append hash to URL
     - on page load, read URL hash and use it to set up localStorage sqs.
