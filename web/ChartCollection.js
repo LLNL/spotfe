@@ -42,14 +42,25 @@ ST.ChartCollection = function() {
     };
 
 
+    //  Debug Data.
+    var show_layout_ = function( lay ) {
+
+        var ht = "";
+
+        for( var x in lay.charts ) {
+            ht += lay.charts[x].dimension + "  ";
+        }
+
+        console.log( ht );
+    };
+
+
     var RenderChartCollection = function (the_data, layout_spec) {
 
         //amend_charts_( layout_spec );
 
         console.dir(the_data);
         var GLOB_DAT = the_data;
-        //  ST.MakeNiceData.make( the_data );
-        //          options.buckets = ['0-0.3', '0.3-0.6', '0.6-10', '10-15', '15-20'];
 
         $('.chart_container').html("");
 
@@ -106,7 +117,6 @@ ST.ChartCollection = function() {
                 console.log('Sorry.  Viz type viz=' + viz + ' is not supported.');
             }
         }
-
 
         var dataCount = dc.dataCount('.dc-data-count');
         runTable = dc.dataTable('.dc-data-table');

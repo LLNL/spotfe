@@ -30,12 +30,12 @@ ST.UserPreferences = function() {
 
     var render_ = function() {
 
-        ST.layout_used.charts.sort( function( a, b ) {
+/*        ST.layout_used.charts.sort( function( a, b ) {
 
             if(a.dimension < b.dimension) { return -1; }
             if(a.dimension > b.dimension) { return 1; }
             return 0;
-        });
+        });*/
 
         console.dir( ST.layout_used.charts );
 

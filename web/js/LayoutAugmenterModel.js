@@ -88,7 +88,6 @@ ST.LayoutAugmenterModel = function() {
 
                 Assert( spec[xaxis], "The xaxis listed (" + xaxis + ") was not found in the spec.");
 
-                console.dir(spec[xaxis]);
                 var xmin = spec[xaxis].min - 1;
                 var xmax = (+spec[xaxis].max) + 1;
 

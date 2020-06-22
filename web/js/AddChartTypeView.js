@@ -117,7 +117,9 @@ ST.AddChartTypeView = function() {
             old_layout.name = chart_name;
             old_layout.title = chart_name;
 
-            sqs.layout_used.charts.push(old_layout);
+            //sqs.layout_used.charts.push(old_layout);
+            console.log('old_index = ' + old_layout.old_index);
+            sqs.layout_used.charts.splice( old_layout.old_index, 0, old_layout );
             sq.save();
 
             ST.layout_used = sqs.layout_used;
@@ -166,10 +168,12 @@ ST.AddChartTypeView = function() {
 
                 var old = $.extend({}, charts[x] );
                 charts.splice( x, 1 );
+                old.old_index = x;
                 return old;
             }
         }
     };
+
 
     var validate_have_ = function( ls, new_layout ) {
 

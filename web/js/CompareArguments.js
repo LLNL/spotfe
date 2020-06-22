@@ -2,15 +2,6 @@ ST.CompareArguments = function() {
 
     var render_ = function (fields) {
 
-        var options = "<option value=''></option>";
-        var farr = get_farr(fields);
-
-        for (var x = 0; x < farr.length; x++) {
-
-            var field = farr[x];
-            options += '<option value="' + field + '">' + field + '</option>';
-        }
-
         var last_days = ST.Utility.get_param(ST.LAST_DAYS) || "";
 
         $('.launch_container').html('<div class="launcher">' +
@@ -138,29 +129,6 @@ ST.CompareArguments = function() {
         if (aggregate !== 'undefined') {
             ST.graph.setAggregateType(aggregate);
         }
-    };
-
-
-    var get_farr = function (fields) {
-
-        var farr = ST.Utility.to_array(fields);
-
-        farr.sort(function (a, b) {
-
-            a = a.toLowerCase();
-            b = b.toLowerCase();
-
-            if (a < b) {
-                return -1;
-            }
-            if (a > b) {
-                return 1;
-            }
-
-            return 0;
-        });
-
-        return farr;
     };
 
 

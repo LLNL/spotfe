@@ -5,6 +5,7 @@ Next:
 - multiJupyter integrating for Joe's container.
 - maintain order consistency of the charts
     * right now when you edit a chart, the chart edited can appear in a new position
+    * turns out it was being ordered by UserPreferences.js Line 33.
 
 DONE - make sure dates have the year.
 DONE - Help David deploy his stuff on dev on CZ and RZ.
