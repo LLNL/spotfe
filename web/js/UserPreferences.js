@@ -90,7 +90,12 @@ ST.UserPreferences = function() {
             "el": "#user_preferences"
         });
 
-        $('.plus_icon').unbind('click').bind('click', ST.AddChartTypeView.render );
+        $('.plus_icon').unbind('click').bind('click', function() {
+
+            ST.AddChartTypeView.render( false, {
+                is_scatter_chart: true
+            });
+        });
     };
 
     var axis_selection_types = ["double", "long", "int", "date"];
