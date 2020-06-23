@@ -1,4 +1,6 @@
 Next:
+- come up with hard coded "live" inside of spot.py
+    * or try to figure out dev/live based on where it's executing.
 - make spot-dev email list.
 - make Release script that copies directories (hatchet, caliper) from dev to live
     * first run git fetch, git pull on live dir.

@@ -63,7 +63,7 @@ ST.CompareArguments = function() {
                     //  cali_path is /usr/gapps/spot/datasets/lulesh_gen/500/5.cali
                     var file_path = $('.directory').val();
                     var total_send = file_path + " \"" + cali_keys + "\"";
-                    var limit = 3500;
+                    var limit = 2200;
                     var t_count = total_send.length;
 
                     if( cali_count <= 1 ) {
