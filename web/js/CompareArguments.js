@@ -66,6 +66,9 @@ ST.CompareArguments = function() {
                     var limit = 1700;
                     var t_count = total_send.length;
 
+                    //limit = 50000;
+                    console.log("t_count = " + t_count );
+
                     if( cali_count <= 1 ) {
                         ReusableView.warning("Less than 2 rows are selected.  Please select 2 or more rows to compare.");
                         return false;

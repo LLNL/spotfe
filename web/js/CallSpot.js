@@ -136,6 +136,12 @@ ST.CallSpot = function() {
     ST.cali_obj_by_key = [];
     ST.orig_obj_by_key = [];
 
+
+    var get_run_set_id_ = function( whole, right_remove ) {
+        return whole.replace(right_remove, "");
+    };
+
+
     var handle_success2_ = function( summ ) {
 
         ST.Utility.check_error( summ );
@@ -169,6 +175,7 @@ ST.CallSpot = function() {
                 var valid_obj = parsed[key];
 
                 ST.cali_obj_by_key[new_index] = valid_obj;
+                ST.cali_obj_by_key[new_index].run_set_id = get_run_set_id_( ST.cali_obj_by_key[new_index].filepath, key );
                 ST.cali_obj_by_key[new_index].file_path = key;
                 ST.orig_obj_by_key[new_index] = $.extend({}, valid_obj);
 
@@ -417,7 +424,9 @@ ST.CallSpot = function() {
 
         } else if( subject === "walltime" ) {
 
-            var file_left = strip_right_( file );
+            var file_left = ST.cali_obj_by_key[key].run_set_id;
+            file_left = strip_right_( file_left );
+            
             window.open('sankey/index.html?runSetId=' + file_left + "&runId=" + cali_fp );
 
         } else {
