@@ -461,11 +461,10 @@ ST.ChartCollection = function() {
                 console.log('summary:', summary);
                 ST.CallSpot.handle_success2(summary);
 
-                //  just for now.
-                setTimeout( setup_pars_, 1000);
             }).finally( summary => {
                 ST.Utility.check_error( summary );
         });
+        setup_pars_()
 
         // listen from chart
         ST.graph.addXAxisChangeListener(xAxis => {
