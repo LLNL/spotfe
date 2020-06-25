@@ -28944,9 +28944,7 @@ var _default = new _vuex.default.Store({
 
 
         if (state.rootFuncPath == '' || !allFuncPaths.includes(state.rootFuncPath)) {
-          state.rootFuncPath = _lodash.default.minBy(allFuncPaths, function (key) {
-            return key.length;
-          });
+          state.rootFuncPath = _lodash.default.min(allFuncPaths);
         }
       }
 
@@ -39952,7 +39950,6 @@ function isSlowBuffer (obj) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getStackData = getStackData;
 exports.childrenPaths = childrenPaths;
 exports.parentPath = parentPath;
 exports.colorHash = colorHash;
@@ -39962,10 +39959,6 @@ var _lodash = _interopRequireDefault(require("lodash"));
 var _md = _interopRequireDefault(require("md5"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function getStackData(runs) {
-  console.log('runs:', runs);
-}
 
 function childrenPaths(parentPath, paths) {
   return _lodash.default.filter(paths, function (path) {
@@ -39978,6 +39971,8 @@ function parentPath(path) {
 }
 
 function colorHash(text, alpha) {
+  text = text.slice(14); // remove '--root path--/'
+
   var reverseString = text.split("").reverse().join("");
   var hash = (0, _md.default)(reverseString);
   var r = parseInt(hash.slice(12, 14), 16);
@@ -40104,14 +40099,14 @@ exports.default = vue_1.default.extend({
     window.removeEventListener('resize', this.handleResize);
   }
 });
-        var $c5c306 = exports.default || module.exports;
+        var $6cd63b = exports.default || module.exports;
       
-      if (typeof $c5c306 === 'function') {
-        $c5c306 = $c5c306.options;
+      if (typeof $6cd63b === 'function') {
+        $6cd63b = $6cd63b.options;
       }
     
         /* template */
-        Object.assign($c5c306, (function () {
+        Object.assign($6cd63b, (function () {
           var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"chart",style:({display:'flex', flexDirection:'column', alignItems:'stretch', padding:'5px 60px 20px 20px', border:'1px solid black', margin:'5px'})},[_c('div',{staticClass:"groupname-title",style:({display:'flex', justifyContent:'center'})},[_c('div',[_vm._v(_vm._s(_vm.selectedGroupBy ? _vm.selectedGroupBy + ': ' + _vm.groupName : ''))])]),_c('div',{staticClass:"chartrow",style:({width:'100%', display:'flex', height:'240px'})},[_c('div',{staticClass:"yaxis",staticStyle:{"display":"flex"}},[_c('div',{staticClass:"yaxis-title",style:({width:0, display: 'flex', alignItems: 'center', justifyContent: 'center'})},[_c('div',{staticClass:"title",style:({transform: 'rotate(-90deg)'})},[_vm._v(" "+_vm._s(_vm.selectedYAxisMeta))])]),_c('div',{staticClass:"yaxis-ticks",style:({height:'100%', width:'75px'})},[_c('svg',{attrs:{"height":"320px","viewbox":"0 0 100 100"}},[_vm._l((_vm.yticks),function(ytick){return [_c('line',{attrs:{"x1":"70","x2":"75","y1":ytick[0],"y2":ytick[0],"stroke":"black","stroke-width":"1"}}),_c('text',{attrs:{"text-anchor":"end","x":65,"y":ytick[0] + 4}},[_vm._v(" "+_vm._s(ytick[1]))])]}),_c('line',{attrs:{"x1":75,"y1":240,"x2":75,"y2":0,"stroke":"black","pointerEvents":"none"}})],2)])]),_c('div',{ref:"chartAreaSvg",staticClass:"chartarea",style:({flexGrow:1})},[_c('svg',{attrs:{"width":"100%","height":"100%","viewbox":" 0 100 100"},on:{"mousemove":_vm.notifyChartHoverPosition}},[_c('rect',{attrs:{"width":"100%","height":"100%","fill":"white"},on:{"click":_vm.rectClicked}}),_c('g',{attrs:{"cursor":"pointer"}},_vm._l((_vm.seriesList),function(series){return _c('path',{attrs:{"fill":_vm.colorHash(series.key),"d":_vm.areaFunc(series)},on:{"click":function($event){return _vm.$emit('set-node', series.key)}}})}),0),(_vm.hoverX && _vm.hoverX.groupName == _vm.groupName)?_c('line',{attrs:{"x1":_vm.x(_vm.hoverX.runIndex),"y1":240,"x2":_vm.x(_vm.hoverX.runIndex),"y2":0,"stroke":"black","pointerEvents":"none"}}):_vm._e()])])]),_c('div',{staticClass:"xaxis",style:({position:"relative", height: "75px" , marginLeft: "75px", zIndex: 0  })},_vm._l((_vm.displayedXTitles),function(xTitle,i){return ((i % Math.floor(_vm.runs.length/_vm.numberOfTicks)) == 0)?_c('div',{staticClass:"stuff",style:({ position: "absolute" , left: i/(_vm.runs.length-1)*_vm.width + "px", height:"10px", borderLeft:"1px solid black"})},[_c('span',{style:({position:'absolute', right:0, top:'10px', transformOrigin: 'right', transform: 'rotate(-60deg)', whiteSpace:'nowrap', maxWidth:'150px', overflow:'hidden' })},[_vm._v(_vm._s(xTitle))])]):_vm._e()}),0),_c('div',{staticClass:"xaxis-title",style:({width: '100%', height: '50px', display: 'flex', justifyContent: 'center', alignItems: 'flex-end'})},[_c('div',{staticClass:"xaxis-title-text"},[_vm._v(_vm._s(_vm.selectedXAxisMetric))])])])}
 var staticRenderFns = []
 
@@ -40119,7 +40114,7 @@ var staticRenderFns = []
             render: render,
             staticRenderFns: staticRenderFns,
             _compiled: true,
-            _scopeId: "data-v-c5c306",
+            _scopeId: "data-v-6cd63b",
             functional: undefined
           };
         })());
@@ -40190,22 +40185,22 @@ var _default = {
   name: 'flamegraph-node'
 };
 exports.default = _default;
-        var $69651d = exports.default || module.exports;
+        var $ac686f = exports.default || module.exports;
       
-      if (typeof $69651d === 'function') {
-        $69651d = $69651d.options;
+      if (typeof $ac686f === 'function') {
+        $ac686f = $ac686f.options;
       }
     
         /* template */
-        Object.assign($69651d, (function () {
-          var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"flamenode",style:({width:_vm.inclusiveWidthPercent, display:'flex', flexDirection:'column'})},[_c('div',{staticClass:"inclusive",style:({display:'flex', alignItems:'center', height:'25px', background:_vm.inclusiveBackground(_vm.funcPath)})},[_c('div',{staticClass:"exclusive",style:({width:_vm.exclusiveWidthPercent, display:'inline-block', backgroundColor:'white'})},[_c('div',{staticClass:"exclusive",style:({display:'flex', alignItems:'center', height: '25px', backgroundColor: _vm.iAmSelected ? 'white': _vm.colorHash(_vm.funcPath), cursor:'pointer', border: _vm.iAmSelected ? '3px solid black' : '' }),on:{"click":function($event){return _vm.handleClick(_vm.funcPath)}}},[_c('div',{staticClass:"text",style:({marginLeft:'3px', whiteSpace:'nowrap', overflow:'hidden', cursor:'pointer'}),attrs:{"title":_vm.title}},[_vm._v(_vm._s(_vm.title)+" ")])])])]),_c('div',{staticClass:"children",style:({display:'flex'})},_vm._l((_vm.childrenPaths(_vm.funcPath, _vm.allFuncPaths)),function(fp){return _c('flamegraph-node',{attrs:{"runData":_vm.runData,"selectedNode":_vm.selectedNode,"funcPath":fp,"handleClick":_vm.handleClick}})}),1)])}
+        Object.assign($ac686f, (function () {
+          var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"flamenode",style:({width:_vm.inclusiveWidthPercent, display:'flex', flexDirection:'column'})},[(!_vm.title.startsWith('--root'))?_c('div',{staticClass:"inclusive",style:({display:'flex', alignItems:'center', height:'25px', background:_vm.inclusiveBackground(_vm.funcPath)})},[_c('div',{staticClass:"exclusive-white-buffer",style:({width:_vm.exclusiveWidthPercent, display:'inline-block', backgroundColor:'white'})},[_c('div',{staticClass:"exclusive",style:({display:'flex', alignItems:'center', height: '25px', backgroundColor: _vm.iAmSelected ? 'white': _vm.colorHash(_vm.funcPath), cursor:'pointer', border: _vm.iAmSelected ? '1px solid black' : '' }),on:{"click":function($event){return _vm.handleClick(_vm.funcPath)}}},[_c('div',{staticClass:"text",style:({marginLeft:'3px', overflow:'hidden', cursor:'pointer', whiteSpace:'nowrap'}),attrs:{"title":_vm.title}},[_vm._v(_vm._s(_vm.title)+" ")])])])]):_vm._e(),_c('div',{staticClass:"children",style:({display:'flex'})},_vm._l((_vm.childrenPaths(_vm.funcPath, _vm.allFuncPaths)),function(fp){return _c('flamegraph-node',{attrs:{"runData":_vm.runData,"selectedNode":_vm.selectedNode,"funcPath":fp,"handleClick":_vm.handleClick}})}),1)])}
 var staticRenderFns = []
 
           return {
             render: render,
             staticRenderFns: staticRenderFns,
             _compiled: true,
-            _scopeId: "data-v-69651d",
+            _scopeId: "data-v-ac686f",
             functional: undefined
           };
         })());
@@ -40226,6 +40221,11 @@ var _lodash = _interopRequireDefault(require("lodash"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
+//
+//
+//
+//
 //
 //
 //
@@ -40295,7 +40295,7 @@ var _default = {
         }
       }
 
-      addInclusiveNode('main');
+      addInclusiveNode(_lodash.default.min(funcPathKeys));
       return inclusiveData;
     }
   },
@@ -40304,15 +40304,15 @@ var _default = {
   }
 };
 exports.default = _default;
-        var $7d0241 = exports.default || module.exports;
+        var $0a8d43 = exports.default || module.exports;
       
-      if (typeof $7d0241 === 'function') {
-        $7d0241 = $7d0241.options;
+      if (typeof $0a8d43 === 'function') {
+        $0a8d43 = $0a8d43.options;
       }
     
         /* template */
-        Object.assign($7d0241, (function () {
-          var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"flamegraph",style:({flex:2, minWidth:'300px'})},[_vm._l((_vm.collapsedFuncPaths),function(funcPath){return _c('div',{staticClass:"collapsed-parent",style:({display:'flex', alignItems:'center', height: '25px', backgroundColor: 'white', cursor:'pointer' }),on:{"click":function($event){return _vm.handleClick(funcPath)}}},[_c('div',{staticClass:"text",style:({marginLeft:'3px', whiteSpace:'nowrap', overflow:'hidden', cursor:'pointer'})},[_vm._v(_vm._s(_vm.title(funcPath)))])])}),_c('flamegraph-node',{attrs:{"runData":_vm.addInclusive(_vm.runData),"selectedNode":_vm.selectedNode,"funcPath":_vm.selectedNode,"handleClick":_vm.handleClick}})],2)}
+        Object.assign($0a8d43, (function () {
+          var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"flamegraph",style:({flex:2, minWidth:'600px', overflow:'scroll'})},[_c('div',{staticClass:"rootbutton",style:({backgroundColor:'#ddd', textAlign:'center', border: _vm.selectedNode == '--root path--' ? 'solid 1px black':''}),on:{"click":function($event){return _vm.handleClick('--root path--')}}},[_vm._v("/")]),_vm._l((_vm.collapsedFuncPaths),function(funcPath){return (funcPath != '--root path--')?_c('div',{staticClass:"collapsed-parent",style:({ display:'flex', alignItems:'center', height: '25px', backgroundColor: 'white', cursor:'pointer' }),on:{"click":function($event){return _vm.handleClick(funcPath)}}},[_c('div',{staticClass:"text",style:({marginLeft:'3px', overflow:'hidden', cursor:'pointer'})},[_vm._v(_vm._s(_vm.title(funcPath)))])]):_vm._e()}),_c('flamegraph-node',{attrs:{"runData":_vm.addInclusive(_vm.runData),"selectedNode":_vm.selectedNode,"funcPath":_vm.selectedNode,"handleClick":_vm.handleClick}})],2)}
 var staticRenderFns = []
 
           return {
@@ -40541,22 +40541,22 @@ exports.default = vue_1.default.extend({
     FlameGraph: Flamegraph_vue_1.default
   }
 });
-        var $bed92e = exports.default || module.exports;
+        var $ff3891 = exports.default || module.exports;
       
-      if (typeof $bed92e === 'function') {
-        $bed92e = $bed92e.options;
+      if (typeof $ff3891 === 'function') {
+        $ff3891 = $ff3891.options;
       }
     
         /* template */
-        Object.assign($bed92e, (function () {
-          var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{style:({display:'flex', flexDirection:'column'}),attrs:{"id":"compare-window"}},[_c('div',{staticClass:"sticky",style:({position: 'sticky', top: 0, zIndex: 1})},[_c('div',{staticClass:"topbar",style:({ backgroundColor: 'lightgray', padding:'5px', height:'40px', display:'flex', alignItems: 'center'})},[_c('div',{staticClass:"selects",style:({flex:1, display:'flex', alignItems:'center', flexWrap:'wrap'})},[_c('label',{staticStyle:{"margin":"5px"},attrs:{"for":"xAxis-select"}},[_vm._v("X-Axis: ")]),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.xAxis),expression:"xAxis"}],attrs:{"id":"xAxis-select"},on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.xAxis=$event.target.multiple ? $$selectedVal : $$selectedVal[0]}}},_vm._l((_vm.xAxisList),function(option){return _c('option',[_vm._v(_vm._s(option))])}),0),_c('label',{staticStyle:{"margin":"5px"},attrs:{"for":"aggregate-select"}},[_vm._v("X-Axis Aggregate:")]),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.selectedAggregateBy),expression:"selectedAggregateBy"}],style:({marginRight: '10px'}),attrs:{"id":"aggregate-select"},on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.selectedAggregateBy=$event.target.multiple ? $$selectedVal : $$selectedVal[0]}}},_vm._l((['', 'sum','avg', 'min', 'max' ]),function(option){return _c('option',[_vm._v(_vm._s(option))])}),0),_c('label',{staticStyle:{"margin":"5px"},attrs:{"for":"yAxis-select"}},[_vm._v("Y-Axis: ")]),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.yAxis),expression:"yAxis"}],attrs:{"id":"yAxis-select"},on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.yAxis=$event.target.multiple ? $$selectedVal : $$selectedVal[0]}}},_vm._l((_vm.yAxisList),function(option){return _c('option',[_vm._v(_vm._s(option))])}),0),_c('label',{staticStyle:{"margin":"5px"},attrs:{"for":"groupBy-select"}},[_vm._v("Group By:")]),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.selectedGroupBy),expression:"selectedGroupBy"}],attrs:{"id":"groupBy-select"},on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.selectedGroupBy=$event.target.multiple ? $$selectedVal : $$selectedVal[0]}}},_vm._l((_vm.groupByList),function(option){return _c('option',[_vm._v(_vm._s(option))])}),0)]),_c('div',{staticClass:"scale-type-button",style:({borderRadius:'5px', padding:'7px', backgroundColor:'#666', color:'white', cursor:'pointer', userSelect:'none'}),on:{"click":_vm.toggleScaleType}},[_vm._v("Set "+_vm._s(_vm.selectedScaleType == 'linear' ? 'Log' : 'Linear'))])]),_c('div',{staticClass:"legend",style:({display: 'flex', justifyContent:'center', marginTop: '5px'})},[_c('div',{staticClass:"legend-border",style:({display:'flex', flexWrap:'wrap', maxWidth:'100%', alignItems:'center', border: '1px solid black', borderRadius: '15px', backgroundColor: '#eee'})},_vm._l((_vm.displayedChildrenPaths),function(path){return _c('div',{staticClass:"legend-item",style:({display: 'flex', padding:'5px', cursor:'pointer'}),on:{"click":function($event){return _vm.togglePathVisible(path)}}},[_c('div',{staticClass:"circle",style:({width:'15px', height:'15px', backgroundColor: _vm.disabledFuncPaths.includes(path) ? 'lightgrey': _vm.colorHash(path), borderRadius:'50px'})}),_c('div',{staticClass:"name",style:({marginLeft:'5px', color: _vm.disabledFuncPaths.includes(path) ? 'lightgrey': 'black'})},[_vm._v(_vm._s(path.slice(path.lastIndexOf('/') + 1 )))])])}),0)])]),_c('div',{staticClass:"comparison-charts",staticStyle:{"padding":"10px"}},_vm._l((_vm.groupedAndAggregated),function(runs,groupName){return _c('view-chart',{attrs:{"groupName":groupName,"hoverX":_vm.hoverX,"runs":runs,"displayedChildrenPaths":_vm.difference(_vm.displayedChildrenPaths, _vm.disabledFuncPaths),"selectedXAxisMetric":_vm.xAxis,"selectedYAxisMeta":_vm.yAxis,"selectedGroupBy":_vm.selectedGroupBy,"selectedScaleType":_vm.selectedScaleType},on:{"set-node":_vm.changePath,"chart-hover-position-changed":_vm.setChartHoverPosition,"toggle-hover-position-locked":_vm.toggleHoverPositionLock}})}),1),(_vm.hoverX)?_c('div',{staticClass:"run-view",style:({width:'100%', height:'270px', display: 'flex', position:'sticky', bottom: 0, backgroundColor:'white', padding:'10px'})},[(_vm.selectedRun)?_c('flame-graph',{attrs:{"runData":_vm.selectedRun.data,"selectedNode":_vm.selectedParent,"handleClick":_vm.changePath}}):_vm._e(),_c('div',{staticClass:"global-meta",style:({flex: 1, display:'flex', flexDirection:'column', minWidth:'300px', maxWidth:'500px', marginLeft:'20px', overflow:'scroll'})},_vm._l((_vm.selectedRun.meta),function(metaVal,metaName){return _c('div',{staticClass:"metarow",style:({display:'flex'})},[_c('div',{staticClass:"name",style:({color:'blue', fontWeight:'bold'})},[_vm._v(_vm._s(metaName)+" ")]),_c('div',{staticClass:"val",style:({whiteSpace:'nowrap', overflowWrap:'break-word', overflow:''})},[_vm._v(": "+_vm._s(metaVal))])])}),0)],1):_vm._e()])}
+        Object.assign($ff3891, (function () {
+          var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{style:({display:'flex', flexDirection:'column'}),attrs:{"id":"compare-window"}},[_c('div',{staticClass:"sticky",style:({position: 'sticky', top: 0, zIndex: 1})},[_c('div',{staticClass:"topbar",style:({ backgroundColor: 'lightgray', padding:'5px', height:'40px', display:'flex', alignItems: 'center'})},[_c('div',{staticClass:"selects",style:({flex:1, display:'flex', alignItems:'center', flexWrap:'wrap'})},[_c('label',{staticStyle:{"margin":"5px"},attrs:{"for":"xAxis-select"}},[_vm._v("X-Axis: ")]),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.xAxis),expression:"xAxis"}],attrs:{"id":"xAxis-select"},on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.xAxis=$event.target.multiple ? $$selectedVal : $$selectedVal[0]}}},_vm._l((_vm.xAxisList),function(option){return _c('option',[_vm._v(_vm._s(option))])}),0),_c('label',{staticStyle:{"margin":"5px"},attrs:{"for":"aggregate-select"}},[_vm._v("X-Axis Aggregate:")]),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.selectedAggregateBy),expression:"selectedAggregateBy"}],style:({marginRight: '10px'}),attrs:{"id":"aggregate-select"},on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.selectedAggregateBy=$event.target.multiple ? $$selectedVal : $$selectedVal[0]}}},_vm._l((['', 'sum','avg', 'min', 'max' ]),function(option){return _c('option',[_vm._v(_vm._s(option))])}),0),_c('label',{staticStyle:{"margin":"5px"},attrs:{"for":"yAxis-select"}},[_vm._v("Y-Axis: ")]),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.yAxis),expression:"yAxis"}],attrs:{"id":"yAxis-select"},on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.yAxis=$event.target.multiple ? $$selectedVal : $$selectedVal[0]}}},_vm._l((_vm.yAxisList),function(option){return _c('option',[_vm._v(_vm._s(option))])}),0),_c('label',{staticStyle:{"margin":"5px"},attrs:{"for":"groupBy-select"}},[_vm._v("Group By:")]),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.selectedGroupBy),expression:"selectedGroupBy"}],attrs:{"id":"groupBy-select"},on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.selectedGroupBy=$event.target.multiple ? $$selectedVal : $$selectedVal[0]}}},_vm._l((_vm.groupByList),function(option){return _c('option',[_vm._v(_vm._s(option))])}),0)]),_c('div',{staticClass:"scale-type-button",style:({borderRadius:'5px', padding:'7px', backgroundColor:'#666', color:'white', cursor:'pointer', userSelect:'none'}),on:{"click":_vm.toggleScaleType}},[_vm._v("Set "+_vm._s(_vm.selectedScaleType == 'linear' ? 'Log' : 'Linear'))])]),_c('div',{staticClass:"legend",style:({display: 'flex', justifyContent:'center', marginTop: '5px'})},[_c('div',{staticClass:"legend-border",style:({display:'flex', flexWrap:'wrap', maxWidth:'100%', alignItems:'center', border: '1px solid black', borderRadius: '15px', backgroundColor: '#eee'})},_vm._l((_vm.displayedChildrenPaths),function(path){return _c('div',{staticClass:"legend-item",style:({display: 'flex', padding:'5px', cursor:'pointer'}),on:{"click":function($event){return _vm.togglePathVisible(path)}}},[_c('div',{staticClass:"circle",style:({width:'15px', height:'15px', backgroundColor: _vm.disabledFuncPaths.includes(path) ? 'lightgrey': _vm.colorHash(path), borderRadius:'50px'})}),_c('div',{staticClass:"name",style:({marginLeft:'5px', color: _vm.disabledFuncPaths.includes(path) ? 'lightgrey': 'black'})},[_vm._v(_vm._s(path.slice(path.lastIndexOf('/') + 1 )))])])}),0)])]),_c('div',{staticClass:"comparison-charts",staticStyle:{"padding":"10px"}},_vm._l((_vm.groupedAndAggregated),function(runs,groupName){return _c('view-chart',{attrs:{"groupName":groupName,"hoverX":_vm.hoverX,"runs":runs,"displayedChildrenPaths":_vm.difference(_vm.displayedChildrenPaths, _vm.disabledFuncPaths),"selectedXAxisMetric":_vm.xAxis,"selectedYAxisMeta":_vm.yAxis,"selectedGroupBy":_vm.selectedGroupBy,"selectedScaleType":_vm.selectedScaleType},on:{"set-node":_vm.changePath,"chart-hover-position-changed":_vm.setChartHoverPosition,"toggle-hover-position-locked":_vm.toggleHoverPositionLock}})}),1),(_vm.hoverX)?_c('div',{staticClass:"run-view",style:({width:'100%', height:'270px', display: 'flex', position:'sticky', bottom: 0, backgroundColor:'white', padding:'10px'})},[(_vm.selectedRun)?_c('flame-graph',{attrs:{"runData":_vm.selectedRun.data,"selectedNode":_vm.selectedParent,"handleClick":_vm.changePath}}):_vm._e(),_c('div',{staticClass:"global-meta",style:({flex: 1, display:'flex', flexDirection:'column', minWidth:'300px', maxWidth:'500px', marginLeft:'20px', overflow:'scroll'})},_vm._l((_vm.selectedRun.meta),function(metaVal,metaName){return _c('div',{staticClass:"metarow",style:({display:'flex'})},[_c('div',{staticClass:"name",style:({color:'blue', fontWeight:'bold'})},[_vm._v(_vm._s(metaName)+" ")]),_c('div',{staticClass:"val",style:({whiteSpace:'nowrap', overflowWrap:'break-word'})},[_vm._v(": "+_vm._s(metaVal))])])}),0)],1):_vm._e()])}
 var staticRenderFns = []
 
           return {
             render: render,
             staticRenderFns: staticRenderFns,
             _compiled: true,
-            _scopeId: "data-v-bed92e",
+            _scopeId: "data-v-ff3891",
             functional: undefined
           };
         })());
@@ -48559,12 +48559,12 @@ define(String.prototype, "padRight", "".padEnd);
 "pop,reverse,shift,keys,values,entries,indexOf,every,some,forEach,map,filter,find,findIndex,includes,join,slice,concat,push,splice,unshift,sort,lastIndexOf,reduce,reduceRight,copyWithin,fill".split(",").forEach(function (key) {
   [][key] && define(Array, key, Function.call.bind([][key]));
 });
-},{"core-js/shim":"w2bQ","regenerator-runtime/runtime":"pGZN","core-js/fn/regexp/escape":"aLB7"}],"EM1A":[function(require,module,exports) {
+},{"core-js/shim":"w2bQ","regenerator-runtime/runtime":"pGZN","core-js/fn/regexp/escape":"aLB7"}],"C6gz":[function(require,module,exports) {
 var define;
 var global = arguments[3];
 /*!
     localForage -- Offline Storage, Improved
-    Version 1.7.4
+    Version 1.7.3
     https://localforage.github.io/localForage
     (c) 2013-2017 Mozilla, Apache License 2.0
 */
@@ -48940,7 +48940,7 @@ function isIndexedDBValid() {
     try {
         // Initialize IndexedDB; fall back to vendor-prefixed versions
         // if needed.
-        if (!idb || !idb.open) {
+        if (!idb) {
             return false;
         }
         // We mimic PouchDB here;
@@ -48951,12 +48951,8 @@ function isIndexedDBValid() {
 
         var hasFetch = typeof fetch === 'function' && fetch.toString().indexOf('[native code') !== -1;
 
-        // Safari <10.1 does not meet our requirements for IDB support
-        // (see: https://github.com/pouchdb/pouchdb/issues/5572).
-        // Safari 10.1 shipped with fetch, we can use that to detect it.
-        // Note: this creates issues with `window.fetch` polyfills and
-        // overrides; see:
-        // https://github.com/localForage/localForage/issues/856
+        // Safari <10.1 does not meet our requirements for IDB support (#5572)
+        // since Safari 10.1 shipped with fetch, we can use that to detect it
         return (!isSafari || hasFetch) && typeof indexedDB !== 'undefined' &&
         // some outdated implementations of IDB that appear on Samsung
         // and HTC Android devices <4.4 are missing IDBKeyRange
@@ -49542,7 +49538,7 @@ function iterate(iterator, callback) {
                             }
                             var result = iterator(value, cursor.key, iterationNumber++);
 
-                            // when the iterator callback returns any
+                            // when the iterator callback retuns any
                             // (non-`undefined`) value, then we stop
                             // the iteration immediately
                             if (result !== void 0) {
@@ -49764,7 +49760,7 @@ function key(n, callback) {
                 try {
                     var store = transaction.objectStore(self._dbInfo.storeName);
                     var advanced = false;
-                    var req = store.openKeyCursor();
+                    var req = store.openCursor();
 
                     req.onsuccess = function () {
                         var cursor = req.result;
@@ -49818,7 +49814,7 @@ function keys(callback) {
 
                 try {
                     var store = transaction.objectStore(self._dbInfo.storeName);
-                    var req = store.openKeyCursor();
+                    var req = store.openCursor();
                     var keys = [];
 
                     req.onsuccess = function () {
@@ -51497,6 +51493,8 @@ require("babel-polyfill");
 
 var _localforage = _interopRequireDefault(require("localforage"));
 
+var _lodash = _interopRequireDefault(require("lodash"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -51778,7 +51776,7 @@ var Graph = /*#__PURE__*/function () {
 
               case 14:
                 newData = _context3.sent;
-                _context3.next = 29;
+                _context3.next = 28;
                 break;
 
               case 17:
@@ -51790,13 +51788,12 @@ var Graph = /*#__PURE__*/function () {
               case 21:
                 _context3.t2 = _context3.sent;
                 newData = _context3.t1.parse.call(_context3.t1, _context3.t2);
-                _context3.next = 29;
+                _context3.next = 28;
                 break;
 
               case 25:
                 _context3.prev = 25;
                 _context3.t3 = _context3["catch"](17);
-                console.log('shoud get here', _context3.t3);
                 newData = {
                   Runs: {},
                   RunDataMeta: {},
@@ -51804,7 +51801,7 @@ var Graph = /*#__PURE__*/function () {
                   RunSetMeta: {}
                 };
 
-              case 29:
+              case 28:
                 // Merge new data with cached and put into local cache
                 cachedData.Runs = Object.assign(cachedData.Runs, newData.Runs);
                 cachedData.RunDataMeta = Object.assign(cachedData.RunDataMeta, newData.RunDataMeta);
@@ -51815,10 +51812,11 @@ var Graph = /*#__PURE__*/function () {
                 deletedRuns.forEach(function (deletedRun) {
                   return delete cachedData.Runs[deletedRun];
                 });
+                _context3.next = 37;
+                return _localforage.default.setItem(dataSetKey, cachedData);
 
-                _localforage.default.setItem(dataSetKey, cachedData); // set data values
-
-
+              case 37:
+                // set data values
                 this.dataSetKey = dataSetKey;
                 this.data = cachedData;
                 this.compare(); // 4. return summary
@@ -52002,9 +52000,12 @@ var Graph = /*#__PURE__*/function () {
       var _this = this;
 
       filenames = filenames || Object.keys(this.data.Runs);
+
+      var cloneData = _lodash.default.cloneDeep(this.data);
+
       var baseMetrics = {};
 
-      for (var metric in this.data.RunDataMeta) {
+      for (var metric in cloneData.RunDataMeta) {
         baseMetrics[metric] = 0.0;
       }
 
@@ -52012,7 +52013,7 @@ var Graph = /*#__PURE__*/function () {
       var metricNames = new Set();
       var runs = [];
       filenames.map(function (filename) {
-        var fileData = _this.data.Runs[filename].Data;
+        var fileData = cloneData.Runs[filename].Data;
         var run = {
           'data': fileData
         }; // pad the data
@@ -52035,12 +52036,12 @@ var Graph = /*#__PURE__*/function () {
 
         run.meta = {};
 
-        for (var _i5 = 0, _Object$entries5 = Object.entries(_this.data.Runs[filename].Globals); _i5 < _Object$entries5.length; _i5++) {
+        for (var _i5 = 0, _Object$entries5 = Object.entries(cloneData.Runs[filename].Globals); _i5 < _Object$entries5.length; _i5++) {
           var _Object$entries5$_i = _slicedToArray(_Object$entries5[_i5], 2),
               _metricName = _Object$entries5$_i[0],
               value = _Object$entries5$_i[1];
 
-          var metricMeta = _this.data.RunGlobalMeta[_metricName];
+          var metricMeta = cloneData.RunGlobalMeta[_metricName];
           var type = metricMeta ? metricMeta.type : "string";
           run.meta[_metricName] = {
             value: value,
@@ -52060,8 +52061,10 @@ var Graph = /*#__PURE__*/function () {
       });
       runs.forEach(function (run) {
         funcPaths.forEach(function (funcPath) {
-          run.data[funcPath] = _objectSpread({}, baseMetrics, {}, run.data[funcPath]);
+          run.data['--root path--/' + funcPath] = _objectSpread({}, baseMetrics, {}, run.data[funcPath]);
+          delete run.data[funcPath];
         });
+        run.data['--root path--'] = baseMetrics;
       });
 
       _store.default.commit('setData', runs);
@@ -52114,7 +52117,7 @@ var Graph = /*#__PURE__*/function () {
 
 exports.Graph = Graph;
 window.Graph = Graph;
-},{"vue":"QPfz","./store":"iz0v","./App.vue":"Js2s","babel-polyfill":"wllv","localforage":"EM1A","_bundle_loader":"Cm3W","jquery":[["jquery.4af8f51c.js","juYr"],"juYr"]}],"W28G":[function(require,module,exports) {
+},{"vue":"QPfz","./store":"iz0v","./App.vue":"Js2s","babel-polyfill":"wllv","localforage":"C6gz","lodash":"B1iE","_bundle_loader":"Cm3W","jquery":[["jquery.4af8f51c.js","juYr"],"juYr"]}],"W28G":[function(require,module,exports) {
 module.exports = function loadJSBundle(bundle) {
   return new Promise(function (resolve, reject) {
     var script = document.createElement('script');
