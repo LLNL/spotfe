@@ -40432,6 +40432,7 @@ var lodash_1 = __importDefault(require("lodash"));
 var functions_js_1 = require("./functions.js");
 
 exports.default = vue_1.default.extend({
+  props: ['yourMom'],
   data: function data() {
     return {
       selectedParent: "",
@@ -51730,10 +51731,14 @@ var Graph = /*#__PURE__*/function () {
   function Graph(selector) {
     _classCallCheck(this, Graph);
 
-    new _vue.default({
+    this.app = new _vue.default({
       el: selector,
       render: function render(h) {
-        return h(_App.default);
+        return h(_App.default, {
+          propsData: {
+            yourMom: 'wow'
+          }
+        });
       },
       store: _store.default
     });
@@ -51801,7 +51806,7 @@ var Graph = /*#__PURE__*/function () {
   }, {
     key: "openMultiJupyter",
     value: function () {
-      var _openMultiJupyter = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(filepath, host, command) {
+      var _openMultiJupyter = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(basepath, subpaths, host, command) {
         var response, url, _url2;
 
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
@@ -51820,7 +51825,7 @@ var Graph = /*#__PURE__*/function () {
                     'content-type': 'application/json'
                   },
                   body: JSON.stringify({
-                    filepath: filepath
+                    basepath: basepath
                   })
                 });
 
@@ -51837,7 +51842,7 @@ var Graph = /*#__PURE__*/function () {
 
               case 7:
                 _context2.next = 9;
-                return lorenz(host, "".concat(command, " ").concat(filepath));
+                return lorenz(host, "".concat(command, " ").concat(basepath, " '").concat(JSON.stringify(subpaths), "'"));
 
               case 9:
                 _url2 = _context2.sent;
@@ -51851,7 +51856,7 @@ var Graph = /*#__PURE__*/function () {
         }, _callee2);
       }));
 
-      function openMultiJupyter(_x6, _x7, _x8) {
+      function openMultiJupyter(_x6, _x7, _x8, _x9) {
         return _openMultiJupyter.apply(this, arguments);
       }
 
@@ -51867,14 +51872,16 @@ var Graph = /*#__PURE__*/function () {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                _context3.next = 2;
+                // Get Cached Data from local storage 
+                this.app.yourMom = 'not cool';
+                _context3.next = 3;
                 return _localforage.default.getItem(dataSetKey);
 
-              case 2:
+              case 3:
                 _context3.t0 = _context3.sent;
 
                 if (_context3.t0) {
-                  _context3.next = 5;
+                  _context3.next = 6;
                   break;
                 }
 
@@ -51885,7 +51892,7 @@ var Graph = /*#__PURE__*/function () {
                   RunSetMeta: {}
                 };
 
-              case 5:
+              case 6:
                 cachedData = _context3.t0;
                 cachedRunCtimes = cachedData.runCtimes || {};
                 dataRequest = {
@@ -51894,11 +51901,11 @@ var Graph = /*#__PURE__*/function () {
                 }; // Get New  Data from backend
 
                 if (!(window.ENV && window.ENV.machine == 'container')) {
-                  _context3.next = 17;
+                  _context3.next = 18;
                   break;
                 }
 
-                _context3.next = 11;
+                _context3.next = 12;
                 return fetch("/getdata", {
                   method: "post",
                   headers: {
@@ -51907,31 +51914,31 @@ var Graph = /*#__PURE__*/function () {
                   body: JSON.stringify(dataRequest)
                 });
 
-              case 11:
+              case 12:
                 response = _context3.sent;
-                _context3.next = 14;
+                _context3.next = 15;
                 return response.json();
 
-              case 14:
+              case 15:
                 newData = _context3.sent;
-                _context3.next = 28;
+                _context3.next = 29;
                 break;
 
-              case 17:
-                _context3.prev = 17;
+              case 18:
+                _context3.prev = 18;
                 _context3.t1 = JSON;
-                _context3.next = 21;
+                _context3.next = 22;
                 return lorenz(host, "".concat(command, " ").concat(dataSetKey, " '") + JSON.stringify(cachedRunCtimes) + "'");
 
-              case 21:
+              case 22:
                 _context3.t2 = _context3.sent;
                 newData = _context3.t1.parse.call(_context3.t1, _context3.t2);
-                _context3.next = 28;
+                _context3.next = 29;
                 break;
 
-              case 25:
-                _context3.prev = 25;
-                _context3.t3 = _context3["catch"](17);
+              case 26:
+                _context3.prev = 26;
+                _context3.t3 = _context3["catch"](18);
                 newData = {
                   Runs: {},
                   RunDataMeta: {},
@@ -51939,7 +51946,7 @@ var Graph = /*#__PURE__*/function () {
                   RunSetMeta: {}
                 };
 
-              case 28:
+              case 29:
                 // Merge new data with cached and put into local cache
                 cachedData.Runs = Object.assign(cachedData.Runs, newData.Runs);
                 cachedData.RunDataMeta = Object.assign(cachedData.RunDataMeta, newData.RunDataMeta);
@@ -51950,10 +51957,10 @@ var Graph = /*#__PURE__*/function () {
                 deletedRuns.forEach(function (deletedRun) {
                   return delete cachedData.Runs[deletedRun];
                 });
-                _context3.next = 37;
+                _context3.next = 38;
                 return _localforage.default.setItem(dataSetKey, cachedData);
 
-              case 37:
+              case 38:
                 // set data values
                 this.dataSetKey = dataSetKey;
                 this.data = cachedData;
@@ -51966,20 +51973,20 @@ var Graph = /*#__PURE__*/function () {
                     table: []
                   }
                 };
-                _context3.next = 43;
+                _context3.next = 44;
                 return _localforage.default.getItem("show:" + dataSetKey);
 
-              case 43:
+              case 44:
                 _context3.t4 = _context3.sent;
 
                 if (_context3.t4) {
-                  _context3.next = 46;
+                  _context3.next = 47;
                   break;
                 }
 
                 _context3.t4 = defaultVisibleCharts;
 
-              case 46:
+              case 47:
                 visibleCharts = _context3.t4;
 
                 for (_i = 0, _Object$entries = Object.entries(cachedData.Runs); _i < _Object$entries.length; _i++) {
@@ -52008,32 +52015,32 @@ var Graph = /*#__PURE__*/function () {
                   });
                 }
 
-                _context3.next = 51;
+                _context3.next = 52;
                 return _localforage.default.getItem('scatterplots:' + this.dataSetKey);
 
-              case 51:
+              case 52:
                 _context3.t5 = _context3.sent;
 
                 if (_context3.t5) {
-                  _context3.next = 54;
+                  _context3.next = 55;
                   break;
                 }
 
                 _context3.t5 = [];
 
-              case 54:
+              case 55:
                 summary.layout.scatterplots = _context3.t5;
                 return _context3.abrupt("return", summary);
 
-              case 56:
+              case 57:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, this, [[17, 25]]);
+        }, _callee3, this, [[18, 26]]);
       }));
 
-      function getData(_x9, _x10, _x11) {
+      function getData(_x10, _x11, _x12) {
         return _getData.apply(this, arguments);
       }
 
@@ -52076,7 +52083,7 @@ var Graph = /*#__PURE__*/function () {
         }, _callee4, this);
       }));
 
-      function addScatterplot(_x12) {
+      function addScatterplot(_x13) {
         return _addScatterplot.apply(this, arguments);
       }
 
@@ -52126,7 +52133,7 @@ var Graph = /*#__PURE__*/function () {
         }, _callee5, this);
       }));
 
-      function setChartVisible(_x13) {
+      function setChartVisible(_x14) {
         return _setChartVisible.apply(this, arguments);
       }
 
