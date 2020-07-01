@@ -1,10 +1,22 @@
 Next:
+IN PROG - multiJupyter integrating for Joe's container.
+    9 seconds - 8807 characters.
+    38 seconds - 36000 characters.
+IN PROG - regression testing.
+
 - come up with hard coded "live" inside of spot.py
     * or try to figure out dev/live based on where it's executing.
 - make spot-dev email list.
-- make Release script that copies directories (hatchet, caliper) from dev to live
+DONE - make Release script that copies directories (hatchet, caliper) from dev to live
     * first run git fetch, git pull on live dir.
-- multiJupyter integrating for Joe's container.
+
+
+
+Next:
+- integrate Joe's code with mine.  Right now still working on minified code.
+    * need to make this a priority.
+- (trade) check wage works claim/ and HSA claims (both submitted on Tues 6/30)
+
 
 DONE - maintain order consistency of the charts
     * right now when you edit a chart, the chart edited can appear in a new position
@@ -30,6 +42,7 @@ DONE - Do edit name of chart
 DONE - Add Chart make it use the new pers layer
 DONE - Auto focus for the initial input field.
 DONE - check to see if we can do hovers for the horizontal bar value
+
 
 For New Release:
 - new version of caliper

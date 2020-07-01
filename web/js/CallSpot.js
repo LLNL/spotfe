@@ -426,7 +426,7 @@ ST.CallSpot = function() {
 
             var file_left = ST.cali_obj_by_key[key].run_set_id;
             file_left = strip_right_( file_left );
-            
+
             window.open('sankey/index.html?runSetId=' + file_left + "&runId=" + cali_fp );
 
         } else {
