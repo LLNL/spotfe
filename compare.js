@@ -39176,7 +39176,6 @@ exports.default = vue_1.default.extend({
       if (this.yAxisListener) this.yAxisListener(value);
     },
     selectedGroupBy: function selectedGroupBy(value) {
-      console.log('changing groupby');
       this.hoverX = null;
       if (this.groupByListener) this.groupByListener(value);
     },
@@ -39196,35 +39195,7 @@ exports.default = vue_1.default.extend({
     }
   },
   computed: {
-    // runs() {
-    //     if(this.selectedParent == '') this.selectedParent = this.rootFuncPath
-    //     return this.$store.state.runs
-    // },
-    // rootFuncPath(){return this.$store.state.rootFuncPath},
-    // xAxis: {
-    //     get(){return this.$store.state.xAxis},
-    //     set(value){this.$store.commit('setXAxis', value)}
-    // },
-    // yAxis: {
-    //     get(){return this.$store.state.yAxis},
-    //     set(value){this.$store.commit('setYAxis', value)}
-    // },
-    // selectedGroupBy: {
-    //     get(){
-    //         this.hoverX = null;
-    //         return this.$store.state.groupBy
-    //     },
-    //     set(value){this.$store.commit('setGroupBy', value)}
-    //     },
-    // selectedAggregateBy: {
-    //     get(){
-    //         this.hoverX = null;
-    //         return this.$store.state.selectedAggregateBy
-    //         },
-    //     set(value){this.$store.commit('setAggregateBy', value)}
-    //     },
     xAxisList: function xAxisList() {
-      // const firstRun = this.$store.state.runs[0] || {meta:{}}
       var firstRun = this.runs[0] || {
         meta: {}
       };
@@ -50475,8 +50446,7 @@ var Graph = /*#__PURE__*/function () {
       },
       components: {
         App: _App.default
-      } // store
-
+      }
     }).$children[0];
   }
 
@@ -50695,10 +50665,21 @@ var Graph = /*#__PURE__*/function () {
                 return _localforage.default.setItem(dataSetKey, cachedData);
 
               case 37:
-                // set data values
+                // add in datsetkey and datakey to globals
+                _lodash.default.forEach(cachedData.Runs, function (run, filename) {
+                  run.Globals.dataSetKey = dataSetKey;
+                  run.Globals.datapath = filename;
+                });
+
+                cachedData.RunGlobalMeta.dataSetKey = {
+                  type: 'string'
+                };
+                cachedData.RunGlobalMeta.datapath = {
+                  type: 'string'
+                }; // set data values
+
                 this.dataSetKey = dataSetKey;
                 window.runData = cachedData;
-                console.log('rundata', window.runData);
                 this.compare(); // 4. return summary
 
                 summary = {
@@ -50708,20 +50689,20 @@ var Graph = /*#__PURE__*/function () {
                     table: []
                   }
                 };
-                _context3.next = 44;
+                _context3.next = 46;
                 return _localforage.default.getItem("show:" + dataSetKey);
 
-              case 44:
+              case 46:
                 _context3.t4 = _context3.sent;
 
                 if (_context3.t4) {
-                  _context3.next = 47;
+                  _context3.next = 49;
                   break;
                 }
 
                 _context3.t4 = defaultVisibleCharts;
 
-              case 47:
+              case 49:
                 visibleCharts = _context3.t4;
 
                 for (_i = 0, _Object$entries = Object.entries(cachedData.Runs); _i < _Object$entries.length; _i++) {
@@ -50750,24 +50731,24 @@ var Graph = /*#__PURE__*/function () {
                   });
                 }
 
-                _context3.next = 52;
+                _context3.next = 54;
                 return _localforage.default.getItem('scatterplots:' + this.dataSetKey);
 
-              case 52:
+              case 54:
                 _context3.t5 = _context3.sent;
 
                 if (_context3.t5) {
-                  _context3.next = 55;
+                  _context3.next = 57;
                   break;
                 }
 
                 _context3.t5 = [];
 
-              case 55:
+              case 57:
                 summary.layout.scatterplots = _context3.t5;
                 return _context3.abrupt("return", summary);
 
-              case 57:
+              case 59:
               case "end":
                 return _context3.stop();
             }
@@ -50877,8 +50858,6 @@ var Graph = /*#__PURE__*/function () {
   }, {
     key: "compare",
     value: function compare(filenames) {
-      var _this = this;
-
       filenames = filenames || Object.keys(window.runData.Runs);
 
       var cloneData = _lodash.default.cloneDeep(window.runData);
@@ -50915,8 +50894,9 @@ var Graph = /*#__PURE__*/function () {
         }
 
         run.meta = {};
+        var globals = cloneData.Runs[filename].Globals;
 
-        for (var _i5 = 0, _Object$entries5 = Object.entries(cloneData.Runs[filename].Globals); _i5 < _Object$entries5.length; _i5++) {
+        for (var _i5 = 0, _Object$entries5 = Object.entries(globals); _i5 < _Object$entries5.length; _i5++) {
           var _Object$entries5$_i = _slicedToArray(_Object$entries5[_i5], 2),
               _metricName = _Object$entries5$_i[0],
               value = _Object$entries5$_i[1];
@@ -50929,14 +50909,6 @@ var Graph = /*#__PURE__*/function () {
           };
         }
 
-        run.meta.dataSetKey = {
-          value: _this.dataSetKey,
-          type: "string"
-        };
-        run.meta.datapath = {
-          value: filename,
-          type: "string"
-        };
         runs.push(run);
       });
       runs.forEach(function (run) {
