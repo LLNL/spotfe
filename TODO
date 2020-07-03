@@ -1,9 +1,17 @@
 Next:
+- stephanie brinks cali file error:
+    * joe fixed the back end where the layout wasn't being returned
+    *
 IN PROG - multiJupyter integrating for Joe's container.
     9 seconds - 8807 characters.
     38 seconds - 36000 characters.
+    57 seconds - 52000 characters
 IN PROG - regression testing.
+- make sure errors show up okay.
 
+
+Next Release:
+- Spinner for MultiJupyter.
 - come up with hard coded "live" inside of spot.py
     * or try to figure out dev/live based on where it's executing.
 - make spot-dev email list.
@@ -15,7 +23,6 @@ DONE - make Release script that copies directories (hatchet, caliper) from dev t
 Next:
 - integrate Joe's code with mine.  Right now still working on minified code.
     * need to make this a priority.
-- (trade) check wage works claim/ and HSA claims (both submitted on Tues 6/30)
 
 
 DONE - maintain order consistency of the charts

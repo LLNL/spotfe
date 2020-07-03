@@ -280,11 +280,15 @@ ST.CallSpot = function() {
     //  that input box at the left side above the table.
     var get_made_up_date_ = function() {
 
-        //  This is a STUB!!!!!!!  STUB STUB STUB.
-        var rb = valid_obj['Region Balance'];
-        var deterministic = valid_obj.FigureOfMerit || rb || 0.5;
-        var made_up = 1557354304 - Math.floor( deterministic * 380 * 86000);
-        return made_up;
+        if( valid_obj ) {
+            //  This is a STUB!!!!!!!  STUB STUB STUB.
+            var rb = valid_obj['Region Balance'];
+            var deterministic = valid_obj.FigureOfMerit || rb || 0.5;
+            var made_up = 1557354304 - Math.floor(deterministic * 380 * 86000);
+            return made_up;
+        }
+
+        return 0;
     };
 
 
