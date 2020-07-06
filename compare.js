@@ -39173,7 +39173,7 @@ exports.default = vue_1.default.extend({
       if (this.xAxisListener) this.xAxisListener(value);
     },
     yAxis: function yAxis(value) {
-      if (this.yAxisListener) this.yAxisListener(value);
+      if (this.yAxisListener && !this.gettingInitialYValue) this.yAxisListener(value);
     },
     selectedGroupBy: function selectedGroupBy(value) {
       this.hoverX = null;
@@ -39191,7 +39191,9 @@ exports.default = vue_1.default.extend({
         }
       }
 
+      this.gettingInitialYValue = true;
       this.yAxis = getInitialYValue(_runs);
+      this.gettingInitialYValue = false;
     }
   },
   computed: {
