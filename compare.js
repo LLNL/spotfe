@@ -39172,9 +39172,6 @@ exports.default = vue_1.default.extend({
     xAxis: function xAxis(value) {
       if (this.xAxisListener) this.xAxisListener(value);
     },
-    yAxis: function yAxis(value) {
-      if (this.yAxisListener && !this.gettingInitialYValue) this.yAxisListener(value);
-    },
     selectedGroupBy: function selectedGroupBy(value) {
       this.hoverX = null;
       if (this.groupByListener) this.groupByListener(value);
@@ -39191,9 +39188,7 @@ exports.default = vue_1.default.extend({
         }
       }
 
-      this.gettingInitialYValue = true;
       this.yAxis = getInitialYValue(_runs);
-      this.gettingInitialYValue = false;
     }
   },
   computed: {
@@ -39310,6 +39305,10 @@ exports.default = vue_1.default.extend({
     }
   },
   methods: {
+    yAxisSelected: function yAxisSelected(selectedYAxis) {
+      this.yAxis = selectedYAxis;
+      if (this.yAxisListener) this.yAxisListener(selectedYAxis);
+    },
     changePath: function changePath(path) {
       this.selectedParent = path;
     },
@@ -39352,7 +39351,7 @@ exports.default = vue_1.default.extend({
                 height:'40px',
                 display:'flex',
                 alignItems:'center',
-                })},[_c('div',{staticClass:"selects",style:({flex:1, display:'flex', alignItems:'center', flexWrap:'wrap'})},[_c('label',{staticStyle:{"margin":"5px"},attrs:{"for":"xAxis-select"}},[_vm._v("X-Axis: ")]),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.xAxis),expression:"xAxis"}],attrs:{"id":"xAxis-select"},on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.xAxis=$event.target.multiple ? $$selectedVal : $$selectedVal[0]}}},_vm._l((_vm.xAxisList),function(option){return _c('option',[_vm._v(_vm._s(option))])}),0),_c('label',{staticStyle:{"margin":"5px"},attrs:{"for":"aggregate-select"}},[_vm._v("X-Axis Aggregate:")]),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.selectedAggregateBy),expression:"selectedAggregateBy"}],style:({marginRight: '10px'}),attrs:{"id":"aggregate-select"},on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.selectedAggregateBy=$event.target.multiple ? $$selectedVal : $$selectedVal[0]}}},_vm._l((['', 'sum','avg', 'min', 'max' ]),function(option){return _c('option',[_vm._v(_vm._s(option))])}),0),_c('label',{staticStyle:{"margin":"5px"},attrs:{"for":"yAxis-select"}},[_vm._v("Y-Axis: ")]),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.yAxis),expression:"yAxis"}],attrs:{"id":"yAxis-select"},on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.yAxis=$event.target.multiple ? $$selectedVal : $$selectedVal[0]}}},_vm._l((_vm.yAxisList),function(option){return _c('option',[_vm._v(_vm._s(option))])}),0),_c('label',{staticStyle:{"margin":"5px"},attrs:{"for":"groupBy-select"}},[_vm._v("Group By:")]),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.selectedGroupBy),expression:"selectedGroupBy"}],attrs:{"id":"groupBy-select"},on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.selectedGroupBy=$event.target.multiple ? $$selectedVal : $$selectedVal[0]}}},_vm._l((_vm.groupByList),function(option){return _c('option',[_vm._v(_vm._s(option))])}),0)]),_c('div',{staticClass:"scale-type-button",style:({
+                })},[_c('div',{staticClass:"selects",style:({flex:1, display:'flex', alignItems:'center', flexWrap:'wrap'})},[_c('label',{staticStyle:{"margin":"5px"},attrs:{"for":"xAxis-select"}},[_vm._v("X-Axis: ")]),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.xAxis),expression:"xAxis"}],attrs:{"id":"xAxis-select"},on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.xAxis=$event.target.multiple ? $$selectedVal : $$selectedVal[0]}}},_vm._l((_vm.xAxisList),function(option){return _c('option',[_vm._v(_vm._s(option))])}),0),_c('label',{staticStyle:{"margin":"5px"},attrs:{"for":"aggregate-select"}},[_vm._v("X-Axis Aggregate:")]),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.selectedAggregateBy),expression:"selectedAggregateBy"}],style:({marginRight: '10px'}),attrs:{"id":"aggregate-select"},on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.selectedAggregateBy=$event.target.multiple ? $$selectedVal : $$selectedVal[0]}}},_vm._l((['', 'sum','avg', 'min', 'max' ]),function(option){return _c('option',[_vm._v(_vm._s(option))])}),0),_c('label',{staticStyle:{"margin":"5px"},attrs:{"for":"yAxis-select"}},[_vm._v("Y-Axis: ")]),_c('select',{attrs:{"id":"yAxis-select"},domProps:{"value":_vm.yAxis},on:{"input":function($event){return _vm.yAxisSelected($event.target.value)}}},_vm._l((_vm.yAxisList),function(option){return _c('option',[_vm._v(_vm._s(option))])}),0),_c('label',{staticStyle:{"margin":"5px"},attrs:{"for":"groupBy-select"}},[_vm._v("Group By:")]),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.selectedGroupBy),expression:"selectedGroupBy"}],attrs:{"id":"groupBy-select"},on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.selectedGroupBy=$event.target.multiple ? $$selectedVal : $$selectedVal[0]}}},_vm._l((_vm.groupByList),function(option){return _c('option',[_vm._v(_vm._s(option))])}),0)]),_c('div',{staticClass:"scale-type-button",style:({
                     borderRadius:'5px',
                     padding:'7px',
                     backgroundColor:'#666',
