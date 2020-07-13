@@ -1,20 +1,14 @@
 Next:
-- stephanie brinks cali file error:
-    * joe fixed the back end where the layout wasn't being returned
-    *
-IN PROG - multiJupyter integrating for Joe's container.
-    9 seconds - 8807 characters.
-    38 seconds - 36000 characters.
-    57 seconds - 52000 characters
-IN PROG - regression testing.
+- make spot-dev email list.
 - make sure errors show up okay.
+    * for example instead of having to check the debugger.
+    * but which errors?
 
 
 Next Release:
 - Spinner for MultiJupyter.
 - come up with hard coded "live" inside of spot.py
     * or try to figure out dev/live based on where it's executing.
-- make spot-dev email list.
 DONE - make Release script that copies directories (hatchet, caliper) from dev to live
     * first run git fetch, git pull on live dir.
 
@@ -49,6 +43,14 @@ DONE - Do edit name of chart
 DONE - Add Chart make it use the new pers layer
 DONE - Auto focus for the initial input field.
 DONE - check to see if we can do hovers for the horizontal bar value
+
+
+FIXED - stephanie brinks cali file error:
+    * joe fixed the back end where the layout wasn't being returned
+FIXED - multiJupyter integrating for Joe's container.
+    9 seconds - 8807 characters.
+    38 seconds - 36000 characters.
+    57 seconds - 52000 characters
 
 
 For New Release:
