@@ -39158,9 +39158,9 @@ exports.default = vue_1.default.extend({
       selectedGroupBy: '',
       groupByListener: null,
       selectedAggregateBy: '',
+      filenames: [],
       aggregateListener: null,
       rootFuncPath: '',
-      runs: {},
       selectedParent: "--root path--",
       selectedScaleType: "linear",
       hoverX: null,
@@ -39179,25 +39179,36 @@ exports.default = vue_1.default.extend({
     selectedAggregateBy: function selectedAggregateBy(value) {
       if (this.aggregateListener) this.aggregateListener(value);
     },
-    runs: function runs(_runs) {
-      if (_runs.length) {
-        var allFuncPaths = lodash_1.default.keys(_runs[0].data); // if no rootFuncPath set or dataset doesn't include currently set rootFuncPath set it
+    filenames: function filenames(_filenames) {
+      if (_filenames.length) {
+        var allFuncPaths = lodash_1.default.keys(this.runs[0].data); // if no rootFuncPath set or dataset doesn't include currently set rootFuncPath set it
 
         if (this.rootFuncPath == '' || !allFuncPaths.includes(this.rootFuncPath)) {
           this.rootFuncPath = lodash_1.default.min(allFuncPaths);
         }
       }
 
-      this.yAxis = getInitialYValue(_runs);
+      this.yAxis = getInitialYValue(this.runs);
     }
   },
   computed: {
+    runs: function runs() {
+      var _this = this;
+
+      return this.filenames && window.runs ? window.runs.filter(function (run) {
+        return _this.filenames.includes(run.meta.datapath.value);
+      }) : [];
+    },
     xAxisList: function xAxisList() {
-      var firstRun = this.runs[0] || {
-        meta: {}
-      };
-      var metaKeys = Object.keys(firstRun.meta);
-      return metaKeys;
+      if (this.filenames.length) {
+        var firstRun = this.runs[0] || {
+          meta: {}
+        };
+        var metaKeys = Object.keys(firstRun.meta);
+        return metaKeys;
+      } else {
+        return [];
+      }
     },
     funcPathKeys: function funcPathKeys() {
       return this.runs[0] ? Object.keys(this.runs[0].data) : [];
@@ -50343,6 +50354,8 @@ var _localforage = _interopRequireDefault(require("localforage"));
 
 var _lodash = _interopRequireDefault(require("lodash"));
 
+var _window$ENV, _window$ENV2;
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -50373,6 +50386,10 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+var defaultVisibleCharts = ['walltime', 'user', 'uid', 'launchdate', 'executable', 'executablepath', 'cmdline', 'hosthame', 'clustername', 'systime', 'cputime', 'fom'];
+var isContainer = ((_window$ENV = window.ENV) === null || _window$ENV === void 0 ? void 0 : _window$ENV.machine) == 'container';
+var useJsonp = (_window$ENV2 = window.ENV) === null || _window$ENV2 === void 0 ? void 0 : _window$ENV2.use_JSONP_for_lorenz_calls;
+
 function lorenz(_x, _x2) {
   return _lorenz.apply(this, arguments);
 }
@@ -50386,7 +50403,7 @@ function _lorenz() {
           case 0:
             baseurl = "https://".concat(host.startsWith('rz') ? 'rz' : '', "lc.llnl.gov/lorenz/lora/lora.cgi");
 
-            if (!("production" === 'development' || window.ENV && window.ENV.use_JSONP_for_lorenz_calls)) {
+            if (!("production" === 'development' || useJsonp)) {
               _context6.next = 8;
               break;
             }
@@ -50434,8 +50451,6 @@ function _lorenz() {
   return _lorenz.apply(this, arguments);
 }
 
-var defaultVisibleCharts = ['walltime', 'user', 'uid', 'launchdate', 'executable', 'executablepath', 'cmdline', 'hosthame', 'clustername', 'systime', 'cputime', 'fom'];
-
 var Graph = /*#__PURE__*/function () {
   function Graph(selector) {
     _classCallCheck(this, Graph);
@@ -50461,7 +50476,7 @@ var Graph = /*#__PURE__*/function () {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (!(window.ENV && window.ENV.machine == 'container')) {
+                if (!isContainer) {
                   _context.next = 7;
                   break;
                 }
@@ -50520,7 +50535,7 @@ var Graph = /*#__PURE__*/function () {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                if (!(window.ENV && window.ENV.machine == 'container')) {
+                if (!isContainer) {
                   _context2.next = 7;
                   break;
                 }
@@ -50573,7 +50588,7 @@ var Graph = /*#__PURE__*/function () {
     key: "getData",
     value: function () {
       var _getData = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(host, command, dataSetKey) {
-        var cachedData, cachedRunCtimes, dataRequest, newData, response, deletedRuns, summary, visibleCharts, _i, _Object$entries, _Object$entries$_i, filename, fileContents, _i2, _Object$entries2, _Object$entries2$_i, globalName, globalValue, globType, show;
+        var cachedData, cachedRunCtimes, dataRequest, newData, response, deletedRuns, baseMetrics, metric, funcPaths, metricNames, runs, filenames, summary, visibleCharts, _i4, _Object$entries4, _Object$entries4$_i, filename, fileContents, _i5, _Object$entries5, _Object$entries5$_i, globalName, globalValue, globType, show;
 
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
@@ -50605,7 +50620,7 @@ var Graph = /*#__PURE__*/function () {
                   cachedRunCtimes: cachedRunCtimes
                 }; // Get New  Data from backend
 
-                if (!(window.ENV && window.ENV.machine == 'container')) {
+                if (!isContainer) {
                   _context3.next = 17;
                   break;
                 }
@@ -50652,16 +50667,18 @@ var Graph = /*#__PURE__*/function () {
                 };
 
               case 28:
-                // Merge new data with cached and put into local cache
+                // Merge new data with cached
                 cachedData.Runs = Object.assign(cachedData.Runs, newData.Runs);
                 cachedData.RunDataMeta = Object.assign(cachedData.RunDataMeta, newData.RunDataMeta);
                 cachedData.RunGlobalMeta = Object.assign(cachedData.RunGlobalMeta, newData.RunGlobalMeta);
                 cachedData.RunSetMeta = Object.assign(cachedData.RunSetMeta, newData.RunSetMeta);
-                cachedData.runCtimes = newData.runCtimes;
+                cachedData.runCtimes = newData.runCtimes; // delete runs from cache that were deleted on backend
+
                 deletedRuns = newData.deletedRuns || [];
                 deletedRuns.forEach(function (deletedRun) {
                   return delete cachedData.Runs[deletedRun];
-                });
+                }); // cache newest version of data
+
                 _context3.next = 37;
                 return _localforage.default.setItem(dataSetKey, cachedData);
 
@@ -50677,11 +50694,68 @@ var Graph = /*#__PURE__*/function () {
                 };
                 cachedData.RunGlobalMeta.datapath = {
                   type: 'string'
-                }; // set data values
+                };
+                baseMetrics = {};
+
+                for (metric in cachedData.RunDataMeta) {
+                  baseMetrics[metric] = 0.0;
+                }
+
+                funcPaths = new Set();
+                metricNames = new Set();
+                runs = [];
+                filenames = Object.keys(cachedData.Runs);
+                filenames.map(function (filename) {
+                  var fileData = cachedData.Runs[filename].Data;
+                  var run = {
+                    'data': fileData
+                  }; // pad the data
+
+                  for (var _i = 0, _Object$entries = Object.entries(fileData); _i < _Object$entries.length; _i++) {
+                    var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
+                        funcPath = _Object$entries$_i[0],
+                        metrics = _Object$entries$_i[1];
+
+                    funcPaths.add(funcPath);
+
+                    for (var _i2 = 0, _Object$entries2 = Object.entries(metrics); _i2 < _Object$entries2.length; _i2++) {
+                      var _Object$entries2$_i = _slicedToArray(_Object$entries2[_i2], 2),
+                          metricName = _Object$entries2$_i[0],
+                          val = _Object$entries2$_i[1];
+
+                      metricNames.add(metricName);
+                    }
+                  }
+
+                  run.meta = {};
+                  var globals = cachedData.Runs[filename].Globals;
+
+                  for (var _i3 = 0, _Object$entries3 = Object.entries(globals); _i3 < _Object$entries3.length; _i3++) {
+                    var _Object$entries3$_i = _slicedToArray(_Object$entries3[_i3], 2),
+                        _metricName = _Object$entries3$_i[0],
+                        value = _Object$entries3$_i[1];
+
+                    var metricMeta = cachedData.RunGlobalMeta[_metricName];
+                    var type = metricMeta ? metricMeta.type : "string";
+                    run.meta[_metricName] = {
+                      value: value,
+                      type: type
+                    };
+                  }
+
+                  runs.push(run);
+                });
+                runs.forEach(function (run) {
+                  funcPaths.forEach(function (funcPath) {
+                    run.data['--root path--/' + funcPath] = _objectSpread({}, baseMetrics, {}, run.data[funcPath]);
+                    delete run.data[funcPath];
+                  });
+                  run.data['--root path--'] = baseMetrics;
+                }); // set data values
 
                 this.dataSetKey = dataSetKey;
-                window.runData = cachedData;
-                this.compare(); // 4. return summary
+                window.runs = runs;
+                this.compare(filenames); // 4. return summary
 
                 summary = {
                   data: {},
@@ -50690,31 +50764,31 @@ var Graph = /*#__PURE__*/function () {
                     table: []
                   }
                 };
-                _context3.next = 46;
+                _context3.next = 54;
                 return _localforage.default.getItem("show:" + dataSetKey);
 
-              case 46:
+              case 54:
                 _context3.t4 = _context3.sent;
 
                 if (_context3.t4) {
-                  _context3.next = 49;
+                  _context3.next = 57;
                   break;
                 }
 
                 _context3.t4 = defaultVisibleCharts;
 
-              case 49:
+              case 57:
                 visibleCharts = _context3.t4;
 
-                for (_i = 0, _Object$entries = Object.entries(cachedData.Runs); _i < _Object$entries.length; _i++) {
-                  _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2), filename = _Object$entries$_i[0], fileContents = _Object$entries$_i[1];
+                for (_i4 = 0, _Object$entries4 = Object.entries(cachedData.Runs); _i4 < _Object$entries4.length; _i4++) {
+                  _Object$entries4$_i = _slicedToArray(_Object$entries4[_i4], 2), filename = _Object$entries4$_i[0], fileContents = _Object$entries4$_i[1];
                   summary.data[filename] = _objectSpread({}, fileContents.Globals, {
                     filepath: dataSetKey + '/' + filename
                   });
                 }
 
-                for (_i2 = 0, _Object$entries2 = Object.entries(cachedData.RunGlobalMeta); _i2 < _Object$entries2.length; _i2++) {
-                  _Object$entries2$_i = _slicedToArray(_Object$entries2[_i2], 2), globalName = _Object$entries2$_i[0], globalValue = _Object$entries2$_i[1];
+                for (_i5 = 0, _Object$entries5 = Object.entries(cachedData.RunGlobalMeta); _i5 < _Object$entries5.length; _i5++) {
+                  _Object$entries5$_i = _slicedToArray(_Object$entries5[_i5], 2), globalName = _Object$entries5$_i[0], globalValue = _Object$entries5$_i[1];
                   globType = globalValue.type;
                   show = visibleCharts.includes(globalName);
                   summary.layout.charts.push({
@@ -50732,24 +50806,24 @@ var Graph = /*#__PURE__*/function () {
                   });
                 }
 
-                _context3.next = 54;
+                _context3.next = 62;
                 return _localforage.default.getItem('scatterplots:' + this.dataSetKey);
 
-              case 54:
+              case 62:
                 _context3.t5 = _context3.sent;
 
                 if (_context3.t5) {
-                  _context3.next = 57;
+                  _context3.next = 65;
                   break;
                 }
 
                 _context3.t5 = [];
 
-              case 57:
+              case 65:
                 summary.layout.scatterplots = _context3.t5;
                 return _context3.abrupt("return", summary);
 
-              case 59:
+              case 67:
               case "end":
                 return _context3.stop();
             }
@@ -50859,67 +50933,7 @@ var Graph = /*#__PURE__*/function () {
   }, {
     key: "compare",
     value: function compare(filenames) {
-      filenames = filenames || Object.keys(window.runData.Runs);
-
-      var cloneData = _lodash.default.cloneDeep(window.runData);
-
-      var baseMetrics = {};
-
-      for (var metric in cloneData.RunDataMeta) {
-        baseMetrics[metric] = 0.0;
-      }
-
-      var funcPaths = new Set();
-      var metricNames = new Set();
-      var runs = [];
-      filenames.map(function (filename) {
-        var fileData = cloneData.Runs[filename].Data;
-        var run = {
-          'data': fileData
-        }; // pad the data
-
-        for (var _i3 = 0, _Object$entries3 = Object.entries(fileData); _i3 < _Object$entries3.length; _i3++) {
-          var _Object$entries3$_i = _slicedToArray(_Object$entries3[_i3], 2),
-              funcPath = _Object$entries3$_i[0],
-              metrics = _Object$entries3$_i[1];
-
-          funcPaths.add(funcPath);
-
-          for (var _i4 = 0, _Object$entries4 = Object.entries(metrics); _i4 < _Object$entries4.length; _i4++) {
-            var _Object$entries4$_i = _slicedToArray(_Object$entries4[_i4], 2),
-                metricName = _Object$entries4$_i[0],
-                val = _Object$entries4$_i[1];
-
-            metricNames.add(metricName);
-          }
-        }
-
-        run.meta = {};
-        var globals = cloneData.Runs[filename].Globals;
-
-        for (var _i5 = 0, _Object$entries5 = Object.entries(globals); _i5 < _Object$entries5.length; _i5++) {
-          var _Object$entries5$_i = _slicedToArray(_Object$entries5[_i5], 2),
-              _metricName = _Object$entries5$_i[0],
-              value = _Object$entries5$_i[1];
-
-          var metricMeta = cloneData.RunGlobalMeta[_metricName];
-          var type = metricMeta ? metricMeta.type : "string";
-          run.meta[_metricName] = {
-            value: value,
-            type: type
-          };
-        }
-
-        runs.push(run);
-      });
-      runs.forEach(function (run) {
-        funcPaths.forEach(function (funcPath) {
-          run.data['--root path--/' + funcPath] = _objectSpread({}, baseMetrics, {}, run.data[funcPath]);
-          delete run.data[funcPath];
-        });
-        run.data['--root path--'] = baseMetrics;
-      });
-      this.app.runs = runs;
+      this.app.filenames = filenames;
     } //------------------ controls functions
 
   }, {
