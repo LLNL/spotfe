@@ -19,7 +19,9 @@ DONE - isntead of come up with hard coded "live" inside of spot.py
     * error is somewhere in compare.js: graph.getData
 
 Release process:
-- remember to change template notebook in live from dev/hatchet to live/hatchet
+- TEST: remember to change template notebook in live from dev/hatchet to live/hatchet
+- TEST: Alt user to ensure that the permissions are set correct.
+
 
 Next Release:
 - Get rid of left margin now that we don't support left horiz bar chart anymore

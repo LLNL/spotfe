@@ -1,12 +1,66 @@
 List of Library Licenses
 ----------------------------------------------
-dc.js
+1. dc.js
+Apache License
+Version 2.0, January 2004
+Copyright 2012-2016 Nick Zhu & the dc.js Developers
+https://github.com/dc-js/dc.js/blob/master/AUTHORS
+
+- I found this license in the source code, in a file called "LICENSE"
 
 
+2. Crossfilter
+https://crossfilter.github.io/crossfilter/
+Released under the Apache License 2.0.
+Copyright 2012-2015 Square, Inc. and crossfilter contributors.
 
 
-Crossfilter
+3. d3.js
+d3/d3 is licensed under the BSD 3-Clause "New" or "Revised" License
+A permissive license similar to the BSD 2-Clause License, but with a 3rd clause that prohibits others from using the name of the project or its contributors to promote derived products without written consent.
 
+
+4. JQuery
+ It is free, open-source software using the permissive MIT License
+
+5. Vue - MIT license
+
+6. Bootstrap - is a free and open-source CSS framework.
+MIT License (Apache License 2.0 prior to 3.1.0)
+
+7. SCSS - MIT License
+
+
+8. Durations page has high charts source in our repo.  But, I'm not sure whether or not Joe's using it.
+
+ Highcharts JS v7.0.1 (2018-12-19)
+ (c) 2009-2018 Torstein Honsi
+ Highsoft standard license agreement 12.1
+ License: www.highcharts.com/license
+
+
+I did not look at any of the pyhton modules:
+argparse, json, sys, os, platform, subprocess, getpass, urllib.parse, socket, time
+
+but I think these all go under the python license.
+Python License:
+"The Python License is similar to the BSD License and, while it is a free software license, its wording in some versions meant that it was incompatible with the GNU General Public License (GPL) used by a great deal of free software including the Linux kernel. For this reason CNRI retired the license in 2001, and the license of current releases is owned by the Python Software Foundation License.[2]"
+
+
+9. Grunt - MIT License
+Bower - MIT License
+
+=========================================================================================
+All the rest are in our build system depencies list:
+They are not being explicitly used.  At most, they're just being compiled on our dev machines, not even on the LC servers.
+
+10. jsdifflib - BSD License
+11. ink-docstrap - MIT License
+12. jasmine-core - MIT License
+13. karma - MIT License
+14. load-grunt-tasks - MIT License
+15. time-grunt - MIT License
+16. uglify-js - BSD license
 
 
 
