@@ -90,6 +90,7 @@ ST.CallSpot = function() {
     var objs_by_run_id_ = {};
 
     //  this is the default success handler
+    //  i think is only used by ravel, right now.
     var handle_success_ = function(value) {
 
         var command_out = value.output ? value.output.command_out : value.responseText;
@@ -143,6 +144,9 @@ ST.CallSpot = function() {
 
 
     var handle_success2_ = function( summ ) {
+
+        console.dir(summ);
+//        return false;
 
         ST.Utility.check_error( summ );
 

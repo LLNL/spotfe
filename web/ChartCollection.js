@@ -464,7 +464,8 @@ ST.ChartCollection = function() {
             }).finally( summary => {
                 ST.Utility.check_error( summary );
         });
-        setup_pars_()
+
+        setup_pars_();
 
         // listen from chart
         ST.graph.addXAxisChangeListener(xAxis => {
