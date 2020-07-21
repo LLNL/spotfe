@@ -1,4 +1,8 @@
 Next:
+- Joe Chavez request for create a repo for the container
+- get all the copyrights and put them in a directory
+- Tuesday 10am do actual release to cz.  then rz.
+
 DONE - make Release script that copies directories (hatchet, caliper) from dev to live
     * first run git fetch, git pull on live dir.
 DONE - fixed a command line error for output.
@@ -12,6 +16,8 @@ DONE - isntead of come up with hard coded "live" inside of spot.py
     - plus any other javascript libraries
     - check with matt to make sure they're okay.
     - worried about images, all the things we're not thinking about.
+
+/collab/usr/gapps/python/$SYS_TYPE/conda
 
 
 - martyMCF error

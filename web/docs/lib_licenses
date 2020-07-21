@@ -31,13 +31,6 @@ MIT License (Apache License 2.0 prior to 3.1.0)
 7. SCSS - MIT License
 
 
-8. Durations page has high charts source in our repo.  But, I'm not sure whether or not Joe's using it.
-
- Highcharts JS v7.0.1 (2018-12-19)
- (c) 2009-2018 Torstein Honsi
- Highsoft standard license agreement 12.1
- License: www.highcharts.com/license
-
 
 I did not look at any of the pyhton modules:
 argparse, json, sys, os, platform, subprocess, getpass, urllib.parse, socket, time
@@ -57,10 +50,7 @@ They are not being explicitly used.  At most, they're just being compiled on our
 10. jsdifflib - BSD License
 11. ink-docstrap - MIT License
 12. jasmine-core - MIT License
-13. karma - MIT License
-14. load-grunt-tasks - MIT License
-15. time-grunt - MIT License
-16. uglify-js - BSD license
+13. uglify-js - BSD license
 
 
 
