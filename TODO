@@ -1,7 +1,8 @@
 Next:
-- Joe Chavez request for create a repo for the container
-- get all the copyrights and put them in a directory
-- Tuesday 10am do actual release to cz.  then rz.
+DONE - Joe Chavez request for create a repo for the container
+DONE - get all the copyrights and put them in a directory
+DONE - Tuesday 10am do actual release to cz.  then rz.
+- David's -> bug about bar charts reset not working in FF try to repro again.
 
 DONE - make Release script that copies directories (hatchet, caliper) from dev to live
     * first run git fetch, git pull on live dir.
