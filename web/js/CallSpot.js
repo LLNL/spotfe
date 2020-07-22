@@ -444,8 +444,12 @@ ST.CallSpot = function() {
             //get_command_( "jupyter", file, "" );
             console.log("ST.graph.openJupyter( \"" + file + "\", \"" + host + "\", \"" + command + "\" );");
 
+            ST.Utility.start_spinner();
+
             ST.graph.openJupyter( file, host, command ).then( function( url ) {
 
+                ST.Utility.stop_spinner();
+                
                 console.dir(url);
                 //var command_out = data.output.command_out;
                 //var url = command_out;

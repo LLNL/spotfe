@@ -2,13 +2,7 @@ Next:
 DONE - Joe Chavez request for create a repo for the container
 DONE - get all the copyrights and put them in a directory
 DONE - Tuesday 10am do actual release to cz.  then rz.
-- David's -> bug about bar charts reset not working in FF try to repro again.
-
-DONE - make Release script that copies directories (hatchet, caliper) from dev to live
-    * first run git fetch, git pull on live dir.
-DONE - fixed a command line error for output.
-DONE - isntead of come up with hard coded "live" inside of spot.py
-    * or try to figure out dev/live based on where it's executing.
+DONE - Spinner for MultiJupyter.
 - make spot-dev email list.
     * https://llnl.servicenowservices.com/ess?id=ticket&table=sc_req_item&sys_id=015312ac1b82d050774e657fe54bcb69&view=sp
 DONE - Check Libraries:
@@ -17,6 +11,26 @@ DONE - Check Libraries:
     - plus any other javascript libraries
     - check with matt to make sure they're okay.
     - worried about images, all the things we're not thinking about.
+- David's -> bug about bar charts reset not working in FF try to repro again.
+
+
+Next Release:
+- Get rid of left margin now that we don't support left horiz bar chart anymore
+- reduce minimum width, so people with smaller screens don't have problems viewing
+- integrate Joe's code with mine.  Right now still working on minified code.
+    * need to make this a priority.
+
+Question for next:
+Do we want to do scatter plot first?
+or do we want to do the Memory lineChart next.
+
+
+Last time:
+DONE - make Release script that copies directories (hatchet, caliper) from dev to live
+    * first run git fetch, git pull on live dir.
+DONE - fixed a command line error for output.
+DONE - isntead of come up with hard coded "live" inside of spot.py
+    * or try to figure out dev/live based on where it's executing.
 
 /collab/usr/gapps/python/$SYS_TYPE/conda
 
@@ -29,13 +43,6 @@ Release process:
 - TEST: remember to change template notebook in live from dev/hatchet to live/hatchet
 - TEST: Alt user to ensure that the permissions are set correct.
 
-
-Next Release:
-- Get rid of left margin now that we don't support left horiz bar chart anymore
-- reduce minimum width, so people with smaller screens don't have problems viewing
-- Spinner for MultiJupyter.
-- integrate Joe's code with mine.  Right now still working on minified code.
-    * need to make this a priority.
 
 
 DONE - maintain order consistency of the charts
@@ -81,11 +88,6 @@ For New Release:
     * part of new localStorage integration.
 - new localstorage implementation for show/hide of checkboxes.
 
-
-- Add/Edit/Delete of charts will not be in this release.
-
-
-- I do the Deploy to live.
 
 
 Next:
