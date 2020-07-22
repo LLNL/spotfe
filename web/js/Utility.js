@@ -403,9 +403,20 @@ ST.Utility = function() {
     function hide_tooltip_() {
         var tooltip = document.getElementById("tooltip");
         tooltip.style.display = "none";
-    }
+    };
+
+    var start_spinner_ = function() {
+
+        
+    };
+
+    var stop_spinner_ = function() {
+
+    };
 
     return {
+        start_spinner: start_spinner_,
+        stop_spinner: stop_spinner_,
         lookup_orig_str: lookup_orig_str_,
         show_tooltip: show_tooltip_,
         hide_tooltip: hide_tooltip_,

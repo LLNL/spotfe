@@ -57,6 +57,8 @@ ST.CompareArguments = function() {
                 },
                 multiJupyter: function() {
 
+                    ST.Utility.start_spinner();
+
                     var cali_keys = ST.CallSpot.get_keys();// ST.str_cali_keys;
                     var cali_count = cali_keys.split(' ').length;
                     var cali_keys_arr = cali_keys.split(' ');
@@ -90,13 +92,6 @@ ST.CompareArguments = function() {
                     console.log( "host=" + host + "    command = " + command );
 
                     ST.graph.openMultiJupyter( file_path, cali_keys_arr, host, command ).then( finish_multi_ );
-
-                    /*ST.CallSpot.ajax({
-                        file: total_send,
-                        type: "multi_jupyter",
-                        "success": finish_multi_
-                    });*/
-
                 }
             },
             created: function() {
@@ -112,6 +107,8 @@ ST.CompareArguments = function() {
 
 
     var finish_multi_ = function(data) {
+
+        ST.Utility.stop_spinner();
 
         ST.Utility.check_error( data );
         var command_out = data; // data.output.command_out;

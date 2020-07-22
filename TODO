@@ -11,7 +11,7 @@ DONE - isntead of come up with hard coded "live" inside of spot.py
     * or try to figure out dev/live based on where it's executing.
 - make spot-dev email list.
     * https://llnl.servicenowservices.com/ess?id=ticket&table=sc_req_item&sys_id=015312ac1b82d050774e657fe54bcb69&view=sp
-- Check Libraries:
+DONE - Check Libraries:
     - dc.js
     - crossfilter
     - plus any other javascript libraries
