@@ -84,10 +84,7 @@ ST.ChartCollection = <span class="hljs-function"><span class="hljs-keyword">func
             }
 
         }
-    };
-
-
-    <span class="hljs-keyword">var</span> RenderChartCollection = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">the_data, layout_spec</span>) </span>{</pre></div></div>
+    };</pre></div></div>
             
         </li>
         
@@ -98,13 +95,23 @@ ST.ChartCollection = <span class="hljs-function"><span class="hljs-keyword">func
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p>amend_charts_( layout_spec );</p>
+              <p> Debug Data.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>
-        <span class="hljs-built_in">console</span>.dir(the_data);
-        <span class="hljs-keyword">var</span> GLOB_DAT = the_data;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> show_layout_ = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> lay </span>) </span>{
+
+        <span class="hljs-keyword">var</span> ht = <span class="hljs-string">""</span>;
+
+        <span class="hljs-keyword">for</span>( <span class="hljs-keyword">var</span> x <span class="hljs-keyword">in</span> lay.charts ) {
+            ht += lay.charts[x].dimension + <span class="hljs-string">"  "</span>;
+        }
+
+        <span class="hljs-built_in">console</span>.log( ht );
+    };
+
+
+    <span class="hljs-keyword">var</span> RenderChartCollection = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">the_data, layout_spec</span>) </span>{</pre></div></div>
             
         </li>
         
@@ -115,12 +122,14 @@ ST.ChartCollection = <span class="hljs-function"><span class="hljs-keyword">func
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <p> ST.MakeNiceData.make( the_data );
-         options.buckets = [‘0-0.3’, ‘0.3-0.6’, ‘0.6-10’, ‘10-15’, ‘15-20’];</p>
+              <p>amend_charts_( layout_spec );</p>
 
             </div>
             
             <div class="content"><div class='highlight'><pre>
+        <span class="hljs-built_in">console</span>.dir(the_data);
+        <span class="hljs-keyword">var</span> GLOB_DAT = the_data;
+
         $(<span class="hljs-string">'.chart_container'</span>).html(<span class="hljs-string">""</span>);</pre></div></div>
             
         </li>
@@ -224,7 +233,6 @@ ST.ChartCollection = <span class="hljs-function"><span class="hljs-keyword">func
                 <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Sorry.  Viz type viz='</span> + viz + <span class="hljs-string">' is not supported.'</span>);
             }
         }
-
 
         <span class="hljs-keyword">var</span> dataCount = dc.dataCount(<span class="hljs-string">'.dc-data-count'</span>);
         runTable = dc.dataTable(<span class="hljs-string">'.dc-data-table'</span>);
@@ -824,7 +832,13 @@ This code demonstrates generating the column header automatically based on the c
 
                 ST.Utility.check_error( summary );
                 <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'summary:'</span>, summary);
-                ST.CallSpot.handle_success2(summary);</pre></div></div>
+                ST.CallSpot.handle_success2(summary);
+
+            }).finally( <span class="hljs-function"><span class="hljs-params">summary</span> =&gt;</span> {
+                ST.Utility.check_error( summary );
+        });
+
+        setup_pars_();</pre></div></div>
             
         </li>
         
@@ -834,24 +848,6 @@ This code demonstrates generating the column header automatically based on the c
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-30">&#182;</a>
-              </div>
-              <p> just for now.</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>                setTimeout( setup_pars_, <span class="hljs-number">1000</span>);
-            }).finally( <span class="hljs-function"><span class="hljs-params">summary</span> =&gt;</span> {
-                ST.Utility.check_error( summary );
-        });</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-31">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-31">&#182;</a>
               </div>
               <p>listen from chart</p>
 

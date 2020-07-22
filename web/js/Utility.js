@@ -405,13 +405,13 @@ ST.Utility = function() {
         tooltip.style.display = "none";
     };
 
-    var start_spinner_ = function() {
 
-        
+    var start_spinner_ = function() {
+        $('.spinner_loader').show();
     };
 
     var stop_spinner_ = function() {
-
+        $('.spinner_loader').hide();
     };
 
     return {
