@@ -449,7 +449,7 @@ ST.CallSpot = function() {
             ST.graph.openJupyter( file, host, command ).then( function( url ) {
 
                 ST.Utility.stop_spinner();
-                
+
                 console.dir(url);
                 //var command_out = data.output.command_out;
                 //var url = command_out;
