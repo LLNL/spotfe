@@ -376,7 +376,7 @@ body .dc-chart g.row text {
 
 .inner_container {
   display: inline-block;
-  width: 1480px;
+  width: 1360px;
   padding-top: 60px; }
   .inner_container .instructions {
     color: #888888; }
@@ -461,7 +461,7 @@ body .dc-chart g.row text {
     margin: 4px 0 4px -20px; }
   .container .user_pref_body .prow {
     display: inline-block;
-    width: 230px;
+    width: 270px;
     margin: 6px 0 6px 0; }
     .container .user_pref_body .prow .title {
       position: relative;

@@ -3,8 +3,7 @@ DONE - Joe Chavez request for create a repo for the container
 DONE - get all the copyrights and put them in a directory
 DONE - Tuesday 10am do actual release to cz.  then rz.
 DONE - Spinner for MultiJupyter.
-- make spot-dev email list.
-    * https://llnl.servicenowservices.com/ess?id=ticket&table=sc_req_item&sys_id=015312ac1b82d050774e657fe54bcb69&view=sp
+DONE - moved multijupyter button to the left a bit.
 DONE - Check Libraries:
     - dc.js
     - crossfilter
@@ -15,6 +14,10 @@ DONE - Check Libraries:
 
 
 Next Release:
+- Tues SCF Release
+    * wear mask and Login to WAY
+- make spot-dev email list.
+    * https://llnl.servicenowservices.com/ess?id=ticket&table=sc_req_item&sys_id=015312ac1b82d050774e657fe54bcb69&view=sp
 - Get rid of left margin now that we don't support left horiz bar chart anymore
 - reduce minimum width, so people with smaller screens don't have problems viewing
 - integrate Joe's code with mine.  Right now still working on minified code.
