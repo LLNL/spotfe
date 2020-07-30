@@ -457,21 +457,6 @@ ST.CallSpot = function() {
                 window.open(url);
                 // now go to the URL that BE tells us to go to.
             });
-
-            /*  subject must be jupyter or walltime
-            ajax_({
-                file: file,
-                type: "jupyter",
-                command: command,
-                "success": function(data) {
-
-                    var command_out = data.output.command_out;
-                    var url = command_out;
-
-                    window.open(url);
-                    // now go to the URL that BE tells us to go to.
-                }
-            });*/
         }
     };
 

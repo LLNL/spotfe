@@ -4,6 +4,7 @@ DONE - get all the copyrights and put them in a directory
 DONE - Tuesday 10am do actual release to cz.  then rz.
 DONE - Spinner for MultiJupyter.
 DONE - moved multijupyter button to the left a bit.
+DONE - Tues SCF Release    * wear mask and Login to WAY
 DONE - Check Libraries:
     - dc.js
     - crossfilter
@@ -13,20 +14,61 @@ DONE - Check Libraries:
 - David's -> bug about bar charts reset not working in FF try to repro again.
 
 
+
+- Discuss how long joe will be here?
+    * Joe do his code integration.
+- Do people want to set up spot-dev email list, add themselves.
+    * there is a Bulk add, if I can find it.
+- update dev environments and put loader and width adjustment.
+- do we still want "machine" to be settable?
+
+
+
 Next Release:
-- Tues SCF Release
-    * wear mask and Login to WAY
+- SCF testing checklist: Check Alternate user, and run setperms.shS
+DONE - Umask for Git -> check that -> should be 002.
+- Composite type: (work on estimate)
+    * It's just a computed value based on multiple data attributes.
+    * What would be involved in selecting multiple data attributes
+    * are we sending this data to compare?  or does compare get it from the BE?
+    * composite needs to be viewable in compare.
 - make spot-dev email list.
     * https://llnl.servicenowservices.com/ess?id=ticket&table=sc_req_item&sys_id=015312ac1b82d050774e657fe54bcb69&view=sp
+    * add people using bulk add.
+- try to run joe's minification process.
+- lineGraph memory - let joe let me know once this is coming together
+    * i need to own that.
+    * on a new page do some implementation that shows what this looks like
 - Get rid of left margin now that we don't support left horiz bar chart anymore
 - reduce minimum width, so people with smaller screens don't have problems viewing
 - integrate Joe's code with mine.  Right now still working on minified code.
     * need to make this a priority.
+- This can get you your zone: nodeattr -v center
 
 Question for next:
 Do we want to do scatter plot first?
-or do we want to do the Memory lineChart next.
+or do we want to do the Memory lineChart next with horizontal scroller.
 
+https://stackoverflow.com/questions/11574271/git-change-default-umask-when-update-file#25441170
+
+
+Last few weeks:
+- release script, release processes
+- coordinating with joe and steph brink (hatchet)
+    * for deployment related stuff.
+- regression testing
+- hover overs for horizontal bar.
+- improvements on making things env independent
+- integrate multiJupyter/jupyter changes with Joe's new container model.
+- EtcBucket
+- scatterChart
+    * persistance in localStorage
+    * adding dynamic new chart types
+    * preloading edit modal
+    * edit submit for changes to chart types
+    * yaxis, xaxis, title editable
+    * make charts deletable.
+- horizontal bar charts.
 
 Last time:
 DONE - make Release script that copies directories (hatchet, caliper) from dev to live
