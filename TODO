@@ -1,3 +1,26 @@
+Next Release:
+- SCF testing checklist: Check Alternate user, and run setperms.shS
+DONE - Umask for Git -> check that -> should be 002.
+- Composite type: (work on estimate)
+    * It's just a computed value based on multiple data attributes.
+    * What would be involved in selecting multiple data attributes
+    * are we sending this data to compare?  or does compare get it from the BE?
+    * composite needs to be viewable in compare.
+- make spot-dev email list.
+    * https://llnl.servicenowservices.com/ess?id=ticket&table=sc_req_item&sys_id=015312ac1b82d050774e657fe54bcb69&view=sp
+    * add people using bulk add.
+- try to run joe's minification process.
+- lineGraph memory
+    * person clicks on a button on a cali run line that opens a new page.
+    * linegraph chart will appear on a new page.
+    * I need to get the stub from joe on this one as the BE comes from him but i will own the BE later
+- Get rid of left margin now that we don't support left horiz bar chart anymore
+- reduce minimum width, so people with smaller screens don't have problems viewing
+- integrate Joe's code with mine.  Right now still working on minified code.
+    * need to make this a priority.
+- This can get you your zone: nodeattr -v center
+
+
 Next:
 DONE - Joe Chavez request for create a repo for the container
 DONE - get all the copyrights and put them in a directory
@@ -24,26 +47,6 @@ DONE - Check Libraries:
 
 
 
-Next Release:
-- SCF testing checklist: Check Alternate user, and run setperms.shS
-DONE - Umask for Git -> check that -> should be 002.
-- Composite type: (work on estimate)
-    * It's just a computed value based on multiple data attributes.
-    * What would be involved in selecting multiple data attributes
-    * are we sending this data to compare?  or does compare get it from the BE?
-    * composite needs to be viewable in compare.
-- make spot-dev email list.
-    * https://llnl.servicenowservices.com/ess?id=ticket&table=sc_req_item&sys_id=015312ac1b82d050774e657fe54bcb69&view=sp
-    * add people using bulk add.
-- try to run joe's minification process.
-- lineGraph memory - let joe let me know once this is coming together
-    * i need to own that.
-    * on a new page do some implementation that shows what this looks like
-- Get rid of left margin now that we don't support left horiz bar chart anymore
-- reduce minimum width, so people with smaller screens don't have problems viewing
-- integrate Joe's code with mine.  Right now still working on minified code.
-    * need to make this a priority.
-- This can get you your zone: nodeattr -v center
 
 Question for next:
 Do we want to do scatter plot first?

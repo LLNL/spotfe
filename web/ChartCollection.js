@@ -432,9 +432,6 @@ ST.ChartCollection = function() {
 
 
     $(document).ready( function() {
-        setInterval( function() {
-          //  $('.multi_jupyter').trigger('click');
-        }, 4000);
     });
 
     function init () {
