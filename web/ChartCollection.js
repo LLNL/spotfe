@@ -430,10 +430,7 @@ ST.ChartCollection = function() {
         return str !== undefined && str !== "undefined";
     };
 
-
-    $(document).ready( function() {
-    });
-
+    
     function init () {
 
         var file = ST.Utility.get_file();
