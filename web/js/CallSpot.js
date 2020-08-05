@@ -452,10 +452,13 @@ ST.CallSpot = function() {
         } else if( subject === "walltime" ) {
 
             var file_left = ST.cali_obj_by_key[key].run_set_id;
-            file_left = strip_right_( file_left );
+            file_left = strip_right_(file_left);
 
-            window.open('sankey/index.html?runSetId=' + file_left + "&runId=" + cali_fp );
+            window.open('sankey/index.html?runSetId=' + file_left + "&runId=" + cali_fp);
 
+        } else if( subject === "memory" ) {
+
+            window.open('memory/index.html');
         } else {
 
             var host = ST.params.machine;
