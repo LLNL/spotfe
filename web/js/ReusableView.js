@@ -78,7 +78,17 @@ ReusableView = function() {
         });
     };
 
+    var get_hamburger_ = function() {
+
+        return "<div class='popup_menu'> \
+            <div class='bar'></div>\
+            <div class='bar'></div>\
+            <div class='bar'></div>\
+        </div>";
+    };
+
     return {
+        get_hamburger: get_hamburger_,
         warning: warning_,
         close: close_,
         alert: alert_,

@@ -1,11 +1,26 @@
+DONE - get all the copyrights and put them in a directory
+DONE - Tuesday 10am do actual release to cz.  then rz.
+DONE - Spinner for MultiJupyter.
+DONE - moved multijupyter button to the left a bit.
+DONE - Check Libraries:
+    - dc.js
+    - crossfilter
+    - plus any other javascript libraries
+    - check with matt to make sure they're okay.
+    - worried about images, all the things we're not thinking about.
+- David's -> bug about bar charts reset not working in FF try to repro again.
+
 Next Release:
+- Test CZ/RZ for scatterPlot.  and message Matt that it's ready for inspection.
 - SCF testing checklist: Check Alternate user, and run setperms.shS
-DONE - Umask for Git -> check that -> should be 002.
 - Composite type: (work on estimate)
     * It's just a computed value based on multiple data attributes.
     * What would be involved in selecting multiple data attributes
     * are we sending this data to compare?  or does compare get it from the BE?
     * composite needs to be viewable in compare.
+- LineGraph: Do proof of concept:
+    * button which jumps to new page
+    * make a lineChart with fake data and zooming ability.
 - make spot-dev email list.
     * https://llnl.servicenowservices.com/ess?id=ticket&table=sc_req_item&sys_id=015312ac1b82d050774e657fe54bcb69&view=sp
     * add people using bulk add.
@@ -21,20 +36,39 @@ DONE - Umask for Git -> check that -> should be 002.
 - This can get you your zone: nodeattr -v center
 
 
+operators:
+x, /, +, -, concatenate,
+
+
+Don't have to start with editable.
+
+support: Set, String, Lists, Numbers
+let them become strings.
+
+eventually do some math on them.
+
+ignore order of operations, and do top to bottom.
+
+
+Features for lineGraph:
+-zooming
+-possibly multi line graphs
+- get initial thing from David
+- spot.py shows how to maek the call
+
+
+timeSeries - we want a generic visualization for timeSeries
+
+bandWidth is a type of timeSeries data.
+
+initially the data will be small, data did a lot of aggregation for us.
+
+
+
+
+
 Next:
 DONE - Joe Chavez request for create a repo for the container
-DONE - get all the copyrights and put them in a directory
-DONE - Tuesday 10am do actual release to cz.  then rz.
-DONE - Spinner for MultiJupyter.
-DONE - moved multijupyter button to the left a bit.
-DONE - Tues SCF Release    * wear mask and Login to WAY
-DONE - Check Libraries:
-    - dc.js
-    - crossfilter
-    - plus any other javascript libraries
-    - check with matt to make sure they're okay.
-    - worried about images, all the things we're not thinking about.
-- David's -> bug about bar charts reset not working in FF try to repro again.
 
 
 

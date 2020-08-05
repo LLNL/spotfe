@@ -152,6 +152,24 @@ ST.CallSpot = function() {
 
         ST.layout_used = sqs.layout_used || summ.layout;
 
+        if( window.USE_EXPERIMENTAL ) {
+
+            ST.layout_used.charts.push({
+                dimension: "experimental_composite",
+                title: "experimental_composite",
+                type: "int",
+                show: true,
+                viz: "BarChart"
+            });
+
+            ST.layout_used.table.push({
+                dimension: "experimental_composite",
+                label: "Experimental",
+                type: "int",
+                show: true
+            });
+        }
+
         if( !sqs.layout_used ) {
             sqs.layout_used = summ.layout;
         }
@@ -181,6 +199,7 @@ ST.CallSpot = function() {
                 ST.cali_obj_by_key[new_index] = valid_obj;
                 ST.cali_obj_by_key[new_index].run_set_id = get_run_set_id_( ST.cali_obj_by_key[new_index].filepath, key );
                 ST.cali_obj_by_key[new_index].file_path = key;
+                ST.cali_obj_by_key[new_index].experimental_composite = parseInt(Math.random()*100);
                 ST.orig_obj_by_key[new_index] = $.extend({}, valid_obj);
 
                 valid_obj.key = new_index;

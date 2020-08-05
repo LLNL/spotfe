@@ -132,11 +132,18 @@ div.horizontal-bar-chart {
         position: absolute;
         top: 20px;
         right: 40px;
-        color: black;
-        font-size: 22px;
-        border-bottom: 2px solid black;
         cursor: pointer;
         width: 12px;
+
+        .bar {
+            width: 22px;
+            height: 3px;
+            background-color: #444444;
+            margin: 4px 0;
+            border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+        }
     }
 
     .top_left {

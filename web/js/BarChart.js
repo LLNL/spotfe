@@ -117,7 +117,7 @@ ST.BarChart = function() {
                 <strong class="text_chart_name">' + upper_( options.title || dimension) + '</strong> \
                 <a class="reset" onclick="ST.BarChart.reset(this);" style="display: none;">reset</a>\
             </div> \
-            <div class="popup_menu">=</div>\
+        ' + ReusableView.get_hamburger() + '\
             <div class="x-label" style="width: ' + width + 'px;">' + xlabel + '</div> \
             <div class="y-label" style="width: ' + height + 'px;">' + ylabel + '</div> \
         </div>';

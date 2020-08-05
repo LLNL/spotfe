@@ -1,0 +1,37 @@
+
+
+
+operators:
+x, /, +, -, concatenate,
+
+
+Don't have to start with editable.
+
+support: Set, String, Lists, Numbers
+let them become strings.
+
+eventually do some math on them.
+
+ignore order of operations, and do top to bottom.
+
+
+Features for lineGraph:
+-zooming
+-possibly multi line graphs
+- get initial thing from David
+- spot.py shows how to maek the call
+
+
+timeSeries - we want a generic visualization for timeSeries
+
+bandWidth is a type of timeSeries data.
+
+initially the data will be small, data did a lot of aggregation for us.
+
+
+
+
+
+
+
+
