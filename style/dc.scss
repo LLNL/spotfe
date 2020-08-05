@@ -816,6 +816,10 @@ body .dc-chart g.row text {
 .none_here {
     display: none;
 }
+.attributions {
+    font-size: 11px;
+    color: #999999;
+}
 
 .dc-data-table {
 
@@ -825,6 +829,16 @@ body .dc-chart g.row text {
 
         div {
             background-image: url(../img/walltime.png);
+            background-size: 100% 100%;
+        }
+    }
+
+    .memory {
+
+        position: static;
+
+        div {
+            background-image: url(../img/memory.png);
             background-size: 100% 100%;
         }
     }

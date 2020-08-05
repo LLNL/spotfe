@@ -550,10 +550,19 @@ body .dc-chart g.row text {
 .none_here {
   display: none; }
 
+.attributions {
+  font-size: 11px;
+  color: #999999; }
+
 .dc-data-table .walltime {
   position: static; }
   .dc-data-table .walltime div {
     background-image: url(../img/walltime.png);
+    background-size: 100% 100%; }
+.dc-data-table .memory {
+  position: static; }
+  .dc-data-table .memory div {
+    background-image: url(../img/memory.png);
     background-size: 100% 100%; }
 .dc-data-table .jupyter.icon {
   position: static;

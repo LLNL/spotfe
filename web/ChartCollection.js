@@ -194,7 +194,8 @@ ST.ChartCollection = function() {
                 var buts = "";
                 var title = {
                     "jupyter" : "Jupyter View",
-                    "walltime" : "Walltime View"
+                    "walltime" : "Walltime View",
+                    "memory": "Memory View"
                 };
 
                 for (var x in d.drilldown) {

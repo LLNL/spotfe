@@ -12,6 +12,10 @@ DONE - Check Libraries:
 - David's -> bug about bar charts reset not working in FF try to repro again.
 
 Next Release:
+- LineGraph: Do proof of concept:
+    * finish up memory button and showing the index page.
+    * button which jumps to new page
+    * make a lineChart with fake data and zooming ability.
 - Do compression on sqs.layout_used figure out how to compress to less than 1K
     * do URL encode and decode
     * if loading, need to use the decode but don't overwrite their existing
@@ -21,9 +25,6 @@ Next Release:
     * What would be involved in selecting multiple data attributes
     * are we sending this data to compare?  or does compare get it from the BE?
     * composite needs to be viewable in compare.
-- LineGraph: Do proof of concept:
-    * button which jumps to new page
-    * make a lineChart with fake data and zooming ability.
 - SCF testing checklist: Check Alternate user, and run setperms.shS
 - make spot-dev email list.
     * https://llnl.servicenowservices.com/ess?id=ticket&table=sc_req_item&sys_id=015312ac1b82d050774e657fe54bcb69&view=sp
