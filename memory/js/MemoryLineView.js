@@ -1,8 +1,10 @@
+var ST = ST || {};
+
 ST.MemoryLineView = function() {
 
     var render_ = function() {
 
-        d3.csv('ndx.csv').then(data => {
+        d3.csv('../web/ndx.csv').then(data => {
             const ndx = crossfilter(data);
             const moveMonths = ndx.dimension(d => d.month);
             // Group by total volume within move, and scale down result
