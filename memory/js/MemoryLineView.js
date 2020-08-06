@@ -5,19 +5,43 @@ ST.MemoryLineView = function() {
     var render_ = function() {
 
         d3.csv('../web/ndx.csv').then(data => {
+
+            // Since its a csv file we need to format the data a bit.
+            const dateFormatSpecifier = '%m/%d/%Y';
+            const dateFormat = d3.timeFormat(dateFormatSpecifier);
+            const dateFormatParser = d3.timeParse(dateFormatSpecifier);
+            const numberFormat = d3.format('.2f');
+
+            data.forEach(d => {
+                d.dd = dateFormatParser(d.date);
+                d.month = d3.timeMonth(d.dd); // pre-calculate month for better performance
+                d.close = +d.close; // coerce to number
+                d.open = +d.open;
+            });
+
+
             const ndx = crossfilter(data);
             const moveMonths = ndx.dimension(d => d.month);
             // Group by total volume within move, and scale down result
             const volumeByMonthGroup = moveMonths.group().reduceSum(d => d.volume / 500000);
 
 
-            const memoryChart = new dc.LineChart('#memory-chart');
-            const volumeChart = new dc.BarChart('#volume-chart');
+            const memoryChart = new dc.lineChart('#memory-chart');
+            const volumeChart = new dc.barChart('#volume-chart');
+
+            var all = ndx.groupAll();
+
+            var runtime_dimension = ndx.dimension(function (cali_object) {
+                return Math.random()*1000;
+            });
+
+            var grp  = moveMonths.group();
 
             memoryChart /* dc.lineChart('#monthly-move-chart', 'chartGroup') */
                 .renderArea(true)
                 .width(990)
                 .height(200)
+                .group( grp )
                 .transitionDuration(1000)
                 .margins({top: 30, right: 50, bottom: 25, left: 40})
                 .dimension(moveMonths)
@@ -41,6 +65,9 @@ ST.MemoryLineView = function() {
                 .round(d3.timeMonth.round)
                 .alwaysUseRounding(true)
                 .xUnits(d3.timeMonths);
+
+
+                dc.renderAll();
         });
     };
 
