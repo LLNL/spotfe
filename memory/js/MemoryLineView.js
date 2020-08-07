@@ -10,7 +10,7 @@ ST.MemoryLineView = function() {
       ST.CallSpot.ajax({
           file: '/usr/gapps/spot/datasets/lulesh_gen/100',
           type: "memory",
-          success: finish_render_
+          success: line_render_
       });
 
       return true;
@@ -35,6 +35,128 @@ ST.MemoryLineView = function() {
     };
 
 
+    var line_render_ = function( aj_dat ) {
+
+        var ret = aj_dat.output.command_out;
+        var ret2 = JSON.parse( ret );
+        var ret3 = JSON.parse( ret2 );
+
+        var trace1 = {
+            x: [1, 2, 3, 4],
+            y: [10, 15, 13, 17],
+            type: 'scatter'
+        };
+
+        var trace2 = {
+            x: [1, 2, 3, 4],
+            y: [16, 5, 11, 9],
+            type: 'scatter'
+        };
+
+        var data = [trace1, trace2];
+
+        Plotly.newPlot('myDiv', data);
+    };
+
+
+
+    var finish_render2_ = function( aj_dat ) {
+
+
+        console.dir( ret3 );
+
+        d3.csv('../web/ndx.csv').then(data => {
+
+            // Since its a csv file we need to format the data a bit.
+            const dateFormatSpecifier = '%m/%d/%Y';
+            const dateFormat = d3.timeFormat(dateFormatSpecifier);
+            const dateFormatParser = d3.timeParse(dateFormatSpecifier);
+            const numberFormat = d3.format('.2f');
+
+
+            ret3.forEach(d => {
+                //d.dd = dateFormatParser(d.date);
+                //d.month = d3.timeMonth(d.dd); // pre-calculate month for better performance
+                d.month = d.block;
+                d.close = +d.iter_per_sec; // coerce to number
+                d.open = +d.mem_read_bw;
+            });
+
+            ret3.forEach(d => {
+
+            });
+
+            const ndx = crossfilter(ret3);
+            const moveMonths = ndx.dimension(function(d) {
+                return d.block;
+            });
+
+            // Group by total volume within move, and scale down result
+            const volumeByMonthGroup = moveMonths.group().reduceSum( function(d) {
+                return d.iter_per_sec;
+            } );
+
+
+            const memoryChart = new dc.lineChart('#memory-chart');
+            const volumeChart = new dc.barChart('#volume-chart');
+
+            var all = ndx.groupAll();
+
+            var runtime_dimension = ndx.dimension(function (cali_object) {
+                return Math.random()*1000;
+            });
+
+            var grp  = moveMonths.group( function(d) {
+
+                var rr = parseInt(Math.random()*10);
+                //console.log(rr);
+                return rr;
+            });
+
+            var domain = [0,10];
+            var domain0 = d3.scaleLinear(0.25).domain( domain );
+            var yrange = d3.scaleLinear(0.25).domain( [0,100] );
+
+            memoryChart /* dc.lineChart('#monthly-move-chart', 'chartGroup') */
+                .renderArea(true)
+                .width(590)
+                .height(500)
+                .group( grp )
+                .transitionDuration(1000)
+                .margins({top: 30, right: 50, bottom: 25, left: 40})
+                .dimension(moveMonths)
+                .mouseZoomable(true)
+                // Specify a "range chart" to link its brush extent with the zoom of the current "focus chart".
+                .rangeChart(volumeChart)
+                .x( domain0 )
+               // .x(d3.scaleTime().domain([new Date(1985, 0, 1), new Date(2012, 11, 31)]))
+               // .round(d3.timeMonth.round)
+               // .xUnits(d3.timeMonths)
+                //.y( yrange )
+                .elasticY(true)
+                .renderHorizontalGridLines(true);
+
+            volumeChart.width(590) /* dc.barChart('#monthly-volume-chart', 'chartGroup'); */
+                .height(40)
+                .margins({top: 10, right: 50, bottom: 20, left: 40})
+                .dimension(moveMonths)
+                .group(volumeByMonthGroup)
+                .centerBar(true)
+                .x( domain0 )
+                .gap(1)
+                .alwaysUseRounding(true);
+                //.x(d3.scaleTime().domain([new Date(1985, 0, 1), new Date(2012, 11, 31)]))
+                //.round(d3.timeMonth.round)
+                //.xUnits(d3.timeMonths);
+
+
+            dc.renderAll();
+        });
+    };
+
+
+
+
     var finish_render_ = function( aj_dat ) {
 
         var ret = aj_dat.output.command_out;
@@ -51,6 +173,7 @@ ST.MemoryLineView = function() {
             const dateFormatParser = d3.timeParse(dateFormatSpecifier);
             const numberFormat = d3.format('.2f');
 
+
             data.forEach(d => {
                 d.dd = dateFormatParser(d.date);
                 d.month = d3.timeMonth(d.dd); // pre-calculate month for better performance
@@ -58,13 +181,19 @@ ST.MemoryLineView = function() {
                 d.open = +d.open;
             });
 
+            ret3.forEach(d => {
+
+            });
 
             const ndx = crossfilter(data);
-            const moveMonths = ndx.dimension(d => d.month);
+            const moveMonths = ndx.dimension(function(d){
+                console.log(d.month);
+                return d.month;
+            });
 
             // Group by total volume within move, and scale down result
             const volumeByMonthGroup = moveMonths.group().reduceSum( function(d) {
-                return d.volume / 500000;
+                return d.volume / 500;
             } );
 
 
@@ -72,10 +201,6 @@ ST.MemoryLineView = function() {
             const volumeChart = new dc.barChart('#volume-chart');
 
             var all = ndx.groupAll();
-
-            var runtime_dimension = ndx.dimension(function (cali_object) {
-                return Math.random()*1000;
-            });
 
             var grp  = moveMonths.group();
 
