@@ -1,8 +1,41 @@
 var ST = ST || {};
+var ENV = {
+    machine: "oslic"
+};
 
 ST.MemoryLineView = function() {
 
     var render_ = function() {
+
+      ST.CallSpot.ajax({
+          file: '',
+          type: "",
+          success: finish_render_
+      });
+
+      return true;
+
+      var final_command = "";
+        var rtype = "POST";
+        var obj = {
+            timeout: 600000,
+            type: rtype,
+            method: rtype,
+            url: ST.params.get_rundata_url,
+            data:   {
+                'via'    : 'post',
+                'route'  : '/command/' + ST.params.machine,      //  rzgenie
+                'command': final_command
+            }
+        };
+
+        obj.dataType = "jsonp";
+
+        $.ajax(obj).done(finish_render_).error(finish_render_);
+    };
+
+
+    var finish_render_ = function() {
 
         d3.csv('../web/ndx.csv').then(data => {
 
@@ -22,8 +55,11 @@ ST.MemoryLineView = function() {
 
             const ndx = crossfilter(data);
             const moveMonths = ndx.dimension(d => d.month);
+
             // Group by total volume within move, and scale down result
-            const volumeByMonthGroup = moveMonths.group().reduceSum(d => d.volume / 500000);
+            const volumeByMonthGroup = moveMonths.group().reduceSum( function(d) {
+                return d.volume / 500000;
+            } );
 
 
             const memoryChart = new dc.lineChart('#memory-chart');
@@ -67,7 +103,7 @@ ST.MemoryLineView = function() {
                 .xUnits(d3.timeMonths);
 
 
-                dc.renderAll();
+            dc.renderAll();
         });
     };
 
