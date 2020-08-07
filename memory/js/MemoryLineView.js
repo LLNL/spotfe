@@ -8,8 +8,8 @@ ST.MemoryLineView = function() {
     var render_ = function() {
 
       ST.CallSpot.ajax({
-          file: '',
-          type: "",
+          file: '/usr/gapps/spot/datasets/lulesh_gen/100',
+          type: "memory",
           success: finish_render_
       });
 
@@ -35,7 +35,13 @@ ST.MemoryLineView = function() {
     };
 
 
-    var finish_render_ = function() {
+    var finish_render_ = function( aj_dat ) {
+
+        var ret = aj_dat.output.command_out;
+        var ret2 = JSON.parse( ret );
+        var ret3 = JSON.parse( ret2 );
+
+        console.dir( ret3 );
 
         d3.csv('../web/ndx.csv').then(data => {
 
