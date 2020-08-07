@@ -41,6 +41,26 @@ ST.MemoryLineView = function() {
         var ret2 = JSON.parse( ret );
         var ret3 = JSON.parse( ret2 );
 
+        ret3.sort( function( a, b ) {
+
+            return a.block - b.block;
+        });
+
+        console.dir( ret3 );
+
+        var trace3 = {
+            x: [],
+            y: [],
+            type: 'scatter'
+        };
+
+        for( var a=0; a < ret3.length; a++ ) {
+
+            var obj = ret3[a];
+            trace3.x.push( obj.block );
+            trace3.y.push( obj.iter_per_sec );
+        }
+
         var trace1 = {
             x: [1, 2, 3, 4],
             y: [10, 15, 13, 17],
@@ -53,7 +73,7 @@ ST.MemoryLineView = function() {
             type: 'scatter'
         };
 
-        var data = [trace1, trace2];
+        var data = [ trace3 ];
 
         Plotly.newPlot('myDiv', data);
     };
