@@ -48,7 +48,21 @@ ST.MemoryLineView = function() {
 
         console.dir( ret3 );
 
-        var trace3 = {
+        var trace3 = get_trace_( ret3, 'iter_per_sec');
+        var trace4 = get_trace_( ret3, 'mem_read_bw');
+        var trace5 = get_trace_( ret3, 'mem_write_bw');
+
+        var data = [ trace4 ];
+
+        Plotly.newPlot('myDiv', [trace3]);
+        Plotly.newPlot('myDiv2', [trace4]);
+        Plotly.newPlot('myDiv3', [trace5]);
+    };
+
+
+    var get_trace_ = function( ret3, attr ) {
+
+        var trace = {
             x: [],
             y: [],
             type: 'scatter'
@@ -57,25 +71,11 @@ ST.MemoryLineView = function() {
         for( var a=0; a < ret3.length; a++ ) {
 
             var obj = ret3[a];
-            trace3.x.push( obj.block );
-            trace3.y.push( obj.iter_per_sec );
+            trace.x.push( obj.block );
+            trace.y.push( obj[ attr ] );
         }
 
-        var trace1 = {
-            x: [1, 2, 3, 4],
-            y: [10, 15, 13, 17],
-            type: 'scatter'
-        };
-
-        var trace2 = {
-            x: [1, 2, 3, 4],
-            y: [16, 5, 11, 9],
-            type: 'scatter'
-        };
-
-        var data = [ trace3 ];
-
-        Plotly.newPlot('myDiv', data);
+        return trace;
     };
 
 
