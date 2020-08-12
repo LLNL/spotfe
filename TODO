@@ -14,6 +14,8 @@ DONE - Check Libraries:
 
 Next Release:
 - Update Documentation with saying what buttons are doing.
+- made some adjustments to the width and area on the left. See if marty approves.
+
 DONE - LineGraph: Do proof of concept:
     * finish up memory button and showing the index page.
     * button which jumps to new page

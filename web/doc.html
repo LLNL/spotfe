@@ -30,6 +30,23 @@
             margin: 30px 0 2px 0;
             padding: 0;
         }
+
+        table {
+            border-spacing: 0;
+        }
+        table tr:first-child td {
+            font-weight: bold;
+            background-color: #bbbbbb;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        table td {
+            border-bottom: 1px solid #e2e2e2;
+            padding: 8px;
+        }
     </style>
 
     <link rel="stylesheet" type="text/css" href="../web/css/dc.css">
@@ -83,7 +100,7 @@
                 The Planet shaped icon will take you to a jupyter notebook.
             </td>
         </tr>
-        
+
         <tr>
             <td>
                 Durations Icon
@@ -92,6 +109,25 @@
                 The durations icon will show you the walltime for a given run.
             </td>
         </tr>
+
+        <tr>
+            <td>
+                Memory Icon
+            </td>
+            <td>
+                This will open up a new window showing memory usage details.
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                MultiJupyter Icon
+            </td>
+            <td>
+                This opens a new jupyter notebook with all your runs amalgamated.
+            </td>
+        </tr>
+
     </table>
 
 
@@ -314,11 +350,7 @@
     <h2>last_days</h2>
     <p>This is a URL parameter which lets you specify the last X number of days.  This was designed to be used in conjunction with exe_compare which will then execute the compare right away.</p>
 
-
-    <h2>Exe Compare</h2>
-    <p>if you set exe_compare=1 in the URL bar, the display will jump to the compare page dashboard.</p>
-
-
+    
 
     <h2>Getting Started</h2>
     <p>
