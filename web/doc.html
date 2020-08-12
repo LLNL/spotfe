@@ -9,7 +9,7 @@
             margin: 0;
             padding: 0;
         }
-        .inner {
+        .out_inner {
             margin: 0 auto;
             width: 1024px;
             padding: 25px;
@@ -31,10 +31,70 @@
             padding: 0;
         }
     </style>
+
+    <link rel="stylesheet" type="text/css" href="../web/css/dc.css">
 </head>
 <body>
 
-<div class="inner">
+<div class="out_inner">
+
+    <h2>Primary Functionality</h2>
+
+    <table>
+        <tr>
+            <td>
+                Button
+            </td>
+            <td>
+                Function
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Plus Button
+            </td>
+            <td>
+                Use this to add a new chart to your dashboard.  Currently, we support ScatterCharts.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Checkboxes
+            </td>
+            <td>
+                You may show or hide charts using the checkboxes.  First click the checkbox icon at the top right.  That will open the checkbox drawer.  Then check or uncheck to show or hide charts.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Input box at the top left.
+            </td>
+            <td>
+                The input box at the top left allows you to choose a data source directory which should contain cali files to be used as inputs.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Jupyter Icon
+            </td>
+            <td>
+                At the bottom, in the table section which shows run data, you'll see up to 3 buttons per row.
+                The Planet shaped icon will take you to a jupyter notebook.
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                Durations Icon
+            </td>
+            <td>
+                The durations icon will show you the walltime for a given run.
+            </td>
+        </tr>
+    </table>
+
+
     <h2>URL Parameters</h2>
 
     <div class="url_params">
