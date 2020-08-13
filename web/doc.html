@@ -47,6 +47,10 @@
             border-bottom: 1px solid #e2e2e2;
             padding: 8px;
         }
+
+        .doc_table img {
+            width: 38px;
+        }
     </style>
 
     <link rel="stylesheet" type="text/css" href="../web/css/dc.css">
@@ -57,7 +61,7 @@
 
     <h2>Primary Functionality</h2>
 
-    <table>
+    <table class="doc_table">
         <tr>
             <td>
                 Button
@@ -69,7 +73,6 @@
 
         <tr>
             <td>
-                Plus Button
                 <img src="../web/img/docs/plus.png"/>
             </td>
             <td>
@@ -78,7 +81,6 @@
         </tr>
         <tr>
             <td>
-                Checkboxes
                 <img src="../web/img/docs/check.png"/>
             </td>
             <td>
@@ -95,7 +97,6 @@
         </tr>
         <tr>
             <td>
-                Jupyter Icon
                 <img src="../web/img/docs/jup.png"/>
             </td>
             <td>
@@ -106,7 +107,6 @@
 
         <tr>
             <td>
-                Durations Icon
                 <img src="../web/img/docs/dur.png"/>
             </td>
             <td>
@@ -116,7 +116,6 @@
 
         <tr>
             <td>
-                Memory Icon
                 <img src="../web/img/docs/memory.png"/>
             </td>
             <td>
@@ -126,7 +125,6 @@
 
         <tr>
             <td>
-                MultiJupyter Icon
                 <img src="../web/img/docs/multi.png"/>
             </td>
             <td>
@@ -160,6 +158,7 @@
         <pre>/usr/gapps/wf/web/spot/data/lulesh_maximal/</pre>
         </p>
 
+        <!--
         <h3>layout</h3>
         <p>
             You can specify the <b>layout</b> with layout= in the url bar.
@@ -175,8 +174,8 @@
             Using get_rundata_url URL: <span class="machine">https://rzlc.llnl.gov/lorenz/lora/lora.cgi/jsonp</span>
 
             <br><br>You can specify the <b>get_rundata_url</b> with get_rundata_url= in the url bar.  The get_rundata_url tells where to make the back end call to.
-
         </p>
+        -->
 
 
         <h3>command</h3>
@@ -186,12 +185,72 @@
         </p>
 
         <h3>Color of charts</h3>
-        <p>You can change the color of the charts with the URL parameter <b>color</b>.  Simply set color=1 or any number between 0 and 17</p>
+        <p>You can change the color of the charts with the URL parameter <b>color</b>.
+            Simply set color=1 or any number between 0 and 17.  These colors only
+            apply to Vertical Bar charts.</p>
 
     </div>
 
+    <h2>Chart Types</h2>
+    <p>
+        Your run data attributes will be shown in 4 different chart types, as histograms which count the occurance of each data value.
+    <table class="doc_table">
+        <tr>
+            <td>BarChart</td>
+            <td>used for numbers and integers</td>
+        </tr>
+        <tr>
+            <td>Horizontal BarChart</td>
+            <td>Used for string values that have more than 12 unique string values</td>
+        </tr>
+        <tr>
+            <td>PieChart</td>
+            <td>Used for string values that have less than 12 unique string values</td>
+        </tr>
+        <tr>
+            <td>ScatterChart</td>
+            <td>Used for values with two axis.</td>
+        </tr>
+    </table>
+    </p>
+
+    <h2>Table Column Sorting</h2>
+    <p>
+        By default the table columns will be sorted either as a string or as numbers based on the type of the data.  Hence "GNU" would be sorted as a string, but 238438 would be sorted as a number.  If
+        the string only contains numbers, such as "234234" we'll typecast it to a number and sort as a number.  If you wish to coerce a string to be sorted as a number, for instance "234.44", then
+        you can use a "sort_as_number": true in the table definition, in the layout spec.
+    </p>
+
+
+    <h2>last_days</h2>
+    <p>This is a URL parameter which lets you specify the last X number of days.
+    </p>
+
+
+    <br><br><br><br><br><br><br>
+
+    <hr>
+    <h1>Developer Docs</h1>
+    <p>
+        The rest of the documentation is for developers.
+    </p>
+
+
+    <h2>Getting Started</h2>
+    <p>
+        Here's the <a href="../web/" target="_blank">Home</a>
+    </p>
+    <p>
+        If someone wanted to start playing with the this, they could leave all the default parameters and simply pass in sf=/directory/to/your/data
+        You’ll need to make sure that the data is the same format as this: (/usr/gapps/spot/datasets/lulesh2small ) to begin with.
+
+        Then you can create your own data sets.  At that point, you’ll need to start specifying a layout file.
+
+    </p>
+
+
     <h2>DataSet</h2>
-    <p>The Data set is an array in this format for each object:
+    <p>The Data set is an array in this format for each object.  This is the data that is returned from the server's <b>getData / Summary</b> call.
     <pre>
     0:
     Cluster: "rzalastor"
@@ -238,13 +297,13 @@
 
     <p>
         The <b>Drilldown</b> option has a special function.  It will show the buttons listed in the drilldown array.  Currently, only 3 drilldowns are supported:
-        <Ul>
-            <li>Jupyter</li>
-            <li>MPI (Ravel traces)</li>
-            <li>Walltime</li>
-        </Ul>
+    <Ul>
+        <li>Jupyter</li>
+        <li>MPI (Ravel traces)</li>
+        <li>Walltime</li>
+    </Ul>
 
-        Each of these will open a new window calling the backend with the cali-key to retrieve the correct data.
+    Each of these will open a new window calling the backend with the cali-key to retrieve the correct data.
     </p>
 
     <p>
@@ -343,32 +402,6 @@
 
     <h2>Ticks</h2>
     <p>You can specify the number of ticks you would like on the X-axis or the y-axis, via "x-ticks", or "y-ticks".</p>
-
-
-    <h2>Table Column Sorting</h2>
-    <p>
-        By default the table columns will be sorted either as a string or as numbers based on the type of the data.  Hence "GNU" would be sorted as a string, but 238438 would be sorted as a number.  If
-    the string only contains numbers, such as "234234" we'll typecast it to a number and sort as a number.  If you wish to coerce a string to be sorted as a number, for instance "234.44", then
-    you can use a "sort_as_number": true in the table definition, in the layout spec.
-    </p>
-
-
-    <h2>last_days</h2>
-    <p>This is a URL parameter which lets you specify the last X number of days.  This was designed to be used in conjunction with exe_compare which will then execute the compare right away.</p>
-
-
-
-    <h2>Getting Started</h2>
-    <p>
-        Here's the <a href="../web/" target="_blank">Home</a>
-    </p>
-    <p>
-        If someone wanted to start playing with the this, they could leave all the default parameters and simply pass in sf=/directory/to/your/data
-        You’ll need to make sure that the data is the same format as this: (/usr/gapps/spot/datasets/lulesh2small ) to begin with.
-
-        Then you can create your own data sets.  At that point, you’ll need to start specifying a layout file.
-
-    </p>
 
 
     <h2></h2>

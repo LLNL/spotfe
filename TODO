@@ -1,4 +1,3 @@
-- verify that scatterPlots are up to play with before meeting.
 DONE - fixed hamburger Icon.
 DONE - get all the copyrights and put them in a directory
 DONE - Tuesday 10am do actual release to cz.  then rz.
@@ -13,8 +12,10 @@ DONE - Check Libraries:
 - David's -> bug about bar charts reset not working in FF try to repro again.
 
 Next Release:
+- Licenses: I saw them in the new repo.
+    * Do these need to be copied over? Links at the bottom of the page.
 - Update Documentation with saying what buttons are doing.
-- made some adjustments to the width and area on the left. See if marty approves.
+DONE - made some adjustments to the width and area on the left. See if marty approves.
 
 DONE - LineGraph: Do proof of concept:
     * finish up memory button and showing the index page.
@@ -24,9 +25,6 @@ DONE - LineGraph: Do proof of concept:
     * Unit types "Mb/s"
     * See if it supports being able to click on certain points.
 
-- Licenses:
-    * do i need to copy over the license directory to the new repo?
-    * Links at the bottom of the page.
 - Composite type: (work on estimate)
     * It's just a computed value based on multiple data attributes.
     * What would be involved in selecting multiple data attributes
