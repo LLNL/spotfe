@@ -128,7 +128,7 @@
                 <img src="../web/img/docs/multi.png"/>
             </td>
             <td>
-                This opens a new jupyter notebook with all your runs amalgamated.
+                This opens a new jupyter notebook with all your runs combined.
             </td>
         </tr>
 
@@ -196,6 +196,11 @@
         Your run data attributes will be shown in 4 different chart types, as histograms which count the occurance of each data value.
     <table class="doc_table">
         <tr>
+            <td>Chart type</td>
+            <td>When its used</td>
+        </tr>
+
+        <tr>
             <td>BarChart</td>
             <td>used for numbers and integers</td>
         </tr>
@@ -217,8 +222,7 @@
     <h2>Table Column Sorting</h2>
     <p>
         By default the table columns will be sorted either as a string or as numbers based on the type of the data.  Hence "GNU" would be sorted as a string, but 238438 would be sorted as a number.  If
-        the string only contains numbers, such as "234234" we'll typecast it to a number and sort as a number.  If you wish to coerce a string to be sorted as a number, for instance "234.44", then
-        you can use a "sort_as_number": true in the table definition, in the layout spec.
+        the string only contains numbers, such as "234234" we'll typecast it to a number and sort as a number.
     </p>
 
 
@@ -287,6 +291,10 @@
     <p>Key is a unique identifier that will get passed to the next page.  For our use case it's a cali file, but it can be any identifier you want.</p>
 
 
+    <h2>Table Sorting</h2>
+    <p>Dev notes: If you wish to coerce a string to be sorted as a number, for instance "234.44", then
+        you can use a "sort_as_number": true in the table definition, in the layout spec.
+    </p>
 
 
     <h2>DataSet Object Attributes</h2>
