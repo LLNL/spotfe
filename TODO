@@ -12,8 +12,7 @@ DONE - Check Libraries:
 - David's -> bug about bar charts reset not working in FF try to repro again.
 
 Next Release:
-- Licenses: I saw them in the new repo.
-    * Do these need to be copied over? Links at the bottom of the page.
+* Links at the bottom of the page, need to be copied to github?
 - Update Documentation with saying what buttons are doing.
 DONE - made some adjustments to the width and area on the left. See if marty approves.
 

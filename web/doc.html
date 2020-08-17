@@ -8,6 +8,7 @@
             background-color: #f2f2f2;
             margin: 0;
             padding: 0;
+            font-family: Tahoma;
         }
         .out_inner {
             margin: 0 auto;
@@ -20,13 +21,13 @@
         .url_params {
             padding: 0 0 0 40px;
         }
-        h2 {
+        h3 {
             margin-top: 100px;
         }
-        h2:first-child {
+        h3:first-child {
             margin-top: 0;
         }
-        h3 {
+        h4 {
             margin: 30px 0 2px 0;
             padding: 0;
         }
@@ -59,7 +60,57 @@
 
 <div class="out_inner">
 
-    <h2>Primary Functionality</h2>
+    <h1>Spot 2 Documentation</h1>
+
+    <h3>Usage</h3>
+
+    <p>
+        Make selections on the 4 chart types.  For example, for barcharts or scatter charts, you can click and drag the chart to select entries which meet that condition.
+        For PieCharts and Horizontal bar charts you can click the bars or the pie slices to make selections.
+    </p>
+
+    <p>
+        Everytime a selection has been made, the rest of the charts will update, reflecting the aggregate selections already made.
+        Also the Run table below will update showing the selections made.
+    </p>
+
+    <p>
+        From the Run table entry, you will have up to 3 buttons on the right: A juputer notebook, a durations page and a memory line graph page (currently in development).
+    </p>
+
+
+
+
+    <h3>Chart Types</h3>
+    <p>
+        Your run data attributes will be shown in 4 different chart types, as histograms which count the occurance of each data value.
+    <table class="doc_table">
+        <tr>
+            <td>Chart type</td>
+            <td>When its used</td>
+        </tr>
+
+        <tr>
+            <td>BarChart</td>
+            <td>used for numbers and integers</td>
+        </tr>
+        <tr>
+            <td>Horizontal BarChart</td>
+            <td>Used for string values that have more than 12 unique string values</td>
+        </tr>
+        <tr>
+            <td>PieChart</td>
+            <td>Used for string values that have less than 12 unique string values</td>
+        </tr>
+        <tr>
+            <td>ScatterChart</td>
+            <td>Used for values with two axis.</td>
+        </tr>
+    </table>
+    </p>
+
+
+    <h3>Primary Functionality</h3>
 
     <table class="doc_table">
         <tr>
@@ -135,20 +186,20 @@
     </table>
 
 
-    <h2>URL Parameters</h2>
+    <h3>URL Parameters</h3>
 
     <div class="url_params">
-        <h3>max</h3>
+        <h4>max</h4>
         <p>You can specify the <b>max</b> with max= in the url bar.  Max is the maximum number of iterations to make.  If you set it to 50, it will ignore all runs after the 50th run.  This helps with very large data sets.  A typical value for this might be max=18000
         </p>
 
-        <h3>machine</h3>
+        <h4>machine</h4>
         <p>
             You can specify the <b>machine</b> with machine= in the url bar.  Machine tells which machine to run it on.  You may need to run on a machine that you have access to.
             Typical values for machine are rzgenie, rzslic, etc.
         </p>
 
-        <h3>spot file</h3>
+        <h4>spot file</h4>
         <p>
             You can specify the <b>s</b>pot <b>f</b>ile with sf= in the url bar.
             sf= is the directory/file sf is short for the dataset (short for Spot File)
@@ -178,7 +229,7 @@
         -->
 
 
-        <h3>command</h3>
+        <h4>command</h4>
         <p>
             Typical value for command is: /usr/gapps/wf/web/spot/virtenv/bin/python /usr/gapps/wf/web/spot/spot.py
             <br><br>You can specify the <b>command</b> with command= in the url bar.  It sends this command to the Back end, where it gets run.
@@ -191,42 +242,15 @@
 
     </div>
 
-    <h2>Chart Types</h2>
-    <p>
-        Your run data attributes will be shown in 4 different chart types, as histograms which count the occurance of each data value.
-    <table class="doc_table">
-        <tr>
-            <td>Chart type</td>
-            <td>When its used</td>
-        </tr>
 
-        <tr>
-            <td>BarChart</td>
-            <td>used for numbers and integers</td>
-        </tr>
-        <tr>
-            <td>Horizontal BarChart</td>
-            <td>Used for string values that have more than 12 unique string values</td>
-        </tr>
-        <tr>
-            <td>PieChart</td>
-            <td>Used for string values that have less than 12 unique string values</td>
-        </tr>
-        <tr>
-            <td>ScatterChart</td>
-            <td>Used for values with two axis.</td>
-        </tr>
-    </table>
-    </p>
-
-    <h2>Table Column Sorting</h2>
+    <h3>Table Column Sorting</h3>
     <p>
         By default the table columns will be sorted either as a string or as numbers based on the type of the data.  Hence "GNU" would be sorted as a string, but 238438 would be sorted as a number.  If
         the string only contains numbers, such as "234234" we'll typecast it to a number and sort as a number.
     </p>
 
 
-    <h2>last_days</h2>
+    <h3>last_days</h3>
     <p>This is a URL parameter which lets you specify the last X number of days.
     </p>
 
