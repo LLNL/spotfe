@@ -42,7 +42,6 @@ ST.AddChartTypeView = function() {
             $('.composite_chart_type .axis_row').hide();
             $('.composite_chart_type .pick_chart_type').show();
 
-            ren_delete_( false );
         } else {
 
             //  Edit Mode.
@@ -61,17 +60,25 @@ ST.AddChartTypeView = function() {
 
             //  is scatter chart, only scatter chart shows axis rows.
             $('.composite_chart_type .axis_row').show();
-            ren_delete_( true );
+
+            if( edit_mode_ ) {
+                ren_delete_(true);
+            }
+
         } else {
             //  is NOT a scatter chart
             $('.composite_chart_type .axis_row').hide();
+        }
+
+        if( edit_mode_ === false ) {
+            ren_delete_( false );
         }
     };
 
     var ren_delete_ = function( show ) {
 
         if( show ) {
-            $('.composite_chart_type .delete').attr('display', 'inline-block');
+            $('.composite_chart_type .delete').attr('display', 'inline-block').show();
         } else {
             $('.composite_chart_type .delete').hide();
         }
