@@ -23,7 +23,7 @@ ST.AddChartTypeView = function() {
             setup_dimensions_();
             setup_defaults_();
 
-            show_based_context_( load_obj.chart_type );
+            show_based_context_( load_obj.chart_type || "multi" );
 
             $('.composite_chart_type .submit').unbind("click").bind('click', submit_ );
             $('.composite_chart_type .delete').unbind("click").bind('click', delete_ );
@@ -52,6 +52,7 @@ ST.AddChartTypeView = function() {
         //  EDIT
         if( ch_type === "multi") {
 
+            $('.multi_row_selector').MultiRowSelector();
             ren_delete_( true );
         }
 
@@ -75,6 +76,7 @@ ST.AddChartTypeView = function() {
         }
     };
 
+
     var ren_delete_ = function( show ) {
 
         if( show ) {
@@ -84,11 +86,13 @@ ST.AddChartTypeView = function() {
         }
     };
 
+
     var chart_type_changed_ = function() {
 
         var ch_type = $('.composite_chart_type .pick_chart_type_sel').val().toLowerCase();
 
         show_based_context_( ch_type );
+
     };
 
     var setup_defaults_ = function () {
