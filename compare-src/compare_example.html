@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Compare Runs</title>
+</head>
+<body>
+    <div id="graph"></div>   <!--this elememnt will get replaced (don't style it)-->
+
+    <script src="src/index.js"></script>
+    <script>
+
+        const graph = new Graph('#graph')
+        
+        // graph.getData("rztopaz", "/usr/gapps/spot/dev/spot.py getData","/usr/workspace/ares/spot/blueos-gpu")
+        // graph.getData("oslic", "/usr/gapps/spot/dev/spot.py getData", "/g/g14/chavez35/legendre_files")
+        // graph.getData("rztopaz", "/usr/gapps/spot/dev/spot.py getData", "/usr/workspace/spotdev/martymcf")
+        // graph.getData("rztopaz", "/usr/gapps/spot/dev/spot.py getData", "/usr/workspace/spotdev/martymcf/ardra/full.ardra.20200505/cali/toss_3_x86_64_ib.200505140757.logs")
+        // graph.getData("rztopaz", "/usr/gapps/spot/dev/spot.py getData", "/g/g14/chavez35/stephanieCali")
+        graph.getData("oslic", "/usr/gapps/spot/dev/spot.py getData", "/usr/gapps/spot/datasets/lulesh_new")
+            .then(summary => {
+                console.log('summary:', summary)
+            })
+        graph.addXAxisChangeListener(axis =>{console.log('xaxischanged', axis)})
+        graph.setYAxis('avg#inclusive#sum#time.duration')
+        graph.addGroupByChangeListener(groupBy => {
+            console.log('groupBy', groupBy )
+        })
+
+        // graph.setGroupBy('threads')
+
+        // listen from chart  
+        graph.addXAxisChangeListener(xAxis => {
+            console.log('xAxis', xAxis)
+        })
+
+        graph.addYAxisChangeListener(yAxis => {
+            console.log('yAxis', yAxis)
+        })
+
+        graph.addAggregateTypeChangeListener(agg =>{
+            console.log('aggregate', agg)
+        })
+
+        // setting vals:
+
+        // graph.setDirectory(newValue)
+
+        //graph.compare(filenames)
+
+        // graph.setXaxis(event.newValue)
+
+        // graph.setYaxis(event.newValue)
+
+        // graph.setAggregate(event.newValue)
+
+        // graph.setGroupBy(event.newValue)
+
+    </script>
+</body>
+</html>
