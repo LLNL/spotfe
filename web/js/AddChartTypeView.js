@@ -23,23 +23,66 @@ ST.AddChartTypeView = function() {
             setup_dimensions_();
             setup_defaults_();
 
-            if( !load_obj.is_scatter_chart && edit_mode_ ) {
-
-                //  is NOT a scatter chart
-                $('.composite_chart_type .axis_row, .composite_chart_type .delete, .composite_chart_type .pick_chart_type').hide();
-            } else {
-
-                //  is scatter chart
-                $(' .composite_chart_type .delete').attr('display', 'inline-block');
-            }
+            show_based_context_( load_obj.chart_type );
 
             $('.composite_chart_type .submit').unbind("click").bind('click', submit_ );
             $('.composite_chart_type .delete').unbind("click").bind('click', delete_ );
+            $('.composite_chart_type .pick_chart_type_sel').unbind('change').change( chart_type_changed_ );
 
             $('.chart_name:eq(0)').focus();
         });
     };
 
+
+    var show_based_context_ = function( ch_type ) {
+
+        if( edit_mode_ === false ) {
+
+            //  NEW --------------------------------------
+            $('.composite_chart_type .axis_row').hide();
+            $('.composite_chart_type .pick_chart_type').show();
+
+            ren_delete_( false );
+        } else {
+
+            //  Edit Mode.
+            $('.composite_chart_type .pick_chart_type').hide();
+            ren_delete_( false );
+        }
+
+        //  EDIT
+        if( ch_type === "multi") {
+
+            ren_delete_( true );
+        }
+
+        //  EDIT
+        if( ch_type === "scatter" ) {
+
+            //  is scatter chart, only scatter chart shows axis rows.
+            $('.composite_chart_type .axis_row').show();
+            ren_delete_( true );
+        } else {
+            //  is NOT a scatter chart
+            $('.composite_chart_type .axis_row').hide();
+        }
+    };
+
+    var ren_delete_ = function( show ) {
+
+        if( show ) {
+            $('.composite_chart_type .delete').attr('display', 'inline-block');
+        } else {
+            $('.composite_chart_type .delete').hide();
+        }
+    };
+
+    var chart_type_changed_ = function() {
+
+        var ch_type = $('.composite_chart_type .pick_chart_type_sel').val().toLowerCase();
+
+        show_based_context_( ch_type );
+    };
 
     var setup_defaults_ = function () {
 
@@ -85,9 +128,11 @@ ST.AddChartTypeView = function() {
         $('.composite_chart_type .close').trigger('click');
     };
 
+
     var make_new_dimension_ = function( xaxis, yaxis ) {
         return xaxis + "_vs_" + yaxis;
     };
+
 
     var submit_ = function() {
 
