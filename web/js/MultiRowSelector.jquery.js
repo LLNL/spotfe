@@ -28,7 +28,12 @@ $.fn.MultiRowSelector = function() {
 
     var bind_ = function( that ) {
 
-        that.unbind('click').bind('click', delete_row_ );
+        that.find('.delete_row').unbind('click').bind('click', delete_row_ );
+        that.find('.add_row').unbind('click').bind('click', add_row_ );
+    };
+
+    var add_row_ = function() {
+
     };
 
     var delete_row_ = function() {
