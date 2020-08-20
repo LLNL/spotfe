@@ -1,16 +1,20 @@
-$.fn.MultiRowSelector = function() {
+$.fn.MultiRowSelector = function( obj ) {
+    
+    var get_select_render_ = function( arr ) {
 
-    var operation_select = '<select>' +
-        '<option>+</option>' +
-        '<option>-</option>' +
-        '<option>*</option>' +
-        '<option>/</option>' +
-        '<option>concat</option>' +
-        '</select>';
+        var sel = "";
+        for( var x=0; x < arr.length; x++ ) {
 
-    var attributes_select = '<select><option>JobSize</option><option>RanksPerNode</option></select>';
+            sel += '<option>' + arr[x] + '</option>';
+        }
+
+        return "<select>" + sel + "</select>";
+    };
 
     var row_ = function() {
+
+        var operation_select = get_select_render_( obj.selectors[0] );
+        var attributes_select = get_select_render_( obj.selectors[1] );
 
         return '<tr class="multi_row">' +
             '<td>' + operation_select + '</td>' +

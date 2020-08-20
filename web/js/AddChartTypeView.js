@@ -34,6 +34,14 @@ ST.AddChartTypeView = function() {
     };
 
 
+    var operation_select = [
+        '+', '-', '*', '/', 'concat'
+    ];
+
+    var attributes_select = [
+        "JobSize", "RanksPerNode"
+    ];
+
     var show_based_context_ = function( ch_type ) {
 
         if( edit_mode_ === false ) {
@@ -52,8 +60,12 @@ ST.AddChartTypeView = function() {
         //  EDIT
         if( ch_type === "multi") {
 
-            $('.multi_row_selector').MultiRowSelector();
+            $('.multi_row_selector').MultiRowSelector({
+                selectors: [ operation_select, attributes_select ]
+            });
+
             ren_delete_( true );
+
         } else {
             $('.multi_row_selector').html("");
         }
