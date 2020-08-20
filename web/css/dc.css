@@ -508,6 +508,14 @@ body .dc-chart g.row text {
       background-image: url(../img/check.png);
       background-size: 100% 100%; }
 
+.composite_chart_type .multi_row_selector {
+  padding: 20px 0 0 0; }
+  .composite_chart_type .multi_row_selector table {
+    margin: 8px 0 0 0;
+    padding: 8px 0 0 0; }
+  .composite_chart_type .multi_row_selector tr:first-child td {
+    border-top: 1px solid #bbbbbb; }
+
 .composite_chart_type.edit_mode .myButton.submit {
   display: inline-block; }
 
@@ -526,7 +534,7 @@ body .dc-chart g.row text {
 .composite_chart_type select {
   height: 36px; }
 
-.composite_chart_type tr:first-child td {
+.composite_chart_type .pick_chart_type td {
   padding: 0 0 17px 0;
   border-bottom: 1px solid #bbbbbb; }
 

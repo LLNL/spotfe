@@ -21,9 +21,11 @@ $.fn.MultiRowSelector = function() {
             '</td>' +
             '</tr>' +
             '</table>' +
+            '<div class="center">' +
             '<div class="icon myButton add_row">\n' +
             '        <div class="inner">ADD ROW</div>\n' +
-            '    </div>';
+            '    </div>' +
+            '</div>';
     };
 
     var bind_ = function( that ) {

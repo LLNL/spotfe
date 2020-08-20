@@ -746,6 +746,19 @@ body .dc-chart g.row text {
 
 .composite_chart_type {
 
+    .multi_row_selector {
+        padding: 20px 0 0 0;
+
+        table {
+          margin: 8px 0 0 0;
+          padding: 8px 0 0 0;
+        }
+
+        tr:first-child td {
+            border-top: 1px solid #bbbbbb;
+        }
+    }
+
     &.edit_mode {
         .myButton.submit {
             display: inline-block;
@@ -772,7 +785,7 @@ body .dc-chart g.row text {
         height: 36px;
     }
 
-    tr:first-child td {
+    .pick_chart_type td {
         padding: 0 0 17px 0;
         border-bottom: 1px solid #bbbbbb;
     }

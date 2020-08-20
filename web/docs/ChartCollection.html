@@ -645,6 +645,15 @@ This code demonstrates generating the column header automatically based on the c
     };
 
 
+    <span class="hljs-keyword">var</span> get_chart_type_ = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> par </span>) </span>{
+
+        <span class="hljs-keyword">if</span>( par.hasClass(<span class="hljs-string">'scatter-chart'</span>) ) {
+            <span class="hljs-keyword">return</span> <span class="hljs-string">"scatter"</span>;
+        }
+
+        <span class="hljs-keyword">return</span> <span class="hljs-string">"other"</span>;
+    };
+
 
     <span class="hljs-keyword">var</span> bind_sort = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{</pre></div></div>
             
@@ -676,6 +685,7 @@ This code demonstrates generating the column header automatically based on the c
 
             ST.AddChartTypeView.render( <span class="hljs-literal">true</span>, {
                 <span class="hljs-attr">chart_name</span>: chart_name,
+                <span class="hljs-attr">chart_type</span>: get_chart_type_( par ),
                 <span class="hljs-attr">dimension</span>: dim,
                 <span class="hljs-attr">is_scatter_chart</span>: is_scatter_chart,
                 <span class="hljs-attr">x_label</span>: x_label,
