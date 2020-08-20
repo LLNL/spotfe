@@ -17,18 +17,22 @@ $.fn.MultiRowSelector = function() {
             '<td>' + operation_select + '</td>' +
             '<td>' + attributes_select + '</td>' +
             '<td>' +
-            '<div class="button">X</div>' +
+            ReusableView.button("X", "delete_row", "myButton") +
             '</td>' +
             '</tr>' +
             '</table>' +
             '<div class="center">' +
-            '<div class="icon myButton add_row">\n' +
-            '        <div class="inner">ADD ROW</div>\n' +
-            '    </div>' +
+            ReusableView.button("ADD ROW", "add_row", "myButton") +
             '</div>';
     };
 
     var bind_ = function( that ) {
+
+        that.unbind('click').bind('click', delete_row_ );
+    };
+
+    var delete_row_ = function() {
+
 
     };
 

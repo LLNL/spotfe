@@ -515,6 +515,13 @@ body .dc-chart g.row text {
   .composite_chart_type .multi_row_selector tr:first-child td {
     border-top: 1px solid #bbbbbb;
     padding: 12px 3px 3px 3px; }
+  .composite_chart_type .multi_row_selector .delete_row {
+    position: relative;
+    top: -4px;
+    font-size: 18px;
+    width: 22px;
+    padding: 6px;
+    text-align: center; }
 
 .composite_chart_type.edit_mode .myButton.submit {
   display: inline-block; }

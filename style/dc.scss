@@ -757,6 +757,15 @@ body .dc-chart g.row text {
           border-top: 1px solid #bbbbbb;
           padding: 12px 3px 3px 3px;
         }
+
+      .delete_row {
+        position: relative;
+        top: -4px;
+        font-size: 18px;
+        width: 22px;
+        padding: 6px;
+        text-align: center;
+      }
     }
 
     &.edit_mode {
