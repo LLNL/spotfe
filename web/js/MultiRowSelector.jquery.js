@@ -31,11 +31,12 @@ $.fn.MultiRowSelector = function() {
 
         var mrs = $(this).closest('.multi_row_selector');
         mrs.find('table').append( row_() );
+
+        bind_( mrs );
     };
 
-    var num_rows_ = function() {
+    var num_rows_ = function( mrs ) {
 
-        var mrs = $(this).closest('.multi_row_selector');
         var count = mrs.find('tr').length;
 
         return count;
@@ -43,8 +44,10 @@ $.fn.MultiRowSelector = function() {
 
     var delete_row_ = function() {
 
+        var mrs = $(this).closest('.multi_row_selector');
+
         //  can't delete the last row.
-        if( num_rows_() > 1 ) {
+        if( num_rows_( mrs ) > 1 ) {
 
             $(this).closest('.multi_row').remove();
         }
