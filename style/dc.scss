@@ -750,12 +750,12 @@ body .dc-chart g.row text {
         padding: 20px 0 0 0;
 
         table {
-          margin: 8px 0 0 0;
-          padding: 8px 0 0 0;
+          margin: 1px 0 0 0;
         }
 
         tr:first-child td {
-            border-top: 1px solid #bbbbbb;
+          border-top: 1px solid #bbbbbb;
+          padding: 12px 3px 3px 3px;
         }
     }
 

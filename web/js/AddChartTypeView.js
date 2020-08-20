@@ -54,6 +54,8 @@ ST.AddChartTypeView = function() {
 
             $('.multi_row_selector').MultiRowSelector();
             ren_delete_( true );
+        } else {
+            $('.multi_row_selector').html("");
         }
 
         //  EDIT
@@ -257,6 +259,15 @@ ST.AddChartTypeView = function() {
 
         $('.composite_chart_type .xaxis, .composite_chart_type .yaxis').html('<select>' + ht + '</select>');
     };
+
+    $(document).ready( function() {
+
+        //  just for development.
+        setTimeout( function() {
+
+            $('.plus_icon').trigger('click');
+        }, 3000);
+    });
 
     return {
         render: render_
