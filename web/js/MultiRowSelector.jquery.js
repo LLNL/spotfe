@@ -1,5 +1,5 @@
 $.fn.MultiRowSelector = function( obj ) {
-    
+
     var get_select_render_ = function( arr ) {
 
         var sel = "";

@@ -39,24 +39,34 @@ ST.MemoryLineView = function() {
 
         var ret = aj_dat.output.command_out;
         var ret2 = JSON.parse( ret );
-        var ret3 = JSON.parse( ret2 );
+        var std = JSON.parse( ret2.std );
+        var records = ret2.series.records;
 
-        ret3.sort( function( a, b ) {
+        records.sort( function( a, b ) {
 
             return a.block - b.block;
         });
 
-        console.dir( ret3 );
+        console.dir( ret2 );
+        console.dir( std );
+        console.dir( records );
 
-        var trace3 = get_trace_( ret3, 'iter_per_sec');
-        var trace4 = get_trace_( ret3, 'mem_read_bw');
-        var trace5 = get_trace_( ret3, 'mem_write_bw');
+        var ret3 = records;
+
+
+        var trace3 = get_trace_( ret3, 'avg#loop.iterations/time.duration');
+        var trace4 = get_trace_( ret3, 'max#mem.bytes.written/mwb.time');
+        var trace5 = get_trace_( ret3, 'sum#mem.bytes.read/mrb.time');
+        var trace6 = get_trace_( ret3, 'avg#mem.bytes.read/mrb.time');
+        var trace7 = get_trace_( ret3, 'max#sum#time.duration');
 
         var data = [ trace4 ];
 
         Plotly.newPlot('myDiv', [trace3]);
         Plotly.newPlot('myDiv2', [trace4]);
         Plotly.newPlot('myDiv3', [trace5]);
+        Plotly.newPlot('myDiv4', [trace6]);
+        Plotly.newPlot('myDiv5', [trace7]);
     };
 
 
