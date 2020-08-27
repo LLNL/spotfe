@@ -63,9 +63,9 @@ ST.MemoryLineView = function() {
         var data = [ trace4 ];
 
         Plotly.newPlot('myDiv', [trace3]);
-        Plotly.newPlot('myDiv2', [trace4]);
-        Plotly.newPlot('myDiv3', [trace5]);
-        Plotly.newPlot('myDiv4', [trace6]);
+        Plotly.newPlot('myDiv2', [trace4, trace5, trace6 ]);
+//        Plotly.newPlot('myDiv3', [trace5]);
+//        Plotly.newPlot('myDiv4', [trace6]);
         Plotly.newPlot('myDiv5', [trace7]);
     };
 

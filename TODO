@@ -1,3 +1,16 @@
+Memory:
+- Titles and Axis labels
+- At the top of the chart, have a drop down which drops checkboxes with text next to it
+- allow checking/unchecking which combines all the line graphs on one chart.
+- Button to allow for another chart type.
+
+Next: Use Aliases instead of #strings.
+
+Multi:
+- get rid of first dropdown.
+- actually create the submit function which takes all the data and aggregates them according to the formula
+    * all the operations involved in a new chart type: check/uncheck, edit.
+
 DONE - fixed hamburger Icon.
 DONE - get all the copyrights and put them in a directory
 DONE - Tuesday 10am do actual release to cz.  then rz.
