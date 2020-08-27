@@ -37,6 +37,8 @@ ST.MemoryLineView = function() {
 
     var line_render_ = function( aj_dat ) {
 
+        $('.ch_dropdown').CheckboxWindowManager();
+
         var ret = aj_dat.output.command_out;
         var ret2 = JSON.parse( ret );
         var std = JSON.parse( ret2.std );

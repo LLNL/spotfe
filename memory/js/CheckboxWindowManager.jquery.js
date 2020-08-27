@@ -1,15 +1,11 @@
 $.fn.CheckboxWindowManager = function() {
 
-    return this.each( function(el) {
-
-        $(this).append('<div class="CheckboxWindowManager">' + boxes_() + "</div>" +
-            "<div class='checkbox_open_close'>views</div>");
-
-        $('[type="checkbox"]').unbind('click').bind('click', checked_ );
-        $('.checkbox_open_close').unbind('click').bind('click', open_close_ );
-
-        bind_lm_handlers_();
-    });
+    var specs_ = {
+        'avg#loop.iterations/time.duration' : "",
+        "max#mem.bytes.written/mwb.time" : "",
+        "sum#mem.bytes.read/mrb.time" : "",
+        "avg#mem.bytes.read/mrb.time" : ""
+    };
 
     var bind_lm_handlers_ = function() {
 
@@ -32,8 +28,7 @@ $.fn.CheckboxWindowManager = function() {
         $('.CheckboxWindowManager').toggle();
     };
 
-    var win_name_,
-        parents_ = {};
+    var win_name_;
 
     var checked_ = function() {
 
@@ -41,16 +36,8 @@ $.fn.CheckboxWindowManager = function() {
         win_name_ = win_name_.toLowerCase();
 
         var becoming_checked = $(this).is(':checked');
-        var varRe = myLayout.root.getItemsByFilter( find_ );
-
-        //var varRe = myLayout.getComponent(win_name_);
-
-        //console.dir( ret );
-
 
         console.log('check: ' + win_name_ + "   ch=" + becoming_checked );
-
-        var spec_child = specs_[win_name_];
 
         if( becoming_checked ) {
 
@@ -82,4 +69,15 @@ $.fn.CheckboxWindowManager = function() {
             "<div class='txt'>" + str + "</div>" +
             "</div>";
     };
+
+    return this.each( function(el) {
+
+        $(this).append('<div class="CheckboxWindowManager">' + boxes_() + "</div>" +
+            "<div class='checkbox_open_close'>views</div>");
+
+        $(this).find('[type="checkbox"]').unbind('click').bind('click', checked_ );
+        $('.checkbox_open_close').unbind('click').bind('click', open_close_ );
+
+        bind_lm_handlers_();
+    });
 };
