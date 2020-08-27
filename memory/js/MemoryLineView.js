@@ -7,15 +7,15 @@ ST.MemoryLineView = function() {
 
     var render_ = function() {
 
-      ST.CallSpot.ajax({
-          file: '/usr/gapps/spot/datasets/lulesh_gen/100',
-          type: "memory",
-          success: line_render_
-      });
+        ST.CallSpot.ajax({
+            file: '/usr/gapps/spot/datasets/lulesh_gen/100',
+            type: "memory",
+            success: line_render_
+        });
 
-      return true;
+        return true;
 
-      var final_command = "";
+        var final_command = "";
         var rtype = "POST";
         var obj = {
             timeout: 600000,
@@ -36,44 +36,50 @@ ST.MemoryLineView = function() {
 
 
     var render_chart_ = function() {
+
         return '<div class="one_chart"> \
             <div class="ch_dropdown"></div>\
             <div id="my_chart"></div>\
             </div>';
     };
 
+    var records_ = false;
+
+    var process_records_ = function( aj_dat ) {
+
+        if( aj_dat ) {
+
+            var ret = aj_dat.output.command_out;
+            var ret2 = JSON.parse( ret );
+            var std = JSON.parse( ret2.std );
+            records_ = ret2.series.records;
+
+            records_.sort( function( a, b ) {
+
+                return a.block - b.block;
+            });
+
+            console.dir( ret2 );
+            console.dir( std );
+            console.dir( records_ );
+        }
+    };
+
+
     var line_render_ = function( aj_dat ) {
 
+        process_records_( aj_dat );
+
         var ht = render_chart_();
+
         $('.chart_container').html( ht );
-
-
         $('.ch_dropdown').CheckboxWindowManager();
 
-        var ret = aj_dat.output.command_out;
-        var ret2 = JSON.parse( ret );
-        var std = JSON.parse( ret2.std );
-        var records = ret2.series.records;
+        var ret3 = records_;
 
-        records.sort( function( a, b ) {
-
-            return a.block - b.block;
-        });
-
-        console.dir( ret2 );
-        console.dir( std );
-        console.dir( records );
-
-        var ret3 = records;
-
-
-        var trace3 = get_trace_( ret3, 'avg#loop.iterations/time.duration');
         var trace4 = get_trace_( ret3, 'max#mem.bytes.written/mwb.time');
         var trace5 = get_trace_( ret3, 'sum#mem.bytes.read/mrb.time');
         var trace6 = get_trace_( ret3, 'avg#mem.bytes.read/mrb.time');
-        var trace7 = get_trace_( ret3, 'max#sum#time.duration');
-
-        var data = [ trace4 ];
 
         Plotly.newPlot('my_chart', [trace4, trace5, trace6 ]);
     };
@@ -168,9 +174,9 @@ ST.MemoryLineView = function() {
                 // Specify a "range chart" to link its brush extent with the zoom of the current "focus chart".
                 .rangeChart(volumeChart)
                 .x( domain0 )
-               // .x(d3.scaleTime().domain([new Date(1985, 0, 1), new Date(2012, 11, 31)]))
-               // .round(d3.timeMonth.round)
-               // .xUnits(d3.timeMonths)
+                // .x(d3.scaleTime().domain([new Date(1985, 0, 1), new Date(2012, 11, 31)]))
+                // .round(d3.timeMonth.round)
+                // .xUnits(d3.timeMonths)
                 //.y( yrange )
                 .elasticY(true)
                 .renderHorizontalGridLines(true);
@@ -184,9 +190,9 @@ ST.MemoryLineView = function() {
                 .x( domain0 )
                 .gap(1)
                 .alwaysUseRounding(true);
-                //.x(d3.scaleTime().domain([new Date(1985, 0, 1), new Date(2012, 11, 31)]))
-                //.round(d3.timeMonth.round)
-                //.xUnits(d3.timeMonths);
+            //.x(d3.scaleTime().domain([new Date(1985, 0, 1), new Date(2012, 11, 31)]))
+            //.round(d3.timeMonth.round)
+            //.xUnits(d3.timeMonths);
 
 
             dc.renderAll();
