@@ -35,7 +35,18 @@ ST.MemoryLineView = function() {
     };
 
 
+    var render_chart_ = function() {
+        return '<div class="one_chart"> \
+            <div class="ch_dropdown"></div>\
+            <div id="my_chart"></div>\
+            </div>';
+    };
+
     var line_render_ = function( aj_dat ) {
+
+        var ht = render_chart_();
+        $('.chart_container').html( ht );
+
 
         $('.ch_dropdown').CheckboxWindowManager();
 
@@ -64,11 +75,7 @@ ST.MemoryLineView = function() {
 
         var data = [ trace4 ];
 
-        Plotly.newPlot('myDiv', [trace3]);
-        Plotly.newPlot('myDiv2', [trace4, trace5, trace6 ]);
-//        Plotly.newPlot('myDiv3', [trace5]);
-//        Plotly.newPlot('myDiv4', [trace6]);
-        Plotly.newPlot('myDiv5', [trace7]);
+        Plotly.newPlot('my_chart', [trace4, trace5, trace6 ]);
     };
 
 
