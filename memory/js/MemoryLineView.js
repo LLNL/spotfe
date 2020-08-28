@@ -75,11 +75,23 @@ ST.MemoryLineView = function() {
         $('.chart_container').html( ht );
         $('.ch_dropdown').CheckboxWindowManager();
 
-        var trace4 = get_trace_( ret3, 'max#mem.bytes.written/mwb.time');
-        var trace5 = get_trace_( ret3, 'sum#mem.bytes.read/mrb.time');
-        var trace6 = get_trace_( ret3, 'avg#mem.bytes.read/mrb.time');
+        var traces = [];
+        var rets = ret3[0];
 
-        Plotly.newPlot('my_chart', [trace4, trace5, trace6 ]);
+        for( var pound_name in rets ) {
+
+            if( typeof rets[pound_name] === "number" && pound_name !== "block" ) {
+
+                var trace = get_trace_( ret3, pound_name );
+                traces.push( trace );
+            }
+        }
+
+        var layout = {
+            title: "First Plot"
+        };
+
+        Plotly.newPlot('my_chart', traces, layout );
     };
 
 
