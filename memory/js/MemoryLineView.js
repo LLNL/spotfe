@@ -100,14 +100,19 @@ ST.MemoryLineView = function() {
         var trace = {
             x: [],
             y: [],
-            type: 'scatter'
+            type: 'scatter',
+            name: attr
         };
 
         for( var a=0; a < ret3.length; a++ ) {
 
             var obj = ret3[a];
+
             trace.x.push( obj.block );
             trace.y.push( obj[ attr ] );
+
+            //  hover.
+            //trace.text.push( attr );
         }
 
         return trace;
