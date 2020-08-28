@@ -43,8 +43,6 @@ ST.MemoryLineView = function() {
             </div>';
     };
 
-    var records_ = false;
-
     var process_records_ = function( aj_dat ) {
 
         if( aj_dat ) {
@@ -52,30 +50,30 @@ ST.MemoryLineView = function() {
             var ret = aj_dat.output.command_out;
             var ret2 = JSON.parse( ret );
             var std = JSON.parse( ret2.std );
-            records_ = ret2.series.records;
+            var records = ret2.series.records;
 
-            records_.sort( function( a, b ) {
+            records.sort( function( a, b ) {
 
                 return a.block - b.block;
             });
 
             console.dir( ret2 );
             console.dir( std );
-            console.dir( records_ );
+            console.dir( records );
+
+            return records;
         }
     };
 
 
     var line_render_ = function( aj_dat ) {
 
-        process_records_( aj_dat );
+        var ret3 = process_records_( aj_dat );
 
         var ht = render_chart_();
 
         $('.chart_container').html( ht );
         $('.ch_dropdown').CheckboxWindowManager();
-
-        var ret3 = records_;
 
         var trace4 = get_trace_( ret3, 'max#mem.bytes.written/mwb.time');
         var trace5 = get_trace_( ret3, 'sum#mem.bytes.read/mrb.time');
