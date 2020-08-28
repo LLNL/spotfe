@@ -1,11 +1,6 @@
-$.fn.CheckboxWindowManager = function() {
+$.fn.CheckboxWindowManager = function( obj ) {
 
-    var specs_ = {
-        'avg#loop.iterations/time.duration' : "",
-        "max#mem.bytes.written/mwb.time" : "",
-        "sum#mem.bytes.read/mrb.time" : "",
-        "avg#mem.bytes.read/mrb.time" : ""
-    };
+    var specs_ = obj.legend;
 
     var bind_lm_handlers_ = function() {
 

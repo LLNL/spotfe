@@ -12,6 +12,7 @@
 
 .CheckboxWindowManager .txt {
 	display: inline-block;
+	margin-left: 8px;
 }
 
 .CheckboxWindowManager .check_line {

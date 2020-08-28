@@ -71,12 +71,9 @@ ST.MemoryLineView = function() {
         var ret3 = process_records_( aj_dat );
 
         var ht = render_chart_();
-
-        $('.chart_container').html( ht );
-        $('.ch_dropdown').CheckboxWindowManager();
-
         var traces = [];
         var rets = ret3[0];
+        var legend = {};
 
         for( var pound_name in rets ) {
 
@@ -84,8 +81,14 @@ ST.MemoryLineView = function() {
 
                 var trace = get_trace_( ret3, pound_name );
                 traces.push( trace );
+                legend[ pound_name ] = 1;
             }
         }
+
+        $('.chart_container').html( ht );
+        $('.ch_dropdown').CheckboxWindowManager({
+            legend: legend
+        });
 
         var layout = {
             title: "First Plot",
