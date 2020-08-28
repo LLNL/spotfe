@@ -1,6 +1,6 @@
 Memory:
-- Titles and Axis labels
-- At the top of the chart, have a drop down which drops checkboxes with text next to it
+DONE - Titles and Axis labels
+DONE - At the top of the chart, have a drop down which drops checkboxes with text next to it
 - allow checking/unchecking which combines all the line graphs on one chart.
 - Button to allow for another chart type.
 

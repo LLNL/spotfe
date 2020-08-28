@@ -88,7 +88,41 @@ ST.MemoryLineView = function() {
         }
 
         var layout = {
-            title: "First Plot"
+            title: "First Plot",
+            xaxis: {
+                title: 'Block',
+                titlefont: {
+                    family: 'Arial, sans-serif',
+                    size: 18,
+                    color: 'grey'
+                },
+                showticklabels: true,
+                tickangle: 'auto',
+                tickfont: {
+                    family: 'Old Standard TT, serif',
+                    size: 14,
+                    color: 'black'
+                },
+                exponentformat: 'e',
+                showexponent: 'all'
+            },
+            yaxis: {
+                title: 'See Legend',
+                titlefont: {
+                    family: 'Arial, sans-serif',
+                    size: 18,
+                    color: 'grey'
+                },
+                showticklabels: true,
+                tickangle: 45,
+                tickfont: {
+                    family: 'Old Standard TT, serif',
+                    size: 14,
+                    color: 'black'
+                },
+                exponentformat: 'e',
+                showexponent: 'all'
+            }
         };
 
         Plotly.newPlot('my_chart', traces, layout );
