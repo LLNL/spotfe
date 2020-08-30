@@ -43,6 +43,8 @@ ST.MemoryLineView = function() {
             </div>';
     };
 
+    var records_cache_;
+
     var process_records_ = function( aj_dat ) {
 
         if( aj_dat ) {
@@ -61,10 +63,24 @@ ST.MemoryLineView = function() {
             console.dir( std );
             console.dir( records );
 
+            records_cache_ = records;
             return records;
         }
+
+        return records_cache_;
     };
 
+
+    var checked_ = function() {
+
+        line_render_();
+    };
+
+    var unchecked_ = function() {
+
+        line_render_();
+    };
+    
 
     var line_render_ = function( aj_dat ) {
 
@@ -87,7 +103,9 @@ ST.MemoryLineView = function() {
 
         $('.chart_container').html( ht );
         $('.ch_dropdown').CheckboxWindowManager({
-            legend: legend
+            legend: legend,
+            checked: checked_,
+            unchecked: unchecked_
         });
 
         var layout = {
