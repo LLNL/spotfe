@@ -32,17 +32,22 @@ $.fn.CheckboxWindowManager = function( obj ) {
 
         var becoming_checked = $(this).is(':checked');
 
+
         console.log('check: ' + win_name_ + "   ch=" + becoming_checked );
 
         if( becoming_checked ) {
 
             if( obj.checked ) {
-                obj.checked();
+
+                var thing = $(event.target).parent().find("div.txt").html();
+                obj.checked( thing );
             }
         } else {
 
             if( obj.unchecked ) {
-                obj.unchecked();
+
+                var thing = $(event.target).parent().find("div.txt").html();
+                obj.unchecked( thing);
             }
         }
 

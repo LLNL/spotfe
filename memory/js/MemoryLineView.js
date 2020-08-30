@@ -71,16 +71,20 @@ ST.MemoryLineView = function() {
     };
 
 
-    var checked_ = function() {
+    var checked_ = function( got_checked ) {
 
+        check_cache_[ got_checked ] = true;
         line_render_();
     };
 
-    var unchecked_ = function() {
+    var unchecked_ = function( got_checked ) {
 
+        check_cache_[ got_checked ] = false;
         line_render_();
     };
-    
+
+    var check_cache_ = {};
+
 
     var line_render_ = function( aj_dat ) {
 
@@ -93,7 +97,9 @@ ST.MemoryLineView = function() {
 
         for( var pound_name in rets ) {
 
-            if( typeof rets[pound_name] === "number" && pound_name !== "block" ) {
+            if( typeof rets[pound_name] === "number" &&
+                pound_name !== "block" &&
+                check_cache_[pound_name] !== false ) {
 
                 var trace = get_trace_( ret3, pound_name );
                 traces.push( trace );
