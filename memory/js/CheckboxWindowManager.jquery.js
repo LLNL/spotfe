@@ -36,9 +36,14 @@ $.fn.CheckboxWindowManager = function( obj ) {
 
         if( becoming_checked ) {
 
-
+            if( obj.checked ) {
+                obj.checked();
+            }
         } else {
 
+            if( obj.unchecked ) {
+                obj.unchecked();
+            }
         }
 
         bind_lm_handlers_();
