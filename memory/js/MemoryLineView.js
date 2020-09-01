@@ -35,12 +35,20 @@ ST.MemoryLineView = function() {
     };
 
 
+    var charts_ = [{}];
+
     var render_chart_ = function() {
 
-        return '<div class="one_chart"> \
+        var ht = "";
+
+        for( var x=0; x < charts_.length; x++ ) {
+            ht +=  '<div class="one_chart"> \
             <div class="ch_dropdown"></div>\
             <div id="my_chart"></div>\
             </div>';
+        }
+
+        return ht;
     };
 
     var records_cache_;
@@ -114,47 +122,17 @@ ST.MemoryLineView = function() {
             unchecked: unchecked_
         });
 
-        var layout = {
-            title: "First Plot",
-            xaxis: {
-                title: 'Block',
-                titlefont: {
-                    family: 'Arial, sans-serif',
-                    size: 18,
-                    color: 'grey'
-                },
-                showticklabels: true,
-                tickangle: 'auto',
-                tickfont: {
-                    family: 'Old Standard TT, serif',
-                    size: 14,
-                    color: 'black'
-                },
-                exponentformat: 'e',
-                showexponent: 'all'
-            },
-            yaxis: {
-                title: 'See Legend',
-                titlefont: {
-                    family: 'Arial, sans-serif',
-                    size: 18,
-                    color: 'grey'
-                },
-                showticklabels: true,
-                tickangle: 45,
-                tickfont: {
-                    family: 'Old Standard TT, serif',
-                    size: 14,
-                    color: 'black'
-                },
-                exponentformat: 'e',
-                showexponent: 'all'
-            }
-        };
+        $('.plus.myButton').unbind('click').bind('click', add_chart_ );
 
         Plotly.newPlot('my_chart', traces, layout );
     };
 
+
+    var add_chart_ = function() {
+
+        charts_.push({});
+        line_render_();
+    };
 
     var get_trace_ = function( ret3, attr ) {
 
@@ -358,6 +336,45 @@ ST.MemoryLineView = function() {
             dc.renderAll();
         });
     };
+
+    var layout = {
+        title: "First Plot",
+        xaxis: {
+            title: 'Block',
+            titlefont: {
+                family: 'Arial, sans-serif',
+                size: 18,
+                color: 'grey'
+            },
+            showticklabels: true,
+            tickangle: 'auto',
+            tickfont: {
+                family: 'Old Standard TT, serif',
+                size: 14,
+                color: 'black'
+            },
+            exponentformat: 'e',
+            showexponent: 'all'
+        },
+        yaxis: {
+            title: 'See Legend',
+            titlefont: {
+                family: 'Arial, sans-serif',
+                size: 18,
+                color: 'grey'
+            },
+            showticklabels: true,
+            tickangle: 45,
+            tickfont: {
+                family: 'Old Standard TT, serif',
+                size: 14,
+                color: 'black'
+            },
+            exponentformat: 'e',
+            showexponent: 'all'
+        }
+    };
+
 
     $(document).ready( render_ );
 }();
