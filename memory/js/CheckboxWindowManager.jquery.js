@@ -92,6 +92,8 @@ $.fn.CheckboxWindowManager = function( obj ) {
 
     return this.each( function(el) {
 
+        $(this).find('.CheckboxWindowManager').remove();
+
         $(this).append('<div class="CheckboxWindowManager">' + boxes_() + "</div>" +
             "<div class='checkbox_open_close'>views</div>");
 
