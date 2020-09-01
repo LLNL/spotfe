@@ -75,6 +75,21 @@ $.fn.CheckboxWindowManager = function( obj ) {
             "</div>";
     };
 
+    var window_out_ = function() {
+
+        var target = $(event.target);
+        var top_bar = target.closest('.CheckboxWindowManager');
+        var inside_topbar = top_bar.length;
+        var has = target.hasClass('checkbox_open_close');
+
+        if( !inside_topbar && !has) {
+            $('.CheckboxWindowManager').hide();
+        }
+    };
+
+    $("body").unbind('click.window_out').bind('click.window_out', window_out_ );
+
+
     return this.each( function(el) {
 
         $(this).append('<div class="CheckboxWindowManager">' + boxes_() + "</div>" +
