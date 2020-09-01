@@ -16,3 +16,9 @@
 .top_bar {
 	height: 30px;
 }
+
+/* make body 100% to ensure when you click on white area it's in the body */
+html,
+body {
+	height:100%;
+}
