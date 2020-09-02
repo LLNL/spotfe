@@ -45,7 +45,7 @@ ST.MemoryLineView = function() {
 
             ht +=  '<div class="one_chart"> \
             <div class="ch_dropdown"></div>\
-            <div id="my_chart"></div>\
+            <div id="my_chart' + x + '"></div>\
             </div>';
         }
 
@@ -129,7 +129,9 @@ ST.MemoryLineView = function() {
 
         $('.plus.myButton').unbind('click').bind('click', add_chart_ );
 
-        Plotly.newPlot('my_chart', traces, layout );
+        for( var x=0; x < charts_.length; x++ ) {
+            Plotly.newPlot('my_chart' + x, traces, layout);
+        }
     };
 
 
@@ -137,7 +139,15 @@ ST.MemoryLineView = function() {
 
         charts_.push({});
         line_render_( false, true );
+
+        scroll_to_bottom_();
     };
+
+    var scroll_to_bottom_ = function() {
+
+        $("html, body").animate({ scrollTop: $(document).height() }, 1000);
+    };
+
 
     var get_trace_ = function( ret3, attr ) {
 
