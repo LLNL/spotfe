@@ -95,7 +95,7 @@ ST.MemoryLineView = function() {
     var check_cache_ = {};
 
 
-    var line_render_ = function( aj_dat ) {
+    var line_render_ = function( aj_dat, plus_button ) {
 
         var ret3 = process_records_( aj_dat );
 
@@ -117,7 +117,7 @@ ST.MemoryLineView = function() {
         }
 
         //$('.one_chart').remove();
-        if( 0 === $('.one_chart').length ) {
+        if( 0 === $('.one_chart').length || plus_button) {
 
             $('.chart_container').html(ht);
             $('.ch_dropdown').CheckboxWindowManager({
@@ -136,7 +136,7 @@ ST.MemoryLineView = function() {
     var add_chart_ = function() {
 
         charts_.push({});
-        line_render_();
+        line_render_( false, true );
     };
 
     var get_trace_ = function( ret3, attr ) {
