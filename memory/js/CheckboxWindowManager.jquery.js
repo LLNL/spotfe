@@ -18,9 +18,9 @@ $.fn.CheckboxWindowManager = function( obj ) {
     };
 
 
-    var open_close_ = function() {
+    var open_close_ = function( that ) {
 
-        $('.CheckboxWindowManager').toggle();
+        that.find('.CheckboxWindowManager').toggle();
     };
 
     var win_name_;
@@ -59,18 +59,19 @@ $.fn.CheckboxWindowManager = function( obj ) {
 
         var ht = "";
         for( var x in specs_ ) {
-            ht += box_( x );
+            ht += box_( x, specs_[x] );
         }
 
         return ht;
     };
 
-    var box_ = function( str ) {
+    var box_ = function( str, checked ) {
 
         var sc = str.toLowerCase();
+        var checked = checked ? ' checked="checked" ' : "";
 
         return "<div class='check_line' check_type='" + sc + "'>" +
-            "<input type='checkbox' checked='checked'/>" +
+            "<input type='checkbox' " + checked + "/>" +
             "<div class='txt'>" + str + "</div>" +
             "</div>";
     };
@@ -92,13 +93,17 @@ $.fn.CheckboxWindowManager = function( obj ) {
 
     return this.each( function(el) {
 
-        $(this).find('.CheckboxWindowManager').remove();
+        var that = $(this);
+        that.find('.CheckboxWindowManager').remove();
 
-        $(this).html('<div class="CheckboxWindowManager">' + boxes_() + "</div>" +
+        that.html('<div class="CheckboxWindowManager">' + boxes_() + "</div>" +
             "<div class='checkbox_open_close'>views</div>");
 
-        $(this).find('[type="checkbox"]').unbind('click').bind('click', checked_ );
-        $('.checkbox_open_close').unbind('click').bind('click', open_close_ );
+        that.find('[type="checkbox"]').unbind('click').bind('click', checked_ );
+
+        that.find('.checkbox_open_close').unbind('click').bind('click', function() {
+            open_close_( that );
+        });
 
         bind_lm_handlers_();
     });

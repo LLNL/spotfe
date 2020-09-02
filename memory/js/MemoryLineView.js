@@ -107,12 +107,16 @@ ST.MemoryLineView = function() {
         for( var pound_name in rets ) {
 
             if( typeof rets[pound_name] === "number" &&
-                pound_name !== "block" &&
-                check_cache_[pound_name] !== false ) {
+                pound_name !== "block" ) {
 
-                var trace = get_trace_( ret3, pound_name );
-                traces.push( trace );
-                legend[ pound_name ] = 1;
+                if( check_cache_[pound_name] !== false ) {
+
+                    var trace = get_trace_(ret3, pound_name);
+                    traces.push(trace);
+                    legend[ pound_name ] = 1;
+                } else {
+                    legend[ pound_name ] = 0;
+                }
             }
         }
 
@@ -171,6 +175,8 @@ ST.MemoryLineView = function() {
 
         return trace;
     };
+
+
 
     var finish_render_ = function( aj_dat ) {
 
