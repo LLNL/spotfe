@@ -104,18 +104,23 @@ ST.MemoryLineView = function() {
         var rets = ret3[0];
         var legend = {};
 
-        for( var pound_name in rets ) {
+        for( var z = 0; z < charts_.length; z++ ) {
 
-            if( typeof rets[pound_name] === "number" &&
-                pound_name !== "block" ) {
+            for (var pound_name in rets) {
 
-                if( check_cache_[pound_name] !== false ) {
+                if (typeof rets[pound_name] === "number" &&
+                    pound_name !== "block") {
 
-                    var trace = get_trace_(ret3, pound_name);
-                    traces.push(trace);
-                    legend[ pound_name ] = 1;
-                } else {
-                    legend[ pound_name ] = 0;
+                    if (check_cache_[pound_name] !== false) {
+
+                        var trace = get_trace_(ret3, pound_name);
+                        traces[z] = traces[z] || [];
+                        traces[z].push(trace);
+
+                        legend[pound_name] = 1;
+                    } else {
+                        legend[pound_name] = 0;
+                    }
                 }
             }
         }
@@ -134,7 +139,7 @@ ST.MemoryLineView = function() {
         $('.plus.myButton').unbind('click').bind('click', add_chart_ );
 
         for( var x=0; x < charts_.length; x++ ) {
-            Plotly.newPlot('my_chart' + x, traces, layout);
+            Plotly.newPlot('my_chart' + x, traces[x], layout);
         }
     };
 
@@ -146,6 +151,7 @@ ST.MemoryLineView = function() {
 
         scroll_to_bottom_();
     };
+
 
     var scroll_to_bottom_ = function() {
 
