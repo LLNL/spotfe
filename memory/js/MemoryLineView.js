@@ -42,6 +42,7 @@ ST.MemoryLineView = function() {
         var ht = "";
 
         for( var x=0; x < charts_.length; x++ ) {
+
             ht +=  '<div class="one_chart"> \
             <div class="ch_dropdown"></div>\
             <div id="my_chart"></div>\
@@ -115,12 +116,16 @@ ST.MemoryLineView = function() {
             }
         }
 
-        $('.chart_container').html( ht );
-        $('.ch_dropdown').CheckboxWindowManager({
-            legend: legend,
-            checked: checked_,
-            unchecked: unchecked_
-        });
+        //$('.one_chart').remove();
+        if( 0 === $('.one_chart').length ) {
+
+            $('.chart_container').html(ht);
+            $('.ch_dropdown').CheckboxWindowManager({
+                legend: legend,
+                checked: checked_,
+                unchecked: unchecked_
+            });
+        }
 
         $('.plus.myButton').unbind('click').bind('click', add_chart_ );
 
@@ -156,7 +161,6 @@ ST.MemoryLineView = function() {
 
         return trace;
     };
-
 
     var finish_render_ = function( aj_dat ) {
 

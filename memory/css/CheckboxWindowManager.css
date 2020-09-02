@@ -24,18 +24,6 @@
 	background-color: #f2f2f2;
 }
 
-.checkbox_open_close {
-	position:fixed;
-	top: 0;
-	right: 0;
-	border: 1px solid #888888;
-	background-color: #dddddd;
-	padding: 2px 7px 2px 7px;
-	cursor: pointer;
-	z-index: 101;
-	color: #888888;
-}
-
 div.zoom_button {
 	position: absolute;
 	right: 30px;

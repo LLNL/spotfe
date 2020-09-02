@@ -22,3 +22,22 @@ html,
 body {
 	height:100%;
 }
+
+.ch_dropdown {
+	position: relative;
+}
+
+.checkbox_open_close {
+	position: absolute;
+	left: 10px;
+	top: 0;
+	display: inline-block;
+	border: 1px solid #888888;
+	background-color: #dddddd;
+	padding: 2px 7px 2px 7px;
+	cursor: pointer;
+	z-index: 101;
+	color: #888888;
+}
+
+
