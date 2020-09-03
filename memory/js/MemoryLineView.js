@@ -43,7 +43,7 @@ ST.MemoryLineView = function() {
 
         for( var x=0; x < charts_.length; x++ ) {
 
-            ht +=  '<div class="one_chart"> \
+            ht +=  '<div class="one_chart" plot_instance="' + x + '"> \
             <div class="ch_dropdown"></div>\
             <div id="my_chart' + x + '"></div>\
             </div>';
@@ -80,19 +80,25 @@ ST.MemoryLineView = function() {
     };
 
 
-    var checked_ = function( got_checked ) {
+    var checked_ = function( got_checked, event_target ) {
 
-        check_cache_[ got_checked ] = true;
+        var plot_instance_el = event_target.closest('[plot_instance]');
+        var plot_instance = plot_instance_el.attr('plot_instance');
+
+        check_cache_[plot_instance][ got_checked ] = true;
         line_render_();
     };
 
-    var unchecked_ = function( got_checked ) {
+    var unchecked_ = function( got_checked, event_target ) {
 
-        check_cache_[ got_checked ] = false;
+        var plot_instance_el = event_target.closest('[plot_instance]');
+        var plot_instance = plot_instance_el.attr('plot_instance');
+
+        check_cache_[plot_instance][ got_checked ] = false;
         line_render_();
     };
 
-    var check_cache_ = {};
+    var check_cache_ = [];
 
 
     var line_render_ = function( aj_dat, plus_button ) {
@@ -111,7 +117,9 @@ ST.MemoryLineView = function() {
                 if (typeof rets[pound_name] === "number" &&
                     pound_name !== "block") {
 
-                    if (check_cache_[pound_name] !== false) {
+                    check_cache_[z] = check_cache_[z] || {};
+                    
+                    if (check_cache_[z][pound_name] !== false) {
 
                         var trace = get_trace_(ret3, pound_name);
                         traces[z] = traces[z] || [];

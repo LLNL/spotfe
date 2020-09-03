@@ -39,15 +39,17 @@ $.fn.CheckboxWindowManager = function( obj ) {
 
             if( obj.checked ) {
 
-                var thing = $(event.target).parent().find("div.txt").html();
-                obj.checked( thing );
+                var et = $(event.target);
+                var thing = et.parent().find("div.txt").html();
+                obj.checked( thing, et );
             }
         } else {
 
             if( obj.unchecked ) {
 
-                var thing = $(event.target).parent().find("div.txt").html();
-                obj.unchecked( thing);
+                var et = $(event.target);
+                var thing = et.parent().find("div.txt").html();
+                obj.unchecked( thing, et );
             }
         }
 
