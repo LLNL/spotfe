@@ -3,15 +3,17 @@
         .inclusive(v-if="!title.startsWith('--root')" :style="{display:'flex', alignItems:'center', height:'25px', background:inclusiveBackground(funcPath)}"
                   ) 
             .exclusive-white-buffer(:style="{width:exclusiveWidthPercent, display:'inline-block', backgroundColor:'white'}")
-                .exclusive(:style="{display:'flex', alignItems:'center', height: '25px', backgroundColor: iAmSelected ? 'white': colorHash(funcPath), cursor:'pointer', border: iAmSelected ? '1px solid black' : '' }"
+                .exclusive(:style="{display:'flex', position:'relative', alignItems:'center', height: '25px', backgroundColor: iAmSelected ? 'white': colorHash(funcPath), cursor:'pointer', border: iAmSelected ? '1px solid black' : '' }"
                             @click='handleClick(funcPath)'
                         )
+                    
                     .text(:style="{marginLeft:'3px', overflow:'hidden', cursor:'pointer', whiteSpace:'nowrap'}" :title='title' ) {{ title }} 
 
         .children(:style="{display:'flex'}") 
-            flamegraph-node(v-for='fp in childrenPaths(funcPath, allFuncPaths)'
+            FlamegraphNode(v-for='fp in childrenPaths(funcPath, allFuncPaths)'
                            :runData='runData' 
                            :selectedNode='selectedNode'
+                           :showTopdown='showTopdown'
                            :funcPath='fp'
                            :handleClick='handleClick'
                            )
@@ -22,13 +24,17 @@ import {parentPath, childrenPaths, colorHash} from './functions.js'
 export default {
     props: [ 
         'selectedNode',
+        'showTopdown',
         'runData',
         'funcPath',
+        'showTopdown',
         'handleClick',
     ],
 
     computed:{
-        title(){ return `${this.funcPath.split('/').slice(-1)[0]} (${this.runData[this.funcPath].exclusive})` },
+        title(){ 
+            return `${this.funcPath.split('/').slice(-1)[0]} (${this.runData[this.funcPath].exclusive})` 
+        },
         iAmSelected(){return this.selectedNode == this.funcPath},
         allFuncPaths(){return Object.keys(this.runData)},
         myInclusive(){ return this.runData[this.funcPath].inclusive },
@@ -55,7 +61,7 @@ export default {
             return `repeating-linear-gradient( 45deg, #fff, #fff 10px, ${colorHash(this.funcPath)} 10px, ${colorHash(this.funcPath)} 20px)`
         },
     },
-    name: 'flamegraph-node'
+    name: 'FlamegraphNode',
 }
 </script>
 <style lang="scss" scoped>

@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "parcel compare_example.html",
-    "build": "parcel build --no-minify src/index.js -d . -o compare.js --no-source-maps",
-    "start-walltime": "parcel src/walltime.pug",
-    "build-walltime": "parcel build src/walltime.pug -d ./sankey -o index.html --no-source-maps --public-url './'"
+    "build": "parcel build --no-minify src/index.js -d .. -o compare.js --no-source-maps",
+    "watch": "parcel watch src/index.js -d .. -o compare.js --no-source-maps",
+    "build-walltime": "parcel build src/walltime.pug -d ../sankey -o index.html --no-source-maps --public-url './'",
+    "watch-walltime": "parcel watch src/walltime.pug -d ../sankey -o index.html --no-source-maps --public-url './'"
   },
   "keywords": [],
   "author": "",

@@ -105,7 +105,7 @@
             padding:'10px'
             }`
         )
-        flame-graph(
+        FlameGraph(
             :runData='selectedRun.data' 
             :selectedNode='selectedParent' 
             :handleClick='changePath'

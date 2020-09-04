@@ -33,11 +33,12 @@
                     }`
                 ) {{ title(funcPath)}}
         
-        flamegraph-node(
+        FlamegraphNode(
             :runData='addInclusive(runData)'
             :selectedNode='selectedNode'
             :funcPath='selectedNode'
-            :handleClick = 'handleClick'
+            :handleClick='handleClick'
+            :showTopdown='showTopdown'
             )
     
 </template>
@@ -47,7 +48,7 @@ import FlamegraphNode from './FlamegraphNode.vue'
 import {childrenPaths} from './functions.js'
 import _ from 'lodash'
 export default {
-    props:['run-data', 'selected-node', 'handle-click'],
+    props:['runData', 'selectedNode', 'handleClick', 'showTopdown', 'metricName', 'showTopdown'],
     computed:{
         collapsedFuncPaths(){
             let collapsedNodes = []
@@ -60,7 +61,7 @@ export default {
     },
     methods:{
         title(funcPath){ 
-            return `${funcPath.split('/').slice(-1)[0]} (${this.runData[funcPath]})` 
+            return `${funcPath.split('/').slice(-1)[0]} (${this.runData[funcPath].value})` 
         },
         addInclusive(selectedRunData){
             // recursively sum up inclusive times
@@ -68,27 +69,35 @@ export default {
 
             let inclusiveData = {}
             function addInclusiveNode(nodeName){
-                const myValue = selectedRunData[nodeName]
+                const myValue = selectedRunData[nodeName].value
+                const topdown = selectedRunData[nodeName].topdown
                 const childrenFuncPaths = childrenPaths(nodeName, funcPathKeys)
 
                 // if no children set value
                 if(!childrenFuncPaths.length) {
-                    inclusiveData[nodeName] =  {inclusive: myValue, exclusive: myValue}
+                    inclusiveData[nodeName] =  {inclusive: myValue, exclusive: myValue, topdown}
+                // else recurse
                 } else {
                     childrenFuncPaths.forEach(path => addInclusiveNode(path))
                     const childrenNodes = _.filter(inclusiveData, (value, key) => childrenFuncPaths.includes(key))
                     const childrenSum = _.sumBy(childrenNodes, node => node.inclusive)
-                    inclusiveData[nodeName] =  {inclusive: _.max([myValue, childrenSum]), exclusive: myValue}
+                    inclusiveData[nodeName] =  {inclusive: _.max([myValue, childrenSum]), exclusive: myValue, topdown}
                 }
             }
             addInclusiveNode(_.min(funcPathKeys))
             return inclusiveData
         },
+        
 
     },
     components:{
         FlamegraphNode
     },
+    created(){
+        console.log('this', this.runData)
+    }
+
+    
     
 }
 </script>

@@ -39526,10 +39526,8 @@ var _functions = require("./functions.js");
 //
 //
 //
-//
-//
 var _default = {
-  props: ['selectedNode', 'showTopdown', 'runData', 'funcPath', 'showTopdown', 'handleClick'],
+  props: ['selectedNode', 'runData', 'funcPath', 'handleClick'],
   computed: {
     title: function title() {
       return "".concat(this.funcPath.split('/').slice(-1)[0], " (").concat(this.runData[this.funcPath].exclusive, ")");
@@ -39562,7 +39560,7 @@ var _default = {
       return "repeating-linear-gradient( 45deg, #fff, #fff 10px, ".concat((0, _functions.colorHash)(this.funcPath), " 10px, ").concat((0, _functions.colorHash)(this.funcPath), " 20px)");
     }
   },
-  name: 'FlamegraphNode'
+  name: 'flamegraph-node'
 };
 exports.default = _default;
         var $4b01c4 = exports.default || module.exports;
@@ -39618,7 +39616,6 @@ exports.default = _default;
                       staticClass: "exclusive",
                       style: {
                         display: "flex",
-                        position: "relative",
                         alignItems: "center",
                         height: "25px",
                         backgroundColor: _vm.iAmSelected
@@ -39659,11 +39656,10 @@ exports.default = _default;
         "div",
         { staticClass: "children", style: { display: "flex" } },
         _vm._l(_vm.childrenPaths(_vm.funcPath, _vm.allFuncPaths), function(fp) {
-          return _c("FlamegraphNode", {
+          return _c("flamegraph-node", {
             attrs: {
               runData: _vm.runData,
               selectedNode: _vm.selectedNode,
-              showTopdown: _vm.showTopdown,
               funcPath: fp,
               handleClick: _vm.handleClick
             }
@@ -39767,9 +39763,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
-//
 var _default = {
-  props: ['runData', 'selectedNode', 'handleClick', 'showTopdown', 'metricName', 'showTopdown'],
+  props: ['run-data', 'selected-node', 'handle-click'],
   computed: {
     collapsedFuncPaths: function collapsedFuncPaths() {
       var collapsedNodes = [];
@@ -39784,7 +39779,7 @@ var _default = {
   },
   methods: {
     title: function title(funcPath) {
-      return "".concat(funcPath.split('/').slice(-1)[0], " (").concat(this.runData[funcPath].value, ")");
+      return "".concat(funcPath.split('/').slice(-1)[0], " (").concat(this.runData[funcPath], ")");
     },
     addInclusive: function addInclusive(selectedRunData) {
       // recursively sum up inclusive times
@@ -39792,16 +39787,14 @@ var _default = {
       var inclusiveData = {};
 
       function addInclusiveNode(nodeName) {
-        var myValue = selectedRunData[nodeName].value;
-        var topdown = selectedRunData[nodeName].topdown;
+        var myValue = selectedRunData[nodeName];
         var childrenFuncPaths = (0, _functions.childrenPaths)(nodeName, funcPathKeys); // if no children set value
 
         if (!childrenFuncPaths.length) {
           inclusiveData[nodeName] = {
             inclusive: myValue,
-            exclusive: myValue,
-            topdown: topdown
-          }; // else recurse
+            exclusive: myValue
+          };
         } else {
           childrenFuncPaths.forEach(function (path) {
             return addInclusiveNode(path);
@@ -39817,8 +39810,7 @@ var _default = {
 
           inclusiveData[nodeName] = {
             inclusive: _lodash.default.max([myValue, childrenSum]),
-            exclusive: myValue,
-            topdown: topdown
+            exclusive: myValue
           };
         }
       }
@@ -39829,9 +39821,6 @@ var _default = {
   },
   components: {
     FlamegraphNode: _FlamegraphNode.default
-  },
-  created: function created() {
-    console.log('this', this.runData);
   }
 };
 exports.default = _default;
@@ -39911,13 +39900,12 @@ exports.default = _default;
             )
           : _vm._e()
       }),
-      _c("FlamegraphNode", {
+      _c("flamegraph-node", {
         attrs: {
           runData: _vm.addInclusive(_vm.runData),
           selectedNode: _vm.selectedNode,
           funcPath: _vm.selectedNode,
-          handleClick: _vm.handleClick,
-          showTopdown: _vm.showTopdown
+          handleClick: _vm.handleClick
         }
       })
     ],
@@ -40528,7 +40516,7 @@ exports.default = vue_1.default.extend({
               }
             },
             [
-              _c("FlameGraph", {
+              _c("flame-graph", {
                 attrs: {
                   runData: _vm.selectedRun.data,
                   selectedNode: _vm.selectedParent,
@@ -52185,7 +52173,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63972" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63730" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
