@@ -11,13 +11,14 @@ $.fn.MultiRowSelector = function( obj ) {
         return "<select>" + sel + "</select>";
     };
 
-    var row_ = function() {
+    //  First row does not have an operation select.
+    var row_ = function( first_row ) {
 
         var operation_select = get_select_render_( obj.selectors[0] );
         var attributes_select = get_select_render_( obj.selectors[1] );
 
         return '<tr class="multi_row">' +
-            '<td>' + operation_select + '</td>' +
+            '<td>' + ( first_row ? "" : operation_select) + '</td>' +
             '<td>' + attributes_select + '</td>' +
             '<td>' +
             ReusableView.button("X", "delete_row", "myButton") +
@@ -60,7 +61,7 @@ $.fn.MultiRowSelector = function( obj ) {
 
     return this.each( function() {
 
-        var html = '<table>' + row_() + '</table>' +
+        var html = '<table>' + row_( true ) + '</table>' +
             '<div class="center">' +
             ReusableView.button("ADD ROW", "add_row", "myButton") +
             '</div>';
