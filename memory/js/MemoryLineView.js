@@ -54,6 +54,17 @@ ST.MemoryLineView = function() {
 
     var records_cache_;
 
+    var randomize_ = function( records ) {
+
+        for( var z=0; z < records.length; z++ ) {
+
+            records[z]['sum#mem.bytes.written/mwb.time'] = Math.random()*1000 + 2000;
+            records[z]['sum#mem.bytes.read/mrb.time'] = Math.random() * 500 + 3000;
+            records[z]['max#sum#loop.iterations'] = Math.random() * 3000 + 200;
+            records[z]['avg#mem.bytes.written/mwb.time'] = Math.random() * 6000;
+        }
+    };
+
     var process_records_ = function( aj_dat ) {
 
         if( aj_dat ) {
@@ -62,6 +73,8 @@ ST.MemoryLineView = function() {
             var ret2 = JSON.parse( ret );
             var std = JSON.parse( ret2.std );
             var records = ret2.series.records;
+
+            randomize_( records );
 
             records.sort( function( a, b ) {
 
@@ -118,7 +131,7 @@ ST.MemoryLineView = function() {
                     pound_name !== "block") {
 
                     check_cache_[z] = check_cache_[z] || {};
-                    
+
                     if (check_cache_[z][pound_name] !== false) {
 
                         var trace = get_trace_(ret3, pound_name);
