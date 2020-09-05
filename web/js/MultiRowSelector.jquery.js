@@ -59,9 +59,10 @@ $.fn.MultiRowSelector = function( obj ) {
 
     };
 
+
     return this.each( function() {
 
-        var html = '<table>' + row_( true ) + '</table>' +
+        var html = '<table class="only_multi_row_selector">' + row_( true ) + '</table>' +
             '<div class="center">' +
             ReusableView.button("ADD ROW", "add_row", "myButton") +
             '</div>';

@@ -744,6 +744,26 @@ body .dc-chart g.row text {
 
 }
 
+
+table.only_multi_row_selector {
+
+    tr:nth-child(2) td {
+        padding: 0 0 0 0;
+    }
+
+    tr td:first-child {
+        width: 100px;
+
+        select {
+            width: 80px;
+        }
+    }
+
+    tr td:nth-child(2) select {
+        width: 360px;
+    }
+}
+
 .composite_chart_type {
 
     .multi_row_selector {
@@ -751,18 +771,6 @@ body .dc-chart g.row text {
 
         table {
             margin: 1px 0 0 0;
-        }
-
-        tr td:first-child {
-            width: 100px;
-
-            select {
-                width: 80px;
-            }
-        }
-
-        tr td:nth-child(2) select {
-            width: 360px;
         }
 
         tr:first-child td {

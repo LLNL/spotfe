@@ -9,8 +9,8 @@ DONE - create multiple instances when button is pressed.  have each check/unchec
 Next: Use Aliases instead of #strings.
 
 Multi:
-- get rid of first dropdown.
-- populate the select drop down.
+DONE - get rid of first dropdown.
+- populate the select drop down with correct values.
 - actually create the submit function which takes all the data and aggregates them according to the formula
     * all the operations involved in a new chart type: check/uncheck, edit.
 

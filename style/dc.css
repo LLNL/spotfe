@@ -508,16 +508,19 @@ body .dc-chart g.row text {
       background-image: url(../img/check.png);
       background-size: 100% 100%; }
 
+table.only_multi_row_selector tr:nth-child(2) td {
+  padding: 0 0 0 0; }
+table.only_multi_row_selector tr td:first-child {
+  width: 100px; }
+  table.only_multi_row_selector tr td:first-child select {
+    width: 80px; }
+table.only_multi_row_selector tr td:nth-child(2) select {
+  width: 360px; }
+
 .composite_chart_type .multi_row_selector {
   padding: 20px 0 0 0; }
   .composite_chart_type .multi_row_selector table {
     margin: 1px 0 0 0; }
-  .composite_chart_type .multi_row_selector tr td:first-child {
-    width: 100px; }
-    .composite_chart_type .multi_row_selector tr td:first-child select {
-      width: 80px; }
-  .composite_chart_type .multi_row_selector tr td:nth-child(2) select {
-    width: 360px; }
   .composite_chart_type .multi_row_selector tr:first-child td {
     border-top: 1px solid #bbbbbb;
     padding: 12px 3px 3px 3px; }
