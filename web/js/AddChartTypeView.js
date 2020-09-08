@@ -38,9 +38,7 @@ ST.AddChartTypeView = function() {
         '+', '-', '*', '/', 'concat'
     ];
 
-    var attributes_select = [
-        "JobSize", "RanksPerNode"
-    ];
+    var attributes_select = [];
 
     var get_attributes_ = function() {
 
