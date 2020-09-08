@@ -42,6 +42,19 @@ ST.AddChartTypeView = function() {
         "JobSize", "RanksPerNode"
     ];
 
+    var get_attributes_ = function() {
+
+        var dims = ST.UserPreferences.get_dimensions();
+        var ht = [];
+
+        for( var x=0; x < dims.length; x++ ) {
+            ht.push( dims[x] );
+        }
+
+        return ht;
+    };
+
+
     var show_based_context_ = function( ch_type ) {
 
         if( edit_mode_ === false ) {
@@ -56,6 +69,8 @@ ST.AddChartTypeView = function() {
             $('.composite_chart_type .pick_chart_type').hide();
             ren_delete_( false );
         }
+
+        attributes_select = get_attributes_();
 
         //  EDIT
         if( ch_type === "multi") {
@@ -106,8 +121,8 @@ ST.AddChartTypeView = function() {
         var ch_type = $('.composite_chart_type .pick_chart_type_sel').val().toLowerCase();
 
         show_based_context_( ch_type );
-
     };
+
 
     var setup_defaults_ = function () {
 
