@@ -9,21 +9,8 @@
     label(for='showTopdownCb') show topdown
         input(type='checkbox' id='showTopdownCb' v-model='showTopdown') 
         
-    .topdown(v-if="showTopdown" style='width:100%;position:absolute;top:1px;opacity:0.7;display:flex')
-        .retiring(v-if='myTopdown && myTopdown["any#any#topdown.retiring"]' :style="{width: myTopdown['any#any#topdown.retiring'] * 100 + '%', backgroundColor:'green', height:'8px'}")
-
-        div(:style="{width: myTopdown['any#any#topdown.bad_speculation'] * 100 + '%'}")
-            .bad_spec(v-if='myTopdown && myTopdown["any#any#topdown.bad_speculation"]' style='width:100%;background-color:red;height:8px;')
-            //- div(style="width:100%;display:flex")
-            //-     .mispredict(:style="{width: myTopdown['any#any#topdown.branch_mispredict'] * 100 + '%', backgroundColor:'pink', height:'6px'}" v-if='myTopdown && myTopdown["any#any#topdown.bad_speculation"]')
-            //-     .mach_clear(:style="{width: myTopdown['any#any#topdown.machine_clears'] * 100 + '%', backgroundColor:'#D00', height:'6px'}" v-if='myTopdown && myTopdown["any#any#topdown.machine_clears"]')
-        div(:style="{width: myTopdown['any#any#topdown.frontend_bound'] * 100 + '%'}")
-            .frontend(v-if='myTopdown && myTopdown["any#any#topdown.frontend_bound"]' style='width:100%;background-color:blue;height:8px;')
-            //- div(style="width:100%;display:flex")
-            //-     .latency(:style="{width: myTopdown['any#any#topdown.frontend_latency'] * 100 + '%', backgroundColor:'cyan', height:'6px'}" v-if='myTopdown && myTopdown["any#any#topdown.frontend_latency"]')
-            //-     .bandwidth(:style="{width: myTopdown['any#any#topdown.frontend_bandwidth'] * 100 + '%', backgroundColor:'#55F', height:'6px'}" v-if='myTopdown && myTopdown["any#any#topdown.frontend_bandwidth"]')
-        .backend(v-if='myTopdown && myTopdown["any#any#topdown.backend_bound"]'
-                    :style="{width: myTopdown['any#any#topdown.backend_bound'] * 100 + '%', backgroundColor:'orange', height:'8px'}" )
+    .topdown(v-if="showTopdown && topdownData")
+        TopDown(:topdownData='topdownData')
 
     .flamegraphRow( v-for='metricName in metricNames' :style="{padding:'20px'}")
         h3(:style="{paddingBottom:'10px' }") {{metricName}}
@@ -35,40 +22,11 @@
                 :handleClick='changePath'
 
                 )
-    //- .topdown
-    //-     svg(width="1100", height="425", padding="100px", margin="100px")
-    //-         g(v-for='row in topdownLayout')
-    //-             g(v-for='(node, index) in row.namevals')
-    //-             rect(
-    //-                 :x="row.xOffset + (row.width + row.spacing)*index"
-    //-                 :y="100 + row.yOffset - node.val"
-    //-                 :height="node.val"
-    //-                 :width="row.width"
-    //-                 rx="5" ry="5"
-    //-                 fill="#4db6ac"
-    //-                 opacity="0.5"
-    //-             )
-    //-             text(
-    //-                 :transform="'translate(' + (row.xOffset + (index + 0.5)*(row.width) + (row.spacing*index)) + ',' + (row.yOffset + 50) + ')rotate('+ row.rotate + ')'"
-    //-                 fill="#333"
-    //-                 dy="0.35em"
-    //-                 text-anchor="middle" ) {{ node.name }}
-    //-             rect(
-    //-                 :x="row.xOffset + (row.width + row.spacing)*index"
-    //-                 :y="row.yOffset"
-    //-                 rx="5"
-    //-                 yx="5"
-    //-                 height="100"
-    //-                 stroke="#448aff"
-    //-                 :stroke-width='selName==node.name?3:1'
-    //-                 :width="row.width"
-    //-                 fill="#fff0"
-    //-             )
-    //-                 title value: {{ node.rawVal }}
 </template>
 
 <script>
 import FlameGraph from './Flamegraph.vue'
+import TopDown from './Topdown.vue'
 import _ from 'lodash'
 
 export default {
@@ -82,11 +40,61 @@ export default {
         funcPaths(){return Object.keys(this.data) },
         metricNames(){ return Object.keys(this.data[this.funcPaths[0]]).filter(name => !name.startsWith('any#any#'))},
         topDownNames(){ return Object.keys(this.data[this.funcPaths[0]]).filter(name => name.startsWith('any#any#'))},
-        myTopdown(){
-            const x =  this.peeledData(this.data, '--root path--')
-            console.log(x)
-            return x
-            },
+        topdownData(){
+            let topdown =  this.peeledData(this.data, this.metricNames[0])[this.selectedNode].topdown
+            if(topdown){
+                topdown = {
+                    're': {val: topdown['any#any#topdown.retiring']},
+
+                    'bs': {val: topdown['any#any#topdown.bad_speculation']},
+                    'ms': {val: topdown['any#any#topdown.branch_mispredict']},
+                    'mc': {val: topdown['any#any#topdown.machine_clears']},
+
+                    'fe': {val: topdown['any#any#topdown.frontend_bound']},
+                    'la': {val: topdown['any#any#topdown.frontend_latency']},
+                    'bw': {val: topdown['any#any#topdown.frontend_bandwidth']},
+
+                    'be': {val: topdown['any#any#topdown.backend_bound']},
+                    'co': {val: topdown['any#any#topdown.core_bound']},
+                    'me': {val: topdown['any#any#topdown.memory_bound']},
+                    'l1': {val: topdown['any#any#topdown.l1_bound']},
+                    'l2': {val: topdown['any#any#topdown.l2_bound']},
+                    'l3': {val: topdown['any#any#topdown.l3_bound']},
+                    'mb': {val: topdown['any#any#topdown.ext_mem_bound']},
+                }
+                
+                // normalize if sum is greather than 1
+                let sum = topdown['re'] + topdown['bs'] + topdown['fe'] + topdown['be']
+                sum = sum > 1 ? sum : 1
+                topdown['re'].disp = topdown['re'].val / sum
+                topdown['bs'].disp = topdown['bs'].val / sum
+                topdown['fe'].disp = topdown['fe'].val / sum
+                topdown['be'].disp = topdown['be'].val / sum
+
+                sum = topdown['ms'] + topdown['mc']
+                sum = sum > 1 ? sum : 1
+                topdown['ms'].disp = topdown['ms'].val / sum
+                topdown['mc'].disp = topdown['mc'].val / sum
+
+                sum = topdown['la'] + topdown['bw']
+                sum = sum > 1 ? sum : 1
+                topdown['la'].disp = topdown['la'].val / sum
+                topdown['bw'].disp = topdown['bw'].val / sum
+
+                sum = topdown['co'] + topdown['me']
+                sum = sum > 1 ? sum : 1
+                topdown['co'].disp = topdown['co'].val / sum
+                topdown['me'].disp = topdown['me'].val / sum
+
+                sum = topdown['l1'] + topdown['l2'] + topdown['l3'] + topdown['mb']
+                sum = sum > 1 ? sum : 1
+                topdown['l1'].disp = topdown['l1'].val / sum
+                topdown['l2'].disp = topdown['l2'].val / sum
+                topdown['l3'].disp = topdown['l3'].val / sum
+                topdown['mb'].disp = topdown['mb'].val / sum
+            }
+            return topdown
+        },
     },
     methods:{
         peeledData(runData, metricName){
@@ -103,7 +111,9 @@ export default {
     },
     created(){
         this.selectedNode = '--root path--'
+        console.log('metric_names', this.metricNames)
+        console.log('basdf')
     },
-    components:{FlameGraph}
+    components:{FlameGraph, TopDown}
 }
 </script>

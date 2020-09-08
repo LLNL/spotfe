@@ -93,9 +93,6 @@ export default {
     components:{
         FlamegraphNode
     },
-    created(){
-        console.log('this', this.runData)
-    }
 
     
     
