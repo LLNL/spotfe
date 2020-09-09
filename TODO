@@ -1,4 +1,8 @@
+- attempt to build compare.js
+
 Memory:
+- see legend: instead put the unit there if they have the same units
+- on checkbox only re-render 1 graph, not the whole thing.
 DONE - Titles and Axis labels
 DONE - At the top of the chart, have a drop down which drops checkboxes with text next to it
 DONE - allow checking/unchecking which combines all the line graphs on one chart.

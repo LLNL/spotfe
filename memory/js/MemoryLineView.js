@@ -93,12 +93,20 @@ ST.MemoryLineView = function() {
     };
 
 
+    var redraw_plot_ = function( instance ) {
+
+        update_traces_();
+        Plotly.newPlot('my_chart' + instance, traces_[instance], layout);
+    };
+
     var checked_ = function( got_checked, event_target ) {
 
         var plot_instance_el = event_target.closest('[plot_instance]');
         var plot_instance = plot_instance_el.attr('plot_instance');
 
         check_cache_[plot_instance][ got_checked ] = true;
+
+        //redraw_plot_( +plot_instance );
         line_render_();
     };
 
@@ -108,20 +116,20 @@ ST.MemoryLineView = function() {
         var plot_instance = plot_instance_el.attr('plot_instance');
 
         check_cache_[plot_instance][ got_checked ] = false;
+
+        //redraw_plot_( +plot_instance );
         line_render_();
     };
 
     var check_cache_ = [];
+    var traces_ = [];
+    var legend_ = [];
 
 
-    var line_render_ = function( aj_dat, plus_button ) {
+    var update_traces_ = function( aj_dat ) {
 
         var ret3 = process_records_( aj_dat );
-
-        var ht = render_chart_();
-        var traces = [];
         var rets = ret3[0];
-        var legend = [];
 
         for( var z = 0; z < charts_.length; z++ ) {
 
@@ -132,21 +140,32 @@ ST.MemoryLineView = function() {
 
                     check_cache_[z] = check_cache_[z] || {};
 
-                    legend[z] = legend[z] || {};
+                    legend_[z] = legend_[z] || {};
 
                     if (check_cache_[z][pound_name] !== false) {
 
                         var trace = get_trace_(ret3, pound_name);
-                        traces[z] = traces[z] || [];
-                        traces[z].push(trace);
+                        traces_[z] = traces_[z] || [];
+                        traces_[z].push(trace);
 
-                        legend[z][pound_name] = 1;
+                        legend_[z][pound_name] = 1;
                     } else {
-                        legend[z][pound_name] = 0;
+                        legend_[z][pound_name] = 0;
                     }
                 }
             }
         }
+    };
+
+
+    var line_render_ = function( aj_dat, plus_button ) {
+
+
+        var ht = render_chart_();
+        traces_ = [];
+        legend_ = [];
+
+        update_traces_( aj_dat );
 
         //$('.one_chart').remove();
         if( 0 === $('.one_chart').length || plus_button) {
@@ -158,7 +177,7 @@ ST.MemoryLineView = function() {
                 var ch_inst = $('[plot_instance="' + y + '"] .ch_dropdown');
 
                 ch_inst.CheckboxWindowManager({
-                    legend: legend[y],
+                    legend: legend_[y],
                     checked: checked_,
                     unchecked: unchecked_
                 });
@@ -168,7 +187,7 @@ ST.MemoryLineView = function() {
         $('.plus.myButton').unbind('click').bind('click', add_chart_ );
 
         for( var x=0; x < charts_.length; x++ ) {
-            Plotly.newPlot('my_chart' + x, traces[x], layout);
+            Plotly.newPlot('my_chart' + x, traces_[x], layout);
         }
     };
 
