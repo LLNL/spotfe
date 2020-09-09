@@ -172,6 +172,14 @@ ST.AddChartTypeView = function() {
     };
 
 
+    var submit_multi_ = function() {
+
+        for( var x=0; x < ST.cali_obj_by_key.length; x++ ) {
+
+            ST.cali_obj_by_key[x].experimental_composite = parseInt(Math.random()*100);
+        }
+    };
+
     var submit_ = function() {
 
         var chart_name = $('.chart_name').val();

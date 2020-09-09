@@ -149,8 +149,10 @@ ST.CallSpot = function() {
 //        return false;
 
         ST.Utility.check_error( summ );
-
         ST.layout_used = sqs.layout_used || summ.layout;
+
+        window.USE_EXPERIMENTAL = true;
+
 
         if( window.USE_EXPERIMENTAL ) {
 
