@@ -176,11 +176,27 @@ ST.AddChartTypeView = function() {
 
         for( var x=0; x < ST.cali_obj_by_key.length; x++ ) {
 
-            ST.cali_obj_by_key[x].experimental_composite = parseInt(Math.random()*100);
+            //  TODO: figure out the formula based on what we've saved in the layout.
+            ST.cali_obj_by_key[x].experimental_composite = parseInt(Math.random()*300);
         }
+
+        //  TODO: Need to call rerender.
+        ST.ChartCollection.RenderChartCollection(ST.newp, ST.layout_used);  //  ST.ReturnedDataStub.layout); //
     };
 
+
+    var is_adding_multi_row_ = function() {
+
+        return $('.only_multi_row_selector').length > 0;
+    };
+
+
     var submit_ = function() {
+
+        if( is_adding_multi_row_() ) {
+            submit_multi_();
+            return true;
+        }
 
         var chart_name = $('.chart_name').val();
         var xaxis = $('.xaxis select').val() || "";
