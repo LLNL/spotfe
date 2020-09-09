@@ -314,7 +314,7 @@ ST.AddChartTypeView = function() {
         //  just for development.
         setTimeout( function() {
 
-            $('.plus_icon').trigger('click');
+            //$('.plus_icon').trigger('click');
         }, 3000);
     });
 
