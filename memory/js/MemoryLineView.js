@@ -121,7 +121,7 @@ ST.MemoryLineView = function() {
         var ht = render_chart_();
         var traces = [];
         var rets = ret3[0];
-        var legend = {};
+        var legend = [];
 
         for( var z = 0; z < charts_.length; z++ ) {
 
@@ -132,15 +132,17 @@ ST.MemoryLineView = function() {
 
                     check_cache_[z] = check_cache_[z] || {};
 
+                    legend[z] = legend[z] || {};
+
                     if (check_cache_[z][pound_name] !== false) {
 
                         var trace = get_trace_(ret3, pound_name);
                         traces[z] = traces[z] || [];
                         traces[z].push(trace);
 
-                        legend[pound_name] = 1;
+                        legend[z][pound_name] = 1;
                     } else {
-                        legend[pound_name] = 0;
+                        legend[z][pound_name] = 0;
                     }
                 }
             }
@@ -150,11 +152,17 @@ ST.MemoryLineView = function() {
         if( 0 === $('.one_chart').length || plus_button) {
 
             $('.chart_container').html(ht);
-            $('.ch_dropdown').CheckboxWindowManager({
-                legend: legend,
-                checked: checked_,
-                unchecked: unchecked_
-            });
+
+            for( var y=0; y < charts_.length; y++ ) {
+
+                var ch_inst = $('[plot_instance="' + y + '"] .ch_dropdown');
+
+                ch_inst.CheckboxWindowManager({
+                    legend: legend[y],
+                    checked: checked_,
+                    unchecked: unchecked_
+                });
+            }
         }
 
         $('.plus.myButton').unbind('click').bind('click', add_chart_ );
