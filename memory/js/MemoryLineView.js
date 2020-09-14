@@ -65,6 +65,8 @@ ST.MemoryLineView = function() {
         }
     };
 
+    var attributes_;
+
     var process_records_ = function( aj_dat ) {
 
         if( aj_dat ) {
@@ -80,6 +82,8 @@ ST.MemoryLineView = function() {
 
                 return a.block - b.block;
             });
+
+            attributes_ = ret2.series.attributes;
 
             console.dir( ret2 );
             console.dir( std );
@@ -209,11 +213,14 @@ ST.MemoryLineView = function() {
 
     var get_trace_ = function( ret3, attr ) {
 
+        var att = attributes_[ attr ];
+        var alias = att["attribute.alias"];
+
         var trace = {
             x: [],
             y: [],
             type: 'scatter',
-            name: attr
+            name: alias
         };
 
         for( var a=0; a < ret3.length; a++ ) {
