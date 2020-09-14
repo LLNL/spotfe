@@ -309,6 +309,7 @@ ST.AddChartTypeView = function() {
         $('.composite_chart_type .xaxis, .composite_chart_type .yaxis').html('<select>' + ht + '</select>');
     };
 
+
     $(document).ready( function() {
 
         //  just for development.
