@@ -172,7 +172,8 @@ ST.MemoryLineView = function() {
             var unit = att['attribute.unit'];
 
             if( !unit ) {
-                ReusableView.warning("attribute.unit is not defined for "+ pound_name );
+                var warning = "attribute.unit is not defined for "+ pound_name;
+                console.log( warning );
             }
 
             if( !first_unit_type ) {
@@ -181,7 +182,7 @@ ST.MemoryLineView = function() {
 
             console.log( unit );
 
-            if( first_unit_type === unit ) {
+            if( 'MB/s' === unit ) {
                 checkbox_obj[pound_name] = 1;
             } else {
                 checkbox_obj[pound_name] = 0;
