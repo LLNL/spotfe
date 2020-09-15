@@ -169,7 +169,11 @@ ST.MemoryLineView = function() {
         for( var pound_name in checkbox_obj ) {
 
             var att = attributes_[pound_name];
-            var unit = att['cali.attribute.type'];
+            var unit = att['attribute.unit'];
+
+            if( !unit ) {
+                ReusableView.warning("attribute.unit is not defined for "+ pound_name );
+            }
 
             if( !first_unit_type ) {
                 first_unit_type = unit;
