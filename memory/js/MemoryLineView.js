@@ -164,6 +164,26 @@ ST.MemoryLineView = function() {
 
     var filter_legend_by_unit_type_ = function( checkbox_obj ) {
 
+        var first_unit_type;
+
+        for( var pound_name in checkbox_obj ) {
+
+            var att = attributes_[pound_name];
+            var unit = att['cali.attribute.type'];
+
+            if( !first_unit_type ) {
+                first_unit_type = unit;
+            }
+
+            console.log( unit );
+
+            if( first_unit_type === unit ) {
+                checkbox_obj[pound_name] = 1;
+            } else {
+                checkbox_obj[pound_name] = 0;
+            }
+        }
+
         return checkbox_obj;
     };
 
