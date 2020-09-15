@@ -1,7 +1,7 @@
 - attempt to build compare.js and actually make a change.
 
 Memory:
-- show alias instead of the coded attribute name.
+DONE - show alias instead of the coded attribute name.
 - only default on, based on the same units.
     * need to figure out which ones have the same units and group them together.
 - see legend: instead put the unit there if they have the same units

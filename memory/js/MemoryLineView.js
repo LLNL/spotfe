@@ -162,6 +162,12 @@ ST.MemoryLineView = function() {
     };
 
 
+    var filter_legend_by_unit_type_ = function( checkbox_obj ) {
+
+        return checkbox_obj;
+    };
+
+
     var line_render_ = function( aj_dat, plus_button ) {
 
 
@@ -179,9 +185,10 @@ ST.MemoryLineView = function() {
             for( var y=0; y < charts_.length; y++ ) {
 
                 var ch_inst = $('[plot_instance="' + y + '"] .ch_dropdown');
+                var legend = filter_legend_by_unit_type_( legend_[y] );
 
                 ch_inst.CheckboxWindowManager({
-                    legend: legend_[y],
+                    legend: legend,
                     checked: checked_,
                     unchecked: unchecked_
                 });
