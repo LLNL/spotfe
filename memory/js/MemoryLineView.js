@@ -195,7 +195,6 @@ ST.MemoryLineView = function() {
 
     var line_render_ = function( aj_dat, plus_button ) {
 
-
         var ht = render_chart_();
         traces_ = [];
         legend_ = [];
@@ -219,6 +218,10 @@ ST.MemoryLineView = function() {
                 });
             }
         }
+
+        //  trace_ needs to be updated according to what's been checked.
+        update_traces_( aj_dat );
+
 
         $('.plus.myButton').unbind('click').bind('click', add_chart_ );
 
