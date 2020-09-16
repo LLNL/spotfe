@@ -76,26 +76,22 @@ ST.MemoryLineView = function() {
             console.log( plot_instance, check_type, checked );
             ST.MemoryLineModel.set_check_cache( plot_instance, check_type, checked );
         });
+
+        redraw_plot_( +plot_instance );
     };
 
 
     var checked_ = function( got_checked, event_target ) {
 
         var plot_instance_el = event_target.closest('[plot_instance]');
-        var plot_instance = plot_instance_el.attr('plot_instance');
-
         sync_dom_checks_to_model_( plot_instance_el );
-        redraw_plot_( +plot_instance );
     };
 
 
     var unchecked_ = function( got_checked, event_target ) {
 
         var plot_instance_el = event_target.closest('[plot_instance]');
-        var plot_instance = plot_instance_el.attr('plot_instance');
-
         sync_dom_checks_to_model_( plot_instance_el );
-        redraw_plot_( +plot_instance );
     };
 
 
@@ -279,4 +275,8 @@ ST.MemoryLineView = function() {
 
 
     $(document).ready( render_ );
+
+    return {
+        sync_dom_checks_to_model: sync_dom_checks_to_model_
+    }
 }();

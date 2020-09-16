@@ -98,6 +98,8 @@ ST.MemoryLineModel = function() {
             records[z]['max#sum#loop.iterations'] = Math.random() * 3000 + 200;
             records[z]['avg#mem.bytes.written/mwb.time'] = Math.random() * 6000;
             records[z]['max#sum#time.duration'] = Math.random() * 200;
+            records[z]['avg#loop.iterations/time.duration'] = (Math.random() * 50) + 500;
+            records[z]['max#mem.bytes.read/mrb.time'] = Math.random()*700 + (z*100);
         }
     };
 
