@@ -127,9 +127,6 @@ ST.MemoryLineView = function() {
             }
         }
 
-        //  trace_ needs to be updated according to what's been checked.
-        //update_traces_( aj_dat );
-
 
         $('.plus.myButton').unbind('click').bind('click', add_chart_ );
 
@@ -139,6 +136,9 @@ ST.MemoryLineView = function() {
             console.dir( trace );
 
             Plotly.newPlot('my_chart' + x, trace, layout);
+
+            var plot_inst_el = $('[plot_instance="' + x + '"]');
+            sync_dom_checks_to_model_( plot_inst_el );
         }
     };
 
