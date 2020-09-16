@@ -1,0 +1,177 @@
+ST.MemoryLineModel = function() {
+
+    var check_cache_ = [];
+    var traces_ = [];
+    var legend_ = [];
+    var attributes_;
+    var records_cache_;
+
+
+    var charts_ = [{}];
+
+    var get_model_ = function() {
+        return charts_;
+    };
+
+    var add_chart_ = function() {
+        charts_.push({});
+    };
+
+    var update_traces_ = function( aj_dat ) {
+
+        var ret3 = process_records_( aj_dat );
+        var rets = ret3[0];
+        //var charts = ST.MemoryLineModel.get_model().charts;
+
+        for( var z = 0; z < charts_.length; z++ ) {
+
+            charts_[z].trace = [];
+
+            for (var pound_name in rets) {
+
+                if (typeof rets[pound_name] === "number" &&
+                    pound_name !== "block") {
+
+                    check_cache_[z] = check_cache_[z] || {};
+
+                    legend_[z] = legend_[z] || {};
+
+                    if (check_cache_[z][pound_name] !== false) {
+
+                        var trace = get_trace_(ret3, pound_name);
+                        charts_[z].trace.push( trace );
+                        //traces_[z] = traces_[z] || [];
+                        //traces_[z].push(trace);
+
+                        legend_[z][pound_name] = 1;
+                    } else {
+                        legend_[z][pound_name] = 0;
+                    }
+                }
+            }
+        }
+    };
+
+
+    var set_check_cache_ = function( plot_instance, got_checked, tf ) {
+
+        check_cache_[plot_instance] = check_cache_[plot_instance] || {};
+        check_cache_[plot_instance][ got_checked ] = tf;
+    };
+
+    var process_records_ = function( aj_dat ) {
+
+        if( aj_dat ) {
+
+            var ret = aj_dat.output.command_out;
+            var ret2 = JSON.parse( ret );
+            var std = JSON.parse( ret2.std );
+            var records = ret2.series.records;
+
+            randomize_( records );
+
+            records.sort( function( a, b ) {
+
+                return a.block - b.block;
+            });
+
+            attributes_ = ret2.series.attributes;
+
+            console.dir( ret2 );
+            console.dir( std );
+            console.dir( records );
+
+            records_cache_ = records;
+            return records;
+        }
+
+        return records_cache_;
+    };
+
+
+    var randomize_ = function( records ) {
+
+        for( var z=0; z < records.length; z++ ) {
+
+            records[z]['sum#mem.bytes.written/mwb.time'] = Math.random()*1000 + 2000;
+            records[z]['sum#mem.bytes.read/mrb.time'] = Math.random() * 500 + 3000;
+            records[z]['max#sum#loop.iterations'] = Math.random() * 3000 + 200;
+            records[z]['avg#mem.bytes.written/mwb.time'] = Math.random() * 6000;
+        }
+    };
+
+
+
+    var filter_legend_by_unit_type_ = function( y ) {
+
+        var checkbox_obj = legend_[y];
+        var first_unit_type;
+
+        for( var pound_name in checkbox_obj ) {
+
+            var att = attributes_[pound_name];
+            var unit = att['attribute.unit'];
+
+            if( !unit ) {
+                var warning = "attribute.unit is not defined for "+ pound_name;
+                console.log( warning );
+            }
+
+            if( !first_unit_type ) {
+                first_unit_type = unit;
+            }
+
+            console.log( unit );
+
+            if( 'MB/s' === unit ) {
+                checkbox_obj[pound_name] = 1;
+            } else {
+                checkbox_obj[pound_name] = 0;
+            }
+        }
+
+        return checkbox_obj;
+    };
+
+    var get_trace_ = function( ret3, attr ) {
+
+        var att = attributes_[ attr ];
+        var alias = att["attribute.alias"];
+
+        var trace = {
+            x: [],
+            y: [],
+            type: 'scatter',
+            name: alias
+        };
+
+        for( var a=0; a < ret3.length; a++ ) {
+
+            var obj = ret3[a];
+
+            trace.x.push( obj.block );
+            trace.y.push( obj[ attr ] );
+
+            //  hover.
+            //trace.text.push( attr );
+        }
+
+        return trace;
+    };
+
+
+    var get_chart_by_instance_ = function( instance ) {
+
+        update_traces_();
+        return charts_[ +instance ];
+    };
+
+    return {
+        get_chart_by_instance: get_chart_by_instance_,
+        filter_legend_by_unit_type: filter_legend_by_unit_type_,
+        set_check_cache: set_check_cache_,
+        update_traces: update_traces_,
+        add_chart: add_chart_,
+        get_model: get_model_
+    }
+}();

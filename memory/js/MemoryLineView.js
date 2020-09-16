@@ -38,7 +38,7 @@ ST.MemoryLineView = function() {
     var render_chart_ = function() {
 
         var ht = "";
-        var charts = ST.MemoryLineModel.get_model().charts;
+        var charts = ST.MemoryLineModel.get_model();
 
         for( var x=0; x < charts.length; x++ ) {
 
@@ -51,155 +51,63 @@ ST.MemoryLineView = function() {
         return ht;
     };
 
-    var records_cache_;
-
-    var randomize_ = function( records ) {
-
-        for( var z=0; z < records.length; z++ ) {
-
-            records[z]['sum#mem.bytes.written/mwb.time'] = Math.random()*1000 + 2000;
-            records[z]['sum#mem.bytes.read/mrb.time'] = Math.random() * 500 + 3000;
-            records[z]['max#sum#loop.iterations'] = Math.random() * 3000 + 200;
-            records[z]['avg#mem.bytes.written/mwb.time'] = Math.random() * 6000;
-        }
-    };
-
-    var attributes_;
-
-    var process_records_ = function( aj_dat ) {
-
-        if( aj_dat ) {
-
-            var ret = aj_dat.output.command_out;
-            var ret2 = JSON.parse( ret );
-            var std = JSON.parse( ret2.std );
-            var records = ret2.series.records;
-
-            randomize_( records );
-
-            records.sort( function( a, b ) {
-
-                return a.block - b.block;
-            });
-
-            attributes_ = ret2.series.attributes;
-
-            console.dir( ret2 );
-            console.dir( std );
-            console.dir( records );
-
-            records_cache_ = records;
-            return records;
-        }
-
-        return records_cache_;
-    };
 
 
     var redraw_plot_ = function( instance ) {
 
-        update_traces_();
-        Plotly.newPlot('my_chart' + instance, traces_[instance], layout);
+        //update_traces_();
+        var chart = ST.MemoryLineModel.get_chart_by_instance( instance );
+        console.dir( chart );
+
+        var trace = chart.trace;
+        Plotly.newPlot('my_chart' + instance, trace, layout);
     };
+
+
+    var sync_dom_checks_to_model_ = function( plot_instance_el ) {
+
+        var plot_instance = plot_instance_el.attr('plot_instance');
+
+        plot_instance_el.find('.check_line').each( function( index, el ) {
+
+            var checked = $(el).find('[type="checkbox"]').is(":checked");
+            var check_type = $(el).attr('check_type');
+
+            console.log( plot_instance, check_type, checked );
+            ST.MemoryLineModel.set_check_cache( plot_instance, check_type, checked );
+        });
+    };
+
 
     var checked_ = function( got_checked, event_target ) {
 
         var plot_instance_el = event_target.closest('[plot_instance]');
         var plot_instance = plot_instance_el.attr('plot_instance');
 
-        check_cache_[plot_instance][ got_checked ] = true;
-
-        //redraw_plot_( +plot_instance );
-        line_render_();
+        sync_dom_checks_to_model_( plot_instance_el );
+        redraw_plot_( +plot_instance );
     };
+
 
     var unchecked_ = function( got_checked, event_target ) {
 
         var plot_instance_el = event_target.closest('[plot_instance]');
         var plot_instance = plot_instance_el.attr('plot_instance');
 
-        check_cache_[plot_instance][ got_checked ] = false;
-
-        //redraw_plot_( +plot_instance );
-        line_render_();
-    };
-
-    var check_cache_ = [];
-    var traces_ = [];
-    var legend_ = [];
-
-
-    var update_traces_ = function( aj_dat ) {
-
-        var ret3 = process_records_( aj_dat );
-        var rets = ret3[0];
-        var charts = ST.MemoryLineModel.get_model().charts;
-
-        for( var z = 0; z < charts.length; z++ ) {
-
-            for (var pound_name in rets) {
-
-                if (typeof rets[pound_name] === "number" &&
-                    pound_name !== "block") {
-
-                    check_cache_[z] = check_cache_[z] || {};
-
-                    legend_[z] = legend_[z] || {};
-
-                    if (check_cache_[z][pound_name] !== false) {
-
-                        var trace = get_trace_(ret3, pound_name);
-                        traces_[z] = traces_[z] || [];
-                        traces_[z].push(trace);
-
-                        legend_[z][pound_name] = 1;
-                    } else {
-                        legend_[z][pound_name] = 0;
-                    }
-                }
-            }
-        }
-    };
-
-
-    var filter_legend_by_unit_type_ = function( checkbox_obj ) {
-
-        var first_unit_type;
-
-        for( var pound_name in checkbox_obj ) {
-
-            var att = attributes_[pound_name];
-            var unit = att['attribute.unit'];
-
-            if( !unit ) {
-                var warning = "attribute.unit is not defined for "+ pound_name;
-                console.log( warning );
-            }
-
-            if( !first_unit_type ) {
-                first_unit_type = unit;
-            }
-
-            console.log( unit );
-
-            if( 'MB/s' === unit ) {
-                checkbox_obj[pound_name] = 1;
-            } else {
-                checkbox_obj[pound_name] = 0;
-            }
-        }
-
-        return checkbox_obj;
+        sync_dom_checks_to_model_( plot_instance_el );
+        redraw_plot_( +plot_instance );
     };
 
 
     var line_render_ = function( aj_dat, plus_button ) {
 
         var ht = render_chart_();
-        traces_ = [];
-        legend_ = [];
+        //traces_ = [];
+        //legend_ = [];
 
-        update_traces_( aj_dat );
+        ST.MemoryLineModel.update_traces( aj_dat );
+        var charts = ST.MemoryLineModel.get_model();
+
 
         //$('.one_chart').remove();
         if( 0 === $('.one_chart').length || plus_button) {
@@ -209,7 +117,7 @@ ST.MemoryLineView = function() {
             for( var y=0; y < charts.length; y++ ) {
 
                 var ch_inst = $('[plot_instance="' + y + '"] .ch_dropdown');
-                var legend = filter_legend_by_unit_type_( legend_[y] );
+                var legend = ST.MemoryLineModel.filter_legend_by_unit_type( y );
 
                 ch_inst.CheckboxWindowManager({
                     legend: legend,
@@ -220,13 +128,17 @@ ST.MemoryLineView = function() {
         }
 
         //  trace_ needs to be updated according to what's been checked.
-        update_traces_( aj_dat );
+        //update_traces_( aj_dat );
 
 
         $('.plus.myButton').unbind('click').bind('click', add_chart_ );
 
         for( var x=0; x < charts.length; x++ ) {
-            Plotly.newPlot('my_chart' + x, traces_[x], layout);
+
+            var trace = charts[x].trace;
+            console.dir( trace );
+
+            Plotly.newPlot('my_chart' + x, trace, layout);
         }
     };
 
@@ -244,34 +156,6 @@ ST.MemoryLineView = function() {
 
         $("html, body").animate({ scrollTop: $(document).height() }, 1000);
     };
-
-
-    var get_trace_ = function( ret3, attr ) {
-
-        var att = attributes_[ attr ];
-        var alias = att["attribute.alias"];
-
-        var trace = {
-            x: [],
-            y: [],
-            type: 'scatter',
-            name: alias
-        };
-
-        for( var a=0; a < ret3.length; a++ ) {
-
-            var obj = ret3[a];
-
-            trace.x.push( obj.block );
-            trace.y.push( obj[ attr ] );
-
-            //  hover.
-            //trace.text.push( attr );
-        }
-
-        return trace;
-    };
-
 
 
     var finish_render_ = function( aj_dat ) {
