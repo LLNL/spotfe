@@ -35,13 +35,12 @@ ST.MemoryLineView = function() {
     };
 
 
-    var charts_ = [{}];
-
     var render_chart_ = function() {
 
         var ht = "";
+        var charts = ST.MemoryLineModel.get_model().charts;
 
-        for( var x=0; x < charts_.length; x++ ) {
+        for( var x=0; x < charts.length; x++ ) {
 
             ht +=  '<div class="one_chart" plot_instance="' + x + '"> \
             <div class="ch_dropdown"></div>\
@@ -134,8 +133,9 @@ ST.MemoryLineView = function() {
 
         var ret3 = process_records_( aj_dat );
         var rets = ret3[0];
+        var charts = ST.MemoryLineModel.get_model().charts;
 
-        for( var z = 0; z < charts_.length; z++ ) {
+        for( var z = 0; z < charts.length; z++ ) {
 
             for (var pound_name in rets) {
 
@@ -206,7 +206,7 @@ ST.MemoryLineView = function() {
 
             $('.chart_container').html(ht);
 
-            for( var y=0; y < charts_.length; y++ ) {
+            for( var y=0; y < charts.length; y++ ) {
 
                 var ch_inst = $('[plot_instance="' + y + '"] .ch_dropdown');
                 var legend = filter_legend_by_unit_type_( legend_[y] );
@@ -225,7 +225,7 @@ ST.MemoryLineView = function() {
 
         $('.plus.myButton').unbind('click').bind('click', add_chart_ );
 
-        for( var x=0; x < charts_.length; x++ ) {
+        for( var x=0; x < charts.length; x++ ) {
             Plotly.newPlot('my_chart' + x, traces_[x], layout);
         }
     };
@@ -233,7 +233,7 @@ ST.MemoryLineView = function() {
 
     var add_chart_ = function() {
 
-        charts_.push({});
+        ST.MemoryLineModel.add_chart();
         line_render_( false, true );
 
         scroll_to_bottom_();
