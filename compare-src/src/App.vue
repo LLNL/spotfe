@@ -217,7 +217,7 @@ export default Vue.extend({
         groupedAndAggregated(){
             let peeledMetricData = _.map(this.runs, run => {
                 const meta = _.fromPairs(_.map(run.meta, (meta, metaName) => [metaName, meta.value]))
-                const data = _.fromPairs(_.map(run.data, (metrics, funcPath) => [funcPath, parseFloat(metrics[this.yAxis])] ))
+                const data = _.fromPairs(_.map(run.data, (metrics, funcPath) => [funcPath, {value: parseFloat(metrics[this.yAxis])}] ))
                 return {meta, data}
             }) 
             const orderedData = _.orderBy(peeledMetricData, item => {

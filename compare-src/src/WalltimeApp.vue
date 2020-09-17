@@ -6,11 +6,15 @@
         .row(:style="{display:'flex'}" v-for='(metaVal, metaName) in meta') 
             .name(:style="{color:'blue', fontWeight:'bold'}") {{ metaName }} 
             .val(:style="{whiteSpace:'nowrap'}") : {{ metaVal.value }}
-    label(for='showTopdownCb') show topdown
-        input(type='checkbox' id='showTopdownCb' v-model='showTopdown') 
+    div(v-if='topdownData' style='margin:10px' )
+        label(for='showTopdownCb' ) show topdown
+            input(type='checkbox' id='showTopdownCb' v-model='showTopdown') 
         
     .topdown(v-if="showTopdown && topdownData")
-        TopDown(:topdownData='topdownData')
+        TopDown(:topdownData='topdownData' 
+                :selectedTopdownNode='selectedTopdownNode'
+                @topdownNodeSelected='setTopdownNode'
+                )
 
     .flamegraphRow( v-for='metricName in metricNames' :style="{padding:'20px'}")
         h3(:style="{paddingBottom:'10px' }") {{metricName}}
@@ -19,6 +23,7 @@
                 :metricName='metricName'
                 :showTopdown='showTopdown'
                 :selectedNode='selectedNode'
+                :selectedTopdownNode='selectedTopdownNode'
                 :handleClick='changePath'
 
                 )
@@ -32,8 +37,9 @@ import _ from 'lodash'
 export default {
     props:['filename', 'data', 'meta'],
     data(){return {
-        selectedNode: null,
-        showTopdown: true
+        selectedNode: '--root path--',
+        selectedTopdownNode: 'fe',
+        showTopdown: false
 
     }},
     computed:{
@@ -42,6 +48,7 @@ export default {
         topDownNames(){ return Object.keys(this.data[this.funcPaths[0]]).filter(name => name.startsWith('any#any#'))},
         topdownData(){
             let topdown =  this.peeledData(this.data, this.metricNames[0])[this.selectedNode].topdown
+
             if(topdown){
                 topdown = {
                     're': {val: topdown['any#any#topdown.retiring']},
@@ -66,32 +73,37 @@ export default {
                 // normalize if sum is greather than 1
                 let sum = topdown['re'] + topdown['bs'] + topdown['fe'] + topdown['be']
                 sum = sum > 1 ? sum : 1
-                topdown['re'].disp = topdown['re'].val / sum
-                topdown['bs'].disp = topdown['bs'].val / sum
-                topdown['fe'].disp = topdown['fe'].val / sum
-                topdown['be'].disp = topdown['be'].val / sum
+                topdown['re'].disp = topdown['re'].val / sum * 100 + '%' 
+                topdown['bs'].disp = topdown['bs'].val / sum * 100 + '%'
+                topdown['fe'].disp = topdown['fe'].val / sum * 100 + '%'
+                topdown['be'].disp = topdown['be'].val / sum * 100 + '%'
+
 
                 sum = topdown['ms'] + topdown['mc']
                 sum = sum > 1 ? sum : 1
-                topdown['ms'].disp = topdown['ms'].val / sum
-                topdown['mc'].disp = topdown['mc'].val / sum
+                topdown['ms'].disp = topdown['ms'].val / sum * 100 + '%'
+                topdown['mc'].disp = topdown['mc'].val / sum * 100 + '%'
+
 
                 sum = topdown['la'] + topdown['bw']
                 sum = sum > 1 ? sum : 1
-                topdown['la'].disp = topdown['la'].val / sum
-                topdown['bw'].disp = topdown['bw'].val / sum
+                topdown['la'].disp = topdown['la'].val / sum * 100 + '%'
+                topdown['bw'].disp = topdown['bw'].val / sum * 100 + '%'
+
 
                 sum = topdown['co'] + topdown['me']
                 sum = sum > 1 ? sum : 1
-                topdown['co'].disp = topdown['co'].val / sum
-                topdown['me'].disp = topdown['me'].val / sum
+                topdown['co'].disp = topdown['co'].val / sum * 100 + '%'
+                topdown['me'].disp = topdown['me'].val / sum * 100 + '%'
+
 
                 sum = topdown['l1'] + topdown['l2'] + topdown['l3'] + topdown['mb']
                 sum = sum > 1 ? sum : 1
-                topdown['l1'].disp = topdown['l1'].val / sum
-                topdown['l2'].disp = topdown['l2'].val / sum
-                topdown['l3'].disp = topdown['l3'].val / sum
-                topdown['mb'].disp = topdown['mb'].val / sum
+                topdown['l1'].disp = topdown['l1'].val / sum * 100 + '%'
+                topdown['l2'].disp = topdown['l2'].val / sum * 100 + '%'
+                topdown['l3'].disp = topdown['l3'].val / sum * 100 + '%'
+                topdown['mb'].disp = topdown['mb'].val / sum * 100 + '%'
+                
             }
             return topdown
         },
@@ -99,20 +111,22 @@ export default {
     methods:{
         peeledData(runData, metricName){
              let x =  _.fromPairs(_.map(runData, (metrics, funcPath) => {
-                 const topdown = {}
+                 let topdown = {} 
                  _.forIn(metrics, (val, key) => {if(key.startsWith('any#any#')) topdown[key] = val})
-                 
+
+                 if(Object.keys(topdown).length == 0) topdown = null
+
                  return ['--root path--/' + funcPath, {value: parseFloat(metrics[metricName]), topdown}] 
              }))
              x['--root path--'] = {value: 0}
              return x
         },
         changePath(path){this.selectedNode = path },
+        setTopdownNode(nodename){
+            this.selectedTopdownNode = nodename
+        },
     },
     created(){
-        this.selectedNode = '--root path--'
-        console.log('metric_names', this.metricNames)
-        console.log('basdf')
     },
     components:{FlameGraph, TopDown}
 }

@@ -204,7 +204,8 @@ export default Vue.extend({
         },
         seriesList(){
             const stackFunc = stack().keys(this.displayedChildrenPaths)
-            const stackData =  stackFunc(this.runs.map(run => run.data))
+            const viewData = this.runs.map(run => {return _.fromPairs(_.map(this.displayedChildrenPaths, path => [path, run.data[path].value]))})
+            const stackData =  stackFunc(viewData)
             return stackData
         },
         displayedXTitles(){
