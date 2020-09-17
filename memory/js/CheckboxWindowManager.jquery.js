@@ -61,20 +61,21 @@ $.fn.CheckboxWindowManager = function( obj ) {
 
         var ht = "";
         for( var x in specs_ ) {
-            ht += box_( x, specs_[x] );
+
+            ht += box_( x, specs_[x].check, specs_[x].alias );
         }
 
         return ht;
     };
 
-    var box_ = function( str, checked ) {
+    var box_ = function( str, checked, alias ) {
 
         var sc = str.toLowerCase();
         var checked = checked ? ' checked="checked" ' : "";
 
         return "<div class='check_line' check_type='" + sc + "'>" +
             "<input type='checkbox' " + checked + "/>" +
-            "<div class='txt'>" + str + "</div>" +
+            "<div class='txt'>" + alias + "</div>" +
             "</div>";
     };
 

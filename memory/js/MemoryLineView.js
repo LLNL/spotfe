@@ -98,8 +98,6 @@ ST.MemoryLineView = function() {
     var line_render_ = function( aj_dat, plus_button ) {
 
         var ht = render_chart_();
-        //traces_ = [];
-        //legend_ = [];
 
         ST.MemoryLineModel.update_traces( aj_dat );
         var charts = ST.MemoryLineModel.get_model();

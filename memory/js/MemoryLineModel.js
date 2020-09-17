@@ -1,7 +1,6 @@
 ST.MemoryLineModel = function() {
 
     var check_cache_ = [];
-    var traces_ = [];
     var legend_ = [];
     var attributes_;
     var records_cache_;
@@ -35,13 +34,12 @@ ST.MemoryLineModel = function() {
                     check_cache_[z] = check_cache_[z] || {};
 
                     legend_[z] = legend_[z] || {};
+                    var alias = attributes_[pound_name]["attribute.alias"] || pound_name;
 
                     if (check_cache_[z][pound_name] !== false) {
 
                         var trace = get_trace_(ret3, pound_name);
                         charts_[z].trace.push( trace );
-                        //traces_[z] = traces_[z] || [];
-                        //traces_[z].push(trace);
 
                         legend_[z][pound_name] = 1;
                     } else {
@@ -114,6 +112,7 @@ ST.MemoryLineModel = function() {
 
             var att = attributes_[pound_name];
             var unit = att['attribute.unit'];
+            var alias = att['attribute.alias'];
 
             if( !unit ) {
                 var warning = "attribute.unit is not defined for "+ pound_name;
@@ -127,9 +126,16 @@ ST.MemoryLineModel = function() {
             console.log( unit );
 
             if( 'MB/s' === unit ) {
-                checkbox_obj[pound_name] = 1;
+                checkbox_obj[pound_name] = {
+                    check: 1,
+                    alias: alias
+                };
+
             } else {
-                checkbox_obj[pound_name] = 0;
+                checkbox_obj[pound_name] = {
+                    check: 0,
+                    alias: alias
+                }
             }
         }
 
