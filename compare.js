@@ -10600,7 +10600,7 @@ var define;
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.17.19';
+  var VERSION = '4.17.15';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
@@ -14307,21 +14307,8 @@ var define;
      * @returns {Array} Returns the new sorted array.
      */
     function baseOrderBy(collection, iteratees, orders) {
-      if (iteratees.length) {
-        iteratees = arrayMap(iteratees, function(iteratee) {
-          if (isArray(iteratee)) {
-            return function(value) {
-              return baseGet(value, iteratee.length === 1 ? iteratee[0] : iteratee);
-            }
-          }
-          return iteratee;
-        });
-      } else {
-        iteratees = [identity];
-      }
-
       var index = -1;
-      iteratees = arrayMap(iteratees, baseUnary(getIteratee()));
+      iteratees = arrayMap(iteratees.length ? iteratees : [identity], baseUnary(getIteratee()));
 
       var result = baseMap(collection, function(value, key, collection) {
         var criteria = arrayMap(iteratees, function(iteratee) {
@@ -14578,10 +14565,6 @@ var define;
         var key = toKey(path[index]),
             newValue = value;
 
-        if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
-          return object;
-        }
-
         if (index != lastIndex) {
           var objValue = nested[key];
           newValue = customizer ? customizer(objValue, key, nested) : undefined;
@@ -14734,14 +14717,11 @@ var define;
      *  into `array`.
      */
     function baseSortedIndexBy(array, value, iteratee, retHighest) {
-      var low = 0,
-          high = array == null ? 0 : array.length;
-      if (high === 0) {
-        return 0;
-      }
-
       value = iteratee(value);
-      var valIsNaN = value !== value,
+
+      var low = 0,
+          high = array == null ? 0 : array.length,
+          valIsNaN = value !== value,
           valIsNull = value === null,
           valIsSymbol = isSymbol(value),
           valIsUndefined = value === undefined;
@@ -16226,11 +16206,10 @@ var define;
       if (arrLength != othLength && !(isPartial && othLength > arrLength)) {
         return false;
       }
-      // Check that cyclic values are equal.
-      var arrStacked = stack.get(array);
-      var othStacked = stack.get(other);
-      if (arrStacked && othStacked) {
-        return arrStacked == other && othStacked == array;
+      // Assume cyclic values are equal.
+      var stacked = stack.get(array);
+      if (stacked && stack.get(other)) {
+        return stacked == other;
       }
       var index = -1,
           result = true,
@@ -16392,11 +16371,10 @@ var define;
           return false;
         }
       }
-      // Check that cyclic values are equal.
-      var objStacked = stack.get(object);
-      var othStacked = stack.get(other);
-      if (objStacked && othStacked) {
-        return objStacked == other && othStacked == object;
+      // Assume cyclic values are equal.
+      var stacked = stack.get(object);
+      if (stacked && stack.get(other)) {
+        return stacked == other;
       }
       var result = true;
       stack.set(object, other);
@@ -19777,10 +19755,6 @@ var define;
      * // The `_.property` iteratee shorthand.
      * _.filter(users, 'active');
      * // => objects for ['barney']
-     *
-     * // Combining several predicates using `_.overEvery` or `_.overSome`.
-     * _.filter(users, _.overSome([{ 'age': 36 }, ['age', 40]]));
-     * // => objects for ['fred', 'barney']
      */
     function filter(collection, predicate) {
       var func = isArray(collection) ? arrayFilter : baseFilter;
@@ -20530,15 +20504,15 @@ var define;
      * var users = [
      *   { 'user': 'fred',   'age': 48 },
      *   { 'user': 'barney', 'age': 36 },
-     *   { 'user': 'fred',   'age': 30 },
+     *   { 'user': 'fred',   'age': 40 },
      *   { 'user': 'barney', 'age': 34 }
      * ];
      *
      * _.sortBy(users, [function(o) { return o.user; }]);
-     * // => objects for [['barney', 36], ['barney', 34], ['fred', 48], ['fred', 30]]
+     * // => objects for [['barney', 36], ['barney', 34], ['fred', 48], ['fred', 40]]
      *
      * _.sortBy(users, ['user', 'age']);
-     * // => objects for [['barney', 34], ['barney', 36], ['fred', 30], ['fred', 48]]
+     * // => objects for [['barney', 34], ['barney', 36], ['fred', 40], ['fred', 48]]
      */
     var sortBy = baseRest(function(collection, iteratees) {
       if (collection == null) {
@@ -25413,11 +25387,11 @@ var define;
 
       // Use a sourceURL for easier debugging.
       // The sourceURL gets injected into the source that's eval-ed, so be careful
-      // to normalize all kinds of whitespace, so e.g. newlines (and unicode versions of it) can't sneak in
-      // and escape the comment, thus injecting code that gets evaled.
+      // with lookup (in case of e.g. prototype pollution), and strip newlines if any.
+      // A newline wouldn't be a valid sourceURL anyway, and it'd enable code injection.
       var sourceURL = '//# sourceURL=' +
         (hasOwnProperty.call(options, 'sourceURL')
-          ? (options.sourceURL + '').replace(/\s/g, ' ')
+          ? (options.sourceURL + '').replace(/[\r\n]/g, ' ')
           : ('lodash.templateSources[' + (++templateCounter) + ']')
         ) + '\n';
 
@@ -25450,6 +25424,8 @@ var define;
 
       // If `variable` is not specified wrap a with-statement around the generated
       // code to add the data object to the top of the scope chain.
+      // Like with sourceURL, we take care to not check the option's prototype,
+      // as this configuration is a code injection vector.
       var variable = hasOwnProperty.call(options, 'variable') && options.variable;
       if (!variable) {
         source = 'with (obj) {\n' + source + '\n}\n';
@@ -26156,9 +26132,6 @@ var define;
      * values against any array or object value, respectively. See `_.isEqual`
      * for a list of supported value comparisons.
      *
-     * **Note:** Multiple values can be checked by combining several matchers
-     * using `_.overSome`
-     *
      * @static
      * @memberOf _
      * @since 3.0.0
@@ -26174,10 +26147,6 @@ var define;
      *
      * _.filter(objects, _.matches({ 'a': 4, 'c': 6 }));
      * // => [{ 'a': 4, 'b': 5, 'c': 6 }]
-     *
-     * // Checking for several possible values
-     * _.filter(users, _.overSome([_.matches({ 'a': 1 }), _.matches({ 'a': 4 })]));
-     * // => [{ 'a': 1, 'b': 2, 'c': 3 }, { 'a': 4, 'b': 5, 'c': 6 }]
      */
     function matches(source) {
       return baseMatches(baseClone(source, CLONE_DEEP_FLAG));
@@ -26191,9 +26160,6 @@ var define;
      * **Note:** Partial comparisons will match empty array and empty object
      * `srcValue` values against any array or object value, respectively. See
      * `_.isEqual` for a list of supported value comparisons.
-     *
-     * **Note:** Multiple values can be checked by combining several matchers
-     * using `_.overSome`
      *
      * @static
      * @memberOf _
@@ -26211,10 +26177,6 @@ var define;
      *
      * _.find(objects, _.matchesProperty('a', 4));
      * // => { 'a': 4, 'b': 5, 'c': 6 }
-     *
-     * // Checking for several possible values
-     * _.filter(users, _.overSome([_.matchesProperty('a', 1), _.matchesProperty('a', 4)]));
-     * // => [{ 'a': 1, 'b': 2, 'c': 3 }, { 'a': 4, 'b': 5, 'c': 6 }]
      */
     function matchesProperty(path, srcValue) {
       return baseMatchesProperty(path, baseClone(srcValue, CLONE_DEEP_FLAG));
@@ -26438,10 +26400,6 @@ var define;
      * Creates a function that checks if **all** of the `predicates` return
      * truthy when invoked with the arguments it receives.
      *
-     * Following shorthands are possible for providing predicates.
-     * Pass an `Object` and it will be used as an parameter for `_.matches` to create the predicate.
-     * Pass an `Array` of parameters for `_.matchesProperty` and the predicate will be created using them.
-     *
      * @static
      * @memberOf _
      * @since 4.0.0
@@ -26468,10 +26426,6 @@ var define;
      * Creates a function that checks if **any** of the `predicates` return
      * truthy when invoked with the arguments it receives.
      *
-     * Following shorthands are possible for providing predicates.
-     * Pass an `Object` and it will be used as an parameter for `_.matches` to create the predicate.
-     * Pass an `Array` of parameters for `_.matchesProperty` and the predicate will be created using them.
-     *
      * @static
      * @memberOf _
      * @since 4.0.0
@@ -26491,9 +26445,6 @@ var define;
      *
      * func(NaN);
      * // => false
-     *
-     * var matchesFunc = _.overSome([{ 'a': 1 }, { 'a': 2 }])
-     * var matchesPropertyFunc = _.overSome([['a', 1], ['a', 2]])
      */
     var overSome = createOver(arraySome);
 
@@ -38798,10 +38749,15 @@ exports.default = vue_1.default.extend({
       return d3_array_1.zip(yticks.map(this.y), yticks);
     },
     seriesList: function seriesList() {
+      var _this = this;
+
       var stackFunc = d3_shape_1.stack().keys(this.displayedChildrenPaths);
-      var stackData = stackFunc(this.runs.map(function (run) {
-        return run.data;
-      }));
+      var viewData = this.runs.map(function (run) {
+        return lodash_1.default.fromPairs(lodash_1.default.map(_this.displayedChildrenPaths, function (path) {
+          return [path, run.data[path].value];
+        }));
+      });
+      var stackData = stackFunc(viewData);
       return stackData;
     },
     displayedXTitles: function displayedXTitles() {
@@ -38857,14 +38813,14 @@ exports.default = vue_1.default.extend({
     window.removeEventListener('resize', this.handleResize);
   }
 });
-        var $1628ce = exports.default || module.exports;
+        var $7f0c1f = exports.default || module.exports;
       
-      if (typeof $1628ce === 'function') {
-        $1628ce = $1628ce.options;
+      if (typeof $7f0c1f === 'function') {
+        $7f0c1f = $7f0c1f.options;
       }
     
         /* template */
-        Object.assign($1628ce, (function () {
+        Object.assign($7f0c1f, (function () {
           var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"chart",style:({
         display:'flex',
         flexDirection:'column',
@@ -38916,7 +38872,7 @@ var staticRenderFns = []
             render: render,
             staticRenderFns: staticRenderFns,
             _compiled: true,
-            _scopeId: "data-v-1628ce",
+            _scopeId: "data-v-7f0c1f",
             functional: undefined
           };
         })());
@@ -38950,8 +38906,18 @@ var _functions = require("./functions.js");
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
-  props: ['selectedNode', 'runData', 'funcPath', 'handleClick'],
+  props: ['selectedNode', 'selectedTopdownNode', 'showTopdown', 'runData', 'funcPath', 'handleClick'],
   computed: {
     title: function title() {
       return "".concat(this.funcPath.split('/').slice(-1)[0], " (").concat(this.runData[this.funcPath].exclusive, ")");
@@ -38974,6 +38940,25 @@ var _default = {
     },
     inclusiveWidthPercent: function inclusiveWidthPercent() {
       return this.funcPath == this.selectedNode ? '100%' : this.myInclusive / this.runData[(0, _functions.parentPath)(this.funcPath)].inclusive * 100 + '%';
+    },
+    topdownValue: function topdownValue() {
+      var conversion = {
+        're': 'any#any#topdown.retiring',
+        'bs': 'any#any#topdown.bad_speculation',
+        'ms': 'any#any#topdown.branch_mispredict',
+        'mc': 'any#any#topdown.machine_clears',
+        'fe': 'any#any#topdown.frontend_bound',
+        'la': 'any#any#topdown.frontend_latency',
+        'bw': 'any#any#topdown.frontend_bandwidth',
+        'be': 'any#any#topdown.backend_bound',
+        'co': 'any#any#topdown.core_bound',
+        'me': 'any#any#topdown.memory_bound',
+        'l1': 'any#any#topdown.l1_bound',
+        'l2': 'any#any#topdown.l2_bound',
+        'l3': 'any#any#topdown.l3_bound',
+        'mb': 'any#any#topdown.ext_mem_bound'
+      };
+      return this.runData[this.funcPath].topdown[conversion[this.selectedTopdownNode]];
     }
   },
   methods: {
@@ -38984,25 +38969,33 @@ var _default = {
       return "repeating-linear-gradient( 45deg, #fff, #fff 10px, ".concat((0, _functions.colorHash)(this.funcPath), " 10px, ").concat((0, _functions.colorHash)(this.funcPath), " 20px)");
     }
   },
-  name: 'flamegraph-node'
+  name: 'FlamegraphNode'
 };
 exports.default = _default;
-        var $a386b6 = exports.default || module.exports;
+        var $4b01c4 = exports.default || module.exports;
       
-      if (typeof $a386b6 === 'function') {
-        $a386b6 = $a386b6.options;
+      if (typeof $4b01c4 === 'function') {
+        $4b01c4 = $4b01c4.options;
       }
     
         /* template */
-        Object.assign($a386b6, (function () {
-          var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"flamenode",style:({width:_vm.inclusiveWidthPercent, display:'flex', flexDirection:'column'})},[(!_vm.title.startsWith('--root'))?_c('div',{staticClass:"inclusive",style:({display:'flex', alignItems:'center', height:'25px', background:_vm.inclusiveBackground(_vm.funcPath)})},[_c('div',{staticClass:"exclusive-white-buffer",style:({width:_vm.exclusiveWidthPercent, display:'inline-block', backgroundColor:'white'})},[_c('div',{staticClass:"exclusive",style:({display:'flex', alignItems:'center', height: '25px', backgroundColor: _vm.iAmSelected ? 'white': _vm.colorHash(_vm.funcPath), cursor:'pointer', border: _vm.iAmSelected ? '1px solid black' : '' }),on:{"click":function($event){return _vm.handleClick(_vm.funcPath)}}},[_c('div',{staticClass:"text",style:({marginLeft:'3px', overflow:'hidden', cursor:'pointer', whiteSpace:'nowrap'}),attrs:{"title":_vm.title}},[_vm._v(_vm._s(_vm.title)+" ")])])])]):_vm._e(),_c('div',{staticClass:"children",style:({display:'flex'})},_vm._l((_vm.childrenPaths(_vm.funcPath, _vm.allFuncPaths)),function(fp){return _c('flamegraph-node',{attrs:{"runData":_vm.runData,"selectedNode":_vm.selectedNode,"funcPath":fp,"handleClick":_vm.handleClick}})}),1)])}
+        Object.assign($4b01c4, (function () {
+          var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"flamenode",style:({width:_vm.inclusiveWidthPercent, display:'flex', flexDirection:'column'})},[(!_vm.title.startsWith('--root'))?_c('div',{staticClass:"inclusive",style:({display:'flex', alignItems:'center', height:'25px', background:_vm.inclusiveBackground(_vm.funcPath)})},[_c('div',{staticClass:"exclusive-white-buffer",style:({width:_vm.exclusiveWidthPercent, display:'inline-block', backgroundColor:'white', position: 'relative', border: _vm.showTopdown ?  '1px solid black' : ''}),on:{"click":function($event){return _vm.handleClick(_vm.funcPath)}}},[_c('div',{staticClass:"exclusive",style:({ display:'flex' 
+                               , position:'relative'
+                               , alignItems:'center'
+                               , height: '25px'
+                               , backgroundColor: _vm.colorHash(_vm.funcPath) 
+                               , cursor:'pointer'
+                               , width: _vm.showTopdown ? _vm.topdownValue * 100 + '%': '100%'
+                               , border: _vm.iAmSelected ? '3px solid black' : '' 
+                               })}),_c('div',{staticClass:"text",style:({width: _vm.exclusiveWidthPercent,overflow: 'hidden', cursor:'pointer', whiteSpace:'nowrap', position:'absolute', top: '3px', left: '3px'}),attrs:{"title":_vm.title},on:{"click":function($event){return _vm.handleClick(_vm.funcPath)}}},[_vm._v(_vm._s(_vm.title)+" ")])])]):_vm._e(),_c('div',{staticClass:"children",style:({display:'flex'})},_vm._l((_vm.childrenPaths(_vm.funcPath, _vm.allFuncPaths)),function(fp){return _c('FlamegraphNode',{attrs:{"runData":_vm.runData,"selectedNode":_vm.selectedNode,"selectedTopdownNode":_vm.selectedTopdownNode,"showTopdown":_vm.showTopdown,"funcPath":fp,"handleClick":_vm.handleClick}})}),1)])}
 var staticRenderFns = []
 
           return {
             render: render,
             staticRenderFns: staticRenderFns,
             _compiled: true,
-            _scopeId: "data-v-a386b6",
+            _scopeId: "data-v-4b01c4",
             functional: undefined
           };
         })());
@@ -39067,8 +39060,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
 var _default = {
-  props: ['run-data', 'selected-node', 'handle-click'],
+  props: ['runData', 'selectedNode', 'handleClick', 'showTopdown', 'metricName', 'showTopdown', 'selectedTopdownNode'],
   computed: {
     collapsedFuncPaths: function collapsedFuncPaths() {
       var collapsedNodes = [];
@@ -39083,7 +39078,7 @@ var _default = {
   },
   methods: {
     title: function title(funcPath) {
-      return "".concat(funcPath.split('/').slice(-1)[0], " (").concat(this.runData[funcPath], ")");
+      return "".concat(funcPath.split('/').slice(-1)[0], " (").concat(this.runData[funcPath].value, ")");
     },
     addInclusive: function addInclusive(selectedRunData) {
       // recursively sum up inclusive times
@@ -39091,14 +39086,16 @@ var _default = {
       var inclusiveData = {};
 
       function addInclusiveNode(nodeName) {
-        var myValue = selectedRunData[nodeName];
+        var myValue = selectedRunData[nodeName].value;
+        var topdown = selectedRunData[nodeName].topdown;
         var childrenFuncPaths = (0, _functions.childrenPaths)(nodeName, funcPathKeys); // if no children set value
 
         if (!childrenFuncPaths.length) {
           inclusiveData[nodeName] = {
             inclusive: myValue,
-            exclusive: myValue
-          };
+            exclusive: myValue,
+            topdown: topdown
+          }; // else recurse
         } else {
           childrenFuncPaths.forEach(function (path) {
             return addInclusiveNode(path);
@@ -39114,7 +39111,8 @@ var _default = {
 
           inclusiveData[nodeName] = {
             inclusive: _lodash.default.max([myValue, childrenSum]),
-            exclusive: myValue
+            exclusive: myValue,
+            topdown: topdown
           };
         }
       }
@@ -39128,14 +39126,14 @@ var _default = {
   }
 };
 exports.default = _default;
-        var $a7caf4 = exports.default || module.exports;
+        var $5316c8 = exports.default || module.exports;
       
-      if (typeof $a7caf4 === 'function') {
-        $a7caf4 = $a7caf4.options;
+      if (typeof $5316c8 === 'function') {
+        $5316c8 = $5316c8.options;
       }
     
         /* template */
-        Object.assign($a7caf4, (function () {
+        Object.assign($5316c8, (function () {
           var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"flamegraph",style:({
         flex:2,
         minWidth:'600px',
@@ -39154,7 +39152,7 @@ exports.default = _default;
                 marginLeft:'3px',
                 overflow:'hidden',
                 cursor:'pointer'
-                })},[_vm._v(_vm._s(_vm.title(funcPath)))])]):_vm._e()}),_c('flamegraph-node',{attrs:{"runData":_vm.addInclusive(_vm.runData),"selectedNode":_vm.selectedNode,"funcPath":_vm.selectedNode,"handleClick":_vm.handleClick}})],2)}
+                })},[_vm._v(_vm._s(_vm.title(funcPath)))])]):_vm._e()}),_c('FlamegraphNode',{attrs:{"runData":_vm.addInclusive(_vm.runData),"selectedNode":_vm.selectedNode,"selectedTopdownNode":_vm.selectedTopdownNode,"funcPath":_vm.selectedNode,"handleClick":_vm.handleClick,"showTopdown":_vm.showTopdown}})],2)}
 var staticRenderFns = []
 
           return {
@@ -39286,7 +39284,9 @@ exports.default = vue_1.default.extend({
           return [metaName, meta.value];
         }));
         var data = lodash_1.default.fromPairs(lodash_1.default.map(run.data, function (metrics, funcPath) {
-          return [funcPath, parseFloat(metrics[_this.yAxis])];
+          return [funcPath, {
+            value: parseFloat(metrics[_this.yAxis])
+          }];
         }));
         return {
           meta: meta,
@@ -39397,14 +39397,14 @@ exports.default = vue_1.default.extend({
     FlameGraph: Flamegraph_vue_1.default
   }
 });
-        var $b21277 = exports.default || module.exports;
+        var $5d9389 = exports.default || module.exports;
       
-      if (typeof $b21277 === 'function') {
-        $b21277 = $b21277.options;
+      if (typeof $5d9389 === 'function') {
+        $5d9389 = $5d9389.options;
       }
     
         /* template */
-        Object.assign($b21277, (function () {
+        Object.assign($5d9389, (function () {
           var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{style:({display:'flex', flexDirection:'column'}),attrs:{"id":"compare-window"}},[_c('div',{staticClass:"sticky",style:({position: 'sticky', top: 0, zIndex: 1})},[_c('div',{staticClass:"topbar",style:({ 
                 backgroundColor: 'lightgray',
                 padding:'5px',
@@ -39449,7 +39449,7 @@ exports.default = vue_1.default.extend({
             bottom: 0,
             backgroundColor:'white',
             padding:'10px'
-            })},[_c('flame-graph',{attrs:{"runData":_vm.selectedRun.data,"selectedNode":_vm.selectedParent,"handleClick":_vm.changePath}}),_c('div',{staticClass:"global-meta",style:({
+            })},[_c('FlameGraph',{attrs:{"runData":_vm.selectedRun.data,"selectedNode":_vm.selectedParent,"handleClick":_vm.changePath}}),_c('div',{staticClass:"global-meta",style:({
             flex: 1,
             display:'flex',
             flexDirection:'column',
@@ -39466,7 +39466,7 @@ var staticRenderFns = []
             render: render,
             staticRenderFns: staticRenderFns,
             _compiled: true,
-            _scopeId: "data-v-b21277",
+            _scopeId: "data-v-5d9389",
             functional: undefined
           };
         })());
@@ -46678,7 +46678,7 @@ require('./modules/web.immediate');
 require('./modules/web.dom.iterable');
 module.exports = require('./modules/_core');
 
-},{"./modules/es6.symbol":"uVn9","./modules/es6.object.create":"D4xP","./modules/es6.object.define-property":"TSUD","./modules/es6.object.define-properties":"AwOq","./modules/es6.object.get-own-property-descriptor":"nIty","./modules/es6.object.get-prototype-of":"ud3u","./modules/es6.object.keys":"m9aB","./modules/es6.object.get-own-property-names":"i23Y","./modules/es6.object.freeze":"EO7q","./modules/es6.object.seal":"GYFR","./modules/es6.object.prevent-extensions":"llMc","./modules/es6.object.is-frozen":"Z1rp","./modules/es6.object.is-sealed":"Fckj","./modules/es6.object.is-extensible":"EYbC","./modules/es6.object.assign":"K3Jy","./modules/es6.object.is":"MlqR","./modules/es6.object.set-prototype-of":"JGjq","./modules/es6.object.to-string":"zTK3","./modules/es6.function.bind":"WIhg","./modules/es6.function.name":"N3yi","./modules/es6.function.has-instance":"a7bX","./modules/es6.parse-int":"C15x","./modules/es6.parse-float":"Q4DA","./modules/es6.number.constructor":"kRGG","./modules/es6.number.to-fixed":"vva0","./modules/es6.number.to-precision":"Y4ol","./modules/es6.number.epsilon":"DzYy","./modules/es6.number.is-finite":"FuY7","./modules/es6.number.is-integer":"pwRL","./modules/es6.number.is-nan":"SsgJ","./modules/es6.number.is-safe-integer":"qVIE","./modules/es6.number.max-safe-integer":"shx2","./modules/es6.number.min-safe-integer":"ifBH","./modules/es6.number.parse-float":"yjyf","./modules/es6.number.parse-int":"Guno","./modules/es6.math.acosh":"py3M","./modules/es6.math.asinh":"ob11","./modules/es6.math.atanh":"iUik","./modules/es6.math.cbrt":"YRuK","./modules/es6.math.clz32":"R2Qc","./modules/es6.math.cosh":"nEse","./modules/es6.math.expm1":"AmoX","./modules/es6.math.fround":"vmlq","./modules/es6.math.hypot":"kLut","./modules/es6.math.imul":"A8J8","./modules/es6.math.log10":"VUW8","./modules/es6.math.log1p":"qtpC","./modules/es6.math.log2":"Jo9J","./modules/es6.math.sign":"mZl9","./modules/es6.math.sinh":"m0zb","./modules/es6.math.tanh":"Fnqw","./modules/es6.math.trunc":"tiOR","./modules/es6.string.from-code-point":"xSM3","./modules/es6.string.raw":"t29D","./modules/es6.string.trim":"ZW4n","./modules/es6.string.iterator":"tbKg","./modules/es6.string.code-point-at":"zR9y","./modules/es6.string.ends-with":"zRn7","./modules/es6.string.includes":"fH7p","./modules/es6.string.repeat":"C85R","./modules/es6.string.starts-with":"w2SA","./modules/es6.string.anchor":"USd7","./modules/es6.string.big":"c1D0","./modules/es6.string.blink":"Ee86","./modules/es6.string.bold":"ry39","./modules/es6.string.fixed":"AHLq","./modules/es6.string.fontcolor":"H7V0","./modules/es6.string.fontsize":"Dx83","./modules/es6.string.italics":"fRhg","./modules/es6.string.link":"Aaz0","./modules/es6.string.small":"qBr3","./modules/es6.string.strike":"eNyu","./modules/es6.string.sub":"BVLK","./modules/es6.string.sup":"kMsL","./modules/es6.date.now":"susM","./modules/es6.date.to-json":"Gj6n","./modules/es6.date.to-iso-string":"oGqv","./modules/es6.date.to-string":"QX5V","./modules/es6.date.to-primitive":"jQnQ","./modules/es6.array.is-array":"x7iF","./modules/es6.array.from":"RRcs","./modules/es6.array.of":"RB6b","./modules/es6.array.join":"Rs6i","./modules/es6.array.slice":"btFn","./modules/es6.array.sort":"nrVf","./modules/es6.array.for-each":"VsIt","./modules/es6.array.map":"RBsu","./modules/es6.array.filter":"GyG6","./modules/es6.array.some":"dwTY","./modules/es6.array.every":"AJ80","./modules/es6.array.reduce":"UGP9","./modules/es6.array.reduce-right":"qhGD","./modules/es6.array.index-of":"LvRh","./modules/es6.array.last-index-of":"kVuL","./modules/es6.array.copy-within":"tWTB","./modules/es6.array.fill":"hUQ6","./modules/es6.array.find":"Qppk","./modules/es6.array.find-index":"sVmK","./modules/es6.array.species":"smn3","./modules/es6.array.iterator":"wVEN","./modules/es6.regexp.constructor":"BenF","./modules/es6.regexp.exec":"S07n","./modules/es6.regexp.to-string":"iflU","./modules/es6.regexp.flags":"pDhD","./modules/es6.regexp.match":"RTfC","./modules/es6.regexp.replace":"KGao","./modules/es6.regexp.search":"zOab","./modules/es6.regexp.split":"aOHf","./modules/es6.promise":"Pjta","./modules/es6.map":"ioKM","./modules/es6.set":"coyu","./modules/es6.weak-map":"D6DP","./modules/es6.weak-set":"bRUR","./modules/es6.typed.array-buffer":"NJ0a","./modules/es6.typed.data-view":"qL4B","./modules/es6.typed.int8-array":"wqMZ","./modules/es6.typed.uint8-array":"QTtY","./modules/es6.typed.uint8-clamped-array":"Kqgs","./modules/es6.typed.int16-array":"fEGw","./modules/es6.typed.uint16-array":"xyd6","./modules/es6.typed.int32-array":"hIko","./modules/es6.typed.uint32-array":"tNPN","./modules/es6.typed.float32-array":"wisA","./modules/es6.typed.float64-array":"mbTX","./modules/es6.reflect.apply":"F0Xu","./modules/es6.reflect.construct":"JlFO","./modules/es6.reflect.define-property":"S841","./modules/es6.reflect.delete-property":"JRlJ","./modules/es6.reflect.enumerate":"bSEr","./modules/es6.reflect.get":"kv8Z","./modules/es6.reflect.get-own-property-descriptor":"zj1X","./modules/es6.reflect.get-prototype-of":"d0aC","./modules/es6.reflect.has":"OWTq","./modules/es6.reflect.is-extensible":"deHu","./modules/es6.reflect.own-keys":"e6SV","./modules/es6.reflect.prevent-extensions":"BmyK","./modules/es6.reflect.set":"K46i","./modules/es6.reflect.set-prototype-of":"L5z5","./modules/es7.array.includes":"TLss","./modules/es7.array.flat-map":"I8vV","./modules/es7.array.flatten":"hTXg","./modules/es7.string.at":"htok","./modules/es7.string.pad-start":"SWNE","./modules/es7.string.pad-end":"n20m","./modules/es7.string.trim-left":"ppxd","./modules/es7.string.trim-right":"hxx1","./modules/es7.string.match-all":"nuR4","./modules/es7.symbol.async-iterator":"DlMC","./modules/es7.symbol.observable":"m9Sq","./modules/es7.object.get-own-property-descriptors":"BQD8","./modules/es7.object.values":"Ltmz","./modules/es7.object.entries":"gxEP","./modules/es7.object.define-getter":"guoQ","./modules/es7.object.define-setter":"HMp9","./modules/es7.object.lookup-getter":"HB2g","./modules/es7.object.lookup-setter":"QF5J","./modules/es7.map.to-json":"JwqU","./modules/es7.set.to-json":"s0lJ","./modules/es7.map.of":"FGzV","./modules/es7.set.of":"q4rf","./modules/es7.weak-map.of":"q85i","./modules/es7.weak-set.of":"dmfy","./modules/es7.map.from":"JQCn","./modules/es7.set.from":"rl69","./modules/es7.weak-map.from":"mEhd","./modules/es7.weak-set.from":"SgWE","./modules/es7.global":"zzQm","./modules/es7.system.global":"rsrW","./modules/es7.error.is-error":"c5Yp","./modules/es7.math.clamp":"f2NC","./modules/es7.math.deg-per-rad":"M9cD","./modules/es7.math.degrees":"zjWO","./modules/es7.math.fscale":"IeZ8","./modules/es7.math.iaddh":"GM4x","./modules/es7.math.isubh":"Y1LJ","./modules/es7.math.imulh":"cCkt","./modules/es7.math.rad-per-deg":"fCGe","./modules/es7.math.radians":"FX6J","./modules/es7.math.scale":"zEVT","./modules/es7.math.umulh":"zKyL","./modules/es7.math.signbit":"FD1C","./modules/es7.promise.finally":"l1j0","./modules/es7.promise.try":"Worb","./modules/es7.reflect.define-metadata":"HqdS","./modules/es7.reflect.delete-metadata":"Okij","./modules/es7.reflect.get-metadata":"S3NM","./modules/es7.reflect.get-metadata-keys":"LScP","./modules/es7.reflect.get-own-metadata":"sqj0","./modules/es7.reflect.get-own-metadata-keys":"tLXA","./modules/es7.reflect.has-metadata":"zEHE","./modules/es7.reflect.has-own-metadata":"d1YN","./modules/es7.reflect.metadata":"AN3Y","./modules/es7.asap":"A0aM","./modules/es7.observable":"jFPl","./modules/web.timers":"OTsy","./modules/web.immediate":"hZLH","./modules/web.dom.iterable":"v6Aj","./modules/_core":"ss9A"}],"QVnC":[function(require,module,exports) {
+},{"./modules/es6.symbol":"uVn9","./modules/es6.object.create":"D4xP","./modules/es6.object.define-property":"TSUD","./modules/es6.object.define-properties":"AwOq","./modules/es6.object.get-own-property-descriptor":"nIty","./modules/es6.object.get-prototype-of":"ud3u","./modules/es6.object.keys":"m9aB","./modules/es6.object.get-own-property-names":"i23Y","./modules/es6.object.freeze":"EO7q","./modules/es6.object.seal":"GYFR","./modules/es6.object.prevent-extensions":"llMc","./modules/es6.object.is-frozen":"Z1rp","./modules/es6.object.is-sealed":"Fckj","./modules/es6.object.is-extensible":"EYbC","./modules/es6.object.assign":"K3Jy","./modules/es6.object.is":"MlqR","./modules/es6.object.set-prototype-of":"JGjq","./modules/es6.object.to-string":"zTK3","./modules/es6.function.bind":"WIhg","./modules/es6.function.name":"N3yi","./modules/es6.function.has-instance":"a7bX","./modules/es6.parse-int":"C15x","./modules/es6.parse-float":"Q4DA","./modules/es6.number.constructor":"kRGG","./modules/es6.number.to-fixed":"vva0","./modules/es6.number.to-precision":"Y4ol","./modules/es6.number.epsilon":"DzYy","./modules/es6.number.is-finite":"FuY7","./modules/es6.number.is-integer":"pwRL","./modules/es6.number.is-nan":"SsgJ","./modules/es6.number.is-safe-integer":"qVIE","./modules/es6.number.max-safe-integer":"shx2","./modules/es6.number.min-safe-integer":"ifBH","./modules/es6.number.parse-float":"yjyf","./modules/es6.number.parse-int":"Guno","./modules/es6.math.acosh":"py3M","./modules/es6.math.asinh":"ob11","./modules/es6.math.atanh":"iUik","./modules/es6.math.cbrt":"YRuK","./modules/es6.math.clz32":"R2Qc","./modules/es6.math.cosh":"nEse","./modules/es6.math.expm1":"AmoX","./modules/es6.math.fround":"vmlq","./modules/es6.math.hypot":"kLut","./modules/es6.math.imul":"A8J8","./modules/es6.math.log10":"VUW8","./modules/es6.math.log1p":"qtpC","./modules/es6.math.log2":"Jo9J","./modules/es6.math.sign":"mZl9","./modules/es6.math.sinh":"m0zb","./modules/es6.math.tanh":"Fnqw","./modules/es6.math.trunc":"tiOR","./modules/es6.string.from-code-point":"xSM3","./modules/es6.string.raw":"t29D","./modules/es6.string.trim":"ZW4n","./modules/es6.string.iterator":"tbKg","./modules/es6.string.code-point-at":"zR9y","./modules/es6.string.ends-with":"zRn7","./modules/es6.string.includes":"fH7p","./modules/es6.string.repeat":"C85R","./modules/es6.string.starts-with":"w2SA","./modules/es6.string.anchor":"USd7","./modules/es6.string.big":"c1D0","./modules/es6.string.blink":"Ee86","./modules/es6.string.bold":"ry39","./modules/es6.string.fixed":"AHLq","./modules/es6.string.fontcolor":"H7V0","./modules/es6.string.fontsize":"Dx83","./modules/es6.string.italics":"fRhg","./modules/es6.string.link":"Aaz0","./modules/es6.string.small":"qBr3","./modules/es6.string.strike":"eNyu","./modules/es6.string.sub":"BVLK","./modules/es6.string.sup":"kMsL","./modules/es6.date.now":"susM","./modules/es6.date.to-json":"Gj6n","./modules/es6.date.to-iso-string":"oGqv","./modules/es6.date.to-string":"QX5V","./modules/es6.date.to-primitive":"jQnQ","./modules/es6.array.is-array":"x7iF","./modules/es6.array.from":"RRcs","./modules/es6.array.of":"RB6b","./modules/es6.array.join":"Rs6i","./modules/es6.array.slice":"btFn","./modules/es6.array.sort":"nrVf","./modules/es6.array.for-each":"VsIt","./modules/es6.array.map":"RBsu","./modules/es6.array.filter":"GyG6","./modules/es6.array.some":"dwTY","./modules/es6.array.every":"AJ80","./modules/es6.array.reduce":"UGP9","./modules/es6.array.reduce-right":"qhGD","./modules/es6.array.index-of":"LvRh","./modules/es6.array.last-index-of":"kVuL","./modules/es6.array.copy-within":"tWTB","./modules/es6.array.fill":"hUQ6","./modules/es6.array.find":"Qppk","./modules/es6.array.find-index":"sVmK","./modules/es6.array.species":"smn3","./modules/es6.array.iterator":"wVEN","./modules/es6.regexp.constructor":"BenF","./modules/es6.regexp.exec":"S07n","./modules/es6.regexp.to-string":"iflU","./modules/es6.regexp.flags":"pDhD","./modules/es6.regexp.match":"RTfC","./modules/es6.regexp.replace":"KGao","./modules/es6.regexp.search":"zOab","./modules/es6.regexp.split":"aOHf","./modules/es6.promise":"Pjta","./modules/es6.map":"ioKM","./modules/es6.set":"coyu","./modules/es6.weak-map":"D6DP","./modules/es6.weak-set":"bRUR","./modules/es6.typed.array-buffer":"NJ0a","./modules/es6.typed.data-view":"qL4B","./modules/es6.typed.int8-array":"wqMZ","./modules/es6.typed.uint8-array":"QTtY","./modules/es6.typed.uint8-clamped-array":"Kqgs","./modules/es6.typed.int16-array":"fEGw","./modules/es6.typed.uint16-array":"xyd6","./modules/es6.typed.int32-array":"hIko","./modules/es6.typed.uint32-array":"tNPN","./modules/es6.typed.float32-array":"wisA","./modules/es6.typed.float64-array":"mbTX","./modules/es6.reflect.apply":"F0Xu","./modules/es6.reflect.construct":"JlFO","./modules/es6.reflect.define-property":"S841","./modules/es6.reflect.delete-property":"JRlJ","./modules/es6.reflect.enumerate":"bSEr","./modules/es6.reflect.get":"kv8Z","./modules/es6.reflect.get-own-property-descriptor":"zj1X","./modules/es6.reflect.get-prototype-of":"d0aC","./modules/es6.reflect.has":"OWTq","./modules/es6.reflect.is-extensible":"deHu","./modules/es6.reflect.own-keys":"e6SV","./modules/es6.reflect.prevent-extensions":"BmyK","./modules/es6.reflect.set":"K46i","./modules/es6.reflect.set-prototype-of":"L5z5","./modules/es7.array.includes":"TLss","./modules/es7.array.flat-map":"I8vV","./modules/es7.array.flatten":"hTXg","./modules/es7.string.at":"htok","./modules/es7.string.pad-start":"SWNE","./modules/es7.string.pad-end":"n20m","./modules/es7.string.trim-left":"ppxd","./modules/es7.string.trim-right":"hxx1","./modules/es7.string.match-all":"nuR4","./modules/es7.symbol.async-iterator":"DlMC","./modules/es7.symbol.observable":"m9Sq","./modules/es7.object.get-own-property-descriptors":"BQD8","./modules/es7.object.values":"Ltmz","./modules/es7.object.entries":"gxEP","./modules/es7.object.define-getter":"guoQ","./modules/es7.object.define-setter":"HMp9","./modules/es7.object.lookup-getter":"HB2g","./modules/es7.object.lookup-setter":"QF5J","./modules/es7.map.to-json":"JwqU","./modules/es7.set.to-json":"s0lJ","./modules/es7.map.of":"FGzV","./modules/es7.set.of":"q4rf","./modules/es7.weak-map.of":"q85i","./modules/es7.weak-set.of":"dmfy","./modules/es7.map.from":"JQCn","./modules/es7.set.from":"rl69","./modules/es7.weak-map.from":"mEhd","./modules/es7.weak-set.from":"SgWE","./modules/es7.global":"zzQm","./modules/es7.system.global":"rsrW","./modules/es7.error.is-error":"c5Yp","./modules/es7.math.clamp":"f2NC","./modules/es7.math.deg-per-rad":"M9cD","./modules/es7.math.degrees":"zjWO","./modules/es7.math.fscale":"IeZ8","./modules/es7.math.iaddh":"GM4x","./modules/es7.math.isubh":"Y1LJ","./modules/es7.math.imulh":"cCkt","./modules/es7.math.rad-per-deg":"fCGe","./modules/es7.math.radians":"FX6J","./modules/es7.math.scale":"zEVT","./modules/es7.math.umulh":"zKyL","./modules/es7.math.signbit":"FD1C","./modules/es7.promise.finally":"l1j0","./modules/es7.promise.try":"Worb","./modules/es7.reflect.define-metadata":"HqdS","./modules/es7.reflect.delete-metadata":"Okij","./modules/es7.reflect.get-metadata":"S3NM","./modules/es7.reflect.get-metadata-keys":"LScP","./modules/es7.reflect.get-own-metadata":"sqj0","./modules/es7.reflect.get-own-metadata-keys":"tLXA","./modules/es7.reflect.has-metadata":"zEHE","./modules/es7.reflect.has-own-metadata":"d1YN","./modules/es7.reflect.metadata":"AN3Y","./modules/es7.asap":"A0aM","./modules/es7.observable":"jFPl","./modules/web.timers":"OTsy","./modules/web.immediate":"hZLH","./modules/web.dom.iterable":"v6Aj","./modules/_core":"ss9A"}],"pGZN":[function(require,module,exports) {
 var global = arguments[3];
 /**
  * Copyright (c) 2014, Facebook, Inc.
@@ -47469,12 +47469,12 @@ define(String.prototype, "padRight", "".padEnd);
 "pop,reverse,shift,keys,values,entries,indexOf,every,some,forEach,map,filter,find,findIndex,includes,join,slice,concat,push,splice,unshift,sort,lastIndexOf,reduce,reduceRight,copyWithin,fill".split(",").forEach(function (key) {
   [][key] && define(Array, key, Function.call.bind([][key]));
 });
-},{"core-js/shim":"w2bQ","regenerator-runtime/runtime":"QVnC","core-js/fn/regexp/escape":"aLB7"}],"EM1A":[function(require,module,exports) {
+},{"core-js/shim":"w2bQ","regenerator-runtime/runtime":"pGZN","core-js/fn/regexp/escape":"aLB7"}],"EM1A":[function(require,module,exports) {
 var define;
 var global = arguments[3];
 /*!
     localForage -- Offline Storage, Improved
-    Version 1.8.1
+    Version 1.7.4
     https://localforage.github.io/localForage
     (c) 2013-2017 Mozilla, Apache License 2.0
 */
@@ -50421,7 +50421,7 @@ function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArra
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
@@ -50801,7 +50801,7 @@ var Graph = /*#__PURE__*/function () {
                 });
                 runs.forEach(function (run) {
                   funcPaths.forEach(function (funcPath) {
-                    run.data['--root path--/' + funcPath] = _objectSpread(_objectSpread({}, baseMetrics), run.data[funcPath]);
+                    run.data['--root path--/' + funcPath] = _objectSpread({}, baseMetrics, {}, run.data[funcPath]);
                     delete run.data[funcPath];
                   });
                   run.data['--root path--'] = baseMetrics;
@@ -50836,7 +50836,7 @@ var Graph = /*#__PURE__*/function () {
 
                 for (_i4 = 0, _Object$entries4 = Object.entries(cachedData.Runs); _i4 < _Object$entries4.length; _i4++) {
                   _Object$entries4$_i = _slicedToArray(_Object$entries4[_i4], 2), filename = _Object$entries4$_i[0], fileContents = _Object$entries4$_i[1];
-                  summary.data[filename] = _objectSpread(_objectSpread({}, fileContents.Globals), {}, {
+                  summary.data[filename] = _objectSpread({}, fileContents.Globals, {
                     filepath: dataSetKey + '/' + filename
                   });
                 }
