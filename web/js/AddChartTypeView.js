@@ -23,21 +23,102 @@ ST.AddChartTypeView = function() {
             setup_dimensions_();
             setup_defaults_();
 
-            if( !load_obj.is_scatter_chart && edit_mode_ ) {
-
-                //  is NOT a scatter chart
-                $('.composite_chart_type .axis_row, .composite_chart_type .delete, .composite_chart_type .pick_chart_type').hide();
-            } else {
-
-                //  is scatter chart
-                $(' .composite_chart_type .delete').attr('display', 'inline-block');
-            }
+            show_based_context_( load_obj.chart_type || "multi" );
 
             $('.composite_chart_type .submit').unbind("click").bind('click', submit_ );
             $('.composite_chart_type .delete').unbind("click").bind('click', delete_ );
+            $('.composite_chart_type .pick_chart_type_sel').unbind('change').change( chart_type_changed_ );
 
             $('.chart_name:eq(0)').focus();
         });
+    };
+
+
+    var operation_select = [
+        '+', '-', '*', '/', 'concat'
+    ];
+
+    var attributes_select = [];
+
+    var get_attributes_ = function() {
+
+        var dims = ST.UserPreferences.get_dimensions();
+        var ht = [];
+
+        for( var x=0; x < dims.length; x++ ) {
+            ht.push( dims[x] );
+        }
+
+        return ht;
+    };
+
+
+    var show_based_context_ = function( ch_type ) {
+
+        if( edit_mode_ === false ) {
+
+            //  NEW --------------------------------------
+            $('.composite_chart_type .axis_row').hide();
+            $('.composite_chart_type .pick_chart_type').show();
+
+        } else {
+
+            //  Edit Mode.
+            $('.composite_chart_type .pick_chart_type').hide();
+            ren_delete_( false );
+        }
+
+        attributes_select = get_attributes_();
+
+        //  EDIT
+        if( ch_type === "multi") {
+
+            $('.multi_row_selector').MultiRowSelector({
+                selectors: [ operation_select, attributes_select ]
+            });
+
+            ren_delete_( true );
+
+        } else {
+            $('.multi_row_selector').html("");
+        }
+
+        //  EDIT
+        if( ch_type === "scatter" ) {
+
+            //  is scatter chart, only scatter chart shows axis rows.
+            $('.composite_chart_type .axis_row').show();
+
+            if( edit_mode_ ) {
+                ren_delete_(true);
+            }
+
+        } else {
+            //  is NOT a scatter chart
+            $('.composite_chart_type .axis_row').hide();
+        }
+
+        if( edit_mode_ === false ) {
+            ren_delete_( false );
+        }
+    };
+
+
+    var ren_delete_ = function( show ) {
+
+        if( show ) {
+            $('.composite_chart_type .delete').attr('display', 'inline-block').show();
+        } else {
+            $('.composite_chart_type .delete').hide();
+        }
+    };
+
+
+    var chart_type_changed_ = function() {
+
+        var ch_type = $('.composite_chart_type .pick_chart_type_sel').val().toLowerCase();
+
+        show_based_context_( ch_type );
     };
 
 
@@ -85,11 +166,37 @@ ST.AddChartTypeView = function() {
         $('.composite_chart_type .close').trigger('click');
     };
 
+
     var make_new_dimension_ = function( xaxis, yaxis ) {
         return xaxis + "_vs_" + yaxis;
     };
 
+
+    var submit_multi_ = function() {
+
+        for( var x=0; x < ST.cali_obj_by_key.length; x++ ) {
+
+            //  TODO: figure out the formula based on what we've saved in the layout.
+            ST.cali_obj_by_key[x].experimental_composite = parseInt(Math.random()*300);
+        }
+
+        //  TODO: Need to call rerender.
+        ST.ChartCollection.RenderChartCollection(ST.newp, ST.layout_used);  //  ST.ReturnedDataStub.layout); //
+    };
+
+
+    var is_adding_multi_row_ = function() {
+
+        return $('.only_multi_row_selector').length > 0;
+    };
+
+
     var submit_ = function() {
+
+        if( is_adding_multi_row_() ) {
+            submit_multi_();
+            return true;
+        }
 
         var chart_name = $('.chart_name').val();
         var xaxis = $('.xaxis select').val() || "";
@@ -201,6 +308,16 @@ ST.AddChartTypeView = function() {
 
         $('.composite_chart_type .xaxis, .composite_chart_type .yaxis').html('<select>' + ht + '</select>');
     };
+
+
+    $(document).ready( function() {
+
+        //  just for development.
+        setTimeout( function() {
+
+            //$('.plus_icon').trigger('click');
+        }, 3000);
+    });
 
     return {
         render: render_

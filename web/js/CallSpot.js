@@ -149,8 +149,10 @@ ST.CallSpot = function() {
 //        return false;
 
         ST.Utility.check_error( summ );
-
         ST.layout_used = sqs.layout_used || summ.layout;
+
+        window.USE_EXPERIMENTAL = true;
+
 
         if( window.USE_EXPERIMENTAL ) {
 
@@ -444,6 +446,9 @@ ST.CallSpot = function() {
         var file = obj.filepath;    //file + '/' + key;
         var cali_fp = ST.cali_obj_by_key[key].file_path;
 
+        var file_left = ST.cali_obj_by_key[key].run_set_id;
+        file_left = strip_right_(file_left);
+
         if (subject === 'mpi') {
 
             //  http://localhost:8888
@@ -451,14 +456,11 @@ ST.CallSpot = function() {
 
         } else if( subject === "walltime" ) {
 
-            var file_left = ST.cali_obj_by_key[key].run_set_id;
-            file_left = strip_right_(file_left);
-
             window.open('sankey/index.html?runSetId=' + file_left + "&runId=" + cali_fp);
 
         } else if( subject === "memory" ) {
 
-            window.open('memory/index.html');
+            window.open('memory/index.html?runSetId=' + file_left + '&runId=' + cali_fp);
         } else {
 
             var host = ST.params.machine;

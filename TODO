@@ -1,3 +1,29 @@
+- attempt to build compare.js and actually make a change.
+
+Memory:
+DONE - show alias instead of the coded attribute name.
+- only default on, based on the same units.
+    DONE * Use actual David's new file which has data
+    * first plot render only show the things that are default checked.
+    DONE * add console error message if the data is not present in the file.
+- Use the file in the URL instead of hard coded.
+- on checkbox only re-render 1 graph, not the whole thing.
+    * this will prevent another bug that has to do with zooming/panning/using the plotly stuff.
+DONE - Titles and Axis labels
+DONE - At the top of the chart, have a drop down which drops checkboxes with text next to it
+DONE - allow checking/unchecking which combines all the line graphs on one chart.
+DONE - Button to allow for another chart type.
+DONE - create multiple instances when button is pressed.  have each check/uncheck belong to that instance.
+        * Separate each chart instance and legend and checkbox instance correctly.
+
+Next: Use Aliases instead of #strings.
+
+Multi:
+DONE - get rid of first dropdown.
+- populate the select drop down with correct values.
+- actually create the submit function which takes all the data and aggregates them according to the formula
+    * all the operations involved in a new chart type: check/uncheck, edit.
+
 DONE - fixed hamburger Icon.
 DONE - get all the copyrights and put them in a directory
 DONE - Tuesday 10am do actual release to cz.  then rz.
@@ -13,7 +39,7 @@ DONE - Check Libraries:
 
 Next Release:
 * Links at the bottom of the page, need to be copied to github?
-- Update Documentation with saying what buttons are doing.
+DONE - Update Documentation with saying what buttons are doing.
 DONE - made some adjustments to the width and area on the left. See if marty approves.
 
 DONE - LineGraph: Do proof of concept:

@@ -1,0 +1,26 @@
+cd compare-src/
+  529  ls
+  530  cat package.json
+  531  npm install
+  532  npm run build
+  533  ls lib
+  534  node --version
+  535  ls
+  536  more package.json
+  537  npm run build
+
+Install the latest version of node before apble to run npm run build.
+  539  sudo npm stable
+  540  npm install -g n
+  541  npm cache clean -f
+  542  npm --version
+  544  sudo n stable
+  545  npm run build
+
+npm run build:
+- this is what builds the compare.js and the compare.css
+
+then run:
+npm run build-walltime
+
+to build the sankey stuff.

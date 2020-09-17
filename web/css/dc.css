@@ -508,6 +508,32 @@ body .dc-chart g.row text {
       background-image: url(../img/check.png);
       background-size: 100% 100%; }
 
+table.only_multi_row_selector tr:nth-child(2) td {
+  padding: 0 0 0 0; }
+
+table.only_multi_row_selector tr td:first-child {
+  width: 100px; }
+  table.only_multi_row_selector tr td:first-child select {
+    width: 80px; }
+
+table.only_multi_row_selector tr td:nth-child(2) select {
+  width: 360px; }
+
+.composite_chart_type .multi_row_selector {
+  padding: 20px 0 0 0; }
+  .composite_chart_type .multi_row_selector table {
+    margin: 1px 0 0 0; }
+  .composite_chart_type .multi_row_selector tr:first-child td {
+    border-top: 1px solid #bbbbbb;
+    padding: 12px 3px 3px 3px; }
+  .composite_chart_type .multi_row_selector .delete_row {
+    position: relative;
+    top: -4px;
+    font-size: 18px;
+    width: 22px;
+    padding: 6px;
+    text-align: center; }
+
 .composite_chart_type.edit_mode .myButton.submit {
   display: inline-block; }
 
@@ -526,7 +552,7 @@ body .dc-chart g.row text {
 .composite_chart_type select {
   height: 36px; }
 
-.composite_chart_type tr:first-child td {
+.composite_chart_type .pick_chart_type td {
   padding: 0 0 17px 0;
   border-bottom: 1px solid #bbbbbb; }
 

@@ -4,16 +4,22 @@
     <title>SPOT 2</title>
     <meta charset="UTF-8">
 
+    <link rel="stylesheet" type="text/css" href="../web/css/dc.css">
     <link rel="stylesheet" type="text/css" href="../web/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/memory.css"/>
+    <link rel="stylesheet" type="text/css" href="css/CheckboxWindowManager.css"/>
 
 </head>
 <body>
 
-Memory linegraph page.
-<div id="myDiv"></div>
-<div id="myDiv2"></div>
-<div id="myDiv3"></div>
+<div class="top_bar"></div>
+
+<div title="Plus button" class="myButton plus icon">
+    <div class="inner">+</div>
+</div>
+
+<div class="chart_container"></div>
+
 
 <div id="memory-chart"></div>
 <div id="volume-chart"></div>
@@ -27,11 +33,12 @@ Memory linegraph page.
 <script type="text/javascript" src="../web/js/dc.js"></script>
 
 
-
 <script type="text/javascript" src="js/plotly-latest.min.js"></script>
 <script type="text/javascript" src="../web/js/Utility.js"></script>
 <script type="text/javascript" src="../web/js/CallSpot.js"></script>
 <script type="text/javascript" src="js/MemoryLineView.js"></script>
+<script type="text/javascript" src="js/MemoryLineModel.js"></script>
+<script type="text/javascript" src="js/CheckboxWindowManager.jquery.js"></script>
 
 
 </body>

@@ -322,6 +322,15 @@ ST.ChartCollection = function() {
     };
 
 
+    var get_chart_type_ = function( par ) {
+
+        if( par.hasClass('scatter-chart') ) {
+            return "scatter";
+        }
+
+        return "other";
+    };
+
 
     var bind_sort = function () {
 
@@ -341,6 +350,7 @@ ST.ChartCollection = function() {
 
             ST.AddChartTypeView.render( true, {
                 chart_name: chart_name,
+                chart_type: get_chart_type_( par ),
                 dimension: dim,
                 is_scatter_chart: is_scatter_chart,
                 x_label: x_label,
