@@ -122,26 +122,6 @@ ST.AddChartTypeView = function() {
     };
 
 
-    var setup_defaults_ = function () {
-
-        load_obj_ = load_obj_ || {};
-
-        var ch_name = load_obj_.chart_name;
-
-        if( load_obj_.is_scatter_chart && !load_obj_.chart_name ) {
-            ch_name = "Problem size vs Jobsize";
-        }
-
-        var xaxis = load_obj_["x_label"] || "problem_size";
-        var yaxis = load_obj_["y_label"] || "jobsize";
-
-        $('.xaxis select').val( xaxis ).change(update_chart_name_);
-        $('.yaxis select').val( yaxis ).change(update_chart_name_);
-
-        $('.composite_chart_type .chart_name').val( ch_name );
-    };
-
-
     var update_chart_name_ = function() {
 
         var xaxis = $('.xaxis select').val();
@@ -167,21 +147,28 @@ ST.AddChartTypeView = function() {
     };
 
 
-    var make_new_dimension_ = function( xaxis, yaxis ) {
-        return xaxis + "_vs_" + yaxis;
+    var setup_defaults_ = function () {
+
+        load_obj_ = load_obj_ || {};
+
+        var ch_name = load_obj_.chart_name;
+
+        if( load_obj_.is_scatter_chart && !load_obj_.chart_name ) {
+            ch_name = "Problem size vs Jobsize";
+        }
+
+        var xaxis = load_obj_["x_label"] || "problem_size";
+        var yaxis = load_obj_["y_label"] || "jobsize";
+
+        $('.xaxis select').val( xaxis ).change(update_chart_name_);
+        $('.yaxis select').val( yaxis ).change(update_chart_name_);
+
+        $('.composite_chart_type .chart_name').val( ch_name );
     };
 
 
-    var submit_multi_ = function() {
-
-        for( var x=0; x < ST.cali_obj_by_key.length; x++ ) {
-
-            //  TODO: figure out the formula based on what we've saved in the layout.
-            ST.cali_obj_by_key[x].experimental_composite = parseInt(Math.random()*300);
-        }
-
-        //  TODO: Need to call rerender.
-        ST.ChartCollection.RenderChartCollection(ST.newp, ST.layout_used);  //  ST.ReturnedDataStub.layout); //
+    var make_new_dimension_ = function( xaxis, yaxis ) {
+        return xaxis + "_vs_" + yaxis;
     };
 
 
@@ -263,6 +250,19 @@ ST.AddChartTypeView = function() {
                 //ST.graph.addScatterplot(new_layout);
             }
         }
+    };
+
+
+    var submit_multi_ = function() {
+
+        for( var x=0; x < ST.cali_obj_by_key.length; x++ ) {
+
+            //  TODO: figure out the formula based on what we've saved in the layout.
+            ST.cali_obj_by_key[x].experimental_composite = parseInt(Math.random()*300);
+        }
+
+        //  TODO: Need to call rerender.
+        ST.ChartCollection.RenderChartCollection(ST.newp, ST.layout_used);  //  ST.ReturnedDataStub.layout); //
     };
 
 

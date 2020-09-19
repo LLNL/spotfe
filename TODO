@@ -3,7 +3,7 @@
 Memory:
 - when adding a plot, don't rerender all the existing plots, just add one new one.
     * this causes a bug where everything gets rerendered.
-- Use alias in checkbox widget as well.
+DONE - Use alias in checkbox widget as well.
 - Use the file in the URL instead of hard coded.
 DONE - show alias instead of the coded attribute name.
 DONE - only default on, based on the same units.
@@ -19,7 +19,6 @@ DONE - Button to allow for another chart type.
 DONE - create multiple instances when button is pressed.  have each check/uncheck belong to that instance.
         * Separate each chart instance and legend and checkbox instance correctly.
 
-Next: Use Aliases instead of #strings.
 
 Multi:
 DONE - get rid of first dropdown.
