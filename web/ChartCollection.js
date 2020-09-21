@@ -55,7 +55,19 @@ ST.ChartCollection = function() {
     };
 
 
+    var update_composite_ = function() {
+
+        for( var x=0; x < ST.cali_obj_by_key.length; x++ ) {
+
+            //  TODO: figure out the formula based on what we've saved in the layout.
+            ST.cali_obj_by_key[x].experimental_composite = parseInt(Math.random()*400);
+        }
+    };
+
+
     var RenderChartCollection = function (the_data, layout_spec) {
+
+        update_composite_();
 
         //amend_charts_( layout_spec );
 

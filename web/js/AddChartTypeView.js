@@ -180,7 +180,9 @@ ST.AddChartTypeView = function() {
 
     var submit_ = function() {
 
+        //  this is based on if the person selects composite chart type or the scatter plot
         if( is_adding_multi_row_() ) {
+
             submit_multi_();
             return true;
         }
@@ -254,12 +256,6 @@ ST.AddChartTypeView = function() {
 
 
     var submit_multi_ = function() {
-
-        for( var x=0; x < ST.cali_obj_by_key.length; x++ ) {
-
-            //  TODO: figure out the formula based on what we've saved in the layout.
-            ST.cali_obj_by_key[x].experimental_composite = parseInt(Math.random()*300);
-        }
 
         //  TODO: Need to call rerender.
         ST.ChartCollection.RenderChartCollection(ST.newp, ST.layout_used);  //  ST.ReturnedDataStub.layout); //
