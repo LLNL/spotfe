@@ -37,6 +37,7 @@
             :runData='addInclusive(runData)'
             :selectedNode='selectedNode'
             :selectedTopdownNode='selectedTopdownNode'
+            :topdownData='topdownData'
             :funcPath='selectedNode'
             :handleClick='handleClick'
             :showTopdown='showTopdown'
@@ -49,7 +50,7 @@ import FlamegraphNode from './FlamegraphNode.vue'
 import {childrenPaths} from './functions.js'
 import _ from 'lodash'
 export default {
-    props:['runData', 'selectedNode', 'handleClick', 'showTopdown', 'metricName', 'showTopdown', 'selectedTopdownNode'],
+    props:['runData', 'selectedNode', 'handleClick', 'showTopdown', 'topdownData', 'metricName', 'showTopdown', 'selectedTopdownNode'],
     computed:{
         collapsedFuncPaths(){
             let collapsedNodes = []
