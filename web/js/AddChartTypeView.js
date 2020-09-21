@@ -258,6 +258,7 @@ ST.AddChartTypeView = function() {
     var submit_multi_ = function() {
 
         var chart_name = "Multi";
+        var dimension = "multi_elapse_time";
 
         var new_layout2 = {
             dimension: dimension,
@@ -265,7 +266,7 @@ ST.AddChartTypeView = function() {
             //xaxis: xaxis,
             //yaxis: yaxis,
             name: chart_name,
-            viz: ST.CONSTS.COMPOSITE_PLOT,
+            viz: "BarChart",
             show: true,
             layout: {
                 operations: [
@@ -293,6 +294,13 @@ ST.AddChartTypeView = function() {
 
         sqs.layout_used.charts.push(new_layout);
         ST.layout_used = sqs.layout_used;
+
+        ST.layout_used.table.push({
+            dimension: dimension,
+            label: "Experimental",
+            type: "int",
+            show: true
+        });
 
         sq.save();
 
