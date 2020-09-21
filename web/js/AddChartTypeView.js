@@ -257,6 +257,45 @@ ST.AddChartTypeView = function() {
 
     var submit_multi_ = function() {
 
+        var chart_name = "Multi";
+
+        var new_layout2 = {
+            dimension: dimension,
+            title: chart_name,
+            //xaxis: xaxis,
+            //yaxis: yaxis,
+            name: chart_name,
+            viz: ST.CONSTS.COMPOSITE_PLOT,
+            show: true,
+            layout: {
+                operations: [
+                    {
+                        attribute: "elapsed_time"
+                    },
+                    {
+                        attribute: "num_regions",
+                        operation: "plus"
+                    },
+                    {
+                        attribute: "jobsize",
+                        operation: "minus"
+                    },
+                    {
+                        attribute: "elapsed_time",
+                        operation: "plus"
+                    }
+                ]
+            }
+        };
+
+
+        var new_layout = $.extend({}, new_layout2 );
+
+        sqs.layout_used.charts.push(new_layout);
+        ST.layout_used = sqs.layout_used;
+
+        sq.save();
+
         //  TODO: Need to call rerender.
         ST.ChartCollection.RenderChartCollection(ST.newp, ST.layout_used);  //  ST.ReturnedDataStub.layout); //
     };
