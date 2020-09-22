@@ -57,6 +57,7 @@ ST.ChartCollection = function() {
 
     var update_composite_ = function() {
 
+        
         for( var x=0; x < ST.cali_obj_by_key.length; x++ ) {
 
             var the_dimension = "multi_elapse_time";

@@ -268,7 +268,7 @@ ST.AddChartTypeView = function() {
             name: chart_name,
             viz: "BarChart",
             show: true,
-            layout: {
+            composite_layout: {
                 operations: [
                     {
                         attribute: "elapsed_time"
