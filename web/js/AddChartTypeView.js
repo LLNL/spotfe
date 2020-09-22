@@ -255,21 +255,23 @@ ST.AddChartTypeView = function() {
     };
 
 
+    var gen_dimension_ = function( ops ) {
+        
+        var dim = "";
+
+        for( var y=0; y < ops.length; y++ ) {
+            dim += ops[y].attribute + "_";
+        }
+
+        return dim;
+    };
+
+
     var submit_multi_ = function() {
 
         var chart_name = $('.chart_name').val();
-        var dimension = "multi_elapse_time";
 
-        var new_layout2 = {
-            dimension: dimension,
-            title: chart_name,
-            //xaxis: xaxis,
-            //yaxis: yaxis,
-            name: chart_name,
-            viz: "BarChart",
-            show: true,
-            composite_layout: {
-                operations: [
+        var operations = [
                     {
                         attribute: "elapsed_time"
                     },
@@ -285,7 +287,20 @@ ST.AddChartTypeView = function() {
                         attribute: "elapsed_time",
                         operation: "plus"
                     }
-                ]
+                ];
+
+        var dimension = gen_dimension_( operations );
+
+        var new_layout2 = {
+            dimension: dimension,
+            title: chart_name,
+            //xaxis: xaxis,
+            //yaxis: yaxis,
+            name: chart_name,
+            viz: "BarChart",
+            show: true,
+            composite_layout: {
+                operations: operations
             }
         };
 
