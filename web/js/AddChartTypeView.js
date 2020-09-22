@@ -257,7 +257,7 @@ ST.AddChartTypeView = function() {
 
     var submit_multi_ = function() {
 
-        var chart_name = "Multi";
+        var chart_name = $('.chart_name').val();
         var dimension = "multi_elapse_time";
 
         var new_layout2 = {
