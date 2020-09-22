@@ -9,7 +9,7 @@
                                    , height: '25px'
                                    , backgroundColor: colorHash(funcPath) 
                                    , cursor:'pointer'
-                                   , width: showTopdown ? topdownValue * 100 + '%': '100%'
+                                   , width: showTopdown ? topdownData[selectedTopdownNode].flame: '100%'
                                    , border: iAmSelected ? '3px solid black' : '' 
                                    }`
                         )
@@ -21,6 +21,7 @@
                            :runData='runData' 
                            :selectedNode='selectedNode'
                            :selectedTopdownNode='selectedTopdownNode'
+                           :topdownData='topdownData'
                            :showTopdown='showTopdown'
                            :funcPath='fp'
                            :handleClick='handleClick'
@@ -34,6 +35,7 @@ export default {
         'selectedNode',
         'selectedTopdownNode',
         'showTopdown',
+        'topdownData',
         'runData',
         'funcPath',
         'handleClick',
@@ -58,29 +60,7 @@ export default {
                      ? '100%'
                      :  this.myInclusive / this.runData[parentPath(this.funcPath)].inclusive * 100 + '%'
         },
-        topdownValue(){
-            const conversion = {
-                    're': 'any#any#topdown.retiring',
 
-                    'bs': 'any#any#topdown.bad_speculation',
-                    'ms': 'any#any#topdown.branch_mispredict',
-                    'mc': 'any#any#topdown.machine_clears', 
-                                                            
-                    'fe': 'any#any#topdown.frontend_bound', 
-                    'la': 'any#any#topdown.frontend_latency',
-                    'bw': 'any#any#topdown.frontend_bandwidth',
-                                                            
-                    'be': 'any#any#topdown.backend_bound',  
-                    'co': 'any#any#topdown.core_bound',     
-                    'me': 'any#any#topdown.memory_bound',   
-                    'l1': 'any#any#topdown.l1_bound',       
-                    'l2': 'any#any#topdown.l2_bound',       
-                    'l3': 'any#any#topdown.l3_bound',       
-                    'mb': 'any#any#topdown.ext_mem_bound',  
-            }
-            return this.runData[this.funcPath].topdown[conversion[this.selectedTopdownNode]]
-
-        },
 
     },
 

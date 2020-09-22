@@ -38916,8 +38916,9 @@ var _functions = require("./functions.js");
 //
 //
 //
+//
 var _default = {
-  props: ['selectedNode', 'selectedTopdownNode', 'showTopdown', 'runData', 'funcPath', 'handleClick'],
+  props: ['selectedNode', 'selectedTopdownNode', 'showTopdown', 'topdownData', 'runData', 'funcPath', 'handleClick'],
   computed: {
     title: function title() {
       return "".concat(this.funcPath.split('/').slice(-1)[0], " (").concat(this.runData[this.funcPath].exclusive, ")");
@@ -38986,9 +38987,9 @@ exports.default = _default;
                                , height: '25px'
                                , backgroundColor: _vm.colorHash(_vm.funcPath) 
                                , cursor:'pointer'
-                               , width: _vm.showTopdown ? _vm.topdownValue * 100 + '%': '100%'
+                               , width: _vm.showTopdown ? _vm.topdownData[_vm.selectedTopdownNode].flame: '100%'
                                , border: _vm.iAmSelected ? '3px solid black' : '' 
-                               })}),_c('div',{staticClass:"text",style:({width: _vm.exclusiveWidthPercent,overflow: 'hidden', cursor:'pointer', whiteSpace:'nowrap', position:'absolute', top: '3px', left: '3px'}),attrs:{"title":_vm.title},on:{"click":function($event){return _vm.handleClick(_vm.funcPath)}}},[_vm._v(_vm._s(_vm.title)+" ")])])]):_vm._e(),_c('div',{staticClass:"children",style:({display:'flex'})},_vm._l((_vm.childrenPaths(_vm.funcPath, _vm.allFuncPaths)),function(fp){return _c('FlamegraphNode',{attrs:{"runData":_vm.runData,"selectedNode":_vm.selectedNode,"selectedTopdownNode":_vm.selectedTopdownNode,"showTopdown":_vm.showTopdown,"funcPath":fp,"handleClick":_vm.handleClick}})}),1)])}
+                               })}),_c('div',{staticClass:"text",style:({width: _vm.exclusiveWidthPercent,overflow: 'hidden', cursor:'pointer', whiteSpace:'nowrap', position:'absolute', top: '3px', left: '3px'}),attrs:{"title":_vm.title},on:{"click":function($event){return _vm.handleClick(_vm.funcPath)}}},[_vm._v(_vm._s(_vm.title)+" ")])])]):_vm._e(),_c('div',{staticClass:"children",style:({display:'flex'})},_vm._l((_vm.childrenPaths(_vm.funcPath, _vm.allFuncPaths)),function(fp){return _c('FlamegraphNode',{attrs:{"runData":_vm.runData,"selectedNode":_vm.selectedNode,"selectedTopdownNode":_vm.selectedTopdownNode,"topdownData":_vm.topdownData,"showTopdown":_vm.showTopdown,"funcPath":fp,"handleClick":_vm.handleClick}})}),1)])}
 var staticRenderFns = []
 
           return {
@@ -39062,8 +39063,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
 var _default = {
-  props: ['runData', 'selectedNode', 'handleClick', 'showTopdown', 'metricName', 'showTopdown', 'selectedTopdownNode'],
+  props: ['runData', 'selectedNode', 'handleClick', 'showTopdown', 'topdownData', 'metricName', 'showTopdown', 'selectedTopdownNode'],
   computed: {
     collapsedFuncPaths: function collapsedFuncPaths() {
       var collapsedNodes = [];
@@ -39152,7 +39154,7 @@ exports.default = _default;
                 marginLeft:'3px',
                 overflow:'hidden',
                 cursor:'pointer'
-                })},[_vm._v(_vm._s(_vm.title(funcPath)))])]):_vm._e()}),_c('FlamegraphNode',{attrs:{"runData":_vm.addInclusive(_vm.runData),"selectedNode":_vm.selectedNode,"selectedTopdownNode":_vm.selectedTopdownNode,"funcPath":_vm.selectedNode,"handleClick":_vm.handleClick,"showTopdown":_vm.showTopdown}})],2)}
+                })},[_vm._v(_vm._s(_vm.title(funcPath)))])]):_vm._e()}),_c('FlamegraphNode',{attrs:{"runData":_vm.addInclusive(_vm.runData),"selectedNode":_vm.selectedNode,"selectedTopdownNode":_vm.selectedTopdownNode,"topdownData":_vm.topdownData,"funcPath":_vm.selectedNode,"handleClick":_vm.handleClick,"showTopdown":_vm.showTopdown}})],2)}
 var staticRenderFns = []
 
           return {
