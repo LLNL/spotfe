@@ -277,6 +277,7 @@ ST.AddChartTypeView = function() {
     };
 
 
+
     var set_up_chart_name_ = function( ops ) {
 
         var ht = "";
@@ -285,7 +286,7 @@ ST.AddChartTypeView = function() {
 
             var op = ops[z];
             var ope = op.operation || "";
-            
+
             ht += ope + op.attribute;
         }
 
