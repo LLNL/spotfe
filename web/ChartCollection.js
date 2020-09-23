@@ -330,6 +330,10 @@ ST.ChartCollection = function() {
             return "scatter";
         }
 
+        if( par.hasClass(ST.CONSTS.COMPOSITE_PLOT)) {
+            return ST.CONSTS.COMPOSITE_PLOT;
+        }
+
         return "other";
     };
 

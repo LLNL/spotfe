@@ -8,18 +8,26 @@ $.fn.MultiRowSelector = function( obj ) {
             sel += '<option>' + arr[x] + '</option>';
         }
 
+        if( cla === "dimension_attribute" ) {
+            sel += "<option>CONSTANT</option>";
+        }
+
         return "<select class='"+ cla + "'>" + sel + "</select>";
     };
+
 
     //  First row does not have an operation select.
     var row_ = function( first_row ) {
 
         var operation_select = get_select_render_( obj.selectors[0], "operation_sel" );
         var attributes_select = get_select_render_( obj.selectors[1], "dimension_attribute" );
+        var input_const = "<input type='text' class='input_const' style='display: none;'>";
 
         return '<tr class="multi_row">' +
             '<td>' + ( first_row ? "" : operation_select) + '</td>' +
-            '<td>' + attributes_select + '</td>' +
+            '<td>' + attributes_select +
+            input_const +
+            '</td>' +
             '<td>' +
             ReusableView.button("X", "delete_row", "myButton") +
             '</td>' +
@@ -63,6 +71,7 @@ $.fn.MultiRowSelector = function( obj ) {
         } );
     };
 
+
     var add_row_ = function() {
 
         var mrs = $(this).closest('.multi_row_selector');
@@ -71,12 +80,14 @@ $.fn.MultiRowSelector = function( obj ) {
         bind_( mrs );
     };
 
+
     var num_rows_ = function( mrs ) {
 
         var count = mrs.find('tr').length;
 
         return count;
     };
+
 
     var delete_row_ = function() {
 

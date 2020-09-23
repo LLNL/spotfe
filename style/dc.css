@@ -519,6 +519,8 @@ table.only_multi_row_selector tr td:nth-child(2) select {
 
 .composite_chart_type .multi_row_selector {
   padding: 20px 0 0 0; }
+  .composite_chart_type .multi_row_selector .input_const {
+    display: none; }
   .composite_chart_type .multi_row_selector table {
     margin: 1px 0 0 0; }
   .composite_chart_type .multi_row_selector tr:first-child td {

@@ -1,4 +1,5 @@
 - attempt to build compare.js and actually make a change.
+- fix grunt server.
 
 Memory:
 - when adding a plot, don't rerender all the existing plots, just add one new one.
@@ -22,9 +23,21 @@ DONE - create multiple instances when button is pressed.  have each check/unchec
 
 Multi:
 DONE - get rid of first dropdown.
-- populate the select drop down with correct values.
-- actually create the submit function which takes all the data and aggregates them according to the formula
-    * all the operations involved in a new chart type: check/uncheck, edit.
+DONE - populate the select drop down with correct values.
+DONE - actually create the submit function which takes all the data and aggregates them according to the formula
+DONE * all the operations involved in a new chart type: check/uncheck, edit.
+DONE - eval for data
+DONE - able to delete a chart.
+
+
+Things Think about:
+- Eval will do order of operations, not top to bottom
+- concat operation requires some extra work, because need to do it manually and split up evals.
+- need to do const attribute where you enter your own number
+- what to do in cases where there's a string, use pieChart?
+
+
+
 
 DONE - fixed hamburger Icon.
 DONE - get all the copyrights and put them in a directory

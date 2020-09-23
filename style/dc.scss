@@ -767,6 +767,11 @@ table.only_multi_row_selector {
 .composite_chart_type {
 
     .multi_row_selector {
+
+        .input_const {
+            display: none;
+        }
+
         padding: 20px 0 0 0;
 
         table {

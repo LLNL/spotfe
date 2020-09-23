@@ -106,12 +106,15 @@ ST.BarChart = function() {
 
         var xlabel = options["x-label"] || "";
         var ylabel = options["y-label"] || "";
+        var composite_chart = options["composite_layout"] ? ST.CONSTS.COMPOSITE_PLOT : "";
 
         var style = options.show ? "display: block;" : "display: none;";
         var dimension_low = dimension.toLowerCase();
         var DOM_safe_dimension = ST.Utility.filter_special( dimension_low );
 
-        var rcht = '<div class="outer_cont runtime-chart' + DOM_safe_dimension + '" style="' + style + '" ' +
+        var rcht = '<div class="outer_cont ' + composite_chart +
+            ' runtime-chart' + DOM_safe_dimension + '" ' +
+            'style="' + style + '" ' +
             'chart-dimension="' + DOM_safe_dimension + '"> \
             <div class="top_left"> \
                 <strong class="text_chart_name">' + upper_( options.title || dimension) + '</strong> \

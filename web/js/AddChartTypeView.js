@@ -84,6 +84,10 @@ ST.AddChartTypeView = function() {
             $('.multi_row_selector').html("");
         }
 
+        if( ch_type === ST.CONSTS.COMPOSITE_PLOT && edit_mode_ ) {
+            ren_delete_(true);
+        }
+
         //  EDIT
         if( ch_type === "scatter" ) {
 
