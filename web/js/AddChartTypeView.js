@@ -74,7 +74,8 @@ ST.AddChartTypeView = function() {
         if( ch_type === "multi") {
 
             $('.multi_row_selector').MultiRowSelector({
-                selectors: [ operation_select, attributes_select ]
+                selectors: [ operation_select, attributes_select ],
+                callback: drop_selected_
             });
 
             ren_delete_( true );
@@ -256,7 +257,7 @@ ST.AddChartTypeView = function() {
 
 
     var gen_dimension_ = function( ops ) {
-        
+
         var dim = "";
 
         for( var y=0; y < ops.length; y++ ) {
@@ -267,11 +268,18 @@ ST.AddChartTypeView = function() {
     };
 
 
+    var operations_;
+
+    var drop_selected_ = function( operations ) {
+
+        operations_ = operations;
+    };
+
     var submit_multi_ = function() {
 
         var chart_name = $('.chart_name').val();
 
-        var operations = [
+        var operations = operations_ || [
                     {
                         attribute: "elapsed_time"
                     },
