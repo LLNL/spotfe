@@ -1,6 +1,6 @@
 $.fn.MultiRowSelector = function( obj ) {
 
-    var get_select_render_ = function( arr ) {
+    var get_select_render_ = function( arr, cla ) {
 
         var sel = "";
         for( var x=0; x < arr.length; x++ ) {
@@ -8,14 +8,14 @@ $.fn.MultiRowSelector = function( obj ) {
             sel += '<option>' + arr[x] + '</option>';
         }
 
-        return "<select>" + sel + "</select>";
+        return "<select class='"+ cla + "'>" + sel + "</select>";
     };
 
     //  First row does not have an operation select.
     var row_ = function( first_row ) {
 
-        var operation_select = get_select_render_( obj.selectors[0] );
-        var attributes_select = get_select_render_( obj.selectors[1] );
+        var operation_select = get_select_render_( obj.selectors[0], "operation_sel" );
+        var attributes_select = get_select_render_( obj.selectors[1], "dimension_attribute" );
 
         return '<tr class="multi_row">' +
             '<td>' + ( first_row ? "" : operation_select) + '</td>' +
@@ -32,10 +32,12 @@ $.fn.MultiRowSelector = function( obj ) {
         var parent = that.closest(".multi_row_selector");
         var vals = [];
 
-        var ops = parent.find("select").each( function( ind, el ) {
+        var ops = parent.find("select.dimension_attribute").each( function( ind, el ) {
 
             var v = $(el).val();
-            vals.push( v );
+            vals.push({
+                attribute: v
+            } );
         });
 
 
