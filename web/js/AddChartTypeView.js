@@ -179,6 +179,12 @@ ST.AddChartTypeView = function() {
     };
 
 
+    var close_modal_ = function() {
+
+        $('.composite_chart_type .close').trigger('click');
+    };
+
+
     var submit_ = function() {
 
         //  this is based on if the person selects composite chart type or the scatter plot
@@ -198,7 +204,7 @@ ST.AddChartTypeView = function() {
         var dimension = make_new_dimension_( xaxis, yaxis );
 
 
-        $('.composite_chart_type .close').trigger('click');
+        close_modal_();
 
         if( edit_mode_ ) {
 
@@ -348,6 +354,8 @@ ST.AddChartTypeView = function() {
 
         //  TODO: Need to call rerender.
         ST.ChartCollection.RenderChartCollection(ST.newp, ST.layout_used);  //  ST.ReturnedDataStub.layout); //
+
+        close_modal_();
     };
 
 
