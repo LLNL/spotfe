@@ -26,10 +26,35 @@ $.fn.MultiRowSelector = function( obj ) {
             '</tr>';
     };
 
+
+    var get_operations_ = function( that ) {
+
+        var parent = that.closest(".multi_row_selector");
+        var vals = [];
+
+        var ops = parent.find("select").each( function( ind, el ) {
+
+            var v = $(el).val();
+            vals.push( v );
+        });
+
+
+        console.dir( vals );
+        console.dir( ops );
+        return vals;
+    };
+
+
     var bind_ = function( that ) {
 
         that.find('.delete_row').unbind('click').bind('click', delete_row_ );
         that.find('.add_row').unbind('click').bind('click', add_row_ );
+
+        that.find('select').unbind('change').change( function() {
+
+            var ops = get_operations_( that );
+            obj.callback( ops );
+        } );
     };
 
     var add_row_ = function() {
