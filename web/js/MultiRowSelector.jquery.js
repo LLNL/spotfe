@@ -35,9 +35,13 @@ $.fn.MultiRowSelector = function( obj ) {
         var ops = parent.find("select.dimension_attribute").each( function( ind, el ) {
 
             var v = $(el).val();
+            var tr = $(el).closest('tr.multi_row');
+            var op_sel = tr.find('.operation_sel').val();
+
             vals.push({
-                attribute: v
-            } );
+                attribute: v,
+                operation: op_sel
+            });
         });
 
 

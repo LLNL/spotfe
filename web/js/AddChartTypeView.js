@@ -273,7 +273,25 @@ ST.AddChartTypeView = function() {
     var drop_selected_ = function( operations ) {
 
         operations_ = operations;
+        set_up_chart_name_( operations );
     };
+
+
+    var set_up_chart_name_ = function( ops ) {
+
+        var ht = "";
+
+        for( var z=0; z < ops.length; z++ ) {
+
+            var op = ops[z];
+            var ope = op.operation || "";
+            
+            ht += ope + op.attribute;
+        }
+
+        $('.chart_name').val( ht );
+    };
+
 
     var submit_multi_ = function() {
 
