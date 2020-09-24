@@ -16,7 +16,7 @@ ST.PieChart = function() {
         var DOM_safe_dimension = ST.Utility.filter_special( dimension_low );
 
         var style = spec.show ? "display: block;" : "display: none;";
-        var composite_chart = options["composite_layout"] ? ST.CONSTS.COMPOSITE_PLOT : "";
+        var composite_chart = spec["composite_layout"] ? ST.CONSTS.COMPOSITE_PLOT : "";
 
         var rcht =     '<div instance_num="' + DOM_safe_dimension + '"  ' +
             'style="' + style + '" ' +
