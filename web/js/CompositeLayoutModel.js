@@ -53,7 +53,7 @@ ST.CompositeLayoutModel = function() {
             str += operation + key_val;
         }
 
-        console.log( str );
+        //console.log( str );
         var ev = eval( str );
 
         return ev;
@@ -64,7 +64,7 @@ ST.CompositeLayoutModel = function() {
 
         var def = "BarChart";
 
-        for( var x in ops ) {
+        for( var x=0; x < ops.length; x++ ) {
 
             var obo = ops[x];
             var attribute = obo.attribute;

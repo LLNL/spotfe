@@ -110,7 +110,7 @@ ST.UserPreferences = function() {
             var chart = charts[x];
             var dlc = chart.dimension.toLowerCase();
 
-            if( axis_selection_types.indexOf(chart.type) > -1 ) {
+            if( axis_selection_types.indexOf(chart.type) > -1 || true) {
                 dimensions.push(dlc);
             }
         }
