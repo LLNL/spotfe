@@ -42,6 +42,7 @@ ST.CompositeLayoutModel = function() {
             if( !formula_data[ op.attribute ] ) {
 
                 var fd_contents = "";
+
                 for( var y in formula_data ) {
                     fd_contents += ", " + y;
                 }
@@ -50,7 +51,7 @@ ST.CompositeLayoutModel = function() {
                     'I could only find the following references: ' + fd_contents);
             }
 
-            str += operation + key_val;
+            str += operation + make_str_if_str_( key_val );
         }
 
         //console.log( str );
@@ -60,9 +61,23 @@ ST.CompositeLayoutModel = function() {
     };
 
 
+    //  this value could be a string or it might not be.
+    var make_str_if_str_ = function( s ) {
+
+        if( isNaN(s) ) {
+            //  quotes allow the JS eval to work correctly.
+            return '"' + s + '"';
+        }else {
+            //  it's a number then no quotes needed.
+            return s;
+        }
+    };
+
+
     var get_viz_type_based_on_cali_data_type_ = function( ops ) {
 
         var def = "BarChart";
+        return def;
 
         for( var x=0; x < ops.length; x++ ) {
 
