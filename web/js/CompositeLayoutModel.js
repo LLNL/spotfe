@@ -60,7 +60,34 @@ ST.CompositeLayoutModel = function() {
     };
 
 
+    var get_viz_type_based_on_cali_data_type_ = function( ops ) {
+
+        var def = "BarChart";
+
+        for( var x in ops ) {
+
+            var obo = ops[x];
+            var attribute = obo.attribute;
+            var js_type = get_javascript_type_( attribute );
+            console.log( js_type );
+        }
+
+        return def;
+    };
+
+
+    var get_javascript_type_ = function( att ) {
+
+        for( var x=0; x < ST.cali_obj_by_key.length; x++ ) {
+
+            var obj = ST.cali_obj_by_key[x];
+
+            return typeof obj[att];
+        }
+    };
+
     return {
+        get_viz_type_based_on_cali_data_type: get_viz_type_based_on_cali_data_type_,
         update_composite: update_composite_
     }
 }();

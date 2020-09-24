@@ -315,6 +315,7 @@ ST.AddChartTypeView = function() {
         var operations = operations_;
 
         var dimension = gen_dimension_( operations );
+        var viz = ST.CompositeLayoutModel.get_viz_type_based_on_cali_data_type( operations );
 
         var new_layout2 = {
             dimension: dimension,
@@ -322,7 +323,7 @@ ST.AddChartTypeView = function() {
             //xaxis: xaxis,
             //yaxis: yaxis,
             name: chart_name,
-            viz: "BarChart",
+            viz: viz,
             show: true,
             composite_layout: {
                 operations: operations
