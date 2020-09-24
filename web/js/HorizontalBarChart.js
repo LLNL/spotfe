@@ -12,13 +12,16 @@ ST.HorizontalBarChart = function() {
         var DOM_safe_dimension = ST.Utility.filter_special( dimension_low );
         var className = 'horizontal-bar-chart-' + DOM_safe_dimension;
         var axis_chart_name = className + '_bar';
+        var composite_chart = options["composite_layout"] ? ST.CONSTS.COMPOSITE_PLOT : "";
 
         var rcht = '\
     <div class="outer_holder outer_cont"> \
         <strong class="text_chart_name">' + options.title + '</strong> \
         <a class="reset horiz_reset"  style="display: none;">reset</a> \
         <div instance_num="' + DOM_safe_dimension + '"  ' +
-            'style="' + style + '" class="horizontal-bar-chart ' + className + '"  ' +
+            'style="' + style + '" ' +
+            'class="horizontal-bar-chart ' +
+            composite_chart + ' ' + className + '"  ' +
             'chart-dimension="' + DOM_safe_dimension + '">  \
         ' + ReusableView.get_hamburger() + '\
             <div class="clearfix"></div> \
