@@ -1,3 +1,11 @@
+- check front light watt.
+- concat is important -> MOST important
+    * provide support for pieChart and horizontal bar chart for string based stuff.
+
+- Next step: Use actual files that are in the URL, rather than hard coded ones.
+- Perhaps generate new data sets
+    * get data sets that span nodes so we use real data.
+- Error handling if the data is not there yet.
 - attempt to build compare.js and actually make a change.
 - fix grunt server.
 

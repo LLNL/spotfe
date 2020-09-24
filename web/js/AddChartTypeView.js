@@ -308,23 +308,11 @@ ST.AddChartTypeView = function() {
 
         var chart_name = $('.chart_name').val();
 
-        var operations = operations_ || [
-                    {
-                        attribute: "elapsed_time"
-                    },
-                    {
-                        attribute: "num_regions",
-                        operation: "plus"
-                    },
-                    {
-                        attribute: "jobsize",
-                        operation: "minus"
-                    },
-                    {
-                        attribute: "elapsed_time",
-                        operation: "plus"
-                    }
-                ];
+        if( !operations_ ) {
+            alert('operations have not been set.');
+        }
+        
+        var operations = operations_;
 
         var dimension = gen_dimension_( operations );
 
