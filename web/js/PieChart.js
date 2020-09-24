@@ -16,10 +16,12 @@ ST.PieChart = function() {
         var DOM_safe_dimension = ST.Utility.filter_special( dimension_low );
 
         var style = spec.show ? "display: block;" : "display: none;";
+        var composite_chart = options["composite_layout"] ? ST.CONSTS.COMPOSITE_PLOT : "";
 
         var rcht =     '<div instance_num="' + DOM_safe_dimension + '"  ' +
             'style="' + style + '" ' +
-            'class="outer_cont quarter-chart-' + DOM_safe_dimension + '"  ' +
+            'class="outer_cont ' + composite_chart +
+            ' quarter-chart-' + DOM_safe_dimension + '"  ' +
             'chart-dimension="' + DOM_safe_dimension + '">  \
         <strong class="text_chart_name">' + spec.title + '</strong> \
         <a class="reset pie_reset"  style="display: none;">reset</a> \

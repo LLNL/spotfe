@@ -1,3 +1,4 @@
+- fix the grunt server so we can compile scss or just find command to do scss.
 - check front light watt.
 - concat is important -> MOST important
     * provide support for pieChart and horizontal bar chart for string based stuff.

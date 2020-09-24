@@ -311,7 +311,7 @@ ST.AddChartTypeView = function() {
         if( !operations_ ) {
             alert('operations have not been set.');
         }
-        
+
         var operations = operations_;
 
         var dimension = gen_dimension_( operations );
