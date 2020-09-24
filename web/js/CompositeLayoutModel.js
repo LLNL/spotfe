@@ -77,13 +77,16 @@ ST.CompositeLayoutModel = function() {
     var get_viz_type_based_on_cali_data_type_ = function( ops ) {
 
         var def = "BarChart";
-        return def;
 
         for( var x=0; x < ops.length; x++ ) {
 
             var obo = ops[x];
             var attribute = obo.attribute;
             var js_type = get_javascript_type_( attribute );
+
+            if( js_type === "string") {
+                return "PieChart";
+            }
             console.log( js_type );
         }
 
