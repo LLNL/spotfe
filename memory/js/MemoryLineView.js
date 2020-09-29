@@ -7,8 +7,14 @@ ST.MemoryLineView = function() {
 
     var render_ = function() {
 
+        var runSetId = ST.Utility.get_param('runSetId');
+        var runId = ST.Utility.get_param('runId');
+
+        //  //'/usr/gapps/spot/datasets/lulesh_gen/100',
+        var path = runSetId + runId;
+
         ST.CallSpot.ajax({
-            file: '/usr/gapps/spot/datasets/lulesh_gen/100',
+            file: path,
             type: "memory",
             success: line_render_
         });
