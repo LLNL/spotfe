@@ -11,6 +11,8 @@
 - fix grunt server.
 
 Memory:
+- spot.py commit update to the file, path for the runSetId, now that we're able to receive the whole thing.
+    * still need to actually use that file instead of the stub.
 - when adding a plot, don't rerender all the existing plots, just add one new one.
     * this causes a bug where everything gets rerendered.
 DONE - Use alias in checkbox widget as well.
