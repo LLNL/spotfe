@@ -11,7 +11,7 @@ ST.MemoryLineView = function() {
         var runId = ST.Utility.get_param('runId');
 
         //  //'/usr/gapps/spot/datasets/lulesh_gen/100',
-        var path = runSetId + runId;
+        var path = runSetId + "/" + runId;
 
         ST.CallSpot.ajax({
             file: path,
