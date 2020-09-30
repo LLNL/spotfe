@@ -70,7 +70,7 @@ ST.MemoryLineModel = function() {
 
             ST.Utility.assert( records.length > 0, "Did not receive any records.  Please check to see that your cali files contain memory data.");
 
-            randomize_( records );
+            //randomize_( records );
 
             records.sort( function( a, b ) {
 
