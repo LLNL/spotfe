@@ -41,6 +41,14 @@ ST.MemoryLineView = function() {
     };
 
 
+    var render_inst_ = function( x ) {
+
+        return '<div class="one_chart" plot_instance="' + x + '"> \
+            <div class="ch_dropdown"></div>\
+            <div id="my_chart' + x + '"></div>\
+            </div>';
+    };
+
     var render_chart_ = function() {
 
         var ht = "";
@@ -48,10 +56,7 @@ ST.MemoryLineView = function() {
 
         for( var x=0; x < charts.length; x++ ) {
 
-            ht +=  '<div class="one_chart" plot_instance="' + x + '"> \
-            <div class="ch_dropdown"></div>\
-            <div id="my_chart' + x + '"></div>\
-            </div>';
+            ht += render_inst_(x);
         }
 
         return ht;
@@ -101,6 +106,51 @@ ST.MemoryLineView = function() {
     };
 
 
+    var add_chart_render_ = function() {
+
+        var charts = ST.MemoryLineModel.get_model();
+        var inst = charts.length - 1;
+
+        var ht = render_inst_( inst );
+        $('.chart_container').append( ht );
+
+        post_render_( inst );
+
+        //make_checkbox_dropdown_( inst );
+    };
+
+
+    var make_checkbox_dropdown_ = function( inst ) {
+
+        var ch_inst = $('[plot_instance="' + inst + '"] .ch_dropdown');
+        console.log( ch_inst.length );
+        var legend = ST.MemoryLineModel.filter_legend_by_unit_type( inst );
+
+        ch_inst.CheckboxWindowManager({
+            legend: legend,
+            checked: checked_,
+            unchecked: unchecked_
+        });
+    };
+
+
+    var post_render_ = function( inst ) {
+
+        ST.MemoryLineModel.update_traces();
+
+        var charts = ST.MemoryLineModel.get_model();
+        make_checkbox_dropdown_( inst );
+
+        var trace = charts[ inst ].trace;
+        console.dir( trace );
+
+        Plotly.newPlot('my_chart' + inst, trace, layout);
+
+        var plot_inst_el = $('[plot_instance="' + inst + '"]');
+        sync_dom_checks_to_model_( plot_inst_el );
+    };
+
+
     var line_render_ = function( aj_dat, plus_button ) {
 
         var ht = render_chart_();
@@ -108,46 +158,23 @@ ST.MemoryLineView = function() {
         ST.MemoryLineModel.update_traces( aj_dat );
         var charts = ST.MemoryLineModel.get_model();
 
-
         //$('.one_chart').remove();
         if( 0 === $('.one_chart').length || plus_button) {
 
             $('.chart_container').html(ht);
-
-            for( var y=0; y < charts.length; y++ ) {
-
-                var ch_inst = $('[plot_instance="' + y + '"] .ch_dropdown');
-                var legend = ST.MemoryLineModel.filter_legend_by_unit_type( y );
-
-                ch_inst.CheckboxWindowManager({
-                    legend: legend,
-                    checked: checked_,
-                    unchecked: unchecked_
-                });
-            }
+            post_render_(0);
         }
-
 
         $('.plus.myButton').unbind('click').bind('click', add_chart_ );
-
-        for( var x=0; x < charts.length; x++ ) {
-
-            var trace = charts[x].trace;
-            console.dir( trace );
-
-            Plotly.newPlot('my_chart' + x, trace, layout);
-
-            var plot_inst_el = $('[plot_instance="' + x + '"]');
-            sync_dom_checks_to_model_( plot_inst_el );
-        }
     };
 
 
     var add_chart_ = function() {
 
         ST.MemoryLineModel.add_chart();
-        line_render_( false, true );
+        //line_render_( false, true );
 
+        add_chart_render_();
         scroll_to_bottom_();
     };
 

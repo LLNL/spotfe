@@ -1,6 +1,7 @@
 - fix the grunt server so we can compile scss or just find command to do scss.
-DONE - Error handling if the data is not there yet.
-    * right now records.length is 0 and then there's no graph there.
+- when adding a plot, don't rerender all the existing plots, just add one new one.
+    * this causes a bug where everything gets rerendered.
+DONE - Error handling if the data is not there yet.    * right now records.length is 0 and then there's no graph there.
 - add a test for the new directory we have of David's new data.
 - concat is important -> MOST important
     * provide support for pieChart and horizontal bar chart for string based stuff.
@@ -11,8 +12,6 @@ DONE - Use actual files that are in the URL, rather than hard coded ones.
 
 Memory:
 
-- when adding a plot, don't rerender all the existing plots, just add one new one.
-    * this causes a bug where everything gets rerendered.
 DONE - Use alias in checkbox widget as well.
 DONE - show alias instead of the coded attribute name.
 DONE - only default on, based on the same units.
