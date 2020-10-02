@@ -41,7 +41,8 @@ var TEST = function() {
     var init_ = function() {
 
         var num = [15, 100, 500, 1000, 2000, 5000, 10000,
-            14500, 32000, 95000, 350000, "multi25", "multi250", "multi10000", "multi32000", "deep_dir_5"];
+            14500, 32000, 95000, 350000, "multi25", "multi250", "multi10000",
+            "multi32000", "deep_dir_5", "lul_sept_28_timeseries"];
 
         for (var x in num) {
 
