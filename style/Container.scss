@@ -1,0 +1,126 @@
+.container {
+
+    div.launch_button {
+        padding: 7px;
+        width: 20px;
+
+        div {
+            background-image: url(../img/refresh.png);
+            background-size: 100% 100%;
+            width: 17px;
+            height: 17px
+        }
+    }
+
+    .reset_all {
+        color: #0c7cd5;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .contain_show_more {
+
+        text-align: center;
+        padding: 0 0 15px 0;
+    }
+
+    /* make room for rotated labels. */
+    svg[height="370"] {
+        height: 450px;
+    }
+
+    /* Need to be able to see long labels without them overlapping each other. */
+    .x.axis {
+
+        text {
+            text-anchor: end !important;
+            transform: rotate(-45deg) translate(-7px, -5px) scaleX(1.23) scaleY(1.23);
+        }
+    }
+
+    .y.axis {
+
+        text {
+            transform: scaleX(1.2) scaleY(1.2);
+        }
+    }
+
+
+    .help_body, .user_pref_body {
+        background-color: #f2f2f2;
+        border: 1px solid #cccccc;
+        padding: 22px 0 22px 22px;
+        font-size: 13px;
+        margin: 4px 0 4px -20px;
+    }
+
+    .user_pref_body .prow {
+
+        display: inline-block;
+        width: 270px;
+        margin: 6px 0 6px 0;
+
+        .title {
+            position: relative;
+            top: 4px;
+            left: 4px;
+        }
+
+        input {
+            zoom: 1.5;
+        }
+    }
+
+    a {
+        cursor: pointer;
+    }
+
+    div.multi_jupyter {
+        right: auto;
+        left: 1255px;
+    }
+    .icon {
+        padding: 8px 7px 8px 8px;
+        display: inline-block;
+        cursor: pointer;
+        text-align: center;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        z-index: 1000;
+
+        .inner {
+            width: 20px;
+            height: 20px;
+            -webkit-filter: invert(100%); /* Safari/Chrome */
+            filter: invert(100%);
+        }
+    }
+
+    .help_icon {
+
+        div {
+            background-image: url(../img/info.png);
+            background-size: 100% 100%;
+        }
+    }
+
+    .plus_icon {
+        right: 95px;
+
+        div {
+            background-image: url(../img/plus.png);
+            background-size: 100% 100%;
+        }
+    }
+
+    .user_pref_icon {
+        right: 50px;
+
+        div {
+            background-image: url(../img/check.png);
+            background-size: 100% 100%;
+        }
+    }
+
+}
