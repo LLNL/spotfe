@@ -35,7 +35,7 @@ ST.AddChartTypeView = function() {
 
 
     var operation_select = [
-        '+', '-', '*', '/', 'concat'
+        '+', '-', '*', '/'
     ];
 
     var attributes_select = [];
