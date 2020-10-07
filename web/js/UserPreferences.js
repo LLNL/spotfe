@@ -98,19 +98,22 @@ ST.UserPreferences = function() {
         });
     };
 
-    var axis_selection_types = ["double", "long", "int", "date"];
+    var axis_selection_types = ["double", "long", "int", "date", "path", "string", "set of string", "set of path"];
 
     var get_dimensions_ = function() {
 
         var charts = ST.layout_used.charts;
         var dimensions = [];
+        var allow_any_type = true;
 
         for( var x=0; x < charts.length; x++ ) {
 
             var chart = charts[x];
             var dlc = chart.dimension.toLowerCase();
 
-            if( axis_selection_types.indexOf(chart.type) > -1 || true) {
+            console.log(chart.type);
+
+            if( axis_selection_types.indexOf(chart.type) > -1 || allow_any_type ) {
                 dimensions.push(dlc);
             }
         }

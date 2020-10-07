@@ -1,15 +1,20 @@
-- need to work on the compare.js build, seems to be broken when i run it.
+1) - need to work on the compare.js build, seems to be broken when i run it.
     * be able to change 1 thing.
-DONE - SCSS clean up and break up these files so that there's not just 1 big one.
+
+2) DONE - SCSS clean up and break up these files so that there's not just 1 big one.
 DONE - fix the grunt server so we can compile scss or just find command to do scss.
     * did some SCSS refactoring, so that not all the CSS will be in just one big file.
-DONE - when adding a plot, don't rerender all the existing plots, just add one new one. * this causes a bug where everything gets rerendered.
+
+3) DONE - when adding a plot, don't rerender all the existing plots, just add one new one. * this causes a bug where everything gets rerendered.
 DONE - Error handling if the data is not there yet.    * right now records.length is 0 and then there's no graph there.
+DONE - Use actual files that are in the URL, rather than hard coded ones.
 DONE - add a test for the new directory we have of David's new data.
-- concat is important -> MOST important
+
+4) DONE - concat is important -> MOST important
     * provide support for pieChart and horizontal bar chart for string based stuff.
 
-DONE - Use actual files that are in the URL, rather than hard coded ones.
+
+- EtcBucket is not implemented for composite dimensions.
 - Generate new files using the attribute data.
 
 
