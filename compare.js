@@ -127,8 +127,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 
 /*!
- * Vue.js v2.6.11
- * (c) 2014-2019 Evan You
+ * Vue.js v2.6.12
+ * (c) 2014-2020 Evan You
  * Released under the MIT License.
  */
 
@@ -5568,7 +5568,7 @@ Object.defineProperty(Vue.prototype, '$ssrContext', {
 Object.defineProperty(Vue, 'FunctionalRenderContext', {
   value: FunctionalRenderContext
 });
-Vue.version = '2.6.11';
+Vue.version = '2.6.12';
 /*  */
 // these are reserved for web because they are directly compiled away
 // during template compilation
@@ -7147,7 +7147,7 @@ function updateDOMProps(oldVnode, vnode) {
     } else if ( // skip the update if old and new VDOM state is the same.
     // `value` is handled separately because the DOM value may be temporarily
     // out of sync with VDOM state due to focus, composition and modifiers.
-    // This  #4521 by skipping the unnecesarry `checked` update.
+    // This  #4521 by skipping the unnecessary `checked` update.
     cur !== oldProps[key]) {
       // some property updates can throw
       // e.g. `value` on <progress> w/ non-finite value
@@ -10600,7 +10600,7 @@ var define;
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.17.15';
+  var VERSION = '4.17.20';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
@@ -14307,8 +14307,21 @@ var define;
      * @returns {Array} Returns the new sorted array.
      */
     function baseOrderBy(collection, iteratees, orders) {
+      if (iteratees.length) {
+        iteratees = arrayMap(iteratees, function(iteratee) {
+          if (isArray(iteratee)) {
+            return function(value) {
+              return baseGet(value, iteratee.length === 1 ? iteratee[0] : iteratee);
+            }
+          }
+          return iteratee;
+        });
+      } else {
+        iteratees = [identity];
+      }
+
       var index = -1;
-      iteratees = arrayMap(iteratees.length ? iteratees : [identity], baseUnary(getIteratee()));
+      iteratees = arrayMap(iteratees, baseUnary(getIteratee()));
 
       var result = baseMap(collection, function(value, key, collection) {
         var criteria = arrayMap(iteratees, function(iteratee) {
@@ -14565,6 +14578,10 @@ var define;
         var key = toKey(path[index]),
             newValue = value;
 
+        if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
+          return object;
+        }
+
         if (index != lastIndex) {
           var objValue = nested[key];
           newValue = customizer ? customizer(objValue, key, nested) : undefined;
@@ -14717,11 +14734,14 @@ var define;
      *  into `array`.
      */
     function baseSortedIndexBy(array, value, iteratee, retHighest) {
-      value = iteratee(value);
-
       var low = 0,
-          high = array == null ? 0 : array.length,
-          valIsNaN = value !== value,
+          high = array == null ? 0 : array.length;
+      if (high === 0) {
+        return 0;
+      }
+
+      value = iteratee(value);
+      var valIsNaN = value !== value,
           valIsNull = value === null,
           valIsSymbol = isSymbol(value),
           valIsUndefined = value === undefined;
@@ -16206,10 +16226,11 @@ var define;
       if (arrLength != othLength && !(isPartial && othLength > arrLength)) {
         return false;
       }
-      // Assume cyclic values are equal.
-      var stacked = stack.get(array);
-      if (stacked && stack.get(other)) {
-        return stacked == other;
+      // Check that cyclic values are equal.
+      var arrStacked = stack.get(array);
+      var othStacked = stack.get(other);
+      if (arrStacked && othStacked) {
+        return arrStacked == other && othStacked == array;
       }
       var index = -1,
           result = true,
@@ -16371,10 +16392,11 @@ var define;
           return false;
         }
       }
-      // Assume cyclic values are equal.
-      var stacked = stack.get(object);
-      if (stacked && stack.get(other)) {
-        return stacked == other;
+      // Check that cyclic values are equal.
+      var objStacked = stack.get(object);
+      var othStacked = stack.get(other);
+      if (objStacked && othStacked) {
+        return objStacked == other && othStacked == object;
       }
       var result = true;
       stack.set(object, other);
@@ -19755,6 +19777,10 @@ var define;
      * // The `_.property` iteratee shorthand.
      * _.filter(users, 'active');
      * // => objects for ['barney']
+     *
+     * // Combining several predicates using `_.overEvery` or `_.overSome`.
+     * _.filter(users, _.overSome([{ 'age': 36 }, ['age', 40]]));
+     * // => objects for ['fred', 'barney']
      */
     function filter(collection, predicate) {
       var func = isArray(collection) ? arrayFilter : baseFilter;
@@ -20504,15 +20530,15 @@ var define;
      * var users = [
      *   { 'user': 'fred',   'age': 48 },
      *   { 'user': 'barney', 'age': 36 },
-     *   { 'user': 'fred',   'age': 40 },
+     *   { 'user': 'fred',   'age': 30 },
      *   { 'user': 'barney', 'age': 34 }
      * ];
      *
      * _.sortBy(users, [function(o) { return o.user; }]);
-     * // => objects for [['barney', 36], ['barney', 34], ['fred', 48], ['fred', 40]]
+     * // => objects for [['barney', 36], ['barney', 34], ['fred', 48], ['fred', 30]]
      *
      * _.sortBy(users, ['user', 'age']);
-     * // => objects for [['barney', 34], ['barney', 36], ['fred', 40], ['fred', 48]]
+     * // => objects for [['barney', 34], ['barney', 36], ['fred', 30], ['fred', 48]]
      */
     var sortBy = baseRest(function(collection, iteratees) {
       if (collection == null) {
@@ -25387,11 +25413,11 @@ var define;
 
       // Use a sourceURL for easier debugging.
       // The sourceURL gets injected into the source that's eval-ed, so be careful
-      // with lookup (in case of e.g. prototype pollution), and strip newlines if any.
-      // A newline wouldn't be a valid sourceURL anyway, and it'd enable code injection.
+      // to normalize all kinds of whitespace, so e.g. newlines (and unicode versions of it) can't sneak in
+      // and escape the comment, thus injecting code that gets evaled.
       var sourceURL = '//# sourceURL=' +
         (hasOwnProperty.call(options, 'sourceURL')
-          ? (options.sourceURL + '').replace(/[\r\n]/g, ' ')
+          ? (options.sourceURL + '').replace(/\s/g, ' ')
           : ('lodash.templateSources[' + (++templateCounter) + ']')
         ) + '\n';
 
@@ -25424,8 +25450,6 @@ var define;
 
       // If `variable` is not specified wrap a with-statement around the generated
       // code to add the data object to the top of the scope chain.
-      // Like with sourceURL, we take care to not check the option's prototype,
-      // as this configuration is a code injection vector.
       var variable = hasOwnProperty.call(options, 'variable') && options.variable;
       if (!variable) {
         source = 'with (obj) {\n' + source + '\n}\n';
@@ -26132,6 +26156,9 @@ var define;
      * values against any array or object value, respectively. See `_.isEqual`
      * for a list of supported value comparisons.
      *
+     * **Note:** Multiple values can be checked by combining several matchers
+     * using `_.overSome`
+     *
      * @static
      * @memberOf _
      * @since 3.0.0
@@ -26147,6 +26174,10 @@ var define;
      *
      * _.filter(objects, _.matches({ 'a': 4, 'c': 6 }));
      * // => [{ 'a': 4, 'b': 5, 'c': 6 }]
+     *
+     * // Checking for several possible values
+     * _.filter(objects, _.overSome([_.matches({ 'a': 1 }), _.matches({ 'a': 4 })]));
+     * // => [{ 'a': 1, 'b': 2, 'c': 3 }, { 'a': 4, 'b': 5, 'c': 6 }]
      */
     function matches(source) {
       return baseMatches(baseClone(source, CLONE_DEEP_FLAG));
@@ -26160,6 +26191,9 @@ var define;
      * **Note:** Partial comparisons will match empty array and empty object
      * `srcValue` values against any array or object value, respectively. See
      * `_.isEqual` for a list of supported value comparisons.
+     *
+     * **Note:** Multiple values can be checked by combining several matchers
+     * using `_.overSome`
      *
      * @static
      * @memberOf _
@@ -26177,6 +26211,10 @@ var define;
      *
      * _.find(objects, _.matchesProperty('a', 4));
      * // => { 'a': 4, 'b': 5, 'c': 6 }
+     *
+     * // Checking for several possible values
+     * _.filter(objects, _.overSome([_.matchesProperty('a', 1), _.matchesProperty('a', 4)]));
+     * // => [{ 'a': 1, 'b': 2, 'c': 3 }, { 'a': 4, 'b': 5, 'c': 6 }]
      */
     function matchesProperty(path, srcValue) {
       return baseMatchesProperty(path, baseClone(srcValue, CLONE_DEEP_FLAG));
@@ -26400,6 +26438,10 @@ var define;
      * Creates a function that checks if **all** of the `predicates` return
      * truthy when invoked with the arguments it receives.
      *
+     * Following shorthands are possible for providing predicates.
+     * Pass an `Object` and it will be used as an parameter for `_.matches` to create the predicate.
+     * Pass an `Array` of parameters for `_.matchesProperty` and the predicate will be created using them.
+     *
      * @static
      * @memberOf _
      * @since 4.0.0
@@ -26426,6 +26468,10 @@ var define;
      * Creates a function that checks if **any** of the `predicates` return
      * truthy when invoked with the arguments it receives.
      *
+     * Following shorthands are possible for providing predicates.
+     * Pass an `Object` and it will be used as an parameter for `_.matches` to create the predicate.
+     * Pass an `Array` of parameters for `_.matchesProperty` and the predicate will be created using them.
+     *
      * @static
      * @memberOf _
      * @since 4.0.0
@@ -26445,6 +26491,9 @@ var define;
      *
      * func(NaN);
      * // => false
+     *
+     * var matchesFunc = _.overSome([{ 'a': 1 }, { 'a': 2 }])
+     * var matchesPropertyFunc = _.overSome([['a', 1], ['a', 2]])
      */
     var overSome = createOver(arraySome);
 
@@ -30965,61 +31014,113 @@ var _ascending = _interopRequireDefault(require("./ascending.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _default(compare) {
-  if (compare.length === 1) compare = ascendingComparator(compare);
-  return {
-    left: function (a, x, lo, hi) {
-      if (lo == null) lo = 0;
-      if (hi == null) hi = a.length;
+function _default(f) {
+  let delta = f;
+  let compare = f;
 
-      while (lo < hi) {
-        var mid = lo + hi >>> 1;
-        if (compare(a[mid], x) < 0) lo = mid + 1;else hi = mid;
-      }
+  if (f.length === 1) {
+    delta = (d, x) => f(d) - x;
 
-      return lo;
-    },
-    right: function (a, x, lo, hi) {
-      if (lo == null) lo = 0;
-      if (hi == null) hi = a.length;
+    compare = ascendingComparator(f);
+  }
 
-      while (lo < hi) {
-        var mid = lo + hi >>> 1;
-        if (compare(a[mid], x) > 0) hi = mid;else lo = mid + 1;
-      }
+  function left(a, x, lo, hi) {
+    if (lo == null) lo = 0;
+    if (hi == null) hi = a.length;
 
-      return lo;
+    while (lo < hi) {
+      const mid = lo + hi >>> 1;
+      if (compare(a[mid], x) < 0) lo = mid + 1;else hi = mid;
     }
+
+    return lo;
+  }
+
+  function right(a, x, lo, hi) {
+    if (lo == null) lo = 0;
+    if (hi == null) hi = a.length;
+
+    while (lo < hi) {
+      const mid = lo + hi >>> 1;
+      if (compare(a[mid], x) > 0) hi = mid;else lo = mid + 1;
+    }
+
+    return lo;
+  }
+
+  function center(a, x, lo, hi) {
+    if (lo == null) lo = 0;
+    if (hi == null) hi = a.length;
+    const i = left(a, x, lo, hi - 1);
+    return i > lo && delta(a[i - 1], x) > -delta(a[i], x) ? i - 1 : i;
+  }
+
+  return {
+    left,
+    center,
+    right
   };
 }
 
 function ascendingComparator(f) {
-  return function (d, x) {
-    return (0, _ascending.default)(f(d), x);
-  };
+  return (d, x) => (0, _ascending.default)(f(d), x);
 }
-},{"./ascending.js":"yJgn"}],"YrTP":[function(require,module,exports) {
+},{"./ascending.js":"yJgn"}],"XWLP":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = exports.bisectLeft = exports.bisectRight = void 0;
+exports.default = _default;
+exports.numbers = numbers;
+
+function _default(x) {
+  return x === null ? NaN : +x;
+}
+
+function* numbers(values, valueof) {
+  if (valueof === undefined) {
+    for (let value of values) {
+      if (value != null && (value = +value) >= value) {
+        yield value;
+      }
+    }
+  } else {
+    let index = -1;
+
+    for (let value of values) {
+      if ((value = valueof(value, ++index, values)) != null && (value = +value) >= value) {
+        yield value;
+      }
+    }
+  }
+}
+},{}],"YrTP":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = exports.bisectCenter = exports.bisectLeft = exports.bisectRight = void 0;
 
 var _ascending = _interopRequireDefault(require("./ascending.js"));
 
 var _bisector = _interopRequireDefault(require("./bisector.js"));
 
+var _number = _interopRequireDefault(require("./number.js"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var ascendingBisect = (0, _bisector.default)(_ascending.default);
-var bisectRight = ascendingBisect.right;
+const ascendingBisect = (0, _bisector.default)(_ascending.default);
+const bisectRight = ascendingBisect.right;
 exports.bisectRight = bisectRight;
-var bisectLeft = ascendingBisect.left;
+const bisectLeft = ascendingBisect.left;
 exports.bisectLeft = bisectLeft;
+const bisectCenter = (0, _bisector.default)(_number.default).center;
+exports.bisectCenter = bisectCenter;
 var _default = bisectRight;
 exports.default = _default;
-},{"./ascending.js":"yJgn","./bisector.js":"CQHQ"}],"w45x":[function(require,module,exports) {
+},{"./ascending.js":"yJgn","./bisector.js":"CQHQ","./number.js":"XWLP"}],"w45x":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31196,6 +31297,93 @@ function _default(values, valueof) {
 
   return [min, max];
 }
+},{}],"PMZ4":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+exports.Adder = void 0;
+
+// https://github.com/python/cpython/blob/a74eea238f5baba15797e2e8b570d153bc8690a7/Modules/mathmodule.c#L1423
+class Adder {
+  constructor() {
+    this._partials = new Float64Array(32);
+    this._n = 0;
+  }
+
+  add(x) {
+    const p = this._partials;
+    let i = 0;
+
+    for (let j = 0; j < this._n && j < 32; j++) {
+      const y = p[j],
+            hi = x + y,
+            lo = Math.abs(x) < Math.abs(y) ? x - (hi - y) : y - (hi - x);
+      if (lo) p[i++] = lo;
+      x = hi;
+    }
+
+    p[i] = x;
+    this._n = i + 1;
+    return this;
+  }
+
+  valueOf() {
+    const p = this._partials;
+    let n = this._n,
+        x,
+        y,
+        lo,
+        hi = 0;
+
+    if (n > 0) {
+      hi = p[--n];
+
+      while (n > 0) {
+        x = hi;
+        y = p[--n];
+        hi = x + y;
+        lo = y - (hi - x);
+        if (lo) break;
+      }
+
+      if (n > 0 && (lo < 0 && p[n - 1] < 0 || lo > 0 && p[n - 1] > 0)) {
+        y = lo * 2;
+        x = hi + y;
+        if (y == x - hi) hi = x;
+      }
+    }
+
+    return hi;
+  }
+
+}
+
+exports.Adder = Adder;
+
+function _default(values, valueof) {
+  const adder = new Adder();
+
+  if (valueof === undefined) {
+    for (let value of values) {
+      if (value = +value) {
+        adder.add(value);
+      }
+    }
+  } else {
+    let index = -1;
+
+    for (let value of values) {
+      if (value = +valueof(value, ++index, values)) {
+        adder.add(value);
+      }
+    }
+  }
+
+  return +adder;
+}
 },{}],"NNW9":[function(require,module,exports) {
 "use strict";
 
@@ -31217,6 +31405,8 @@ exports.default = group;
 exports.groups = groups;
 exports.rollup = rollup;
 exports.rollups = rollups;
+exports.index = index;
+exports.indexes = indexes;
 
 var _identity = _interopRequireDefault(require("./identity.js"));
 
@@ -31236,6 +31426,19 @@ function rollup(values, reduce, ...keys) {
 
 function rollups(values, reduce, ...keys) {
   return nest(values, Array.from, reduce, keys);
+}
+
+function index(values, ...keys) {
+  return nest(values, _identity.default, unique, keys);
+}
+
+function indexes(values, ...keys) {
+  return nest(values, Array.from, unique, keys);
+}
+
+function unique(values) {
+  if (values.length !== 1) throw new Error("duplicate key");
+  return values[0];
 }
 
 function nest(values, map, reduce, keys) {
@@ -31283,26 +31486,6 @@ function _default(x) {
     return x;
   };
 }
-},{}],"wcAU":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = _default;
-
-function _default(start, stop, step) {
-  start = +start, stop = +stop, step = (n = arguments.length) < 2 ? (stop = start, start = 0, 1) : n < 3 ? 1 : +step;
-  var i = -1,
-      n = Math.max(0, Math.ceil((stop - start) / step)) | 0,
-      range = new Array(n);
-
-  while (++i < n) {
-    range[i] = start + i * step;
-  }
-
-  return range;
-}
 },{}],"EUzg":[function(require,module,exports) {
 "use strict";
 
@@ -31334,11 +31517,12 @@ function _default(start, stop, count) {
 
     while (++i < n) ticks[i] = (start + i) * step;
   } else {
-    start = Math.floor(start * step);
-    stop = Math.ceil(stop * step);
-    ticks = new Array(n = Math.ceil(start - stop + 1));
+    step = -step;
+    start = Math.ceil(start * step);
+    stop = Math.floor(stop * step);
+    ticks = new Array(n = Math.ceil(stop - start + 1));
 
-    while (++i < n) ticks[i] = (start - i) / step;
+    while (++i < n) ticks[i] = (start + i) / step;
   }
 
   if (reverse) ticks.reverse();
@@ -31392,9 +31576,7 @@ var _extent = _interopRequireDefault(require("./extent.js"));
 
 var _identity = _interopRequireDefault(require("./identity.js"));
 
-var _range = _interopRequireDefault(require("./range.js"));
-
-var _ticks = require("./ticks.js");
+var _ticks = _interopRequireDefault(require("./ticks.js"));
 
 var _sturges = _interopRequireDefault(require("./threshold/sturges.js"));
 
@@ -31422,8 +31604,8 @@ function _default() {
         tz = threshold(values, x0, x1); // Convert number of thresholds into uniform thresholds.
 
     if (!Array.isArray(tz)) {
-      tz = (0, _ticks.tickStep)(x0, x1, tz);
-      tz = (0, _range.default)(Math.ceil(x0 / tz) * tz, x1, tz); // exclusive
+      tz = (0, _ticks.default)(x0, x1, tz);
+      if (tz[tz.length - 1] === x1) tz.pop(); // exclusive
     } // Remove any thresholds outside the domain.
 
 
@@ -31468,7 +31650,7 @@ function _default() {
 
   return histogram;
 }
-},{"./array.js":"RkzJ","./bisect.js":"YrTP","./constant.js":"aCvo","./extent.js":"UaWb","./identity.js":"NNW9","./range.js":"wcAU","./ticks.js":"EUzg","./threshold/sturges.js":"J0XR"}],"Ougw":[function(require,module,exports) {
+},{"./array.js":"RkzJ","./bisect.js":"YrTP","./constant.js":"aCvo","./extent.js":"UaWb","./identity.js":"NNW9","./ticks.js":"EUzg","./threshold/sturges.js":"J0XR"}],"Ougw":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31580,37 +31762,7 @@ function swap(array, i, j) {
   array[i] = array[j];
   array[j] = t;
 }
-},{"./ascending.js":"yJgn"}],"XWLP":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = _default;
-exports.numbers = numbers;
-
-function _default(x) {
-  return x === null ? NaN : +x;
-}
-
-function* numbers(values, valueof) {
-  if (valueof === undefined) {
-    for (let value of values) {
-      if (value != null && (value = +value) >= value) {
-        yield value;
-      }
-    }
-  } else {
-    let index = -1;
-
-    for (let value of values) {
-      if ((value = valueof(value, ++index, values)) != null && (value = +value) >= value) {
-        yield value;
-      }
-    }
-  }
-}
-},{}],"xM5B":[function(require,module,exports) {
+},{"./ascending.js":"yJgn"}],"xM5B":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31852,6 +32004,26 @@ exports.default = _default;
 function _default(source, keys) {
   return Array.from(keys, key => source[key]);
 }
+},{}],"wcAU":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+function _default(start, stop, step) {
+  start = +start, stop = +stop, step = (n = arguments.length) < 2 ? (stop = start, start = 0, 1) : n < 3 ? 1 : +step;
+  var i = -1,
+      n = Math.max(0, Math.ceil((stop - start) / step)) | 0,
+      range = new Array(n);
+
+  while (++i < n) {
+    range[i] = start + i * step;
+  }
+
+  return range;
+}
 },{}],"LCo4":[function(require,module,exports) {
 "use strict";
 
@@ -32014,21 +32186,26 @@ function scan(values, compare) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = shuffle;
+exports.shuffler = shuffler;
+exports.default = void 0;
 
-function shuffle(array, i0 = 0, i1 = array.length) {
-  var m = i1 - (i0 = +i0),
-      t,
-      i;
+var _default = shuffler(Math.random);
 
-  while (m) {
-    i = Math.random() * m-- | 0;
-    t = array[m + i0];
-    array[m + i0] = array[i + i0];
-    array[i + i0] = t;
-  }
+exports.default = _default;
 
-  return array;
+function shuffler(random) {
+  return function shuffle(array, i0 = 0, i1 = array.length) {
+    let m = i1 - (i0 = +i0);
+
+    while (m) {
+      const i = random() * m-- | 0,
+            t = array[m + i0];
+      array[m + i0] = array[i + i0];
+      array[i + i0] = t;
+    }
+
+    return array;
+  };
 }
 },{}],"uFmM":[function(require,module,exports) {
 "use strict";
@@ -32125,6 +32302,12 @@ Object.defineProperty(exports, "bisectLeft", {
     return _bisect.bisectLeft;
   }
 });
+Object.defineProperty(exports, "bisectCenter", {
+  enumerable: true,
+  get: function () {
+    return _bisect.bisectCenter;
+  }
+});
 Object.defineProperty(exports, "ascending", {
   enumerable: true,
   get: function () {
@@ -32173,6 +32356,18 @@ Object.defineProperty(exports, "extent", {
     return _extent.default;
   }
 });
+Object.defineProperty(exports, "fsum", {
+  enumerable: true,
+  get: function () {
+    return _fsum.default;
+  }
+});
+Object.defineProperty(exports, "Adder", {
+  enumerable: true,
+  get: function () {
+    return _fsum.Adder;
+  }
+});
 Object.defineProperty(exports, "group", {
   enumerable: true,
   get: function () {
@@ -32183,6 +32378,18 @@ Object.defineProperty(exports, "groups", {
   enumerable: true,
   get: function () {
     return _group.groups;
+  }
+});
+Object.defineProperty(exports, "index", {
+  enumerable: true,
+  get: function () {
+    return _group.index;
+  }
+});
+Object.defineProperty(exports, "indexes", {
+  enumerable: true,
+  get: function () {
+    return _group.indexes;
   }
 });
 Object.defineProperty(exports, "rollup", {
@@ -32341,6 +32548,12 @@ Object.defineProperty(exports, "shuffle", {
     return _shuffle.default;
   }
 });
+Object.defineProperty(exports, "shuffler", {
+  enumerable: true,
+  get: function () {
+    return _shuffle.shuffler;
+  }
+});
 Object.defineProperty(exports, "sum", {
   enumerable: true,
   get: function () {
@@ -32402,6 +32615,8 @@ var _deviation = _interopRequireDefault(require("./deviation.js"));
 
 var _extent = _interopRequireDefault(require("./extent.js"));
 
+var _fsum = _interopRequireWildcard(require("./fsum.js"));
+
 var _group = _interopRequireWildcard(require("./group.js"));
 
 var _bin = _interopRequireDefault(require("./bin.js"));
@@ -32446,7 +32661,7 @@ var _greatestIndex = _interopRequireDefault(require("./greatestIndex.js"));
 
 var _scan = _interopRequireDefault(require("./scan.js"));
 
-var _shuffle = _interopRequireDefault(require("./shuffle.js"));
+var _shuffle = _interopRequireWildcard(require("./shuffle.js"));
 
 var _sum = _interopRequireDefault(require("./sum.js"));
 
@@ -32463,7 +32678,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-},{"./bisect.js":"YrTP","./ascending.js":"yJgn","./bisector.js":"CQHQ","./count.js":"w45x","./cross.js":"LKVk","./cumsum.js":"YSUD","./descending.js":"x8mM","./deviation.js":"WEAa","./extent.js":"UaWb","./group.js":"zkcs","./bin.js":"bGH2","./threshold/freedmanDiaconis.js":"nJJ4","./threshold/scott.js":"Rqev","./threshold/sturges.js":"J0XR","./max.js":"Ougw","./maxIndex.js":"IgNN","./mean.js":"YY5N","./median.js":"CxwF","./merge.js":"Getd","./min.js":"kP8m","./minIndex.js":"Fe03","./pairs.js":"DkXH","./permute.js":"RhiG","./quantile.js":"xM5B","./quickselect.js":"v5AZ","./range.js":"wcAU","./least.js":"LCo4","./leastIndex.js":"JcRo","./greatest.js":"P3UJ","./greatestIndex.js":"Rv6z","./scan.js":"swlo","./shuffle.js":"Xskt","./sum.js":"uFmM","./ticks.js":"EUzg","./transpose.js":"DmNI","./variance.js":"Nh5Q","./zip.js":"ciZM"}],"buZa":[function(require,module,exports) {
+},{"./bisect.js":"YrTP","./ascending.js":"yJgn","./bisector.js":"CQHQ","./count.js":"w45x","./cross.js":"LKVk","./cumsum.js":"YSUD","./descending.js":"x8mM","./deviation.js":"WEAa","./extent.js":"UaWb","./fsum.js":"PMZ4","./group.js":"zkcs","./bin.js":"bGH2","./threshold/freedmanDiaconis.js":"nJJ4","./threshold/scott.js":"Rqev","./threshold/sturges.js":"J0XR","./max.js":"Ougw","./maxIndex.js":"IgNN","./mean.js":"YY5N","./median.js":"CxwF","./merge.js":"Getd","./min.js":"kP8m","./minIndex.js":"Fe03","./pairs.js":"DkXH","./permute.js":"RhiG","./quantile.js":"xM5B","./quickselect.js":"v5AZ","./range.js":"wcAU","./least.js":"LCo4","./leastIndex.js":"JcRo","./greatest.js":"P3UJ","./greatestIndex.js":"Rv6z","./scan.js":"swlo","./shuffle.js":"Xskt","./sum.js":"uFmM","./ticks.js":"EUzg","./transpose.js":"DmNI","./variance.js":"Nh5Q","./zip.js":"ciZM"}],"buZa":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33078,11 +33293,11 @@ function hsl2rgb(h, m1, m2) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.rad2deg = exports.deg2rad = void 0;
-var deg2rad = Math.PI / 180;
-exports.deg2rad = deg2rad;
-var rad2deg = 180 / Math.PI;
-exports.rad2deg = rad2deg;
+exports.degrees = exports.radians = void 0;
+const radians = Math.PI / 180;
+exports.radians = radians;
+const degrees = 180 / Math.PI;
+exports.degrees = degrees;
 },{}],"f7Av":[function(require,module,exports) {
 
 "use strict";
@@ -33108,14 +33323,14 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 // https://observablehq.com/@mbostock/lab-and-rgb
-var K = 18,
-    Xn = 0.96422,
-    Yn = 1,
-    Zn = 0.82521,
-    t0 = 4 / 29,
-    t1 = 6 / 29,
-    t2 = 3 * t1 * t1,
-    t3 = t1 * t1 * t1;
+const K = 18,
+      Xn = 0.96422,
+      Yn = 1,
+      Zn = 0.82521,
+      t0 = 4 / 29,
+      t1 = 6 / 29,
+      t2 = 3 * t1 * t1,
+      t3 = t1 * t1 * t1;
 
 function labConvert(o) {
   if (o instanceof Lab) return new Lab(o.l, o.a, o.b, o.opacity);
@@ -33188,7 +33403,7 @@ function hclConvert(o) {
   if (!(o instanceof Lab)) o = labConvert(o);
   if (o.a === 0 && o.b === 0) return new Hcl(NaN, 0 < o.l && o.l < 100 ? 0 : NaN, o.l, o.opacity);
 
-  var h = Math.atan2(o.b, o.a) * _math.rad2deg;
+  var h = Math.atan2(o.b, o.a) * _math.degrees;
 
   return new Hcl(h < 0 ? h + 360 : h, Math.sqrt(o.a * o.a + o.b * o.b), o.l, o.opacity);
 }
@@ -33210,7 +33425,7 @@ function Hcl(h, c, l, opacity) {
 
 function hcl2lab(o) {
   if (isNaN(o.h)) return new Lab(o.l, 0, 0, o.opacity);
-  var h = o.h * _math.deg2rad;
+  var h = o.h * _math.radians;
   return new Lab(o.l, Math.cos(h) * o.c, Math.sin(h) * o.c, o.opacity);
 }
 
@@ -33265,7 +33480,7 @@ function cubehelixConvert(o) {
       k = (E * (g - l) - C * bl) / D,
       s = Math.sqrt(k * k + bl * bl) / (E * l * (1 - l)),
       // NaN if l=0 or l=1
-  h = s ? Math.atan2(k, bl) * _math.rad2deg - 120 : NaN;
+  h = s ? Math.atan2(k, bl) * _math.degrees - 120 : NaN;
   return new Cubehelix(h < 0 ? h + 360 : h, s, l, o.opacity);
 }
 
@@ -33290,7 +33505,7 @@ function Cubehelix(h, s, l, opacity) {
     return new Cubehelix(this.h, this.s, this.l * k, this.opacity);
   },
   rgb: function () {
-    var h = isNaN(this.h) ? 0 : (this.h + 120) * _math.deg2rad,
+    var h = isNaN(this.h) ? 0 : (this.h + 120) * _math.radians,
         l = +this.l,
         a = isNaN(this.s) ? 0 : this.s * l * (1 - l),
         cosh = Math.cos(h),
@@ -33411,7 +33626,18 @@ function _default(values) {
     return (0, _basis.basis)((t - i / n) * n, v0, v1, v2, v3);
   };
 }
-},{"./basis.js":"ElXH"}],"RhzI":[function(require,module,exports) {
+},{"./basis.js":"ElXH"}],"yxFT":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _default = x => () => x;
+
+exports.default = _default;
+},{}],"RhzI":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33452,7 +33678,7 @@ function nogamma(a, b) {
   var d = b - a;
   return d ? linear(a, d) : (0, _constant.default)(isNaN(a) ? b : a);
 }
-},{"./constant.js":"aCvo"}],"rvVK":[function(require,module,exports) {
+},{"./constant.js":"yxFT"}],"rvVK":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33775,7 +34001,7 @@ function _default(a, b) {
       c;
   return b == null || t === "boolean" ? (0, _constant.default)(b) : (t === "number" ? _number.default : t === "string" ? (c = (0, _d3Color.color)(b)) ? (b = c, _rgb.default) : _string.default : b instanceof _d3Color.color ? _rgb.default : b instanceof Date ? _date.default : (0, _numberArray.isNumberArray)(b) ? _numberArray.default : Array.isArray(b) ? _array.genericArray : typeof b.valueOf !== "function" && typeof b.toString !== "function" || isNaN(b) ? _object.default : _number.default)(a, b);
 }
-},{"d3-color":"Peej","./rgb.js":"rvVK","./array.js":"TYZM","./date.js":"jEDF","./number.js":"YNf8","./object.js":"iJdZ","./string.js":"nK0E","./constant.js":"aCvo","./numberArray.js":"BOJ5"}],"B1w8":[function(require,module,exports) {
+},{"d3-color":"Peej","./rgb.js":"rvVK","./array.js":"TYZM","./date.js":"jEDF","./number.js":"YNf8","./object.js":"iJdZ","./string.js":"nK0E","./constant.js":"yxFT","./numberArray.js":"BOJ5"}],"B1w8":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33868,16 +34094,12 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-var cssNode, cssRoot, cssView, svgNode;
+var svgNode;
+/* eslint-disable no-undef */
 
 function parseCss(value) {
-  if (value === "none") return _decompose.identity;
-  if (!cssNode) cssNode = document.createElement("DIV"), cssRoot = document.documentElement, cssView = document.defaultView;
-  cssNode.style.transform = value;
-  value = cssView.getComputedStyle(cssRoot.appendChild(cssNode), null).getPropertyValue("transform");
-  cssRoot.removeChild(cssNode);
-  value = value.slice(7, -1).split(",");
-  return (0, _decompose.default)(+value[0], +value[1], +value[2], +value[3], +value[4], +value[5]);
+  const m = new (typeof DOMMatrix === "function" ? DOMMatrix : WebKitCSSMatrix)(value + "");
+  return m.isIdentity ? _decompose.identity : (0, _decompose.default)(m.a, m.b, m.c, m.d, m.e, m.f);
 }
 
 function parseSvg(value) {
@@ -33995,11 +34217,8 @@ exports.interpolateTransformSvg = interpolateTransformSvg;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = _default;
-var rho = Math.SQRT2,
-    rho2 = 2,
-    rho4 = 4,
-    epsilon2 = 1e-12;
+exports.default = void 0;
+var epsilon2 = 1e-12;
 
 function cosh(x) {
   return ((x = Math.exp(x)) + 1 / x) / 2;
@@ -34011,49 +34230,63 @@ function sinh(x) {
 
 function tanh(x) {
   return ((x = Math.exp(2 * x)) - 1) / (x + 1);
-} // p0 = [ux0, uy0, w0]
-// p1 = [ux1, uy1, w1]
+}
 
+var _default = function zoomRho(rho, rho2, rho4) {
+  // p0 = [ux0, uy0, w0]
+  // p1 = [ux1, uy1, w1]
+  function zoom(p0, p1) {
+    var ux0 = p0[0],
+        uy0 = p0[1],
+        w0 = p0[2],
+        ux1 = p1[0],
+        uy1 = p1[1],
+        w1 = p1[2],
+        dx = ux1 - ux0,
+        dy = uy1 - uy0,
+        d2 = dx * dx + dy * dy,
+        i,
+        S; // Special case for u0 ≅ u1.
 
-function _default(p0, p1) {
-  var ux0 = p0[0],
-      uy0 = p0[1],
-      w0 = p0[2],
-      ux1 = p1[0],
-      uy1 = p1[1],
-      w1 = p1[2],
-      dx = ux1 - ux0,
-      dy = uy1 - uy0,
-      d2 = dx * dx + dy * dy,
-      i,
-      S; // Special case for u0 ≅ u1.
-
-  if (d2 < epsilon2) {
-    S = Math.log(w1 / w0) / rho;
-
-    i = function (t) {
-      return [ux0 + t * dx, uy0 + t * dy, w0 * Math.exp(rho * t * S)];
-    };
-  } // General case.
-  else {
-      var d1 = Math.sqrt(d2),
-          b0 = (w1 * w1 - w0 * w0 + rho4 * d2) / (2 * w0 * rho2 * d1),
-          b1 = (w1 * w1 - w0 * w0 - rho4 * d2) / (2 * w1 * rho2 * d1),
-          r0 = Math.log(Math.sqrt(b0 * b0 + 1) - b0),
-          r1 = Math.log(Math.sqrt(b1 * b1 + 1) - b1);
-      S = (r1 - r0) / rho;
+    if (d2 < epsilon2) {
+      S = Math.log(w1 / w0) / rho;
 
       i = function (t) {
-        var s = t * S,
-            coshr0 = cosh(r0),
-            u = w0 / (rho2 * d1) * (coshr0 * tanh(rho * s + r0) - sinh(r0));
-        return [ux0 + u * dx, uy0 + u * dy, w0 * coshr0 / cosh(rho * s + r0)];
+        return [ux0 + t * dx, uy0 + t * dy, w0 * Math.exp(rho * t * S)];
       };
-    }
+    } // General case.
+    else {
+        var d1 = Math.sqrt(d2),
+            b0 = (w1 * w1 - w0 * w0 + rho4 * d2) / (2 * w0 * rho2 * d1),
+            b1 = (w1 * w1 - w0 * w0 - rho4 * d2) / (2 * w1 * rho2 * d1),
+            r0 = Math.log(Math.sqrt(b0 * b0 + 1) - b0),
+            r1 = Math.log(Math.sqrt(b1 * b1 + 1) - b1);
+        S = (r1 - r0) / rho;
 
-  i.duration = S * 1000;
-  return i;
-}
+        i = function (t) {
+          var s = t * S,
+              coshr0 = cosh(r0),
+              u = w0 / (rho2 * d1) * (coshr0 * tanh(rho * s + r0) - sinh(r0));
+          return [ux0 + u * dx, uy0 + u * dy, w0 * coshr0 / cosh(rho * s + r0)];
+        };
+      }
+
+    i.duration = S * 1000 * rho / Math.SQRT2;
+    return i;
+  }
+
+  zoom.rho = function (_) {
+    var _1 = Math.max(1e-3, +_),
+        _2 = _1 * _1,
+        _4 = _2 * _2;
+
+    return zoomRho(_1, _2, _4);
+  };
+
+  return zoom;
+}(Math.SQRT2, 2, 4);
+
+exports.default = _default;
 },{}],"LdeI":[function(require,module,exports) {
 "use strict";
 
@@ -34207,7 +34440,12 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = piecewise;
 
+var _value = _interopRequireDefault(require("./value.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function piecewise(interpolate, values) {
+  if (values === undefined) values = interpolate, interpolate = _value.default;
   var i = 0,
       n = values.length - 1,
       v = values[0],
@@ -34220,7 +34458,7 @@ function piecewise(interpolate, values) {
     return I[i](t - i);
   };
 }
-},{}],"Oe1t":[function(require,module,exports) {
+},{"./value.js":"gzcD"}],"Oe1t":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34610,11 +34848,16 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = _default;
+exports.formatDecimalParts = formatDecimalParts;
 
-// Computes the decimal coefficient and exponent of the specified number x with
+function _default(x) {
+  return Math.abs(x = Math.round(x)) >= 1e21 ? x.toLocaleString("en").replace(/,/g, "") : x.toString(10);
+} // Computes the decimal coefficient and exponent of the specified number x with
 // significant digits p, where x is positive and p is in [1, 21] or undefined.
-// For example, formatDecimal(1.23) returns ["123", 0].
-function _default(x, p) {
+// For example, formatDecimalParts(1.23) returns ["123", 0].
+
+
+function formatDecimalParts(x, p) {
   if ((i = (x = p ? x.toExponential(p - 1) : x.toExponential()).indexOf("e")) < 0) return null; // NaN, ±Infinity
 
   var i,
@@ -34631,12 +34874,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = _default;
 
-var _formatDecimal = _interopRequireDefault(require("./formatDecimal.js"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _formatDecimal = require("./formatDecimal.js");
 
 function _default(x) {
-  return x = (0, _formatDecimal.default)(Math.abs(x)), x ? x[1] : NaN;
+  return x = (0, _formatDecimal.formatDecimalParts)(Math.abs(x)), x ? x[1] : NaN;
 }
 },{"./formatDecimal.js":"GAUC"}],"rbAM":[function(require,module,exports) {
 "use strict";
@@ -34764,21 +35005,19 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = _default;
 exports.prefixExponent = void 0;
 
-var _formatDecimal = _interopRequireDefault(require("./formatDecimal.js"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _formatDecimal = require("./formatDecimal.js");
 
 var prefixExponent;
 exports.prefixExponent = prefixExponent;
 
 function _default(x, p) {
-  var d = (0, _formatDecimal.default)(x, p);
+  var d = (0, _formatDecimal.formatDecimalParts)(x, p);
   if (!d) return x + "";
   var coefficient = d[0],
       exponent = d[1],
       i = exponent - (exports.prefixExponent = prefixExponent = Math.max(-8, Math.min(8, Math.floor(exponent / 3))) * 3) + 1,
       n = coefficient.length;
-  return i === n ? coefficient : i > n ? coefficient + new Array(i - n + 1).join("0") : i > 0 ? coefficient.slice(0, i) + "." + coefficient.slice(i) : "0." + new Array(1 - i).join("0") + (0, _formatDecimal.default)(x, Math.max(0, p + i - 1))[0]; // less than 1y!
+  return i === n ? coefficient : i > n ? coefficient + new Array(i - n + 1).join("0") : i > 0 ? coefficient.slice(0, i) + "." + coefficient.slice(i) : "0." + new Array(1 - i).join("0") + (0, _formatDecimal.formatDecimalParts)(x, Math.max(0, p + i - 1))[0]; // less than 1y!
 }
 },{"./formatDecimal.js":"GAUC"}],"UDrw":[function(require,module,exports) {
 "use strict";
@@ -34788,12 +35027,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = _default;
 
-var _formatDecimal = _interopRequireDefault(require("./formatDecimal.js"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _formatDecimal = require("./formatDecimal.js");
 
 function _default(x, p) {
-  var d = (0, _formatDecimal.default)(x, p);
+  var d = (0, _formatDecimal.formatDecimalParts)(x, p);
   if (!d) return x + "";
   var coefficient = d[0],
       exponent = d[1];
@@ -34807,6 +35044,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _formatDecimal = _interopRequireDefault(require("./formatDecimal.js"));
+
 var _formatPrefixAuto = _interopRequireDefault(require("./formatPrefixAuto.js"));
 
 var _formatRounded = _interopRequireDefault(require("./formatRounded.js"));
@@ -34814,44 +35053,22 @@ var _formatRounded = _interopRequireDefault(require("./formatRounded.js"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _default = {
-  "%": function (x, p) {
-    return (x * 100).toFixed(p);
-  },
-  "b": function (x) {
-    return Math.round(x).toString(2);
-  },
-  "c": function (x) {
-    return x + "";
-  },
-  "d": function (x) {
-    return Math.round(x).toString(10);
-  },
-  "e": function (x, p) {
-    return x.toExponential(p);
-  },
-  "f": function (x, p) {
-    return x.toFixed(p);
-  },
-  "g": function (x, p) {
-    return x.toPrecision(p);
-  },
-  "o": function (x) {
-    return Math.round(x).toString(8);
-  },
-  "p": function (x, p) {
-    return (0, _formatRounded.default)(x * 100, p);
-  },
+  "%": (x, p) => (x * 100).toFixed(p),
+  "b": x => Math.round(x).toString(2),
+  "c": x => x + "",
+  "d": _formatDecimal.default,
+  "e": (x, p) => x.toExponential(p),
+  "f": (x, p) => x.toFixed(p),
+  "g": (x, p) => x.toPrecision(p),
+  "o": x => Math.round(x).toString(8),
+  "p": (x, p) => (0, _formatRounded.default)(x * 100, p),
   "r": _formatRounded.default,
   "s": _formatPrefixAuto.default,
-  "X": function (x) {
-    return Math.round(x).toString(16).toUpperCase();
-  },
-  "x": function (x) {
-    return Math.round(x).toString(16);
-  }
+  "X": x => Math.round(x).toString(16).toUpperCase(),
+  "x": x => Math.round(x).toString(16)
 };
 exports.default = _default;
-},{"./formatPrefixAuto.js":"fBpa","./formatRounded.js":"UDrw"}],"IVmM":[function(require,module,exports) {
+},{"./formatDecimal.js":"GAUC","./formatPrefixAuto.js":"fBpa","./formatRounded.js":"UDrw"}],"IVmM":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34887,7 +35104,7 @@ function _default(locale) {
       decimal = locale.decimal === undefined ? "." : locale.decimal + "",
       numerals = locale.numerals === undefined ? _identity.default : (0, _formatNumerals.default)(map.call(locale.numerals, String)),
       percent = locale.percent === undefined ? "%" : locale.percent + "",
-      minus = locale.minus === undefined ? "-" : locale.minus + "",
+      minus = locale.minus === undefined ? "−" : locale.minus + "",
       nan = locale.nan === undefined ? "NaN" : locale.nan + "";
 
   function newFormat(specifier) {
@@ -35030,11 +35247,9 @@ exports.format = format;
 var formatPrefix;
 exports.formatPrefix = formatPrefix;
 defaultLocale({
-  decimal: ".",
   thousands: ",",
   grouping: [3],
-  currency: ["$", ""],
-  minus: "-"
+  currency: ["$", ""]
 });
 
 function defaultLocale(definition) {
@@ -35250,38 +35465,38 @@ function linearish(scale) {
 
   scale.nice = function (count) {
     if (count == null) count = 10;
-    var d = domain(),
-        i0 = 0,
-        i1 = d.length - 1,
-        start = d[i0],
-        stop = d[i1],
-        step;
+    var d = domain();
+    var i0 = 0;
+    var i1 = d.length - 1;
+    var start = d[i0];
+    var stop = d[i1];
+    var prestep;
+    var step;
+    var maxIter = 10;
 
     if (stop < start) {
       step = start, start = stop, stop = step;
       step = i0, i0 = i1, i1 = step;
     }
 
-    step = (0, _d3Array.tickIncrement)(start, stop, count);
-
-    if (step > 0) {
-      start = Math.floor(start / step) * step;
-      stop = Math.ceil(stop / step) * step;
+    while (maxIter-- > 0) {
       step = (0, _d3Array.tickIncrement)(start, stop, count);
-    } else if (step < 0) {
-      start = Math.ceil(start * step) / step;
-      stop = Math.floor(stop * step) / step;
-      step = (0, _d3Array.tickIncrement)(start, stop, count);
-    }
 
-    if (step > 0) {
-      d[i0] = Math.floor(start / step) * step;
-      d[i1] = Math.ceil(stop / step) * step;
-      domain(d);
-    } else if (step < 0) {
-      d[i0] = Math.ceil(start * step) / step;
-      d[i1] = Math.floor(stop * step) / step;
-      domain(d);
+      if (step === prestep) {
+        d[i0] = start;
+        d[i1] = stop;
+        return domain(d);
+      } else if (step > 0) {
+        start = Math.floor(start / step) * step;
+        stop = Math.ceil(stop / step) * step;
+      } else if (step < 0) {
+        start = Math.ceil(start * step) / step;
+        stop = Math.floor(stop * step) / step;
+      } else {
+        break;
+      }
+
+      prestep = step;
     }
 
     return scale;
@@ -36109,15 +36324,7 @@ var _duration = require("./duration.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var day = (0, _interval.default)(function (date) {
-  date.setHours(0, 0, 0, 0);
-}, function (date, step) {
-  date.setDate(date.getDate() + step);
-}, function (start, end) {
-  return (end - start - (end.getTimezoneOffset() - start.getTimezoneOffset()) * _duration.durationMinute) / _duration.durationDay;
-}, function (date) {
-  return date.getDate() - 1;
-});
+var day = (0, _interval.default)(date => date.setHours(0, 0, 0, 0), (date, step) => date.setDate(date.getDate() + step), (start, end) => (end - start - (end.getTimezoneOffset() - start.getTimezoneOffset()) * _duration.durationMinute) / _duration.durationDay, date => date.getDate() - 1);
 var _default = day;
 exports.default = _default;
 var days = day.range;
@@ -36913,6 +37120,8 @@ function formatLocale(locale) {
     "d": formatDayOfMonth,
     "e": formatDayOfMonth,
     "f": formatMicroseconds,
+    "g": formatYearISO,
+    "G": formatFullYearISO,
     "H": formatHour24,
     "I": formatHour12,
     "j": formatDayOfYear,
@@ -36945,6 +37154,8 @@ function formatLocale(locale) {
     "d": formatUTCDayOfMonth,
     "e": formatUTCDayOfMonth,
     "f": formatUTCMicroseconds,
+    "g": formatUTCYearISO,
+    "G": formatUTCFullYearISO,
     "H": formatUTCHour24,
     "I": formatUTCHour12,
     "j": formatUTCDayOfYear,
@@ -36977,6 +37188,8 @@ function formatLocale(locale) {
     "d": parseDayOfMonth,
     "e": parseDayOfMonth,
     "f": parseMicroseconds,
+    "g": parseYear,
+    "G": parseFullYear,
     "H": parseHour24,
     "I": parseHour24,
     "j": parseDayOfYear,
@@ -37115,27 +37328,27 @@ function formatLocale(locale) {
 
   function parsePeriod(d, string, i) {
     var n = periodRe.exec(string.slice(i));
-    return n ? (d.p = periodLookup[n[0].toLowerCase()], i + n[0].length) : -1;
+    return n ? (d.p = periodLookup.get(n[0].toLowerCase()), i + n[0].length) : -1;
   }
 
   function parseShortWeekday(d, string, i) {
     var n = shortWeekdayRe.exec(string.slice(i));
-    return n ? (d.w = shortWeekdayLookup[n[0].toLowerCase()], i + n[0].length) : -1;
+    return n ? (d.w = shortWeekdayLookup.get(n[0].toLowerCase()), i + n[0].length) : -1;
   }
 
   function parseWeekday(d, string, i) {
     var n = weekdayRe.exec(string.slice(i));
-    return n ? (d.w = weekdayLookup[n[0].toLowerCase()], i + n[0].length) : -1;
+    return n ? (d.w = weekdayLookup.get(n[0].toLowerCase()), i + n[0].length) : -1;
   }
 
   function parseShortMonth(d, string, i) {
     var n = shortMonthRe.exec(string.slice(i));
-    return n ? (d.m = shortMonthLookup[n[0].toLowerCase()], i + n[0].length) : -1;
+    return n ? (d.m = shortMonthLookup.get(n[0].toLowerCase()), i + n[0].length) : -1;
   }
 
   function parseMonth(d, string, i) {
     var n = monthRe.exec(string.slice(i));
-    return n ? (d.m = monthLookup[n[0].toLowerCase()], i + n[0].length) : -1;
+    return n ? (d.m = monthLookup.get(n[0].toLowerCase()), i + n[0].length) : -1;
   }
 
   function parseLocaleDateTime(d, string, i) {
@@ -37264,13 +37477,7 @@ function formatRe(names) {
 }
 
 function formatLookup(names) {
-  var map = {},
-      i = -1,
-      n = names.length;
-
-  while (++i < n) map[names[i].toLowerCase()] = i;
-
-  return map;
+  return new Map(names.map((name, i) => [name.toLowerCase(), i]));
 }
 
 function parseWeekdayNumberSunday(d, string, i) {
@@ -37418,9 +37625,13 @@ function formatWeekNumberSunday(d, p) {
   return pad(_d3Time.timeSunday.count((0, _d3Time.timeYear)(d) - 1, d), p, 2);
 }
 
-function formatWeekNumberISO(d, p) {
+function dISO(d) {
   var day = d.getDay();
-  d = day >= 4 || day === 0 ? (0, _d3Time.timeThursday)(d) : _d3Time.timeThursday.ceil(d);
+  return day >= 4 || day === 0 ? (0, _d3Time.timeThursday)(d) : _d3Time.timeThursday.ceil(d);
+}
+
+function formatWeekNumberISO(d, p) {
+  d = dISO(d);
   return pad(_d3Time.timeThursday.count((0, _d3Time.timeYear)(d), d) + ((0, _d3Time.timeYear)(d).getDay() === 4), p, 2);
 }
 
@@ -37436,7 +37647,18 @@ function formatYear(d, p) {
   return pad(d.getFullYear() % 100, p, 2);
 }
 
+function formatYearISO(d, p) {
+  d = dISO(d);
+  return pad(d.getFullYear() % 100, p, 2);
+}
+
 function formatFullYear(d, p) {
+  return pad(d.getFullYear() % 10000, p, 4);
+}
+
+function formatFullYearISO(d, p) {
+  var day = d.getDay();
+  d = day >= 4 || day === 0 ? (0, _d3Time.timeThursday)(d) : _d3Time.timeThursday.ceil(d);
   return pad(d.getFullYear() % 10000, p, 4);
 }
 
@@ -37490,9 +37712,13 @@ function formatUTCWeekNumberSunday(d, p) {
   return pad(_d3Time.utcSunday.count((0, _d3Time.utcYear)(d) - 1, d), p, 2);
 }
 
-function formatUTCWeekNumberISO(d, p) {
+function UTCdISO(d) {
   var day = d.getUTCDay();
-  d = day >= 4 || day === 0 ? (0, _d3Time.utcThursday)(d) : _d3Time.utcThursday.ceil(d);
+  return day >= 4 || day === 0 ? (0, _d3Time.utcThursday)(d) : _d3Time.utcThursday.ceil(d);
+}
+
+function formatUTCWeekNumberISO(d, p) {
+  d = UTCdISO(d);
   return pad(_d3Time.utcThursday.count((0, _d3Time.utcYear)(d), d) + ((0, _d3Time.utcYear)(d).getUTCDay() === 4), p, 2);
 }
 
@@ -37508,7 +37734,18 @@ function formatUTCYear(d, p) {
   return pad(d.getUTCFullYear() % 100, p, 2);
 }
 
+function formatUTCYearISO(d, p) {
+  d = UTCdISO(d);
+  return pad(d.getUTCFullYear() % 100, p, 2);
+}
+
 function formatUTCFullYear(d, p) {
+  return pad(d.getUTCFullYear() % 10000, p, 4);
+}
+
+function formatUTCFullYearISO(d, p) {
+  var day = d.getUTCDay();
+  d = day >= 4 || day === 0 ? (0, _d3Time.utcThursday)(d) : _d3Time.utcThursday.ceil(d);
   return pad(d.getUTCFullYear() % 10000, p, 4);
 }
 
@@ -38508,7 +38745,7 @@ function isSlowBuffer (obj) {
         message = utf8.stringToBytes(message);
     else if (isBuffer(message))
       message = Array.prototype.slice.call(message, 0);
-    else if (!Array.isArray(message))
+    else if (!Array.isArray(message) && message.constructor !== Uint8Array)
       message = message.toString();
     // else, assume byte array already
 
@@ -38813,14 +39050,14 @@ exports.default = vue_1.default.extend({
     window.removeEventListener('resize', this.handleResize);
   }
 });
-        var $7f0c1f = exports.default || module.exports;
+        var $72cd7a = exports.default || module.exports;
       
-      if (typeof $7f0c1f === 'function') {
-        $7f0c1f = $7f0c1f.options;
+      if (typeof $72cd7a === 'function') {
+        $72cd7a = $72cd7a.options;
       }
     
         /* template */
-        Object.assign($7f0c1f, (function () {
+        Object.assign($72cd7a, (function () {
           var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"chart",style:({
         display:'flex',
         flexDirection:'column',
@@ -38872,7 +39109,7 @@ var staticRenderFns = []
             render: render,
             staticRenderFns: staticRenderFns,
             _compiled: true,
-            _scopeId: "data-v-7f0c1f",
+            _scopeId: "data-v-72cd7a",
             functional: undefined
           };
         })());
@@ -38941,25 +39178,6 @@ var _default = {
     },
     inclusiveWidthPercent: function inclusiveWidthPercent() {
       return this.funcPath == this.selectedNode ? '100%' : this.myInclusive / this.runData[(0, _functions.parentPath)(this.funcPath)].inclusive * 100 + '%';
-    },
-    topdownValue: function topdownValue() {
-      var conversion = {
-        're': 'any#any#topdown.retiring',
-        'bs': 'any#any#topdown.bad_speculation',
-        'ms': 'any#any#topdown.branch_mispredict',
-        'mc': 'any#any#topdown.machine_clears',
-        'fe': 'any#any#topdown.frontend_bound',
-        'la': 'any#any#topdown.frontend_latency',
-        'bw': 'any#any#topdown.frontend_bandwidth',
-        'be': 'any#any#topdown.backend_bound',
-        'co': 'any#any#topdown.core_bound',
-        'me': 'any#any#topdown.memory_bound',
-        'l1': 'any#any#topdown.l1_bound',
-        'l2': 'any#any#topdown.l2_bound',
-        'l3': 'any#any#topdown.l3_bound',
-        'mb': 'any#any#topdown.ext_mem_bound'
-      };
-      return this.runData[this.funcPath].topdown[conversion[this.selectedTopdownNode]];
     }
   },
   methods: {
@@ -38973,14 +39191,14 @@ var _default = {
   name: 'FlamegraphNode'
 };
 exports.default = _default;
-        var $4b01c4 = exports.default || module.exports;
+        var $6af355 = exports.default || module.exports;
       
-      if (typeof $4b01c4 === 'function') {
-        $4b01c4 = $4b01c4.options;
+      if (typeof $6af355 === 'function') {
+        $6af355 = $6af355.options;
       }
     
         /* template */
-        Object.assign($4b01c4, (function () {
+        Object.assign($6af355, (function () {
           var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"flamenode",style:({width:_vm.inclusiveWidthPercent, display:'flex', flexDirection:'column'})},[(!_vm.title.startsWith('--root'))?_c('div',{staticClass:"inclusive",style:({display:'flex', alignItems:'center', height:'25px', background:_vm.inclusiveBackground(_vm.funcPath)})},[_c('div',{staticClass:"exclusive-white-buffer",style:({width:_vm.exclusiveWidthPercent, display:'inline-block', backgroundColor:'white', position: 'relative', border: _vm.showTopdown ?  '1px solid black' : ''}),on:{"click":function($event){return _vm.handleClick(_vm.funcPath)}}},[_c('div',{staticClass:"exclusive",style:({ display:'flex' 
                                , position:'relative'
                                , alignItems:'center'
@@ -38996,7 +39214,7 @@ var staticRenderFns = []
             render: render,
             staticRenderFns: staticRenderFns,
             _compiled: true,
-            _scopeId: "data-v-4b01c4",
+            _scopeId: "data-v-6af355",
             functional: undefined
           };
         })());
@@ -39128,14 +39346,14 @@ var _default = {
   }
 };
 exports.default = _default;
-        var $5316c8 = exports.default || module.exports;
+        var $9e94d7 = exports.default || module.exports;
       
-      if (typeof $5316c8 === 'function') {
-        $5316c8 = $5316c8.options;
+      if (typeof $9e94d7 === 'function') {
+        $9e94d7 = $9e94d7.options;
       }
     
         /* template */
-        Object.assign($5316c8, (function () {
+        Object.assign($9e94d7, (function () {
           var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"flamegraph",style:({
         flex:2,
         minWidth:'600px',
@@ -39399,14 +39617,14 @@ exports.default = vue_1.default.extend({
     FlameGraph: Flamegraph_vue_1.default
   }
 });
-        var $5d9389 = exports.default || module.exports;
+        var $10154c = exports.default || module.exports;
       
-      if (typeof $5d9389 === 'function') {
-        $5d9389 = $5d9389.options;
+      if (typeof $10154c === 'function') {
+        $10154c = $10154c.options;
       }
     
         /* template */
-        Object.assign($5d9389, (function () {
+        Object.assign($10154c, (function () {
           var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{style:({display:'flex', flexDirection:'column'}),attrs:{"id":"compare-window"}},[_c('div',{staticClass:"sticky",style:({position: 'sticky', top: 0, zIndex: 1})},[_c('div',{staticClass:"topbar",style:({ 
                 backgroundColor: 'lightgray',
                 padding:'5px',
@@ -39468,7 +39686,7 @@ var staticRenderFns = []
             render: render,
             staticRenderFns: staticRenderFns,
             _compiled: true,
-            _scopeId: "data-v-5d9389",
+            _scopeId: "data-v-10154c",
             functional: undefined
           };
         })());
@@ -46680,7 +46898,7 @@ require('./modules/web.immediate');
 require('./modules/web.dom.iterable');
 module.exports = require('./modules/_core');
 
-},{"./modules/es6.symbol":"uVn9","./modules/es6.object.create":"D4xP","./modules/es6.object.define-property":"TSUD","./modules/es6.object.define-properties":"AwOq","./modules/es6.object.get-own-property-descriptor":"nIty","./modules/es6.object.get-prototype-of":"ud3u","./modules/es6.object.keys":"m9aB","./modules/es6.object.get-own-property-names":"i23Y","./modules/es6.object.freeze":"EO7q","./modules/es6.object.seal":"GYFR","./modules/es6.object.prevent-extensions":"llMc","./modules/es6.object.is-frozen":"Z1rp","./modules/es6.object.is-sealed":"Fckj","./modules/es6.object.is-extensible":"EYbC","./modules/es6.object.assign":"K3Jy","./modules/es6.object.is":"MlqR","./modules/es6.object.set-prototype-of":"JGjq","./modules/es6.object.to-string":"zTK3","./modules/es6.function.bind":"WIhg","./modules/es6.function.name":"N3yi","./modules/es6.function.has-instance":"a7bX","./modules/es6.parse-int":"C15x","./modules/es6.parse-float":"Q4DA","./modules/es6.number.constructor":"kRGG","./modules/es6.number.to-fixed":"vva0","./modules/es6.number.to-precision":"Y4ol","./modules/es6.number.epsilon":"DzYy","./modules/es6.number.is-finite":"FuY7","./modules/es6.number.is-integer":"pwRL","./modules/es6.number.is-nan":"SsgJ","./modules/es6.number.is-safe-integer":"qVIE","./modules/es6.number.max-safe-integer":"shx2","./modules/es6.number.min-safe-integer":"ifBH","./modules/es6.number.parse-float":"yjyf","./modules/es6.number.parse-int":"Guno","./modules/es6.math.acosh":"py3M","./modules/es6.math.asinh":"ob11","./modules/es6.math.atanh":"iUik","./modules/es6.math.cbrt":"YRuK","./modules/es6.math.clz32":"R2Qc","./modules/es6.math.cosh":"nEse","./modules/es6.math.expm1":"AmoX","./modules/es6.math.fround":"vmlq","./modules/es6.math.hypot":"kLut","./modules/es6.math.imul":"A8J8","./modules/es6.math.log10":"VUW8","./modules/es6.math.log1p":"qtpC","./modules/es6.math.log2":"Jo9J","./modules/es6.math.sign":"mZl9","./modules/es6.math.sinh":"m0zb","./modules/es6.math.tanh":"Fnqw","./modules/es6.math.trunc":"tiOR","./modules/es6.string.from-code-point":"xSM3","./modules/es6.string.raw":"t29D","./modules/es6.string.trim":"ZW4n","./modules/es6.string.iterator":"tbKg","./modules/es6.string.code-point-at":"zR9y","./modules/es6.string.ends-with":"zRn7","./modules/es6.string.includes":"fH7p","./modules/es6.string.repeat":"C85R","./modules/es6.string.starts-with":"w2SA","./modules/es6.string.anchor":"USd7","./modules/es6.string.big":"c1D0","./modules/es6.string.blink":"Ee86","./modules/es6.string.bold":"ry39","./modules/es6.string.fixed":"AHLq","./modules/es6.string.fontcolor":"H7V0","./modules/es6.string.fontsize":"Dx83","./modules/es6.string.italics":"fRhg","./modules/es6.string.link":"Aaz0","./modules/es6.string.small":"qBr3","./modules/es6.string.strike":"eNyu","./modules/es6.string.sub":"BVLK","./modules/es6.string.sup":"kMsL","./modules/es6.date.now":"susM","./modules/es6.date.to-json":"Gj6n","./modules/es6.date.to-iso-string":"oGqv","./modules/es6.date.to-string":"QX5V","./modules/es6.date.to-primitive":"jQnQ","./modules/es6.array.is-array":"x7iF","./modules/es6.array.from":"RRcs","./modules/es6.array.of":"RB6b","./modules/es6.array.join":"Rs6i","./modules/es6.array.slice":"btFn","./modules/es6.array.sort":"nrVf","./modules/es6.array.for-each":"VsIt","./modules/es6.array.map":"RBsu","./modules/es6.array.filter":"GyG6","./modules/es6.array.some":"dwTY","./modules/es6.array.every":"AJ80","./modules/es6.array.reduce":"UGP9","./modules/es6.array.reduce-right":"qhGD","./modules/es6.array.index-of":"LvRh","./modules/es6.array.last-index-of":"kVuL","./modules/es6.array.copy-within":"tWTB","./modules/es6.array.fill":"hUQ6","./modules/es6.array.find":"Qppk","./modules/es6.array.find-index":"sVmK","./modules/es6.array.species":"smn3","./modules/es6.array.iterator":"wVEN","./modules/es6.regexp.constructor":"BenF","./modules/es6.regexp.exec":"S07n","./modules/es6.regexp.to-string":"iflU","./modules/es6.regexp.flags":"pDhD","./modules/es6.regexp.match":"RTfC","./modules/es6.regexp.replace":"KGao","./modules/es6.regexp.search":"zOab","./modules/es6.regexp.split":"aOHf","./modules/es6.promise":"Pjta","./modules/es6.map":"ioKM","./modules/es6.set":"coyu","./modules/es6.weak-map":"D6DP","./modules/es6.weak-set":"bRUR","./modules/es6.typed.array-buffer":"NJ0a","./modules/es6.typed.data-view":"qL4B","./modules/es6.typed.int8-array":"wqMZ","./modules/es6.typed.uint8-array":"QTtY","./modules/es6.typed.uint8-clamped-array":"Kqgs","./modules/es6.typed.int16-array":"fEGw","./modules/es6.typed.uint16-array":"xyd6","./modules/es6.typed.int32-array":"hIko","./modules/es6.typed.uint32-array":"tNPN","./modules/es6.typed.float32-array":"wisA","./modules/es6.typed.float64-array":"mbTX","./modules/es6.reflect.apply":"F0Xu","./modules/es6.reflect.construct":"JlFO","./modules/es6.reflect.define-property":"S841","./modules/es6.reflect.delete-property":"JRlJ","./modules/es6.reflect.enumerate":"bSEr","./modules/es6.reflect.get":"kv8Z","./modules/es6.reflect.get-own-property-descriptor":"zj1X","./modules/es6.reflect.get-prototype-of":"d0aC","./modules/es6.reflect.has":"OWTq","./modules/es6.reflect.is-extensible":"deHu","./modules/es6.reflect.own-keys":"e6SV","./modules/es6.reflect.prevent-extensions":"BmyK","./modules/es6.reflect.set":"K46i","./modules/es6.reflect.set-prototype-of":"L5z5","./modules/es7.array.includes":"TLss","./modules/es7.array.flat-map":"I8vV","./modules/es7.array.flatten":"hTXg","./modules/es7.string.at":"htok","./modules/es7.string.pad-start":"SWNE","./modules/es7.string.pad-end":"n20m","./modules/es7.string.trim-left":"ppxd","./modules/es7.string.trim-right":"hxx1","./modules/es7.string.match-all":"nuR4","./modules/es7.symbol.async-iterator":"DlMC","./modules/es7.symbol.observable":"m9Sq","./modules/es7.object.get-own-property-descriptors":"BQD8","./modules/es7.object.values":"Ltmz","./modules/es7.object.entries":"gxEP","./modules/es7.object.define-getter":"guoQ","./modules/es7.object.define-setter":"HMp9","./modules/es7.object.lookup-getter":"HB2g","./modules/es7.object.lookup-setter":"QF5J","./modules/es7.map.to-json":"JwqU","./modules/es7.set.to-json":"s0lJ","./modules/es7.map.of":"FGzV","./modules/es7.set.of":"q4rf","./modules/es7.weak-map.of":"q85i","./modules/es7.weak-set.of":"dmfy","./modules/es7.map.from":"JQCn","./modules/es7.set.from":"rl69","./modules/es7.weak-map.from":"mEhd","./modules/es7.weak-set.from":"SgWE","./modules/es7.global":"zzQm","./modules/es7.system.global":"rsrW","./modules/es7.error.is-error":"c5Yp","./modules/es7.math.clamp":"f2NC","./modules/es7.math.deg-per-rad":"M9cD","./modules/es7.math.degrees":"zjWO","./modules/es7.math.fscale":"IeZ8","./modules/es7.math.iaddh":"GM4x","./modules/es7.math.isubh":"Y1LJ","./modules/es7.math.imulh":"cCkt","./modules/es7.math.rad-per-deg":"fCGe","./modules/es7.math.radians":"FX6J","./modules/es7.math.scale":"zEVT","./modules/es7.math.umulh":"zKyL","./modules/es7.math.signbit":"FD1C","./modules/es7.promise.finally":"l1j0","./modules/es7.promise.try":"Worb","./modules/es7.reflect.define-metadata":"HqdS","./modules/es7.reflect.delete-metadata":"Okij","./modules/es7.reflect.get-metadata":"S3NM","./modules/es7.reflect.get-metadata-keys":"LScP","./modules/es7.reflect.get-own-metadata":"sqj0","./modules/es7.reflect.get-own-metadata-keys":"tLXA","./modules/es7.reflect.has-metadata":"zEHE","./modules/es7.reflect.has-own-metadata":"d1YN","./modules/es7.reflect.metadata":"AN3Y","./modules/es7.asap":"A0aM","./modules/es7.observable":"jFPl","./modules/web.timers":"OTsy","./modules/web.immediate":"hZLH","./modules/web.dom.iterable":"v6Aj","./modules/_core":"ss9A"}],"pGZN":[function(require,module,exports) {
+},{"./modules/es6.symbol":"uVn9","./modules/es6.object.create":"D4xP","./modules/es6.object.define-property":"TSUD","./modules/es6.object.define-properties":"AwOq","./modules/es6.object.get-own-property-descriptor":"nIty","./modules/es6.object.get-prototype-of":"ud3u","./modules/es6.object.keys":"m9aB","./modules/es6.object.get-own-property-names":"i23Y","./modules/es6.object.freeze":"EO7q","./modules/es6.object.seal":"GYFR","./modules/es6.object.prevent-extensions":"llMc","./modules/es6.object.is-frozen":"Z1rp","./modules/es6.object.is-sealed":"Fckj","./modules/es6.object.is-extensible":"EYbC","./modules/es6.object.assign":"K3Jy","./modules/es6.object.is":"MlqR","./modules/es6.object.set-prototype-of":"JGjq","./modules/es6.object.to-string":"zTK3","./modules/es6.function.bind":"WIhg","./modules/es6.function.name":"N3yi","./modules/es6.function.has-instance":"a7bX","./modules/es6.parse-int":"C15x","./modules/es6.parse-float":"Q4DA","./modules/es6.number.constructor":"kRGG","./modules/es6.number.to-fixed":"vva0","./modules/es6.number.to-precision":"Y4ol","./modules/es6.number.epsilon":"DzYy","./modules/es6.number.is-finite":"FuY7","./modules/es6.number.is-integer":"pwRL","./modules/es6.number.is-nan":"SsgJ","./modules/es6.number.is-safe-integer":"qVIE","./modules/es6.number.max-safe-integer":"shx2","./modules/es6.number.min-safe-integer":"ifBH","./modules/es6.number.parse-float":"yjyf","./modules/es6.number.parse-int":"Guno","./modules/es6.math.acosh":"py3M","./modules/es6.math.asinh":"ob11","./modules/es6.math.atanh":"iUik","./modules/es6.math.cbrt":"YRuK","./modules/es6.math.clz32":"R2Qc","./modules/es6.math.cosh":"nEse","./modules/es6.math.expm1":"AmoX","./modules/es6.math.fround":"vmlq","./modules/es6.math.hypot":"kLut","./modules/es6.math.imul":"A8J8","./modules/es6.math.log10":"VUW8","./modules/es6.math.log1p":"qtpC","./modules/es6.math.log2":"Jo9J","./modules/es6.math.sign":"mZl9","./modules/es6.math.sinh":"m0zb","./modules/es6.math.tanh":"Fnqw","./modules/es6.math.trunc":"tiOR","./modules/es6.string.from-code-point":"xSM3","./modules/es6.string.raw":"t29D","./modules/es6.string.trim":"ZW4n","./modules/es6.string.iterator":"tbKg","./modules/es6.string.code-point-at":"zR9y","./modules/es6.string.ends-with":"zRn7","./modules/es6.string.includes":"fH7p","./modules/es6.string.repeat":"C85R","./modules/es6.string.starts-with":"w2SA","./modules/es6.string.anchor":"USd7","./modules/es6.string.big":"c1D0","./modules/es6.string.blink":"Ee86","./modules/es6.string.bold":"ry39","./modules/es6.string.fixed":"AHLq","./modules/es6.string.fontcolor":"H7V0","./modules/es6.string.fontsize":"Dx83","./modules/es6.string.italics":"fRhg","./modules/es6.string.link":"Aaz0","./modules/es6.string.small":"qBr3","./modules/es6.string.strike":"eNyu","./modules/es6.string.sub":"BVLK","./modules/es6.string.sup":"kMsL","./modules/es6.date.now":"susM","./modules/es6.date.to-json":"Gj6n","./modules/es6.date.to-iso-string":"oGqv","./modules/es6.date.to-string":"QX5V","./modules/es6.date.to-primitive":"jQnQ","./modules/es6.array.is-array":"x7iF","./modules/es6.array.from":"RRcs","./modules/es6.array.of":"RB6b","./modules/es6.array.join":"Rs6i","./modules/es6.array.slice":"btFn","./modules/es6.array.sort":"nrVf","./modules/es6.array.for-each":"VsIt","./modules/es6.array.map":"RBsu","./modules/es6.array.filter":"GyG6","./modules/es6.array.some":"dwTY","./modules/es6.array.every":"AJ80","./modules/es6.array.reduce":"UGP9","./modules/es6.array.reduce-right":"qhGD","./modules/es6.array.index-of":"LvRh","./modules/es6.array.last-index-of":"kVuL","./modules/es6.array.copy-within":"tWTB","./modules/es6.array.fill":"hUQ6","./modules/es6.array.find":"Qppk","./modules/es6.array.find-index":"sVmK","./modules/es6.array.species":"smn3","./modules/es6.array.iterator":"wVEN","./modules/es6.regexp.constructor":"BenF","./modules/es6.regexp.exec":"S07n","./modules/es6.regexp.to-string":"iflU","./modules/es6.regexp.flags":"pDhD","./modules/es6.regexp.match":"RTfC","./modules/es6.regexp.replace":"KGao","./modules/es6.regexp.search":"zOab","./modules/es6.regexp.split":"aOHf","./modules/es6.promise":"Pjta","./modules/es6.map":"ioKM","./modules/es6.set":"coyu","./modules/es6.weak-map":"D6DP","./modules/es6.weak-set":"bRUR","./modules/es6.typed.array-buffer":"NJ0a","./modules/es6.typed.data-view":"qL4B","./modules/es6.typed.int8-array":"wqMZ","./modules/es6.typed.uint8-array":"QTtY","./modules/es6.typed.uint8-clamped-array":"Kqgs","./modules/es6.typed.int16-array":"fEGw","./modules/es6.typed.uint16-array":"xyd6","./modules/es6.typed.int32-array":"hIko","./modules/es6.typed.uint32-array":"tNPN","./modules/es6.typed.float32-array":"wisA","./modules/es6.typed.float64-array":"mbTX","./modules/es6.reflect.apply":"F0Xu","./modules/es6.reflect.construct":"JlFO","./modules/es6.reflect.define-property":"S841","./modules/es6.reflect.delete-property":"JRlJ","./modules/es6.reflect.enumerate":"bSEr","./modules/es6.reflect.get":"kv8Z","./modules/es6.reflect.get-own-property-descriptor":"zj1X","./modules/es6.reflect.get-prototype-of":"d0aC","./modules/es6.reflect.has":"OWTq","./modules/es6.reflect.is-extensible":"deHu","./modules/es6.reflect.own-keys":"e6SV","./modules/es6.reflect.prevent-extensions":"BmyK","./modules/es6.reflect.set":"K46i","./modules/es6.reflect.set-prototype-of":"L5z5","./modules/es7.array.includes":"TLss","./modules/es7.array.flat-map":"I8vV","./modules/es7.array.flatten":"hTXg","./modules/es7.string.at":"htok","./modules/es7.string.pad-start":"SWNE","./modules/es7.string.pad-end":"n20m","./modules/es7.string.trim-left":"ppxd","./modules/es7.string.trim-right":"hxx1","./modules/es7.string.match-all":"nuR4","./modules/es7.symbol.async-iterator":"DlMC","./modules/es7.symbol.observable":"m9Sq","./modules/es7.object.get-own-property-descriptors":"BQD8","./modules/es7.object.values":"Ltmz","./modules/es7.object.entries":"gxEP","./modules/es7.object.define-getter":"guoQ","./modules/es7.object.define-setter":"HMp9","./modules/es7.object.lookup-getter":"HB2g","./modules/es7.object.lookup-setter":"QF5J","./modules/es7.map.to-json":"JwqU","./modules/es7.set.to-json":"s0lJ","./modules/es7.map.of":"FGzV","./modules/es7.set.of":"q4rf","./modules/es7.weak-map.of":"q85i","./modules/es7.weak-set.of":"dmfy","./modules/es7.map.from":"JQCn","./modules/es7.set.from":"rl69","./modules/es7.weak-map.from":"mEhd","./modules/es7.weak-set.from":"SgWE","./modules/es7.global":"zzQm","./modules/es7.system.global":"rsrW","./modules/es7.error.is-error":"c5Yp","./modules/es7.math.clamp":"f2NC","./modules/es7.math.deg-per-rad":"M9cD","./modules/es7.math.degrees":"zjWO","./modules/es7.math.fscale":"IeZ8","./modules/es7.math.iaddh":"GM4x","./modules/es7.math.isubh":"Y1LJ","./modules/es7.math.imulh":"cCkt","./modules/es7.math.rad-per-deg":"fCGe","./modules/es7.math.radians":"FX6J","./modules/es7.math.scale":"zEVT","./modules/es7.math.umulh":"zKyL","./modules/es7.math.signbit":"FD1C","./modules/es7.promise.finally":"l1j0","./modules/es7.promise.try":"Worb","./modules/es7.reflect.define-metadata":"HqdS","./modules/es7.reflect.delete-metadata":"Okij","./modules/es7.reflect.get-metadata":"S3NM","./modules/es7.reflect.get-metadata-keys":"LScP","./modules/es7.reflect.get-own-metadata":"sqj0","./modules/es7.reflect.get-own-metadata-keys":"tLXA","./modules/es7.reflect.has-metadata":"zEHE","./modules/es7.reflect.has-own-metadata":"d1YN","./modules/es7.reflect.metadata":"AN3Y","./modules/es7.asap":"A0aM","./modules/es7.observable":"jFPl","./modules/web.timers":"OTsy","./modules/web.immediate":"hZLH","./modules/web.dom.iterable":"v6Aj","./modules/_core":"ss9A"}],"QVnC":[function(require,module,exports) {
 var global = arguments[3];
 /**
  * Copyright (c) 2014, Facebook, Inc.
@@ -47471,12 +47689,12 @@ define(String.prototype, "padRight", "".padEnd);
 "pop,reverse,shift,keys,values,entries,indexOf,every,some,forEach,map,filter,find,findIndex,includes,join,slice,concat,push,splice,unshift,sort,lastIndexOf,reduce,reduceRight,copyWithin,fill".split(",").forEach(function (key) {
   [][key] && define(Array, key, Function.call.bind([][key]));
 });
-},{"core-js/shim":"w2bQ","regenerator-runtime/runtime":"pGZN","core-js/fn/regexp/escape":"aLB7"}],"EM1A":[function(require,module,exports) {
+},{"core-js/shim":"w2bQ","regenerator-runtime/runtime":"QVnC","core-js/fn/regexp/escape":"aLB7"}],"EM1A":[function(require,module,exports) {
 var define;
 var global = arguments[3];
 /*!
     localForage -- Offline Storage, Improved
-    Version 1.7.4
+    Version 1.9.0
     https://localforage.github.io/localForage
     (c) 2013-2017 Mozilla, Apache License 2.0
 */
@@ -50423,7 +50641,7 @@ function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArra
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
@@ -50803,7 +51021,7 @@ var Graph = /*#__PURE__*/function () {
                 });
                 runs.forEach(function (run) {
                   funcPaths.forEach(function (funcPath) {
-                    run.data['--root path--/' + funcPath] = _objectSpread({}, baseMetrics, {}, run.data[funcPath]);
+                    run.data['--root path--/' + funcPath] = _objectSpread(_objectSpread({}, baseMetrics), run.data[funcPath]);
                     delete run.data[funcPath];
                   });
                   run.data['--root path--'] = baseMetrics;
@@ -50838,7 +51056,7 @@ var Graph = /*#__PURE__*/function () {
 
                 for (_i4 = 0, _Object$entries4 = Object.entries(cachedData.Runs); _i4 < _Object$entries4.length; _i4++) {
                   _Object$entries4$_i = _slicedToArray(_Object$entries4[_i4], 2), filename = _Object$entries4$_i[0], fileContents = _Object$entries4$_i[1];
-                  summary.data[filename] = _objectSpread({}, fileContents.Globals, {
+                  summary.data[filename] = _objectSpread(_objectSpread({}, fileContents.Globals), {}, {
                     filepath: dataSetKey + '/' + filename
                   });
                 }
