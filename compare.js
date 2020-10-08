@@ -39537,13 +39537,14 @@ exports.default = vue_1.default.extend({
             meta: lodash_1.default.fromPairs(lodash_1.default.map(runList[0].meta, function (val, key) {
               return [key, []];
             }))
-          };
+          }; // create object of empty arrays
+
           runList.forEach(function (run) {
             lodash_1.default.forEach(run.meta, function (val, key) {
               aggregatedRun.meta[key].push(val);
             });
             lodash_1.default.forEach(run.data, function (val, key) {
-              aggregatedRun.data[key].push(val);
+              aggregatedRun.data[key].push(val.value); // console.log('list', groupByName, key, val.value, aggregatedRun.data[key])
             });
           }); // if the meta values are all the same that value is preserved else just mark it '--' to denote assorted values
 
@@ -39555,23 +39556,31 @@ exports.default = vue_1.default.extend({
           lodash_1.default.forEach(aggregatedRun.data, function (dataList, dataName) {
             switch (_this.selectedAggregateBy) {
               case 'sum':
-                aggregatedRun.data[dataName] = dataList.reduce(function (a, b) {
-                  return a + b;
-                }, 0);
+                aggregatedRun.data[dataName] = {
+                  value: dataList.reduce(function (a, b) {
+                    return a + b;
+                  }, 0)
+                };
                 break;
 
               case 'avg':
-                aggregatedRun.data[dataName] = dataList.reduce(function (a, b) {
-                  return a + b;
-                }, 0) / dataList.length;
+                aggregatedRun.data[dataName] = {
+                  value: dataList.reduce(function (a, b) {
+                    return a + b;
+                  }, 0) / dataList.length
+                };
                 break;
 
               case 'max':
-                aggregatedRun.data[dataName] = lodash_1.default.max(dataList);
+                aggregatedRun.data[dataName] = {
+                  value: lodash_1.default.max(dataList)
+                };
                 break;
 
               case 'min':
-                aggregatedRun.data[dataName] = lodash_1.default.min(dataList);
+                aggregatedRun.data[dataName] = {
+                  value: lodash_1.default.min(dataList)
+                };
                 break;
             }
           }); // mark how many runs were consolidated
