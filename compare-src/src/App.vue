@@ -234,53 +234,57 @@ export default Vue.extend({
                 //   first create a run where each value of data and meta is the list of values of all the runs of the runList
                 const aggregateGroups = _.groupBy(runList, a => a.meta[this.xAxis])
                 const aggregatedValues = _.map(aggregateGroups, (runList, aggregateBykey) => {
-
-                const aggregatedRun = {
-                    data: _.fromPairs(_.map(runList[0].data, (val, key) => [key, []] )), 
-                    meta: _.fromPairs(_.map(runList[0].meta, (val, key) => [key, []] )),
-                }
-
-                runList.forEach(run => {
-                    _.forEach(run.meta, (val, key) => {
-                    aggregatedRun.meta[key].push(val)
-                    })
-                    _.forEach(run.data, (val, key) => {
-                    aggregatedRun.data[key].push(val)
-                    })
-                })
-
-                // if the meta values are all the same that value is preserved else just mark it '--' to denote assorted values
-                _.forEach(aggregatedRun.meta, (metaList, metaName) => {
-                    const uniqVals = _.uniq(metaList)
-                    aggregatedRun.meta[metaName] =  uniqVals.length == 1 ? uniqVals[0]: '--'
-                })
-                
-                // consolidate the data values into the type of aggregate
-                _.forEach(aggregatedRun.data, (dataList, dataName) => {
-                    switch(this.selectedAggregateBy){
-                    case 'sum':
-                        aggregatedRun.data[dataName] = dataList.reduce((a, b) => a + b, 0)
-                        break;
-                    case 'avg':
-                        aggregatedRun.data[dataName] = (dataList.reduce((a, b) => a + b, 0))/dataList.length
-                        break;
-                    case 'max':
-                        aggregatedRun.data[dataName] = _.max(dataList)
-                        break;
-                    case 'min':
-                        aggregatedRun.data[dataName] = _.min(dataList)
-                        break;
+                    const aggregatedRun = {
+                        data: _.fromPairs(_.map(runList[0].data, (val, key) => [key, []] )), 
+                        meta: _.fromPairs(_.map(runList[0].meta, (val, key) => [key, []] )),
                     }
-                })
 
-                // mark how many runs were consolidated
-                aggregatedRun.meta['--num records--'] = runList.length
-                return aggregatedRun
-                })
-                return [groupByName, aggregatedValues]
-                
-            }))
-            return aggregated
+
+                    // create object of empty arrays
+
+                    runList.forEach(run => {
+                        _.forEach(run.meta, (val, key) => {
+                            aggregatedRun.meta[key].push(val)
+                        })
+                        _.forEach(run.data, (val, key) => {
+                            aggregatedRun.data[key].push(val.value)
+
+                            // console.log('list', groupByName, key, val.value, aggregatedRun.data[key])
+                        })
+                    })
+
+                    // if the meta values are all the same that value is preserved else just mark it '--' to denote assorted values
+                    _.forEach(aggregatedRun.meta, (metaList, metaName) => {
+                        const uniqVals = _.uniq(metaList)
+                        aggregatedRun.meta[metaName] =  uniqVals.length == 1 ? uniqVals[0]: '--'
+                    })
+                    
+                    // consolidate the data values into the type of aggregate
+                    _.forEach(aggregatedRun.data, (dataList, dataName) => {
+                        switch(this.selectedAggregateBy){
+                        case 'sum':
+                            aggregatedRun.data[dataName] = { value: dataList.reduce((a, b) => a + b, 0) }
+                            break;
+                        case 'avg':
+                            aggregatedRun.data[dataName] = { value: (dataList.reduce((a, b) => a + b, 0))/dataList.length }
+                            break;
+                        case 'max':
+                            aggregatedRun.data[dataName] = { value: _.max(dataList) }
+                            break;
+                        case 'min':
+                            aggregatedRun.data[dataName] = { value: _.min(dataList) }
+                            break;
+                        }
+                    })
+
+                    // mark how many runs were consolidated
+                    aggregatedRun.meta['--num records--'] = runList.length
+                    return aggregatedRun
+                    })
+                    return [groupByName, aggregatedValues]
+                    
+                }))
+                return aggregated
         },
     },  // end computed
 
