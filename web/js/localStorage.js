@@ -55,7 +55,17 @@ var sq = function() {
         } else {
             log("Can't save stat before loading it.");
         }
-    }
+    };
+
+
+    /*
+        Developer function to reset invalid layouts that were created durring development.
+     */
+    var reset_ = function() {
+
+        sqs.layout_used = false;
+        sq.save();
+    };
 
 
     return {
@@ -69,5 +79,6 @@ var sq = function() {
         /*
          *  This is the object to which you can store stuff in freely.
          */
+        reset: reset_
     }
 }();

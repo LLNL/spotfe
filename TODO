@@ -18,10 +18,16 @@ Composite Charts
     * provide support for pieChart and horizontal bar chart for string based stuff.
 
 
-For Next Release:
+For Oct 22:
+- Be able to reset saved charts, so bad ones don't linger around.
 - Instead of text: First pLot : call it memory bandwidth
 - do error dialog on submit, if you do a weird combo
-- wrok out compare.js stuff.
+- do chart wrap around.
+DONE - work out compare.js stuff.
+
+
+-  Vuetify
+- Nox.
 
 
 Caveat:
