@@ -99,7 +99,7 @@ ST.UserPreferences = function() {
     };
 
     var axis_selection_types = ["double", "long", "int", "date", "path", "string", "set of string", "set of path"];
-
+    var dim_idx_by_name_ = {};
 
     var get_dimensions_ = function() {
 
@@ -114,19 +114,21 @@ ST.UserPreferences = function() {
 
             if( axis_selection_types.indexOf(chart.type) > -1 || allow_any_type ) {
                 dimensions.push(dlc);
+                dim_idx_by_name_[ dlc ] = chart.type;
             }
         }
         return dimensions;
     };
 
 
-    var get_dimension_ = function() {
+    var get_dimension_by_name_ = function( name ) {
 
+        return dim_idx_by_name_[ name ];
     };
 
     return {
         render: render_,
         get_dimensions: get_dimensions_,
-        get_dimension: get_dimension_
+        get_dimension: get_dimension_by_name_
     }
 }();
