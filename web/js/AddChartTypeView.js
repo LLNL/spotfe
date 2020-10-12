@@ -194,7 +194,7 @@ ST.AddChartTypeView = function() {
         //  this is based on if the person selects composite chart type or the scatter plot
         if( is_adding_multi_row_() ) {
 
-            submit_multi_();
+            composite_chart_type_submit_();
             return true;
         }
 
@@ -304,7 +304,7 @@ ST.AddChartTypeView = function() {
     };
 
 
-    var submit_multi_ = function() {
+    var composite_chart_type_submit_ = function() {
 
         var chart_name = $('.chart_name').val();
 

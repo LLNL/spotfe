@@ -119,8 +119,14 @@ ST.UserPreferences = function() {
         return dimensions;
     };
 
+
+    var get_dimension_ = function() {
+
+    };
+
     return {
         render: render_,
-        get_dimensions: get_dimensions_
+        get_dimensions: get_dimensions_,
+        get_dimension: get_dimension_
     }
 }();
