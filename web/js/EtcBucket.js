@@ -35,7 +35,6 @@ ST.EtcBucket = function() {
     var handle_etc_buckets_ = function() {
 
         dim_to_idx_ = make_column_index_(ST.layout_used.table);
-        console.dir(dim_to_idx_);
 
         cali_key_ = 0;
     };

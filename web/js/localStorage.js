@@ -65,6 +65,9 @@ var sq = function() {
 
         sqs.layout_used = false;
         sq.save();
+
+        //  After page reloads, default layout will be used from the summary response.
+        window.location.reload();
     };
 
 
