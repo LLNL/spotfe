@@ -315,7 +315,7 @@ ST.AddChartTypeView = function() {
 
         if( valid !== true ) {
 
-            ReusableView.alert('Composite chart inputs not valid: ' + valid);
+            ReusableView.alert('Composite chart inputs not valid', valid);
             return false;
         }
 
