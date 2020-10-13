@@ -129,6 +129,6 @@ ST.UserPreferences = function() {
     return {
         render: render_,
         get_dimensions: get_dimensions_,
-        get_dimension: get_dimension_type_by_name_
+        get_dimension_type_by_name: get_dimension_type_by_name_
     }
 }();
