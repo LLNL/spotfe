@@ -4,6 +4,12 @@ ST.ValidateCompositeModel = function() {
 
         console.dir( ops );
 
+        for( var z = 0; z < ops.length; z++ ) {
+
+            var att = ops[z].attribute;
+            console.log(att);
+        }
+
         if( ops[1].attribute === "cmdline") {
             return "its cmdline.";
         }
