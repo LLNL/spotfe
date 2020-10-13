@@ -309,7 +309,7 @@ ST.AddChartTypeView = function() {
         var chart_name = $('.chart_name').val();
 
         if( !operations_ ) {
-            alert('operations have not been set.');
+            ReusableView.alert('operations have not been set.');
         }
 
         var operations = operations_;

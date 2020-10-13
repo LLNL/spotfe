@@ -1,9 +1,9 @@
 For Oct 22:
 DONE - Be able to reset saved charts, so bad ones don't linger around.
+DONE - work out compare.js stuff.
 - Instead of text: First pLot : call it memory bandwidth
 - do error dialog on submit, if you do a weird combo
 - do chart wrap around.
-DONE - work out compare.js stuff.
 
 
 Building Compare.js
