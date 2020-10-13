@@ -306,6 +306,14 @@ ST.AddChartTypeView = function() {
 
     var composite_chart_type_submit_ = function() {
 
+        var valid = ST.ValidateCompositeModel.validate( operations_ );
+
+        if( valid !== true ) {
+
+            ReusableView.alert('Composite chart inputs not valid: ' + valid);
+            return false;
+        }
+
         var chart_name = $('.chart_name').val();
 
         if( !operations_ ) {
