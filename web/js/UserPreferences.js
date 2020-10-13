@@ -121,7 +121,7 @@ ST.UserPreferences = function() {
     };
 
 
-    var get_dimension_by_name_ = function( name ) {
+    var get_dimension_type_by_name_ = function( name ) {
 
         return dim_idx_by_name_[ name ];
     };
@@ -129,6 +129,6 @@ ST.UserPreferences = function() {
     return {
         render: render_,
         get_dimensions: get_dimensions_,
-        get_dimension: get_dimension_by_name_
+        get_dimension: get_dimension_type_by_name_
     }
 }();
