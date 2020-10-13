@@ -58,6 +58,9 @@ $.fn.MultiRowSelector = function( obj ) {
         return vals;
     };
 
+    //  Let's make this publicly available so that we can run it before submits happen.
+    //  OR so we don't have to wait for a onchange event to occur.
+    $.fn.MultiRowSelector.get_operations = get_operations_;
 
     var bind_ = function( that ) {
 

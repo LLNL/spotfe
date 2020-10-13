@@ -306,7 +306,12 @@ ST.AddChartTypeView = function() {
 
     var composite_chart_type_submit_ = function() {
 
-        var valid = ST.ValidateCompositeModel.validate( operations_ );
+        //  having only one instance to worry about makes it easier.
+        var con =$('.multi_row_selector');
+
+        //  get latest ops instead of waiting for select drop down onchange event.
+        var operations_just_now = $.fn.MultiRowSelector.get_operations( con );
+        var valid = ST.ValidateCompositeModel.validate( operations_just_now );
 
         if( valid !== true ) {
 
@@ -316,11 +321,11 @@ ST.AddChartTypeView = function() {
 
         var chart_name = $('.chart_name').val();
 
-        if( !operations_ ) {
+        if( !operations_just_now ) {
             ReusableView.alert('operations have not been set.');
         }
 
-        var operations = operations_;
+        var operations = operations_just_now;
 
         var dimension = gen_dimension_( operations );
         //var viz = "BarChart";
