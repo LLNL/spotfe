@@ -267,7 +267,7 @@ ST.MemoryLineView = function() {
     };
 
     var layout = {
-        title: "First Plot",
+        title: "Memory Bandwidth",
         xaxis: {
             title: 'Block',
             titlefont: {
