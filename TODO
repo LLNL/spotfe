@@ -4,6 +4,7 @@ For Oct 22:
 - For optvis, there should only be one of each "psi", "psi_data", and they should not be strikethrough
     * only %r15 should be strikethrough
 
+
 - research possibility to do an Iframe, and pull in the existing code
 DONE - Be able to reset saved charts, so bad ones don't linger around.
 DONE - work out compare.js stuff.
