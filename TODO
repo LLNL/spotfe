@@ -7,9 +7,9 @@ For Oct 22:
 - research possibility to do an Iframe, and pull in the existing code
 DONE - Be able to reset saved charts, so bad ones don't linger around.
 DONE - work out compare.js stuff.
-- Instead of text: First pLot : call it memory bandwidth
-
+DONE - Instead of text: First pLot : call it memory bandwidth
 - do error dialog on submit, if you do a weird combo
+
 - do chart wrap around.
 
 
@@ -33,6 +33,12 @@ Composite Charts
     * provide support for pieChart and horizontal bar chart for string based stuff.
 
 
+This seems to work for an iframe within a jupyter notebook.
+import IPython
+url = 'https://lc.llnl.gov/lorenz_base/dev/pascal/dcvis/memory/index.html?runSetId=/usr/gapps/spot/datasets/lulesh_gen/lul_sept_28_timeseries&runId=200924-16383266200.cali'
+iframe = '<iframe src=' + url + ' width=700 height=350></iframe>'
+#IPython.display.HTML(iframe)
+IPython.display.IFrame(url,800,400)
 
 
 -  Vuetify
