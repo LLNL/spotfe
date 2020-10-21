@@ -104,7 +104,25 @@ ST.CompositeLayoutModel = function() {
         }
     };
 
+    var get_js_type_based_on_cali_data_type_ = function( ops ) {
+
+        for( var x=0; x < ops.length; x++ ) {
+
+            var obo = ops[x];
+            var attribute = obo.attribute;
+            var js_type = get_javascript_type_( attribute );
+
+            if( js_type === "string") {
+                return "string";
+            }
+            console.log( js_type );
+        }
+
+        return "int";
+    };
+
     return {
+        get_js_type_based_on_cali_data_type: get_js_type_based_on_cali_data_type_,
         get_viz_type_based_on_cali_data_type: get_viz_type_based_on_cali_data_type_,
         update_composite: update_composite_
     }

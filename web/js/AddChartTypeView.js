@@ -351,10 +351,12 @@ ST.AddChartTypeView = function() {
         sqs.layout_used.charts.push(new_layout);
         ST.layout_used = sqs.layout_used;
 
+        var data_type = ST.CompositeLayoutModel.get_js_type_based_on_cali_data_type( operations );
+
         ST.layout_used.table.push({
             dimension: dimension,
-            label: "Experimental",
-            type: "int",
+            //label: "Experimental",
+            type: data_type,
             show: true
         });
 
