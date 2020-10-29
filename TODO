@@ -1,15 +1,29 @@
+- add strcat operation instead of relying on +.
+    * which means + strings should be an error.
+    * make sure it's ready to be released.
+- Compare.js look into, to see if we can use the composite data types.
+    * find out if compare.js is a big task.
+
+- Get a new icon for memory view: it should have to do with time series, maybe a set of line graphs.
+- Title: "Iterations", "Memory Bandwidth", "Time", "Power", else use the actual name (it'll be long but hopefully this owon't happen a lot)
+- Optvis: reach out to adam for repro steps. (adam was demoing when it happened).
+
+
+
+
+- Later: let's take a look at EtcBucket.
+
 Optvis: 20%, Spot: 80%
 
 For Oct 22:
-- For optvis, there should only be one of each "psi", "psi_data", and they should not be strikethrough
-    * only %r15 should be strikethrough
+- DONE - For optvis, there should only be one of each "psi", "psi_data", and they should not be strikethrough
 
 
-- research possibility to do an Iframe, and pull in the existing code
+DONE - research possibility to do an Iframe, and pull in the existing code
 DONE - Be able to reset saved charts, so bad ones don't linger around.
 DONE - work out compare.js stuff.
 DONE - Instead of text: First pLot : call it memory bandwidth
-- do error dialog on submit, if you do a weird combo
+DONE - do error dialog on submit, if you do a weird combo
 
 - do chart wrap around.
 

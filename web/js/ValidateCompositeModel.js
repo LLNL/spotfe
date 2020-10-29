@@ -5,7 +5,7 @@ ST.ValidateCompositeModel = function() {
         console.dir( ops );
 
         var have_at_least_1_str = false;
-        var have_non_plus_op = false;
+        var have_non_strcon_op = false;
 
         var cumulative_ops = "";
         var strs_selected = "";
@@ -24,8 +24,8 @@ ST.ValidateCompositeModel = function() {
                 strs_selected += ", (<b>" + att + "</b> of type <b>" + type + "</b> is a string)";
             }
 
-            if( operation !== undefined && operation !== "+" ) {
-                have_non_plus_op = true;
+            if( operation !== undefined && operation !== ST.CONSTS.STRCON ) {
+                have_non_strcon_op = true;
             }
 
             if( operation !== undefined ) {
@@ -34,7 +34,7 @@ ST.ValidateCompositeModel = function() {
         }
 
 
-        if( have_at_least_1_str && have_non_plus_op ) {
+        if( have_at_least_1_str && have_non_strcon_op ) {
 
             cumulative_ops = cumulative_ops.substr(2);
             strs_selected = strs_selected.substr(2);

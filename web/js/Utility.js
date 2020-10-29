@@ -12,7 +12,8 @@ ST.CONSTS = {
     "COMPOSITE_PLOT": "CompositePlot",
     "UNIQUE_STR": 50,
     "MAX_HOR_BAR_CHART_STR_LEN": 100,
-    "ETC_BUCKET": "Etc bucket"
+    "ETC_BUCKET": "Etc bucket",
+    "STRCON": "_strcon_"
 };
 
 ST.Utility = function() {
