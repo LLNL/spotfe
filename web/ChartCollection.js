@@ -184,7 +184,14 @@ ST.ChartCollection = function() {
 
                 } else {
 
-                    columns.push(tab.dimension);
+                    columns.push({
+                        label: tab.label,
+                        dimension: tab.dimension,
+                        format: function( cali_obj, spec) {
+                            
+                            return cali_obj[this.dimension];
+                        }
+                    }); //         || tab.dimension);
                 }
             }
         }

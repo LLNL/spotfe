@@ -355,6 +355,7 @@ ST.AddChartTypeView = function() {
 
         ST.layout_used.table.push({
             dimension: dimension,
+            label: chart_name,
             //label: "Experimental",
             type: data_type,
             show: true

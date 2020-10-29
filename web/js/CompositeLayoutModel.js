@@ -54,7 +54,7 @@ ST.CompositeLayoutModel = function() {
             str += operation + make_str_if_str_( key_val );
         }
 
-        console.log( str );
+        //console.log( str );
         str = str.replace(ST.CONSTS.STRCON, '+');
         var ev = eval( str );
 
