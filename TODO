@@ -1,4 +1,5 @@
 - Title: "Iterations", "Memory Bandwidth", "Time", "Power", else use the actual name (it'll be long but hopefully this owon't happen a lot)
+    * I also added a custom map where we can easily add more labels.
 
 DONE - add strcat operation instead of relying on +.
     * which means + strings should be an error.

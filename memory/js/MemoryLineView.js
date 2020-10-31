@@ -63,7 +63,6 @@ ST.MemoryLineView = function() {
     };
 
 
-
     var redraw_plot_ = function( instance ) {
 
         //update_traces_();
@@ -72,7 +71,8 @@ ST.MemoryLineView = function() {
 
         var trace = chart.trace;
 
-        layout.title = ST.TitleModel.get_title( chart );
+        layout.title = ST.TitleModel.get_title( trace );
+
         Plotly.newPlot('my_chart' + instance, trace, layout);
     };
 
