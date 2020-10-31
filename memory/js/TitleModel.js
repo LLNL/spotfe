@@ -3,8 +3,7 @@ ST.TitleModel = function() {
     var mappings = {
         "MemBW": "Memory Bandwidth",
         "Iter": "Iterations",
-        "Time": "Time",
-        "loop.iterations": "Loop Iterations"
+        "Time": "Time"
     };
 
 
