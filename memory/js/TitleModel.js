@@ -3,7 +3,8 @@ ST.TitleModel = function() {
     var mappings = {
         "MemBW": "Memory Bandwidth",
         "Iter": "Iterations",
-        "Time": "Time"
+        "Time": "Time",
+        "loop.iterations": "Loop Iterations"
     };
 
 
@@ -22,7 +23,7 @@ ST.TitleModel = function() {
 
             for( var y in mappings ) {
 
-                if( label.indexOf(y) > -1 ) {
+                if( label && label.indexOf(y) > -1 ) {
                     title[ mappings[y] ] = 1;
                 }
             }
@@ -44,9 +45,13 @@ ST.TitleModel = function() {
             str += ", " + x;
         }
 
+        if( str === "" ) {
+            return "";
+        }
+
         return str.substr(2);
     };
-    
+
 
     return {
         get_title: get_title_
