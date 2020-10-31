@@ -9,7 +9,7 @@ $.fn.MultiRowSelector = function( obj ) {
         }
 
         if( cla === "dimension_attribute" ) {
-            sel += "<option>CONSTANT</option>";
+            //sel += "<option>CONSTANT</option>";
         }
 
         return "<select class='"+ cla + "'>" + sel + "</select>";

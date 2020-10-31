@@ -1,12 +1,14 @@
-- add strcat operation instead of relying on +.
+- Title: "Iterations", "Memory Bandwidth", "Time", "Power", else use the actual name (it'll be long but hopefully this owon't happen a lot)
+
+DONE - add strcat operation instead of relying on +.
     * which means + strings should be an error.
     * make sure it's ready to be released.
 - Compare.js look into, to see if we can use the composite data types.
     * find out if compare.js is a big task.
 
 - Get a new icon for memory view: it should have to do with time series, maybe a set of line graphs.
-- Title: "Iterations", "Memory Bandwidth", "Time", "Power", else use the actual name (it'll be long but hopefully this owon't happen a lot)
 - Optvis: reach out to adam for repro steps. (adam was demoing when it happened).
+    * turns out it's a firefox issue.
 
 
 

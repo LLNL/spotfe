@@ -40,7 +40,7 @@ ST.ValidateCompositeModel = function() {
             strs_selected = strs_selected.substr(2);
 
             return "You have selected a string type " + strs_selected + " from the attribute drop downs.  " +
-                "Only + operation is permitted on string types.  <br><br>Operations you selected: <b>" + cumulative_ops + "</b>";
+                "Only <b>" + ST.CONSTS.STRCON + "</b> operation is permitted on string types.  <br><br>Operations you selected: <b>" + cumulative_ops + "</b>";
         }
 
         //  everything is okay.

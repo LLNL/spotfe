@@ -71,6 +71,8 @@ ST.MemoryLineView = function() {
         console.dir( chart );
 
         var trace = chart.trace;
+
+        layout.title = ST.TitleModel.get_title( chart );
         Plotly.newPlot('my_chart' + instance, trace, layout);
     };
 

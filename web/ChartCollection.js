@@ -188,7 +188,7 @@ ST.ChartCollection = function() {
                         label: tab.label,
                         dimension: tab.dimension,
                         format: function( cali_obj, spec) {
-                            
+
                             return cali_obj[this.dimension];
                         }
                     }); //         || tab.dimension);

@@ -55,7 +55,9 @@ ST.CompositeLayoutModel = function() {
         }
 
         //console.log( str );
-        str = str.replace(ST.CONSTS.STRCON, '+');
+        const regex =  new RegExp(ST.CONSTS.STRCON,'g');
+        str = str.replace( regex, '+');
+
         var ev = eval( str );
 
         return ev;

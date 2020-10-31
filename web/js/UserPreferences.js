@@ -105,7 +105,9 @@ ST.UserPreferences = function() {
 
         var charts = ST.layout_used.charts;
         var dimensions = [];
-        var allow_any_type = true;
+
+        //  We don't want composite types to b used in teh select drop down yet.  we don't support hat yet.
+        var allow_any_type = false;
 
         for( var x=0; x < charts.length; x++ ) {
 
