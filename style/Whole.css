@@ -301,7 +301,7 @@ table.dc-data-table .walltime {
 table.dc-data-table .memory {
   position: static; }
   table.dc-data-table .memory div {
-    background-image: url(../img/memory.png);
+    background-image: url(../img/graph.png);
     background-size: 100% 100%; }
 table.dc-data-table .jupyter.icon {
   position: static;

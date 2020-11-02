@@ -1,4 +1,5 @@
-- Title: "Iterations", "Memory Bandwidth", "Time", "Power", else use the actual name (it'll be long but hopefully this owon't happen a lot)
+DONE - Get a new icon for memory view: it should have to do with time series, maybe a set of line graphs.
+DONE - Title: "Iterations", "Memory Bandwidth", "Time", "Power", else use the actual name (it'll be long but hopefully this owon't happen a lot)
     * I also added a custom map where we can easily add more labels.
 
 DONE - add strcat operation instead of relying on +.
@@ -7,7 +8,6 @@ DONE - add strcat operation instead of relying on +.
 - Compare.js look into, to see if we can use the composite data types.
     * find out if compare.js is a big task.
 
-- Get a new icon for memory view: it should have to do with time series, maybe a set of line graphs.
 - Optvis: reach out to adam for repro steps. (adam was demoing when it happened).
     * turns out it's a firefox issue.
 
