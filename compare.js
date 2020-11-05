@@ -39472,6 +39472,7 @@ exports.default = vue_1.default.extend({
           meta: {}
         };
         var metaKeys = Object.keys(firstRun.meta);
+        console.dir(metaKeys);
         return metaKeys;
       } else {
         return [];
@@ -51036,8 +51037,9 @@ var Graph = /*#__PURE__*/function () {
                   run.data['--root path--'] = baseMetrics;
                 }); // set data values
 
-                this.dataSetKey = dataSetKey;
-                window.runs = runs;
+                this.dataSetKey = dataSetKey; //  The first run's meta object is used to determine what the drop down select options should be.
+
+                window.runs = ST.CompositeLayoutModel.augment_first_run_to_include_composite_charts(runs);
                 this.compare(filenames); // 4. return summary
 
                 summary = {

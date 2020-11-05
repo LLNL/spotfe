@@ -190,8 +190,10 @@ export default Vue.extend({
         runs(){return this.filenames && window.runs ? window.runs.filter(run => this.filenames.includes(run.meta.datapath.value)): [] },
         xAxisList(){
             if (this.filenames.length){
+
                 const firstRun = this.runs[0] || {meta:{}}
                 const metaKeys = Object.keys(firstRun.meta)
+                console.dir( metaKeys )
                 return metaKeys
             } else {
                 return []

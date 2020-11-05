@@ -1,18 +1,28 @@
-- Stop wrap around from happening for the horizontal bar charts.
+- 4pm call tim, see about cancel.
+For Nov 4th
+DONE - Stop wrap around from happening for the horizontal bar charts.
 DONE - Get a new icon for memory view: it should have to do with time series, maybe a set of line graphs.
 DONE - Title: "Iterations", "Memory Bandwidth", "Time", "Power", else use the actual name (it'll be long but hopefully this owon't happen a lot)
+    * added dynamic update according to what gets checked or unchecked.
 DONE - I also added a custom map where we can easily add more labels.
-
 DONE - add strcat operation instead of relying on +.
     * which means + strings should be an error.
     * make sure it's ready to be released.
+
+"time series" -
+- BE calls examples
+    * Spot examples for BE calls, Optvis too.
 - Compare.js look into, to see if we can use the composite data types.
-    * find out if compare.js is a big task.
+    * need to be able to pass in the new data.
+    * be able to set the X-axis drop down and y-axis?
+    * change the data source from what it was using to the data we're passing in.
 
 - Optvis: reach out to adam for repro steps. (adam was demoing when it happened).
     * turns out it's a firefox issue.
 
 
+In App.vue the select drop down gets created from window.runs
+index.js creates the window.runs, we can manipulate the runs from there.
 
 
 - Later: let's take a look at EtcBucket.

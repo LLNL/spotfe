@@ -124,7 +124,37 @@ ST.CompositeLayoutModel = function() {
         return "int";
     };
 
+    //  sqs.layout_used.charts[22].title
+    var augment_first_run_to_include_composite_charts_ = function( runs ) {
+
+        var already_have = runs[0].meta;
+        var charts = sqs.layout_used.charts;
+
+        for( var x=0; x < charts.length; x++ ) {
+
+            var chart = charts[x];
+            var title = chart.title;
+
+            if( !already_have[ title ] ) {
+
+                for( var z = 0; z < runs.length; z++ ) {
+
+                    var stub = parseInt(Math.random()*7) + 5;
+                    var val = ST.cali_obj_by_key[z][title] || -1;
+
+                    runs[z].meta[title] = {
+                        type: "int",
+                        value: stub
+                    }
+                }
+            }
+        }
+
+        return runs;
+    };
+
     return {
+        augment_first_run_to_include_composite_charts: augment_first_run_to_include_composite_charts_,
         get_js_type_based_on_cali_data_type: get_js_type_based_on_cali_data_type_,
         get_viz_type_based_on_cali_data_type: get_viz_type_based_on_cali_data_type_,
         update_composite: update_composite_

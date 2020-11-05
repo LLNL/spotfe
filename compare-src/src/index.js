@@ -192,7 +192,9 @@ export class Graph{
 
         // set data values
         this.dataSetKey = dataSetKey
-        window.runs = runs
+
+        //  The first run's meta object is used to determine what the drop down select options should be.
+        window.runs = ST.CompositeLayoutModel.augment_first_run_to_include_composite_charts(runs);
 
         this.compare(filenames)
 
