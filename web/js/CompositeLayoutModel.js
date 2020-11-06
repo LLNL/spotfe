@@ -133,9 +133,27 @@ ST.CompositeLayoutModel = function() {
     //  to populate the ST.cali_obj_by_key store which is needed for the augment_first function.
     var update_cali_obj_with_CS_compatible_ = function( runs ) {
 
+        ST.cali_obj_by_key = ST.cali_obj_by_key || {};
 
+        for( var x=0; x < runs.length; x++ ) {
 
+            var run_key = x + "";
+            var meta = runs[x].meta;
+
+            ST.cali_obj_by_key[ run_key ] = ST.cali_obj_by_key[ run_key ] || {};
+
+            for( var meta_att in meta ) {
+
+                var obj = meta[meta_att];
+                var val = obj.value;
+
+                ST.cali_obj_by_key[ run_key ][ meta_att] = val;
+            }
+        }
+
+        console.dir( ST.cali_obj_by_key );
     };
+
 
     //  sqs.layout_used.charts[22].title
     var augment_first_run_to_include_composite_charts_ = function( runs ) {
@@ -155,8 +173,10 @@ ST.CompositeLayoutModel = function() {
 
                 for( var z = 0; z < runs.length; z++ ) {
 
+                    var run_key = z + "";
                     var stub = parseInt(Math.random()*17) + 5;
-                    var val = ST.cali_obj_by_key[z] ? ST.cali_obj_by_key[z][title] : -1;
+                    var run_obj = ST.cali_obj_by_key[ run_key ];
+                    var val = run_obj ? run_obj[title] : -1;
 
                     runs[z].meta[title] = {
                         type: "int",
