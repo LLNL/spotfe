@@ -103,6 +103,7 @@ ST.CallSpot = function() {
 
             var spotReturnedValue = command_out;
             var parsed_whole = JSON.parse(spotReturnedValue);
+            console.dir( parsed_whole );
 
             var command_out2;
             var parsed;

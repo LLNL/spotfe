@@ -124,8 +124,24 @@ ST.CompositeLayoutModel = function() {
         return "int";
     };
 
+
+    //  INPUT:
+    //      runs from index.js, originating from the getData call.
+    //      that's a different output from the summary call we get back from the BE.
+    //
+    //  Use output of this function to feed the handle_success of Callspot.js
+    //  to populate the ST.cali_obj_by_key store which is needed for the augment_first function.
+    var update_cali_obj_with_CS_compatible_ = function( runs ) {
+
+
+
+    };
+
     //  sqs.layout_used.charts[22].title
     var augment_first_run_to_include_composite_charts_ = function( runs ) {
+
+        console.dir( runs );
+        update_cali_obj_with_CS_compatible_( runs );
 
         var already_have = runs[0].meta;
         var charts = sqs.layout_used.charts;
@@ -139,12 +155,12 @@ ST.CompositeLayoutModel = function() {
 
                 for( var z = 0; z < runs.length; z++ ) {
 
-                    var stub = parseInt(Math.random()*7) + 5;
-                    var val = ST.cali_obj_by_key[z][title] || -1;
+                    var stub = parseInt(Math.random()*17) + 5;
+                    var val = ST.cali_obj_by_key[z] ? ST.cali_obj_by_key[z][title] : -1;
 
                     runs[z].meta[title] = {
                         type: "int",
-                        value: stub
+                        value: val
                     }
                 }
             }

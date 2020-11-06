@@ -466,7 +466,7 @@ ST.ChartCollection = function() {
         var machine = ST.Utility.get_param('machine');
         var command = ST.Utility.get_command();
 
-        console.log('command=' + command);
+        //console.log('command=' + command);
 
         host = machine || host;
 
