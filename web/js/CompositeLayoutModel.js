@@ -159,7 +159,9 @@ ST.CompositeLayoutModel = function() {
     var augment_first_run_to_include_composite_charts_ = function( runs ) {
 
         console.dir( runs );
+
         update_cali_obj_with_CS_compatible_( runs );
+        update_composite_();
 
         var already_have = runs[0].meta;
         var charts = sqs.layout_used.charts;
@@ -167,18 +169,19 @@ ST.CompositeLayoutModel = function() {
         for( var x=0; x < charts.length; x++ ) {
 
             var chart = charts[x];
+            var dimension = chart.dimension;
             var title = chart.title;
 
-            if( !already_have[ title ] ) {
+            if( !already_have[ dimension ] ) {
 
                 for( var z = 0; z < runs.length; z++ ) {
 
                     var run_key = z + "";
                     var stub = parseInt(Math.random()*17) + 5;
                     var run_obj = ST.cali_obj_by_key[ run_key ];
-                    var val = run_obj ? run_obj[title] : -1;
+                    var val = run_obj ? run_obj[dimension] : -1;
 
-                    runs[z].meta[title] = {
+                    runs[z].meta[dimension] = {
                         type: "int",
                         value: val
                     }
