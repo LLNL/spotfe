@@ -247,7 +247,9 @@ export class Graph{
     }
 
     compare(filenames){
+        filenames = filenames || this.last_filenames;
         this.app.filenames = filenames
+        this.last_filenames = filenames;
     }
 
     //------------------ controls functions

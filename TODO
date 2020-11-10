@@ -1,8 +1,13 @@
-On index.js need to call compositeLayoutModel new function to
-take "runs" and format it in a way handle_success (from Callspot) can handle
+DONE - On index.js need to call compositeLayoutModel new function to
+DONE - take "runs" and format it in a way handle_success (from Callspot) can handle
     * then call that function and fill up ST.cali_obj_by_key
     * then call augment_first_run.
-    
+TEST - need to make sure everything is correct
+- on X-axis and group by, should I perhaps show the title, not the dimension?
+- update drop down list as soon as they add the graph, instead of making them refresh.
+    * should we just do it from index.js 197.
+
+
 For Nov 4th
 DONE - Stop wrap around from happening for the horizontal bar charts.
 DONE - Get a new icon for memory view: it should have to do with time series, maybe a set of line graphs.
