@@ -1,6 +1,7 @@
 - For the icons: Get a BE data to see whether timeseries data is there.
     * jupyter will always be there.
 - Xaxis, GroupBy, Chart name all the same. (things should not have multiple names)
+    * STILL -> fix table column name.
     * instead of strcon, use a space.
     * default names, +,-,/,*
 
