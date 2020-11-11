@@ -187,7 +187,7 @@ ST.CompositeLayoutModel = function() {
                         var run_obj = ST.cali_obj_by_key[run_key];
                         var val = run_obj ? run_obj[dimension] : -1;
 
-                        runs[z].meta[dimension] = {
+                        runs[z].meta[title] = {
                             type: "int",
                             value: val
                         }

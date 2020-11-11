@@ -70,6 +70,7 @@ ST.AddChartTypeView = function() {
 
         attributes_select = get_attributes_();
 
+        //  test
         //  EDIT
         if( ch_type === "multi") {
 
