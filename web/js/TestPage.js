@@ -40,15 +40,35 @@ var TEST = function() {
 
     var init_ = function() {
 
-        var num = [15, 100, 500, 1000, 2000, 5000, 10000,
-            14500, 32000, 95000, 350000, "multi25", "multi250", "multi10000",
-            "multi32000", "deep_dir_5", "lul_sept_28_timeseries"];
+        var num = [15,
+            100,
+            500,
+            1000,
+            2000,
+            5000,
+            10000,
+            14500,
+            32000,
+            95000,
+            350000,
+            "lulesh_gen/multi25",
+            "lulesh_gen/multi250",
+            "lulesh_gen/multi10000",
+            "lulesh_gen/multi32000",
+            "lulesh_gen/deep_dir_5",
+            "lulesh_gen/lul_sept_28_timeseries",
+            "demos/mpi"
+        ];
 
         for (var x in num) {
 
             var count = num[x];
 
-            var luly = '?sf=/usr/gapps/spot/datasets/lulesh_gen/' + count;
+            if( typeof count === "number" ) {
+                count = "lulesh_gen/" + count;
+            }
+
+            var luly = '?sf=/usr/gapps/spot/datasets/' + count;
             add_test_( count, luly );
         }
 

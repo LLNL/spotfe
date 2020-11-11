@@ -1,22 +1,26 @@
+- For the icons: Get a BE data to see whether timeseries data is there.
+    * jupyter will always be there.
+- Xaxis, GroupBy, Chart name all the same. (things should not have multiple names)
+    * instead of strcon, use a space.
+    * default names, +,-,/,*
+
+FIXED - not loading issue -> related to layout not loaded early on.
+DONE - strcon to strcat
+DONE - attributions to the help repo, move somewhere else.
+DONE - start with a default name that makes sense: maybe whatever is in the first drop down.
+DONE - Add this to list of things to test: /usr/gapps/spot/datasets/demos/mpi
+
+- update drop down list as soon as they add the graph, instead of making them refresh.
+    * should we just do it from index.js 197.
+    * need to enable source maps in the transpilation process in order to debug where the funcs came from.
+
+
+
 DONE - On index.js need to call compositeLayoutModel new function to
 DONE - take "runs" and format it in a way handle_success (from Callspot) can handle
     * then call that function and fill up ST.cali_obj_by_key
     * then call augment_first_run.
 TEST - need to make sure everything is correct
-
-FIXED - not loading issue -> related to layout not loaded early on.
-- For the icons: Get a BE data to see whether timeseries data is there.
-    * jupyter will always be there.
-DONE - strcon to strcat
-DONE - attributions to the help repo, move somewhere else.
-DONE - start with a default name that makes sense: maybe whatever is in the first drop down.
-- Xaxis, GroupBy, Chart name all the same. (things should not have multiple names)
-    * instead of strcon, use a space.
-    * default names, +,-,/,*
-- Add this to list of things to test: /usr/gapps/spot/datasets/demos/mpi
-- update drop down list as soon as they add the graph, instead of making them refresh.
-    * should we just do it from index.js 197.
-    * need to enable source maps in the transpilation process in order to debug where the funcs came from.
 
 
 
