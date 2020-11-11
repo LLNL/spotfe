@@ -4,19 +4,21 @@ DONE - take "runs" and format it in a way handle_success (from Callspot) can han
     * then call augment_first_run.
 TEST - need to make sure everything is correct
 
+FIXED - not loading issue -> related to layout not loaded early on.
+- For the icons: Get a BE data to see whether timeseries data is there.
+    * jupyter will always be there.
 - attributions to the help repo, move somewhere else.
 - start with a default name that makes sense: maybe whatever is in the first drop down.
 - Xaxis, GroupBy, Chart name all the same. (things should not have multiple names)
     * instead of strcon, use a space.
     * default names, +,-,/,*
     * strcon to strcat
-- Get a BE data to see whether timeseries data is there.
-    * jupyter will always be there.
+- Add this to list of things to test: /usr/gapps/spot/datasets/demos/mpi
 - update drop down list as soon as they add the graph, instead of making them refresh.
     * should we just do it from index.js 197.
     * need to enable source maps in the transpilation process in order to debug where the funcs came from.
 - find out how to clear cache.
-- jupyter icon.
+- jupyter icon - make it actually jupyter.
 
 
 

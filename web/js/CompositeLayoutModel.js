@@ -168,7 +168,7 @@ ST.CompositeLayoutModel = function() {
         update_composite_();
 
         if( sqs.layout_used ) {
-            
+
             var already_have = runs[0].meta;
             var charts = sqs.layout_used.charts;
 
