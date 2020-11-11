@@ -101,6 +101,12 @@ ST.AddChartTypeView = function() {
                 ren_delete_(true);
             }
 
+            var xaxis_sel = $('.composite_chart_type .xaxis select').val();
+            var yaxis_sel = $('.composite_chart_type .yaxis select').val();
+            var vs = xaxis_sel + " vs " + yaxis_sel;
+
+            $('.composite_chart_type .chart_name').val( vs );
+
         } else {
             //  is NOT a scatter chart
             $('.composite_chart_type .axis_row').hide();
