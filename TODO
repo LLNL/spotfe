@@ -7,7 +7,7 @@ TEST - need to make sure everything is correct
 FIXED - not loading issue -> related to layout not loaded early on.
 - For the icons: Get a BE data to see whether timeseries data is there.
     * jupyter will always be there.
-- strcon to strcat
+DONE - strcon to strcat
 DONE - attributions to the help repo, move somewhere else.
 DONE - start with a default name that makes sense: maybe whatever is in the first drop down.
 - Xaxis, GroupBy, Chart name all the same. (things should not have multiple names)
