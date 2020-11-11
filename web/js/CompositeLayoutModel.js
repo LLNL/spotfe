@@ -167,27 +167,30 @@ ST.CompositeLayoutModel = function() {
         update_cali_obj_with_CS_compatible_( runs );
         update_composite_();
 
-        var already_have = runs[0].meta;
-        var charts = sqs.layout_used.charts;
+        if( sqs.layout_used ) {
+            
+            var already_have = runs[0].meta;
+            var charts = sqs.layout_used.charts;
 
-        for( var x=0; x < charts.length; x++ ) {
+            for (var x = 0; x < charts.length; x++) {
 
-            var chart = charts[x];
-            var dimension = chart.dimension;
-            var title = chart.title;
+                var chart = charts[x];
+                var dimension = chart.dimension;
+                var title = chart.title;
 
-            if( !already_have[ dimension ] ) {
+                if (!already_have[dimension]) {
 
-                for( var z = 0; z < runs.length; z++ ) {
+                    for (var z = 0; z < runs.length; z++) {
 
-                    var run_key = z + "";
-                    var stub = parseInt(Math.random()*17) + 5;
-                    var run_obj = ST.cali_obj_by_key[ run_key ];
-                    var val = run_obj ? run_obj[dimension] : -1;
+                        var run_key = z + "";
+                        var stub = parseInt(Math.random() * 17) + 5;
+                        var run_obj = ST.cali_obj_by_key[run_key];
+                        var val = run_obj ? run_obj[dimension] : -1;
 
-                    runs[z].meta[dimension] = {
-                        type: "int",
-                        value: val
+                        runs[z].meta[dimension] = {
+                            type: "int",
+                            value: val
+                        }
                     }
                 }
             }
