@@ -2,16 +2,20 @@ ST.CompositeLayoutModel = function() {
 
     var update_composite_ = function() {
 
-        var ch = sqs.layout_used.charts;
+        if( sqs.layout_used ) {
+            var ch = sqs.layout_used.charts;
 
-        for (var y = 0; y < ch.length; y++) {
+            for (var y = 0; y < ch.length; y++) {
 
-            var ch_i = ch[y];
+                var ch_i = ch[y];
 
-            if (ch_i.composite_layout) {
+                if (ch_i.composite_layout) {
 
-                update_one_plot_( ch_i.composite_layout, ch_i.dimension );
+                    update_one_plot_(ch_i.composite_layout, ch_i.dimension);
+                }
             }
+        } else {
+            console.log('sqs.layout not yet defined, so skipping update_composite_()');
         }
     };
 

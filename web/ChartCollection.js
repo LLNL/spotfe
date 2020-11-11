@@ -537,6 +537,7 @@ ST.ChartCollection = function() {
 
 
     return {
+        init: init,
         show_more: show_more_,
         RenderChartCollection: RenderChartCollection,
         bind_sort: bind_sort

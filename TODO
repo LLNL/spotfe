@@ -3,9 +3,31 @@ DONE - take "runs" and format it in a way handle_success (from Callspot) can han
     * then call that function and fill up ST.cali_obj_by_key
     * then call augment_first_run.
 TEST - need to make sure everything is correct
-- on X-axis and group by, should I perhaps show the title, not the dimension?
+
+- attributions to the help repo, move somewhere else.
+- start with a default name that makes sense: maybe whatever is in the first drop down.
+- Xaxis, GroupBy, Chart name all the same. (things should not have multiple names)
+    * instead of strcon, use a space.
+    * default names, +,-,/,*
+    * strcon to strcat
+- Get a BE data to see whether timeseries data is there.
+    * jupyter will always be there.
 - update drop down list as soon as they add the graph, instead of making them refresh.
     * should we just do it from index.js 197.
+    * need to enable source maps in the transpilation process in order to debug where the funcs came from.
+- find out how to clear cache.
+- jupyter icon.
+
+
+
+- In the Compare code: error messages for host issues
+- Should we change machine default?  since oslic is down?
+
+
+- Back end is not returning a layout for the following:
+https://rzlc.llnl.gov/spot/dcvis/?sf=/usr/gapps/spot/datasets/demos/mpi&xaxis=cluster_region_cost_region_balance_&groupby=cluster&aggregate=sum
+    * add regression tests.
+
 
 
 For Nov 4th
