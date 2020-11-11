@@ -7,17 +7,21 @@ TEST - need to make sure everything is correct
 FIXED - not loading issue -> related to layout not loaded early on.
 - For the icons: Get a BE data to see whether timeseries data is there.
     * jupyter will always be there.
-- attributions to the help repo, move somewhere else.
+- strcon to strcat
+DONE - attributions to the help repo, move somewhere else.
 - start with a default name that makes sense: maybe whatever is in the first drop down.
+    * $('.composite_chart_type .dimension_attribute').val();
 - Xaxis, GroupBy, Chart name all the same. (things should not have multiple names)
     * instead of strcon, use a space.
     * default names, +,-,/,*
-    * strcon to strcat
 - Add this to list of things to test: /usr/gapps/spot/datasets/demos/mpi
 - update drop down list as soon as they add the graph, instead of making them refresh.
     * should we just do it from index.js 197.
     * need to enable source maps in the transpilation process in order to debug where the funcs came from.
-- find out how to clear cache.
+
+
+
+- find out how to clear cache, bust joe's cache how to?
 - jupyter icon - make it actually jupyter.
 
 

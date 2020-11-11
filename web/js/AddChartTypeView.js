@@ -80,6 +80,9 @@ ST.AddChartTypeView = function() {
 
             ren_delete_( true );
 
+            var first_dropdown = $('.composite_chart_type .multi_row:eq(0) .dimension_attribute').val();
+            $('.composite_chart_type .chart_name').val( first_dropdown );
+
         } else {
             $('.multi_row_selector').html("");
         }
