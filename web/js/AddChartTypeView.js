@@ -308,7 +308,7 @@ ST.AddChartTypeView = function() {
             var op = ops[z];
             var ope = op.operation || "";
 
-            //  Matt wants _strcon_ to not appear in the string.  
+            //  Matt wants _strcon_ to not appear in the string.
             ope = ope.replace(ST.CONSTS.STRCON, " ");
 
             ht += ope + op.attribute;

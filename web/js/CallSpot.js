@@ -243,7 +243,11 @@ ST.CallSpot = function() {
                     //valid_obj.epoch_date = date;
                     valid_obj.formatdate = month + "/" + day + "/" + year;
                     valid_obj.run_id = "id_" + Math.floor(Math.random() * 10000);
-                    valid_obj.drilldown = ['Jupyter', 'walltime', 'memory'];
+                    valid_obj.drilldown = {
+                        "jupyter":1,    //  always exists
+                        "durations":1,  //  always exists
+                        "timeseries": valid_obj.timeseries || 0
+                    };
 
                     for (var dimension in valid_obj) {
 

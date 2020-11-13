@@ -203,20 +203,22 @@ ST.ChartCollection = function() {
                 var buts = "";
                 var title = {
                     "jupyter" : "Jupyter View",
-                    "walltime" : "Walltime View",
-                    "memory": "Memory View"
+                    "durations" : "Walltime View",
+                    "timeseries": "Timeseries View"
                 };
 
-                for (var x in d.drilldown) {
+                for (var jwt_type in d.drilldown) {
 
-                    var but = d.drilldown[x];
-                    var drill_icon = but.toLowerCase();
+                    var show_me = d.drilldown[jwt_type];
+                    var drill_icon = jwt_type.toLowerCase();
 
-                    buts += '<div run_id="' + d.run_id + '" ' +
-                        'title="' + title[ drill_icon ] + '" ' +
-                        'subject="' + drill_icon + '" class="drilldown myButton ' + drill_icon + ' icon">' +
-                        '<div class="inner"></div>' +
-                        '</div>';
+                    if( show_me ) {
+                        buts += '<div run_id="' + d.run_id + '" ' +
+                            'title="' + title[drill_icon] + '" ' +
+                            'subject="' + drill_icon + '" class="drilldown myButton ' + drill_icon + ' icon">' +
+                            '<div class="inner"></div>' +
+                            '</div>';
+                    }
                 }
 
                 var hidden = '<div class="hidden key" key="' + d.key + '">' + d.key + '</div>';
