@@ -1,9 +1,8 @@
-- For the icons: Get a BE data to see whether timeseries data is there.
-    * jupyter will always be there.
-- Xaxis, GroupBy, Chart name all the same. (things should not have multiple names)
-    * STILL -> fix table column name.
-    * instead of strcon, use a space.
-    * default names, +,-,/,*
+DONE - For the icons: Get a BE data to see whether timeseries data is there.
+    * spot.py Line 254.  Need to get OGlobals.options which should contain the string "timeseries", just check the latest david's data.
+    * jupyter/walltime will always be there.
+DONE - Xaxis, GroupBy, Chart name all the same. (things should not have multiple names)
+DONE - instead of strcon, use a space.
 
 FIXED - not loading issue -> related to layout not loaded early on.
 DONE - strcon to strcat
@@ -14,7 +13,10 @@ DONE - Add this to list of things to test: /usr/gapps/spot/datasets/demos/mpi
 - update drop down list as soon as they add the graph, instead of making them refresh.
     * should we just do it from index.js 197.
     * need to enable source maps in the transpilation process in order to debug where the funcs came from.
+- need to update when deleting as well.
 
+NEED ERR MESSAGE - When creating a new composite that has the same name of something that already exists, there needs to be an error
+BUG - when updating the name of the chart, the table column doesn't update.
 
 
 DONE - On index.js need to call compositeLayoutModel new function to
@@ -22,7 +24,7 @@ DONE - take "runs" and format it in a way handle_success (from Callspot) can han
     * then call that function and fill up ST.cali_obj_by_key
     * then call augment_first_run.
 TEST - need to make sure everything is correct
-
+AddChartTypeView.js : 312 -> here we can change the strcon back so the user can see what they've created, if matt changes his mind.
 
 
 - find out how to clear cache, bust joe's cache how to?
@@ -37,6 +39,29 @@ TEST - need to make sure everything is correct
 - Back end is not returning a layout for the following:
 https://rzlc.llnl.gov/spot/dcvis/?sf=/usr/gapps/spot/datasets/demos/mpi&xaxis=cluster_region_cost_region_balance_&groupby=cluster&aggregate=sum
     * add regression tests.
+
+Problem:
+Not able to update the compare view after setting window.runs
+
+Solution:
+    Inside App.vue pug tempalte:
+    .updateCompareView(@click="rerenderForSelectDropdownUpdate")
+
+        rerenderForSelectDropdownUpdate() {
+            this.filenames.push("test823");
+        },
+
+    This tells vue to rerender the compare component because this.filenames have changed.
+    runs() is a computed property which takes into account the changes in window.runs
+
+
+    Another key part is this:
+        var update_compare_view_ = function() {
+
+        //  The first run's meta object is used to determine what the drop down select options should be.
+        window.runs = ST.CompositeLayoutModel.augment_first_run_to_include_composite_charts(runs);
+        $('.updateCompareView').trigger('click');
+    };
 
 
 

@@ -200,6 +200,13 @@ ST.AddChartTypeView = function() {
     };
 
 
+    var update_compare_view_ = function() {
+
+        //  The first run's meta object is used to determine what the drop down select options should be.
+        window.runs = ST.CompositeLayoutModel.augment_first_run_to_include_composite_charts(runs);
+        $('.updateCompareView').trigger('click');
+    };
+
     var submit_ = function() {
 
         //  this is based on if the person selects composite chart type or the scatter plot
@@ -380,6 +387,7 @@ ST.AddChartTypeView = function() {
         ST.ChartCollection.RenderChartCollection(ST.newp, ST.layout_used);  //  ST.ReturnedDataStub.layout); //
 
         close_modal_();
+        update_compare_view_();
     };
 
 

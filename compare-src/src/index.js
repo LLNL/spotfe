@@ -125,6 +125,8 @@ export class Graph{
             }
         }
 
+        console.dir( newData );
+
         // Merge new data with cached
         cachedData.Runs = Object.assign(cachedData.Runs, newData.Runs)
         cachedData.RunDataMeta = Object.assign(cachedData.RunDataMeta, newData.RunDataMeta)

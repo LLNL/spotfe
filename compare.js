@@ -39602,8 +39602,13 @@ exports.default = vue_1.default.extend({
     changePath: function changePath(path) {
       this.selectedParent = path;
     },
+    rerenderForSelectDropdownUpdate: function rerenderForSelectDropdownUpdate() {
+      this.filenames.push("test823");
+    },
     toggleScaleType: function toggleScaleType() {
       this.selectedScaleType = this.selectedScaleType == 'linear' ? 'log' : 'linear';
+      this.filenames.push("test13241234.cali");
+      console.log('toggleScaletype');
     },
     togglePathVisible: function togglePathVisible(pathToToggle) {
       this.disabledFuncPaths = lodash_1.default.xor(this.disabledFuncPaths, [pathToToggle]);
@@ -39635,7 +39640,7 @@ exports.default = vue_1.default.extend({
     
         /* template */
         Object.assign($10154c, (function () {
-          var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{style:({display:'flex', flexDirection:'column'}),attrs:{"id":"compare-window"}},[_c('div',{staticClass:"sticky",style:({position: 'sticky', top: 0, zIndex: 1})},[_c('div',{staticClass:"topbar",style:({ 
+          var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{style:({display:'flex', flexDirection:'column'}),attrs:{"id":"compare-window"}},[_c('div',{staticClass:"updateCompareView",on:{"click":_vm.rerenderForSelectDropdownUpdate}}),_c('div',{staticClass:"sticky",style:({position: 'sticky', top: 0, zIndex: 1})},[_c('div',{staticClass:"topbar",style:({ 
                 backgroundColor: 'lightgray',
                 padding:'5px',
                 height:'40px',
@@ -50951,7 +50956,8 @@ var Graph = /*#__PURE__*/function () {
                 };
 
               case 28:
-                // Merge new data with cached
+                console.dir(newData); // Merge new data with cached
+
                 cachedData.Runs = Object.assign(cachedData.Runs, newData.Runs);
                 cachedData.RunDataMeta = Object.assign(cachedData.RunDataMeta, newData.RunDataMeta);
                 cachedData.RunGlobalMeta = Object.assign(cachedData.RunGlobalMeta, newData.RunGlobalMeta);
@@ -50963,10 +50969,10 @@ var Graph = /*#__PURE__*/function () {
                   return delete cachedData.Runs[deletedRun];
                 }); // cache newest version of data
 
-                _context3.next = 37;
+                _context3.next = 38;
                 return _localforage.default.setItem(dataSetKey, cachedData);
 
-              case 37:
+              case 38:
                 // add in datsetkey and datakey to globals
                 _lodash.default.forEach(cachedData.Runs, function (run, filename) {
                   run.Globals.dataSetKey = dataSetKey;
@@ -51049,20 +51055,20 @@ var Graph = /*#__PURE__*/function () {
                     table: []
                   }
                 };
-                _context3.next = 54;
+                _context3.next = 55;
                 return _localforage.default.getItem("show:" + dataSetKey);
 
-              case 54:
+              case 55:
                 _context3.t4 = _context3.sent;
 
                 if (_context3.t4) {
-                  _context3.next = 57;
+                  _context3.next = 58;
                   break;
                 }
 
                 _context3.t4 = defaultVisibleCharts;
 
-              case 57:
+              case 58:
                 visibleCharts = _context3.t4;
 
                 for (_i4 = 0, _Object$entries4 = Object.entries(cachedData.Runs); _i4 < _Object$entries4.length; _i4++) {
@@ -51091,24 +51097,24 @@ var Graph = /*#__PURE__*/function () {
                   });
                 }
 
-                _context3.next = 62;
+                _context3.next = 63;
                 return _localforage.default.getItem('scatterplots:' + this.dataSetKey);
 
-              case 62:
+              case 63:
                 _context3.t5 = _context3.sent;
 
                 if (_context3.t5) {
-                  _context3.next = 65;
+                  _context3.next = 66;
                   break;
                 }
 
                 _context3.t5 = [];
 
-              case 65:
+              case 66:
                 summary.layout.scatterplots = _context3.t5;
                 return _context3.abrupt("return", summary);
 
-              case 67:
+              case 68:
               case "end":
                 return _context3.stop();
             }

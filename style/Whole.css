@@ -293,14 +293,14 @@ table.only_multi_row_selector tr td:nth-child(2) select {
   font-size: 11px;
   color: #999999; }
 
-table.dc-data-table .walltime {
+table.dc-data-table .durations {
   position: static; }
-  table.dc-data-table .walltime div {
+  table.dc-data-table .durations div {
     background-image: url(../img/walltime.png);
     background-size: 100% 100%; }
-table.dc-data-table .memory {
+table.dc-data-table .timeseries {
   position: static; }
-  table.dc-data-table .memory div {
+  table.dc-data-table .timeseries div {
     background-image: url(../img/graph.png);
     background-size: 100% 100%; }
 table.dc-data-table .jupyter.icon {

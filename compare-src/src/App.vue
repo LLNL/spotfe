@@ -1,5 +1,6 @@
 <template lang="pug">
 #compare-window(:style="{display:'flex', flexDirection:'column'}")
+    .updateCompareView(@click="rerenderForSelectDropdownUpdate")
     .sticky(:style="{position: 'sticky', top: 0, zIndex: 1}")
         .topbar(
             :style=`{ 
@@ -298,8 +299,13 @@ export default Vue.extend({
         changePath(path){
         this.selectedParent = path
         },
+        rerenderForSelectDropdownUpdate() {
+            this.filenames.push("test823");
+        },
         toggleScaleType(){
-        this.selectedScaleType = this.selectedScaleType == 'linear' ? 'log' : 'linear'
+            this.selectedScaleType = this.selectedScaleType == 'linear' ? 'log' : 'linear'
+            this.filenames.push("test13241234.cali");
+            console.log('toggleScaletype')
         },
         togglePathVisible(pathToToggle){
         this.disabledFuncPaths =  _.xor(this.disabledFuncPaths, [pathToToggle])
