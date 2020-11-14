@@ -1,3 +1,4 @@
+
 DONE - For the icons: Get a BE data to see whether timeseries data is there.
     * spot.py Line 254.  Need to get OGlobals.options which should contain the string "timeseries", just check the latest david's data.
     * jupyter/walltime will always be there.
@@ -10,13 +11,20 @@ DONE - attributions to the help repo, move somewhere else.
 DONE - start with a default name that makes sense: maybe whatever is in the first drop down.
 DONE - Add this to list of things to test: /usr/gapps/spot/datasets/demos/mpi
 
-- update drop down list as soon as they add the graph, instead of making them refresh.
+DONE - update drop down list as soon as they add the graph, instead of making them refresh.
     * should we just do it from index.js 197.
     * need to enable source maps in the transpilation process in order to debug where the funcs came from.
-- need to update when deleting as well.
+DONE - need to update compare view when deleting as well.
+
 
 NEED ERR MESSAGE - When creating a new composite that has the same name of something that already exists, there needs to be an error
+- AFter an Edit of a chart name, need to edit the compare view version as well.
 BUG - when updating the name of the chart, the table column doesn't update.
+- The type should not always be "int" in CompositeLayoutModel:
+                        runs[z].meta[title] = {
+                            type: "int",
+                            value: val
+                        }
 
 
 DONE - On index.js need to call compositeLayoutModel new function to

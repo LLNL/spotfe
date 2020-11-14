@@ -133,6 +133,9 @@ ST.CompositeLayoutModel = function() {
     //      runs from index.js, originating from the getData call.
     //      that's a different output from the summary call we get back from the BE.
     //
+    //  OBJECTIVE:
+    //      Sync runs to ST.cali_obj_by_key so it's up to date
+    //
     //  Use output of this function to feed the handle_success of Callspot.js
     //  to populate the ST.cali_obj_by_key store which is needed for the augment_first function.
     var update_cali_obj_with_CS_compatible_ = function( runs ) {
@@ -183,7 +186,6 @@ ST.CompositeLayoutModel = function() {
                     for (var z = 0; z < runs.length; z++) {
 
                         var run_key = z + "";
-                        var stub = parseInt(Math.random() * 17) + 5;
                         var run_obj = ST.cali_obj_by_key[run_key];
                         var val = run_obj ? run_obj[dimension] : -1;
 
@@ -199,7 +201,38 @@ ST.CompositeLayoutModel = function() {
         return runs;
     };
 
+
+    //  For the benefit of the compare view, we need to update runs which will then be returned to window.runs
+    var remove_composite_chart_from_runs_ = function( dimension ) {
+
+        var title = get_title_( dimension );
+        console.log('title=' + title);
+
+        for (var z = 0; z < window.runs.length; z++) {
+
+            delete window.runs[z].meta[title];
+        }
+    };
+
+
+    var get_title_ = function( dimension ) {
+
+        var charts = sqs.layout_used.charts;
+        for( var x=0; x < charts.length; x++ ) {
+
+            var dim = charts[x].dimension;
+            if( dim.toLowerCase() === dimension.toLowerCase() ) {
+
+                return charts[x].title;
+            }
+        }
+
+        return "title not found";
+    };
+
+
     return {
+        remove_composite_chart_from_runs: remove_composite_chart_from_runs_,
         augment_first_run_to_include_composite_charts: augment_first_run_to_include_composite_charts_,
         get_js_type_based_on_cali_data_type: get_js_type_based_on_cali_data_type_,
         get_viz_type_based_on_cali_data_type: get_viz_type_based_on_cali_data_type_,

@@ -150,6 +150,14 @@ ST.AddChartTypeView = function() {
 
     var delete_ = function() {
 
+        //  For the compare view
+        //  Needs to go first so that ST.layout_used is still in there to reference the title info from dimension.
+        //  Do this first:
+        ST.CompositeLayoutModel.remove_composite_chart_from_runs( loaded_dimension_ );
+
+        //  Don't re-add the first meta's.  Just need to update the view.
+        $('.updateCompareView').trigger('click');
+
         remove_by_dimension_( ST.layout_used.charts, loaded_dimension_ );
         remove_by_dimension_( ST.layout_used.scatterplots, loaded_dimension_ );
         remove_by_dimension_( ST.layout_used.table, loaded_dimension_ );
