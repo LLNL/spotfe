@@ -459,11 +459,11 @@ ST.CallSpot = function() {
             //  http://localhost:8888
             window.open('../ravel/index.html?cali_key=' + cali_fp );
 
-        } else if( subject === "walltime" ) {
+        } else if( subject === "durations" ) {
 
             window.open('sankey/index.html?runSetId=' + file_left + "&runId=" + cali_fp);
 
-        } else if( subject === "memory" ) {
+        } else if( subject === "timeseries" ) {
 
             window.open('memory/index.html?runSetId=' + file_left + '&runId=' + cali_fp);
         } else {
