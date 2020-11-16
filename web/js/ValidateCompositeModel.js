@@ -1,5 +1,14 @@
 ST.ValidateCompositeModel = function() {
 
+    var str_types_ = ["datapath", "set of path", "path", "libraries", "set of string", "cluster", "user", "string"];
+
+    //  Our type system is very specific, has many string types
+    var specific_type_is_str_ = function( str ) {
+
+        return str_types_.indexOf( str ) > -1;
+    };
+
+
     var validate_ = function( ops ) {
 
         console.dir( ops );
@@ -47,14 +56,6 @@ ST.ValidateCompositeModel = function() {
         return true;
     };
 
-
-    var str_types_ = ["datapath", "set of path", "path", "libraries", "set of string", "cluster", "user", "string"];
-
-    //  Our type system is very specific, has many string types
-    var specific_type_is_str_ = function( str ) {
-
-        return str_types_.indexOf( str ) > -1;
-    };
 
     return {
         validate: validate_
