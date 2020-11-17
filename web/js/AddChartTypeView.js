@@ -340,6 +340,16 @@ ST.AddChartTypeView = function() {
 
         //  get latest ops instead of waiting for select drop down onchange event.
         var operations_just_now = $.fn.MultiRowSelector.get_operations( con );
+
+        if( !operations_just_now ) {
+            ReusableView.alert('operations have not been set.');
+        }
+
+        var dimension = gen_dimension_( operations );
+        var chart_name = $('.chart_name').val();
+
+        var valid_dim = ST.validate_dimension( dimension );
+        var valid_name = ST.validate_name( chart_name );
         var valid = ST.ValidateCompositeModel.validate( operations_just_now );
 
         if( valid !== true ) {
@@ -348,15 +358,8 @@ ST.AddChartTypeView = function() {
             return false;
         }
 
-        var chart_name = $('.chart_name').val();
-
-        if( !operations_just_now ) {
-            ReusableView.alert('operations have not been set.');
-        }
-
         var operations = operations_just_now;
 
-        var dimension = gen_dimension_( operations );
         //var viz = "BarChart";
         var viz = ST.CompositeLayoutModel.get_viz_type_based_on_cali_data_type( operations );
 

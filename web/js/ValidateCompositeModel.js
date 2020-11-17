@@ -60,7 +60,7 @@ ST.ValidateCompositeModel = function() {
     var validate_name_ = function() {
 
     };
-    
+
     var validate_dimension_ = function( generated_dimension ) {
 
     };
