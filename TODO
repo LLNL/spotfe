@@ -18,7 +18,7 @@ DONE - need to update compare view when deleting as well.
 DONE - Error message: (name && dimension) When creating a new composite that has the same name of something that already exists, there needs to be an error
 
 
-- For ScatterPlot, change the select drop down contents.
+- For add new plot screen, when ScatterPlot is selected, change the select drop down contents to just ints.
 - AFter an Edit of a chart name, need to edit the compare view version as well.
 BUG - when updating the name of the chart, the table column doesn't update.
 - The type should not always be "int" in CompositeLayoutModel:
