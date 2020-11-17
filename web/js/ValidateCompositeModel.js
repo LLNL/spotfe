@@ -57,7 +57,17 @@ ST.ValidateCompositeModel = function() {
     };
 
 
+    var validate_name_ = function() {
+
+    };
+    
+    var validate_dimension_ = function( generated_dimension ) {
+
+    };
+
     return {
-        validate: validate_
+        validate: validate_,
+        validate_dimension: validate_dimension_,
+        validate_name: validate_name_
     }
 }();
