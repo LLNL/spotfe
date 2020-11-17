@@ -39,10 +39,15 @@ ST.Utility = function() {
     };
 
 
-    var assert_ = function( bool, str ) {
+    var assert_ = function( bool, str, use_alert ) {
 
         if( !bool ) {
-            error_( str );
+
+            if( use_alert ) {
+                alert( str );
+            } else {
+                error_(str);
+            }
         }
     };
 
