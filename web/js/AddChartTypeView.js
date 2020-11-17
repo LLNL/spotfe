@@ -118,6 +118,16 @@ ST.AddChartTypeView = function() {
         }
     };
 
+    var update_chart_name_ = function() {
+
+        var xaxis = $('.xaxis select').val();
+        var yaxis = $('.yaxis select').val();
+
+        var name = xaxis + " vs " + yaxis;
+
+        $('.composite_chart_type .chart_name').val( name );
+    };
+
 
     var ren_delete_ = function( show ) {
 
@@ -134,17 +144,6 @@ ST.AddChartTypeView = function() {
         var ch_type = $('.composite_chart_type .pick_chart_type_sel').val().toLowerCase();
 
         show_based_context_( ch_type );
-    };
-
-
-    var update_chart_name_ = function() {
-
-        var xaxis = $('.xaxis select').val();
-        var yaxis = $('.yaxis select').val();
-
-        var name = xaxis + " vs " + yaxis;
-
-        $('.composite_chart_type .chart_name').val( name );
     };
 
 

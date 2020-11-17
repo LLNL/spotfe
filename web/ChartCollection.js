@@ -482,7 +482,7 @@ ST.ChartCollection = function() {
                 ST.CallSpot.handle_success2(summary);
 
             }).finally( summary => {
-                ST.Utility.check_error( summary );
+            ST.Utility.check_error( summary );
         });
 
         setup_pars_();
