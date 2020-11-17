@@ -57,12 +57,19 @@ ST.ValidateCompositeModel = function() {
     };
 
 
-    var validate_name_ = function() {
+    var validate_name_ = function( name ) {
 
+        var already_present = window.runs[0].meta[name];
+
+        return already_present ? "You already have a chart with the name: " + name : true;
     };
+
 
     var validate_dimension_ = function( generated_dimension ) {
 
+        var already_dim = ST.cali_obj_by_key[0][generated_dimension];
+
+        return already_dim ? "There is already a chart with these operations: " + generated_dimension : true;
     };
 
     return {

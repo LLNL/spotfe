@@ -15,9 +15,8 @@ DONE - update drop down list as soon as they add the graph, instead of making th
     * should we just do it from index.js 197.
     * need to enable source maps in the transpilation process in order to debug where the funcs came from.
 DONE - need to update compare view when deleting as well.
+DONE - Error message: (name && dimension) When creating a new composite that has the same name of something that already exists, there needs to be an error
 
-
-NEED ERR MESSAGE - When creating a new composite that has the same name of something that already exists, there needs to be an error
 - AFter an Edit of a chart name, need to edit the compare view version as well.
 BUG - when updating the name of the chart, the table column doesn't update.
 - The type should not always be "int" in CompositeLayoutModel:

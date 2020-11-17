@@ -345,20 +345,30 @@ ST.AddChartTypeView = function() {
             ReusableView.alert('operations have not been set.');
         }
 
+        var operations = operations_just_now;
         var dimension = gen_dimension_( operations );
         var chart_name = $('.chart_name').val();
 
-        var valid_dim = ST.validate_dimension( dimension );
-        var valid_name = ST.validate_name( chart_name );
+
+        var valid_dim = ST.ValidateCompositeModel.validate_dimension( dimension );
+        var valid_name = ST.ValidateCompositeModel.validate_name( chart_name );
         var valid = ST.ValidateCompositeModel.validate( operations_just_now );
 
         if( valid !== true ) {
-
-            ReusableView.alert('Composite chart inputs not valid', valid);
+            ReusableView.alert("Composite chart input not valid", valid );
             return false;
         }
 
-        var operations = operations_just_now;
+        if( valid_dim !== true ) {
+            ReusableView.alert("Composite chart dimension not valid", valid_dim );
+            return false;
+        }
+
+        if( valid_name !== true ) {
+            ReusableView.alert("Composite chart Name not valid", valid_name );
+            return false;
+        }
+
 
         //var viz = "BarChart";
         var viz = ST.CompositeLayoutModel.get_viz_type_based_on_cali_data_type( operations );

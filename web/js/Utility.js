@@ -39,6 +39,7 @@ ST.Utility = function() {
     };
 
 
+
     var assert_ = function( bool, str, use_alert ) {
 
         if( !bool ) {
