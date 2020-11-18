@@ -40,9 +40,10 @@ ST.AddChartTypeView = function() {
 
     var attributes_select = [];
 
-    var get_attributes_ = function() {
+    var get_attributes_ = function( allowed_types ) {
 
-        var dims = ST.UserPreferences.get_dimensions();
+        //  for composite type
+        var dims = ST.UserPreferences.get_dimensions( allowed_types );
         var ht = [];
 
         for( var x=0; x < dims.length; x++ ) {
@@ -108,6 +109,12 @@ ST.AddChartTypeView = function() {
 
             $('.composite_chart_type .chart_name').val( vs );
 
+            var attributes_select = get_attributes_(["double", "long", "int"]);
+            var sel = get_select_render_( attributes_select );
+            $('.axis_row .xaxis, .axis_row .yaxis').html( sel );
+
+            setup_defaults_();
+
         } else {
             //  is NOT a scatter chart
             $('.composite_chart_type .axis_row').hide();
@@ -117,6 +124,19 @@ ST.AddChartTypeView = function() {
             ren_delete_( false );
         }
     };
+
+
+    var get_select_render_ = function( arr, cla ) {
+
+        var sel = "";
+        for( var x=0; x < arr.length; x++ ) {
+
+            sel += '<option>' + arr[x] + '</option>';
+        }
+
+        return "<select class='"+ cla + "'>" + sel + "</select>";
+    };
+
 
     var update_chart_name_ = function() {
 

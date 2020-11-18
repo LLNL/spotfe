@@ -98,12 +98,12 @@ ST.UserPreferences = function() {
         });
     };
 
-    var axis_selection_types = ["double", "long", "int", "date", "path", "string", "set of string", "set of path"];
     var dim_idx_by_name_ = {};
 
 
     var get_dimensions_ = function( allowed_types ) {
 
+        var axis_selection_types = ["double", "long", "int", "date", "path", "string", "set of string", "set of path"];
         axis_selection_types = allowed_types || axis_selection_types;
 
         var charts = ST.layout_used.charts;
