@@ -1,12 +1,23 @@
+Blockers:
+- spot.channel in y-axis
+- Walltime page being broken.
+- As for the attribute aliases on the walltimes page.  Those aliases were added after Joe implemented that page, so I that’s why it doesn’t use those aliases.  I’ll need to look into that.
+
+
+For Jobsize 1:
+- on timeseries page -> Views button covers the
+- on timeseries page -> make sure at least 1 is check marked.
+
+
 - why figure_of_merit+region_cost makes a horizontal bar chart instead of vertical bar chart when data is 10K+.
     * This is because there was one data in there that was a string.  If even one data is a string then it becomes a Piechart/HorizontalBarChart.
+- Edit non-composites
 
 - Why does wall time not work for data where that comes from timeseries enabled.
 - spot.channel is not a metric - don't show it on durations page.
 - As for hiding Spot.channel:
     * I see it on the walltime page.  But which comparison metric dropdown are you talking about?
 
-- As for the attribute aliases on the walltimes page.  Those aliases were added after Joe implemented that page, so I that’s why it doesn’t use those aliases.  I’ll need to look into that.
 
 
 - Start browser testing

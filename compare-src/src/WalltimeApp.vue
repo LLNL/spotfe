@@ -139,10 +139,12 @@ export default {
 
                  if(Object.keys(topdown).length == 0) topdown = null
 
+                 var metricValue = metrics[metricName] || 0
+                 
                  console.log("met:")
                  console.dir(metrics)
                  console.dir(metricName)
-                 return ['--root path--/' + funcPath, {value: parseFloat(metrics[metricName]), topdown}] 
+                 return ['--root path--/' + funcPath, {value: parseFloat(metricValue), topdown}]
              }))
              x['--root path--'] = {value: 0}
              return x
