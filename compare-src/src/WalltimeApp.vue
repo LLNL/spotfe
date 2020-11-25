@@ -48,7 +48,15 @@ export default {
         metricNames(){ return Object.keys(this.data[this.funcPaths[0]]).filter(name => !name.startsWith('any#any#'))},
         topDownNames(){ return Object.keys(this.data[this.funcPaths[0]]).filter(name => name.startsWith('any#any#'))},
         topdownData(){
-            let topdown =  this.peeledData(this.data, this.metricNames[0])[this.selectedNode].topdown
+            console.dir( this.data )
+            console.dir( this.metricNames )
+            console.dir( this.selectedNode )
+            var peeled = this.peeledData(this.data, this.metricNames[0])
+            console.dir( "peeled" )
+            console.dir( peeled )
+            let topdown = peeled[this.selectedNode].topdown
+            console.log( "topdown: ")
+            console.dir( topdown )
 
             if(topdown){
                 topdown = {
@@ -131,6 +139,9 @@ export default {
 
                  if(Object.keys(topdown).length == 0) topdown = null
 
+                 console.log("met:")
+                 console.dir(metrics)
+                 console.dir(metricName)
                  return ['--root path--/' + funcPath, {value: parseFloat(metrics[metricName]), topdown}] 
              }))
              x['--root path--'] = {value: 0}
