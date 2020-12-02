@@ -30,12 +30,32 @@
                 )
 </template>
 
+
 <script>
 import FlameGraph from './Flamegraph.vue'
 import TopDown from './Topdown.vue'
 import _ from 'lodash'
 
 export default {
+    created() {
+
+        console.log("created:");
+
+        var files = [
+            "../web/js/Utility.js",
+            "../web/js/CallSpot.js?a"
+        ];
+
+        for( var x = 0; x < files.length; x++ ) {
+
+            let ckeditor = document.createElement('script');
+            var src = files[x];
+
+            console.log('adding src for: ' + src);
+            ckeditor.setAttribute('src', src );
+            document.head.appendChild(ckeditor);
+        }
+    },
     props:['filename', 'data', 'meta'],
     data(){return {
         selectedNode: '--root path--',
@@ -43,11 +63,20 @@ export default {
         showTopdown: false
 
     }},
+    mounted: function() {
+
+        console.log("I have mounted.");
+        this.get_aliases()
+    },
     computed:{
         funcPaths(){return Object.keys(this.data) },
         metricNames(){ return Object.keys(this.data[this.funcPaths[0]]).filter(name => !name.startsWith('any#any#'))},
         topDownNames(){ return Object.keys(this.data[this.funcPaths[0]]).filter(name => name.startsWith('any#any#'))},
         topdownData(){
+
+            this.filterMetricNames()
+            //this.replaceMetricNames( "avg#inclusive#sum#time.duration", "alias23" )
+
             console.dir( this.data )
             console.dir( this.metricNames )
             console.dir( this.selectedNode )
@@ -132,6 +161,53 @@ export default {
         },
     },
     methods:{
+        //  Just reuse our existing get memory call for now, so we can retrieve aliases.
+        get_aliases() {
+
+            var runSetId = ST.Utility.get_param('runSetId');
+            var runId = ST.Utility.get_param('runId');
+
+            //  //'/usr/gapps/spot/datasets/lulesh_gen/100',
+            var path = runSetId + "/" + runId;
+
+            ST.CallSpot.ajax({
+                file: path,
+                type: "memory",
+                success: function() {
+
+                }
+            });
+        },
+        replaceMetricNames( replacee, replacer ) {
+
+            for( var lul_dir in this.data ) {
+
+                var num = this.data[ lul_dir ][replacee];
+                this.data[ lul_dir ][replacer] = num;
+                delete this.data[ lul_dir ][replacee];
+            }
+
+            for( var x=0; x < this.metricNames.length; x++ ) {
+
+                if( this.metricNames[x] === replacee ) {
+                    this.metricNames[x] = replacer;
+                }
+            }
+        },
+        filterMetricNames() {
+
+            var excludes = {
+                "spot.channel": true
+            };
+
+            for( var x=0; x < this.metricNames.length; x++ ) {
+
+                var sub = this.metricNames[x];
+                if( excludes[sub] ) {
+                    this.metricNames.splice(x,1);
+                }
+            }
+        },
         peeledData(runData, metricName){
              let x =  _.fromPairs(_.map(runData, (metrics, funcPath) => {
                  let topdown = {} 
@@ -140,10 +216,10 @@ export default {
                  if(Object.keys(topdown).length == 0) topdown = null
 
                  var metricValue = metrics[metricName] || 0
-                 
-                 console.log("met:")
-                 console.dir(metrics)
-                 console.dir(metricName)
+
+                 //console.log("metsavd:")
+                 //console.dir(metrics)
+                 //console.dir(metricName)
                  return ['--root path--/' + funcPath, {value: parseFloat(metricValue), topdown}]
              }))
              x['--root path--'] = {value: 0}

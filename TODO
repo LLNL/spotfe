@@ -1,8 +1,15 @@
 Blockers:
-- spot.channel in y-axis
-- Walltime page being broken.
+- spot.channel in y-axis on compare page.
 - As for the attribute aliases on the walltimes page.  Those aliases were added after Joe implemented that page, so I that’s why it doesn’t use those aliases.  I’ll need to look into that.
+    * retrieve release.
+DONE - filtered spot.channel on the walltime page to prevent it from being a heading that shows up.
+DONE - coordinate hatchet release
+DONE - Walltime page being broken - metricName could not reference metrics object because metricName did not exist
+    * because it didn't exist it caused a NaN value instead of 0.
+    * one of the cali object/data object had extraneous metrics in there that could not be one.
 
+Eventually:
+- Need better way to query for data, so "spot.channel" does not show up.
 
 For Jobsize 1:
 - on timeseries page -> Views button covers the
