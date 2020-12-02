@@ -29652,17 +29652,16 @@ var _default = {
       selectedTopdownNode: 'fe',
       showTopdown: false,
       replacing_metrics: {},
-      ensure_update: false
+      ensure_update: false,
+      metricObjs: {}
     };
   },
   mounted: function mounted() {
-    console.log("I have mounted34.");
-    this.getScripts();
     var aliases = this.getAliases; //  just temporary, i promise.
 
     setTimeout(function () {
       aliases();
-    }, 4000);
+    }, 3000);
   },
   computed: {
     funcPaths: function funcPaths() {
@@ -29680,7 +29679,7 @@ var _default = {
     },
     topdownData: function topdownData() {
       this.filterMetricNames();
-      console.log('doing topdownData 2'); //this.replaceMetricNames( "avg#inclusive#sum#time.duration", "alias2344" )
+      console.log('doing topdownData 30'); //this.replaceMetricNames( "avg#inclusive#sum#time.duration", "alias2344" )
 
       if (this.replacing_metrics) {
         for (var met in this.replacing_metrics) {
@@ -29781,12 +29780,22 @@ var _default = {
         topdown['mb'].flame = topdown['mb'].val * topdown['be'].val * topdown['mb'].val / sum * 100 + '%';
       }
 
-      return this.ensure_update ? topdown : {};
+      return this.ensure_update ? topdown : topdown;
     }
   },
   methods: {
     getScripts: function getScripts() {
-      var files = ["../web/js/jquery-1.11.0.min.js", "../web/js/Environment.js", "../web/js/Utility.js", "../web/js/CallSpot.js?abb"];
+      var files = ["../web/js/jquery-1.11.0.min.js", "../web/js/Environment.js", "../web/js/Utility.js", "../web/js/CallSpot.js?abb"]; //loadScriptsInOrder( files ).then( this.getAliases );
+
+      /*            $.when(
+                      $.getScript("../web/js/jquery-1.11.0.min.js"),
+                      $.getScript("../web/js/Environment.js"),
+                      $.getScript("../web/js/Utility.js"),
+                      $.getScript("../web/js/CallSpot.js?abb"),
+                      $.Deferred(function( deferred ){
+                          $( deferred.resolve );
+                      })
+                  ).done( this.getAliases );*/
 
       for (var x = 0; x < files.length; x++) {
         var ckeditor = document.createElement('script');
@@ -29836,17 +29845,24 @@ var _default = {
       });
     },
     replaceMetricNames: function replaceMetricNames(replacee, replacer) {
-      console.log("replacee=" + replacee + '  replacer=' + replacer);
+      console.log("2replacee=" + replacee + '  replacer=' + replacer);
+      this.metricObjs[replacee] = {
+        "name": replacee,
+        "alias": replacer
+      };
+      return true;
 
-      for (var lul_dir in this.data) {
-        var num = this.data[lul_dir][replacee];
-        this.data[lul_dir][replacer] = num;
-        delete this.data[lul_dir][replacee];
-      }
+      if (replacee !== replacer) {
+        for (var lul_dir in this.data) {
+          var num = this.data[lul_dir][replacee];
+          this.data[lul_dir][replacer] = num;
+          delete this.data[lul_dir][replacee];
+        }
 
-      for (var x = 0; x < this.metricNames.length; x++) {
-        if (this.metricNames[x] === replacee) {
-          this.metricNames[x] = replacer;
+        for (var x = 0; x < this.metricNames.length; x++) {
+          if (this.metricNames[x] === replacee) {
+            this.metricNames[x] = replacer;
+          }
         }
       }
     },
@@ -29894,7 +29910,10 @@ var _default = {
       this.selectedTopdownNode = nodename;
     }
   },
-  created: function created() {},
+  created: function created() {
+    console.log("I have created 2334.");
+    this.getScripts();
+  },
   components: {
     FlameGraph: _Flamegraph.default,
     TopDown: _Topdown.default
@@ -30021,18 +30040,18 @@ exports.default = _default;
             1
           )
         : _vm._e(),
-      _vm._l(_vm.metricNames, function(metricName) {
+      _vm._l(_vm.metricObjs, function(metricObj) {
         return _c(
           "div",
           { staticClass: "flamegraphRow", style: { padding: "20px" } },
           [
             _c("h3", { style: { paddingBottom: "10px" } }, [
-              _vm._v(_vm._s(metricName))
+              _vm._v(_vm._s(metricObj.alias))
             ]),
             _c("FlameGraph", {
               attrs: {
-                runData: _vm.peeledData(_vm.data, metricName),
-                metricName: metricName,
+                runData: _vm.peeledData(_vm.data, metricObj.name),
+                metricName: metricObj.name,
                 showTopdown: _vm.showTopdown,
                 topdownData: _vm.topdownData,
                 selectedNode: _vm.selectedNode,

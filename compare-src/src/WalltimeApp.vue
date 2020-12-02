@@ -17,11 +17,11 @@
                 @topdownNodeSelected='setTopdownNode'
                 )
 
-    .flamegraphRow( v-for='metricName in metricNames' :style="{padding:'20px'}")
-        h3(:style="{paddingBottom:'10px' }") {{metricName}}
+    .flamegraphRow( v-for='metricObj in metricObjs' :style="{padding:'20px'}")
+        h3(:style="{paddingBottom:'10px' }") {{metricObj.alias}}
         FlameGraph(
-                :runData='peeledData(data, metricName)'
-                :metricName='metricName'
+                :runData='peeledData(data, metricObj.name)'
+                :metricName='metricObj.name'
                 :showTopdown='showTopdown'
                 :topdownData='topdownData'
                 :selectedNode='selectedNode'
@@ -37,6 +37,7 @@ import FlameGraph from './Flamegraph.vue'
 import TopDown from './Topdown.vue'
 import _ from 'lodash'
 
+
 export default {
     props:['filename', 'data', 'meta'],
     data(){return {
@@ -44,20 +45,18 @@ export default {
         selectedTopdownNode: 'fe',
         showTopdown: false,
         replacing_metrics: {},
-        ensure_update: false
+        ensure_update: false,
+        metricObjs: {}
 
     }},
     mounted: function() {
 
-        console.log("I have mounted34.");
-        this.getScripts()
-
         var aliases = this.getAliases
         //  just temporary, i promise.
-        setTimeout( function() {
 
+        setTimeout( function() {
             aliases()
-        }, 4000 );
+        }, 3000 );
 
     },
     computed:{
@@ -66,9 +65,8 @@ export default {
         topDownNames(){ return Object.keys(this.data[this.funcPaths[0]]).filter(name => name.startsWith('any#any#'))},
         topdownData(){
 
-
             this.filterMetricNames()
-            console.log('doing topdownData 2')
+            console.log('doing topdownData 30')
             //this.replaceMetricNames( "avg#inclusive#sum#time.duration", "alias2344" )
 
             if( this.replacing_metrics ) {
@@ -85,6 +83,7 @@ export default {
             console.dir( this.metricNames )
             console.dir( this.selectedNode )
             var peeled = this.peeledData(this.data, this.metricNames[0])
+
             console.dir( "peeled" )
             console.dir( peeled )
             let topdown = peeled[this.selectedNode].topdown
@@ -162,7 +161,7 @@ export default {
                 
             }
 
-            return this.ensure_update ? topdown : {}
+            return this.ensure_update ? topdown : topdown
         },
     },
     methods:{
@@ -174,6 +173,17 @@ export default {
                 "../web/js/Utility.js",
                 "../web/js/CallSpot.js?abb"
             ];
+            //loadScriptsInOrder( files ).then( this.getAliases );
+
+/*            $.when(
+                $.getScript("../web/js/jquery-1.11.0.min.js"),
+                $.getScript("../web/js/Environment.js"),
+                $.getScript("../web/js/Utility.js"),
+                $.getScript("../web/js/CallSpot.js?abb"),
+                $.Deferred(function( deferred ){
+                    $( deferred.resolve );
+                })
+            ).done( this.getAliases );*/
 
 
             for( var x = 0; x < files.length; x++ ) {
@@ -240,19 +250,29 @@ export default {
         },
         replaceMetricNames( replacee, replacer ) {
 
-            console.log( "replacee=" + replacee + '  replacer=' + replacer)
+            console.log( "2replacee=" + replacee + '  replacer=' + replacer)
 
-            for( var lul_dir in this.data ) {
+            this.metricObjs[replacee] = {
+                "name": replacee,
+                "alias": replacer
+            };
 
-                var num = this.data[ lul_dir ][replacee];
-                this.data[ lul_dir ][replacer] = num;
-                delete this.data[ lul_dir ][replacee];
-            }
+            return true;
 
-            for( var x=0; x < this.metricNames.length; x++ ) {
+            if( replacee !== replacer ) {
 
-                if( this.metricNames[x] === replacee ) {
-                    this.metricNames[x] = replacer;
+                for (var lul_dir in this.data) {
+
+                    var num = this.data[lul_dir][replacee];
+                    this.data[lul_dir][replacer] = num;
+                    delete this.data[lul_dir][replacee];
+                }
+
+                for (var x = 0; x < this.metricNames.length; x++) {
+
+                    if (this.metricNames[x] === replacee) {
+                        this.metricNames[x] = replacer;
+                    }
                 }
             }
         },
@@ -293,6 +313,9 @@ export default {
         },
     },
     created(){
+
+        console.log("I have created 2334.");
+        this.getScripts()
     },
     components:{FlameGraph, TopDown}
 }
