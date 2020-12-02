@@ -1,6 +1,6 @@
 <template lang="pug">
 .root(:style="{display:'flex', flexDirection:'column', padding:'20px'}")
-    .update_top_down(@click="update_top_down_data")
+    .update_top_down(@click="updateTopDownData")
     .title-row(:style="{display:'flex', justifyContent:'center'}")
         h2 Runs: {{filename}}
     .global-meta(:style="{flex: 1, display:'flex', flexDirection:'column', marginLeft:'20px', overflow:'scroll'}")
@@ -43,15 +43,16 @@ export default {
         selectedNode: '--root path--',
         selectedTopdownNode: 'fe',
         showTopdown: false,
-        replacing_metrics: {}
+        replacing_metrics: {},
+        ensure_update: false
 
     }},
     mounted: function() {
 
-        console.log("I have mounted3.");
-        this.get_scripts()
+        console.log("I have mounted34.");
+        this.getScripts()
 
-        var aliases = this.get_aliases
+        var aliases = this.getAliases
         //  just temporary, i promise.
         setTimeout( function() {
 
@@ -67,7 +68,7 @@ export default {
 
 
             this.filterMetricNames()
-            console.log('doing topdownData')
+            console.log('doing topdownData 2')
             //this.replaceMetricNames( "avg#inclusive#sum#time.duration", "alias2344" )
 
             if( this.replacing_metrics ) {
@@ -160,11 +161,12 @@ export default {
                 topdown['mb'].flame = topdown['mb'].val * topdown['be'].val * topdown['mb'].val / sum * 100 + '%'
                 
             }
-            return this.replacing_metrics ? topdown : {}
+
+            return this.ensure_update ? topdown : {}
         },
     },
     methods:{
-        get_scripts() {
+        getScripts() {
 
             var files = [
                 "../web/js/jquery-1.11.0.min.js",
@@ -179,18 +181,20 @@ export default {
                 let ckeditor = document.createElement('script');
                 var src = files[x];
 
-                console.log('adding src for: ' + src);
+                //console.log('adding src for: ' + src);
                 ckeditor.setAttribute('src', src );
                 document.head.appendChild(ckeditor);
             }
 
         },
-        update_top_down_data() {
-            this.replacing_metrics["a"] = 2;
+        updateTopDownData() {
+
+            //  Need to make sure that it recalculates the topDownData
+            this.ensure_update = 1;
         },
 
         //  Just reuse our existing get memory call for now, so we can retrieve aliases.
-        get_aliases() {
+        getAliases() {
 
             console.log('get aliases')
             var runSetId = ST.Utility.get_param('runSetId');

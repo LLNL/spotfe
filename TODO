@@ -1,16 +1,21 @@
 Blockers:
-- As for the attribute aliases on the walltimes page.  Those aliases were added after Joe implemented that page, so I that’s why it doesn’t use those aliases.  I’ll need to look into that.
+- Still need to make JS file loading synchronous instead of asynchronous.
+BUG - loading of Yaxis, i thought we already did that?
+
+DONE - As for the attribute aliases on the walltimes page.  Those aliases were added after Joe implemented that page, so I that’s why it doesn’t use those aliases.  I’ll need to look into that.
     * need to trigger this recalculation: topdownData, trigger: this.replacing_metrics["fake"]=2
     * probably need to trigger that synchronously so we can use the this reference, which means we need the callback for the script append function to work.
-
-- get rid of extraneous error message from Utilities integraiton
-
+    * 2 integrations:
+        * CallSpot infrastructure to the walltime page,
+        * Applying Alias results to the page
 DONE - spot.channel in y-axis on compare page.
 DONE - filtered spot.channel on the walltime page to prevent it from being a heading that shows up.
 DONE - coordinate hatchet release
 DONE - Walltime page being broken - metricName could not reference metrics object because metricName did not exist
     * because it didn't exist it caused a NaN value instead of 0.
     * one of the cali object/data object had extraneous metrics in there that could not be one.
+DONE - get rid of extraneous error message from Utilities integraiton
+
 
 Eventually:
 - Need better way to query for data, so "spot.channel" does not show up.

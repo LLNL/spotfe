@@ -105,7 +105,7 @@ ST.Utility = function() {
         var file = ST.Utility.get_param("sf");
         //var default_file = "/usr/gapps/spot/datasets/lulesh2small"; // "/usr/gapps/wf/web/spot/data/lulesh_maximal";
 
-        if( !file && !on_memory_page ) {
+        if( !file && !on_memory_page && !on_walltime_page ) {
 
             var example = "For example: /g/g0/myname/mycalifiles/";
             error_("Please provide a directory that contains dot cali files.  You can specify this in the input box below: <br>" + example);

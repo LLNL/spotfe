@@ -29651,13 +29651,14 @@ var _default = {
       selectedNode: '--root path--',
       selectedTopdownNode: 'fe',
       showTopdown: false,
-      replacing_metrics: {}
+      replacing_metrics: {},
+      ensure_update: false
     };
   },
   mounted: function mounted() {
-    console.log("I have mounted3.");
-    this.get_scripts();
-    var aliases = this.get_aliases; //  just temporary, i promise.
+    console.log("I have mounted34.");
+    this.getScripts();
+    var aliases = this.getAliases; //  just temporary, i promise.
 
     setTimeout(function () {
       aliases();
@@ -29679,7 +29680,7 @@ var _default = {
     },
     topdownData: function topdownData() {
       this.filterMetricNames();
-      console.log('doing topdownData'); //this.replaceMetricNames( "avg#inclusive#sum#time.duration", "alias2344" )
+      console.log('doing topdownData 2'); //this.replaceMetricNames( "avg#inclusive#sum#time.duration", "alias2344" )
 
       if (this.replacing_metrics) {
         for (var met in this.replacing_metrics) {
@@ -29780,26 +29781,27 @@ var _default = {
         topdown['mb'].flame = topdown['mb'].val * topdown['be'].val * topdown['mb'].val / sum * 100 + '%';
       }
 
-      return this.replacing_metrics ? topdown : {};
+      return this.ensure_update ? topdown : {};
     }
   },
   methods: {
-    get_scripts: function get_scripts() {
+    getScripts: function getScripts() {
       var files = ["../web/js/jquery-1.11.0.min.js", "../web/js/Environment.js", "../web/js/Utility.js", "../web/js/CallSpot.js?abb"];
 
       for (var x = 0; x < files.length; x++) {
         var ckeditor = document.createElement('script');
-        var src = files[x];
-        console.log('adding src for: ' + src);
+        var src = files[x]; //console.log('adding src for: ' + src);
+
         ckeditor.setAttribute('src', src);
         document.head.appendChild(ckeditor);
       }
     },
-    update_top_down_data: function update_top_down_data() {
-      this.replacing_metrics["a"] = 2;
+    updateTopDownData: function updateTopDownData() {
+      //  Need to make sure that it recalculates the topDownData
+      this.ensure_update = 1;
     },
     //  Just reuse our existing get memory call for now, so we can retrieve aliases.
-    get_aliases: function get_aliases() {
+    getAliases: function getAliases() {
       console.log('get aliases');
       var runSetId = ST.Utility.get_param('runSetId');
       var runId = ST.Utility.get_param('runId'); //  //'/usr/gapps/spot/datasets/lulesh_gen/100',
@@ -29920,7 +29922,7 @@ exports.default = _default;
     [
       _c("div", {
         staticClass: "update_top_down",
-        on: { click: _vm.update_top_down_data }
+        on: { click: _vm.updateTopDownData }
       }),
       _c(
         "div",
