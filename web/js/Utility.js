@@ -100,6 +100,7 @@ ST.Utility = function() {
     var get_file_ = function() {
 
         var on_memory_page = window.location.href.indexOf('memory/index.html') > 0;
+        var on_walltime_page = window.location.href.indexOf('sankey/index.html') > 0;
 
         var file = ST.Utility.get_param("sf");
         //var default_file = "/usr/gapps/spot/datasets/lulesh2small"; // "/usr/gapps/wf/web/spot/data/lulesh_maximal";
