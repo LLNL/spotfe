@@ -48,7 +48,7 @@
         .node-width(:style="{width: topdownData['re'].disp}") 
             .node(v-if='topdownData["re"]' style="background-color:#B2FF59" @click='$emit("topdownNodeSelected", "re")' :style='{border: selectedTopdownNode == "re" ? "3px solid black" : ""}' :title="'retiring (' + topdownData['re'].val + ')'") 
                 | retiring ({{topdownData['re'].val}})
-    
+
 </template>
 
 
@@ -77,6 +77,7 @@ div{
 
 
 </style>
+
 
 <script>
 export default {

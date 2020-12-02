@@ -211,7 +211,20 @@ export default Vue.extend({
         },
         yAxisList(){
             const firstRun = this.runs[0] || {data:{}}
-            const metrics = Object.keys(Object.values(firstRun.data)[0] || {}) 
+            const metrics = Object.keys(Object.values(firstRun.data)[0] || {})
+
+            console.log("yaxisList  88998  nhkj");
+            console.dir(metrics);
+            for( var y=0; y < metrics.length; y++ ) {
+
+                if( metrics[y] === "spot.channel" ) {
+                    metrics.splice(y,1);
+                }
+            }
+
+            delete metrics["spot.channel"];
+            console.dir(metrics);
+
             return metrics
         },
         selectedRun(){

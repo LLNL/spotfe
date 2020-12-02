@@ -1,7 +1,11 @@
 Blockers:
-- spot.channel in y-axis on compare page.
 - As for the attribute aliases on the walltimes page.  Those aliases were added after Joe implemented that page, so I that’s why it doesn’t use those aliases.  I’ll need to look into that.
-    * retrieve release.
+    * need to trigger this recalculation: topdownData, trigger: this.replacing_metrics["fake"]=2
+    * probably need to trigger that synchronously so we can use the this reference, which means we need the callback for the script append function to work.
+
+- get rid of extraneous error message from Utilities integraiton
+
+DONE - spot.channel in y-axis on compare page.
 DONE - filtered spot.channel on the walltime page to prevent it from being a heading that shows up.
 DONE - coordinate hatchet release
 DONE - Walltime page being broken - metricName could not reference metrics object because metricName did not exist

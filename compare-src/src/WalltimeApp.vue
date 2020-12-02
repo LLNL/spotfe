@@ -1,5 +1,6 @@
 <template lang="pug">
 .root(:style="{display:'flex', flexDirection:'column', padding:'20px'}")
+    .update_top_down(@click="update_top_down_data")
     .title-row(:style="{display:'flex', justifyContent:'center'}")
         h2 Runs: {{filename}}
     .global-meta(:style="{flex: 1, display:'flex', flexDirection:'column', marginLeft:'20px', overflow:'scroll'}")
@@ -37,36 +38,26 @@ import TopDown from './Topdown.vue'
 import _ from 'lodash'
 
 export default {
-    created() {
-
-        console.log("created:");
-
-        var files = [
-            "../web/js/Utility.js",
-            "../web/js/CallSpot.js?a"
-        ];
-
-        for( var x = 0; x < files.length; x++ ) {
-
-            let ckeditor = document.createElement('script');
-            var src = files[x];
-
-            console.log('adding src for: ' + src);
-            ckeditor.setAttribute('src', src );
-            document.head.appendChild(ckeditor);
-        }
-    },
     props:['filename', 'data', 'meta'],
     data(){return {
         selectedNode: '--root path--',
         selectedTopdownNode: 'fe',
-        showTopdown: false
+        showTopdown: false,
+        replacing_metrics: {}
 
     }},
     mounted: function() {
 
-        console.log("I have mounted.");
-        this.get_aliases()
+        console.log("I have mounted3.");
+        this.get_scripts()
+
+        var aliases = this.get_aliases
+        //  just temporary, i promise.
+        setTimeout( function() {
+
+            aliases()
+        }, 4000 );
+
     },
     computed:{
         funcPaths(){return Object.keys(this.data) },
@@ -74,8 +65,20 @@ export default {
         topDownNames(){ return Object.keys(this.data[this.funcPaths[0]]).filter(name => name.startsWith('any#any#'))},
         topdownData(){
 
+
             this.filterMetricNames()
-            //this.replaceMetricNames( "avg#inclusive#sum#time.duration", "alias23" )
+            console.log('doing topdownData')
+            //this.replaceMetricNames( "avg#inclusive#sum#time.duration", "alias2344" )
+
+            if( this.replacing_metrics ) {
+
+                for( var met in this.replacing_metrics ) {
+
+                    var alias = this.replacing_metrics[met];
+
+                    this.replaceMetricNames( met, alias )
+                }
+            }
 
             console.dir( this.data )
             console.dir( this.metricNames )
@@ -157,28 +160,83 @@ export default {
                 topdown['mb'].flame = topdown['mb'].val * topdown['be'].val * topdown['mb'].val / sum * 100 + '%'
                 
             }
-            return topdown
+            return this.replacing_metrics ? topdown : {}
         },
     },
     methods:{
+        get_scripts() {
+
+            var files = [
+                "../web/js/jquery-1.11.0.min.js",
+                "../web/js/Environment.js",
+                "../web/js/Utility.js",
+                "../web/js/CallSpot.js?abb"
+            ];
+
+
+            for( var x = 0; x < files.length; x++ ) {
+
+                let ckeditor = document.createElement('script');
+                var src = files[x];
+
+                console.log('adding src for: ' + src);
+                ckeditor.setAttribute('src', src );
+                document.head.appendChild(ckeditor);
+            }
+
+        },
+        update_top_down_data() {
+            this.replacing_metrics["a"] = 2;
+        },
+
         //  Just reuse our existing get memory call for now, so we can retrieve aliases.
         get_aliases() {
 
+            console.log('get aliases')
             var runSetId = ST.Utility.get_param('runSetId');
             var runId = ST.Utility.get_param('runId');
 
             //  //'/usr/gapps/spot/datasets/lulesh_gen/100',
             var path = runSetId + "/" + runId;
+            var metricNames = this.metricNames;
+            var replaceMetricNames = this.replaceMetricNames
+
+            var replacing_metrics = this.replacing_metrics
+
 
             ST.CallSpot.ajax({
                 file: path,
                 type: "memory",
-                success: function() {
+                success: function( aj_dat ) {
 
+                    console.log('memory ajax:');
+
+                    var ret = aj_dat.output.command_out;
+                    var ret2 = JSON.parse( ret );
+                    var std = JSON.parse( ret2.std );
+                    var records = ret2.series.records;
+
+                    var attributes = ret2.series.attributes;
+                    console.dir( records )
+                    console.dir( attributes )
+                    console.dir( metricNames )
+
+                    for( var x=0; x < metricNames.length; x++ ) {
+
+                        var met = metricNames[x];
+                        var cali_obj = attributes[ met ] || {};
+                        var alias = cali_obj["attribute.alias"] || met;
+
+                        replacing_metrics[ met ] = alias
+                    }
+
+                    $('.update_top_down').trigger('click')
                 }
             });
         },
         replaceMetricNames( replacee, replacer ) {
+
+            console.log( "replacee=" + replacee + '  replacer=' + replacer)
 
             for( var lul_dir in this.data ) {
 

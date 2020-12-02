@@ -29005,6 +29005,7 @@ exports.default = void 0;
 //
 //
 //
+//
 var _default = {
   props: ['topdownData', 'selectedTopdownNode'],
   data: function data() {
@@ -29607,36 +29608,60 @@ var _Topdown = _interopRequireDefault(require("./Topdown.vue"));
 
 var _lodash = _interopRequireDefault(require("lodash"));
 
-var _created$props$data$m;
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-var _default = (_created$props$data$m = {
-  created: function created() {
-    console.log("created:");
-    var files = ["../web/js/Utility.js", "../web/js/CallSpot.js?a"];
-
-    for (var x = 0; x < files.length; x++) {
-      var ckeditor = document.createElement('script');
-      var src = files[x];
-      console.log('adding src for: ' + src);
-      ckeditor.setAttribute('src', src);
-      document.head.appendChild(ckeditor);
-    }
-  },
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = {
   props: ['filename', 'data', 'meta'],
   data: function data() {
     return {
       selectedNode: '--root path--',
       selectedTopdownNode: 'fe',
-      showTopdown: false
+      showTopdown: false,
+      replacing_metrics: {}
     };
   },
   mounted: function mounted() {
-    console.log("I have mounted.");
-    this.get_aliases();
+    console.log("I have mounted3.");
+    this.get_scripts();
+    var aliases = this.get_aliases; //  just temporary, i promise.
+
+    setTimeout(function () {
+      aliases();
+    }, 4000);
   },
   computed: {
     funcPaths: function funcPaths() {
@@ -29653,7 +29678,15 @@ var _default = (_created$props$data$m = {
       });
     },
     topdownData: function topdownData() {
-      this.filterMetricNames(); //this.replaceMetricNames( "avg#inclusive#sum#time.duration", "alias23" )
+      this.filterMetricNames();
+      console.log('doing topdownData'); //this.replaceMetricNames( "avg#inclusive#sum#time.duration", "alias2344" )
+
+      if (this.replacing_metrics) {
+        for (var met in this.replacing_metrics) {
+          var alias = this.replacing_metrics[met];
+          this.replaceMetricNames(met, alias);
+        }
+      }
 
       console.dir(this.data);
       console.dir(this.metricNames);
@@ -29747,23 +29780,62 @@ var _default = (_created$props$data$m = {
         topdown['mb'].flame = topdown['mb'].val * topdown['be'].val * topdown['mb'].val / sum * 100 + '%';
       }
 
-      return topdown;
+      return this.replacing_metrics ? topdown : {};
     }
   },
   methods: {
+    get_scripts: function get_scripts() {
+      var files = ["../web/js/jquery-1.11.0.min.js", "../web/js/Environment.js", "../web/js/Utility.js", "../web/js/CallSpot.js?abb"];
+
+      for (var x = 0; x < files.length; x++) {
+        var ckeditor = document.createElement('script');
+        var src = files[x];
+        console.log('adding src for: ' + src);
+        ckeditor.setAttribute('src', src);
+        document.head.appendChild(ckeditor);
+      }
+    },
+    update_top_down_data: function update_top_down_data() {
+      this.replacing_metrics["a"] = 2;
+    },
     //  Just reuse our existing get memory call for now, so we can retrieve aliases.
     get_aliases: function get_aliases() {
+      console.log('get aliases');
       var runSetId = ST.Utility.get_param('runSetId');
       var runId = ST.Utility.get_param('runId'); //  //'/usr/gapps/spot/datasets/lulesh_gen/100',
 
       var path = runSetId + "/" + runId;
+      var metricNames = this.metricNames;
+      var replaceMetricNames = this.replaceMetricNames;
+      var replacing_metrics = this.replacing_metrics;
       ST.CallSpot.ajax({
         file: path,
         type: "memory",
-        success: function success() {}
+        success: function success(aj_dat) {
+          console.log('memory ajax:');
+          var ret = aj_dat.output.command_out;
+          var ret2 = JSON.parse(ret);
+          var std = JSON.parse(ret2.std);
+          var records = ret2.series.records;
+          var attributes = ret2.series.attributes;
+          console.dir(records);
+          console.dir(attributes);
+          console.dir(metricNames);
+
+          for (var x = 0; x < metricNames.length; x++) {
+            var met = metricNames[x];
+            var cali_obj = attributes[met] || {};
+            var alias = cali_obj["attribute.alias"] || met;
+            replacing_metrics[met] = alias;
+          }
+
+          $('.update_top_down').trigger('click');
+        }
       });
     },
     replaceMetricNames: function replaceMetricNames(replacee, replacer) {
+      console.log("replacee=" + replacee + '  replacer=' + replacer);
+
       for (var lul_dir in this.data) {
         var num = this.data[lul_dir][replacee];
         this.data[lul_dir][replacer] = num;
@@ -29819,12 +29891,13 @@ var _default = (_created$props$data$m = {
     setTopdownNode: function setTopdownNode(nodename) {
       this.selectedTopdownNode = nodename;
     }
+  },
+  created: function created() {},
+  components: {
+    FlameGraph: _Flamegraph.default,
+    TopDown: _Topdown.default
   }
-}, _defineProperty(_created$props$data$m, "created", function created() {}), _defineProperty(_created$props$data$m, "components", {
-  FlameGraph: _Flamegraph.default,
-  TopDown: _Topdown.default
-}), _created$props$data$m);
-
+};
 exports.default = _default;
         var $e46e2c = exports.default || module.exports;
       
@@ -29845,6 +29918,10 @@ exports.default = _default;
       style: { display: "flex", flexDirection: "column", padding: "20px" }
     },
     [
+      _c("div", {
+        staticClass: "update_top_down",
+        on: { click: _vm.update_top_down_data }
+      }),
       _c(
         "div",
         {
