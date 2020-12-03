@@ -31,11 +31,17 @@
                 )
 </template>
 
-
 <script>
 import FlameGraph from './Flamegraph.vue'
 import TopDown from './Topdown.vue'
 import _ from 'lodash'
+
+
+//  hjk
+//Vue.loadScript('../../web/js/jquery-1.11.0.min')
+
+//import * as $ from '../../web/js/jquery-1.11.0.min'
+//import ST from '../../web/js/Utility.js'
 
 
 export default {
@@ -53,6 +59,8 @@ export default {
 
         var aliases = this.getAliases
         //  just temporary, i promise.
+
+        //aliases()
 
         setTimeout( function() {
             aliases()
@@ -168,7 +176,7 @@ export default {
         getScripts() {
 
             var files = [
-                "../web/js/jquery-1.11.0.min.js",
+                //"../web/js/jquery-1.11.0.min.js",
                 "../web/js/Environment.js",
                 "../web/js/Utility.js",
                 "../web/js/CallSpot.js?abb"
@@ -193,6 +201,11 @@ export default {
 
                 //console.log('adding src for: ' + src);
                 ckeditor.setAttribute('src', src );
+                ckeditor.async = false;
+                ckeditor.load( function() {
+                    console.log('loaded.')
+                });
+
                 document.head.appendChild(ckeditor);
             }
 
@@ -314,7 +327,7 @@ export default {
     },
     created(){
 
-        console.log("I have created 2334.");
+        console.log("I have created 99.");
         this.getScripts()
     },
     components:{FlameGraph, TopDown}

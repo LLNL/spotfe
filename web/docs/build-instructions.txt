@@ -24,3 +24,8 @@ then run:
 npm run build-walltime
 
 to build the sankey stuff.
+
+***************************
+Required to include JS files:
+npm install --save vue-plugin-load-script
+
