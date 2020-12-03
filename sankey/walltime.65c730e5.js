@@ -29597,7 +29597,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //  hjk
 //Vue.loadScript('../../web/js/jquery-1.11.0.min')
 //import * as $ from '../../web/js/jquery-1.11.0.min'
-//import ST from '../../web/js/Utility.js'
+//import * as ST from '../../web/js/Utility.js'
 var _default = {
   props: ['filename', 'data', 'meta'],
   data: function data() {
@@ -29610,14 +29610,7 @@ var _default = {
       metricObjs: {}
     };
   },
-  mounted: function mounted() {
-    var aliases = this.getAliases; //  just temporary, i promise.
-    //aliases()
-
-    setTimeout(function () {
-      aliases();
-    }, 3000);
-  },
+  mounted: function mounted() {},
   computed: {
     funcPaths: function funcPaths() {
       return Object.keys(this.data);
@@ -29633,8 +29626,7 @@ var _default = {
       });
     },
     topdownData: function topdownData() {
-      this.filterMetricNames();
-      console.log('doing topdownData 30'); //this.replaceMetricNames( "avg#inclusive#sum#time.duration", "alias2344" )
+      this.filterMetricNames(); //this.replaceMetricNames( "avg#inclusive#sum#time.duration", "alias2344" )
 
       if (this.replacing_metrics) {
         for (var met in this.replacing_metrics) {
@@ -29650,8 +29642,6 @@ var _default = {
       console.dir("peeled");
       console.dir(peeled);
       var topdown = peeled[this.selectedNode].topdown;
-      console.log("topdown: ");
-      console.dir(topdown);
 
       if (topdown) {
         topdown = {
@@ -29740,30 +29730,20 @@ var _default = {
   },
   methods: {
     getScripts: function getScripts() {
-      var files = [//"../web/js/jquery-1.11.0.min.js",
-      "../web/js/Environment.js", "../web/js/Utility.js", "../web/js/CallSpot.js?abb"]; //loadScriptsInOrder( files ).then( this.getAliases );
+      var _this = this;
 
-      /*            $.when(
-                      $.getScript("../web/js/jquery-1.11.0.min.js"),
-                      $.getScript("../web/js/Environment.js"),
-                      $.getScript("../web/js/Utility.js"),
-                      $.getScript("../web/js/CallSpot.js?abb"),
-                      $.Deferred(function( deferred ){
-                          $( deferred.resolve );
-                      })
-                  ).done( this.getAliases );*/
+      var files = ["../web/js/jquery-1.11.0.min.js", "../web/js/Utility.js", "../web/js/Environment.js", "../web/js/CallSpot.js?abb"]; //loadScriptsInOrder( files ).then( this.getAliases );
 
-      for (var x = 0; x < files.length; x++) {
-        var ckeditor = document.createElement('script');
-        var src = files[x]; //console.log('adding src for: ' + src);
+      var script = document.createElement('script');
+      script.src = "../web/js/jquery-1.11.0.min.js"; // assign an onload event handler
 
-        ckeditor.setAttribute('src', src);
-        ckeditor.async = false;
-        ckeditor.load(function () {
-          console.log('loaded.');
-        });
-        document.head.appendChild(ckeditor);
-      }
+      script.addEventListener('load', function (event) {
+        console.log('jquery has been loaded.');
+        $.when($.getScript("../web/js/Environment.js"), $.getScript("../web/js/Utility.js"), $.getScript("../web/js/CallSpot.js?abb"), $.Deferred(function (deferred) {
+          $(deferred.resolve);
+        })).done(_this.getAliases);
+      });
+      document.body.appendChild(script);
     },
     updateTopDownData: function updateTopDownData() {
       //  Need to make sure that it recalculates the topDownData
@@ -29771,7 +29751,6 @@ var _default = {
     },
     //  Just reuse our existing get memory call for now, so we can retrieve aliases.
     getAliases: function getAliases() {
-      console.log('get aliases');
       var runSetId = ST.Utility.get_param('runSetId');
       var runId = ST.Utility.get_param('runId'); //  //'/usr/gapps/spot/datasets/lulesh_gen/100',
 
@@ -29871,7 +29850,6 @@ var _default = {
     }
   },
   created: function created() {
-    console.log("I have created 99.");
     this.getScripts();
   },
   components: {

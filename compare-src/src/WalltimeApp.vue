@@ -41,7 +41,7 @@ import _ from 'lodash'
 //Vue.loadScript('../../web/js/jquery-1.11.0.min')
 
 //import * as $ from '../../web/js/jquery-1.11.0.min'
-//import ST from '../../web/js/Utility.js'
+//import * as ST from '../../web/js/Utility.js'
 
 
 export default {
@@ -56,16 +56,6 @@ export default {
 
     }},
     mounted: function() {
-
-        var aliases = this.getAliases
-        //  just temporary, i promise.
-
-        //aliases()
-
-        setTimeout( function() {
-            aliases()
-        }, 3000 );
-
     },
     computed:{
         funcPaths(){return Object.keys(this.data) },
@@ -74,7 +64,6 @@ export default {
         topdownData(){
 
             this.filterMetricNames()
-            console.log('doing topdownData 30')
             //this.replaceMetricNames( "avg#inclusive#sum#time.duration", "alias2344" )
 
             if( this.replacing_metrics ) {
@@ -95,8 +84,7 @@ export default {
             console.dir( "peeled" )
             console.dir( peeled )
             let topdown = peeled[this.selectedNode].topdown
-            console.log( "topdown: ")
-            console.dir( topdown )
+
 
             if(topdown){
                 topdown = {
@@ -176,38 +164,31 @@ export default {
         getScripts() {
 
             var files = [
-                //"../web/js/jquery-1.11.0.min.js",
-                "../web/js/Environment.js",
+                "../web/js/jquery-1.11.0.min.js",
                 "../web/js/Utility.js",
+                "../web/js/Environment.js",
                 "../web/js/CallSpot.js?abb"
             ];
             //loadScriptsInOrder( files ).then( this.getAliases );
 
-/*            $.when(
-                $.getScript("../web/js/jquery-1.11.0.min.js"),
-                $.getScript("../web/js/Environment.js"),
-                $.getScript("../web/js/Utility.js"),
-                $.getScript("../web/js/CallSpot.js?abb"),
-                $.Deferred(function( deferred ){
-                    $( deferred.resolve );
-                })
-            ).done( this.getAliases );*/
+            let script = document.createElement('script');
+            script.src = "../web/js/jquery-1.11.0.min.js";
 
+            // assign an onload event handler
+            script.addEventListener('load', (event) => {
 
-            for( var x = 0; x < files.length; x++ ) {
+                console.log('jquery has been loaded.');
+                $.when(
+                    $.getScript("../web/js/Environment.js"),
+                    $.getScript("../web/js/Utility.js"),
+                    $.getScript("../web/js/CallSpot.js?abb"),
+                    $.Deferred(function( deferred ){
+                        $( deferred.resolve );
+                    })
+                ).done( this.getAliases );
+            });
 
-                let ckeditor = document.createElement('script');
-                var src = files[x];
-
-                //console.log('adding src for: ' + src);
-                ckeditor.setAttribute('src', src );
-                ckeditor.async = false;
-                ckeditor.load( function() {
-                    console.log('loaded.')
-                });
-
-                document.head.appendChild(ckeditor);
-            }
+            document.body.appendChild(script);
 
         },
         updateTopDownData() {
@@ -219,7 +200,6 @@ export default {
         //  Just reuse our existing get memory call for now, so we can retrieve aliases.
         getAliases() {
 
-            console.log('get aliases')
             var runSetId = ST.Utility.get_param('runSetId');
             var runId = ST.Utility.get_param('runId');
 
@@ -327,7 +307,6 @@ export default {
     },
     created(){
 
-        console.log("I have created 99.");
         this.getScripts()
     },
     components:{FlameGraph, TopDown}
