@@ -213,7 +213,6 @@ export default Vue.extend({
             const firstRun = this.runs[0] || {data:{}}
             const metrics = Object.keys(Object.values(firstRun.data)[0] || {})
 
-            console.log("yaxisList  88998  nhkj");
             console.dir(metrics);
             for( var y=0; y < metrics.length; y++ ) {
 

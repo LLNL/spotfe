@@ -1,7 +1,7 @@
 Blockers:
-- Still need to make JS file loading synchronous instead of asynchronous.
 BUG - loading of Yaxis, i thought we already did that?
-- Check to see if hatchet will be copied to live by the script.
+DONE - Still need to make JS file loading synchronous instead of asynchronous.
+DONE - Check to see if hatchet will be copied to live by the script.
 
 
 DONE - Walltime page being broken - metricName could not reference metrics object because metricName did not exist
