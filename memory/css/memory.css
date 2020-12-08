@@ -10,6 +10,10 @@
     text-align: center;
 }
 
+.one_chart {
+	padding: 35px 0 0 0;
+}
+
 .top_bar {
 	height: 30px;
 }
@@ -22,6 +26,7 @@ body {
 
 .ch_dropdown {
 	position: relative;
+	top: -30px;
 }
 
 .checkbox_open_close {

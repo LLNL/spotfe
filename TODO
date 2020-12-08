@@ -1,5 +1,6 @@
 Blockers:
-BUG - loading of Yaxis, i thought we already did that?
+- redeploty to CZ and RZ and Retest thoroughly
+TEST - loading of Yaxis, i thought we already did that?
     * mostly fixed but still need to find the onload event for Vue, so we can fire that event correctYAxisSelect in App.vue
     * after that and after it's tested, deploy to cz and rz and send update to matt+
 DONE - Still need to make JS file loading synchronous instead of asynchronous.
