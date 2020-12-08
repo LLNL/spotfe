@@ -40002,11 +40002,8 @@ var functions_js_1 = require("./functions.js");
 function getInitialYValue(runs) {
   var firstRun = runs[0] || {
     data: {}
-  }; //console.dir( firstRun )
-
-  var metrics = Object.keys(Object.values(firstRun.data)[0] || {}); //console.dir( metrics )
-  //console.log( "metrics0=" + metrics[0] )
-
+  };
+  var metrics = Object.keys(Object.values(firstRun.data)[0] || {});
   var defMetric = metrics[0];
   var yaxis = ST.Utility.get_param("yaxis");
 
@@ -40081,7 +40078,6 @@ exports.default = vue_1.default.extend({
           meta: {}
         };
         var metaKeys = Object.keys(firstRun.meta);
-        console.dir(metaKeys);
         return metaKeys;
       } else {
         return [];
@@ -40101,7 +40097,6 @@ exports.default = vue_1.default.extend({
         data: {}
       };
       var metrics = Object.keys(Object.values(firstRun.data)[0] || {});
-      console.dir(metrics);
 
       for (var y = 0; y < metrics.length; y++) {
         if (metrics[y] === "spot.channel") {
@@ -40109,7 +40104,6 @@ exports.default = vue_1.default.extend({
         }
       }
 
-      console.dir(metrics);
       return metrics;
     },
     selectedRun: function selectedRun() {
@@ -40235,7 +40229,6 @@ exports.default = vue_1.default.extend({
     toggleScaleType: function toggleScaleType() {
       this.selectedScaleType = this.selectedScaleType == 'linear' ? 'log' : 'linear';
       this.filenames.push("test13241234.cali");
-      console.log('toggleScaletype');
     },
     togglePathVisible: function togglePathVisible(pathToToggle) {
       this.disabledFuncPaths = lodash_1.default.xor(this.disabledFuncPaths, [pathToToggle]);

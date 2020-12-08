@@ -140,13 +140,10 @@ import _ from "lodash"
 import {childrenPaths, colorHash} from './functions.js'
 
 function getInitialYValue(runs){
-      const firstRun = runs[0] || {data:{}}
 
-      //console.dir( firstRun )
+      const firstRun = runs[0] || {data:{}}
       const metrics = Object.keys(Object.values(firstRun.data)[0] || {})
 
-      //console.dir( metrics )
-      //console.log( "metrics0=" + metrics[0] )
       var defMetric = metrics[0]
 
     var yaxis = ST.Utility.get_param("yaxis");
@@ -215,7 +212,7 @@ export default Vue.extend({
 
                 const firstRun = this.runs[0] || {meta:{}}
                 const metaKeys = Object.keys(firstRun.meta)
-                console.dir( metaKeys )
+
                 return metaKeys
             } else {
                 return []
@@ -234,15 +231,12 @@ export default Vue.extend({
             const firstRun = this.runs[0] || {data:{}}
             const metrics = Object.keys(Object.values(firstRun.data)[0] || {})
 
-            console.dir(metrics);
             for( var y=0; y < metrics.length; y++ ) {
 
                 if( metrics[y] === "spot.channel" ) {
                     metrics.splice(y,1);
                 }
             }
-
-            console.dir(metrics);
 
             return metrics
         },
@@ -348,7 +342,6 @@ export default Vue.extend({
         toggleScaleType(){
             this.selectedScaleType = this.selectedScaleType == 'linear' ? 'log' : 'linear'
             this.filenames.push("test13241234.cali");
-            console.log('toggleScaletype')
         },
         togglePathVisible(pathToToggle){
         this.disabledFuncPaths =  _.xor(this.disabledFuncPaths, [pathToToggle])
