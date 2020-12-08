@@ -1,5 +1,7 @@
 Blockers:
 BUG - loading of Yaxis, i thought we already did that?
+    * mostly fixed but still need to find the onload event for Vue, so we can fire that event correctYAxisSelect in App.vue
+    * after that and after it's tested, deploy to cz and rz and send update to matt+
 DONE - Still need to make JS file loading synchronous instead of asynchronous.
 DONE - Check to see if hatchet will be copied to live by the script.
 
@@ -36,6 +38,10 @@ For Jobsize 1:
 - As for hiding Spot.channel:
     * I see it on the walltime page.  But which comparison metric dropdown are you talking about?
 
+
+BUG - Dropdown was set to empty or "spot.channel"
+    * the problem is here: function getInitialYValue(runs){
+    * it's failing because the data has extraneous values in there "spot.channel"
 
 
 - Start browser testing

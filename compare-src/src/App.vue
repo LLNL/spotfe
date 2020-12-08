@@ -3,7 +3,7 @@
     .updateCompareView(@click="rerenderForSelectDropdownUpdate")
     .sticky(:style="{position: 'sticky', top: 0, zIndex: 1}")
         .topbar(
-            :style=`{ 
+            :style=`{
                 backgroundColor: 'lightgray',
                 padding:'5px',
                 height:'40px',
@@ -141,8 +141,26 @@ import {childrenPaths, colorHash} from './functions.js'
 
 function getInitialYValue(runs){
       const firstRun = runs[0] || {data:{}}
-      const metrics = Object.keys(Object.values(firstRun.data)[0] || {}) 
-      return metrics[0]
+
+      //console.dir( firstRun )
+      const metrics = Object.keys(Object.values(firstRun.data)[0] || {})
+
+      //console.dir( metrics )
+      //console.log( "metrics0=" + metrics[0] )
+      var defMetric = metrics[0]
+
+    var yaxis = ST.Utility.get_param("yaxis");
+
+      if( yaxis ) {
+
+          yaxis = decodeURIComponent(yaxis);
+          return yaxis;
+      }
+
+      if( defMetric === "spot.channel" ) {
+          return metrics[1]
+      }
+      return defMetric
 }
 
 export default Vue.extend({
@@ -163,6 +181,8 @@ export default Vue.extend({
         disabledFuncPaths: [],
         hoverLock: false,
     }},
+    mounted() {
+    },
     watch:{
         xAxis(value){
             if(this.xAxisListener) this.xAxisListener(value)
@@ -184,6 +204,7 @@ export default Vue.extend({
 
             }
             this.yAxis = getInitialYValue(this.runs)
+            console.log("this.yaxis : " + this.yAxis)
 
         },
     },
@@ -221,7 +242,6 @@ export default Vue.extend({
                 }
             }
 
-            delete metrics["spot.channel"];
             console.dir(metrics);
 
             return metrics
@@ -304,6 +324,17 @@ export default Vue.extend({
     },  // end computed
 
     methods:{
+        correctYAxisSelect() {
+
+            var yaxis = ST.Utility.get_param("yaxis");
+            yaxis = decodeURIComponent(yaxis);
+
+            if( $('#yAxis-select').val() !== yaxis ) {
+
+                console.log('Compare: setting yaxis to ' + yaxis);
+                this.yAxis = yaxis
+            }
+        },
         yAxisSelected(selectedYAxis){
             this.yAxis = selectedYAxis
             if(this.yAxisListener) this.yAxisListener(selectedYAxis)

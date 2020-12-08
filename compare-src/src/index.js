@@ -277,6 +277,7 @@ export class Graph{
     }
 
     setYAxis(yAxisName){
+        console.log("yAxisName: " + yAxisName);
         this.app.yAxis = yAxisName
     }
 

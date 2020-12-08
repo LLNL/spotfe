@@ -40002,9 +40002,24 @@ var functions_js_1 = require("./functions.js");
 function getInitialYValue(runs) {
   var firstRun = runs[0] || {
     data: {}
-  };
-  var metrics = Object.keys(Object.values(firstRun.data)[0] || {});
-  return metrics[0];
+  }; //console.dir( firstRun )
+
+  var metrics = Object.keys(Object.values(firstRun.data)[0] || {}); //console.dir( metrics )
+  //console.log( "metrics0=" + metrics[0] )
+
+  var defMetric = metrics[0];
+  var yaxis = ST.Utility.get_param("yaxis");
+
+  if (yaxis) {
+    yaxis = decodeURIComponent(yaxis);
+    return yaxis;
+  }
+
+  if (defMetric === "spot.channel") {
+    return metrics[1];
+  }
+
+  return defMetric;
 }
 
 exports.default = vue_1.default.extend({
@@ -40027,6 +40042,7 @@ exports.default = vue_1.default.extend({
       hoverLock: false
     };
   },
+  mounted: function mounted() {},
   watch: {
     xAxis: function xAxis(value) {
       if (this.xAxisListener) this.xAxisListener(value);
@@ -40048,6 +40064,7 @@ exports.default = vue_1.default.extend({
       }
 
       this.yAxis = getInitialYValue(this.runs);
+      console.log("this.yaxis : " + this.yAxis);
     }
   },
   computed: {
@@ -40092,7 +40109,6 @@ exports.default = vue_1.default.extend({
         }
       }
 
-      delete metrics["spot.channel"];
       console.dir(metrics);
       return metrics;
     },
@@ -40197,6 +40213,15 @@ exports.default = vue_1.default.extend({
     }
   },
   methods: {
+    correctYAxisSelect: function correctYAxisSelect() {
+      var yaxis = ST.Utility.get_param("yaxis");
+      yaxis = decodeURIComponent(yaxis);
+
+      if ($('#yAxis-select').val() !== yaxis) {
+        console.log('Compare: setting yaxis to ' + yaxis);
+        this.yAxis = yaxis;
+      }
+    },
     yAxisSelected: function yAxisSelected(selectedYAxis) {
       this.yAxis = selectedYAxis;
       if (this.yAxisListener) this.yAxisListener(selectedYAxis);
@@ -52196,6 +52221,7 @@ var Graph = /*#__PURE__*/function () {
   }, {
     key: "setYAxis",
     value: function setYAxis(yAxisName) {
+      console.log("yAxisName: " + yAxisName);
       this.app.yAxis = yAxisName;
     }
   }, {
@@ -52243,7 +52269,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60502" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51936" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
