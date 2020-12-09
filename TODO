@@ -1,3 +1,14 @@
+- FE + BE to Bitbucket: CZ BitBucket.
+    * Bitbucket Spot -> I need to update.
+
+1. Always show legend, even if only 1 is selected.
+2. Iter/s  -> make this the default checked, not MemBw
+3. Have Y-axis start at 0?
+
+DONE _ make + button say "Add plot"
+DONE - views button partly covers the plotly controls
+
+
 Blockers:
 - redeploty to CZ and RZ and Retest thoroughly
 TEST - loading of Yaxis, i thought we already did that?
