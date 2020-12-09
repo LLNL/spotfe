@@ -85,7 +85,35 @@
     </p>
 
     <h3>Jupyter Notebooks</h3>
-    <p>Clicking on the jupyter icon for a run, will open a new page showing a jupyter notebook.</p>
+    <table>
+        <tr>
+            <td>
+                <img src="../img/docs/jup.png" alt="Jupyter Button" style="width:35px;height:35px;">
+            </td>
+            <td>
+                <img src="../img/docs/multi.png" alt="Multi Jupyter Button" style="width:35px;height:35px;">
+            </td>
+        </tr>
+    </table>
+
+    <p>
+        There are two options for interfacing with Spot's jupyter notebooks.
+        Clicking on the jupyter icon (left image above) for a run will open a
+        notebook containing the corresponding run in a new webpage (depending
+        on which entry in the table was selected). Alternatively, clicking on
+        the jupyter icon with an "M" at the top of the Run table (right image
+        above) will open a notebook containing all runs.
+    </p>
+    <p>
+        The notebooks use <a
+        href="https://github.com/llnl/hatchet">Hatchet</a>, is a Python-based
+        library for analyzing performance data that has a hierarchy, for
+        example, profiles represents calling context trees or call graphs.
+        These notebooks include sample Hatchet analyses that can be used on a
+        single run or across multiple runs. Please see the <a
+        href="https://hatchet.readthedocs.io/en/latest/">Hatchet
+        Documentation</a> for more example analyses.
+    </p>
 
     <h3>Durations</h3>
     <p>Clicking on the durations icon for a run, will open the walltimes page.</p>
