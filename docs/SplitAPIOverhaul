@@ -1,0 +1,7 @@
+We need to split up the API into two different returns one for the metric data and one for the other data.
+Currently they're mixed up.
+
+You can run the BE call from the command line, like so:
+/usr/gapps/spot/dev/spot.py getData /usr/gapps/spot/datasets/lulesh_gen/lul_sept_28_timeseres '{"200924-16330964138.cali":1607561460.291696,"200924-16383266200.cali":1607561460.291704,"200924-16394856104.cali":1607561460.291709,"200924-16401756144.cali":1607561460.291713,"200924-16410956192.cali":1607561460.292693,"200924-16420956733.cali":1607561460.292696,"200924-16435357269.cali":1607561460.2927,"200924-16444657823.cali":1607561460.292703,"200924-16454258362.cali":1607561460.293692,"200924-16465458917.cali":1607561460.293698,"200924-16475759479.cali":1607561460.293702,"200924-17012261057.cali":1607561460.294693,"200924-17025362173.cali":16060.294698}'
+
+Note: the values for each cali file contain a numeric value which is the cached value that if you lower it will get you a fresh response.
