@@ -1,9 +1,31 @@
+- clicking on bar below make the things below it strange
+    * should we check before I added the fixes to see if that was already there?
+    * comment out our 3 changes and see if that fixes the issue.
+
+DONE - Fix the "spot.channel" bug and use the 2nd returned metric.
+
+IN PROCESS - apply for special privledges and tell them I need to install Docker.
+- Install Docker on Laptop.
+- install charlie cloud - It's from LLNL. - https://github.com/hpc/charliecloud
+
+
+
+1) David BE call split up data. -> clean up.
+
+2) Integrate top down perfomrance counters into spot.
+    - Get Query from David to get Data which repressnets the performance counters and adapt data to our view.
+    - Get from Data how to define whether or not the data exists -> so we show the data conditionally.
+    - open page
+    - "it was commited but not enabled."
+
+
 - FE + BE to Bitbucket: CZ BitBucket.
     * Bitbucket Spot -> I need to update.
 
 1. Always show legend, even if only 1 is selected.
 2. Iter/s  -> make this the default checked, not MemBw
 3. Have Y-axis start at 0?
+Let Legendre know if I add anything.
 
 DONE _ make + button say "Add plot"
 DONE - views button partly covers the plotly controls
