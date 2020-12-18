@@ -197,7 +197,8 @@ ST.Utility = function() {
 
     var get_default_url_ = function() {
         var rz = on_rz_() ? 'rz' : '';
-        return 'https://' + rz + 'lc.llnl.gov/lorenz/lora/lora.cgi/jsonp';
+        //return 'https://' + rz + 'lc.llnl.gov/lorenz/lora/lora.cgi/jsonp';
+        return '/lc.llnl.gov/lorenz/lora/lora.cgi/jsonp';
     };
 
 
