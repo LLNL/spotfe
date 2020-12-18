@@ -1,0 +1,106 @@
+- Container: MultiJupyter on container -> if URL string too long from too many selections, causes hanging without error message
+- currently it's trying to use: lc.llnl.gov which is not right, it should use the current host. (dont hard code localhost)
+- fix timeseries for container that jsonP call need to use the URL host
+    * app.js add a new endpoint.  backend.py IS the spot.py file.
+    * Just need to call that backend.py the same way we do for spot.py but with a different end point name.
+- fix walltime for container that jsonP call need ot use the URL host
+- app.js only add "/data/" if it's not present in that string that's given
+    * don't want people to be able to supply ../etc/
+    * realpath -> changes it into actual location
+    * translate realpath into an absolute location
+    * add /data/ if not exists.
+- I'll need to test both spotfe/spotbe in both Container and Noncontainer
+    * don't worry about which user is testing.
+    * Matt will test charliecloud.
+
+# do this if you need to change any source code files.  if source files change need to rm and rebuild and rerun.
+docker rm spot2_debug6
+
+docker build -t spot2 .
+docker run -v /Users/aschwanden1/datasets/:/data -p 8080:8080/tcp -p 8888:8888/tcp --name spot2_debug2 spot2 &
+
+docker exec -it spot2_debug2 /bin/bash
+
+The above will start a debugging session where you or on the docker image:
+(base) root@bbe7b70e2409:/usr/gapps/spot# ls /data/lul_sept_28_timeseries/
+200924-16330964138.cali  200924-16420956733.cali  200924-16475759479.cali
+200924-16383266200.cali  200924-16435357269.cali  200924-17012261057.cali
+200924-16394856104.cali  200924-16444657823.cali  200924-17025362173.cali
+200924-16401756144.cali  200924-16454258362.cali
+200924-16410956192.cali  200924-16465458917.cali
+
+Then you can see all the cali files in your /data/lul_sept_28_timeseries dir:
+
+Works:
+http://localhost:8080/?sf=lul_sept_28_timeseries
+
+In Input field only need to enter: lul_sept_28_timeseries
+
+- consider moving to prod mode for Vue.
+- possibly look into websocket error
+    * who knows if its important or not.
+
+
+From Legendre:
+I’ve updated Joe’s SPOT container and added instructions in the README.md for how to build and run it.  It mostly works, but I’m hitting a couple issues:
+
+Task:
+The walltime page is broken.  It tries to access lc.llnl.gov.
+Instead it should access the containers Node.js backend.
+You can see examples of the backend in the container’s app.js code.
+Can you look into making the FE go through app.js when in the container?
+If I push too many files to multijupyter it just hangs rather than giving an error message.
+
+
+ Spot2 ready to go with the exception of the container errors you mentioned.
+
+Container is the only blocker that I know of.
+
+In order to resolve the container issue, I first have to get it working.
+I’m working on 2 fronts:
+Try to get docker working OR
+Try to get Charliecloud working
+
+
+Unfortunately, I’m running into issues with both of these right now:
+Installing Charliecloud – getting a fatal error because autoreconf is not installed.  I need to install this on mac OS X.  Also getting an error when installing autoconf:
+Enter PIN for 'Certificate For PIV Authentication (aschwanden1)':
+
+
+Docker: I’m getting a build error on this command: docker build -t spot2 .
+#14 0.470 CMake Error: The source directory "/usr/gapps/spot/Caliper" does not appear to contain CMakeLists.txt.
+
+Once i checked out the submodules this error message went away:
+git submodule update --init --recursive
+
+
+
+
+Container:
+- https://lc.llnl.gov/bitbucket/projects/SPOT2/repos/spot2_container/browse
+- https://github.com/hpc/charliecloud
+- https://hpc.github.io/charliecloud/
+
+Left off trying to install charliecloud
+* i tried to install:
+aschwanden1@doc ~/Downloads/charliecloud-master: ./autogen.sh
+but there was a problem with
++ autoreconf --force --install -Wall -Werror
+./autogen.sh: line 56: autoreconf: command not found
+
+- need to find out how to install autoreconf and try to reinstall it.
+After that install charliecloud.
+- then after that follow the directions for the spot2_container: https://lc.llnl.gov/bitbucket/projects/SPOT2/repos/spot2_container/browse
+
+
+
+
+
+Ok, so I was able to change the URL such that It calls from http://localhost:8080 in the container for the failing jsonP callback.  But, it’s now calling lora.cgi/jsonp.
+
+So, I’m going to use the app.js file to specify a new endpoint that will call backend.py, just like the /getData call in app.js.
+
+There’s a memory call which returns all the info needed for the front end, (the call for noncontainer is:
+
+/usr/gapps/spot/venv_python/bin/python3 /usr/gapps/spot/dev/spot.py memory lul_sept_28_timeseries/200924-16410956192.cali
+
