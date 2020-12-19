@@ -1,9 +1,11 @@
-- Container: MultiJupyter on container -> if URL string too long from too many selections, causes hanging without error message
-- currently it's trying to use: lc.llnl.gov which is not right, it should use the current host. (dont hard code localhost)
 - fix timeseries for container that jsonP call need to use the URL host
+    * /getmemory - was able to make BE call but parameters sent were incorrect, thus incorrect response.
     * app.js add a new endpoint.  backend.py IS the spot.py file.
     * Just need to call that backend.py the same way we do for spot.py but with a different end point name.
+    * WalltimeApp.vue - line 214, Callspot.js line 67.
 - fix walltime for container that jsonP call need ot use the URL host
+- Container: MultiJupyter on container -> if URL string too long from too many selections, causes hanging without error message
+- currently it's trying to use: lc.llnl.gov which is not right, it should use the current host. (dont hard code localhost)
 - app.js only add "/data/" if it's not present in that string that's given
     * don't want people to be able to supply ../etc/
     * realpath -> changes it into actual location

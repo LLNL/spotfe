@@ -62,11 +62,13 @@ ST.CallSpot = function() {
             // rtype = "POST";
         }
 
+        var url = ST.params.get_rundata_url;
+        
         var obj = {
             timeout: 600000,
             type: rtype,
             method: rtype,
-            url: ST.params.get_rundata_url,
+            url: url,
             data:   {
                 'via'    : 'post',
                 'route'  : '/command/' + ST.params.machine,      //  rzgenie

@@ -1,16 +1,16 @@
-*[data-v-6af355] {
+*[data-v-67cf97] {
   box-sizing: border-box;
   margin: 0px;
-}div[data-v-486b3a] {
+}div[data-v-f185e1] {
   box-sizing: border-box;
 }
-.node-width[data-v-486b3a] {
+.node-width[data-v-f185e1] {
   display: flex;
   flex-direction: column;
   flex-shrink: 1;
   min-width: 0;
 }
-.node[data-v-486b3a] {
+.node[data-v-f185e1] {
   height: 35px;
   border-radius: 10px;
   overflow: hidden;
@@ -18,6 +18,6 @@
   padding-left: 3px;
   min-width: 0px;
 }
-.children[data-v-486b3a] {
+.children[data-v-f185e1] {
   display: flex;
 }

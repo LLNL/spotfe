@@ -28472,14 +28472,14 @@ var _default = {
   name: 'FlamegraphNode'
 };
 exports.default = _default;
-        var $6af355 = exports.default || module.exports;
+        var $67cf97 = exports.default || module.exports;
       
-      if (typeof $6af355 === 'function') {
-        $6af355 = $6af355.options;
+      if (typeof $67cf97 === 'function') {
+        $67cf97 = $67cf97.options;
       }
     
         /* template */
-        Object.assign($6af355, (function () {
+        Object.assign($67cf97, (function () {
           var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -28596,7 +28596,7 @@ render._withStripped = true
             render: render,
             staticRenderFns: staticRenderFns,
             _compiled: true,
-            _scopeId: "data-v-6af355",
+            _scopeId: "data-v-67cf97",
             functional: undefined
           };
         })());
@@ -28609,9 +28609,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$6af355', $6af355);
+            api.createRecord('$67cf97', $67cf97);
           } else {
-            api.reload('$6af355', $6af355);
+            api.reload('$67cf97', $67cf97);
           }
         }
 
@@ -28749,14 +28749,14 @@ var _default = {
   }
 };
 exports.default = _default;
-        var $9e94d7 = exports.default || module.exports;
+        var $ffc729 = exports.default || module.exports;
       
-      if (typeof $9e94d7 === 'function') {
-        $9e94d7 = $9e94d7.options;
+      if (typeof $ffc729 === 'function') {
+        $ffc729 = $ffc729.options;
       }
     
         /* template */
-        Object.assign($9e94d7, (function () {
+        Object.assign($ffc729, (function () {
           var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -28860,9 +28860,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$9e94d7', $9e94d7);
+            api.createRecord('$ffc729', $ffc729);
           } else {
-            api.reload('$9e94d7', $9e94d7);
+            api.reload('$ffc729', $ffc729);
           }
         }
 
@@ -28964,14 +28964,14 @@ var _default = {
   }
 };
 exports.default = _default;
-        var $486b3a = exports.default || module.exports;
+        var $f185e1 = exports.default || module.exports;
       
-      if (typeof $486b3a === 'function') {
-        $486b3a = $486b3a.options;
+      if (typeof $f185e1 === 'function') {
+        $f185e1 = $f185e1.options;
       }
     
         /* template */
-        Object.assign($486b3a, (function () {
+        Object.assign($f185e1, (function () {
           var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -29519,7 +29519,7 @@ render._withStripped = true
             render: render,
             staticRenderFns: staticRenderFns,
             _compiled: true,
-            _scopeId: "data-v-486b3a",
+            _scopeId: "data-v-f185e1",
             functional: undefined
           };
         })());
@@ -29532,9 +29532,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$486b3a', $486b3a);
+            api.createRecord('$f185e1', $f185e1);
           } else {
-            api.reload('$486b3a', $486b3a);
+            api.reload('$f185e1', $f185e1);
           }
         }
 
@@ -29561,39 +29561,10 @@ var _lodash = _interopRequireDefault(require("lodash"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //  hjk
 //Vue.loadScript('../../web/js/jquery-1.11.0.min')
 //import * as $ from '../../web/js/jquery-1.11.0.min'
@@ -29729,6 +29700,33 @@ var _default = {
     }
   },
   methods: {
+    getmemoryfunc: function getmemoryfunc() {
+      return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+        var response;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return fetch("/getmemory", {
+                  method: "post",
+                  headers: {
+                    'content-type': 'application/json'
+                  },
+                  body: JSON.stringify({})
+                });
+
+              case 2:
+                response = _context.sent;
+
+              case 3:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
     getScripts: function getScripts() {
       var _this = this;
 
@@ -29751,6 +29749,8 @@ var _default = {
     },
     //  Just reuse our existing get memory call for now, so we can retrieve aliases.
     getAliases: function getAliases() {
+      var _window$ENV;
+
       var runSetId = ST.Utility.get_param('runSetId');
       var runId = ST.Utility.get_param('runId'); //  //'/usr/gapps/spot/datasets/lulesh_gen/100',
 
@@ -29758,30 +29758,36 @@ var _default = {
       var metricNames = this.metricNames;
       var replaceMetricNames = this.replaceMetricNames;
       var replacing_metrics = this.replacing_metrics;
-      ST.CallSpot.ajax({
-        file: path,
-        type: "memory",
-        success: function success(aj_dat) {
-          console.log('memory ajax:');
-          var ret = aj_dat.output.command_out;
-          var ret2 = JSON.parse(ret);
-          var std = JSON.parse(ret2.std);
-          var records = ret2.series.records;
-          var attributes = ret2.series.attributes;
-          console.dir(records);
-          console.dir(attributes);
-          console.dir(metricNames);
+      var isContainer = ((_window$ENV = window.ENV) === null || _window$ENV === void 0 ? void 0 : _window$ENV.machine) == 'container';
 
-          for (var x = 0; x < metricNames.length; x++) {
-            var met = metricNames[x];
-            var cali_obj = attributes[met] || {};
-            var alias = cali_obj["attribute.alias"] || met;
-            replacing_metrics[met] = alias;
+      if (isContainer) {
+        this.getmemoryfunc();
+      } else {
+        ST.CallSpot.ajax({
+          file: path,
+          type: "memory",
+          success: function success(aj_dat) {
+            console.log('memory ajax:');
+            var ret = aj_dat.output.command_out;
+            var ret2 = JSON.parse(ret);
+            var std = JSON.parse(ret2.std);
+            var records = ret2.series.records;
+            var attributes = ret2.series.attributes;
+            console.dir(records);
+            console.dir(attributes);
+            console.dir(metricNames);
+
+            for (var x = 0; x < metricNames.length; x++) {
+              var met = metricNames[x];
+              var cali_obj = attributes[met] || {};
+              var alias = cali_obj["attribute.alias"] || met;
+              replacing_metrics[met] = alias;
+            }
+
+            $('.update_top_down').trigger('click');
           }
-
-          $('.update_top_down').trigger('click');
-        }
-      });
+        });
+      }
     },
     replaceMetricNames: function replaceMetricNames(replacee, replacer) {
       console.log("2replacee=" + replacee + '  replacer=' + replacer);
@@ -29858,14 +29864,14 @@ var _default = {
   }
 };
 exports.default = _default;
-        var $e46e2c = exports.default || module.exports;
+        var $1a0cdc = exports.default || module.exports;
       
-      if (typeof $e46e2c === 'function') {
-        $e46e2c = $e46e2c.options;
+      if (typeof $1a0cdc === 'function') {
+        $1a0cdc = $1a0cdc.options;
       }
     
         /* template */
-        Object.assign($e46e2c, (function () {
+        Object.assign($1a0cdc, (function () {
           var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -30025,9 +30031,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$e46e2c', $e46e2c);
+            api.createRecord('$1a0cdc', $1a0cdc);
           } else {
-            api.reload('$e46e2c', $e46e2c);
+            api.reload('$1a0cdc', $1a0cdc);
           }
         }
 
@@ -40930,7 +40936,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54018" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53651" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

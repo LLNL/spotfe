@@ -45,6 +45,7 @@ import _ from 'lodash'
 
 
 export default {
+
     props:['filename', 'data', 'meta'],
     data(){return {
         selectedNode: '--root path--',
@@ -161,6 +162,16 @@ export default {
         },
     },
     methods:{
+        async getmemoryfunc()
+        {
+            let response = await fetch("/getmemory", {
+                method: "post",
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({})
+            })
+        },
         getScripts() {
 
             var files = [
@@ -210,36 +221,45 @@ export default {
 
             var replacing_metrics = this.replacing_metrics
 
+            const isContainer = window.ENV?.machine == 'container'
 
-            ST.CallSpot.ajax({
-                file: path,
-                type: "memory",
-                success: function( aj_dat ) {
+            if( isContainer ) {
 
-                    console.log('memory ajax:');
+                this.getmemoryfunc();
 
-                    var ret = aj_dat.output.command_out;
-                    var ret2 = JSON.parse( ret );
-                    var std = JSON.parse( ret2.std );
-                    var records = ret2.series.records;
+            } else {
 
-                    var attributes = ret2.series.attributes;
-                    console.dir( records )
-                    console.dir( attributes )
-                    console.dir( metricNames )
 
-                    for( var x=0; x < metricNames.length; x++ ) {
+                ST.CallSpot.ajax({
+                    file: path,
+                    type: "memory",
+                    success: function( aj_dat ) {
 
-                        var met = metricNames[x];
-                        var cali_obj = attributes[ met ] || {};
-                        var alias = cali_obj["attribute.alias"] || met;
+                        console.log('memory ajax:');
 
-                        replacing_metrics[ met ] = alias
+                        var ret = aj_dat.output.command_out;
+                        var ret2 = JSON.parse( ret );
+                        var std = JSON.parse( ret2.std );
+                        var records = ret2.series.records;
+
+                        var attributes = ret2.series.attributes;
+                        console.dir( records )
+                        console.dir( attributes )
+                        console.dir( metricNames )
+
+                        for( var x=0; x < metricNames.length; x++ ) {
+
+                            var met = metricNames[x];
+                            var cali_obj = attributes[ met ] || {};
+                            var alias = cali_obj["attribute.alias"] || met;
+
+                            replacing_metrics[ met ] = alias
+                        }
+
+                        $('.update_top_down').trigger('click')
                     }
-
-                    $('.update_top_down').trigger('click')
-                }
-            });
+                });
+            }
         },
         replaceMetricNames( replacee, replacer ) {
 
