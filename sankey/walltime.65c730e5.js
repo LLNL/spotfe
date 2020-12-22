@@ -29700,26 +29700,58 @@ var _default = {
     }
   },
   methods: {
-    getmemoryfunc: function getmemoryfunc() {
+    getmemoryfunc: function getmemoryfunc(path) {
+      var _this = this;
+
       return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-        var response;
+        var command, datarequest, response, newData;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
+                command = "/opt/conda/bin/python3 /usr/gapps/spot/backend.py --config /usr/gapps/spot/backend_config.yaml memory /data/" + path;
+                datarequest = {
+                  command: command,
+                  filepath: path
+                };
+                console.log('getmemoryfunc()');
+                _context.next = 5;
                 return fetch("/getmemory", {
                   method: "post",
                   headers: {
                     'content-type': 'application/json'
                   },
-                  body: JSON.stringify({})
+                  body: JSON.stringify(datarequest)
                 });
 
-              case 2:
+              case 5:
                 response = _context.sent;
+                console.log("here is the response obj: ");
+                console.dir(response);
 
-              case 3:
+                if (!(response && response.json)) {
+                  _context.next = 18;
+                  break;
+                }
+
+                console.log("about to do response.json();");
+                _context.next = 12;
+                return response.json();
+
+              case 12:
+                newData = _context.sent;
+                console.log('newData:');
+                console.dir(newData);
+
+                _this.updateTopDown(newData);
+
+                _context.next = 19;
+                break;
+
+              case 18:
+                console.log('no .json');
+
+              case 19:
               case "end":
                 return _context.stop();
             }
@@ -29728,7 +29760,7 @@ var _default = {
       }))();
     },
     getScripts: function getScripts() {
-      var _this = this;
+      var _this2 = this;
 
       var files = ["../web/js/jquery-1.11.0.min.js", "../web/js/Utility.js", "../web/js/Environment.js", "../web/js/CallSpot.js?abb"]; //loadScriptsInOrder( files ).then( this.getAliases );
 
@@ -29739,7 +29771,7 @@ var _default = {
         console.log('jquery has been loaded.');
         $.when($.getScript("../web/js/Environment.js"), $.getScript("../web/js/Utility.js"), $.getScript("../web/js/CallSpot.js?abb"), $.Deferred(function (deferred) {
           $(deferred.resolve);
-        })).done(_this.getAliases);
+        })).done(_this2.getAliases);
       });
       document.body.appendChild(script);
     },
@@ -29755,39 +29787,50 @@ var _default = {
       var runId = ST.Utility.get_param('runId'); //  //'/usr/gapps/spot/datasets/lulesh_gen/100',
 
       var path = runSetId + "/" + runId;
-      var metricNames = this.metricNames;
-      var replaceMetricNames = this.replaceMetricNames;
-      var replacing_metrics = this.replacing_metrics;
       var isContainer = ((_window$ENV = window.ENV) === null || _window$ENV === void 0 ? void 0 : _window$ENV.machine) == 'container';
 
       if (isContainer) {
-        this.getmemoryfunc();
+        this.getmemoryfunc(path);
       } else {
         ST.CallSpot.ajax({
           file: path,
           type: "memory",
           success: function success(aj_dat) {
-            console.log('memory ajax:');
-            var ret = aj_dat.output.command_out;
-            var ret2 = JSON.parse(ret);
-            var std = JSON.parse(ret2.std);
-            var records = ret2.series.records;
-            var attributes = ret2.series.attributes;
-            console.dir(records);
-            console.dir(attributes);
-            console.dir(metricNames);
+            console.log('memory ajax 2:');
+            var ret2 = {};
 
-            for (var x = 0; x < metricNames.length; x++) {
-              var met = metricNames[x];
-              var cali_obj = attributes[met] || {};
-              var alias = cali_obj["attribute.alias"] || met;
-              replacing_metrics[met] = alias;
+            if (aj_dat.series) {
+              ret2 = aj_dat;
+            } else {
+              var ret = aj_dat.output.command_out;
+              ret2 = JSON.parse(ret);
             }
 
-            $('.update_top_down').trigger('click');
+            this.updateTopDown(ret2);
           }
         });
       }
+    },
+    updateTopDown: function updateTopDown(ret2) {
+      console.log('updateTopDown 23223');
+      console.dir(ret2);
+      var records = ret2.series.records;
+      var attributes = ret2.series.attributes;
+      var metricNames = this.metricNames;
+      var replaceMetricNames = this.replaceMetricNames;
+      var replacing_metrics = this.replacing_metrics;
+      console.dir(records);
+      console.dir(attributes);
+      console.dir(metricNames);
+
+      for (var x = 0; x < metricNames.length; x++) {
+        var met = metricNames[x];
+        var cali_obj = attributes[met] || {};
+        var alias = cali_obj["attribute.alias"] || met;
+        replacing_metrics[met] = alias;
+      }
+
+      $('.update_top_down').trigger('click');
     },
     replaceMetricNames: function replaceMetricNames(replacee, replacer) {
       console.log("2replacee=" + replacee + '  replacer=' + replacer);
@@ -40936,7 +40979,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53651" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61400" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -174,6 +174,7 @@ export default Vue.extend({
 
 
     methods: {
+
         handleResize(){
             if(this.$refs.chartAreaSvg){
                 this.width = this.$refs.chartAreaSvg.clientWidth

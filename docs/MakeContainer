@@ -3,6 +3,7 @@
     * app.js add a new endpoint.  backend.py IS the spot.py file.
     * Just need to call that backend.py the same way we do for spot.py but with a different end point name.
     * WalltimeApp.vue - line 214, Callspot.js line 67.
+- Make SURE that it still works on DEV, not just the container: for both walltime and memory page.
 - fix walltime for container that jsonP call need ot use the URL host
 - Container: MultiJupyter on container -> if URL string too long from too many selections, causes hanging without error message
 - currently it's trying to use: lc.llnl.gov which is not right, it should use the current host. (dont hard code localhost)
@@ -14,12 +15,18 @@
 - I'll need to test both spotfe/spotbe in both Container and Noncontainer
     * don't worry about which user is testing.
     * Matt will test charliecloud.
+- consider moving to prod mode for Vue.
+- possibly look into websocket error
+    * who knows if its important or not.
+
+
+~/install/spot2_container/spotfe/compare-src: npm run watch-walltime
 
 # do this if you need to change any source code files.  if source files change need to rm and rebuild and rerun.
 docker rm spot2_debug6
 
 docker build -t spot2 .
-docker run -v /Users/aschwanden1/datasets/:/data -p 8080:8080/tcp -p 8888:8888/tcp --name spot2_debug2 spot2 &
+docker run -v /Users/aschwanden1/datasets/:/data -p 8080:8080/tcp -p 8888:8888/tcp --name spot2_debug17 spot2
 
 docker exec -it spot2_debug2 /bin/bash
 
@@ -38,9 +45,6 @@ http://localhost:8080/?sf=lul_sept_28_timeseries
 
 In Input field only need to enter: lul_sept_28_timeseries
 
-- consider moving to prod mode for Vue.
-- possibly look into websocket error
-    * who knows if its important or not.
 
 
 From Legendre:

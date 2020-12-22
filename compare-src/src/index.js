@@ -103,6 +103,7 @@ export class Graph{
 
         // Get New  Data from backend
         let newData
+
         if(isContainer) {
             // first see if there is a data endpoint:  used in docker container
             let response = await fetch("/getdata", { 
