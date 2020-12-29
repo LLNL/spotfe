@@ -60,13 +60,17 @@ export class Graph{
             })
             if(response.ok) {
                 let ipynbjson = await response.json()
-                const server = window.location.protocol + '//' + window.location.hostname + ':8888'
+                const server = window.location.protocol + '//' + window.location.hostname
                 const urlpath = ipynbjson["path"]
                 let auth = ""
                 if (ipynbjson.hasOwnProperty("token")) {
                     auth = "?token=" + ipynbjson["token"]
                 }
-                return server + urlpath + auth
+                let port = ""
+                if (ipynbjson.hasOwnProperty("port")) {
+                    port = ":" + ipynbjson["port"]
+                }                
+                return server + port + urlpath + auth
             }
         } else {
             // for lorenz
@@ -89,13 +93,17 @@ export class Graph{
             })
             if(response.ok) {
                 let ipynbjson = await response.json()
-                const server = window.location.protocol + '//' + window.location.hostname + ':8888'
+                const server = window.location.protocol + '//' + window.location.hostname
                 const urlpath = ipynbjson["path"]
                 let auth = ""
                 if (ipynbjson.hasOwnProperty("token")) {
                     auth = "?token=" + ipynbjson["token"]
                 }
-                return server + urlpath + auth
+                let port = ""
+                if (ipynbjson.hasOwnProperty("port")) {
+                    port = ":" + ipynbjson["port"]
+                }
+                return server + port + urlpath + auth
             }
         } else {
             // for lorenz
