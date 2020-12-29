@@ -59,7 +59,9 @@ export class Graph{
                 body:  JSON.stringify({filepath})
             })
             if(response.ok) {
-                const url = 'http://localhost:8888/notebooks/' + filepath.slice(0, -4) + "ipynb"
+                const sep = (filepath.substring(0, 1) === '/') ? '' : '/'
+                const server = window.location.protocol + '//' + window.location.hostname + ':8888'
+                const url = server + '/notebooks' + sep + filepath.slice(0, -4) + "ipynb"
                 window.open(url)
             }
         } else {
@@ -82,7 +84,8 @@ export class Graph{
                 body: JSON.stringify({basepath, subpaths})
             })
             if(response.ok) {
-                const url = 'http://localhost:8888/notebooks/combo.ipynb'
+                const server = window.location.protocol + '//' + window.location.hostname + ':8888'
+                const url = server + '/notebooks/combo.ipynb'
                 window.open(url)
             }
         } else {
