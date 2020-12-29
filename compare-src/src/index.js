@@ -59,10 +59,14 @@ export class Graph{
                 body:  JSON.stringify({filepath})
             })
             if(response.ok) {
-                const sep = (filepath.substring(0, 1) === '/') ? '' : '/'
+                let ipynbjson = await response.json()
                 const server = window.location.protocol + '//' + window.location.hostname + ':8888'
-                const url = server + '/notebooks' + sep + filepath.slice(0, -4) + "ipynb"
-                window.open(url)
+                const urlpath = ipynbjson["path"]
+                let auth = ""
+                if (ipynbjson.hasOwnProperty("token")) {
+                    auth = "?token=" + ipynbjson["token"]
+                }
+                return server + urlpath + auth
             }
         } else {
             // for lorenz
@@ -84,9 +88,14 @@ export class Graph{
                 body: JSON.stringify({basepath, subpaths})
             })
             if(response.ok) {
+                let ipynbjson = await response.json()
                 const server = window.location.protocol + '//' + window.location.hostname + ':8888'
-                const url = server + '/notebooks/combo.ipynb'
-                window.open(url)
+                const urlpath = ipynbjson["path"]
+                let auth = ""
+                if (ipynbjson.hasOwnProperty("token")) {
+                    auth = "?token=" + ipynbjson["token"]
+                }
+                return server + urlpath + auth
             }
         } else {
             // for lorenz

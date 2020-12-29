@@ -50549,14 +50549,13 @@ var Graph = /*#__PURE__*/function () {
     key: "openJupyter",
     value: function () {
       var _openJupyter = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(filepath, host, command) {
-        var response, sep, server, url, _url;
-
+        var response, ipynbjson, server, urlpath, auth, url;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 if (!isContainer) {
-                  _context.next = 7;
+                  _context.next = 15;
                   break;
                 }
 
@@ -50574,25 +50573,39 @@ var Graph = /*#__PURE__*/function () {
               case 3:
                 response = _context.sent;
 
-                if (response.ok) {
-                  sep = filepath.substring(0, 1) === '/' ? '' : '/';
-                  server = window.location.protocol + '//' + window.location.hostname + ':8888';
-                  url = server + '/notebooks' + sep + filepath.slice(0, -4) + "ipynb";
-                  window.open(url);
+                if (!response.ok) {
+                  _context.next = 13;
+                  break;
                 }
 
-                _context.next = 11;
-                break;
+                _context.next = 7;
+                return response.json();
 
               case 7:
-                _context.next = 9;
+                ipynbjson = _context.sent;
+                server = window.location.protocol + '//' + window.location.hostname + ':8888';
+                urlpath = ipynbjson["path"];
+                auth = "";
+
+                if (ipynbjson.hasOwnProperty("token")) {
+                  auth = "?token=" + ipynbjson["token"];
+                }
+
+                return _context.abrupt("return", server + urlpath + auth);
+
+              case 13:
+                _context.next = 19;
+                break;
+
+              case 15:
+                _context.next = 17;
                 return lorenz(host, "".concat(command, " ").concat(filepath));
 
-              case 9:
-                _url = _context.sent;
-                return _context.abrupt("return", _url);
+              case 17:
+                url = _context.sent;
+                return _context.abrupt("return", url);
 
-              case 11:
+              case 19:
               case "end":
                 return _context.stop();
             }
@@ -50610,14 +50623,13 @@ var Graph = /*#__PURE__*/function () {
     key: "openMultiJupyter",
     value: function () {
       var _openMultiJupyter = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(basepath, subpaths, host, command) {
-        var response, server, url, _url2;
-
+        var response, ipynbjson, server, urlpath, auth, url;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 if (!isContainer) {
-                  _context2.next = 7;
+                  _context2.next = 15;
                   break;
                 }
 
@@ -50636,24 +50648,39 @@ var Graph = /*#__PURE__*/function () {
               case 3:
                 response = _context2.sent;
 
-                if (response.ok) {
-                  server = window.location.protocol + '//' + window.location.hostname + ':8888';
-                  url = server + '/notebooks/combo.ipynb';
-                  window.open(url);
+                if (!response.ok) {
+                  _context2.next = 13;
+                  break;
                 }
 
-                _context2.next = 11;
-                break;
+                _context2.next = 7;
+                return response.json();
 
               case 7:
-                _context2.next = 9;
+                ipynbjson = _context2.sent;
+                server = window.location.protocol + '//' + window.location.hostname + ':8888';
+                urlpath = ipynbjson["path"];
+                auth = "";
+
+                if (ipynbjson.hasOwnProperty("token")) {
+                  auth = "?token=" + ipynbjson["token"];
+                }
+
+                return _context2.abrupt("return", server + urlpath + auth);
+
+              case 13:
+                _context2.next = 19;
+                break;
+
+              case 15:
+                _context2.next = 17;
                 return lorenz(host, "".concat(command, " ").concat(basepath, " '").concat(JSON.stringify(subpaths), "'"));
 
-              case 9:
-                _url2 = _context2.sent;
-                return _context2.abrupt("return", _url2);
+              case 17:
+                url = _context2.sent;
+                return _context2.abrupt("return", url);
 
-              case 11:
+              case 19:
               case "end":
                 return _context2.stop();
             }
