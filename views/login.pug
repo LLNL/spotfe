@@ -1,0 +1,10 @@
+html
+   head
+      title Signin
+   body
+      if (message)
+        h4 #{message}
+      p Please provide the SPOT password to login
+      form(action = "/login" method = "POST")
+        input(name = "password" type = "password" required placeholder = "Password")
+        button(type = "Submit") Login
