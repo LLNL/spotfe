@@ -63,9 +63,22 @@ ST.MemoryLineModel = function() {
 
         if( aj_dat ) {
 
-            var ret = aj_dat.output.command_out;
-            var ret2 = JSON.parse( ret );
-            var std = JSON.parse( ret2.std );
+            var ret2;
+            var aj_obj = JSON.parse(aj_dat);
+
+            if( aj_obj.series ) {
+
+                //  In container.
+                ret2 = aj_obj;
+
+            } else {
+                //  on Lorenz, not the container
+                var ret = aj_dat.output.command_out;
+                ret2 = JSON.parse(ret);
+                var std = JSON.parse(ret2.std);
+                console.dir( std );
+            }
+
             var records = ret2.series.records;
 
             ST.Utility.assert( records.length > 0, "Did not receive any records.  Please check to see that your cali files contain memory data.");
@@ -80,7 +93,6 @@ ST.MemoryLineModel = function() {
             attributes_ = ret2.series.attributes;
 
             console.dir( ret2 );
-            console.dir( std );
             console.dir( records );
 
             records_cache_ = records;

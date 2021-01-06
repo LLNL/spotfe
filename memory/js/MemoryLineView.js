@@ -13,11 +13,21 @@ ST.MemoryLineView = function() {
         //  //'/usr/gapps/spot/datasets/lulesh_gen/100',
         var path = runSetId + "/" + runId;
 
-        ST.CallSpot.ajax({
-            file: path,
-            type: "memory",
-            success: line_render_
-        });
+        window.ENV.machine = 'container';
+
+        const isContainer = window.ENV.machine == 'container'
+
+        if( isContainer ) {
+
+            container_ajax_();
+        } else {
+
+            ST.CallSpot.ajax({
+                file: path,
+                type: "memory",
+                success: line_render_
+            });
+        }
 
         return true;
 
@@ -37,7 +47,38 @@ ST.MemoryLineView = function() {
 
         obj.dataType = "jsonp";
 
-        $.ajax(obj).done(finish_render_).error(finish_render_);
+        $.ajax(obj).done(from_lorenz_finish_).error(from_lorenz_finish_);
+    };
+
+
+    var container_ajax_ = function() {
+
+        var runSetId = ST.Utility.get_param('runSetId');
+            var runId = ST.Utility.get_param('runId');
+
+            //  //'/usr/gapps/spot/datasets/lulesh_gen/100',
+            var path = runSetId + "/" + runId;
+
+        const command = "/opt/conda/bin/python3 /usr/gapps/spot/backend.py --config /usr/gapps/spot/backend_config.yaml memory /data/" +
+            path;
+
+        console.log('container ajax: ' + command);
+
+        var datarequest = {
+            command: command,
+            filepath: path
+        };
+
+        var data_obj = JSON.stringify(datarequest);
+
+        console.log('getmemoryfunc()');
+
+        $.ajax({
+            type: "POST",
+            url: "/getmemory",
+            data: datarequest,
+            success: line_render_
+        });
     };
 
 
@@ -186,12 +227,18 @@ ST.MemoryLineView = function() {
         $("html, body").animate({ scrollTop: $(document).height() }, 1000);
     };
 
-
-    var finish_render_ = function( aj_dat ) {
+    var from_lorenz_finish_ = function( aj_dat ) {
 
         var ret = aj_dat.output.command_out;
         var ret2 = JSON.parse( ret );
         var ret3 = JSON.parse( ret2 );
+
+        finish_render_( ret3 );
+    };
+
+
+    var finish_render_ = function( ret3 ) {
+
 
         console.dir( ret3 );
 
@@ -209,10 +256,6 @@ ST.MemoryLineView = function() {
                 d.month = d3.timeMonth(d.dd); // pre-calculate month for better performance
                 d.close = +d.close; // coerce to number
                 d.open = +d.open;
-            });
-
-            ret3.forEach(d => {
-
             });
 
             const ndx = crossfilter(data);
