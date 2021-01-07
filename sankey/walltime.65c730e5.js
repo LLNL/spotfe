@@ -29781,13 +29781,11 @@ var _default = {
     },
     //  Just reuse our existing get memory call for now, so we can retrieve aliases.
     getAliases: function getAliases() {
-      var _window$ENV;
-
       var runSetId = ST.Utility.get_param('runSetId');
       var runId = ST.Utility.get_param('runId'); //  //'/usr/gapps/spot/datasets/lulesh_gen/100',
 
       var path = runSetId + "/" + runId;
-      var isContainer = ((_window$ENV = window.ENV) === null || _window$ENV === void 0 ? void 0 : _window$ENV.machine) == 'container';
+      var isContainer = window.ENV.machine == 'container';
 
       if (isContainer) {
         this.getmemoryfunc(path);

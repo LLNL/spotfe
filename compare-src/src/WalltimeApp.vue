@@ -245,7 +245,7 @@ export default {
             //  //'/usr/gapps/spot/datasets/lulesh_gen/100',
             var path = runSetId + "/" + runId;
 
-            const isContainer = window.ENV?.machine == 'container'
+            const isContainer = window.ENV.machine == 'container'
 
             if( isContainer ) {
 
