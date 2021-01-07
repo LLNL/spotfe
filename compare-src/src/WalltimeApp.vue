@@ -253,6 +253,7 @@ export default {
 
             } else {
 
+                var updateTopDown = this.updateTopDown;
 
                 ST.CallSpot.ajax({
                     file: path,
@@ -270,7 +271,7 @@ export default {
                             ret2 = JSON.parse(ret);
                         }
 
-                        this.updateTopDown(ret2);
+                        updateTopDown(ret2);
                     }
                 });
             }
