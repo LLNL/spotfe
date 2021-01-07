@@ -1,4 +1,4 @@
-- in /demos/   add a new directory files: timeseries.
+DONE - in /demos/   add a new directory files: timeseries.
     * call it "mem" and put the cali files in there
 - fix timeseries - fix the environemnt.js
 - Make SURE that it still works on DEV, not just the container: for both walltime and memory page.
@@ -35,7 +35,7 @@ docker rm spot2_debug6
 docker build -t spot2 .
 docker run -v /Users/aschwanden1/datasets/:/data -p 8080:8080/tcp -p 8888:8888/tcp --name spot2_debug17 spot2
 
-docker exec -it spot2_debug2 /bin/bash
+docker exec -it spot2_debug17 /bin/bash
 
 The above will start a debugging session where you or on the docker image:
 (base) root@bbe7b70e2409:/usr/gapps/spot# ls /data/lul_sept_28_timeseries/
@@ -52,7 +52,7 @@ http://localhost:8080/?sf=lul_sept_28_timeseries
 
 In Input field only need to enter: lul_sept_28_timeseries
 
-
+Put data in here: /install/spot2_container/spotbe/demos
 
 From Legendre:
 I’ve updated Joe’s SPOT container and added instructions in the README.md for how to build and run it.  It mostly works, but I’m hitting a couple issues:

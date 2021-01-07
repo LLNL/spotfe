@@ -1,6 +1,7 @@
 var ST = ST || {};
-var ENV = {
-    machine: "oslic"
+
+window.ENV = window.ENV || {
+    machine: 'oslic'
 };
 
 ST.MemoryLineView = function() {
@@ -13,7 +14,7 @@ ST.MemoryLineView = function() {
         //  //'/usr/gapps/spot/datasets/lulesh_gen/100',
         var path = runSetId + "/" + runId;
 
-        window.ENV.machine = 'container';
+        //window.ENV.machine = 'container';
 
         const isContainer = window.ENV.machine == 'container'
 
