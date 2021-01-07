@@ -50555,7 +50555,7 @@ var Graph = /*#__PURE__*/function () {
             switch (_context.prev = _context.next) {
               case 0:
                 if (!isContainer) {
-                  _context.next = 17;
+                  _context.next = 19;
                   break;
                 }
 
@@ -50574,7 +50574,7 @@ var Graph = /*#__PURE__*/function () {
                 response = _context.sent;
 
                 if (!response.ok) {
-                  _context.next = 15;
+                  _context.next = 17;
                   break;
                 }
 
@@ -50583,7 +50583,16 @@ var Graph = /*#__PURE__*/function () {
 
               case 7:
                 ipynbjson = _context.sent;
-                server = window.location.protocol + '//' + window.location.hostname;
+                server = "";
+
+                if (ipynbjson.hasOwnProperty("server")) {
+                  server = ipynbjson["server"].trim();
+                }
+
+                if (server.length == 0) {
+                  server = window.location.protocol + '//' + window.location.hostname;
+                }
+
                 urlpath = ipynbjson["path"];
                 auth = "";
 
@@ -50599,19 +50608,19 @@ var Graph = /*#__PURE__*/function () {
 
                 return _context.abrupt("return", server + port + urlpath + auth);
 
-              case 15:
-                _context.next = 21;
+              case 17:
+                _context.next = 23;
                 break;
 
-              case 17:
-                _context.next = 19;
+              case 19:
+                _context.next = 21;
                 return lorenz(host, "".concat(command, " ").concat(filepath));
 
-              case 19:
+              case 21:
                 url = _context.sent;
                 return _context.abrupt("return", url);
 
-              case 21:
+              case 23:
               case "end":
                 return _context.stop();
             }

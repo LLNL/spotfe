@@ -60,7 +60,13 @@ export class Graph{
             })
             if(response.ok) {
                 let ipynbjson = await response.json()
-                const server = window.location.protocol + '//' + window.location.hostname
+                let server = ""
+                if (ipynbjson.hasOwnProperty("server")) {
+                    server = ipynbjson["server"].trim()
+                }
+                if (server.length == 0) {
+                    server = window.location.protocol + '//' + window.location.hostname
+                }
                 const urlpath = ipynbjson["path"]
                 let auth = ""
                 if (ipynbjson.hasOwnProperty("token")) {
