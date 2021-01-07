@@ -75,8 +75,8 @@ ST.MemoryLineModel = function() {
                 //  on Lorenz, not the container
                 var ret = aj_dat.output.command_out;
                 ret2 = JSON.parse(ret);
-                var std = JSON.parse(ret2.std);
-                console.dir( std );
+                //var std = JSON.parse(ret2.std);
+                //console.dir( std );
             }
 
             var records = ret2.series.records;
