@@ -125,6 +125,11 @@ export class Graph{
 
         const cachedRunCtimes = cachedData.runCtimes || {}
 
+        //  Round to prevent string from being too long.
+        for( var x in cachedRunCtimes ) {
+            cachedRunCtimes[x] = parseInt(cachedRunCtimes[x]);
+        }
+
         const dataRequest = {dataSetKey, cachedRunCtimes}
 
         // Get New  Data from backend
