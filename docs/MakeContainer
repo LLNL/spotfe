@@ -1,5 +1,8 @@
 - walltime ajax call not working on LC, says "not found"
 
+https://  lc.llnl.gov/lc.llnl.gov/lorenz/lora/lora.cgi/jsonp?callback=jQuery
+https://rzlc.llnl.gov/lorenz/lora/lora.cgi/jsonp?callback=
+
 DONE - in /demos/   add a new directory files: timeseries.
     * call it "mem" and put the cali files in there
 - fix timeseries - fix the environemnt.js

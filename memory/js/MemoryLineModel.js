@@ -64,6 +64,11 @@ ST.MemoryLineModel = function() {
         if( aj_dat ) {
 
             var ret2;
+
+            if( aj_dat.output ) {
+                aj_dat = aj_dat.output.command_out;
+            }
+
             var aj_obj = JSON.parse(aj_dat);
 
             if( aj_obj.series ) {

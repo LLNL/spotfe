@@ -29790,6 +29790,7 @@ var _default = {
       if (isContainer) {
         this.getmemoryfunc(path);
       } else {
+        var updateTopDown = this.updateTopDown;
         ST.CallSpot.ajax({
           file: path,
           type: "memory",
@@ -29804,7 +29805,7 @@ var _default = {
               ret2 = JSON.parse(ret);
             }
 
-            this.updateTopDown(ret2);
+            updateTopDown(ret2);
           }
         });
       }
