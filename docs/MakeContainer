@@ -1,12 +1,16 @@
-- fix timeseries for container that jsonP call need to use the URL host
-    * /getmemory - was able to make BE call but parameters sent were incorrect, thus incorrect response.
-    * app.js add a new endpoint.  backend.py IS the spot.py file.
-    * Just need to call that backend.py the same way we do for spot.py but with a different end point name.
-    * WalltimeApp.vue - line 214, Callspot.js line 67.
+- walltime ajax call not working on LC, says "not found"
+
+DONE - in /demos/   add a new directory files: timeseries.
+    * call it "mem" and put the cali files in there
+- fix timeseries - fix the environemnt.js
 - Make SURE that it still works on DEV, not just the container: for both walltime and memory page.
-- fix walltime for container that jsonP call need ot use the URL host
+
 - Container: MultiJupyter on container -> if URL string too long from too many selections, causes hanging without error message
-- currently it's trying to use: lc.llnl.gov which is not right, it should use the current host. (dont hard code localhost)
+
+- fix walltime for container that jsonP call need ot use the URL host
+
+DONE - currently it's trying to use: lc.llnl.gov which is not right, it should use the current host. (dont hard code localhost)
+
 - app.js only add "/data/" if it's not present in that string that's given
     * don't want people to be able to supply ../etc/
     * realpath -> changes it into actual location
@@ -15,10 +19,15 @@
 - I'll need to test both spotfe/spotbe in both Container and Noncontainer
     * don't worry about which user is testing.
     * Matt will test charliecloud.
+
 - consider moving to prod mode for Vue.
 - possibly look into websocket error
     * who knows if its important or not.
 
+
+SPOTPW=see  docker run -e SPOTPW -v /Users/aschwanden1/datasets/:/data -p 8080:8080/tcp -p 8888:8888/tcp --name spot2_d32 spot2
+
+docker build -t spot2 --build-arg DEFAULT_SPOTPW=see .
 
 ~/install/spot2_container/spotfe/compare-src: npm run watch-walltime
 
@@ -28,7 +37,7 @@ docker rm spot2_debug6
 docker build -t spot2 .
 docker run -v /Users/aschwanden1/datasets/:/data -p 8080:8080/tcp -p 8888:8888/tcp --name spot2_debug17 spot2
 
-docker exec -it spot2_debug2 /bin/bash
+docker exec -it spot2_debug17 /bin/bash
 
 The above will start a debugging session where you or on the docker image:
 (base) root@bbe7b70e2409:/usr/gapps/spot# ls /data/lul_sept_28_timeseries/
@@ -45,7 +54,7 @@ http://localhost:8080/?sf=lul_sept_28_timeseries
 
 In Input field only need to enter: lul_sept_28_timeseries
 
-
+Put data in here: /install/spot2_container/spotbe/demos
 
 From Legendre:
 I’ve updated Joe’s SPOT container and added instructions in the README.md for how to build and run it.  It mostly works, but I’m hitting a couple issues:
