@@ -1,0 +1,8 @@
+Modifications made by LLNL on top of dc.js are under the following copyright:
+
+Copyright (c) 2021, Lawrence Livermore National Security, LLC. Produced at
+the Lawrence Livermore National Laboratory. LLNL-CODE-813387. All rights reserved.
+
+
+Source code from dc.js and other javascript libraries used in the SPOT front-end
+retain their original copyrights.
