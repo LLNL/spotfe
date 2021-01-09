@@ -67,14 +67,17 @@ ST.CompareArguments = function() {
                     var file_path = $('.directory').val();
                     var cali_quoted = " \"" + cali_keys + "\"";
                     var total_send = file_path + cali_quoted;
-                    var limit = 85000; // 1700;
+                    var limit = 15000; // 1700;
                     var t_count = total_send.length;
 
                     //limit = 50000;
                     console.log("t_count = " + t_count );
 
+
                     if( cali_count <= 1 ) {
+
                         ReusableView.warning("Less than 2 rows are selected.  Please select 2 or more rows to compare.");
+                        ST.Utility.stop_spinner();
                         return false;
                     }
 
@@ -82,6 +85,7 @@ ST.CompareArguments = function() {
 
                         ReusableView.warning("Too many rows selected.  Please narrow the selection.  <br>" +
                                 "request chars = " + t_count + "  limit = " + limit);
+                        ST.Utility.stop_spinner();
                         return false;
                     }
 
