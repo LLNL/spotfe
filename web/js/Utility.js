@@ -329,7 +329,13 @@ ST.Utility = function() {
         return location.href.indexOf('llnl.gov/spot2') > -1;
     };
 
+    var is_sand_box_ = function() {
+	return location.href.indexOf("pascal/spotfe") > -1;
+    };
+
     var get_prefix_ = function() {
+
+	
         var dev_prefix = ST.Utility.is_live() ? "live/" : "dev/";
         return dev_prefix;
     };
