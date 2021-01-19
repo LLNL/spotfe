@@ -335,6 +335,9 @@ ST.Utility = function() {
 
     var get_prefix_ = function() {
 
+	if( is_sand_box_() ) {
+		return "sand/";
+ 	}
 	
         var dev_prefix = ST.Utility.is_live() ? "live/" : "dev/";
         return dev_prefix;

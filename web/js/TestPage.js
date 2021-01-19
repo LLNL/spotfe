@@ -29,7 +29,7 @@ var TEST = function() {
         testList.push({
             "page": count,
             "localhost": show[0] === 0 ? "" : "http://localhost:8888/" + luly + machines[0],
-            "cz_pascal": show[1] === 0 ? "" : "https://lc.llnl.gov/lorenz_base/dev/pascal/dcvis/" + luly + machines[1],
+            "cz_pascal": show[1] === 0 ? "" : "https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/" + luly + machines[1],
             "cz_d2": show[1] === 0 ? "" : 'https://lc.llnl.gov/spot/dcvis/' + luly + machines[1],
             "rz_d2": show[2] === 0 ? "" : 'https://rzlc.llnl.gov/spot/dcvis/' + luly + machines[2],
             "cz_l2": show[3] === 0 ? "" : 'https://lc.llnl.gov/spot2/' + luly + machines[3],
@@ -96,7 +96,7 @@ var TEST = function() {
             <tr>\
                 <td>Test Page</td>\
                 <td>Localhost</td>\
-                <td>CZ Pascal</td>\
+                <td>RZ Pascal</td>\
                 <td>CZ D2  - Dev</td>\
                 <td>RZ D2  - Dev</td>\
                 <td>CZ L2  - Live</td>\
