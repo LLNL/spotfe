@@ -10,7 +10,7 @@ ST.LAST_DAYS = "launchdate_days_ago";
 ST.CONSTS = {
     "SCATTER_PLOT" : "ScatterPlot",
     "COMPOSITE_PLOT": "CompositePlot",
-    "UNIQUE_STR": 50,
+    "UNIQUE_STR": 200,
     "MAX_HOR_BAR_CHART_STR_LEN": 100,
     "ETC_BUCKET": "Etc bucket",
     "STRCON": "_strcat_"
