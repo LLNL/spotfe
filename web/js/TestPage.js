@@ -57,7 +57,8 @@ var TEST = function() {
             "lulesh_gen/multi32000",
             "lulesh_gen/deep_dir_5",
             "lulesh_gen/lul_sept_28_timeseries",
-            "demos/mpi"
+            "demos/mpi",
+	    "/g/g0/pascal/tes4"
         ];
 
         for (var x in num) {
@@ -69,6 +70,11 @@ var TEST = function() {
             }
 
             var luly = '?sf=/usr/gapps/spot/datasets/' + count;
+
+	    if( typeof count === "string" && count.charAt(0) === "/") {
+		luly = "?sf=" + count;	
+	    }
+
             add_test_( count, luly );
         }
 
