@@ -50,7 +50,10 @@ ST.UserPreferences = function() {
 
     var sort_charts_by_title_ = function( a, b ) {
 
-	return a.title > b.title ? 1 : -1;
+	var at = a.title.toLowerCase();
+	var bt = b.title.toLowerCase();
+
+	return at > bt ? 1 : -1;
     };
 
 
