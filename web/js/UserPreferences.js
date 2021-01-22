@@ -48,7 +48,15 @@ ST.UserPreferences = function() {
     };
 
 
+    var sort_charts_by_title_ = function( a, b ) {
+
+	return a.title > b.title ? 1 : -1;
+    };
+
+
     var init_pref_ = function( pref_html ) {
+
+	ST.layout_used.charts.sort( sort_charts_by_title_ );
 
         Vue.component('user-preferences', {
             data: function() {
