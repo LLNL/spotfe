@@ -86,7 +86,7 @@ var TEST = function() {
                 luly = "?sf=" + count;
             }
 
-            var showing = typeof count === 'string' && count.indexOf('ale3d_regr') > -1  ? [ 0,1,0,1,0,1 ] : undefined;
+            var showing = typeof count === 'string' && count.indexOf('ale3d_regr') > -1  ? [ 0,0,1,0,1 ] : undefined;
 
             add_test_( count, luly, showing );
         }
