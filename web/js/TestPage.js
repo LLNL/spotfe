@@ -82,11 +82,13 @@ var TEST = function() {
 
             var luly = '?sf=/usr/gapps/spot/datasets/' + count;
 
-	    if( typeof count === "string" && count.charAt(0) === "/") {
-		luly = "?sf=" + count;	
-	    }
+            if( typeof count === "string" && count.charAt(0) === "/") {
+                luly = "?sf=" + count;
+            }
 
-            add_test_( count, luly );
+            var showing = typeof count === 'string' && count.indexOf('ale3d_regr') > -1  ? [ 0,1,0,1,0,1 ] : undefined;
+
+            add_test_( count, luly, showing );
         }
 
         add_test_( "RZ Only Siboka/nathan", '?machine=rztopaz&command=/collab/usr/gapps/wf/spot/sina-spot-dev.py&sf=/usr/gapps/wf/siboka_team/sina/uqacam_FS.sqlite', [0,0,1,0,1]);
