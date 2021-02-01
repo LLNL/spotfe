@@ -58,7 +58,12 @@ var TEST = function() {
             "lulesh_gen/deep_dir_5",
             "lulesh_gen/lul_sept_28_timeseries",
             "demos/mpi",
-	    "/g/g0/pascal/tes4"
+	    "/g/g0/pascal/zdeb/ale3d_regr/am-gen",
+	    "/g/g0/pascal/zdeb/ale3d_regr/pipe",
+	    "/g/g0/pascal/zdeb/ale3d_regr/sedov",
+	    "/g/g0/pascal/zdeb/ale3d_regr/tow3d",
+	    "/g/g0/pascal/zdeb/ale3d_regr/usndhs",
+	    "/g/g0/pascal/zdeb/ale3d_regr/xno",
         ];
 
         for (var x in num) {
