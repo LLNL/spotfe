@@ -57,7 +57,9 @@ var TEST = function() {
             "lulesh_gen/multi32000",
             "lulesh_gen/deep_dir_5",
             "lulesh_gen/lul_sept_28_timeseries",
-            "demos/mpi",
+            "demos/mpi"];
+
+        var rtests = [
 	    "/g/g0/pascal/zdeb/ale3d_regr/am-gen",
 	    "/g/g0/pascal/zdeb/ale3d_regr/pipe",
 	    "/g/g0/pascal/zdeb/ale3d_regr/sedov",
@@ -65,6 +67,10 @@ var TEST = function() {
 	    "/g/g0/pascal/zdeb/ale3d_regr/usndhs",
 	    "/g/g0/pascal/zdeb/ale3d_regr/xno",
         ];
+
+        if( location.host === "rzlc.llnl.gov" ) {
+            num = num.concat( rtests );
+        }
 
         for (var x in num) {
 
