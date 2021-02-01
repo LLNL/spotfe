@@ -1,14 +1,60 @@
-- walltime ajax call not working on LC, says "not found"
+- Deploy latest to CZ Dev: clone new repo there.
+- Do full regression test for deploy.
 
-https://  lc.llnl.gov/lc.llnl.gov/lorenz/lora/lora.cgi/jsonp?callback=jQuery
-https://rzlc.llnl.gov/lorenz/lora/lora.cgi/jsonp?callback=
+Issues with Ale3d:
+    1) last layer doesn't appear -> non-issue because same thing happens on live for ALL other data sets.
+    2) why doesn't it break it apart by title "/g/g0/pascal/zdeb/ale3d_all" -> because there are only 4 different titles: /usr/gapps/spot/sand/spot.py getData ~/zdeb/ale3d_all '{}' | grep 'title'
 
-DONE - in /demos/   add a new directory files: timeseries.
-    * call it "mem" and put the cali files in there
-- fix timeseries - fix the environemnt.js
-- Make SURE that it still works on DEV, not just the container: for both walltime and memory page.
+    3) Pipe Gen - https://rzlc.llnl.gov/spot/dcvis/?sf=/usr/workspace/spotdev/martymcf/ale3d/perf/2021-01-13/performance_profiles/spot2&aggregate=sum&groupby=problem%20name&problem_name=pipe-gen
+            * the first pipe gen graph does not show up.
+            * perhaps this is because the values are all 0.
+- Caching is an issue -> everytime want to start clean, need to create a new dir and copy files.
 
-- Container: MultiJupyter on container -> if URL string too long from too many selections, causes hanging without error message
+Questions:
+Are the XTics in the
+
+
+DONE - 2) Move over changes -> the 2 Ale3D fixes
+DONE - Ale3D data set -> Marty Spot1 files: https://rzlc.llnl.gov/spot/dcvis/?sf=/usr/workspace/spotdev/martymcf/ale3d/spot1-files
+- why is it graphing 55 for all the values?  instead of all the different values
+    * subset datasets https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/?xaxis=launchdate&sf=/g/g0/pascal/tes4&groupby=dataSetKey&aggregate=sum
+    * https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/?sf=/g/g0/pascal/tes6
+    * https://rzlc.llnl.gov/spot/#/charts/%2Fusr%2Fworkspace%2Fspotdev%2Fmartymcf%2Fale3d%2Fspot1-files
+    * at the 4th layers something is still not right:
+    "generator/build ghost elem/exchange and finalize/breakdown ghost elements": {
+                    "yAxis": 0.0
+                },
+    *
+
+DONE - Redeploy RZ Dev with new BE clone ->
+DONE - Create subsets of the Ale3D dataset, with just 4 files in it.
+DONE - sort the checkboxes at the top of the page of the spot2 dashboard.
+    * although sorting is done, need to regression test and see if it didn't break anything
+    * because it was commented out, means that it was probably breaking something.
+DONE - EtcBucket limit to 200.
+
+
+
+https://rzlc.llnl.gov/spot/dcvis/?sf=/usr/workspace/spotdev/martymcf/ale3d/spot1-files&groupby=title&aggregate=sum
+/usr/gapps/spot/dev/spot.py getData /usr/gapps/spot/datasets/test_marty '{}' | more
+    * resolve 0 issues.
+/Users/aschwanden1/spot_my_changes.py
+
+- recheck everything out into new clone and then integrate spot_my_changes
+    * make sure we don't overwite existing changes.
+
+DONE - Container -> got walltime working
+DONE - Container -> got timeseries working -> had to implement ajax call in a way that worked for the container.
+DONE - fixed Environment issues - fix the environemnt.js
+DONE - /demos/mem - this does not work for some reason, need to find out why
+DONE - Container: MultiJupyter on container -> if URL string too long from too many selections, causes hanging without error message
+    * Lowered the limit on the number of characters, which should mitigate the issue.
+    * but not sure where the character limit in the docker server is coming from.
+
+
+- Need to reclone the whole repo and copy changes to it.
+
+
 
 - fix walltime for container that jsonP call need ot use the URL host
 
@@ -26,6 +72,17 @@ DONE - currently it's trying to use: lc.llnl.gov which is not right, it should u
 - consider moving to prod mode for Vue.
 - possibly look into websocket error
     * who knows if its important or not.
+
+Debuging the python command line:
+    from pprint import pprint
+    pprint(subpaths)
+
+        except:
+            error_me = sys.exc_info()
+            pprint(error_me)
+            print("Next entry.")
+            print()
+
 
 
 SPOTPW=see  docker run -e SPOTPW -v /Users/aschwanden1/datasets/:/data -p 8080:8080/tcp -p 8888:8888/tcp --name spot2_d32 spot2
