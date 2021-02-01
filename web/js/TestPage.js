@@ -30,10 +30,10 @@ var TEST = function() {
             "page": count,
             "localhost": show[0] === 0 ? "" : "http://localhost:8888/" + luly + machines[0],
             "cz_pascal": show[1] === 0 ? "" : "https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/" + luly + machines[1],
-            "cz_d2": show[1] === 0 ? "" : 'https://lc.llnl.gov/spot/dcvis/' + luly + machines[1],
-            "rz_d2": show[2] === 0 ? "" : 'https://rzlc.llnl.gov/spot/dcvis/' + luly + machines[2],
-            "cz_l2": show[3] === 0 ? "" : 'https://lc.llnl.gov/spot2/' + luly + machines[3],
-            "rz_l2": show[4] === 0 ? "" : 'https://rzlc.llnl.gov/spot2/' + luly + machines[4]
+            "cz_d2": show[2] === 0 ? "" : 'https://lc.llnl.gov/spot/dcvis/' + luly + machines[1],
+            "rz_d2": show[3] === 0 ? "" : 'https://rzlc.llnl.gov/spot/dcvis/' + luly + machines[2],
+            "cz_l2": show[4] === 0 ? "" : 'https://lc.llnl.gov/spot2/' + luly + machines[3],
+            "rz_l2": show[5] === 0 ? "" : 'https://rzlc.llnl.gov/spot2/' + luly + machines[4]
         });
     };
 
@@ -72,6 +72,9 @@ var TEST = function() {
             num = num.concat( rtests );
         }
 
+        var rz_only = [ 0,1,0,1,0,1 ];
+        var cz_only = [ 1,0,1,0,1,0 ];
+
         for (var x in num) {
 
             var count = num[x];
@@ -86,12 +89,12 @@ var TEST = function() {
                 luly = "?sf=" + count;
             }
 
-            var showing = typeof count === 'string' && count.indexOf('ale3d_regr') > -1  ? [ 0,1,1,0,1 ] : undefined;
+            var showing = typeof count === 'string' && count.indexOf('ale3d_regr') > -1  ? rz_only : undefined;
 
             add_test_( count, luly, showing );
         }
 
-        add_test_( "RZ Only Siboka/nathan", '?machine=rztopaz&command=/collab/usr/gapps/wf/spot/sina-spot-dev.py&sf=/usr/gapps/wf/siboka_team/sina/uqacam_FS.sqlite', [0,0,1,0,1]);
+        add_test_( "RZ Only Siboka/nathan", '?machine=rztopaz&command=/collab/usr/gapps/wf/spot/sina-spot-dev.py&sf=/usr/gapps/wf/siboka_team/sina/uqacam_FS.sqlite', rz_only);
 
 
         var machines = ["&machine=oslic", "&machine=oslic", "&machine=rzslic", "&machine=oslic", "&machine=rzslic"];
@@ -101,7 +104,7 @@ var TEST = function() {
             var count = num[x];
             var luly = '?sf=/g/g0/padebug/datasets/lulesh_gen/' + count;
 
-            add_test_( "padebug " + count, luly, [1,1,0,1], machines );
+            add_test_( "padebug " + count, luly, cz_only, machines );
         }
 
         Vue.component('link-rows', {
