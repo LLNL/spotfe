@@ -1,4 +1,29 @@
-- Deploy latest to CZ Dev: clone new repo there.
+check spot2_container and update the FE/BE branch to point to the latest.
+
+
+set a UMASK before we start.
+umask 0002
+that modifies in the current shell.
+
+
+When doing deploy: do CZ first.  Test.  Then do RZ.
+Need to remove old github, contact Matt if permission issues.
+do deploy at 1pm
+
+
+
+Clean up: Delete dot files: check github to see the dot files and delete them.
+.sasscache
+.idea
+
+
+
+Clean up the interface between spotBE and spotFE.
+
+
+
+
+DONE - Deploy latest to CZ Dev: clone new repo there.  Smoke Test.
 - Do full regression test for deploy.
 
 Issues with Ale3d:
@@ -10,8 +35,6 @@ Issues with Ale3d:
             * perhaps this is because the values are all 0.
 - Caching is an issue -> everytime want to start clean, need to create a new dir and copy files.
 
-Questions:
-Are the XTics in the
 
 
 DONE - 2) Move over changes -> the 2 Ale3D fixes
