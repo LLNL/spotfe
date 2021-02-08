@@ -273,7 +273,7 @@ ST.CallSpot = function() {
         var num_past_min_date = newp.length;
 
         if( num_total === 0 ) {
-            alert('I got 0 data objects.');
+            console.log('I got 0 data objects.');
             return true;
         }
 
