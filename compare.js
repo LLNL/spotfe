@@ -39203,14 +39203,14 @@ exports.default = vue_1.default.extend({
     window.removeEventListener('resize', this.handleResize);
   }
 });
-        var $7bde27 = exports.default || module.exports;
+        var $93b958 = exports.default || module.exports;
       
-      if (typeof $7bde27 === 'function') {
-        $7bde27 = $7bde27.options;
+      if (typeof $93b958 === 'function') {
+        $93b958 = $93b958.options;
       }
     
         /* template */
-        Object.assign($7bde27, (function () {
+        Object.assign($93b958, (function () {
           var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -39476,7 +39476,7 @@ render._withStripped = true
             render: render,
             staticRenderFns: staticRenderFns,
             _compiled: true,
-            _scopeId: "data-v-7bde27",
+            _scopeId: "data-v-93b958",
             functional: undefined
           };
         })());
@@ -39489,9 +39489,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$7bde27', $7bde27);
+            api.createRecord('$93b958', $93b958);
           } else {
-            api.reload('$7bde27', $7bde27);
+            api.reload('$93b958', $93b958);
           }
         }
 
@@ -39579,14 +39579,14 @@ var _default = {
   name: 'FlamegraphNode'
 };
 exports.default = _default;
-        var $67cf97 = exports.default || module.exports;
+        var $871017 = exports.default || module.exports;
       
-      if (typeof $67cf97 === 'function') {
-        $67cf97 = $67cf97.options;
+      if (typeof $871017 === 'function') {
+        $871017 = $871017.options;
       }
     
         /* template */
-        Object.assign($67cf97, (function () {
+        Object.assign($871017, (function () {
           var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -39703,7 +39703,7 @@ render._withStripped = true
             render: render,
             staticRenderFns: staticRenderFns,
             _compiled: true,
-            _scopeId: "data-v-67cf97",
+            _scopeId: "data-v-871017",
             functional: undefined
           };
         })());
@@ -39716,9 +39716,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$67cf97', $67cf97);
+            api.createRecord('$871017', $871017);
           } else {
-            api.reload('$67cf97', $67cf97);
+            api.reload('$871017', $871017);
           }
         }
 
@@ -39856,14 +39856,14 @@ var _default = {
   }
 };
 exports.default = _default;
-        var $ffc729 = exports.default || module.exports;
+        var $a7e2e7 = exports.default || module.exports;
       
-      if (typeof $ffc729 === 'function') {
-        $ffc729 = $ffc729.options;
+      if (typeof $a7e2e7 === 'function') {
+        $a7e2e7 = $a7e2e7.options;
       }
     
         /* template */
-        Object.assign($ffc729, (function () {
+        Object.assign($a7e2e7, (function () {
           var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -39967,9 +39967,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$ffc729', $ffc729);
+            api.createRecord('$a7e2e7', $a7e2e7);
           } else {
-            api.reload('$ffc729', $ffc729);
+            api.reload('$a7e2e7', $a7e2e7);
           }
         }
 
@@ -40252,14 +40252,14 @@ exports.default = vue_1.default.extend({
     FlameGraph: Flamegraph_vue_1.default
   }
 });
-        var $94da3e = exports.default || module.exports;
+        var $4385a8 = exports.default || module.exports;
       
-      if (typeof $94da3e === 'function') {
-        $94da3e = $94da3e.options;
+      if (typeof $4385a8 === 'function') {
+        $4385a8 = $4385a8.options;
       }
     
         /* template */
-        Object.assign($94da3e, (function () {
+        Object.assign($4385a8, (function () {
           var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -40669,7 +40669,7 @@ render._withStripped = true
             render: render,
             staticRenderFns: staticRenderFns,
             _compiled: true,
-            _scopeId: "data-v-94da3e",
+            _scopeId: "data-v-4385a8",
             functional: undefined
           };
         })());
@@ -40682,9 +40682,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$94da3e', $94da3e);
+            api.createRecord('$4385a8', $4385a8);
           } else {
-            api.reload('$94da3e', $94da3e);
+            api.reload('$4385a8', $4385a8);
           }
         }
 
@@ -51885,7 +51885,7 @@ var Graph = /*#__PURE__*/function () {
     key: "getData",
     value: function () {
       var _getData = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(host, command, dataSetKey) {
-        var cachedData, cachedRunCtimes, dataRequest, newData, response, deletedRuns, baseMetrics, metric, funcPaths, metricNames, runs, filenames, summary, visibleCharts, _i4, _Object$entries4, _Object$entries4$_i, filename, fileContents, _i5, _Object$entries5, _Object$entries5$_i, globalName, globalValue, globType, show;
+        var cachedData, cachedRunCtimes, x, dataRequest, newData, response, deletedRuns, baseMetrics, metric, funcPaths, metricNames, runs, filenames, summary, visibleCharts, _i4, _Object$entries4, _Object$entries4$_i, filename, fileContents, _i5, _Object$entries5, _Object$entries5$_i, globalName, globalValue, globType, show;
 
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
@@ -51911,18 +51911,23 @@ var Graph = /*#__PURE__*/function () {
 
               case 5:
                 cachedData = _context3.t0;
-                cachedRunCtimes = cachedData.runCtimes || {};
+                cachedRunCtimes = cachedData.runCtimes || {}; //  Round to prevent string from being too long.
+
+                for (x in cachedRunCtimes) {
+                  cachedRunCtimes[x] = parseInt(cachedRunCtimes[x]);
+                }
+
                 dataRequest = {
                   dataSetKey: dataSetKey,
                   cachedRunCtimes: cachedRunCtimes
                 }; // Get New  Data from backend
 
                 if (!isContainer) {
-                  _context3.next = 17;
+                  _context3.next = 18;
                   break;
                 }
 
-                _context3.next = 11;
+                _context3.next = 12;
                 return fetch("/getdata", {
                   method: "post",
                   headers: {
@@ -51931,31 +51936,32 @@ var Graph = /*#__PURE__*/function () {
                   body: JSON.stringify(dataRequest)
                 });
 
-              case 11:
+              case 12:
                 response = _context3.sent;
-                _context3.next = 14;
+                _context3.next = 15;
                 return response.json();
 
-              case 14:
+              case 15:
                 newData = _context3.sent;
-                _context3.next = 28;
+                _context3.next = 30;
                 break;
 
-              case 17:
-                _context3.prev = 17;
+              case 18:
+                _context3.prev = 18;
                 _context3.t1 = JSON;
-                _context3.next = 21;
+                _context3.next = 22;
                 return lorenz(host, "".concat(command, " ").concat(dataSetKey, " '") + JSON.stringify(cachedRunCtimes) + "'");
 
-              case 21:
+              case 22:
                 _context3.t2 = _context3.sent;
                 newData = _context3.t1.parse.call(_context3.t1, _context3.t2);
-                _context3.next = 28;
+                _context3.next = 30;
                 break;
 
-              case 25:
-                _context3.prev = 25;
-                _context3.t3 = _context3["catch"](17);
+              case 26:
+                _context3.prev = 26;
+                _context3.t3 = _context3["catch"](18);
+                console.dir(_context3.t3);
                 newData = {
                   Runs: {},
                   RunDataMeta: {},
@@ -51963,7 +51969,7 @@ var Graph = /*#__PURE__*/function () {
                   RunSetMeta: {}
                 };
 
-              case 28:
+              case 30:
                 console.dir(newData); // Merge new data with cached
 
                 cachedData.Runs = Object.assign(cachedData.Runs, newData.Runs);
@@ -51977,10 +51983,10 @@ var Graph = /*#__PURE__*/function () {
                   return delete cachedData.Runs[deletedRun];
                 }); // cache newest version of data
 
-                _context3.next = 38;
+                _context3.next = 40;
                 return _localforage.default.setItem(dataSetKey, cachedData);
 
-              case 38:
+              case 40:
                 // add in datsetkey and datakey to globals
                 _lodash.default.forEach(cachedData.Runs, function (run, filename) {
                   run.Globals.dataSetKey = dataSetKey;
@@ -52063,20 +52069,20 @@ var Graph = /*#__PURE__*/function () {
                     table: []
                   }
                 };
-                _context3.next = 55;
+                _context3.next = 57;
                 return _localforage.default.getItem("show:" + dataSetKey);
 
-              case 55:
+              case 57:
                 _context3.t4 = _context3.sent;
 
                 if (_context3.t4) {
-                  _context3.next = 58;
+                  _context3.next = 60;
                   break;
                 }
 
                 _context3.t4 = defaultVisibleCharts;
 
-              case 58:
+              case 60:
                 visibleCharts = _context3.t4;
 
                 for (_i4 = 0, _Object$entries4 = Object.entries(cachedData.Runs); _i4 < _Object$entries4.length; _i4++) {
@@ -52105,29 +52111,29 @@ var Graph = /*#__PURE__*/function () {
                   });
                 }
 
-                _context3.next = 63;
+                _context3.next = 65;
                 return _localforage.default.getItem('scatterplots:' + this.dataSetKey);
 
-              case 63:
+              case 65:
                 _context3.t5 = _context3.sent;
 
                 if (_context3.t5) {
-                  _context3.next = 66;
+                  _context3.next = 68;
                   break;
                 }
 
                 _context3.t5 = [];
 
-              case 66:
+              case 68:
                 summary.layout.scatterplots = _context3.t5;
                 return _context3.abrupt("return", summary);
 
-              case 68:
+              case 70:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, this, [[17, 25]]);
+        }, _callee3, this, [[18, 26]]);
       }));
 
       function getData(_x10, _x11, _x12) {
@@ -52313,7 +52319,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59856" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52154" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
