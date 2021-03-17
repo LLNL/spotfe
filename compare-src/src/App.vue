@@ -228,25 +228,52 @@ export default Vue.extend({
             return [''].concat(this.xAxisList)
         },
         yAxisList(){
+
+            //  These are stubs meant to be replaced with the aliases we get back from the BE.
+             var aliasReplacements = {
+                "avg#inclusive#sum#time.duration" : "Duration Alias",
+                 "sum#inclusive#sum#time.duration" : "Sum Alias",
+                "min#inclusive#sum#time.duration" : "Min Alias"
+            };
+
+            window.aliasReplacements = aliasReplacements;
+
             const firstRun = this.runs[0] || {data:{}}
-            const metrics = Object.keys(Object.values(firstRun.data)[0] || {})
+            var metrics = Object.keys(Object.values(firstRun.data)[0] || {})
 
             for( var y=0; y < metrics.length; y++ ) {
 
-                if( metrics[y] === "spot.channel" ) {
+                var loopMetric = metrics[y];
+
+                if( loopMetric === "spot.channel" ) {
                     metrics.splice(y,1);
+                }
+
+                loopMetric = metrics[y];
+
+                for( var candidate in aliasReplacements ) {
+
+                    if( loopMetric === candidate ) {
+
+                        var replacement = aliasReplacements[candidate];
+                        metrics[y] = replacement;
+                    }
                 }
             }
 
-            return metrics
+            console.dir( metrics );
+            return metrics;
         },
         selectedRun(){
             return this.hoverX ? this.groupedAndAggregated[this.hoverX.groupName][this.hoverX.runIndex] : null
         },
         groupedAndAggregated(){
+
+            var yAxisLookup = this.lookupOriginalYAxis();
+
             let peeledMetricData = _.map(this.runs, run => {
                 const meta = _.fromPairs(_.map(run.meta, (meta, metaName) => [metaName, meta.value]))
-                const data = _.fromPairs(_.map(run.data, (metrics, funcPath) => [funcPath, {value: parseFloat(metrics[this.yAxis])}] ))
+                const data = _.fromPairs(_.map(run.data, (metrics, funcPath) => [funcPath, {value: parseFloat(metrics[yAxisLookup])}] ))
                 return {meta, data}
             }) 
             const orderedData = _.orderBy(peeledMetricData, item => {
@@ -318,20 +345,29 @@ export default Vue.extend({
     },  // end computed
 
     methods:{
-        correctYAxisSelect() {
+        //  Returns the original yAxis that looks like this "max#inclusive#duration.time"
+        //  the data was originally sent to the FE with those as indexes.
+        lookupOriginalYAxis() {
 
-            var yaxis = ST.Utility.get_param("yaxis");
-            yaxis = decodeURIComponent(yaxis);
+            var yax = this.yAxis;
 
-            if( $('#yAxis-select').val() !== yaxis ) {
+            for( var encoded in window.aliasReplacements ) {
 
-                console.log('Compare: setting yaxis to ' + yaxis);
-                this.yAxis = yaxis
+                var alias = window.aliasReplacements[ encoded ];
+                if( alias === this.yAxis ) {
+                    yax = encoded;
+                }
             }
+
+            return yax;
         },
         yAxisSelected(selectedYAxis){
+
             this.yAxis = selectedYAxis
-            if(this.yAxisListener) this.yAxisListener(selectedYAxis)
+
+            if(this.yAxisListener) {
+                this.yAxisListener(selectedYAxis);
+            }
         },
         changePath(path){
         this.selectedParent = path
