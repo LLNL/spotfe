@@ -200,7 +200,8 @@ export default Vue.extend({
                 }
 
             }
-            this.yAxis = getInitialYValue(this.runs)
+            var yax = getInitialYValue(this.runs)
+            this.yAxis = yax; //this.lookupOriginalYAxis( yax );
             console.log("this.yaxis : " + this.yAxis)
 
         },
@@ -269,7 +270,7 @@ export default Vue.extend({
         },
         groupedAndAggregated(){
 
-            var yAxisLookup = this.lookupOriginalYAxis();
+            var yAxisLookup = this.lookupOriginalYAxis( this.yAxis );
 
             let peeledMetricData = _.map(this.runs, run => {
                 const meta = _.fromPairs(_.map(run.meta, (meta, metaName) => [metaName, meta.value]))
@@ -347,14 +348,14 @@ export default Vue.extend({
     methods:{
         //  Returns the original yAxis that looks like this "max#inclusive#duration.time"
         //  the data was originally sent to the FE with those as indexes.
-        lookupOriginalYAxis() {
+        lookupOriginalYAxis( yAxis ) {
 
-            var yax = this.yAxis;
+            var yax = yAxis;
 
             for( var encoded in window.aliasReplacements ) {
 
                 var alias = window.aliasReplacements[ encoded ];
-                if( alias === this.yAxis ) {
+                if( alias === yAxis ) {
                     yax = encoded;
                 }
             }
