@@ -124,10 +124,16 @@ export class Graph{
         const cachedData = await localforage.getItem(dataSetKey) || {Runs: {}, RunDataMeta: {}, RunGlobalMeta: {}, RunSetMeta: {}}
 
         const cachedRunCtimes = cachedData.runCtimes || {}
+        var bust_cache = ST.Utility.get_param("cache") === "0";
 
         //  Round to prevent string from being too long.
         for( var x in cachedRunCtimes ) {
             cachedRunCtimes[x] = parseInt(cachedRunCtimes[x]);
+
+            if( bust_cache ) {
+                //  this should be low enough to prevent caching
+                cachedRunCtimes[x] = -1;
+            }
         }
 
         const dataRequest = {dataSetKey, cachedRunCtimes}
@@ -153,6 +159,8 @@ export class Graph{
                 newData = JSON.parse(await lorenz(host, `${command} ${dataSetKey} '` + JSON.stringify(cachedRunCtimes) + "'" ))
 
             }catch (e){
+                console.log('Exception:');
+                console.dir(e);
                 newData = {Runs: {}, RunDataMeta: {}, RunGlobalMeta: {}, RunSetMeta: {}}
             }
         }
