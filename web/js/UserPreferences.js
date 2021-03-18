@@ -37,8 +37,6 @@ ST.UserPreferences = function() {
             return 0;
         });*/
 
-        console.dir( ST.layout_used.charts );
-
         if( $('.user_pref_icon').length > 0 ) {
             //  Means it's already rendered and thus should auto update.
             return true;
@@ -114,7 +112,7 @@ ST.UserPreferences = function() {
 
     var get_dimensions_ = function( allowed_types ) {
 
-        var axis_selection_types = ["double", "long", "int", "date", "path", "string", "set of string", "set of path"];
+        var axis_selection_types = ["double", "long", "int", "date", "path", "string", "set of string", "set of path", "unsigned int"];
         axis_selection_types = allowed_types || axis_selection_types;
 
         var charts = ST.layout_used.charts;
