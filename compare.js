@@ -40060,8 +40060,8 @@ exports.default = vue_1.default.extend({
         }
       }
 
-      this.yAxis = getInitialYValue(this.runs);
-      console.log("this.yaxis : " + this.yAxis);
+      var yax = getInitialYValue(this.runs);
+      this.yAxis = yax; //this.lookupOriginalYAxis( yax );
     }
   },
   computed: {
@@ -40093,17 +40093,53 @@ exports.default = vue_1.default.extend({
       return [''].concat(this.xAxisList);
     },
     yAxisList: function yAxisList() {
+      //  These are stubs meant to be replaced with the aliases we get back from the BE.
+      var stub = {
+        "avg#inclusive#sum#time.duration": "Duration Alias",
+        "sum#inclusive#sum#time.duration": "Sum Alias",
+        "min#inclusive#sum#time.duration": "Min Alias"
+      };
+
+      if (window.cachedData) {
+        var aliasReplacements = {};
+        var rdm = window.cachedData.RunDataMeta;
+
+        for (var encoded in rdm) {
+          if (rdm[encoded].alias) {
+            var alias = rdm[encoded].alias;
+            aliasReplacements[encoded] = alias;
+          }
+        }
+
+        console.log("Alias Replacements: ");
+        console.dir(aliasReplacements);
+      }
+
+      window.aliasReplacements = aliasReplacements;
       var firstRun = this.runs[0] || {
         data: {}
       };
       var metrics = Object.keys(Object.values(firstRun.data)[0] || {});
+      console.dir(firstRun);
 
       for (var y = 0; y < metrics.length; y++) {
-        if (metrics[y] === "spot.channel") {
+        var loopMetric = metrics[y];
+
+        if (loopMetric === "spot.channel") {
           metrics.splice(y, 1);
+        }
+
+        loopMetric = metrics[y];
+
+        for (var candidate in aliasReplacements) {
+          if (loopMetric === candidate) {
+            var replacement = aliasReplacements[candidate];
+            metrics[y] = replacement;
+          }
         }
       }
 
+      console.dir(metrics);
       return metrics;
     },
     selectedRun: function selectedRun() {
@@ -40112,13 +40148,14 @@ exports.default = vue_1.default.extend({
     groupedAndAggregated: function groupedAndAggregated() {
       var _this = this;
 
+      var yAxisLookup = this.lookupOriginalYAxis(this.yAxis);
       var peeledMetricData = lodash_1.default.map(this.runs, function (run) {
         var meta = lodash_1.default.fromPairs(lodash_1.default.map(run.meta, function (meta, metaName) {
           return [metaName, meta.value];
         }));
         var data = lodash_1.default.fromPairs(lodash_1.default.map(run.data, function (metrics, funcPath) {
           return [funcPath, {
-            value: parseFloat(metrics[_this.yAxis])
+            value: parseFloat(metrics[yAxisLookup])
           }];
         }));
         return {
@@ -40207,18 +40244,27 @@ exports.default = vue_1.default.extend({
     }
   },
   methods: {
-    correctYAxisSelect: function correctYAxisSelect() {
-      var yaxis = ST.Utility.get_param("yaxis");
-      yaxis = decodeURIComponent(yaxis);
+    //  Returns the original yAxis that looks like this "max#inclusive#duration.time"
+    //  the data was originally sent to the FE with those as indexes.
+    lookupOriginalYAxis: function lookupOriginalYAxis(yAxis) {
+      var yax = yAxis;
 
-      if ($('#yAxis-select').val() !== yaxis) {
-        console.log('Compare: setting yaxis to ' + yaxis);
-        this.yAxis = yaxis;
+      for (var encoded in window.aliasReplacements) {
+        var alias = window.aliasReplacements[encoded];
+
+        if (alias === yAxis) {
+          yax = encoded;
+        }
       }
+
+      return yax;
     },
     yAxisSelected: function yAxisSelected(selectedYAxis) {
       this.yAxis = selectedYAxis;
-      if (this.yAxisListener) this.yAxisListener(selectedYAxis);
+
+      if (this.yAxisListener) {
+        this.yAxisListener(selectedYAxis);
+      }
     },
     changePath: function changePath(path) {
       this.selectedParent = path;
@@ -51885,7 +51931,7 @@ var Graph = /*#__PURE__*/function () {
     key: "getData",
     value: function () {
       var _getData = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(host, command, dataSetKey) {
-        var cachedData, cachedRunCtimes, x, dataRequest, newData, response, deletedRuns, baseMetrics, metric, funcPaths, metricNames, runs, filenames, summary, visibleCharts, _i4, _Object$entries4, _Object$entries4$_i, filename, fileContents, _i5, _Object$entries5, _Object$entries5$_i, globalName, globalValue, globType, show;
+        var cachedData, cachedRunCtimes, bust_cache, x, dataRequest, newData, response, deletedRuns, baseMetrics, metric, funcPaths, metricNames, runs, filenames, summary, visibleCharts, _i4, _Object$entries4, _Object$entries4$_i, filename, fileContents, _i5, _Object$entries5, _Object$entries5$_i, globalName, globalValue, globType, show;
 
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
@@ -51911,10 +51957,16 @@ var Graph = /*#__PURE__*/function () {
 
               case 5:
                 cachedData = _context3.t0;
-                cachedRunCtimes = cachedData.runCtimes || {}; //  Round to prevent string from being too long.
+                cachedRunCtimes = cachedData.runCtimes || {};
+                bust_cache = ST.Utility.get_param("cache") === "0"; //  Round to prevent string from being too long.
 
                 for (x in cachedRunCtimes) {
                   cachedRunCtimes[x] = parseInt(cachedRunCtimes[x]);
+
+                  if (bust_cache) {
+                    //  this should be low enough to prevent caching
+                    cachedRunCtimes[x] = -1;
+                  }
                 }
 
                 dataRequest = {
@@ -51923,11 +51975,11 @@ var Graph = /*#__PURE__*/function () {
                 }; // Get New  Data from backend
 
                 if (!isContainer) {
-                  _context3.next = 18;
+                  _context3.next = 19;
                   break;
                 }
 
-                _context3.next = 12;
+                _context3.next = 13;
                 return fetch("/getdata", {
                   method: "post",
                   headers: {
@@ -51936,31 +51988,32 @@ var Graph = /*#__PURE__*/function () {
                   body: JSON.stringify(dataRequest)
                 });
 
-              case 12:
+              case 13:
                 response = _context3.sent;
-                _context3.next = 15;
+                _context3.next = 16;
                 return response.json();
 
-              case 15:
+              case 16:
                 newData = _context3.sent;
-                _context3.next = 30;
+                _context3.next = 32;
                 break;
 
-              case 18:
-                _context3.prev = 18;
+              case 19:
+                _context3.prev = 19;
                 _context3.t1 = JSON;
-                _context3.next = 22;
+                _context3.next = 23;
                 return lorenz(host, "".concat(command, " ").concat(dataSetKey, " '") + JSON.stringify(cachedRunCtimes) + "'");
 
-              case 22:
+              case 23:
                 _context3.t2 = _context3.sent;
                 newData = _context3.t1.parse.call(_context3.t1, _context3.t2);
-                _context3.next = 30;
+                _context3.next = 32;
                 break;
 
-              case 26:
-                _context3.prev = 26;
-                _context3.t3 = _context3["catch"](18);
+              case 27:
+                _context3.prev = 27;
+                _context3.t3 = _context3["catch"](19);
+                console.log('Exception:');
                 console.dir(_context3.t3);
                 newData = {
                   Runs: {},
@@ -51969,7 +52022,7 @@ var Graph = /*#__PURE__*/function () {
                   RunSetMeta: {}
                 };
 
-              case 30:
+              case 32:
                 console.dir(newData); // Merge new data with cached
 
                 cachedData.Runs = Object.assign(cachedData.Runs, newData.Runs);
@@ -51981,12 +52034,13 @@ var Graph = /*#__PURE__*/function () {
                 deletedRuns = newData.deletedRuns || [];
                 deletedRuns.forEach(function (deletedRun) {
                   return delete cachedData.Runs[deletedRun];
-                }); // cache newest version of data
+                });
+                window.cachedData = cachedData; // cache newest version of data
 
-                _context3.next = 40;
+                _context3.next = 43;
                 return _localforage.default.setItem(dataSetKey, cachedData);
 
-              case 40:
+              case 43:
                 // add in datsetkey and datakey to globals
                 _lodash.default.forEach(cachedData.Runs, function (run, filename) {
                   run.Globals.dataSetKey = dataSetKey;
@@ -52069,20 +52123,20 @@ var Graph = /*#__PURE__*/function () {
                     table: []
                   }
                 };
-                _context3.next = 57;
+                _context3.next = 60;
                 return _localforage.default.getItem("show:" + dataSetKey);
 
-              case 57:
+              case 60:
                 _context3.t4 = _context3.sent;
 
                 if (_context3.t4) {
-                  _context3.next = 60;
+                  _context3.next = 63;
                   break;
                 }
 
                 _context3.t4 = defaultVisibleCharts;
 
-              case 60:
+              case 63:
                 visibleCharts = _context3.t4;
 
                 for (_i4 = 0, _Object$entries4 = Object.entries(cachedData.Runs); _i4 < _Object$entries4.length; _i4++) {
@@ -52111,29 +52165,29 @@ var Graph = /*#__PURE__*/function () {
                   });
                 }
 
-                _context3.next = 65;
+                _context3.next = 68;
                 return _localforage.default.getItem('scatterplots:' + this.dataSetKey);
 
-              case 65:
+              case 68:
                 _context3.t5 = _context3.sent;
 
                 if (_context3.t5) {
-                  _context3.next = 68;
+                  _context3.next = 71;
                   break;
                 }
 
                 _context3.t5 = [];
 
-              case 68:
+              case 71:
                 summary.layout.scatterplots = _context3.t5;
                 return _context3.abrupt("return", summary);
 
-              case 70:
+              case 73:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, this, [[18, 26]]);
+        }, _callee3, this, [[19, 27]]);
       }));
 
       function getData(_x10, _x11, _x12) {
@@ -52271,7 +52325,6 @@ var Graph = /*#__PURE__*/function () {
   }, {
     key: "setYAxis",
     value: function setYAxis(yAxisName) {
-      console.log("yAxisName: " + yAxisName);
       this.app.yAxis = yAxisName;
     }
   }, {
@@ -52319,7 +52372,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52154" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53655" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
