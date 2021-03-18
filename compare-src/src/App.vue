@@ -202,8 +202,6 @@ export default Vue.extend({
             }
             var yax = getInitialYValue(this.runs)
             this.yAxis = yax; //this.lookupOriginalYAxis( yax );
-            console.log("this.yaxis : " + this.yAxis)
-
         },
     },
     computed: {
@@ -231,16 +229,35 @@ export default Vue.extend({
         yAxisList(){
 
             //  These are stubs meant to be replaced with the aliases we get back from the BE.
-             var aliasReplacements = {
+             var stub = {
                 "avg#inclusive#sum#time.duration" : "Duration Alias",
                  "sum#inclusive#sum#time.duration" : "Sum Alias",
                 "min#inclusive#sum#time.duration" : "Min Alias"
             };
 
+            if( window.cachedData ) {
+
+                var aliasReplacements = {};
+                var rdm = window.cachedData.RunDataMeta;
+
+                for( var encoded in rdm ) {
+
+                    if( rdm[encoded].alias ) {
+                        var alias = rdm[encoded].alias;
+                        aliasReplacements[encoded] = alias;
+                    }
+                }
+
+                console.log( "Alias Replacements: ");
+                console.dir( aliasReplacements );
+            }
+
             window.aliasReplacements = aliasReplacements;
 
             const firstRun = this.runs[0] || {data:{}}
             var metrics = Object.keys(Object.values(firstRun.data)[0] || {})
+
+            console.dir(firstRun);
 
             for( var y=0; y < metrics.length; y++ ) {
 

@@ -178,6 +178,8 @@ export class Graph{
         const deletedRuns = newData.deletedRuns || []
         deletedRuns.forEach(deletedRun => delete cachedData.Runs[deletedRun])
 
+        window.cachedData = cachedData;
+
         // cache newest version of data
         await localforage.setItem(dataSetKey, cachedData)
 
@@ -317,7 +319,6 @@ export class Graph{
     }
 
     setYAxis(yAxisName){
-        console.log("yAxisName: " + yAxisName);
         this.app.yAxis = yAxisName
     }
 

@@ -37,8 +37,6 @@ ST.UserPreferences = function() {
             return 0;
         });*/
 
-        console.dir( ST.layout_used.charts );
-
         if( $('.user_pref_icon').length > 0 ) {
             //  Means it's already rendered and thus should auto update.
             return true;

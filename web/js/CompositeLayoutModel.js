@@ -94,7 +94,6 @@ ST.CompositeLayoutModel = function() {
             if( js_type === "string") {
                 return "PieChart";
             }
-            console.log( js_type );
         }
 
         return def;
@@ -122,7 +121,6 @@ ST.CompositeLayoutModel = function() {
             if( js_type === "string") {
                 return "string";
             }
-            console.log( js_type );
         }
 
         return "int";
@@ -157,15 +155,11 @@ ST.CompositeLayoutModel = function() {
                 ST.cali_obj_by_key[ run_key ][ meta_att] = val;
             }
         }
-
-        console.dir( ST.cali_obj_by_key );
     };
 
 
     //  sqs.layout_used.charts[22].title
     var augment_first_run_to_include_composite_charts_ = function( runs ) {
-
-        console.dir( runs );
 
         update_cali_obj_with_CS_compatible_( runs );
         update_composite_();

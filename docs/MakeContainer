@@ -1,8 +1,12 @@
 DONE - added cache busting parameter.
+DONE - Fixed the "jobsize" issue.
+- BUG: Blue Bar with the 1 in it.
 
 Start a new branch for this:
     - Do the yAxis dropdown and try to use the alias.
     - need to prevent vue from making the select empty!
+    - FE and BE done, now need to connect the two together, and change data format to match.
+    - line 231 -> yAxisList -> is where it gets used.
 
 
 Update Dev with Marty's code:
@@ -573,7 +577,7 @@ total 6624
 43M	a0
 
 
-XN1
+XN1 ~ about 8 files
 (base) [pascal@rzslic6:~]$ python -m cProfile /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/xn1 '{}' --poolCount 20 | grep 'function calls'
          551782 function calls (548384 primitive calls) in 9.967 seconds
 (base) [pascal@rzslic6:~]$ python -m cProfile /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/xn1 '{}' --poolCount 5 | grep 'function calls'
@@ -581,7 +585,7 @@ XN1
 (base) [pascal@rzslic6:~]$ python -m cProfile /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/xn1 '{}' --poolCount 2 | grep 'function calls'
          550551 function calls (547171 primitive calls) in 18.336 seconds
 
-Sedov
+Sedov about 7 or 8 files or so.
 (base) [pascal@rzslic6:~]$ python -m cProfile /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/sedov '{}' --poolCount 2 | grep 'function calls'
          672036 function calls (668656 primitive calls) in 23.431 seconds
 (base) [pascal@rzslic6:~]$ python -m cProfile /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/sedov '{}' --poolCount 20 | grep 'function calls'
@@ -589,7 +593,7 @@ Sedov
 (base) [pascal@rzslic6:~]$ python -m cProfile /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/sedov '{}' --poolCount 40 | grep 'function calls'
          675390 function calls (671972 primitive calls) in 17.379 seconds
 
-A0:
+A0: this is all the files.
 (base) [pascal@rzslic6:~]$ python -m cProfile /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/a0 '{}' --poolCount 2 | grep 'function calls'
          3648091 function calls (3644711 primitive calls) in 318.389 seconds
 (base) [pascal@rzslic6:~]$ python -m cProfile /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/a0 '{}' --poolCount 20 | grep 'function calls'
