@@ -1,3 +1,188 @@
+DONE - added cache busting parameter.
+DONE - Fixed the "jobsize" issue.
+
+Start a new branch for this:
+    - Do the yAxis dropdown and try to use the alias.
+    - need to prevent vue from making the select empty!
+    - FE and BE done, now need to connect the two together, and change data format to match.
+    - line 231 -> yAxisList -> is where it gets used.
+
+- BUG: Blue Bar with the 1 in it.
+
+
+Update Dev with Marty's code:
+
+1) was able to use the Pools to make a function call.
+1.5) Creted a smaller dataset to work with, for easier debugging, since i'm reworking  a lot of stuff on Be.
+2) wrote an algorithm to break up the workload into X arrays to be sent to each pool process
+3) now, reworking the algorithm which sends the YAxis data because currently it's just sending 1 run, but we want all 50 or all 300 runs.
+    * in that process, to get the maximum space savings, i am restructuring how the data gets sent to FE. (only showing function path one time per 300/Y runs)
+Ale3d:
+DONE * need to make it JSON again, and compare size difference with not JSON.  this way FE won't have to turn it into JSON.  let's make it look like what the FE was using before.
+* make sure runs_subsets is being split up correctly
+    - let's create smaller data files that will make it easier to debug.
+* Line 153 -> still need to combine the pools and return total, not just pool_res[1]
+    - do this after we fix the performance problems.
+* create a test to make sure it's correct. pool timing don't make sense.
+
+- parallelize multiple files using the technique in spot.py
+    * table string is currently at the end, after all subprocessing has completed.
+    * there needs to be a table string for each subprocess
+    * make_table_str needs to be inside the subprocess.
+    try:
+        cali_json = multiprocessing.Pool(18).map( _cali_to_json, _prependDir(filepath, subpaths))
+    except:
+    python -m cProfile /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/tow2 '{}' | more
+
+- verify size difference.
+- Try Marty's Ale3D - entire set and see what the reduction would be.
+    * keeping each one separate.
+- str replace -> make sure that it replaces the entire contents between the slashes, not just a sub part of it.
+- Add JSON wrapper, so it looks just like it looked before.
+
+
+1. Figure out the ratio of Performance (compare.js) vs Meta Data (crossfilter)
+    * let's write a script to actually calculate the difference.
+    * ~/zdeb/globals_vs_meta (tow2) / ~/zdeb/globals_vs_meta2 ( all in sub0)
+2. Turn it into a table with strings on BE and then print out as a string and not rely on json.dumps.
+    watch /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/tow2 '{}'
+    /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/tow2 '{}' >> ~/zdeb/compressed
+    * the new method takes 12 sec.
+    * old: 0.53 sec, before we did
+
+Now with Multi porcessing: (depending on number of pools)
+    * 8 xno files takes 12 seconds, 18, 9 sec
+    * tow2 takes 3 sec, 4.6 sec 262 dictionary values, 372 data values
+    * xn1 takes 11 sec (TTFB), dictionary = 239, data values = 377
+    * xn1 with 18 sub, 38 pools, takes 8.8 sec, xn1 48/48  takes 16 seconds, 28/28 takes 11 sec
+    * a0: 95 seconds (58 splits, 58 pools), 93 sec (18 splits, 18 pools)
+
+With JSON vs without:
+-rw------- 1 pascal pascal   18233 Mar  8 16:32 /g/g0/pascal/zdeb/not_json
+-rw------- 1 pascal pascal   20045 Mar  8 18:05 /g/g0/pascal/zdeb/with_json
+
+
+(base) [pascal@rzslic7:zdeb]$ du -skh xn1
+5.3M	xn1
+(base) [pascal@rzslic7:zdeb]$ du -skh sedov
+6.5M	sedov
+(base) [pascal@rzslic7:zdeb]$ du -skh a0
+43M	a0
+
+
+https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/?sf=/g/g0/pascal/zdeb/tow2
+- Fix a bug, it can be both: json or cali.
+    * python, find a way to combine two lists, deep recursive.
+
+Find out why there's an exception when we use json.dumps: index.js Line 156
+    * aschwanden1@doc (master *) ~/install/spot2_github/spotfe/compare-src: npm run watch
+1) json.dumps OR other libraries.
+    * json.dumps is almost x4 times faster!
+    * Other libraries areonly a little faster.
+    https://brett.is/writing/about/fastest-python-json-library/
+DONE 2) Fix bug:
+if newRuns:
+    * don't overwrite
+2) explore caching.
+
+
+DONE - need to join "LLNL computing" on mattermost => then email Matt Legendre.
+- figure out how spot1 does it so fast?
+    * https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/?sf=/g/g0/pascal/zdeb/xn  31/57 files
+    * https://rzlc.llnl.gov/spot/#/charts/%2Fusr%2Fworkspace%2Fspotdev%2Fmartymcf%2Fale3d%2Fale3dtest%2Fall%2Fperformance_profiles
+    * Two Reasons:
+        1) Spot1 can start rendering before all the data has been transferred, because it asks for each file individually.  so, after just 2% of the data is transferred it can already start rendering
+            whereas spot2 needs to wait until all data has been transfered.
+        2) Another Big reason: simply requesting a JSON file is much easier for the web server to load, rather than opening up a request and doing a bunch of data operations and transmitting all that data through a process.
+
+- why no caching on the front end for spot2?
+    * seems like FE augments results from last requests with the newest request and just asks for a smaller set of data.
+    * for our JSON implementation it returns the whole data set regardless whereas for the other requests, it returns a smaller subset of data to augment the existing data.
+
+SOLUTION:
+- ChartCollection.js Line: 477
+    * Just do an FE cache in localStorage for every file.
+    * if something already exists then render it: ST.CallSpot.handle_success2(cached_summary);
+    * otherwise make the BE call.
+    * Need some way for user to force a refresh.
+    * Or just fetch a new call in the background every 15 minutes.
+
+Solution 2:
+    * Request JSON files without doing any kind of processing.
+    * this is fairly significant:
+    * need to collect a list of files from BE.
+    * then make individual requests for each of those files.
+    * then collect all the requests on the FE and synchronize their returns
+    * then need to process them in a way that's equivalent to what the current spot.py is doing
+    * then feed them into the existing FE summary handling code.
+
+
+Another thing I’ve been investigating:
+why is there no caching for the ale3d json data.
+The way our caching works: It seems like FE augments results from last requests with the newest request and just asks for a smaller set of data.  At least, for our JSON implementation, it returns the whole data set regardless whereas for caching to work it should return a smaller subset of data to augment the existing data.
+
+- when doing the npm build, need to make sure we get the debug mapping in there so we can debug our own app in vue.
+    * by default, you can't debug compiled code.
+
+* Matt thinks that removing < 0.3 values is not a good solution.
+
+    2. BE/FE api clean up issues.
+    3. sorting horiz bar charts (needs more discussion)
+    4. error reporting / no-directory warning message
+    5. column sorting - column major
+
+
+
+
+
+- fixed alert box issue.
+- need to investigate git issues
+    * commit my FE change hotfix, 1 line console.log from alert.
+
+    1. performance issues
+    xn* takes about 8 seconds, if which 1 second is roughly getAllJsonRuns
+    but, most of it is json.dump!!
+    It's dumping about 1.2 million lines of code and needs to send that to FE.
+    but why should that take 8 seconds?
+    Potential Fix:
+        * Write that JSON to a file, with a date extension.  then have the FE include it as a script from the FE.
+        * Delete all the 0 entries?  and see if that will reduce the amount of data and fix the issue.
+        * reducing the number of values output to 0.3 or greater for all xn0 entries, seems to reduce exec time from 8 sec to 1.1 sec!
+        * the entire data set can be sent in 13 seconds, instead of 60 seconds + using this strategy.
+        * 0.3 or greater => 13 sec, 0.5 or greater => 11 sec.
+
+0. solve the issue where it gives a 504 gateway timeout:
+This link produces “I got 0 data objects” after about a minute: https://rzlc.llnl.gov/spot/dcvis/?sf=/usr/workspace/spotdev/martymcf/ale3d/ale3dtest/all/performance_profiles
+This spot1 link works: https://rzlc.llnl.gov/spot/#/charts/%2Fusr%2Fworkspace%2Fspotdev%2Fmartymcf%2Fale3d%2Fale3dtest%2Fall%2Fperformance_profiles
+
+Profile it like this:
+rm ~/zdeb/perf/xn; python -m cProfile /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/xn '{}' >> ~/zdeb/perf/xn
+cat ~/zdeb/perf/xn | grep -v 'problem' | grep -v 'generator' | awk '$4 > 0.1'
+
+getAllJsonRuns is only 7 out of 53 seconds.
+encoder.py:413(_iterencode)  33 sec
+
+
+https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/?sf=/g/g0/pascal/zdeb/xn1
+Profiling: from FE: just TTFB
+all xno -> 8 files
+with S => 3.54 seco, 3.69s, 3.15s
+without S => 9.33, 43s, 11s
+
+a0 -> the entire data set of Ale3d.
+with S = 23s, 18s, 24s, 18s, 23s
+without S => timeout. (60s+).
+
+
+1. Solve sorting issue - marty
+2. Clean up work for the api, data that's returned, communicate with david for this.
+
+
+
+- commit the 2 changes:
+    * steph's fix to the spot.py
+    * the push+script changes.
+
 check spot2_container and update the FE/BE branch to point to the latest.
 
 
@@ -202,3 +387,238 @@ There’s a memory call which returns all the info needed for the front end, (th
 
 /usr/gapps/spot/venv_python/bin/python3 /usr/gapps/spot/dev/spot.py memory lul_sept_28_timeseries/200924-16410956192.cali
 
+
+
+Parcel not found:
+Answer:
+This means you need to run:
+From here: ~/install/spot2_github/spotfe/compare-src
+npm install
+
+
+Average run time over 500 executions repeated 4 times
+--------------------
+Library: ujson
+Version: 1.33
+ujson.dumps(data): 1.97361302376 (total) 0.000986806511879 (per call)
+ujson.loads(data): 2.05873394012 (total) 0.00102936697006 (per call)
+--------------------
+Library: simplejson
+Version: 3.3.0
+simplejson.dumps(data): 3.24183320999 (total) 0.001620916605 (per call)
+simplejson.loads(data): 2.20791387558 (total) 0.00110395693779 (per call)
+--------------------
+Library: jsonlib2
+Version: (1, 3, 10)
+jsonlib2.dumps(data): 2.211810112 (total) 0.001105905056 (per call)
+jsonlib2.loads(data): 2.55381131172 (total) 0.00127690565586 (per call)
+--------------------
+Library: json
+Version: 2.0.9
+json.dumps(data): 2.35674309731 (total) 0.00117837154865 (per call)
+json.loads(data): 5.23104810715 (total) 0.00261552405357 (per call)
+--------------------
+Library: yajl
+Version: None
+yajl.dumps(data): 2.85826969147 (total) 0.00142913484573 (per call)
+yajl.loads(data): 3.03867292404 (total) 0.00151933646202 (per call)
+--------------------
+Fastest dumps: ujson 1.97361302376 (total)
+Fastest loads: ujson 2.05873394012 (total)
+
+
+
+
+tow2: (2 files)
+with dumps: 3.49, 3.49, 3.41, 3.03, 3.65
+with dump: 4.71, 5.14, 4.53, 5.16, 4.51 ~ avg 4.75
+
+
+https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/?sf=/g/g0/pascal/zdeb/ale3d_regr/sedov&groupby=title&aggregate=sum
+sedov: (12 files)
+with dumps: 6.82, 6.98, 6.63
+with dump: 11.35, 10.11
+1.8 mb / 46 mb
+
+with all the files:
+with dumps: still timing out, 46s, 41s
+
+
+xn_no_s: 23 files, just tow files:
+https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/?sf=/g/g0/pascal/zdeb/xn_no_s&groupby=title&aggregate=sum
+with dumps: 25s, 30.7s, 25.4s
+
+
+
+from pprint import pprint
+
+class RunTable:
+
+    def __init__(self, json_runs):
+
+        for (file_name) in json_runs['Runs']:
+            pprint( file_name )
+            run = json_runs['Runs'][file_name]
+            run_data = run['Data']
+            pprint( run_data )
+
+        pprint( json_runs )
+        return None
+
+    def render(self):
+        return "hello world"
+
+
+watch /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/tow2 '{}'
+/usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/tow2 '{}' >> ~/zdeb/compressed
+
+
+
+        for (global_data_rk_obj) in run_data:
+
+            Data = global_data_rk_obj['Data']
+
+            for (long_generator_str) in Data:
+
+                yAxis_payload = Data[long_generator_str]
+                lgs_original = long_generator_str
+
+                for (between_str) in self.between_table:
+
+                    enc = self.between_table[ between_str ]
+                    #print( time_key_original )
+                    lgs_original = lgs_original.replace( between_str, enc )
+                    #print( time_key )
+
+                compact_runs[ lgs_original ] = yAxis_payload
+
+        return self.make_str_from_compact_runs( compact_runs )
+
+
+
+
+
+
+
+
+
+        split_workload:
+                no_split_total = {}
+        split_arr = []
+
+        for (data_globals_obj) in runs_arr:
+            #pprint( data_globals_obj)
+            Data = data_globals_obj['Data']
+
+            for (key) in Data:
+                #pprint(Data)
+                #exit()
+                no_split_total[ key ] = Data[key]
+
+        pprint( no_split_total )
+        entry_count = len(no_split_total)
+        pprint( entry_count )
+
+        split_index = 0
+
+        for (no_split_key) in no_split_total:
+
+            entry = no_split_total[ no_split_key ]
+
+            if split_index >= len(split_arr):
+                split_arr.append( {} )
+
+            split_arr[ split_index ][ no_split_key ] = entry
+            split_index += 1
+
+            if split_index >= split_count:
+                split_index = 0
+
+        print('split arr: ')
+        pprint( split_arr )
+        #exit()
+        return split_arr
+
+
+
+
+
+{"dictionary":{"generator":"ab","3d_ex0":"ac","3d_ex1":"ad","3d_ex2":"ae","3d_ex3":"af","tow5d":"ag","ex0":"ah","ex1":"ai","ex2":"aj","ex3":"ak"},"pool_str":{"tow3d-slide8-0":{"Globals": {"launchdate": "1582654519", "commit": "v5", "title": "tow3d title"}, "Data": {"generator/3d_ex0": {"yAxis": 0.1}, "generator/3d_ex1": {"yAxis": 0.13}, "generator/3d_ex2": {"yAxis": 0.16}, "generator/3d_ex3": {"yAxis": 0.19}}},"tow3d-slide8-1":{"Globals": {"launchdate": "1582709659", "commit": "v5.1", "title": "tow3d title"}, "Data": {"generator/3d_ex0": {"yAxis": 0.11}, "generator/3d_ex1": {"yAxis": 0.14}, "generator/3d_ex2": {"yAxis": 0.17}, "generator/3d_ex3": {"yAxis": 0.2}}},"tow3d-slide8-2":{"Globals": {"launchdate": "1582788954", "commit": "v5.2", "title": "tow3d title"}, "Data": {"generator/3d_ex0": {"yAxis": 0.12}, "generator/3d_ex1": {"yAxis": 0.15}, "generator/3d_ex2": {"yAxis": 0.18}, "generator/3d_ex3": {"yAxis": 0.21}}},"tow5d-0":{"Globals": {"launchdate": "1582654519", "commit": "v4.0", "title": "tow5d title"}, "Data": {"tow5d/ex0": {"yAxis": 0.01}, "tow5d/ex1": {"yAxis": 0.04}, "tow5d/ex2":{"yAxis": 0.07}, "tow5d/ex3": {"yAxis": 0.1}}},"tow5d-1":{"Globals": {"launchdate": "1582709659", "commit": "v4.1", "title": "tow5d title"}, "Data": {"tow5d/ex0": {"yAxis": 0.02}, "tow5d/ex1": {"yAxis": 0.05}, "tow5d/ex2": {"yAxis": 0.08}, "tow5d/ex3": {"yAxis": 0.11}}},"tow5d-2":{"Globals": {"launchdate": "1582788954", "commit": "v4.2", "title": "tow5d title"}, "Data": {"tow5d/ex0": {"yAxis": 0.03}, "tow5d/ex1": {"yAxis": 0.06}, "tow5d/ex2": {"yAxis": 0.09}, "tow5d/ex3": {"yAxis": 0.12}}}}}
+
+
+(base) [pascal@rzslic7:zdeb]$ ls -l xn1
+total 5388
+-rw------- 1 pascal pascal  358087 Feb  9 19:52 xno-gen.1d.1p.json
+-rw------- 1 pascal pascal  929036 Feb  9 19:52 xno.1d.1p.json
+-rw------- 1 pascal pascal  364486 Feb  9 19:52 xno_large-gen.1d.1p.json
+-rw------- 1 pascal pascal  927871 Feb  9 19:52 xno_large.1d.1p.json
+-rw------- 1 pascal pascal  456980 Feb  9 19:52 xno_large4-gen.4d.4p.json
+-rw------- 1 pascal pascal 1171256 Feb  9 19:52 xno_large4.4d.4p.json
+-rw------- 1 pascal pascal  364503 Feb  9 19:52 xno_modequip-gen.1d.1p.json
+-rw------- 1 pascal pascal  899964 Feb  9 19:52 xno_modequip.1d.1p.json
+(base) [pascal@rzslic7:zdeb]$ ls -l sedov
+total 6624
+-rw------- 1 pascal pascal 345444 Mar  8 19:31 sedov_a3d-gen.1d.1p.json
+-rw------- 1 pascal pascal 509258 Mar  8 19:31 sedov_a3d.1d.1p.json
+-rw------- 1 pascal pascal 389402 Mar  8 19:31 sedov_a3d4-gen.4d.4p.json
+-rw------- 1 pascal pascal 581240 Mar  8 19:31 sedov_a3d4.4d.4p.json
+-rw------- 1 pascal pascal 390361 Mar  8 19:31 sedov_a3d8-gen.8d.8p.json
+-rw------- 1 pascal pascal 563829 Mar  8 19:31 sedov_a3d8.8d.8p.json
+-rw------- 1 pascal pascal 348486 Mar  8 19:31 sedov_adv-gen.1d.1p.json
+-rw------- 1 pascal pascal 824139 Mar  8 19:31 sedov_adv.1d.1p.json
+-rw------- 1 pascal pascal 400864 Mar  8 19:31 sedov_adv4-gen.4d.4p.json
+-rw------- 1 pascal pascal 989274 Mar  8 19:31 sedov_adv4.4d.4p.json
+-rw------- 1 pascal pascal 402364 Mar  8 19:31 sedov_adv8-gen.8d.8p.json
+-rw------- 1 pascal pascal 958518 Mar  8 19:31 sedov_adv8.8d.8p.json
+(base) [pascal@rzslic7:zdeb]$ du -skh xn1
+5.3M	xn1
+(base) [pascal@rzslic7:zdeb]$ du -skh sedov
+6.5M	sedov
+(base) [pascal@rzslic7:zdeb]$ du -ksh a0
+43M	a0
+
+
+XN1 ~ about 8 files
+(base) [pascal@rzslic6:~]$ python -m cProfile /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/xn1 '{}' --poolCount 20 | grep 'function calls'
+         551782 function calls (548384 primitive calls) in 9.967 seconds
+(base) [pascal@rzslic6:~]$ python -m cProfile /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/xn1 '{}' --poolCount 5 | grep 'function calls'
+         550716 function calls (547333 primitive calls) in 10.244 seconds
+(base) [pascal@rzslic6:~]$ python -m cProfile /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/xn1 '{}' --poolCount 2 | grep 'function calls'
+         550551 function calls (547171 primitive calls) in 18.336 seconds
+
+Sedov about 7 or 8 files or so.
+(base) [pascal@rzslic6:~]$ python -m cProfile /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/sedov '{}' --poolCount 2 | grep 'function calls'
+         672036 function calls (668656 primitive calls) in 23.431 seconds
+(base) [pascal@rzslic6:~]$ python -m cProfile /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/sedov '{}' --poolCount 20 | grep 'function calls'
+         673258 function calls (669860 primitive calls) in 12.564 seconds
+(base) [pascal@rzslic6:~]$ python -m cProfile /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/sedov '{}' --poolCount 40 | grep 'function calls'
+         675390 function calls (671972 primitive calls) in 17.379 seconds
+
+A0: this is all the files.
+(base) [pascal@rzslic6:~]$ python -m cProfile /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/a0 '{}' --poolCount 2 | grep 'function calls'
+         3648091 function calls (3644711 primitive calls) in 318.389 seconds
+(base) [pascal@rzslic6:~]$ python -m cProfile /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/a0 '{}' --poolCount 20 | grep 'function calls'
+         3649325 function calls (3645927 primitive calls) in 95.531 seconds
+(base) [pascal@rzslic6:~]$ python -m cProfile /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/a0 '{}' --poolCount 40 | grep 'function calls'
+         3651453 function calls (3648035 primitive calls) in 135.533 seconds
+(base) [pascal@rzslic6:~]$ python -m cProfile /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/a0 '{}' --poolCount 10 | grep 'function calls'
+         3648578 function calls (3645190 primitive calls) in 116.891 seconds
+
+
+Size:
+(base) [pascal@rzslic9:sand]$ ls -l  ~/zdeb/perf/measure_a0_size
+-rw------- 1 pascal pascal 119067849 Mar 12 09:26 /g/g0/pascal/zdeb/perf/measure_a0_size
+
+That's 119 MB.
+But, could drop that by:
+    * getting rid of spaces
+    * compress yAxis string
+    * rep 0.0 with 0
+Get down to 80 MB.
+
+
+
+            //  Framework Bug: for some reason vue keeps trying to set the select to blank.  :(
+            setTimeout( function() {
+                //$('#yAxis-select').val( selectedYAxis );
+            }, 500);
