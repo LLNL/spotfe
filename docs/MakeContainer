@@ -1,12 +1,13 @@
 DONE - added cache busting parameter.
 DONE - Fixed the "jobsize" issue.
-- BUG: Blue Bar with the 1 in it.
 
 Start a new branch for this:
     - Do the yAxis dropdown and try to use the alias.
     - need to prevent vue from making the select empty!
     - FE and BE done, now need to connect the two together, and change data format to match.
     - line 231 -> yAxisList -> is where it gets used.
+
+- BUG: Blue Bar with the 1 in it.
 
 
 Update Dev with Marty's code:
