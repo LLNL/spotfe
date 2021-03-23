@@ -241,7 +241,7 @@ ST.ChartCollection = function() {
                 var format = d3.format('02d');
                 var date = new Date(d.date * 1000);  // used to be epoch_date
                 //return date.getFullYear() + '/' + format((date.getMonth() + 1));
-                return 1;
+                return "";
             })
             // (_optional_) max number of records to be shown, `default = 25`
             .size(ST.MAX_SHOW)    //  ST.params.max
