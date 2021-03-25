@@ -250,7 +250,7 @@ export class Graph{
             summary.data[filename] = { ...fileContents.Globals, filepath: dataSetKey + '/' + filename}
         }
 
-        var barChart = ['unsigned int', 'int', 'double', 'timeval', 'date', 'long'];
+        var barCharts = ['unsigned int', 'int', 'double', 'timeval', 'date', 'long'];
 
         for( const [globalName, globalValue] of Object.entries(cachedData.RunGlobalMeta)){
             const globType = globalValue.type

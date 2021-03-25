@@ -51931,7 +51931,7 @@ var Graph = /*#__PURE__*/function () {
     key: "getData",
     value: function () {
       var _getData = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(host, command, dataSetKey) {
-        var cachedData, cachedRunCtimes, bust_cache, x, dataRequest, newData, response, deletedRuns, baseMetrics, metric, funcPaths, metricNames, runs, filenames, summary, visibleCharts, _i4, _Object$entries4, _Object$entries4$_i, filename, fileContents, barChart, _i5, _Object$entries5, _Object$entries5$_i, globalName, globalValue, globType, show;
+        var cachedData, cachedRunCtimes, bust_cache, x, dataRequest, newData, response, deletedRuns, baseMetrics, metric, funcPaths, metricNames, runs, filenames, summary, visibleCharts, _i4, _Object$entries4, _Object$entries4$_i, filename, fileContents, barCharts, _i5, _Object$entries5, _Object$entries5$_i, globalName, globalValue, globType, show;
 
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
@@ -52146,7 +52146,7 @@ var Graph = /*#__PURE__*/function () {
                   });
                 }
 
-                barChart = ['unsigned int', 'int', 'double', 'timeval', 'date', 'long'];
+                barCharts = ['unsigned int', 'int', 'double', 'timeval', 'date', 'long'];
 
                 for (_i5 = 0, _Object$entries5 = Object.entries(cachedData.RunGlobalMeta); _i5 < _Object$entries5.length; _i5++) {
                   _Object$entries5$_i = _slicedToArray(_Object$entries5[_i5], 2), globalName = _Object$entries5$_i[0], globalValue = _Object$entries5$_i[1];
