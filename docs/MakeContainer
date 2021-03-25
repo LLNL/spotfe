@@ -1,15 +1,18 @@
-DONE - added cache busting parameter.
-DONE - Fixed the "jobsize" issue.
-
-Start a new branch for this:
-    - Do the yAxis dropdown and try to use the alias.
-    - need to prevent vue from making the select empty!
-    - FE and BE done, now need to connect the two together, and change data format to match.
-    - line 231 -> yAxisList -> is where it gets used.
-
-- BUG: Blue Bar with the 1 in it.
+DONE - Blue Bar with the 1 in it.
+DONE - Fixed the "jobsize" issue. ~ unsigned int, so it wasn't in dropdown.
+DONE - added cache busting parameter.  cache="0"
+DONE - Do the yAxis dropdown and try to use the alias.
+    * did the backend to pass back alias info to FE, and the FE part and connected them together.
+    * I recommend we get more test data for this!
 
 
+DONE - BUG: unsigned int (numhosts, jobsize) should not come up as a pieChart.
+- 1. Hook up BE to FE
+1.5 ~ start working on a converter that would write something to disk.
+2. Disable Jupyter button for spot1 - if it's spot1 -> ale3D that should not get jupyter button.
+spot2 -> cali files -> jupyter button
+
+Performance Ale3D stuff:
 Update Dev with Marty's code:
 
 1) was able to use the Pools to make a function call.
@@ -17,6 +20,9 @@ Update Dev with Marty's code:
 2) wrote an algorithm to break up the workload into X arrays to be sent to each pool process
 3) now, reworking the algorithm which sends the YAxis data because currently it's just sending 1 run, but we want all 50 or all 300 runs.
     * in that process, to get the maximum space savings, i am restructuring how the data gets sent to FE. (only showing function path one time per 300/Y runs)
+
+** made a new paramter called : "poolCount"
+
 Ale3d:
 DONE * need to make it JSON again, and compare size difference with not JSON.  this way FE won't have to turn it into JSON.  let's make it look like what the FE was using before.
 * make sure runs_subsets is being split up correctly
@@ -595,14 +601,16 @@ Sedov about 7 or 8 files or so.
          675390 function calls (671972 primitive calls) in 17.379 seconds
 
 A0: this is all the files.
+python -m cProfile /usr/gapps/spot/dev/spot.py getData /g/g0/pascal/zdeb/a0 '{}' | grep 'function calls'
+}         269201604 function calls (146312103 primitive calls) in 65.513 seconds
 (base) [pascal@rzslic6:~]$ python -m cProfile /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/a0 '{}' --poolCount 2 | grep 'function calls'
          3648091 function calls (3644711 primitive calls) in 318.389 seconds
+(base) [pascal@rzslic6:~]$ python -m cProfile /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/a0 '{}' --poolCount 10 | grep 'function calls'
+         3648578 function calls (3645190 primitive calls) in 116.891 seconds
 (base) [pascal@rzslic6:~]$ python -m cProfile /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/a0 '{}' --poolCount 20 | grep 'function calls'
          3649325 function calls (3645927 primitive calls) in 95.531 seconds
 (base) [pascal@rzslic6:~]$ python -m cProfile /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/a0 '{}' --poolCount 40 | grep 'function calls'
          3651453 function calls (3648035 primitive calls) in 135.533 seconds
-(base) [pascal@rzslic6:~]$ python -m cProfile /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/a0 '{}' --poolCount 10 | grep 'function calls'
-         3648578 function calls (3645190 primitive calls) in 116.891 seconds
 
 
 Size:
@@ -616,6 +624,60 @@ But, could drop that by:
     * rep 0.0 with 0
 Get down to 80 MB.
 
+
+
+
+(base) [pascal@rzslic7:sand]$ cat ~/zdeb/perf/ppa0 | grep -v 'problem' | grep -v 'generator' | awk '$4 > 0.04'
+   Ordered by: standard name
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+  975/186    0.001    0.000    0.163    0.001 <frozen importlib._bootstrap>:1009(_handle_fromlist)
+   279/17    0.000    0.000    0.208    0.012 <frozen importlib._bootstrap>:211(_call_with_frames_removed)
+   184/17    0.001    0.000    0.217    0.013 <frozen importlib._bootstrap>:663(_load_unlocked)
+      192    0.001    0.000    0.048    0.000 <frozen importlib._bootstrap>:882(_find_spec)
+   195/16    0.001    0.000    0.222    0.014 <frozen importlib._bootstrap>:948(_find_and_load_unlocked)
+   195/16    0.001    0.000    0.223    0.014 <frozen importlib._bootstrap>:978(_find_and_load)
+      189    0.001    0.000    0.045    0.000 <frozen importlib._bootstrap_external>:1240(_get_spec)
+      189    0.000    0.000    0.046    0.000 <frozen importlib._bootstrap_external>:1272(find_spec)
+      383    0.003    0.000    0.043    0.000 <frozen importlib._bootstrap_external>:1356(find_spec)
+   141/17    0.000    0.000    0.216    0.013 <frozen importlib._bootstrap_external>:722(exec_module)
+      141    0.002    0.000    0.066    0.000 <frozen importlib._bootstrap_external>:793(get_code)
+        1    0.058    0.058   81.091   81.091 RunTable.py:137(make_compare_str)
+        1    0.407    0.407   83.717   83.717 RunTable.py:188(render)
+        1    2.279    2.279    3.029    3.029 RunTable.py:9(__init__)
+        1    0.000    0.000    0.163    0.163 __init__.py:106(<module>)
+        1    0.000    0.000    0.047    0.047 __init__.py:13(<module>)
+       56    0.001    0.000    4.763    0.085 __init__.py:274(load)
+       58    0.000    0.000    6.791    0.117 __init__.py:299(loads)
+        1    0.000    0.000    0.047    0.047 __init__.py:7(<module>)
+    11942    0.083    0.000    0.146    0.000 _strptime.py:318(_strptime)
+    11942    0.012    0.000    0.158    0.000 _strptime.py:574(_strptime_datetime)
+        1    0.000    0.000    0.182    0.182 context.py:114(Pool)
+       18    0.001    0.000    0.167    0.009 context.py:274(_Popen)
+       58    0.000    0.000    6.791    0.117 decoder.py:332(decode)
+       58    6.790    0.117    6.790    0.117 decoder.py:343(raw_decode)
+        1    0.000    0.000    0.178    0.178 pool.py:155(__init__)
+        1    0.001    0.001    0.172    0.172 pool.py:227(_repopulate_pool)
+        1    0.000    0.000   80.618   80.618 pool.py:263(map)
+        1    0.000    0.000   80.618   80.618 pool.py:647(wait)
+        1    0.000    0.000   80.618   80.618 pool.py:650(get)
+       18    0.000    0.000    0.165    0.009 popen_fork.py:16(__init__)
+       18    0.002    0.000    0.164    0.009 popen_fork.py:67(_launch)
+       18    0.001    0.000    0.169    0.009 process.py:101(start)
+        1    1.387    1.387   99.288   99.288 spot.py:3(<module>)
+        1    5.993    5.993   10.965   10.965 spot.py:344(_getAllJsonRuns)
+        1    0.004    0.004   97.855   97.855 spot.py:483(getData)
+        4    0.000    0.000   80.619   20.155 threading.py:264(wait)
+        4    0.000    0.000   80.619   20.155 threading.py:534(wait)
+   326/13    0.000    0.000    0.162    0.012 {built-in method builtins.__import__}
+    469/1    0.002    0.000   99.288   99.288 {built-in method builtins.exec}
+        1    0.119    0.119    0.119    0.119 {built-in method builtins.print}
+       18    0.161    0.009    0.161    0.009 {built-in method posix.fork}
+      822    0.045    0.000    0.045    0.000 {built-in method posix.stat}
+    11942    0.008    0.000    0.169    0.000 {built-in method strptime}
+       18   80.619    4.479   80.619    4.479 {method 'acquire' of '_thread.lock' objects}
+     2465    0.067    0.000    0.067    0.000 {method 'join' of 'str' objects}
+       57    0.167    0.003    0.194    0.003 {method 'read' of '_io.TextIOWrapper' objects}
+  3235707    0.752    0.000    0.752    0.000 {method 'split' of 'str' objects}
 
 
             //  Framework Bug: for some reason vue keeps trying to set the select to blank.  :(

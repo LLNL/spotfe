@@ -250,6 +250,8 @@ export class Graph{
             summary.data[filename] = { ...fileContents.Globals, filepath: dataSetKey + '/' + filename}
         }
 
+        var barChart = ['unsigned int', 'int', 'double', 'timeval', 'date', 'long'];
+
         for( const [globalName, globalValue] of Object.entries(cachedData.RunGlobalMeta)){
             const globType = globalValue.type
             const show = visibleCharts.includes(globalName)
@@ -257,7 +259,7 @@ export class Graph{
                 { 'dimension' : globalName
                 , 'title': globalName
                 , 'type': globType
-                , 'viz': ['int', 'double', 'timeval', 'date', 'long'].includes(globType) ? 'BarChart' : 'PieChart'
+                , 'viz': barCharts.includes(globType) ? 'BarChart' : 'PieChart'
                 , 'show': show
                 }
             )

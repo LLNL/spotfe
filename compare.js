@@ -51931,7 +51931,7 @@ var Graph = /*#__PURE__*/function () {
     key: "getData",
     value: function () {
       var _getData = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(host, command, dataSetKey) {
-        var cachedData, cachedRunCtimes, bust_cache, x, dataRequest, newData, response, deletedRuns, baseMetrics, metric, funcPaths, metricNames, runs, filenames, summary, visibleCharts, _i4, _Object$entries4, _Object$entries4$_i, filename, fileContents, _i5, _Object$entries5, _Object$entries5$_i, globalName, globalValue, globType, show;
+        var cachedData, cachedRunCtimes, bust_cache, x, dataRequest, newData, response, deletedRuns, baseMetrics, metric, funcPaths, metricNames, runs, filenames, summary, visibleCharts, _i4, _Object$entries4, _Object$entries4$_i, filename, fileContents, barChart, _i5, _Object$entries5, _Object$entries5$_i, globalName, globalValue, globType, show;
 
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
@@ -52146,6 +52146,8 @@ var Graph = /*#__PURE__*/function () {
                   });
                 }
 
+                barChart = ['unsigned int', 'int', 'double', 'timeval', 'date', 'long'];
+
                 for (_i5 = 0, _Object$entries5 = Object.entries(cachedData.RunGlobalMeta); _i5 < _Object$entries5.length; _i5++) {
                   _Object$entries5$_i = _slicedToArray(_Object$entries5[_i5], 2), globalName = _Object$entries5$_i[0], globalValue = _Object$entries5$_i[1];
                   globType = globalValue.type;
@@ -52154,7 +52156,7 @@ var Graph = /*#__PURE__*/function () {
                     'dimension': globalName,
                     'title': globalName,
                     'type': globType,
-                    'viz': ['int', 'double', 'timeval', 'date', 'long'].includes(globType) ? 'BarChart' : 'PieChart',
+                    'viz': barCharts.includes(globType) ? 'BarChart' : 'PieChart',
                     'show': show
                   });
                   summary.layout.table.push({
@@ -52165,24 +52167,24 @@ var Graph = /*#__PURE__*/function () {
                   });
                 }
 
-                _context3.next = 68;
+                _context3.next = 69;
                 return _localforage.default.getItem('scatterplots:' + this.dataSetKey);
 
-              case 68:
+              case 69:
                 _context3.t5 = _context3.sent;
 
                 if (_context3.t5) {
-                  _context3.next = 71;
+                  _context3.next = 72;
                   break;
                 }
 
                 _context3.t5 = [];
 
-              case 71:
+              case 72:
                 summary.layout.scatterplots = _context3.t5;
                 return _context3.abrupt("return", summary);
 
-              case 73:
+              case 74:
               case "end":
                 return _context3.stop();
             }
@@ -52372,7 +52374,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50704" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50510" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
