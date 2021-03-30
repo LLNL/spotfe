@@ -456,100 +456,9 @@ with dumps: 25s, 30.7s, 25.4s
 
 
 
-from pprint import pprint
-
-class RunTable:
-
-    def __init__(self, json_runs):
-
-        for (file_name) in json_runs['Runs']:
-            pprint( file_name )
-            run = json_runs['Runs'][file_name]
-            run_data = run['Data']
-            pprint( run_data )
-
-        pprint( json_runs )
-        return None
-
-    def render(self):
-        return "hello world"
-
 
 watch /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/tow2 '{}'
 /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/tow2 '{}' >> ~/zdeb/compressed
-
-
-
-        for (global_data_rk_obj) in run_data:
-
-            Data = global_data_rk_obj['Data']
-
-            for (long_generator_str) in Data:
-
-                yAxis_payload = Data[long_generator_str]
-                lgs_original = long_generator_str
-
-                for (between_str) in self.between_table:
-
-                    enc = self.between_table[ between_str ]
-                    #print( time_key_original )
-                    lgs_original = lgs_original.replace( between_str, enc )
-                    #print( time_key )
-
-                compact_runs[ lgs_original ] = yAxis_payload
-
-        return self.make_str_from_compact_runs( compact_runs )
-
-
-
-
-
-
-
-
-
-        split_workload:
-                no_split_total = {}
-        split_arr = []
-
-        for (data_globals_obj) in runs_arr:
-            #pprint( data_globals_obj)
-            Data = data_globals_obj['Data']
-
-            for (key) in Data:
-                #pprint(Data)
-                #exit()
-                no_split_total[ key ] = Data[key]
-
-        pprint( no_split_total )
-        entry_count = len(no_split_total)
-        pprint( entry_count )
-
-        split_index = 0
-
-        for (no_split_key) in no_split_total:
-
-            entry = no_split_total[ no_split_key ]
-
-            if split_index >= len(split_arr):
-                split_arr.append( {} )
-
-            split_arr[ split_index ][ no_split_key ] = entry
-            split_index += 1
-
-            if split_index >= split_count:
-                split_index = 0
-
-        print('split arr: ')
-        pprint( split_arr )
-        #exit()
-        return split_arr
-
-
-
-
-
-{"dictionary":{"generator":"ab","3d_ex0":"ac","3d_ex1":"ad","3d_ex2":"ae","3d_ex3":"af","tow5d":"ag","ex0":"ah","ex1":"ai","ex2":"aj","ex3":"ak"},"pool_str":{"tow3d-slide8-0":{"Globals": {"launchdate": "1582654519", "commit": "v5", "title": "tow3d title"}, "Data": {"generator/3d_ex0": {"yAxis": 0.1}, "generator/3d_ex1": {"yAxis": 0.13}, "generator/3d_ex2": {"yAxis": 0.16}, "generator/3d_ex3": {"yAxis": 0.19}}},"tow3d-slide8-1":{"Globals": {"launchdate": "1582709659", "commit": "v5.1", "title": "tow3d title"}, "Data": {"generator/3d_ex0": {"yAxis": 0.11}, "generator/3d_ex1": {"yAxis": 0.14}, "generator/3d_ex2": {"yAxis": 0.17}, "generator/3d_ex3": {"yAxis": 0.2}}},"tow3d-slide8-2":{"Globals": {"launchdate": "1582788954", "commit": "v5.2", "title": "tow3d title"}, "Data": {"generator/3d_ex0": {"yAxis": 0.12}, "generator/3d_ex1": {"yAxis": 0.15}, "generator/3d_ex2": {"yAxis": 0.18}, "generator/3d_ex3": {"yAxis": 0.21}}},"tow5d-0":{"Globals": {"launchdate": "1582654519", "commit": "v4.0", "title": "tow5d title"}, "Data": {"tow5d/ex0": {"yAxis": 0.01}, "tow5d/ex1": {"yAxis": 0.04}, "tow5d/ex2":{"yAxis": 0.07}, "tow5d/ex3": {"yAxis": 0.1}}},"tow5d-1":{"Globals": {"launchdate": "1582709659", "commit": "v4.1", "title": "tow5d title"}, "Data": {"tow5d/ex0": {"yAxis": 0.02}, "tow5d/ex1": {"yAxis": 0.05}, "tow5d/ex2": {"yAxis": 0.08}, "tow5d/ex3": {"yAxis": 0.11}}},"tow5d-2":{"Globals": {"launchdate": "1582788954", "commit": "v4.2", "title": "tow5d title"}, "Data": {"tow5d/ex0": {"yAxis": 0.03}, "tow5d/ex1": {"yAxis": 0.06}, "tow5d/ex2": {"yAxis": 0.09}, "tow5d/ex3": {"yAxis": 0.12}}}}}
 
 
 (base) [pascal@rzslic7:zdeb]$ ls -l xn1
@@ -680,7 +589,12 @@ Get down to 80 MB.
   3235707    0.752    0.000    0.752    0.000 {method 'split' of 'str' objects}
 
 
-            //  Framework Bug: for some reason vue keeps trying to set the select to blank.  :(
-            setTimeout( function() {
-                //$('#yAxis-select').val( selectedYAxis );
-            }, 500);
+Runs: {…}, RunDataMeta: {…}, RunGlobalMeta: {…}, deletedRuns: Array(0), runCtimes:
+
+pri_str = '{"Runs":' + table_text +
+', "RunDataMeta":' + json.dumps(output["RunDataMeta"]) +
+', "RunGlobalMeta":' + json.dumps(output["RunGlobalMeta"]) +
+', "deletedRuns":' + json.dumps(output["deletedRuns"]) +
+', "runCtimes":' + json.dumps(output["runCtimes"]) +
+'}'
+

@@ -120,11 +120,33 @@ export class Graph{
 
     async getData(host, command, dataSetKey){
 
-        // Get Cached Data from local storage 
-        const cachedData = await localforage.getItem(dataSetKey) || {Runs: {}, RunDataMeta: {}, RunGlobalMeta: {}, RunSetMeta: {}}
-
-        const cachedRunCtimes = cachedData.runCtimes || {}
+        var cachedDataGet;
         var bust_cache = ST.Utility.get_param("cache") === "0";
+
+        if( bust_cache ) {
+
+            cachedDataGet = {
+                Runs: {},
+                RunDataMeta: {},
+                RunGlobalMeta: {},
+                RunSetMeta: {}
+            }
+
+            console.log('Got a new cachedData.');
+
+        } else {
+
+            // Get Cached Data from local storage
+            cachedDataGet = await localforage.getItem(dataSetKey) || {
+                Runs: {},
+                RunDataMeta: {},
+                RunGlobalMeta: {},
+                RunSetMeta: {}
+            }
+        }
+
+        const cachedData = cachedDataGet;
+        const cachedRunCtimes = cachedData.runCtimes || {}
 
         //  Round to prevent string from being too long.
         for( var x in cachedRunCtimes ) {
@@ -165,10 +187,14 @@ export class Graph{
             }
         }
 
+        console.log('newData: ');
         console.dir( newData );
 
+        var runs0 = newData.Runs || newData.Pool;
+
+
         // Merge new data with cached
-        cachedData.Runs = Object.assign(cachedData.Runs, newData.Runs)
+        cachedData.Runs = Object.assign(cachedData.Runs, runs0);
         cachedData.RunDataMeta = Object.assign(cachedData.RunDataMeta, newData.RunDataMeta)
         cachedData.RunGlobalMeta = Object.assign(cachedData.RunGlobalMeta, newData.RunGlobalMeta)
         cachedData.RunSetMeta = Object.assign(cachedData.RunSetMeta, newData.RunSetMeta)
@@ -180,11 +206,14 @@ export class Graph{
 
         window.cachedData = cachedData;
 
+        console.log("dataSetKey5=" + dataSetKey);
         // cache newest version of data
         await localforage.setItem(dataSetKey, cachedData)
 
         // add in datsetkey and datakey to globals
         _.forEach(cachedData.Runs, (run, filename) => {
+            console.log("dataSetKey6=" + dataSetKey);
+            run.Globals = run.Globals || {};
             run.Globals.dataSetKey = dataSetKey
             run.Globals.datapath = filename
         })

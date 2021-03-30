@@ -247,9 +247,6 @@ export default Vue.extend({
                         aliasReplacements[encoded] = alias;
                     }
                 }
-
-                console.log( "Alias Replacements: ");
-                console.dir( aliasReplacements );
             }
 
             window.aliasReplacements = aliasReplacements;
