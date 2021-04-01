@@ -26,6 +26,11 @@ ST.CompareArguments = function() {
 
     var load_tabs_ = function() {
 
+        var jup_button = ST.CallSpot.is_ale3d ? ""  : '<div class="myButton icon multi_jupyter" v-on:click="multiJupyter()" title="Open all Jupyter files selected below">' +
+                    '<div class="inner"></div>' +
+                    '<div class="tiny_letter">M</div>' +
+                '</div>';
+
         Vue.component('bottom-tabs', {
             data: function() {
                 return {
@@ -35,10 +40,7 @@ ST.CompareArguments = function() {
             template: '<div class="bottom_tab_outer">' +
                 '<div v-bind:class="{ active: isTableActive }" class="table-tab" v-on:click="tableActive()">TABLE</div>' +
                 '<div v-bind:class="{ active: !isTableActive }" class="compare-tab" v-on:click="compareActive()">COMPARE</div>' +
-                '<div class="myButton icon multi_jupyter" v-on:click="multiJupyter()" title="Open all Jupyter files selected below">' +
-                    '<div class="inner"></div>' +
-                    '<div class="tiny_letter">M</div>' +
-                '</div>' +
+                jup_button +
                 '</div>',
             methods: {
                 tableActive: function() {
