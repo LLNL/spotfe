@@ -52040,9 +52040,14 @@ var Graph = /*#__PURE__*/function () {
                 };
 
               case 38:
-                console.log('newData: ');
+                console.log('newData:  ');
                 console.dir(newData);
-                runs0 = newData.Runs || newData.Pool; // Merge new data with cached
+                runs0 = newData.Runs; //  this will make jupyter button disappear.
+
+                if (newData.dictionary) {
+                  ST.CallSpot.is_ale3d = true;
+                } // Merge new data with cached
+
 
                 cachedData.Runs = Object.assign(cachedData.Runs, runs0);
                 cachedData.RunDataMeta = Object.assign(cachedData.RunDataMeta, newData.RunDataMeta);
@@ -52057,10 +52062,10 @@ var Graph = /*#__PURE__*/function () {
                 window.cachedData = cachedData;
                 console.log("dataSetKey5=" + dataSetKey); // cache newest version of data
 
-                _context3.next = 52;
+                _context3.next = 53;
                 return _localforage.default.setItem(dataSetKey, cachedData);
 
-              case 52:
+              case 53:
                 // add in datsetkey and datakey to globals
                 _lodash.default.forEach(cachedData.Runs, function (run, filename) {
                   console.log("dataSetKey6=" + dataSetKey);
@@ -52145,20 +52150,20 @@ var Graph = /*#__PURE__*/function () {
                     table: []
                   }
                 };
-                _context3.next = 69;
+                _context3.next = 70;
                 return _localforage.default.getItem("show:" + dataSetKey);
 
-              case 69:
+              case 70:
                 _context3.t4 = _context3.sent;
 
                 if (_context3.t4) {
-                  _context3.next = 72;
+                  _context3.next = 73;
                   break;
                 }
 
                 _context3.t4 = defaultVisibleCharts;
 
-              case 72:
+              case 73:
                 visibleCharts = _context3.t4;
 
                 for (_i4 = 0, _Object$entries4 = Object.entries(cachedData.Runs); _i4 < _Object$entries4.length; _i4++) {
@@ -52189,24 +52194,24 @@ var Graph = /*#__PURE__*/function () {
                   });
                 }
 
-                _context3.next = 78;
+                _context3.next = 79;
                 return _localforage.default.getItem('scatterplots:' + this.dataSetKey);
 
-              case 78:
+              case 79:
                 _context3.t5 = _context3.sent;
 
                 if (_context3.t5) {
-                  _context3.next = 81;
+                  _context3.next = 82;
                   break;
                 }
 
                 _context3.t5 = [];
 
-              case 81:
+              case 82:
                 summary.layout.scatterplots = _context3.t5;
                 return _context3.abrupt("return", summary);
 
-              case 83:
+              case 84:
               case "end":
                 return _context3.stop();
             }
@@ -52396,7 +52401,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50012" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55915" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
