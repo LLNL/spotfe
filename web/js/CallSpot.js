@@ -240,13 +240,14 @@ ST.CallSpot = function() {
                     var month = spot_date.getMonth() + 1;
                     var day = spot_date.getDate();
                     var year = spot_date.getFullYear();
+                    var has_jupyter = ST.CallSpot.is_ale3d ? false : true;
 
                     //  This is just for stub
                     //valid_obj.epoch_date = date;
                     valid_obj.formatdate = month + "/" + day + "/" + year;
                     valid_obj.run_id = "id_" + Math.floor(Math.random() * 10000);
                     valid_obj.drilldown = {
-                        "jupyter":1,    //  always exists
+                        "jupyter": has_jupyter,    //  always exists
                         "durations":1,  //  always exists
                         "timeseries": valid_obj.timeseries || 0
                     };

@@ -1,16 +1,23 @@
+DONE - Hatchet deploy stuff
+DONE - 1. Hook up BE to FE
+- Translate dictionary.
+- Ale 3d performance:
+    * start working on a converter that would write something to disk.
+    /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/ale3d_regr/xno '{}' --writeToFile=1
+    https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/?cache=0&sf=/g/g0/pascal/zdeb/a0
+    12s TTFB
+    * start a process to do the JSON file write.
+- Disable Jupyter button for spot1 - if it's spot1 -> ale3D that should not get jupyter button.
+spot2 -> cali files -> jupyter button
+
+
 DONE - Blue Bar with the 1 in it.
 DONE - Fixed the "jobsize" issue. ~ unsigned int, so it wasn't in dropdown.
 DONE - added cache busting parameter.  cache="0"
 DONE - Do the yAxis dropdown and try to use the alias.
     * did the backend to pass back alias info to FE, and the FE part and connected them together.
     * I recommend we get more test data for this!
-
-
 DONE - BUG: unsigned int (numhosts, jobsize) should not come up as a pieChart.
-- 1. Hook up BE to FE
-1.5 ~ start working on a converter that would write something to disk.
-2. Disable Jupyter button for spot1 - if it's spot1 -> ale3D that should not get jupyter button.
-spot2 -> cali files -> jupyter button
 
 Performance Ale3D stuff:
 Update Dev with Marty's code:

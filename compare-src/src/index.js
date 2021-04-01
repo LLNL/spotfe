@@ -190,7 +190,12 @@ export class Graph{
         console.log('newData: ');
         console.dir( newData );
 
-        var runs0 = newData.Runs || newData.Pool;
+        var runs0 = newData.Runs;
+
+        //  this will make jupyter button disappear.
+        if( newData.dictionary ) {
+            ST.CallSpot.is_ale3d = true;
+        }
 
 
         // Merge new data with cached
