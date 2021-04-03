@@ -52042,6 +52042,7 @@ var Graph = /*#__PURE__*/function () {
               case 38:
                 console.log('newData:  ');
                 console.dir(newData);
+                ST.RunDictionaryTranslator.translate(newData);
                 runs0 = newData.Runs; //  this will make jupyter button disappear.
 
                 if (newData.dictionary) {
@@ -52062,10 +52063,10 @@ var Graph = /*#__PURE__*/function () {
                 window.cachedData = cachedData;
                 console.log("dataSetKey5=" + dataSetKey); // cache newest version of data
 
-                _context3.next = 53;
+                _context3.next = 54;
                 return _localforage.default.setItem(dataSetKey, cachedData);
 
-              case 53:
+              case 54:
                 // add in datsetkey and datakey to globals
                 _lodash.default.forEach(cachedData.Runs, function (run, filename) {
                   console.log("dataSetKey6=" + dataSetKey);
@@ -52150,20 +52151,20 @@ var Graph = /*#__PURE__*/function () {
                     table: []
                   }
                 };
-                _context3.next = 70;
+                _context3.next = 71;
                 return _localforage.default.getItem("show:" + dataSetKey);
 
-              case 70:
+              case 71:
                 _context3.t4 = _context3.sent;
 
                 if (_context3.t4) {
-                  _context3.next = 73;
+                  _context3.next = 74;
                   break;
                 }
 
                 _context3.t4 = defaultVisibleCharts;
 
-              case 73:
+              case 74:
                 visibleCharts = _context3.t4;
 
                 for (_i4 = 0, _Object$entries4 = Object.entries(cachedData.Runs); _i4 < _Object$entries4.length; _i4++) {
@@ -52194,24 +52195,24 @@ var Graph = /*#__PURE__*/function () {
                   });
                 }
 
-                _context3.next = 79;
+                _context3.next = 80;
                 return _localforage.default.getItem('scatterplots:' + this.dataSetKey);
 
-              case 79:
+              case 80:
                 _context3.t5 = _context3.sent;
 
                 if (_context3.t5) {
-                  _context3.next = 82;
+                  _context3.next = 83;
                   break;
                 }
 
                 _context3.t5 = [];
 
-              case 82:
+              case 83:
                 summary.layout.scatterplots = _context3.t5;
                 return _context3.abrupt("return", summary);
 
-              case 84:
+              case 85:
               case "end":
                 return _context3.stop();
             }
@@ -52401,7 +52402,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55915" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64840" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
