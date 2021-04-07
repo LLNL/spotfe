@@ -52041,8 +52041,8 @@ var Graph = /*#__PURE__*/function () {
 
               case 38:
                 console.log('newData:  ');
-                console.dir(newData);
-                newData = ST.RunDictionaryTranslator.translate(newData);
+                console.dir(newData); //newData = ST.RunDictionaryTranslator.translate( newData );
+
                 runs0 = newData.Runs; //  this will make jupyter button disappear.
 
                 if (newData.dictionary) {
@@ -52063,10 +52063,10 @@ var Graph = /*#__PURE__*/function () {
                 window.cachedData = cachedData;
                 console.log("dataSetKey5=" + dataSetKey); // cache newest version of data
 
-                _context3.next = 54;
+                _context3.next = 53;
                 return _localforage.default.setItem(dataSetKey, cachedData);
 
-              case 54:
+              case 53:
                 // add in datsetkey and datakey to globals
                 _lodash.default.forEach(cachedData.Runs, function (run, filename) {
                   console.log("dataSetKey6=" + dataSetKey);
@@ -52151,20 +52151,20 @@ var Graph = /*#__PURE__*/function () {
                     table: []
                   }
                 };
-                _context3.next = 71;
+                _context3.next = 70;
                 return _localforage.default.getItem("show:" + dataSetKey);
 
-              case 71:
+              case 70:
                 _context3.t4 = _context3.sent;
 
                 if (_context3.t4) {
-                  _context3.next = 74;
+                  _context3.next = 73;
                   break;
                 }
 
                 _context3.t4 = defaultVisibleCharts;
 
-              case 74:
+              case 73:
                 visibleCharts = _context3.t4;
 
                 for (_i4 = 0, _Object$entries4 = Object.entries(cachedData.Runs); _i4 < _Object$entries4.length; _i4++) {
@@ -52195,24 +52195,24 @@ var Graph = /*#__PURE__*/function () {
                   });
                 }
 
-                _context3.next = 80;
+                _context3.next = 79;
                 return _localforage.default.getItem('scatterplots:' + this.dataSetKey);
 
-              case 80:
+              case 79:
                 _context3.t5 = _context3.sent;
 
                 if (_context3.t5) {
-                  _context3.next = 83;
+                  _context3.next = 82;
                   break;
                 }
 
                 _context3.t5 = [];
 
-              case 83:
+              case 82:
                 summary.layout.scatterplots = _context3.t5;
                 return _context3.abrupt("return", summary);
 
-              case 85:
+              case 84:
               case "end":
                 return _context3.stop();
             }
