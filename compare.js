@@ -52042,7 +52042,7 @@ var Graph = /*#__PURE__*/function () {
               case 38:
                 console.log('newData:  ');
                 console.dir(newData);
-                ST.RunDictionaryTranslator.translate(newData);
+                newData = ST.RunDictionaryTranslator.translate(newData);
                 runs0 = newData.Runs; //  this will make jupyter button disappear.
 
                 if (newData.dictionary) {
@@ -52402,7 +52402,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64840" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56647" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
