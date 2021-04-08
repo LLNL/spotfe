@@ -43,7 +43,8 @@ export default {
 
     computed:{
         title(){ 
-            return `${this.funcPath.split('/').slice(-1)[0]} (${this.runData[this.funcPath].exclusive})` 
+            var encoded_title = `${this.funcPath.split('/').slice(-1)[0]} (${this.runData[this.funcPath].exclusive})`
+            return encoded_title;
         },
         iAmSelected(){return this.selectedNode == this.funcPath},
         allFuncPaths(){return Object.keys(this.runData)},

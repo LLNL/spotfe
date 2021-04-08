@@ -1,14 +1,39 @@
 DONE - Hatchet deploy stuff
+DONE - Disable Jupyter button for spot1 - if it's spot1 -> ale3D that should not get jupyter button.
+spot2 -> cali files -> jupyter button
+DONE - write to file caching
+DONE - able to read file for caching and return it.
 DONE - 1. Hook up BE to FE
-- Translate dictionary.
+DONE - Translate dictionary so we're not showing "ab" anymore, show the actual strings
+
+/usr/gapps/spot/datasets/newdemo/user
 - Ale 3d performance:
     * start working on a converter that would write something to disk.
     /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/ale3d_regr/xno '{}' --writeToFile=1
     https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/?cache=0&sf=/g/g0/pascal/zdeb/a0
-    12s TTFB
-    * start a process to do the JSON file write.
-- Disable Jupyter button for spot1 - if it's spot1 -> ale3D that should not get jupyter button.
-spot2 -> cali files -> jupyter button
+
+Good News:
+    - File size reduced from 700 mb to 120mb
+    - 12s TTFB, can be improved with a JSONP include to less than 1 sec.
+    - Was able to load the entire data set onto the FE, in just a couple of minutes
+        (now the DictionaryTRanslator is taking forever)
+
+Bad News:
+    - FE is sluggish with all that data in there.
+    - FE loading time takes forever due to DictionaryTranslator
+
+Next:
+    - lazy load dictionary lookups.
+    - just load without dictionaryTranslation.  then only do dictionary lookups for things that are being displayed.
+Feature: Add support for JSON + Cali
+    - don't disable the whole set, just do each run individually.
+
+
+Still to do:
+    * start a process to do the JSON file write. (otherwise it will need to do a new fetch).
+    * use include request instead of starting a process?
+
+
 
 
 DONE - Blue Bar with the 1 in it.

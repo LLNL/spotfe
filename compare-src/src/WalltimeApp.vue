@@ -260,8 +260,6 @@ export default {
                     type: "memory",
                     success: function( aj_dat ) {
 
-                        console.log('memory ajax 2:');
-
                         var ret2 = {};
 
                         if( aj_dat.series ) {
@@ -305,8 +303,6 @@ export default {
             $('.update_top_down').trigger('click')
         },
         replaceMetricNames( replacee, replacer ) {
-
-            console.log( "2replacee=" + replacee + '  replacer=' + replacer)
 
             this.metricObjs[replacee] = {
                 "name": replacee,

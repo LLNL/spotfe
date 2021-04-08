@@ -190,7 +190,7 @@ export class Graph{
         console.log('newData:  ');
         console.dir( newData );
 
-        ST.RunDictionaryTranslator.translate( newData );
+        //newData = ST.RunDictionaryTranslator.translate( newData );
 
         var runs0 = newData.Runs;
 
