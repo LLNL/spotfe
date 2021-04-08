@@ -44,7 +44,9 @@ export default {
     computed:{
         title(){ 
             var encoded_title = `${this.funcPath.split('/').slice(-1)[0]} (${this.runData[this.funcPath].exclusive})`
-            return encoded_title;
+            var layman_title = ST.RunDictionaryTranslator.lookupStr( encoded_title );
+
+            return layman_title;
         },
         iAmSelected(){return this.selectedNode == this.funcPath},
         allFuncPaths(){return Object.keys(this.runData)},

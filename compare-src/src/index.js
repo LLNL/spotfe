@@ -191,6 +191,7 @@ export class Graph{
         console.dir( newData );
 
         //newData = ST.RunDictionaryTranslator.translate( newData );
+        ST.RunDictionaryTranslator.set( newData.dictionary );
 
         var runs0 = newData.Runs;
 
@@ -213,13 +214,12 @@ export class Graph{
 
         window.cachedData = cachedData;
 
-        console.log("dataSetKey5=" + dataSetKey);
         // cache newest version of data
         await localforage.setItem(dataSetKey, cachedData)
 
         // add in datsetkey and datakey to globals
         _.forEach(cachedData.Runs, (run, filename) => {
-            console.log("dataSetKey6=" + dataSetKey);
+
             run.Globals = run.Globals || {};
             run.Globals.dataSetKey = dataSetKey
             run.Globals.datapath = filename

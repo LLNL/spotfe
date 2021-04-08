@@ -211,7 +211,11 @@ export default Vue.extend({
         },
         displayedXTitles(){
             return this.runs.map(run => {
-                const title = run.meta[this.selectedXAxisMetric]
+
+                var encoded_title = run.meta[this.selectedXAxisMetric]
+                var layman_title = ST.RunDictionaryTranslator.lookupStr( encoded_title );
+
+                const title = layman_title
                 if (['launchdate', 'launchday'].includes(this.selectedXAxisMetric)){ 
                     return timeFormat("%Y-%b-%d %H:%M")(new Date(parseInt(title + '000')))
                 } 

@@ -4,8 +4,41 @@ ST.RunDictionaryTranslator = function() {
 
     var set_ = function( dictionary ) {
 
+        dict_ = dict_ || {};
+
+        for( var laymanStr in dictionary ) {
+
+            var encodedVal = dictionary[laymanStr];
+            dict_[ encodedVal ] = laymanStr;
+        }
+
+        console.dir( dict_ );
     };
-    
+
+    //  Example string inputs: "read restart ce (0)", "b$"
+    var lookupStr_ = function( str ) {
+
+        var arr = str.split(' ');
+        var total = "";
+
+        for( var z=0; z < arr.length; z++ ) {
+
+            var stringPart = arr[z];
+            var lookStr = lookup_( stringPart );
+            total += lookStr + ' ';
+        }
+
+        return total;
+    };
+
+
+    var lookup_ = function( encodedValue ) {
+
+        var ret = dict_[ encodedValue ] || encodedValue;
+        //console.log( ret );
+        return ret;
+    };
+
     //  Translate Dictionary
     var translate_ = function( runPlusDictionary ) {
 
@@ -15,8 +48,6 @@ ST.RunDictionaryTranslator = function() {
         var dict = runPlusDictionary.dictionary;
         var runs = runPlusDictionary.Runs;
         var newRuns = {};
-
-        console.dir( runs );
 
         //  run_name is like am1-gen-0, etc.
         for( var runName in runs ) {
@@ -76,6 +107,9 @@ ST.RunDictionaryTranslator = function() {
 
 
     return {
-        translate: translate_
+        translate: translate_,
+        lookupStr: lookupStr_,
+        lookup: lookup_,
+        set: set_
     };
 }();

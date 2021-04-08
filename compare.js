@@ -39154,7 +39154,9 @@ exports.default = vue_1.default.extend({
       var _this = this;
 
       return this.runs.map(function (run) {
-        var title = run.meta[_this.selectedXAxisMetric];
+        var encoded_title = run.meta[_this.selectedXAxisMetric];
+        var layman_title = ST.RunDictionaryTranslator.lookupStr(encoded_title);
+        var title = layman_title;
 
         if (['launchdate', 'launchday'].includes(_this.selectedXAxisMetric)) {
           return d3_time_format_1.timeFormat("%Y-%b-%d %H:%M")(new Date(parseInt(title + '000')));
@@ -39547,7 +39549,8 @@ var _default = {
   computed: {
     title: function title() {
       var encoded_title = "".concat(this.funcPath.split('/').slice(-1)[0], " (").concat(this.runData[this.funcPath].exclusive, ")");
-      return encoded_title;
+      var layman_title = ST.RunDictionaryTranslator.lookupStr(encoded_title);
+      return layman_title;
     },
     iAmSelected: function iAmSelected() {
       return this.selectedNode == this.funcPath;
@@ -39809,7 +39812,9 @@ var _default = {
   },
   methods: {
     title: function title(funcPath) {
-      return "".concat(funcPath.split('/').slice(-1)[0], " (").concat(this.runData[funcPath].value, ")");
+      var encoded_title = "".concat(funcPath.split('/').slice(-1)[0], " (").concat(this.runData[funcPath].value, ")");
+      var layman_title = ST.RunDictionaryTranslator.lookupStr(encoded_title);
+      return layman_title;
     },
     addInclusive: function addInclusive(selectedRunData) {
       // recursively sum up inclusive times
@@ -40040,6 +40045,7 @@ exports.default = vue_1.default.extend({
       hoverLock: false
     };
   },
+  props: ['path'],
   mounted: function mounted() {},
   watch: {
     xAxis: function xAxis(value) {
@@ -40088,7 +40094,9 @@ exports.default = vue_1.default.extend({
       return this.runs[0] ? Object.keys(this.runs[0].data) : [];
     },
     displayedChildrenPaths: function displayedChildrenPaths() {
-      return functions_js_1.childrenPaths(this.selectedParent, this.funcPathKeys);
+      var chp = functions_js_1.childrenPaths(this.selectedParent, this.funcPathKeys);
+      console.dir(chp);
+      return chp;
     },
     groupByList: function groupByList() {
       return [''].concat(this.xAxisList);
@@ -40137,7 +40145,6 @@ exports.default = vue_1.default.extend({
         }
       }
 
-      console.dir(metrics);
       return metrics;
     },
     selectedRun: function selectedRun() {
@@ -40242,6 +40249,10 @@ exports.default = vue_1.default.extend({
     }
   },
   methods: {
+    legendItem: function legendItem(path) {
+      console.dir(path);
+      return path.slice(path.lastIndexOf('/') + 1);
+    },
     //  Returns the original yAxis that looks like this "max#inclusive#duration.time"
     //  the data was originally sent to the FE with those as indexes.
     lookupOriginalYAxis: function lookupOriginalYAxis(yAxis) {
@@ -40590,7 +40601,7 @@ exports.default = vue_1.default.extend({
                               : "black"
                           }
                         },
-                        [_vm._v(_vm._s(path.slice(path.lastIndexOf("/") + 1)))]
+                        [_vm._v(_vm._s(_vm.legendItem(path)))]
                       )
                     ]
                   )
@@ -52044,6 +52055,7 @@ var Graph = /*#__PURE__*/function () {
                 console.log('newData:  ');
                 console.dir(newData); //newData = ST.RunDictionaryTranslator.translate( newData );
 
+                ST.RunDictionaryTranslator.set(newData.dictionary);
                 runs0 = newData.Runs; //  this will make jupyter button disappear.
 
                 if (newData.dictionary) {
@@ -52061,8 +52073,7 @@ var Graph = /*#__PURE__*/function () {
                 deletedRuns.forEach(function (deletedRun) {
                   return delete cachedData.Runs[deletedRun];
                 });
-                window.cachedData = cachedData;
-                console.log("dataSetKey5=" + dataSetKey); // cache newest version of data
+                window.cachedData = cachedData; // cache newest version of data
 
                 _context3.next = 53;
                 return _localforage.default.setItem(dataSetKey, cachedData);
@@ -52070,7 +52081,6 @@ var Graph = /*#__PURE__*/function () {
               case 53:
                 // add in datsetkey and datakey to globals
                 _lodash.default.forEach(cachedData.Runs, function (run, filename) {
-                  console.log("dataSetKey6=" + dataSetKey);
                   run.Globals = run.Globals || {};
                   run.Globals.dataSetKey = dataSetKey;
                   run.Globals.datapath = filename;

@@ -63,7 +63,10 @@ export default {
     },
     methods:{
         title(funcPath){ 
-            return `${funcPath.split('/').slice(-1)[0]} (${this.runData[funcPath].value})` 
+            var encoded_title = `${funcPath.split('/').slice(-1)[0]} (${this.runData[funcPath].value})`
+            var layman_title = ST.RunDictionaryTranslator.lookupStr( encoded_title );
+
+            return layman_title;
         },
         addInclusive(selectedRunData){
             // recursively sum up inclusive times

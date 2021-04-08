@@ -61,7 +61,6 @@ ST.ChartCollection = function() {
 
         //amend_charts_( layout_spec );
 
-        console.dir(the_data);
         var GLOB_DAT = the_data;
 
         $('.chart_container').html("");
@@ -91,8 +90,6 @@ ST.ChartCollection = function() {
 
         var layout_charts = layout_spec.charts;
         var original_lc = layout_charts; // $.extend(true, {}, layout_charts);
-
-        console.dir(original_lc);
 
         ST.LayoutAugmenterModel.get(layout_charts, the_data);
         ST.UserPreferences.render();

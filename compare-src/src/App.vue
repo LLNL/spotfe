@@ -78,7 +78,7 @@
                         marginLeft:'5px',
                         color: disabledFuncPaths.includes(path) ? 'lightgrey': 'black'
                         }`
-                    ) {{ path.slice(path.lastIndexOf('/') + 1 ) }}
+                    ) {{ legendItem(path) }}
     .comparison-charts(style="padding:10px")
         view-chart(
             v-for="(runs, groupName) in groupedAndAggregated" 
@@ -178,6 +178,7 @@ export default Vue.extend({
         disabledFuncPaths: [],
         hoverLock: false,
     }},
+    props: ['path'],
     mounted() {
     },
     watch:{
@@ -221,7 +222,9 @@ export default Vue.extend({
             return this.runs[0] ? Object.keys(this.runs[0].data) : []
         },
         displayedChildrenPaths(){
-            return childrenPaths(this.selectedParent, this.funcPathKeys)
+            var chp = childrenPaths(this.selectedParent, this.funcPathKeys)
+            console.dir(chp);
+            return chp;
         },
         groupByList(){
             return [''].concat(this.xAxisList)
@@ -276,7 +279,6 @@ export default Vue.extend({
                 }
             }
 
-            console.dir( metrics );
             return metrics;
         },
         selectedRun(){
@@ -360,6 +362,11 @@ export default Vue.extend({
     },  // end computed
 
     methods:{
+        legendItem( path ) {
+
+            console.dir(path);
+            return path.slice(path.lastIndexOf('/') + 1;
+        },
         //  Returns the original yAxis that looks like this "max#inclusive#duration.time"
         //  the data was originally sent to the FE with those as indexes.
         lookupOriginalYAxis( yAxis ) {
