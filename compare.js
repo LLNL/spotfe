@@ -40251,7 +40251,9 @@ exports.default = vue_1.default.extend({
   methods: {
     legendItem: function legendItem(path) {
       console.dir(path);
-      return path.slice(path.lastIndexOf('/') + 1);
+      var ret = path.slice(path.lastIndexOf('/') + 1);
+      var layman_title = ST.RunDictionaryTranslator.lookupStr(ret);
+      return layman_title;
     },
     //  Returns the original yAxis that looks like this "max#inclusive#duration.time"
     //  the data was originally sent to the FE with those as indexes.

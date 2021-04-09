@@ -1,3 +1,13 @@
+Next:
+DONE - initial implementation: lazy load dictionary lookups.
+    * just load without dictionaryTranslation.  then only do dictionary lookups for things that are being displayed.
+BUG: [Vue warn]: Error in render: "TypeError: Cannot read property '85' of undefined"
+    * Can not hover over the X position on compare view.
+    * only the middle two points are clickable (is this because our screen isn't wide enough?)
+    * https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/?sf=/g/g0/pascal/zdeb/ale3d_regr/pipe&cache=0&groupby=title&aggregate=sum&launchdate=1582131012.2211015,1593337317.7673728
+Feature: Add support for JSON + Cali
+    - don't disable the whole set, just do each run individually.
+
 DONE - Hatchet deploy stuff
 DONE - Disable Jupyter button for spot1 - if it's spot1 -> ale3D that should not get jupyter button.
 spot2 -> cali files -> jupyter button
@@ -22,11 +32,6 @@ Bad News:
     - FE is sluggish with all that data in there.
     - FE loading time takes forever due to DictionaryTranslator
 
-Next:
-    - lazy load dictionary lookups.
-    - just load without dictionaryTranslation.  then only do dictionary lookups for things that are being displayed.
-Feature: Add support for JSON + Cali
-    - don't disable the whole set, just do each run individually.
 
 
 Still to do:
