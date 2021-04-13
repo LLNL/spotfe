@@ -288,16 +288,37 @@ export default Vue.extend({
 
             var yAxisLookup = this.lookupOriginalYAxis( this.yAxis );
 
+            console.log('start peeling metric data');
+
             let peeledMetricData = _.map(this.runs, run => {
-                const meta = _.fromPairs(_.map(run.meta, (meta, metaName) => [metaName, meta.value]))
-                const data = _.fromPairs(_.map(run.data, (metrics, funcPath) => [funcPath, {value: parseFloat(metrics[yAxisLookup])}] ))
+
+                var metaPair = _.map(run.meta, (meta, metaName) => [metaName, meta.value]);
+                const meta = _.fromPairs( metaPair )
+
+                var mapPair = _.map(run.data, function(metrics, funcPath) {
+
+                    var metricsFloat = parseFloat(metrics[yAxisLookup]);
+                    var pair = [funcPath, {value: metricsFloat}];
+
+                    return pair;
+                });
+
+                const data = _.fromPairs( mapPair )
+
                 return {meta, data}
-            }) 
+            })
+
+            console.dir( peeledMetricData );
+
+            console.log('finished peeling');
+
             const orderedData = _.orderBy(peeledMetricData, item => {
                 const metaval = item.meta[this.xAxis]
                 return parseFloat(metaval) || metaval
-            })
-            
+            });
+
+            console.log('finished orderedData');
+
             const grouped = this.selectedGroupBy ? _.groupBy(orderedData, a => a.meta[this.selectedGroupBy]) : {"all": orderedData}
             if(!this.selectedAggregateBy) return grouped
 
@@ -357,7 +378,9 @@ export default Vue.extend({
                     return [groupByName, aggregatedValues]
                     
                 }))
-                return aggregated
+
+            console.log('finished aggregated...');
+            return aggregated
         },
     },  // end computed
 

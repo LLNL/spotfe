@@ -5,6 +5,12 @@ BUG: [Vue warn]: Error in render: "TypeError: Cannot read property '85' of undef
     * Can not hover over the X position on compare view.
     * only the middle two points are clickable (is this because our screen isn't wide enough?)
     * https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/?sf=/g/g0/pascal/zdeb/ale3d_regr/pipe&cache=0&groupby=title&aggregate=sum&launchdate=1582131012.2211015,1593337317.7673728
+
+Lazy load:
+    * groupedAndAggregated()
+    * it's a computed field.  first truncate this.runs to 200 entries.  this will allow for the rest of the page to load.
+    * then do setInterval, 1 second later run this.runs, add 1000 entries per second.
+
 Feature: Add support for JSON + Cali
     - don't disable the whole set, just do each run individually.
 

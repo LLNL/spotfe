@@ -40154,24 +40154,32 @@ exports.default = vue_1.default.extend({
       var _this = this;
 
       var yAxisLookup = this.lookupOriginalYAxis(this.yAxis);
+      console.log('start peeling metric data');
       var peeledMetricData = lodash_1.default.map(this.runs, function (run) {
-        var meta = lodash_1.default.fromPairs(lodash_1.default.map(run.meta, function (meta, metaName) {
+        var metaPair = lodash_1.default.map(run.meta, function (meta, metaName) {
           return [metaName, meta.value];
-        }));
-        var data = lodash_1.default.fromPairs(lodash_1.default.map(run.data, function (metrics, funcPath) {
-          return [funcPath, {
-            value: parseFloat(metrics[yAxisLookup])
+        });
+        var meta = lodash_1.default.fromPairs(metaPair);
+        var mapPair = lodash_1.default.map(run.data, function (metrics, funcPath) {
+          var metricsFloat = parseFloat(metrics[yAxisLookup]);
+          var pair = [funcPath, {
+            value: metricsFloat
           }];
-        }));
+          return pair;
+        });
+        var data = lodash_1.default.fromPairs(mapPair);
         return {
           meta: meta,
           data: data
         };
       });
+      console.dir(peeledMetricData);
+      console.log('finished peeling');
       var orderedData = lodash_1.default.orderBy(peeledMetricData, function (item) {
         var metaval = item.meta[_this.xAxis];
         return parseFloat(metaval) || metaval;
       });
+      console.log('finished orderedData');
       var grouped = this.selectedGroupBy ? lodash_1.default.groupBy(orderedData, function (a) {
         return a.meta[_this.selectedGroupBy];
       }) : {
@@ -40245,12 +40253,12 @@ exports.default = vue_1.default.extend({
         });
         return [groupByName, aggregatedValues];
       }));
+      console.log('finished aggregated...');
       return aggregated;
     }
   },
   methods: {
     legendItem: function legendItem(path) {
-      console.dir(path);
       var ret = path.slice(path.lastIndexOf('/') + 1);
       var layman_title = ST.RunDictionaryTranslator.lookupStr(ret);
       return layman_title;
@@ -52415,7 +52423,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56647" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52203" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
