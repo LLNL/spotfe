@@ -364,12 +364,10 @@ export default Vue.extend({
     methods:{
         legendItem( path ) {
 
-            console.dir(path);
             var ret = path.slice(path.lastIndexOf('/') + 1;
 
             var layman_title = ST.RunDictionaryTranslator.lookupStr( ret );
             return layman_title;
-
         },
         //  Returns the original yAxis that looks like this "max#inclusive#duration.time"
         //  the data was originally sent to the FE with those as indexes.
