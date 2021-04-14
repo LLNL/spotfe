@@ -206,7 +206,21 @@ export default Vue.extend({
         },
     },
     computed: {
-        runs(){return this.filenames && window.runs ? window.runs.filter(run => this.filenames.includes(run.meta.datapath.value)): [] },
+        runs(){
+
+            if( this && this.filenames && window.runs ) {
+
+                var fnames = this.filenames;
+                //return window.runs.filter(run => this.filenames.includes(run.meta.datapath.value));
+                var filtered_runs = window.runs.filter( function(run) {
+                    return fnames.includes(run.meta.datapath.value);
+                } );
+
+                return filtered_runs;
+            }
+
+            return [];
+        },
         xAxisList(){
             if (this.filenames.length){
 
