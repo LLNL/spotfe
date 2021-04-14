@@ -40079,6 +40079,21 @@ exports.default = vue_1.default.extend({
         var filtered_runs = window.runs.filter(function (run) {
           return fnames.includes(run.meta.datapath.value);
         });
+
+        if (!window.doFullRuns) {
+          filtered_runs = ST.RunsMeter.meter(filtered_runs);
+          setTimeout(function () {
+            window.doFullRuns = 1;
+            this.runs.push({
+              "filler": 2
+            });
+            this.runs.pop();
+            console.log('Trigger get full runs.');
+          }, 9000);
+        } else {
+          console.log('Got Full.');
+        }
+
         return filtered_runs;
       }
 

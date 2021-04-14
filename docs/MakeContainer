@@ -10,6 +10,7 @@ Lazy load:
     * groupedAndAggregated()
     * it's a computed field.  first truncate this.runs to 200 entries.  this will allow for the rest of the page to load.
     * then do setInterval, 1 second later run this.runs, add 1000 entries per second.
+    * Next: Need to get runs() to be recalculated or AggregatedGrouped() func, in setInterval.
 
 Feature: Add support for JSON + Cali
     - don't disable the whole set, just do each run individually.

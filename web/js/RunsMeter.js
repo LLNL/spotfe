@@ -1,8 +1,15 @@
 ST.RunsMeter = function() {
 
+    var storedRuns_;
+
     var meter_ = function( runs ) {
 
-        runs = runs.slice(0,200);
+        if( !storedRuns_ ) {
+            storedRuns_ = runs;
+        }
+
+        runs = runs.slice(0, 200);
+
         return runs;
     };
 
