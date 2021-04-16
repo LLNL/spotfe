@@ -83,7 +83,13 @@ var sq = function() {
         localStorage.setItem( key, summary );
     };
 
+    var getSummary_ = function() {
+        var key = summaryKey_();
+        return localStorage.getItem( key );
+    };
+
     return {
+        getSummary: getSummary_,
         saveSummary: saveSummary_,
         save: save,
         /*
