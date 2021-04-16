@@ -63,6 +63,8 @@ var sq = function() {
      */
     var reset_ = function() {
 
+
+
         sqs.layout_used = false;
         sq.save();
 
@@ -70,8 +72,19 @@ var sq = function() {
         window.location.reload();
     };
 
+    var summaryKey_ = function() {
+        var path = ST.Utility.get_param('sf');
+        return 'peeledMetricData' + path;
+    };
+
+    var saveSummary_ = function( summary ) {
+
+        var key = summaryKey_();
+        localStorage.setItem( key, summary );
+    };
 
     return {
+        saveSummary: saveSummary_,
         save: save,
         /*
          *  PRECONDITION:
