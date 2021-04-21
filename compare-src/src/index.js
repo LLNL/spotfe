@@ -163,8 +163,7 @@ export class Graph{
 
         // Get New  Data from backend
         let newData;
-
-        var cacheSum = sq.getSummary();
+        var cacheSum = window.cacheSum;
 
         if( cacheSum && !bust_cache ) {
             newData = cacheSum;
@@ -189,7 +188,7 @@ export class Graph{
                 try {
                     newData = JSON.parse(await lorenz(host, `${command} ${dataSetKey} '` + JSON.stringify(cachedRunCtimes) + "'"))
 
-                    sq.saveSummary(newData);
+                    DB.saveSummary(newData);
                 } catch (e) {
                     console.log('Exception: ');
                     console.dir(e);

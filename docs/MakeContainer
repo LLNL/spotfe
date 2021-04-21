@@ -12,6 +12,11 @@ Next:
 - investigate caching the: peeledMetricData and the runsData.
 - should we implement indexedDB?
 
+Advantages of indexedDB:
+1) should be nearly unlimited storage amount
+2) can store objects, rather than limit to strings, so should not need to serialize.
+3) asynchronous, so won't lock up the browser.
+
 Conclusions:
 - smaller runs that can fit in the localSTorage cache limit: 5MB or 25MB are very fast now: just 5 to 6 sec.
     * this is because we no longer have to make an ajax request anymore

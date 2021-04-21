@@ -52053,7 +52053,7 @@ var Graph = /*#__PURE__*/function () {
                   cachedRunCtimes: cachedRunCtimes
                 }; // Get New  Data from backend
 
-                cacheSum = sq.getSummary();
+                cacheSum = window.cacheSum;
 
                 if (!(cacheSum && !bust_cache)) {
                   _context3.next = 22;
@@ -52099,7 +52099,7 @@ var Graph = /*#__PURE__*/function () {
               case 35:
                 _context3.t2 = _context3.sent;
                 newData = _context3.t1.parse.call(_context3.t1, _context3.t2);
-                sq.saveSummary(newData);
+                DB.saveSummary(newData);
                 _context3.next = 45;
                 break;
 
