@@ -8,7 +8,7 @@ ST.RunsMeter = function() {
             storedRuns_ = runs;
         }
 
-        runs = runs.slice(0, 200);
+        runs = runs.slice(0, 100);
 
         return runs;
     };

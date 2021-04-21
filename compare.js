@@ -40078,21 +40078,26 @@ exports.default = vue_1.default.extend({
 
         var filtered_runs = window.runs.filter(function (run) {
           return fnames.includes(run.meta.datapath.value);
-        });
+        }); //var localGroupedAndAggregated = this.groupedAndAggregated;
 
-        if (!window.doFullRuns) {
-          filtered_runs = ST.RunsMeter.meter(filtered_runs);
-          setTimeout(function () {
-            window.doFullRuns = 1;
-            this.runs.push({
-              "filler": 2
-            });
-            this.runs.pop();
-            console.log('Trigger get full runs.');
-          }, 9000);
-        } else {
-          console.log('Got Full.');
-        }
+        /*                if( !window.doFullRuns ) {
+        
+                            filtered_runs = ST.RunsMeter.meter( filtered_runs );
+        
+                            setTimeout( function() {
+        
+                                window.doFullRuns = 1;
+                                this.runs.push({"filler": 2});
+                                this.runs.pop();
+        
+                                $('.updateCompareView').trigger('click');
+        
+                                console.log('Trigger get full runs.');
+        
+                            }, 4000 );
+                        } else {
+                            console.log('Got Full.');
+                        }*/
 
         return filtered_runs;
       }
@@ -40175,24 +40180,39 @@ exports.default = vue_1.default.extend({
 
       var yAxisLookup = this.lookupOriginalYAxis(this.yAxis);
       console.log('start peeling metric data');
-      var peeledMetricData = lodash_1.default.map(this.runs, function (run) {
-        var metaPair = lodash_1.default.map(run.meta, function (meta, metaName) {
-          return [metaName, meta.value];
+      var countLoops = 0;
+      var peeledMetricData;
+      var path = ST.Utility.get_param('sf');
+      var key = 'peeledMetricData' + path;
+      console.log('Using peel key: ' + key);
+      var localPeeled = localStorage.getItem(key);
+
+      if (localPeeled && false) {
+        peeledMetricData = localPeeled;
+      } else {
+        peeledMetricData = lodash_1.default.map(this.runs, function (run) {
+          var metaPair = lodash_1.default.map(run.meta, function (meta, metaName) {
+            return [metaName, meta.value];
+          });
+          var meta = lodash_1.default.fromPairs(metaPair);
+          var mapPair = lodash_1.default.map(run.data, function (metrics, funcPath) {
+            var metricsFloat = parseFloat(metrics[yAxisLookup]);
+            var pair = [funcPath, {
+              value: metricsFloat
+            }];
+            countLoops++;
+            return pair;
+          });
+          var data = lodash_1.default.fromPairs(mapPair);
+          return {
+            meta: meta,
+            data: data
+          };
         });
-        var meta = lodash_1.default.fromPairs(metaPair);
-        var mapPair = lodash_1.default.map(run.data, function (metrics, funcPath) {
-          var metricsFloat = parseFloat(metrics[yAxisLookup]);
-          var pair = [funcPath, {
-            value: metricsFloat
-          }];
-          return pair;
-        });
-        var data = lodash_1.default.fromPairs(mapPair);
-        return {
-          meta: meta,
-          data: data
-        };
-      });
+        localStorage.setItem(key, peeledMetricData);
+      }
+
+      console.log('countLoops = ' + countLoops);
       console.dir(peeledMetricData);
       console.log('finished peeling');
       var orderedData = lodash_1.default.orderBy(peeledMetricData, function (item) {
@@ -51970,7 +51990,7 @@ var Graph = /*#__PURE__*/function () {
     key: "getData",
     value: function () {
       var _getData = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(host, command, dataSetKey) {
-        var cachedDataGet, bust_cache, cachedData, cachedRunCtimes, x, dataRequest, newData, response, runs0, deletedRuns, baseMetrics, metric, funcPaths, metricNames, runs, filenames, summary, visibleCharts, _i4, _Object$entries4, _Object$entries4$_i, filename, fileContents, barCharts, _i5, _Object$entries5, _Object$entries5$_i, globalName, globalValue, globType, show;
+        var cachedDataGet, bust_cache, cachedData, cachedRunCtimes, x, dataRequest, newData, cacheSum, response, runs0, deletedRuns, baseMetrics, metric, funcPaths, metricNames, runs, filenames, summary, visibleCharts, _i4, _Object$entries4, _Object$entries4$_i, filename, fileContents, barCharts, _i5, _Object$entries5, _Object$entries5$_i, globalName, globalValue, globType, show;
 
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
@@ -51989,7 +52009,7 @@ var Graph = /*#__PURE__*/function () {
                   RunGlobalMeta: {},
                   RunSetMeta: {}
                 };
-                console.log('Got a new cachedData.');
+                console.log('Got a new cachedData...');
                 _context3.next = 12;
                 break;
 
@@ -52033,12 +52053,25 @@ var Graph = /*#__PURE__*/function () {
                   cachedRunCtimes: cachedRunCtimes
                 }; // Get New  Data from backend
 
-                if (!isContainer) {
-                  _context3.next = 25;
+                cacheSum = sq.getSummary();
+
+                if (!(cacheSum && !bust_cache)) {
+                  _context3.next = 22;
                   break;
                 }
 
-                _context3.next = 19;
+                newData = cacheSum;
+                console.log('was able to find cache.');
+                _context3.next = 45;
+                break;
+
+              case 22:
+                if (!isContainer) {
+                  _context3.next = 31;
+                  break;
+                }
+
+                _context3.next = 25;
                 return fetch("/getdata", {
                   method: "post",
                   headers: {
@@ -52047,32 +52080,33 @@ var Graph = /*#__PURE__*/function () {
                   body: JSON.stringify(dataRequest)
                 });
 
-              case 19:
+              case 25:
                 response = _context3.sent;
-                _context3.next = 22;
+                _context3.next = 28;
                 return response.json();
 
-              case 22:
+              case 28:
                 newData = _context3.sent;
-                _context3.next = 38;
+                _context3.next = 45;
                 break;
 
-              case 25:
-                _context3.prev = 25;
+              case 31:
+                _context3.prev = 31;
                 _context3.t1 = JSON;
-                _context3.next = 29;
+                _context3.next = 35;
                 return lorenz(host, "".concat(command, " ").concat(dataSetKey, " '") + JSON.stringify(cachedRunCtimes) + "'");
 
-              case 29:
+              case 35:
                 _context3.t2 = _context3.sent;
                 newData = _context3.t1.parse.call(_context3.t1, _context3.t2);
-                _context3.next = 38;
+                sq.saveSummary(newData);
+                _context3.next = 45;
                 break;
 
-              case 33:
-                _context3.prev = 33;
-                _context3.t3 = _context3["catch"](25);
-                console.log('Exception:');
+              case 40:
+                _context3.prev = 40;
+                _context3.t3 = _context3["catch"](31);
+                console.log('Exception: ');
                 console.dir(_context3.t3);
                 newData = {
                   Runs: {},
@@ -52081,7 +52115,7 @@ var Graph = /*#__PURE__*/function () {
                   RunSetMeta: {}
                 };
 
-              case 38:
+              case 45:
                 console.log('newData:  ');
                 console.dir(newData); //newData = ST.RunDictionaryTranslator.translate( newData );
 
@@ -52105,10 +52139,10 @@ var Graph = /*#__PURE__*/function () {
                 });
                 window.cachedData = cachedData; // cache newest version of data
 
-                _context3.next = 53;
+                _context3.next = 60;
                 return _localforage.default.setItem(dataSetKey, cachedData);
 
-              case 53:
+              case 60:
                 // add in datsetkey and datakey to globals
                 _lodash.default.forEach(cachedData.Runs, function (run, filename) {
                   run.Globals = run.Globals || {};
@@ -52192,20 +52226,20 @@ var Graph = /*#__PURE__*/function () {
                     table: []
                   }
                 };
-                _context3.next = 70;
+                _context3.next = 77;
                 return _localforage.default.getItem("show:" + dataSetKey);
 
-              case 70:
+              case 77:
                 _context3.t4 = _context3.sent;
 
                 if (_context3.t4) {
-                  _context3.next = 73;
+                  _context3.next = 80;
                   break;
                 }
 
                 _context3.t4 = defaultVisibleCharts;
 
-              case 73:
+              case 80:
                 visibleCharts = _context3.t4;
 
                 for (_i4 = 0, _Object$entries4 = Object.entries(cachedData.Runs); _i4 < _Object$entries4.length; _i4++) {
@@ -52236,29 +52270,29 @@ var Graph = /*#__PURE__*/function () {
                   });
                 }
 
-                _context3.next = 79;
+                _context3.next = 86;
                 return _localforage.default.getItem('scatterplots:' + this.dataSetKey);
 
-              case 79:
+              case 86:
                 _context3.t5 = _context3.sent;
 
                 if (_context3.t5) {
-                  _context3.next = 82;
+                  _context3.next = 89;
                   break;
                 }
 
                 _context3.t5 = [];
 
-              case 82:
+              case 89:
                 summary.layout.scatterplots = _context3.t5;
                 return _context3.abrupt("return", summary);
 
-              case 84:
+              case 91:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, this, [[25, 33]]);
+        }, _callee3, this, [[31, 40]]);
       }));
 
       function getData(_x10, _x11, _x12) {
@@ -52443,7 +52477,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52203" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49495" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

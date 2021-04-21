@@ -216,23 +216,26 @@ export default Vue.extend({
                     return fnames.includes(run.meta.datapath.value);
                 } );
 
+                //var localGroupedAndAggregated = this.groupedAndAggregated;
 
-                if( !window.doFullRuns ) {
+/*                if( !window.doFullRuns ) {
 
                     filtered_runs = ST.RunsMeter.meter( filtered_runs );
 
                     setTimeout( function() {
 
                         window.doFullRuns = 1;
-                        this.runs.push({"filler":2});
+                        this.runs.push({"filler": 2});
                         this.runs.pop();
+
+                        $('.updateCompareView').trigger('click');
 
                         console.log('Trigger get full runs.');
 
-                    }, 9000 );
+                    }, 4000 );
                 } else {
                     console.log('Got Full.');
-                }
+                }*/
 
                 return filtered_runs;
             }
@@ -321,27 +324,42 @@ export default Vue.extend({
             var yAxisLookup = this.lookupOriginalYAxis( this.yAxis );
 
             console.log('start peeling metric data');
+            var countLoops = 0;
+            var peeledMetricData;
 
-            let peeledMetricData = _.map(this.runs, run => {
+            var path = ST.Utility.get_param('sf');
+            var key = 'peeledMetricData' + path;
+            console.log('Using peel key: ' + key);
 
-                var metaPair = _.map(run.meta, (meta, metaName) => [metaName, meta.value]);
-                const meta = _.fromPairs( metaPair )
+            var localPeeled = localStorage.getItem(key);
 
-                var mapPair = _.map(run.data, function(metrics, funcPath) {
+            if( localPeeled && false ) {
+                peeledMetricData = localPeeled;
+            } else {
+                peeledMetricData = _.map(this.runs, run => {
 
-                    var metricsFloat = parseFloat(metrics[yAxisLookup]);
-                    var pair = [funcPath, {value: metricsFloat}];
+                    var metaPair = _.map(run.meta, (meta, metaName) => [metaName, meta.value]);
+                    const meta = _.fromPairs(metaPair);
 
-                    return pair;
+                    var mapPair = _.map(run.data, function (metrics, funcPath) {
+
+                        var metricsFloat = parseFloat(metrics[yAxisLookup]);
+                        var pair = [funcPath, {value: metricsFloat}];
+                        countLoops++;
+
+                        return pair;
+                    });
+
+                    const data = _.fromPairs(mapPair)
+
+                    return {meta, data}
                 });
 
-                const data = _.fromPairs( mapPair )
+                localStorage.setItem(key, peeledMetricData);
+            }
 
-                return {meta, data}
-            })
-
+            console.log( 'countLoops = ' + countLoops );
             console.dir( peeledMetricData );
-
             console.log('finished peeling');
 
             const orderedData = _.orderBy(peeledMetricData, item => {

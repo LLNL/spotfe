@@ -74,21 +74,69 @@ var sq = function() {
 
     var summaryKey_ = function() {
         var path = ST.Utility.get_param('sf');
-        return 'peeledMetricData' + path;
+        return 'summaryStore' + path;
     };
 
     var saveSummary_ = function( summary ) {
 
         var key = summaryKey_();
-        localStorage.setItem( key, summary );
+        var json = JSON.stringify(summary);
+        console.log( "length of storage: " + json.length );
+
+        try {
+            localStorage.setItem(key, json);
+        } catch (e) {
+
+            //  probably localstorage filled up and we're clearing it now.
+            console.dir(e);
+            localStorage.clear();
+        }
     };
 
     var getSummary_ = function() {
         var key = summaryKey_();
-        return localStorage.getItem( key );
+        var str = localStorage.getItem( key );
+
+        //  empty cache.
+        if( str === '' ) {
+            return false;
+        }
+
+        var obj = JSON.parse(str);
+        return obj;
+    };
+
+    var peeledKey_ = function() {
+
+        var path = ST.Utility.get_param('sf');
+        return 'peeledStore' + path;
+    };
+
+    var savePeeled_ = function( peeled ) {
+
+        var key = peeledKey_();
+        var json = JSON.stringify(peeled);
+
+        localStorage.setItem( key, json );
+    };
+
+    var getPeeled_ = function() {
+
+        var key = peeledKey_();
+        var str = localStorage.getItem( key );
+
+        //  empty cache.
+        if( str === '' ) {
+            return false;
+        }
+
+        var obj = JSON.parse(str);
+        return obj;
     };
 
     return {
+        savePeeled: savePeeled_,
+        getPeeled: getPeeled_,
         getSummary: getSummary_,
         saveSummary: saveSummary_,
         save: save,

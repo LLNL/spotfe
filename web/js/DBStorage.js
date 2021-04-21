@@ -1,17 +1,47 @@
 // This works on all devices/browsers, and uses IndexedDBShim as a final fallback
 var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB || window.shimIndexedDB;
+var DB = {};
 
 // Open (or create) the database
 var open = indexedDB.open("MyDatabase", 1);
+
+DB.cacheStore = "cacheStore";
+DB.open = indexedDB.open( DB.cacheStore );
 
 // Create the schema
 open.onupgradeneeded = function() {
     var db = open.result;
     var store = db.createObjectStore("MyObjectStore", {keyPath: "id"});
     var index = store.createIndex("NameIndex", ["name.last", "name.first"]);
+
+    DB.store = db.createObjectStore( DB.cacheStore, {keyPath: "id"});
 };
 
 open.onsuccess = function() {
+
+    DB.db = DB.open.result;
+    DB.tx = DB.db.transaction(DB.cacheStore, "readwrite");
+};
+
+DB.save = function( id, obj ) {
+
+    var store = DB.tx.objectStore(DB.cacheStore);
+    store.put({id: id, value: obj});
+};
+
+DB.load = function( id, callback ) {
+
+    var store = DB.tx.objectStore(DB.cacheStore);
+    var getObj = store.get( id );
+
+    getObj.onsuccess = function() {
+
+        console.dir( this );
+        callback();
+    };
+};
+
+var other_open_success = function() {
     // Start a new transaction
     var db = open.result;
     var tx = db.transaction("MyObjectStore", "readwrite");

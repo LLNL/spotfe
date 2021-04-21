@@ -118,6 +118,7 @@ export class Graph{
         }
     }
 
+
     async getData(host, command, dataSetKey){
 
         var cachedDataGet;
@@ -132,7 +133,7 @@ export class Graph{
                 RunSetMeta: {}
             }
 
-            console.log('Got a new cachedData.');
+            console.log('Got a new cachedData...');
 
         } else {
 
@@ -161,29 +162,39 @@ export class Graph{
         const dataRequest = {dataSetKey, cachedRunCtimes}
 
         // Get New  Data from backend
-        let newData
+        let newData;
 
-        if(isContainer) {
-            // first see if there is a data endpoint:  used in docker container
-            let response = await fetch("/getdata", { 
-                method: "post", 
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify(dataRequest)
-            })
+        var cacheSum = sq.getSummary();
 
-            newData = await response.json()
-            
+        if( cacheSum && !bust_cache ) {
+            newData = cacheSum;
+            console.log('was able to find cache.');
+
         } else {
-            //else we do a Lorenz call at LLNL
-            try{
-                newData = JSON.parse(await lorenz(host, `${command} ${dataSetKey} '` + JSON.stringify(cachedRunCtimes) + "'" ))
 
-            }catch (e){
-                console.log('Exception:');
-                console.dir(e);
-                newData = {Runs: {}, RunDataMeta: {}, RunGlobalMeta: {}, RunSetMeta: {}}
+            if (isContainer) {
+                // first see if there is a data endpoint:  used in docker container
+                let response = await fetch("/getdata", {
+                    method: "post",
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(dataRequest)
+                });
+
+                newData = await response.json()
+
+            } else {
+                //else we do a Lorenz call at LLNL
+                try {
+                    newData = JSON.parse(await lorenz(host, `${command} ${dataSetKey} '` + JSON.stringify(cachedRunCtimes) + "'"))
+
+                    sq.saveSummary(newData);
+                } catch (e) {
+                    console.log('Exception: ');
+                    console.dir(e);
+                    newData = {Runs: {}, RunDataMeta: {}, RunGlobalMeta: {}, RunSetMeta: {}}
+                }
             }
         }
 
@@ -309,6 +320,8 @@ export class Graph{
         }
 
         summary.layout.scatterplots = await localforage.getItem('scatterplots:' + this.dataSetKey) || []
+
+        //sq.saveSummary(summary);
         return summary
     }
 

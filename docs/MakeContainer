@@ -1,6 +1,25 @@
-Next:
 DONE - initial implementation: lazy load dictionary lookups.
     * just load without dictionaryTranslation.  then only do dictionary lookups for things that are being displayed.
+
+- implement indexedDB: DBStorage.js in order to replace:
+    sq.saveSummary and sq.getSummary()
+
+Next:
+- let's try caching newData: can not because localStorage has a limit of 25MB total, 5 MB per key.
+    * this is by design and can not be changed.
+- investigate caching the entire ajax load, instead of making an ajax load on every page load.
+    * just use "cachedData"
+- investigate caching the: peeledMetricData and the runsData.
+- should we implement indexedDB?
+
+Conclusions:
+- smaller runs that can fit in the localSTorage cache limit: 5MB or 25MB are very fast now: just 5 to 6 sec.
+    * this is because we no longer have to make an ajax request anymore
+- the larger run of everything: still takes 2m to run.
+- 46 Seconds on the front end due to double for loop of Runs, followed by data within those runs
+- needs to make 13 million loops.
+
+
 BUG: [Vue warn]: Error in render: "TypeError: Cannot read property '85' of undefined"
     * Can not hover over the X position on compare view.
     * only the middle two points are clickable (is this because our screen isn't wide enough?)
@@ -22,6 +41,12 @@ DONE - write to file caching
 DONE - able to read file for caching and return it.
 DONE - 1. Hook up BE to FE
 DONE - Translate dictionary so we're not showing "ab" anymore, show the actual strings
+
+2:38s
+TTFB        13s
+Download    60s
+Process run data    46s (2 sections, where double for loop yields 13661648)
+Other stuff 15s - 30s.
 
 /usr/gapps/spot/datasets/newdemo/user
 - Ale 3d performance:
@@ -642,3 +667,10 @@ pri_str = '{"Runs":' + table_text +
 ', "runCtimes":' + json.dumps(output["runCtimes"]) +
 '}'
 
+Update May 2020: Chrome now lets an origin use 60% of the storage device's space (Real nitty gritty: "storage device" is the partition containing the chrome profile directory). Updated article here https://web.dev/storage-for-the-web/#how-much
+
+The rule of thumb is 6% (edit 2015-Jul: was 10%) of the available space on the user's hard drive, less if your origin is using websql, appcache or the filesystem api. The MDN doc mentioning 5mb was outdated and has been updated. The gory details about the current policy are here: https://developer.chrome.com/apps/offline_storage
+
+Note some annoying subtleties:
+
+There is no PERSISTENT storage for indexeddb, only the stuff in the link above about TEMPORARY applies.
