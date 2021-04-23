@@ -40179,12 +40179,11 @@ exports.default = vue_1.default.extend({
       var _this = this;
 
       var yAxisLookup = this.lookupOriginalYAxis(this.yAxis);
-      console.log('start peeling metric data');
       var countLoops = 0;
       var peeledMetricData;
       var path = ST.Utility.get_param('sf');
       var key = 'peeledMetricData' + path;
-      console.log('Using peel key: ' + key);
+      console.log('Started peeling, Using peel key: ' + key);
       var localPeeled = localStorage.getItem(key);
 
       if (localPeeled && false) {
@@ -40214,12 +40213,10 @@ exports.default = vue_1.default.extend({
 
       console.log('countLoops = ' + countLoops);
       console.dir(peeledMetricData);
-      console.log('finished peeling');
       var orderedData = lodash_1.default.orderBy(peeledMetricData, function (item) {
         var metaval = item.meta[_this.xAxis];
         return parseFloat(metaval) || metaval;
       });
-      console.log('finished orderedData');
       var grouped = this.selectedGroupBy ? lodash_1.default.groupBy(orderedData, function (a) {
         return a.meta[_this.selectedGroupBy];
       }) : {
@@ -52477,7 +52474,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49495" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50360" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

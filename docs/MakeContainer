@@ -1,8 +1,34 @@
+Next do:
+    * implement cache invalidation for that one file.
+    * deploy to dev and let marty/legendre try it out.
+    * cali & JSON file mixed support.
+    * support for running our script in their build system.
+    * /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/ale3d_regr/xno '{}' --writeToFile=1
+
+
 DONE - initial implementation: lazy load dictionary lookups.
     * just load without dictionaryTranslation.  then only do dictionary lookups for things that are being displayed.
 
+Was able to get it down to 2 minutes
+- the larger run of everything: still takes 2m to run.
+- 12 TTFB, 10 - 50 sec to send to FE.
+- 46 Seconds on the front end due to double for loop of Runs, followed by data within those runs
+- needs to make 13 million loops.
+- smaller runs that can fit in the localSTorage cache limit: 5MB or 25MB are very fast now: just 5 to 6 sec.
+    * this is because we no longer have to make an ajax request anymore
+
+
+Next do after Ale3d:
+    * Checkbox what is checked - encode that in the URL, so that checkboxes get checked.
+    * pop up or list of other run based buttons (like walltime)
+
+
+IndexedDB on FE:
 - implement indexedDB: DBStorage.js in order to replace:
     sq.saveSummary and sq.getSummary()
+- by bypassing the AJAX call, was able to get to get it down to 1 min.
+* still need to implement cache invalidation:
+    * make an ajax call to figure out the last time that file was updated.
 
 Next:
 - let's try caching newData: can not because localStorage has a limit of 25MB total, 5 MB per key.
@@ -17,12 +43,6 @@ Advantages of indexedDB:
 2) can store objects, rather than limit to strings, so should not need to serialize.
 3) asynchronous, so won't lock up the browser.
 
-Conclusions:
-- smaller runs that can fit in the localSTorage cache limit: 5MB or 25MB are very fast now: just 5 to 6 sec.
-    * this is because we no longer have to make an ajax request anymore
-- the larger run of everything: still takes 2m to run.
-- 46 Seconds on the front end due to double for loop of Runs, followed by data within those runs
-- needs to make 13 million loops.
 
 
 BUG: [Vue warn]: Error in render: "TypeError: Cannot read property '85' of undefined"

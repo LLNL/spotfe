@@ -323,13 +323,12 @@ export default Vue.extend({
 
             var yAxisLookup = this.lookupOriginalYAxis( this.yAxis );
 
-            console.log('start peeling metric data');
             var countLoops = 0;
             var peeledMetricData;
 
             var path = ST.Utility.get_param('sf');
             var key = 'peeledMetricData' + path;
-            console.log('Using peel key: ' + key);
+            console.log('Started peeling, Using peel key: ' + key);
 
             var localPeeled = localStorage.getItem(key);
 
@@ -360,14 +359,11 @@ export default Vue.extend({
 
             console.log( 'countLoops = ' + countLoops );
             console.dir( peeledMetricData );
-            console.log('finished peeling');
 
             const orderedData = _.orderBy(peeledMetricData, item => {
                 const metaval = item.meta[this.xAxis]
                 return parseFloat(metaval) || metaval
             });
-
-            console.log('finished orderedData');
 
             const grouped = this.selectedGroupBy ? _.groupBy(orderedData, a => a.meta[this.selectedGroupBy]) : {"all": orderedData}
             if(!this.selectedAggregateBy) return grouped

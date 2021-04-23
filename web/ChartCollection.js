@@ -471,15 +471,23 @@ ST.ChartCollection = function() {
 
         ST.graph = new Graph('#compare_bottom_outer');
 
-        ST.graph.getData(host, command, file)
-            .then(summary => {
+        DB.init( function() {
 
-                ST.Utility.check_error( summary );
-                console.log('summary:', summary);
-                ST.CallSpot.handle_success2(summary);
+            DB.getSummary(function (cacheSum) {
 
-            }).finally( summary => {
-            ST.Utility.check_error( summary );
+                window.cacheSum = cacheSum;
+                ST.graph.getData(host, command, file)
+                    .then(summary => {
+
+                        ST.Utility.check_error( summary );
+                        console.log('summary:', summary);
+                        ST.CallSpot.handle_success2(summary);
+
+                    }).finally( summary => {
+
+                    ST.Utility.check_error( summary );
+                });
+            });
         });
 
         setup_pars_();

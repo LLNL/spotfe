@@ -4,21 +4,24 @@ var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedD
 var DB = {};
 
 DB.cacheStore = "cacheStore0";
-DB.open = indexedDB.open( DB.cacheStore );
+
+DB.init = function( callback ) {
+
+    DB.open = indexedDB.open(DB.cacheStore);
 
 // Create the schema
-DB.open.onupgradeneeded = function() {
+    DB.open.onupgradeneeded = function () {
 
-    DB.db = DB.open.result;
-    DB.store = DB.db.createObjectStore( DB.cacheStore, {keyPath: "id"});
-};
+        DB.db = DB.open.result;
+        DB.store = DB.db.createObjectStore(DB.cacheStore, {keyPath: "id"});
+    };
 
-DB.open.onsuccess = function() {
+    DB.open.onsuccess = function () {
 
-    DB.db = DB.open.result;
-    DB.tx = DB.db.transaction(DB.cacheStore, "readwrite");
-
-    onceGetSummary();
+        DB.db = DB.open.result;
+        DB.tx = DB.db.transaction(DB.cacheStore, "readwrite");
+        callback();
+    };
 };
 
 DB.save = function( id, obj ) {
