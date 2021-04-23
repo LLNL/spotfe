@@ -1,0 +1,13 @@
+Keep in mind there are two caches at work: a front end one and a back end one.
+If, you’re looking at a very large dataset (takes longer than 60 seconds of TTFB), then you will need to generate the back end cache file like so: (as discussed earlier)
+
+/usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/example_directory '{}' --writeToFile=1
+
+This will generate a file within that directory called: cacheToFE.json
+
+Otherwise, if the dataset is too large, it will timeout and the page will NOT load, ever.
+However, if the cacheToFE.json file is not there, the BE will attempt to return a response the way we have been before without the benefit of the cache file.
+
+If looking at the entire Ale3D data set (the martyMCF directory given to me), you can expect the following performance: (assuming the BE cache file was generated first)
+First Load -> 2 to 2.5 minutes, or less if your connection is fast.
+2nd+ load -> about 1 minute.
