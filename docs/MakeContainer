@@ -1,7 +1,12 @@
 Next do:
-    * implement cache invalidation for that one file.
+    * implement cache invalidation for that one file:
+        * still need to save cache Date
+        * get cache Date
+        * compare cache date to mtime to see if we should bust the cache.
+    /usr/gapps/spot/sand/spot.py getCacheFileDate /g/g0/pascal/zdeb/a0/
     * deploy to dev and let marty/legendre try it out.
     * cali & JSON file mixed support.
+    * make sure that container still works.
     * support for running our script in their build system.
     * /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/ale3d_regr/xno '{}' --writeToFile=1
 

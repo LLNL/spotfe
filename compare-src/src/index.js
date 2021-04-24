@@ -121,8 +121,22 @@ export class Graph{
 
     async getData(host, command, dataSetKey){
 
+        console.log('host=' + host + '   command=' + command );
+
+        var arr = command.split(' ');
+        var spotPy = arr[0];
+
+        var comm = spotPy + ` getCacheFileDate ${dataSetKey}`;
+        var res = await lorenz(host, comm);
+        var cacheResult = JSON.parse(res);
+        var mtime = cacheResult.mtime;
+
+        console.dir(cacheResult);
+
         var cachedDataGet;
         var bust_cache = ST.Utility.get_param("cache") === "0";
+
+
 
         if( bust_cache ) {
 
