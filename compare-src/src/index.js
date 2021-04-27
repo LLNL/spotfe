@@ -189,7 +189,7 @@ export class Graph{
             bust_cache = true;
         }
 
-        if( cacheSum && cacheSum.summary && !bust_cache ) {
+        if( cacheSum && cacheSum.summary && !bust_cache && !isContainer ) {
 
             newData = cacheSum.summary;
             console.log('was able to find cache.');

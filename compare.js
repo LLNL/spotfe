@@ -52071,7 +52071,7 @@ var Graph = /*#__PURE__*/function () {
                   bust_cache = true;
                 }
 
-                if (!(cacheSum && cacheSum.summary && !bust_cache)) {
+                if (!(cacheSum && cacheSum.summary && !bust_cache && !isContainer)) {
                   _context3.next = 35;
                   break;
                 }
