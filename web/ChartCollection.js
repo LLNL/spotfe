@@ -476,6 +476,7 @@ ST.ChartCollection = function() {
             DB.getSummary(function (cacheSum) {
 
                 window.cacheSum = cacheSum;
+
                 ST.graph.getData(host, command, file)
                     .then(summary => {
 

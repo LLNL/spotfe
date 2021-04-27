@@ -59,7 +59,14 @@ DB.summaryKey = function() {
 DB.saveSummary = function( summary ) {
 
     var key = DB.summaryKey();
-    DB.save( key, summary );
+    var epochDate = parseInt( Date.now() / 1000 );
+
+    var summaryWrap = {
+        'summary': summary,
+        'date': epochDate
+    };
+
+    DB.save( key, summaryWrap );
 };
 
 DB.getSummary = function( callback ) {

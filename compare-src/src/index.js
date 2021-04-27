@@ -161,7 +161,7 @@ export class Graph{
         }
 
         const cachedData = cachedDataGet;
-        const cachedRunCtimes = cachedData.runCtimes || {}
+        const cachedRunCtimes = cachedData.runCtimes || {};
 
         //  Round to prevent string from being too long.
         for( var x in cachedRunCtimes ) {
@@ -173,17 +173,30 @@ export class Graph{
             }
         }
 
-        const dataRequest = {dataSetKey, cachedRunCtimes}
+        const dataRequest = {dataSetKey, cachedRunCtimes};
 
         // Get New  Data from backend
         let newData;
-        var cacheSum = window.cacheSum;
 
-        if( cacheSum && !bust_cache ) {
-            newData = cacheSum;
+        var cacheSum = window.cacheSum;
+        var cacheDate = window.cacheSum ? window.cacheSum.date : 0;
+
+        console.log('mtime: ' + mtime + '   cacheDate=' + cacheDate);
+
+        //  if the file modification time for the server side cache is newer then use it.
+        if( mtime > cacheDate ) {
+            console.log('mtime is newer so need to bust cache.');
+            bust_cache = true;
+        }
+
+        if( cacheSum && cacheSum.summary && !bust_cache ) {
+
+            newData = cacheSum.summary;
             console.log('was able to find cache.');
 
         } else {
+
+            console.log('could not find cache.');
 
             if (isContainer) {
                 // first see if there is a data endpoint:  used in docker container
