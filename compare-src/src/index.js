@@ -127,7 +127,12 @@ export class Graph{
         var spotPy = arr[0];
 
         var comm = spotPy + ` getCacheFileDate ${dataSetKey}`;
-        var res = await lorenz(host, comm);
+        var res = '{"mtime": 3000900800}';
+
+        if( !isContainer ) {
+            res = await lorenz(host, comm);
+        }
+
         var cacheResult = JSON.parse(res);
         var mtime = cacheResult.mtime;
 
@@ -199,6 +204,7 @@ export class Graph{
             console.log('could not find cache.');
 
             if (isContainer) {
+
                 // first see if there is a data endpoint:  used in docker container
                 let response = await fetch("/getdata", {
                     method: "post",

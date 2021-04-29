@@ -4,9 +4,9 @@ DONE - implement cache invalidation for that one file:
         * compare cache date to mtime to see if we should bust the cache.
     /usr/gapps/spot/sand/spot.py getCacheFileDate /g/g0/pascal/zdeb/a0/
 Next do:
+    * make sure that container still works.
     * deploy to dev and let marty/legendre try it out.
     * cali & JSON file mixed support.
-    * make sure that container still works.
     * support for running our script in their build system.
     * /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/ale3d_regr/xno '{}' --writeToFile=1
 
@@ -408,9 +408,11 @@ docker build -t spot2 --build-arg DEFAULT_SPOTPW=see .
 docker rm spot2_debug6
 
 docker build -t spot2 .
-docker run -v /Users/aschwanden1/datasets/:/data -p 8080:8080/tcp -p 8888:8888/tcp --name spot2_debug17 spot2
+docker run -v /Users/aschwanden1/datasets/:/data -p 8080:8080/tcp -p 8888:8888/tcp --name spot2_debug20 spot2
 
-docker exec -it spot2_debug17 /bin/bash
+http://localhost:8080/?sf=lul_sept_28_timeseries
+
+docker exec -it spot2_da5 /bin/bash
 
 The above will start a debugging session where you or on the docker image:
 (base) root@bbe7b70e2409:/usr/gapps/spot# ls /data/lul_sept_28_timeseries/
@@ -432,27 +434,6 @@ Put data in here: /install/spot2_container/spotbe/demos
 From Legendre:
 I’ve updated Joe’s SPOT container and added instructions in the README.md for how to build and run it.  It mostly works, but I’m hitting a couple issues:
 
-Task:
-The walltime page is broken.  It tries to access lc.llnl.gov.
-Instead it should access the containers Node.js backend.
-You can see examples of the backend in the container’s app.js code.
-Can you look into making the FE go through app.js when in the container?
-If I push too many files to multijupyter it just hangs rather than giving an error message.
-
-
- Spot2 ready to go with the exception of the container errors you mentioned.
-
-Container is the only blocker that I know of.
-
-In order to resolve the container issue, I first have to get it working.
-I’m working on 2 fronts:
-Try to get docker working OR
-Try to get Charliecloud working
-
-
-Unfortunately, I’m running into issues with both of these right now:
-Installing Charliecloud – getting a fatal error because autoreconf is not installed.  I need to install this on mac OS X.  Also getting an error when installing autoconf:
-Enter PIN for 'Certificate For PIV Authentication (aschwanden1)':
 
 
 Docker: I’m getting a build error on this command: docker build -t spot2 .
@@ -633,69 +614,6 @@ But, could drop that by:
 Get down to 80 MB.
 
 
-
-
-(base) [pascal@rzslic7:sand]$ cat ~/zdeb/perf/ppa0 | grep -v 'problem' | grep -v 'generator' | awk '$4 > 0.04'
-   Ordered by: standard name
-   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
-  975/186    0.001    0.000    0.163    0.001 <frozen importlib._bootstrap>:1009(_handle_fromlist)
-   279/17    0.000    0.000    0.208    0.012 <frozen importlib._bootstrap>:211(_call_with_frames_removed)
-   184/17    0.001    0.000    0.217    0.013 <frozen importlib._bootstrap>:663(_load_unlocked)
-      192    0.001    0.000    0.048    0.000 <frozen importlib._bootstrap>:882(_find_spec)
-   195/16    0.001    0.000    0.222    0.014 <frozen importlib._bootstrap>:948(_find_and_load_unlocked)
-   195/16    0.001    0.000    0.223    0.014 <frozen importlib._bootstrap>:978(_find_and_load)
-      189    0.001    0.000    0.045    0.000 <frozen importlib._bootstrap_external>:1240(_get_spec)
-      189    0.000    0.000    0.046    0.000 <frozen importlib._bootstrap_external>:1272(find_spec)
-      383    0.003    0.000    0.043    0.000 <frozen importlib._bootstrap_external>:1356(find_spec)
-   141/17    0.000    0.000    0.216    0.013 <frozen importlib._bootstrap_external>:722(exec_module)
-      141    0.002    0.000    0.066    0.000 <frozen importlib._bootstrap_external>:793(get_code)
-        1    0.058    0.058   81.091   81.091 RunTable.py:137(make_compare_str)
-        1    0.407    0.407   83.717   83.717 RunTable.py:188(render)
-        1    2.279    2.279    3.029    3.029 RunTable.py:9(__init__)
-        1    0.000    0.000    0.163    0.163 __init__.py:106(<module>)
-        1    0.000    0.000    0.047    0.047 __init__.py:13(<module>)
-       56    0.001    0.000    4.763    0.085 __init__.py:274(load)
-       58    0.000    0.000    6.791    0.117 __init__.py:299(loads)
-        1    0.000    0.000    0.047    0.047 __init__.py:7(<module>)
-    11942    0.083    0.000    0.146    0.000 _strptime.py:318(_strptime)
-    11942    0.012    0.000    0.158    0.000 _strptime.py:574(_strptime_datetime)
-        1    0.000    0.000    0.182    0.182 context.py:114(Pool)
-       18    0.001    0.000    0.167    0.009 context.py:274(_Popen)
-       58    0.000    0.000    6.791    0.117 decoder.py:332(decode)
-       58    6.790    0.117    6.790    0.117 decoder.py:343(raw_decode)
-        1    0.000    0.000    0.178    0.178 pool.py:155(__init__)
-        1    0.001    0.001    0.172    0.172 pool.py:227(_repopulate_pool)
-        1    0.000    0.000   80.618   80.618 pool.py:263(map)
-        1    0.000    0.000   80.618   80.618 pool.py:647(wait)
-        1    0.000    0.000   80.618   80.618 pool.py:650(get)
-       18    0.000    0.000    0.165    0.009 popen_fork.py:16(__init__)
-       18    0.002    0.000    0.164    0.009 popen_fork.py:67(_launch)
-       18    0.001    0.000    0.169    0.009 process.py:101(start)
-        1    1.387    1.387   99.288   99.288 spot.py:3(<module>)
-        1    5.993    5.993   10.965   10.965 spot.py:344(_getAllJsonRuns)
-        1    0.004    0.004   97.855   97.855 spot.py:483(getData)
-        4    0.000    0.000   80.619   20.155 threading.py:264(wait)
-        4    0.000    0.000   80.619   20.155 threading.py:534(wait)
-   326/13    0.000    0.000    0.162    0.012 {built-in method builtins.__import__}
-    469/1    0.002    0.000   99.288   99.288 {built-in method builtins.exec}
-        1    0.119    0.119    0.119    0.119 {built-in method builtins.print}
-       18    0.161    0.009    0.161    0.009 {built-in method posix.fork}
-      822    0.045    0.000    0.045    0.000 {built-in method posix.stat}
-    11942    0.008    0.000    0.169    0.000 {built-in method strptime}
-       18   80.619    4.479   80.619    4.479 {method 'acquire' of '_thread.lock' objects}
-     2465    0.067    0.000    0.067    0.000 {method 'join' of 'str' objects}
-       57    0.167    0.003    0.194    0.003 {method 'read' of '_io.TextIOWrapper' objects}
-  3235707    0.752    0.000    0.752    0.000 {method 'split' of 'str' objects}
-
-
-Runs: {…}, RunDataMeta: {…}, RunGlobalMeta: {…}, deletedRuns: Array(0), runCtimes:
-
-pri_str = '{"Runs":' + table_text +
-', "RunDataMeta":' + json.dumps(output["RunDataMeta"]) +
-', "RunGlobalMeta":' + json.dumps(output["RunGlobalMeta"]) +
-', "deletedRuns":' + json.dumps(output["deletedRuns"]) +
-', "runCtimes":' + json.dumps(output["runCtimes"]) +
-'}'
 
 Update May 2020: Chrome now lets an origin use 60% of the storage device's space (Real nitty gritty: "storage device" is the partition containing the chrome profile directory). Updated article here https://web.dev/storage-for-the-web/#how-much
 
