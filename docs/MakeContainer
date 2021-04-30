@@ -4,7 +4,7 @@ DONE - implement cache invalidation for that one file:
         * compare cache date to mtime to see if we should bust the cache.
     /usr/gapps/spot/sand/spot.py getCacheFileDate /g/g0/pascal/zdeb/a0/
 Next do:
-    * make sure that container still works.
+DONE - make sure that container still works.
     * deploy to dev and let marty/legendre try it out.
     * cali & JSON file mixed support.
     * support for running our script in their build system.

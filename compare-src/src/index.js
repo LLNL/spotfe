@@ -221,6 +221,10 @@ export class Graph{
                 try {
                     newData = JSON.parse(await lorenz(host, `${command} ${dataSetKey} '` + JSON.stringify(cachedRunCtimes) + "'"))
 
+                    if( newData.foundReport ) {
+                        console.log(newData.foundReport);
+                    }
+
                     DB.saveSummary(newData);
                 } catch (e) {
                     console.log('Exception: ');

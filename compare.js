@@ -52087,7 +52087,7 @@ var Graph = /*#__PURE__*/function () {
 
                 newData = cacheSum.summary;
                 console.log('was able to find cache.');
-                _context3.next = 61;
+                _context3.next = 62;
                 break;
 
               case 37:
@@ -52114,7 +52114,7 @@ var Graph = /*#__PURE__*/function () {
 
               case 44:
                 newData = _context3.sent;
-                _context3.next = 61;
+                _context3.next = 62;
                 break;
 
               case 47:
@@ -52126,12 +52126,17 @@ var Graph = /*#__PURE__*/function () {
               case 51:
                 _context3.t2 = _context3.sent;
                 newData = _context3.t1.parse.call(_context3.t1, _context3.t2);
+
+                if (newData.foundReport) {
+                  console.log(newData.foundReport);
+                }
+
                 DB.saveSummary(newData);
-                _context3.next = 61;
+                _context3.next = 62;
                 break;
 
-              case 56:
-                _context3.prev = 56;
+              case 57:
+                _context3.prev = 57;
                 _context3.t3 = _context3["catch"](47);
                 console.log('Exception: ');
                 console.dir(_context3.t3);
@@ -52142,7 +52147,7 @@ var Graph = /*#__PURE__*/function () {
                   RunSetMeta: {}
                 };
 
-              case 61:
+              case 62:
                 console.log('newData:  ');
                 console.dir(newData); //newData = ST.RunDictionaryTranslator.translate( newData );
 
@@ -52166,10 +52171,10 @@ var Graph = /*#__PURE__*/function () {
                 });
                 window.cachedData = cachedData; // cache newest version of data
 
-                _context3.next = 76;
+                _context3.next = 77;
                 return _localforage.default.setItem(dataSetKey, cachedData);
 
-              case 76:
+              case 77:
                 // add in datsetkey and datakey to globals
                 _lodash.default.forEach(cachedData.Runs, function (run, filename) {
                   run.Globals = run.Globals || {};
@@ -52253,20 +52258,20 @@ var Graph = /*#__PURE__*/function () {
                     table: []
                   }
                 };
-                _context3.next = 93;
+                _context3.next = 94;
                 return _localforage.default.getItem("show:" + dataSetKey);
 
-              case 93:
+              case 94:
                 _context3.t4 = _context3.sent;
 
                 if (_context3.t4) {
-                  _context3.next = 96;
+                  _context3.next = 97;
                   break;
                 }
 
                 _context3.t4 = defaultVisibleCharts;
 
-              case 96:
+              case 97:
                 visibleCharts = _context3.t4;
 
                 for (_i4 = 0, _Object$entries4 = Object.entries(cachedData.Runs); _i4 < _Object$entries4.length; _i4++) {
@@ -52297,29 +52302,29 @@ var Graph = /*#__PURE__*/function () {
                   });
                 }
 
-                _context3.next = 102;
+                _context3.next = 103;
                 return _localforage.default.getItem('scatterplots:' + this.dataSetKey);
 
-              case 102:
+              case 103:
                 _context3.t5 = _context3.sent;
 
                 if (_context3.t5) {
-                  _context3.next = 105;
+                  _context3.next = 106;
                   break;
                 }
 
                 _context3.t5 = [];
 
-              case 105:
+              case 106:
                 summary.layout.scatterplots = _context3.t5;
                 return _context3.abrupt("return", summary);
 
-              case 107:
+              case 108:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, this, [[47, 56]]);
+        }, _callee3, this, [[47, 57]]);
       }));
 
       function getData(_x10, _x11, _x12) {
