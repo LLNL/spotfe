@@ -5,8 +5,13 @@ DONE - implement cache invalidation for that one file:
     /usr/gapps/spot/sand/spot.py getCacheFileDate /g/g0/pascal/zdeb/a0/
 Next do:
 DONE - make sure that container still works.
-    * deploy to dev and let marty/legendre try it out.
-    * cali & JSON file mixed support.
+Done - deploy to dev and let marty/legendre try it out.
+- cali & JSON file mixed support.
+    * Need to fix layout_used so that checkboxes for both types show up.  after sq.reset(), the layout was corrected because now based on new data.
+Do: don't use sq.layout cache unless there's none coming from the BE.
+    * Always use fresh values if available.
+
+
     * support for running our script in their build system.
     * /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/ale3d_regr/xno '{}' --writeToFile=1
 
