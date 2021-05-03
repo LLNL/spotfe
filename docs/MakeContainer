@@ -6,7 +6,7 @@ DONE - implement cache invalidation for that one file:
 Next do:
 DONE - make sure that container still works.
 Done - deploy to dev and let marty/legendre try it out.
-- cali & JSON file mixed support.
+DONE - cali & JSON file mixed support.
     * Need to fix layout_used so that checkboxes for both types show up.  after sq.reset(), the layout was corrected because now based on new data.
 Do: don't use sq.layout cache unless there's none coming from the BE.
     * Always use fresh values if available.
