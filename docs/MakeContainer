@@ -1,17 +1,19 @@
 DONE - implement cache invalidation for that one file:
         * still need to save cache Date
         * get cache Date
+        * retrieve mtime.
         * compare cache date to mtime to see if we should bust the cache.
     /usr/gapps/spot/sand/spot.py getCacheFileDate /g/g0/pascal/zdeb/a0/
-Next do:
-DONE - make sure that container still works.
+TEST - make sure that container still works.
 Done - deploy to dev and let marty/legendre try it out.
 DONE - cali & JSON file mixed support.
     * Need to fix layout_used so that checkboxes for both types show up.  after sq.reset(), the layout was corrected because now based on new data.
 Do: don't use sq.layout cache unless there's none coming from the BE.
     * Always use fresh values if available.
 
-
+Next:
+    * Checkbox what is checked - encode that in the URL, so that checkboxes get checked.
+    * Is walltime supposed to work for ale3D data?
     * support for running our script in their build system.
     * /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/ale3d_regr/xno '{}' --writeToFile=1
 
@@ -29,7 +31,6 @@ Was able to get it down to 2 minutes
 
 
 Next do after Ale3d:
-    * Checkbox what is checked - encode that in the URL, so that checkboxes get checked.
     * pop up or list of other run based buttons (like walltime)
 
 
