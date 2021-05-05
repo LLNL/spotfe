@@ -179,6 +179,18 @@ ST.CallSpot = function() {
             sqs.layout_used = summ.layout;
         }
 
+
+        var charts = ST.layout_used.charts;
+
+        for( var x in charts ) {
+
+            var dimension = charts[x].dimension;
+            var val = ST.Utility.get_param( "ch_" + dimension );
+
+            charts[x].show = val === "1";
+        }
+
+        console.log('1Checkboxes:');
         console.dir(ST.layout_used);
 
         parsed = summ.data;

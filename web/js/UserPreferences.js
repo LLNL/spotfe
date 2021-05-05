@@ -57,7 +57,7 @@ ST.UserPreferences = function() {
 
     var init_pref_ = function( pref_html ) {
 
-	ST.layout_used.charts.sort( sort_charts_by_title_ );
+        ST.layout_used.charts.sort( sort_charts_by_title_ );
 
         Vue.component('user-preferences', {
             data: function() {
@@ -86,10 +86,19 @@ ST.UserPreferences = function() {
                         var chart = sqs.layout_used.charts[x];
 
                         if( chart.dimension === chart_dimension ) {
+
                             console.log("checked: " + checked);
                             chart.show = checked;
                             sq.save();
                         }
+                    }
+
+                    var dim_ch = "ch_" + chart_dimension;
+
+                    if( checked ) {
+                        ST.UrlStateManager.update_url(dim_ch, "1");
+                    } else {
+                        ST.UrlStateManager.remove_param(dim_ch);
                     }
                 }
             }

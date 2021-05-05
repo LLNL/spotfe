@@ -220,6 +220,22 @@ ST.UrlStateManager = function() {
         ST.ChartCollection.bind_sort();
     };
 
+    var get_all_ = function() {
+
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        var entries = urlParams.entries();
+        var all = [];
+
+        for(const entry of entries) {
+            all.push({
+                key: entry[0],
+                val: entry[1]
+            });
+        }
+
+        return all;
+    };
 
     return {
         update_slash: update_slash_,
@@ -228,6 +244,7 @@ ST.UrlStateManager = function() {
         update_url: update_url_,
         remove_param: remove_param_,
         user_filtered: user_filtered_,
-        load_filter: load_filter_
+        load_filter: load_filter_,
+        get_all: get_all_
     }
 }();
