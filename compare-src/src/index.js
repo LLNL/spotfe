@@ -21,7 +21,7 @@ async function lorenz(host, cmd){
                     'route':'/command/' + host,
                     'command':cmd,
                     }
-            }).then ( value  => { resolve( value.output.command_out) }
+            }).then ( value  => { resolve( value ) }
                     , error => { reject(error) }
             )
         })
@@ -33,7 +33,7 @@ async function lorenz(host, cmd){
         return fetch( baseurl + '/command/' + host
                     , { method: 'POST' , body: formData }
                     ).then(response => response.json())
-                     .then(value => value.output.command_out)
+                     .then(value => value)
     }
 }
 
@@ -81,7 +81,7 @@ export class Graph{
         } else {
             // for lorenz
             const url = await lorenz(host, `${command} ${filepath}`)
-            return url
+            return url.output.command_out
         }
     }
 
@@ -114,7 +114,7 @@ export class Graph{
         } else {
             // for lorenz
             const url = await lorenz(host, `${command} ${basepath} '${JSON.stringify(subpaths)}'`)
-            return url
+            return url.output.command_out
         }
     }
 
@@ -130,7 +130,8 @@ export class Graph{
         var res = '{"mtime": 3000900800}';
 
         if( !isContainer ) {
-            res = await lorenz(host, comm);
+            var res0 = await lorenz(host, comm)
+            res = res0.output.command_out
         }
 
         var cacheResult = JSON.parse(res);
@@ -219,7 +220,16 @@ export class Graph{
             } else {
                 //else we do a Lorenz call at LLNL
                 try {
-                    newData = JSON.parse(await lorenz(host, `${command} ${dataSetKey} '` + JSON.stringify(cachedRunCtimes) + "'"))
+
+                    var lor_response = await lorenz(host, `${command} ${dataSetKey} '` + JSON.stringify(cachedRunCtimes) + "'");
+                    console.dir(lor_response);
+
+                    if( lor_response.error !== "" ) {
+                        ST.Utility.error( lor_response.error );
+                        return false;
+                    }
+
+                    newData = JSON.parse(lor_response.output.command_out)
 
                     if( newData.foundReport ) {
                         console.log(newData.foundReport);
@@ -227,6 +237,7 @@ export class Graph{
 
                     DB.saveSummary(newData);
                 } catch (e) {
+
                     console.log('Exception: ');
                     console.dir(e);
                     newData = {Runs: {}, RunDataMeta: {}, RunGlobalMeta: {}, RunSetMeta: {}}

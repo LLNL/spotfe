@@ -1,4 +1,7 @@
-DONE - implement cache invalidation for that one file:
+DONE - fixed a json_runs reporting error (count lines), I thought was marty's issue but wasnt
+
+
+1) DONE - implement cache invalidation for that one file:
         * still need to save cache Date
         * get cache Date
         * retrieve mtime.
@@ -6,16 +9,36 @@ DONE - implement cache invalidation for that one file:
     /usr/gapps/spot/sand/spot.py getCacheFileDate /g/g0/pascal/zdeb/a0/
 TEST - make sure that container still works.
 Done - deploy to dev and let marty/legendre try it out.
-DONE - cali & JSON file mixed support.
+2) DONE - cali & JSON file mixed support.
     * Need to fix layout_used so that checkboxes for both types show up.  after sq.reset(), the layout was corrected because now based on new data.
 Do: don't use sq.layout cache unless there's none coming from the BE.
     * Always use fresh values if available.
 
+3) DONE Checkbox what is checked - encode that in the URL, so that checkboxes get checked.
+
 Next:
-    * Checkbox what is checked - encode that in the URL, so that checkboxes get checked.
-    * Is walltime supposed to work for ale3D data?
+    * if there's an error message then pass it up to FE - this way we can diagnose marty's error
+    * make sure multi jupyter and jupyter still work.
+    * make sure walltime works.
+    * https://rzlc.llnl.gov/spot/dcvis/?sf=/usr/WS1/ale3d/perf_tracking/perf/SIERRA_CLANG/blueos_sierra_clang/develop/performance_profiles.spot2&ch_problem%20name=1&ch_walltime=1&ch_jobsize=1
+    * Default: if nothing selected show the checkboxes
+    * Goto old defaults (later on change those).
+    * Is walltime supposed to work for ale3D data?  Walltime should work for ale3d.
+        * [Lorenz::REST::Command::runApprovedCommand] Failed to run command: '/usr/global/tools/lorenz/python/optvis-env2/bin/python /usr/gapps/spot/dev/spot.py memory /g/g0/pascal/zdeb/ale3d_regr/pipe/pipe-gen.4d.4p-1' on rzgenie: cali-query: Error: Could not read file /g/g0/pascal/zdeb/ale3d_regr/pipe/pipe-gen.4d.4p-1"
     * support for running our script in their build system.
     * /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/ale3d_regr/xno '{}' --writeToFile=1
+
+[Lorenz::REST::Command::runApprovedCommand]
+Failed to run command: '
+/usr/gapps/spot/dev/spot.py getData /usr/gapps/spot/datasets/lulesh_gen/100 '{}'' on
+rzgenie: Traceback (most recent call last):\n  File \"/usr/gapps/spot/dev/spot.py\",
+line 746, in <module>\n
+args.func(args)\n  File \"/usr/gapps/spot/dev/spot.py\",
+line 587, in getData\n    found = 'Found ' + str(len(json_output['Runs'].keys())) +
+' runs in JSON format.  '\nKeyError: 'Runs'"
+output: "
+
+
 
 
 DONE - initial implementation: lazy load dictionary lookups.
