@@ -52,11 +52,12 @@ ST.Utility = function() {
         }
     };
 
+
     var check_error_ = function( data ) {
 
-        $('.error_statement').remove();
-
         if( data && data.error ) {
+
+            $('.error_statement').remove();
             error_( data.error );
         }
     };
