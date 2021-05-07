@@ -1,4 +1,5 @@
 DONE - fixed a json_runs reporting error (count lines), I thought was marty's issue but wasnt
+DONE - if there's an error message then pass it up to FE - this way we can diagnose marty's error
 
 
 1) DONE - implement cache invalidation for that one file:
@@ -17,9 +18,7 @@ Do: don't use sq.layout cache unless there's none coming from the BE.
 3) DONE Checkbox what is checked - encode that in the URL, so that checkboxes get checked.
 
 Next:
-    * if there's an error message then pass it up to FE - this way we can diagnose marty's error
-    * make sure multi jupyter and jupyter still work.
-    * make sure walltime works: walltime do dictionary translation.
+    * make sure walltime works (for ale3d): walltime do dictionary translation.
     * https://rzlc.llnl.gov/spot/dcvis/?sf=/usr/WS1/ale3d/perf_tracking/perf/SIERRA_CLANG/blueos_sierra_clang/develop/performance_profiles.spot2&ch_problem%20name=1&ch_walltime=1&ch_jobsize=1
     * Default: if nothing selected show the checkboxes
     * Goto old defaults (later on change those).
