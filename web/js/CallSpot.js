@@ -151,7 +151,7 @@ ST.CallSpot = function() {
         for( var x in charts ) {
 
             var dimension = charts[x].dimension;
-            var val = ST.Utility.get_param( "ch_" + dimension );
+            var val = ST.Utility.get_param( ch_key_( dimension ) );
 
             if( val === "1" ) {
                 return true;
@@ -169,7 +169,7 @@ ST.CallSpot = function() {
             for( var x in charts ) {
 
                 var dimension = charts[x].dimension;
-                var val = ST.Utility.get_param( "ch_" + dimension );
+                var val = ST.Utility.get_param( ch_key_( dimension ) );
 
                 charts[x].show = val === "1";
             }
@@ -181,7 +181,7 @@ ST.CallSpot = function() {
                 var dim_ch = ch.dimension;
 
                 if( ch.show ) {
-                    ST.UrlStateManager.update_url("ch_" + dim_ch, "1");
+                    ST.UrlStateManager.update_url(ch_key_( dim_ch ), "1");
                 }
             }
         }
@@ -539,11 +539,15 @@ ST.CallSpot = function() {
         }
     };
 
+    var ch_key_ = function( dimension ) {
+        return "ch_" + dimension;
+    };
 
     ST.params = ST.params || {};
 
 
     return {
+        ch_key: ch_key_,
         get_keys: get_keys_,
         load_compare: load_compare_,
         handle_success2: handle_success2_,

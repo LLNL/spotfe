@@ -93,7 +93,7 @@ ST.UserPreferences = function() {
                         }
                     }
 
-                    var dim_ch = "ch_" + chart_dimension;
+                    var dim_ch = ST.CallSpot.ch_key( chart_dimension );
 
                     if( checked ) {
                         ST.UrlStateManager.update_url(dim_ch, "1");
