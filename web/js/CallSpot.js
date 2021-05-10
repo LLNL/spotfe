@@ -146,6 +146,48 @@ ST.CallSpot = function() {
     };
 
 
+    var is_something_showing_ = function( charts ) {
+
+        for( var x in charts ) {
+
+            var dimension = charts[x].dimension;
+            var val = ST.Utility.get_param( "ch_" + dimension );
+
+            if( val === "1" ) {
+                return true;
+            }
+        }
+
+        return false;
+    };
+
+
+    var set_up_params_ = function( charts ) {
+
+        if( is_something_showing_( charts ) ) {
+
+            for( var x in charts ) {
+
+                var dimension = charts[x].dimension;
+                var val = ST.Utility.get_param( "ch_" + dimension );
+
+                charts[x].show = val === "1";
+            }
+        } else {
+            //  else show whatever the default is and fix the URL parameters.
+            for( var x in charts ) {
+
+                var ch = charts[x];
+                var dim_ch = ch.dimension;
+
+                if( ch.show ) {
+                    ST.UrlStateManager.update_url("ch_" + dim_ch, "1");
+                }
+            }
+        }
+    };
+
+
     var handle_success2_ = function( summ ) {
 
         console.dir(summ);
@@ -181,14 +223,7 @@ ST.CallSpot = function() {
 
 
         var charts = ST.layout_used.charts;
-
-        for( var x in charts ) {
-
-            var dimension = charts[x].dimension;
-            var val = ST.Utility.get_param( "ch_" + dimension );
-
-            charts[x].show = val === "1";
-        }
+        set_up_params_( charts );
 
         console.log('1Checkboxes:');
         console.dir(ST.layout_used);

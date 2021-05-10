@@ -1,6 +1,11 @@
 DONE - fixed a json_runs reporting error (count lines), I thought was marty's issue but wasnt
+    * in response to marty's error.
 DONE - if there's an error message then pass it up to FE - this way we can diagnose marty's error
-
+    * Default: if nothing selected show the checkboxes
+    * CAllspot.js: set_up_params_()
+    * right now bug, if you: https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/?sf=/usr/gapps/spot/datasets/lulesh_gen/100
+        * it will try to select the wrong thing.
+    * refactor "ch_"+ into a function.
 
 1) DONE - implement cache invalidation for that one file:
         * still need to save cache Date
@@ -20,7 +25,6 @@ Do: don't use sq.layout cache unless there's none coming from the BE.
 Next:
     * make sure walltime works (for ale3d): walltime do dictionary translation.
     * https://rzlc.llnl.gov/spot/dcvis/?sf=/usr/WS1/ale3d/perf_tracking/perf/SIERRA_CLANG/blueos_sierra_clang/develop/performance_profiles.spot2&ch_problem%20name=1&ch_walltime=1&ch_jobsize=1
-    * Default: if nothing selected show the checkboxes
     * Goto old defaults (later on change those).
     * Is walltime supposed to work for ale3D data?  Walltime should work for ale3d.
         * [Lorenz::REST::Command::runApprovedCommand] Failed to run command: '/usr/global/tools/lorenz/python/optvis-env2/bin/python /usr/gapps/spot/dev/spot.py memory /g/g0/pascal/zdeb/ale3d_regr/pipe/pipe-gen.4d.4p-1' on rzgenie: cali-query: Error: Could not read file /g/g0/pascal/zdeb/ale3d_regr/pipe/pipe-gen.4d.4p-1"
