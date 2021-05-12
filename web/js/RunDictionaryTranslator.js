@@ -1,6 +1,6 @@
 ST.RunDictionaryTranslator = function() {
 
-    var dict_;
+    var dict_ = {};
 
     var set_ = function( dictionary ) {
 

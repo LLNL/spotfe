@@ -28439,7 +28439,9 @@ var _default = {
   props: ['selectedNode', 'selectedTopdownNode', 'showTopdown', 'topdownData', 'runData', 'funcPath', 'handleClick'],
   computed: {
     title: function title() {
-      return "".concat(this.funcPath.split('/').slice(-1)[0], " (").concat(this.runData[this.funcPath].exclusive, ")");
+      var encoded_title = "".concat(this.funcPath.split('/').slice(-1)[0], " (").concat(this.runData[this.funcPath].exclusive, ")");
+      var layman_title = ST.RunDictionaryTranslator.lookupStr(encoded_title);
+      return layman_title;
     },
     iAmSelected: function iAmSelected() {
       return this.selectedNode == this.funcPath;
@@ -28472,14 +28474,14 @@ var _default = {
   name: 'FlamegraphNode'
 };
 exports.default = _default;
-        var $67cf97 = exports.default || module.exports;
+        var $871017 = exports.default || module.exports;
       
-      if (typeof $67cf97 === 'function') {
-        $67cf97 = $67cf97.options;
+      if (typeof $871017 === 'function') {
+        $871017 = $871017.options;
       }
     
         /* template */
-        Object.assign($67cf97, (function () {
+        Object.assign($871017, (function () {
           var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -28596,7 +28598,7 @@ render._withStripped = true
             render: render,
             staticRenderFns: staticRenderFns,
             _compiled: true,
-            _scopeId: "data-v-67cf97",
+            _scopeId: "data-v-871017",
             functional: undefined
           };
         })());
@@ -28609,9 +28611,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$67cf97', $67cf97);
+            api.createRecord('$871017', $871017);
           } else {
-            api.reload('$67cf97', $67cf97);
+            api.reload('$871017', $871017);
           }
         }
 
@@ -28701,7 +28703,9 @@ var _default = {
   },
   methods: {
     title: function title(funcPath) {
-      return "".concat(funcPath.split('/').slice(-1)[0], " (").concat(this.runData[funcPath].value, ")");
+      var encoded_title = "".concat(funcPath.split('/').slice(-1)[0], " (").concat(this.runData[funcPath].value, ")");
+      var layman_title = ST.RunDictionaryTranslator.lookupStr(encoded_title);
+      return layman_title;
     },
     addInclusive: function addInclusive(selectedRunData) {
       // recursively sum up inclusive times
@@ -28749,14 +28753,14 @@ var _default = {
   }
 };
 exports.default = _default;
-        var $ffc729 = exports.default || module.exports;
+        var $a7e2e7 = exports.default || module.exports;
       
-      if (typeof $ffc729 === 'function') {
-        $ffc729 = $ffc729.options;
+      if (typeof $a7e2e7 === 'function') {
+        $a7e2e7 = $a7e2e7.options;
       }
     
         /* template */
-        Object.assign($ffc729, (function () {
+        Object.assign($a7e2e7, (function () {
           var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -28860,9 +28864,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$ffc729', $ffc729);
+            api.createRecord('$a7e2e7', $a7e2e7);
           } else {
-            api.reload('$ffc729', $ffc729);
+            api.reload('$a7e2e7', $a7e2e7);
           }
         }
 
@@ -28964,14 +28968,14 @@ var _default = {
   }
 };
 exports.default = _default;
-        var $f185e1 = exports.default || module.exports;
+        var $301527 = exports.default || module.exports;
       
-      if (typeof $f185e1 === 'function') {
-        $f185e1 = $f185e1.options;
+      if (typeof $301527 === 'function') {
+        $301527 = $301527.options;
       }
     
         /* template */
-        Object.assign($f185e1, (function () {
+        Object.assign($301527, (function () {
           var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -29519,7 +29523,7 @@ render._withStripped = true
             render: render,
             staticRenderFns: staticRenderFns,
             _compiled: true,
-            _scopeId: "data-v-f185e1",
+            _scopeId: "data-v-301527",
             functional: undefined
           };
         })());
@@ -29532,9 +29536,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$f185e1', $f185e1);
+            api.createRecord('$301527', $301527);
           } else {
-            api.reload('$f185e1', $f185e1);
+            api.reload('$301527', $301527);
           }
         }
 
@@ -29610,7 +29614,7 @@ var _default = {
       console.dir(this.metricNames);
       console.dir(this.selectedNode);
       var peeled = this.peeledData(this.data, this.metricNames[0]);
-      console.dir("peeled");
+      console.dir("peeled7777");
       console.dir(peeled);
       var topdown = peeled[this.selectedNode].topdown;
 
@@ -29769,7 +29773,7 @@ var _default = {
 
       script.addEventListener('load', function (event) {
         console.log('jquery has been loaded.');
-        $.when($.getScript("../web/js/Environment.js"), $.getScript("../web/js/Utility.js"), $.getScript("../web/js/CallSpot.js?abb"), $.Deferred(function (deferred) {
+        $.when($.getScript("../web/js/Environment.js"), $.getScript("../web/js/Utility.js"), $.getScript("../web/js/CallSpot.js?abb"), $.getScript("../web/js/RunDictionaryTranslator.js?jasdf"), $.Deferred(function (deferred) {
           $(deferred.resolve);
         })).done(_this2.getAliases);
       });
@@ -29795,7 +29799,6 @@ var _default = {
           file: path,
           type: "memory",
           success: function success(aj_dat) {
-            console.log('memory ajax 2:');
             var ret2 = {};
 
             if (aj_dat.series) {
@@ -29832,7 +29835,6 @@ var _default = {
       $('.update_top_down').trigger('click');
     },
     replaceMetricNames: function replaceMetricNames(replacee, replacer) {
-      console.log("2replacee=" + replacee + '  replacer=' + replacer);
       this.metricObjs[replacee] = {
         "name": replacee,
         "alias": replacer
@@ -29867,6 +29869,9 @@ var _default = {
       }
     },
     peeledData: function peeledData(runData, metricName) {
+      console.log('PZA');
+      var z;
+
       var x = _lodash.default.fromPairs(_lodash.default.map(runData, function (metrics, funcPath) {
         var topdown = {};
 
@@ -29906,14 +29911,14 @@ var _default = {
   }
 };
 exports.default = _default;
-        var $1a0cdc = exports.default || module.exports;
+        var $75e2ce = exports.default || module.exports;
       
-      if (typeof $1a0cdc === 'function') {
-        $1a0cdc = $1a0cdc.options;
+      if (typeof $75e2ce === 'function') {
+        $75e2ce = $75e2ce.options;
       }
     
         /* template */
-        Object.assign($1a0cdc, (function () {
+        Object.assign($75e2ce, (function () {
           var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -30073,9 +30078,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$1a0cdc', $1a0cdc);
+            api.createRecord('$75e2ce', $75e2ce);
           } else {
-            api.reload('$1a0cdc', $1a0cdc);
+            api.reload('$75e2ce', $75e2ce);
           }
         }
 
@@ -40978,7 +40983,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59831" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59201" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

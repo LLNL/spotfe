@@ -1,4 +1,12 @@
 * make sure walltime works (for ale3d): walltime do dictionary translation.
+    * make an ajax call to get the dictionary
+    * ST.RunDictionaryTranslator.set( newData.dictionary );
+* need to fix jupyter button.
+    * jupyter button needs to show up for cali files but not JSON files
+    * the multiJupyter should only use the files which are cali, skip the other ones
+* Finish testing everything and deploy to dev for feedback from legendre and marty.
+
+
 DONE - fixed a json_runs reporting error (count lines), I thought was marty's issue but wasnt
     * in response to marty's error.
 DONE - if there's an error message then pass it up to FE - this way we can diagnose marty's error
@@ -8,6 +16,13 @@ DONE - if there's an error message then pass it up to FE - this way we can diagn
         * it will try to select the wrong thing.
 
 DONE - refactor "ch_"+ into a function.
+
+
+Next:
+When you click on a jupyter button or multi jupyter button do a popup modal.
+in that modal, have a select drop down for all the available
+    * at some point we can check in 3 different locations to look in a person's home directory.
+
 
 
 Last week:
