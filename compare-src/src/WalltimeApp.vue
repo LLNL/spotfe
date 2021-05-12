@@ -82,7 +82,7 @@ export default {
             console.dir( this.selectedNode )
             var peeled = this.peeledData(this.data, this.metricNames[0])
 
-            console.dir( "peeled" )
+            console.dir( "peeled7777" )
             console.dir( peeled )
             let topdown = peeled[this.selectedNode].topdown
 
@@ -221,6 +221,7 @@ export default {
                     $.getScript("../web/js/Environment.js"),
                     $.getScript("../web/js/Utility.js"),
                     $.getScript("../web/js/CallSpot.js?abb"),
+                    $.getScript("../web/js/RunDictionaryTranslator.js?jasdf"),
                     $.Deferred(function( deferred ){
                         $( deferred.resolve );
                     })
@@ -343,6 +344,10 @@ export default {
             }
         },
         peeledData(runData, metricName){
+
+            console.log('PZA');
+            var z;
+
              let x =  _.fromPairs(_.map(runData, (metrics, funcPath) => {
                  let topdown = {} 
                  _.forIn(metrics, (val, key) => {if(key.startsWith('any#any#')) topdown[key] = val})
