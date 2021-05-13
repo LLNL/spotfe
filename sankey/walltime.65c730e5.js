@@ -29549,7 +29549,90 @@ render._withStripped = true
       
       }
     })();
-},{"_css_loader":"../node_modules/parcel/src/builtins/css-loader.js","vue-hot-reload-api":"../node_modules/vue-hot-reload-api/dist/index.js","vue":"../node_modules/vue/dist/vue.runtime.esm.js"}],"WalltimeApp.vue":[function(require,module,exports) {
+},{"_css_loader":"../node_modules/parcel/src/builtins/css-loader.js","vue-hot-reload-api":"../node_modules/vue-hot-reload-api/dist/index.js","vue":"../node_modules/vue/dist/vue.runtime.esm.js"}],"../node_modules/parcel/src/builtins/bundle-loader.js":[function(require,module,exports) {
+var getBundleURL = require('./bundle-url').getBundleURL;
+
+function loadBundlesLazy(bundles) {
+  if (!Array.isArray(bundles)) {
+    bundles = [bundles];
+  }
+
+  var id = bundles[bundles.length - 1];
+
+  try {
+    return Promise.resolve(require(id));
+  } catch (err) {
+    if (err.code === 'MODULE_NOT_FOUND') {
+      return new LazyPromise(function (resolve, reject) {
+        loadBundles(bundles.slice(0, -1)).then(function () {
+          return require(id);
+        }).then(resolve, reject);
+      });
+    }
+
+    throw err;
+  }
+}
+
+function loadBundles(bundles) {
+  return Promise.all(bundles.map(loadBundle));
+}
+
+var bundleLoaders = {};
+
+function registerBundleLoader(type, loader) {
+  bundleLoaders[type] = loader;
+}
+
+module.exports = exports = loadBundlesLazy;
+exports.load = loadBundles;
+exports.register = registerBundleLoader;
+var bundles = {};
+
+function loadBundle(bundle) {
+  var id;
+
+  if (Array.isArray(bundle)) {
+    id = bundle[1];
+    bundle = bundle[0];
+  }
+
+  if (bundles[bundle]) {
+    return bundles[bundle];
+  }
+
+  var type = (bundle.substring(bundle.lastIndexOf('.') + 1, bundle.length) || bundle).toLowerCase();
+  var bundleLoader = bundleLoaders[type];
+
+  if (bundleLoader) {
+    return bundles[bundle] = bundleLoader(getBundleURL() + bundle).then(function (resolved) {
+      if (resolved) {
+        module.bundle.register(id, resolved);
+      }
+
+      return resolved;
+    }).catch(function (e) {
+      delete bundles[bundle];
+      throw e;
+    });
+  }
+}
+
+function LazyPromise(executor) {
+  this.executor = executor;
+  this.promise = null;
+}
+
+LazyPromise.prototype.then = function (onSuccess, onError) {
+  if (this.promise === null) this.promise = new Promise(this.executor);
+  return this.promise.then(onSuccess, onError);
+};
+
+LazyPromise.prototype.catch = function (onError) {
+  if (this.promise === null) this.promise = new Promise(this.executor);
+  return this.promise.catch(onError);
+};
+},{"./bundle-url":"../node_modules/parcel/src/builtins/bundle-url.js"}],"WalltimeApp.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -29573,6 +29656,68 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //Vue.loadScript('../../web/js/jquery-1.11.0.min')
 //import * as $ from '../../web/js/jquery-1.11.0.min'
 //import * as ST from '../../web/js/Utility.js'
+function lorenz(_x, _x2) {
+  return _lorenz.apply(this, arguments);
+}
+
+function _lorenz() {
+  _lorenz = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(host, cmd) {
+    var baseurl, _$, formData;
+
+    return regeneratorRuntime.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            baseurl = "https://".concat(host.startsWith('rz') ? 'rz' : '', "lc.llnl.gov/lorenz/lora/lora.cgi");
+
+            if (!("development" === 'development' || useJsonp)) {
+              _context3.next = 8;
+              break;
+            }
+
+            _context3.next = 4;
+            return require("_bundle_loader")(require.resolve('jquery'));
+
+          case 4:
+            _$ = _context3.sent;
+            return _context3.abrupt("return", new Promise(function (resolve, reject) {
+              _$.ajax({
+                dataType: 'jsonp',
+                url: baseurl + '/jsonp',
+                data: {
+                  'via': 'post',
+                  'route': '/command/' + host,
+                  'command': cmd
+                }
+              }).then(function (value) {
+                resolve(value);
+              }, function (error) {
+                reject(error);
+              });
+            }));
+
+          case 8:
+            formData = new FormData();
+            formData.append('command', cmd);
+            return _context3.abrupt("return", fetch(baseurl + '/command/' + host, {
+              method: 'POST',
+              body: formData
+            }).then(function (response) {
+              return response.json();
+            }).then(function (value) {
+              return value;
+            }));
+
+          case 11:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3);
+  }));
+  return _lorenz.apply(this, arguments);
+}
+
 var _default = {
   props: ['filename', 'data', 'meta'],
   data: function data() {
@@ -29704,14 +29849,55 @@ var _default = {
     }
   },
   methods: {
-    getmemoryfunc: function getmemoryfunc(path) {
-      var _this = this;
-
+    getDictionary: function getDictionary() {
       return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-        var command, datarequest, response, newData;
+        var dataSetKey, host, command, lor_response, newData;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
+              case 0:
+                dataSetKey = ST.Utility.get_file();
+                ST.Utility.init_params();
+                host = ST.Utility.get_default_machine();
+                command = ST.Utility.get_command();
+                command = command.replace('getData', 'getDictionary');
+                console.log('Await: ');
+                _context.next = 8;
+                return lorenz(host, "".concat(command, " ").concat(dataSetKey, " '"));
+
+              case 8:
+                lor_response = _context.sent;
+                console.dir(lor_response);
+
+                if (!(lor_response.error !== "")) {
+                  _context.next = 13;
+                  break;
+                }
+
+                ST.Utility.error(lor_response.error);
+                return _context.abrupt("return", false);
+
+              case 13:
+                newData = JSON.parse(lor_response.output.command_out);
+                console.dir(newData);
+                ST.RunDictionaryTranslator.set(newData.dictionary);
+
+              case 16:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    getmemoryfunc: function getmemoryfunc(path) {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+        var command, datarequest, response, newData;
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
               case 0:
                 command = "/opt/conda/bin/python3 /usr/gapps/spot/backend.py --config /usr/gapps/spot/backend_config.yaml memory /data/" + path;
                 datarequest = {
@@ -29719,7 +29905,7 @@ var _default = {
                   filepath: path
                 };
                 console.log('getmemoryfunc()');
-                _context.next = 5;
+                _context2.next = 5;
                 return fetch("/getmemory", {
                   method: "post",
                   headers: {
@@ -29729,27 +29915,27 @@ var _default = {
                 });
 
               case 5:
-                response = _context.sent;
+                response = _context2.sent;
                 console.log("here is the response obj: ");
                 console.dir(response);
 
                 if (!(response && response.json)) {
-                  _context.next = 18;
+                  _context2.next = 18;
                   break;
                 }
 
                 console.log("about to do response.json();");
-                _context.next = 12;
+                _context2.next = 12;
                 return response.json();
 
               case 12:
-                newData = _context.sent;
+                newData = _context2.sent;
                 console.log('newData:');
                 console.dir(newData);
 
                 _this.updateTopDown(newData);
 
-                _context.next = 19;
+                _context2.next = 19;
                 break;
 
               case 18:
@@ -29757,10 +29943,10 @@ var _default = {
 
               case 19:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee);
+        }, _callee2);
       }))();
     },
     getScripts: function getScripts() {
@@ -29794,6 +29980,7 @@ var _default = {
       if (isContainer) {
         this.getmemoryfunc(path);
       } else {
+        this.getDictionary();
         var updateTopDown = this.updateTopDown;
         ST.CallSpot.ajax({
           file: path,
@@ -30087,7 +30274,7 @@ render._withStripped = true
         
       }
     })();
-},{"./Flamegraph.vue":"Flamegraph.vue","./Topdown.vue":"Topdown.vue","lodash":"../node_modules/lodash/lodash.js","_css_loader":"../node_modules/parcel/src/builtins/css-loader.js","vue-hot-reload-api":"../node_modules/vue-hot-reload-api/dist/index.js","vue":"../node_modules/vue/dist/vue.runtime.esm.js"}],"../node_modules/core-js/modules/_global.js":[function(require,module,exports) {
+},{"./Flamegraph.vue":"Flamegraph.vue","./Topdown.vue":"Topdown.vue","lodash":"../node_modules/lodash/lodash.js","_bundle_loader":"../node_modules/parcel/src/builtins/bundle-loader.js","jquery":[["jquery.8a959d8d.js","../node_modules/jquery/dist/jquery.js"],"../node_modules/jquery/dist/jquery.js"],"_css_loader":"../node_modules/parcel/src/builtins/css-loader.js","vue-hot-reload-api":"../node_modules/vue-hot-reload-api/dist/index.js","vue":"../node_modules/vue/dist/vue.runtime.esm.js"}],"../node_modules/core-js/modules/_global.js":[function(require,module,exports) {
 
 // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
 var global = module.exports = typeof window != 'undefined' && window.Math == Math
@@ -40983,7 +41170,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59201" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63430" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -41159,4 +41346,28 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../node_modules/parcel/src/builtins/hmr-runtime.js","walltime.js"], null)
+},{}],"../node_modules/parcel/src/builtins/loaders/browser/js-loader.js":[function(require,module,exports) {
+module.exports = function loadJSBundle(bundle) {
+  return new Promise(function (resolve, reject) {
+    var script = document.createElement('script');
+    script.async = true;
+    script.type = 'text/javascript';
+    script.charset = 'utf-8';
+    script.src = bundle;
+
+    script.onerror = function (e) {
+      script.onerror = script.onload = null;
+      reject(e);
+    };
+
+    script.onload = function () {
+      script.onerror = script.onload = null;
+      resolve();
+    };
+
+    document.getElementsByTagName('head')[0].appendChild(script);
+  });
+};
+},{}],0:[function(require,module,exports) {
+var b=require("../node_modules/parcel/src/builtins/bundle-loader.js");b.register("js",require("../node_modules/parcel/src/builtins/loaders/browser/js-loader.js"));
+},{}]},{},["../node_modules/parcel/src/builtins/hmr-runtime.js",0,"walltime.js"], null)

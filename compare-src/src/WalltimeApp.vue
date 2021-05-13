@@ -43,6 +43,35 @@ import _ from 'lodash'
 //import * as $ from '../../web/js/jquery-1.11.0.min'
 //import * as ST from '../../web/js/Utility.js'
 
+async function lorenz(host, cmd){
+    const baseurl = `https://${host.startsWith('rz') ? 'rz': ''}lc.llnl.gov/lorenz/lora/lora.cgi`
+    if(process.env.NODE_ENV === 'development' || useJsonp){
+        const $ = await import('jquery')
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                dataType:'jsonp',
+                url:     baseurl + '/jsonp',
+                data:{
+                    'via':'post',
+                    'route':'/command/' + host,
+                    'command':cmd,
+                    }
+            }).then ( value  => { resolve( value ) }
+                    , error => { reject(error) }
+            )
+        })
+    }
+    else{
+        const formData = new FormData()
+        formData.append('command', cmd)
+
+        return fetch( baseurl + '/command/' + host
+                    , { method: 'POST' , body: formData }
+                    ).then(response => response.json())
+                     .then(value => value)
+    }
+}
+
 
 export default {
 
@@ -57,6 +86,7 @@ export default {
 
     }},
     mounted: function() {
+
     },
     computed:{
         funcPaths(){return Object.keys(this.data) },
@@ -162,6 +192,29 @@ export default {
         },
     },
     methods:{
+        async getDictionary() {
+
+            var dataSetKey = ST.Utility.get_file();
+            ST.Utility.init_params();
+
+            var host = ST.Utility.get_default_machine();
+            var command = ST.Utility.get_command();
+            command = command.replace('getData', 'getDictionary');
+
+            console.log('Await: ');
+            var lor_response = await lorenz(host, `${command} ${dataSetKey} '` );
+            console.dir(lor_response);
+
+            if( lor_response.error !== "" ) {
+                ST.Utility.error( lor_response.error );
+                return false;
+            }
+
+            var newData = JSON.parse(lor_response.output.command_out)
+
+            console.dir(newData);
+            ST.RunDictionaryTranslator.set( newData.dictionary );
+        },
         async getmemoryfunc( path )
         {
             const command = "/opt/conda/bin/python3 /usr/gapps/spot/backend.py --config /usr/gapps/spot/backend_config.yaml memory /data/" +
@@ -254,6 +307,7 @@ export default {
 
             } else {
 
+                this.getDictionary();
                 var updateTopDown = this.updateTopDown;
 
                 ST.CallSpot.ajax({

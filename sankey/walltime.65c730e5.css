@@ -1,16 +1,16 @@
-*[data-v-67cf97] {
+*[data-v-871017] {
   box-sizing: border-box;
   margin: 0px;
-}div[data-v-f185e1] {
+}div[data-v-301527] {
   box-sizing: border-box;
 }
-.node-width[data-v-f185e1] {
+.node-width[data-v-301527] {
   display: flex;
   flex-direction: column;
   flex-shrink: 1;
   min-width: 0;
 }
-.node[data-v-f185e1] {
+.node[data-v-301527] {
   height: 35px;
   border-radius: 10px;
   overflow: hidden;
@@ -18,6 +18,6 @@
   padding-left: 3px;
   min-width: 0px;
 }
-.children[data-v-f185e1] {
+.children[data-v-301527] {
   display: flex;
 }

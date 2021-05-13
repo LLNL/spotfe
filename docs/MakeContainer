@@ -20,7 +20,10 @@ DONE - refactor "ch_"+ into a function.
 
 Next:
 When you click on a jupyter button or multi jupyter button do a popup modal.
-in that modal, have a select drop down for all the available
+in that modal, have a select drop down for all the available templates
+    * USE case 1: we want olga and stephanie to easily be able to add templates
+    * Use case 2: we want some other scientist to be able to add templates
+        * but these templates are only intended for him and his team, no one else
     * at some point we can check in 3 different locations to look in a person's home directory.
 
 
