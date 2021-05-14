@@ -26,7 +26,7 @@ ST.CompareArguments = function() {
 
     var load_tabs_ = function() {
 
-        var jup_button = ST.CallSpot.is_ale3d ? ""  : '<div class="myButton icon multi_jupyter" v-on:click="multiJupyter()" title="Open all Jupyter files selected below">' +
+        var jup_button = '<div class="myButton icon multi_jupyter" v-on:click="multiJupyter()" title="Open all Jupyter files selected below">' +
                     '<div class="inner"></div>' +
                     '<div class="tiny_letter">M</div>' +
                 '</div>';

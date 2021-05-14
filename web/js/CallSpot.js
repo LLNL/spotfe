@@ -287,7 +287,8 @@ ST.CallSpot = function() {
                     var month = spot_date.getMonth() + 1;
                     var day = spot_date.getDate();
                     var year = spot_date.getFullYear();
-                    var has_jupyter = ST.CallSpot.is_ale3d ? false : true;
+                    var is_ale3d = valid_obj.json === "1";
+                    var has_jupyter = is_ale3d ? false : true;
 
                     //  This is just for stub
                     //valid_obj.epoch_date = date;

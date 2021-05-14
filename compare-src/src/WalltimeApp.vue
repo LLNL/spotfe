@@ -222,6 +222,8 @@ export default {
 
             console.dir(newData);
             ST.RunDictionaryTranslator.set( newData.dictionary );
+
+            this.updateTopDownData();
         },
         async getmemoryfunc( path )
         {
@@ -304,6 +306,10 @@ export default {
             var runSetId = ST.Utility.get_param('runSetId');
             var runId = ST.Utility.get_param('runId');
 
+            if( runId.indexOf('.cali') === -1 ) {
+                runId += ".json";
+            }
+
             //  //'/usr/gapps/spot/datasets/lulesh_gen/100',
             var path = runSetId + "/" + runId;
 
@@ -317,6 +323,7 @@ export default {
 
                 this.getDictionary();
                 var updateTopDown = this.updateTopDown;
+                var updateRendering = this.updateTopDownData;
 
                 ST.CallSpot.ajax({
                     file: path,
@@ -333,6 +340,12 @@ export default {
                         }
 
                         updateTopDown(ret2);
+
+                        console.log('debugTop10');
+                        updateRendering();
+                        setTimeout( updateRendering, 2000);
+                        setTimeout( updateRendering, 4000);
+                        setTimeout( updateRendering, 6000);
                     }
                 });
             }

@@ -29850,6 +29850,8 @@ var _default = {
   },
   methods: {
     getDictionary: function getDictionary() {
+      var _this = this;
+
       return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
         var dataSetKey, host, command, param_str, lor_response, newData;
         return regeneratorRuntime.wrap(function _callee$(_context) {
@@ -29885,7 +29887,9 @@ var _default = {
                 console.dir(newData);
                 ST.RunDictionaryTranslator.set(newData.dictionary);
 
-              case 18:
+                _this.updateTopDownData();
+
+              case 19:
               case "end":
                 return _context.stop();
             }
@@ -29894,7 +29898,7 @@ var _default = {
       }))();
     },
     getmemoryfunc: function getmemoryfunc(path) {
-      var _this = this;
+      var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
         var command, datarequest, response, newData;
@@ -29936,7 +29940,7 @@ var _default = {
                 console.log('newData:');
                 console.dir(newData);
 
-                _this.updateTopDown(newData);
+                _this2.updateTopDown(newData);
 
                 _context2.next = 19;
                 break;
@@ -29953,7 +29957,7 @@ var _default = {
       }))();
     },
     getScripts: function getScripts() {
-      var _this2 = this;
+      var _this3 = this;
 
       var files = ["../web/js/jquery-1.11.0.min.js", "../web/js/Utility.js", "../web/js/Environment.js", "../web/js/CallSpot.js?abb"]; //loadScriptsInOrder( files ).then( this.getAliases );
 
@@ -29964,7 +29968,7 @@ var _default = {
         console.log('jquery has been loaded.');
         $.when($.getScript("../web/js/Environment.js"), $.getScript("../web/js/Utility.js"), $.getScript("../web/js/CallSpot.js?abb"), $.getScript("../web/js/RunDictionaryTranslator.js?jasdf"), $.Deferred(function (deferred) {
           $(deferred.resolve);
-        })).done(_this2.getAliases);
+        })).done(_this3.getAliases);
       });
       document.body.appendChild(script);
     },
@@ -29975,7 +29979,12 @@ var _default = {
     //  Just reuse our existing get memory call for now, so we can retrieve aliases.
     getAliases: function getAliases() {
       var runSetId = ST.Utility.get_param('runSetId');
-      var runId = ST.Utility.get_param('runId'); //  //'/usr/gapps/spot/datasets/lulesh_gen/100',
+      var runId = ST.Utility.get_param('runId');
+
+      if (runId.indexOf('.cali') === -1) {
+        runId += ".json";
+      } //  //'/usr/gapps/spot/datasets/lulesh_gen/100',
+
 
       var path = runSetId + "/" + runId;
       var isContainer = window.ENV.machine == 'container';
@@ -29985,6 +29994,7 @@ var _default = {
       } else {
         this.getDictionary();
         var updateTopDown = this.updateTopDown;
+        var updateRendering = this.updateTopDownData;
         ST.CallSpot.ajax({
           file: path,
           type: "memory",
@@ -29999,6 +30009,11 @@ var _default = {
             }
 
             updateTopDown(ret2);
+            console.log('debugTop10');
+            updateRendering();
+            setTimeout(updateRendering, 2000);
+            setTimeout(updateRendering, 4000);
+            setTimeout(updateRendering, 6000);
           }
         });
       }
@@ -41173,7 +41188,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58953" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62772" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
