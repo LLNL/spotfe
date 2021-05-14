@@ -444,8 +444,14 @@ ST.CallSpot = function() {
         for( var c=0; c < len; c++ ) {
 
             var new_index = all[c].key;
-            var cali_key = ST.cali_obj_by_key[new_index].file_path;
-            str += ' ' + cali_key;
+            var cali_obj = ST.cali_obj_by_key[new_index];
+            var cali_key = cali_obj.file_path;
+
+            //  it has to be a cali file, no JSON (ale3D stuff) will work.
+            if( !cali_obj.json ) {
+
+                str += ' ' + cali_key;
+            }
         }
 
         return str.substr(1);
