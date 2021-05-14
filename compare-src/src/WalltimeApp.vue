@@ -44,7 +44,9 @@ import _ from 'lodash'
 //import * as ST from '../../web/js/Utility.js'
 
 async function lorenz(host, cmd){
+
     const baseurl = `https://${host.startsWith('rz') ? 'rz': ''}lc.llnl.gov/lorenz/lora/lora.cgi`
+
     if(process.env.NODE_ENV === 'development' || useJsonp){
         const $ = await import('jquery')
         return new Promise((resolve, reject) => {
@@ -194,15 +196,21 @@ export default {
     methods:{
         async getDictionary() {
 
-            var dataSetKey = ST.Utility.get_file();
+            //  /usr/gapps/spot/sand/spot.py getDictionary /usr/gapps/spot/datasets/lulesh_gen/100
+            var dataSetKey = ST.Utility.get_param('runSetId');
+
             ST.Utility.init_params();
 
             var host = ST.Utility.get_default_machine();
             var command = ST.Utility.get_command();
-            command = command.replace('getData', 'getDictionary');
 
-            console.log('Await: ');
-            var lor_response = await lorenz(host, `${command} ${dataSetKey} '` );
+            command = command.replace('getData', 'getDictionary');
+            var param_str = `${command} ${dataSetKey}`;
+
+            console.log('Await2, param_str = ' + param_str);
+            var lor_response = await lorenz(host, param_str );
+
+            console.log('lor_response:');
             console.dir(lor_response);
 
             if( lor_response.error !== "" ) {

@@ -1,6 +1,8 @@
-* make sure walltime works (for ale3d): walltime do dictionary translation.
+DONE * make sure walltime works (for ale3d): walltime do dictionary translation.
     * make an ajax call to get the dictionary
     * ST.RunDictionaryTranslator.set( newData.dictionary );
+    * Sample getDictinoary works: /usr/gapps/spot/sand/spot.py getDictionary /usr/gapps/spot/datasets/lulesh_gen/100
+- ADd a regression test: for combo
 * need to fix jupyter button.
     * jupyter button needs to show up for cali files but not JSON files
     * the multiJupyter should only use the files which are cali, skip the other ones

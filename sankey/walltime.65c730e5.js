@@ -29851,38 +29851,41 @@ var _default = {
   methods: {
     getDictionary: function getDictionary() {
       return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-        var dataSetKey, host, command, lor_response, newData;
+        var dataSetKey, host, command, param_str, lor_response, newData;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                dataSetKey = ST.Utility.get_file();
+                //  /usr/gapps/spot/sand/spot.py getDictionary /usr/gapps/spot/datasets/lulesh_gen/100
+                dataSetKey = ST.Utility.get_param('runSetId');
                 ST.Utility.init_params();
                 host = ST.Utility.get_default_machine();
                 command = ST.Utility.get_command();
                 command = command.replace('getData', 'getDictionary');
-                console.log('Await: ');
-                _context.next = 8;
-                return lorenz(host, "".concat(command, " ").concat(dataSetKey, " '"));
+                param_str = "".concat(command, " ").concat(dataSetKey);
+                console.log('Await2, param_str = ' + param_str);
+                _context.next = 9;
+                return lorenz(host, param_str);
 
-              case 8:
+              case 9:
                 lor_response = _context.sent;
+                console.log('lor_response:');
                 console.dir(lor_response);
 
                 if (!(lor_response.error !== "")) {
-                  _context.next = 13;
+                  _context.next = 15;
                   break;
                 }
 
                 ST.Utility.error(lor_response.error);
                 return _context.abrupt("return", false);
 
-              case 13:
+              case 15:
                 newData = JSON.parse(lor_response.output.command_out);
                 console.dir(newData);
                 ST.RunDictionaryTranslator.set(newData.dictionary);
 
-              case 16:
+              case 18:
               case "end":
                 return _context.stop();
             }
@@ -41170,7 +41173,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63430" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58953" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
