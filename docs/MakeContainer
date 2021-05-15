@@ -1,10 +1,12 @@
+- commit error handling stuff.
+- Regression Test for combos/ and combos2/
 - need to rerender the walltime page, so that dictionary will be rendered.
-- catch file not found error.  case where user enters wrong directory OR no permission.
+TEST - check the container to see if walltime works.
 - MAY need more WOrk:  Walltime support for cali files.
     * https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/sankey/index.html?runSetId=/g/g0/pascal/zdeb/combine&runId=tow3d-slide8.8d.8p.json
-- Regression Test for combos/ and combos2/
 - Finish testing everything and deploy to dev for feedback from legendre and marty.
 
+DONE - catch file not found error.  case where user enters wrong directory OR no permission.
 DONE - the multiJupyter should only use the files which are cali, skip the other ones
 DONE * make walltime work with our dictionary translation for cali files.
     * make an ajax call to get the dictionary

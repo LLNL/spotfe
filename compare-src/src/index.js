@@ -224,6 +224,12 @@ export class Graph{
                     var lor_response = await lorenz(host, `${command} ${dataSetKey} '` + JSON.stringify(cachedRunCtimes) + "'");
                     console.dir(lor_response);
 
+                    if( lor_response.output.command_out.indexOf('ERROR') > -1 ) {
+
+                        ST.Utility.error( lor_response.output.command_out );
+                        return false;
+                    }
+
                     if( lor_response.error !== "" ) {
                         ST.Utility.error( lor_response.error );
                         return false;

@@ -52088,7 +52088,7 @@ var Graph = /*#__PURE__*/function () {
 
                 newData = cacheSum.summary;
                 console.log('was able to find cache.');
-                _context3.next = 66;
+                _context3.next = 69;
                 break;
 
               case 38:
@@ -52115,7 +52115,7 @@ var Graph = /*#__PURE__*/function () {
 
               case 45:
                 newData = _context3.sent;
-                _context3.next = 66;
+                _context3.next = 69;
                 break;
 
               case 48:
@@ -52127,15 +52127,24 @@ var Graph = /*#__PURE__*/function () {
                 lor_response = _context3.sent;
                 console.dir(lor_response);
 
-                if (!(lor_response.error !== "")) {
+                if (!(lor_response.output.command_out.indexOf('ERROR') > -1)) {
                   _context3.next = 56;
+                  break;
+                }
+
+                ST.Utility.error(lor_response.output.command_out);
+                return _context3.abrupt("return", false);
+
+              case 56:
+                if (!(lor_response.error !== "")) {
+                  _context3.next = 59;
                   break;
                 }
 
                 ST.Utility.error(lor_response.error);
                 return _context3.abrupt("return", false);
 
-              case 56:
+              case 59:
                 newData = JSON.parse(lor_response.output.command_out);
 
                 if (newData.foundReport) {
@@ -52143,11 +52152,11 @@ var Graph = /*#__PURE__*/function () {
                 }
 
                 DB.saveSummary(newData);
-                _context3.next = 66;
+                _context3.next = 69;
                 break;
 
-              case 61:
-                _context3.prev = 61;
+              case 64:
+                _context3.prev = 64;
                 _context3.t1 = _context3["catch"](48);
                 console.log('Exception: ');
                 console.dir(_context3.t1);
@@ -52158,7 +52167,7 @@ var Graph = /*#__PURE__*/function () {
                   RunSetMeta: {}
                 };
 
-              case 66:
+              case 69:
                 console.log('newData:  ');
                 console.dir(newData); //newData = ST.RunDictionaryTranslator.translate( newData );
 
@@ -52182,10 +52191,10 @@ var Graph = /*#__PURE__*/function () {
                 });
                 window.cachedData = cachedData; // cache newest version of data
 
-                _context3.next = 81;
+                _context3.next = 84;
                 return _localforage.default.setItem(dataSetKey, cachedData);
 
-              case 81:
+              case 84:
                 // add in datsetkey and datakey to globals
                 _lodash.default.forEach(cachedData.Runs, function (run, filename) {
                   run.Globals = run.Globals || {};
@@ -52269,20 +52278,20 @@ var Graph = /*#__PURE__*/function () {
                     table: []
                   }
                 };
-                _context3.next = 98;
+                _context3.next = 101;
                 return _localforage.default.getItem("show:" + dataSetKey);
 
-              case 98:
+              case 101:
                 _context3.t2 = _context3.sent;
 
                 if (_context3.t2) {
-                  _context3.next = 101;
+                  _context3.next = 104;
                   break;
                 }
 
                 _context3.t2 = defaultVisibleCharts;
 
-              case 101:
+              case 104:
                 visibleCharts = _context3.t2;
 
                 for (_i4 = 0, _Object$entries4 = Object.entries(cachedData.Runs); _i4 < _Object$entries4.length; _i4++) {
@@ -52313,29 +52322,29 @@ var Graph = /*#__PURE__*/function () {
                   });
                 }
 
-                _context3.next = 107;
+                _context3.next = 110;
                 return _localforage.default.getItem('scatterplots:' + this.dataSetKey);
 
-              case 107:
+              case 110:
                 _context3.t3 = _context3.sent;
 
                 if (_context3.t3) {
-                  _context3.next = 110;
+                  _context3.next = 113;
                   break;
                 }
 
                 _context3.t3 = [];
 
-              case 110:
+              case 113:
                 summary.layout.scatterplots = _context3.t3;
                 return _context3.abrupt("return", summary);
 
-              case 112:
+              case 115:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, this, [[48, 61]]);
+        }, _callee3, this, [[48, 64]]);
       }));
 
       function getData(_x10, _x11, _x12) {
