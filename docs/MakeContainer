@@ -1,15 +1,16 @@
 - need to rerender the walltime page, so that dictionary will be rendered.
-- the multiJupyter should only use the files which are cali, skip the other ones
-- MAY need more WOrk:  This does not work:  wrong directory?
+- catch file not found error.  case where user enters wrong directory OR no permission.
+- MAY need more WOrk:  Walltime support for cali files.
     * https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/sankey/index.html?runSetId=/g/g0/pascal/zdeb/combine&runId=tow3d-slide8.8d.8p.json
 - Regression Test for combos/ and combos2/
 - Finish testing everything and deploy to dev for feedback from legendre and marty.
 
-DONE * make sure walltime works (for ale3d): walltime do dictionary translation.
+DONE - the multiJupyter should only use the files which are cali, skip the other ones
+DONE * make walltime work with our dictionary translation for cali files.
     * make an ajax call to get the dictionary
     * ST.RunDictionaryTranslator.set( newData.dictionary );
     * Sample getDictinoary works: /usr/gapps/spot/sand/spot.py getDictionary /usr/gapps/spot/datasets/lulesh_gen/100
-DONE * need to fix jupyter button.
+DONE * need to fix jupyter button on per row basis.
     * jupyter button needs to show up for cali files but not JSON files
 
 
