@@ -1,4 +1,3 @@
-- commit error handling stuff.
 - Regression Test for combos/ and combos2/
 - need to rerender the walltime page, so that dictionary will be rendered.
 TEST - check the container to see if walltime works.

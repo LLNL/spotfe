@@ -66,6 +66,8 @@ var TEST = function() {
 	    "/g/g0/pascal/zdeb/ale3d_regr/tow3d",
 	    "/g/g0/pascal/zdeb/ale3d_regr/usndhs",
 	    "/g/g0/pascal/zdeb/ale3d_regr/xno",
+	    "/g/g0/pascal/zdeb/combine",
+	    "/g/g0/pascal/zdeb/combine2",
         ];
 
         if( location.host === "rzlc.llnl.gov" ) {
