@@ -27,7 +27,6 @@
                 :selectedNode='selectedNode'
                 :selectedTopdownNode='selectedTopdownNode'
                 :handleClick='changePath'
-
                 )
 </template>
 
@@ -296,6 +295,7 @@ export default {
         },
         updateTopDownData() {
 
+            console.log('update top downdata.');
             //  Need to make sure that it recalculates the topDownData
             this.ensure_update = 1;
         },
@@ -323,7 +323,7 @@ export default {
 
                 this.getDictionary();
                 var updateTopDown = this.updateTopDown;
-                var updateRendering = this.updateTopDownData;
+                var rerender = this.rerenderSoDictTranslationHappens;
 
                 ST.CallSpot.ajax({
                     file: path,
@@ -341,19 +341,26 @@ export default {
 
                         updateTopDown(ret2);
 
-                        console.log('debugTop10');
-                        updateRendering();
-                        setTimeout( updateRendering, 2000);
-                        setTimeout( updateRendering, 4000);
-                        setTimeout( updateRendering, 6000);
+                        console.log('debugTop19');
+
+                        //  TODO: find event of when the thing gets finished rendering
+                        //  only then should be do rerender.  get rid of setTimeout.
+                        setTimeout( rerender, 1000);
+                        setTimeout( rerender, 3000);
+                        setTimeout( rerender, 5000);
                     }
                 });
             }
         },
+        rerenderSoDictTranslationHappens() {
+
+            $('.exclusive-white-buffer').get(0).click();
+            $('.rootbutton').get(0).click();
+        },
         updateTopDown( ret2 ) {
 
             console.log('updateTopDown 23223')
-            console.dir(ret2)
+            console.dir(ret2);
 
             var records = ret2.series.records;
             var attributes = ret2.series.attributes;
@@ -420,7 +427,6 @@ export default {
         },
         peeledData(runData, metricName){
 
-            console.log('PZA');
             var z;
 
              let x =  _.fromPairs(_.map(runData, (metrics, funcPath) => {
@@ -439,7 +445,10 @@ export default {
              x['--root path--'] = {value: 0}
              return x
         },
-        changePath(path){this.selectedNode = path },
+        changePath(path){
+            console.log('change path.');
+            this.selectedNode = path;
+        },
         setTopdownNode(nodename){
             this.selectedTopdownNode = nodename
         },

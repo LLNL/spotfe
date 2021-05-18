@@ -70,6 +70,7 @@ var TEST = function() {
 	    "/g/g0/pascal/zdeb/combine2",
         ];
 
+
         if( location.host === "rzlc.llnl.gov" ) {
             num = num.concat( rtests );
         }

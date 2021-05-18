@@ -29973,7 +29973,8 @@ var _default = {
       document.body.appendChild(script);
     },
     updateTopDownData: function updateTopDownData() {
-      //  Need to make sure that it recalculates the topDownData
+      console.log('update top downdata.'); //  Need to make sure that it recalculates the topDownData
+
       this.ensure_update = 1;
     },
     //  Just reuse our existing get memory call for now, so we can retrieve aliases.
@@ -29994,7 +29995,7 @@ var _default = {
       } else {
         this.getDictionary();
         var updateTopDown = this.updateTopDown;
-        var updateRendering = this.updateTopDownData;
+        var rerender = this.rerenderSoDictTranslationHappens;
         ST.CallSpot.ajax({
           file: path,
           type: "memory",
@@ -30009,14 +30010,19 @@ var _default = {
             }
 
             updateTopDown(ret2);
-            console.log('debugTop10');
-            updateRendering();
-            setTimeout(updateRendering, 2000);
-            setTimeout(updateRendering, 4000);
-            setTimeout(updateRendering, 6000);
+            console.log('debugTop19'); //  TODO: find event of when the thing gets finished rendering
+            //  only then should be do rerender.  get rid of setTimeout.
+
+            setTimeout(rerender, 1000);
+            setTimeout(rerender, 3000);
+            setTimeout(rerender, 5000);
           }
         });
       }
+    },
+    rerenderSoDictTranslationHappens: function rerenderSoDictTranslationHappens() {
+      $('.exclusive-white-buffer').get(0).click();
+      $('.rootbutton').get(0).click();
     },
     updateTopDown: function updateTopDown(ret2) {
       console.log('updateTopDown 23223');
@@ -30074,7 +30080,6 @@ var _default = {
       }
     },
     peeledData: function peeledData(runData, metricName) {
-      console.log('PZA');
       var z;
 
       var x = _lodash.default.fromPairs(_lodash.default.map(runData, function (metrics, funcPath) {
@@ -30101,6 +30106,7 @@ var _default = {
       return x;
     },
     changePath: function changePath(path) {
+      console.log('change path.');
       this.selectedNode = path;
     },
     setTopdownNode: function setTopdownNode(nodename) {
@@ -41188,7 +41194,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62772" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51610" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
