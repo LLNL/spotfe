@@ -68,6 +68,8 @@ var TEST = function() {
 	    "/g/g0/pascal/zdeb/ale3d_regr/xno",
 	    "/g/g0/pascal/zdeb/combine",
 	    "/g/g0/pascal/zdeb/combine2",
+	    "/g/g0/pascal/zdeb/combine3",
+	    "/g/g0/pascal/zdeb/combine4",
         ];
 
 
