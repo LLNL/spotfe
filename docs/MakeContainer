@@ -1,19 +1,22 @@
+BUG - 2nd compare render doesn't work, only shows two values because:
+    * inside App.vue, in computed->runs  this.filenames only has two things in it
+    * this.filenames should have about 500 or more things in it: https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/?sf=/g/g0/pascal/zdeb/ale3d_regr/pipe&ch_launchdate=1&ch_dataSetKey=1&ch_datapath=1&ch_commit=1&xaxis=launchdate&groupby=dataSetKey&aggregate=avg
+- Verify that we can still build the cacheToFE.json with the JSON stuff.
 TEST - check the container to see if walltime works.
-- MAY need more WOrk:  Walltime support for cali files.
+- MAY need more WOrk:  Walltime support for JSON files (spot1)
     * https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/sankey/index.html?runSetId=/g/g0/pascal/zdeb/combine&runId=tow3d-slide8.8d.8p.json
 - Finish testing everything and deploy to dev for feedback from legendre and marty.
 
 DONE - need to rerender the walltime page, so that dictionary will be rendered.
 DONE - Regression Test for combos/ and combos2/
 DONE - catch file not found error.  case where user enters wrong directory OR no permission.
-DONE - the multiJupyter should only use the files which are cali, skip the other ones
 DONE * make walltime work with our dictionary translation for cali files.
     * make an ajax call to get the dictionary
     * ST.RunDictionaryTranslator.set( newData.dictionary );
     * Sample getDictinoary works: /usr/gapps/spot/sand/spot.py getDictionary /usr/gapps/spot/datasets/lulesh_gen/100
+DONE - the multiJupyter should only use the files which are cali, skip the other ones
 DONE * need to fix jupyter button on per row basis.
     * jupyter button needs to show up for cali files but not JSON files
-
 
 DONE - fixed a json_runs reporting error (count lines), I thought was marty's issue but wasnt
     * in response to marty's error.
@@ -22,6 +25,9 @@ DONE - if there's an error message then pass it up to FE - this way we can diagn
     * CAllspot.js: set_up_params_()
     * right now bug, if you: https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/?sf=/usr/gapps/spot/datasets/lulesh_gen/100
         * it will try to select the wrong thing.
+
+
+
 
 DONE - refactor "ch_"+ into a function.
 

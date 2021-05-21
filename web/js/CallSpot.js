@@ -448,10 +448,10 @@ ST.CallSpot = function() {
             var cali_key = cali_obj.file_path;
 
             //  it has to be a cali file, no JSON (ale3D stuff) will work.
-            if( !cali_obj.json ) {
+            //if( !cali_obj.json ) {
 
-                str += ' ' + cali_key;
-            }
+            str += ' ' + cali_key;
+            //}
         }
 
         return str.substr(1);
