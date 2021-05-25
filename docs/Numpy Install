@@ -1,0 +1,13 @@
+cd /usr/gapps/spot/venv_python/
+# this gets you into the venv.
+source activate
+
+
+pip install --upgrade pip
+pip install numpy
+pip install numpy --upgrade
+
+# Run this!  very important.
+/usr/gapps/spot/setperm.sh
+
+# Need to check permission of the venv.

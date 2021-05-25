@@ -1,11 +1,19 @@
-BUG - 2nd compare render doesn't work, only shows two values because:
-    * inside App.vue, in computed->runs  this.filenames only has two things in it
-    * this.filenames should have about 500 or more things in it: https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/?sf=/g/g0/pascal/zdeb/ale3d_regr/pipe&ch_launchdate=1&ch_dataSetKey=1&ch_datapath=1&ch_commit=1&xaxis=launchdate&groupby=dataSetKey&aggregate=avg
-- Verify that we can still build the cacheToFE.json with the JSON stuff.
-TEST - check the container to see if walltime works.
 - MAY need more WOrk:  Walltime support for JSON files (spot1)
     * https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/sankey/index.html?runSetId=/g/g0/pascal/zdeb/combine&runId=tow3d-slide8.8d.8p.json
-- Finish testing everything and deploy to dev for feedback from legendre and marty.
+
+- permissions for Venv: umask 0002
+- Don't use personal venv, use default at the top of spot.py
+    * to reproduce the error.
+- import numpy
+- also put imports at the top.
+
+python3 -c "import numpy; print(numpy.__version__)"
+
+TEST - check the container to see if walltime works.
+TEST - multi directory, multi level.
+
+- spot1 Data - it might be years before people stop caring about that.
+- spot1 infrastructure we will kill in a few months
 
 DONE - need to rerender the walltime page, so that dictionary will be rendered.
 DONE - Regression Test for combos/ and combos2/
