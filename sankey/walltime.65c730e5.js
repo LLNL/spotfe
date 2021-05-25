@@ -29979,15 +29979,19 @@ var _default = {
     },
     //  Just reuse our existing get memory call for now, so we can retrieve aliases.
     getAliases: function getAliases() {
-      var runSetId = ST.Utility.get_param('runSetId');
-      var runId = ST.Utility.get_param('runId');
+      var runSetId = ST.Utility.get_param('runSetId'); //  cali files use this:
 
-      if (runId.indexOf('.cali') === -1) {
-        runId += ".json";
-      } //  //'/usr/gapps/spot/datasets/lulesh_gen/100',
+      var runId = ST.Utility.get_param('runId'); //  JSON files use this:
 
+      var title = ST.Utility.get_param('title');
 
-      var path = runSetId + "/" + runId;
+      if (title.indexOf('.cali') === -1) {
+        title += ".json";
+      }
+
+      var suff = title === "undefined.json" ? runId : title; //  //'/usr/gapps/spot/datasets/lulesh_gen/100',
+
+      var path = runSetId + "/" + suff;
       var isContainer = window.ENV.machine == 'container';
 
       if (isContainer) {
@@ -41194,7 +41198,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51610" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54501" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

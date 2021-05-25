@@ -506,9 +506,10 @@ ST.CallSpot = function() {
         var obj = objs_by_run_id_[run_id];
         var key = obj.key;
         var file = obj.filepath;    //file + '/' + key;
-        var cali_fp = ST.cali_obj_by_key[key].file_path;
+        var cali_obj = ST.cali_obj_by_key[key];
+        var cali_fp = cali_obj.file_path;
 
-        var file_left = ST.cali_obj_by_key[key].run_set_id;
+        var file_left = cali_obj.run_set_id;
         file_left = strip_right_(file_left);
 
         if (subject === 'mpi') {
@@ -518,7 +519,11 @@ ST.CallSpot = function() {
 
         } else if( subject === "durations" ) {
 
-            window.open('sankey/index.html?runSetId=' + file_left + "&runId=" + cali_fp);
+            var url = 'sankey/index.html?runSetId=' + file_left +
+                "&runId=" + cali_fp +
+                "&title=" + cali_obj.title;
+
+            window.open(url);
 
         } else if( subject === "timeseries" ) {
 

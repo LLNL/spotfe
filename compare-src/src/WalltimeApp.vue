@@ -304,14 +304,21 @@ export default {
         getAliases() {
 
             var runSetId = ST.Utility.get_param('runSetId');
+
+            //  cali files use this:
             var runId = ST.Utility.get_param('runId');
 
-            if( runId.indexOf('.cali') === -1 ) {
-                runId += ".json";
+            //  JSON files use this:
+            var title = ST.Utility.get_param('title');
+
+            if( title.indexOf('.cali') === -1 ) {
+                title += ".json";
             }
 
+            var suff = title === "undefined.json" ? runId : title;
+
             //  //'/usr/gapps/spot/datasets/lulesh_gen/100',
-            var path = runSetId + "/" + runId;
+            var path = runSetId + "/" + suff;
 
             var isContainer = window.ENV.machine == 'container'
 

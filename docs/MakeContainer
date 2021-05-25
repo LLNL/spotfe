@@ -1,5 +1,7 @@
 - MAY need more WOrk:  Walltime support for JSON files (spot1)
-    * https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/sankey/index.html?runSetId=/g/g0/pascal/zdeb/combine&runId=tow3d-slide8.8d.8p.json
+    * FIXED - filename it was asking for.
+    * now some kind of format error.
+    * https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/sankey/index.html?runSetId=/g/g0/pascal/zdeb/ale3d_regr/am-gen&runId=am1-gen.1d.1p-1&title=am1-gen.1d.1p
 
 - permissions for Venv: umask 0002
 - Don't use personal venv, use default at the top of spot.py
