@@ -30010,12 +30010,18 @@ var _default = {
               ret2 = aj_dat;
             } else {
               var ret = aj_dat.output.command_out;
-              ret2 = JSON.parse(ret);
+
+              try {
+                ret2 = JSON.parse(ret);
+              } catch (e) {}
             }
 
             updateTopDown(ret2);
             console.log('debugTop19'); //  TODO: find event of when the thing gets finished rendering
             //  only then should be do rerender.  get rid of setTimeout.
+            //  Rerender needs to happen after another event.
+            //  this rerender allows the dictionary to be translated
+            //  so that we're not showing all two character stuff.
 
             setTimeout(rerender, 1000);
             setTimeout(rerender, 3000);
@@ -30031,20 +30037,23 @@ var _default = {
     updateTopDown: function updateTopDown(ret2) {
       console.log('updateTopDown 23223');
       console.dir(ret2);
-      var records = ret2.series.records;
-      var attributes = ret2.series.attributes;
-      var metricNames = this.metricNames;
-      var replaceMetricNames = this.replaceMetricNames;
-      var replacing_metrics = this.replacing_metrics;
-      console.dir(records);
-      console.dir(attributes);
-      console.dir(metricNames);
 
-      for (var x = 0; x < metricNames.length; x++) {
-        var met = metricNames[x];
-        var cali_obj = attributes[met] || {};
-        var alias = cali_obj["attribute.alias"] || met;
-        replacing_metrics[met] = alias;
+      if (ret2 && ret2.series) {
+        var records = ret2.series.records;
+        var attributes = ret2.series.attributes;
+        var metricNames = this.metricNames;
+        var replaceMetricNames = this.replaceMetricNames;
+        var replacing_metrics = this.replacing_metrics;
+        console.dir(records);
+        console.dir(attributes);
+        console.dir(metricNames);
+
+        for (var x = 0; x < metricNames.length; x++) {
+          var met = metricNames[x];
+          var cali_obj = attributes[met] || {};
+          var alias = cali_obj["attribute.alias"] || met;
+          replacing_metrics[met] = alias;
+        }
       }
 
       $('.update_top_down').trigger('click');
@@ -41134,6 +41143,13 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var params = new URLSearchParams(new URL(window.location).search);
 var runSetId = params.get("runSetId");
 var runId = params.get("runId");
+var ST = ST || {};
+
+ST.replaceYAxisWithValue = function (fd) {
+  for (var x in fd) {
+    fd["value"] = fd[x].yAxis;
+  }
+};
 
 _localforage.default.getItem(runSetId).then(function (runSet) {
   var fileData = runSet.Runs[runId];
@@ -41154,7 +41170,8 @@ _localforage.default.getItem(runSetId).then(function (runSet) {
     filename: runId,
     data: fileData.Data,
     meta: fileData.Globals
-  };
+  }; //ST.replaceYAxisWithValue( fileData );
+
   return new _vue.default({
     el: "main",
     render: function render(h) {
@@ -41198,7 +41215,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54501" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51074" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

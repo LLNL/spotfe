@@ -51737,33 +51737,83 @@ var defaultVisibleCharts = ['walltime', 'user', 'uid', 'launchdate', 'executable
 var isContainer = ((_window$ENV = window.ENV) === null || _window$ENV === void 0 ? void 0 : _window$ENV.machine) == 'container';
 var useJsonp = (_window$ENV2 = window.ENV) === null || _window$ENV2 === void 0 ? void 0 : _window$ENV2.use_JSONP_for_lorenz_calls;
 
-function lorenz(_x, _x2) {
-  return _lorenz.apply(this, arguments);
+function getMain0(_x) {
+  return _getMain.apply(this, arguments);
 }
 
-function _lorenz() {
-  _lorenz = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(host, cmd) {
-    var baseurl, $, formData;
+function _getMain() {
+  _getMain = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(host) {
+    var prefix, url, $;
     return regeneratorRuntime.wrap(function _callee6$(_context6) {
       while (1) {
         switch (_context6.prev = _context6.next) {
           case 0:
-            baseurl = "https://".concat(host.startsWith('rz') ? 'rz' : '', "lc.llnl.gov/lorenz/lora/lora.cgi");
+            prefix = host.startsWith('rz') ? 'rz' : ''; //var url = "https://rzlc.llnl.gov/lorenz_base/dev/pascal/mylc/mylc/cat.cgi";
 
-            if (!("development" === 'development' || useJsonp)) {
-              _context6.next = 8;
-              break;
-            }
-
-            _context6.next = 4;
+            prefix = 'rz';
+            url = "https://" + prefix + "lc.llnl.gov/lorenz_base/dev/pascal/spotfe/scripts/cat.cgi";
+            url = "https://" + prefix + "lc.llnl.gov/lorenz_base/dev/pascal/mylc/mylc/cat.cgi";
+            _context6.next = 6;
             return require("_bundle_loader")(require.resolve('jquery'));
 
-          case 4:
+          case 6:
             $ = _context6.sent;
             return _context6.abrupt("return", new Promise(function (resolve, reject) {
               $.ajax({
                 dataType: 'jsonp',
+                url: url,
+                //url: baseurl + '/command',
+                //type: "POST",
+                data: {
+                  'via': 'post',
+                  'route': '/command/'
+                }
+              }).then(function (value) {
+                resolve(value);
+              }, function (error) {
+                reject(error);
+              });
+            }));
+
+          case 8:
+          case "end":
+            return _context6.stop();
+        }
+      }
+    }, _callee6);
+  }));
+  return _getMain.apply(this, arguments);
+}
+
+function lorenz(_x2, _x3) {
+  return _lorenz.apply(this, arguments);
+}
+
+function _lorenz() {
+  _lorenz = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7(host, cmd) {
+    var baseurl, $, formData;
+    return regeneratorRuntime.wrap(function _callee7$(_context7) {
+      while (1) {
+        switch (_context7.prev = _context7.next) {
+          case 0:
+            baseurl = "https://".concat(host.startsWith('rz') ? 'rz' : '', "lc.llnl.gov/lorenz/lora/lora.cgi");
+
+            if (!("development" === 'development' || useJsonp)) {
+              _context7.next = 8;
+              break;
+            }
+
+            _context7.next = 4;
+            return require("_bundle_loader")(require.resolve('jquery'));
+
+          case 4:
+            $ = _context7.sent;
+            return _context7.abrupt("return", new Promise(function (resolve, reject) {
+              $.ajax({
+                dataType: 'jsonp',
                 url: baseurl + '/jsonp',
+                //url: baseurl + '/command',
+                //type: "POST",
                 data: {
                   'via': 'post',
                   'route': '/command/' + host,
@@ -51779,7 +51829,7 @@ function _lorenz() {
           case 8:
             formData = new FormData();
             formData.append('command', cmd);
-            return _context6.abrupt("return", fetch(baseurl + '/command/' + host, {
+            return _context7.abrupt("return", fetch(baseurl + '/command/' + host, {
               method: 'POST',
               body: formData
             }).then(function (response) {
@@ -51790,10 +51840,10 @@ function _lorenz() {
 
           case 11:
           case "end":
-            return _context6.stop();
+            return _context7.stop();
         }
       }
-    }, _callee6);
+    }, _callee7);
   }));
   return _lorenz.apply(this, arguments);
 }
@@ -51896,7 +51946,7 @@ var Graph = /*#__PURE__*/function () {
         }, _callee);
       }));
 
-      function openJupyter(_x3, _x4, _x5) {
+      function openJupyter(_x4, _x5, _x6) {
         return _openJupyter.apply(this, arguments);
       }
 
@@ -51977,7 +52027,7 @@ var Graph = /*#__PURE__*/function () {
         }, _callee2);
       }));
 
-      function openMultiJupyter(_x6, _x7, _x8, _x9) {
+      function openMultiJupyter(_x7, _x8, _x9, _x10) {
         return _openMultiJupyter.apply(this, arguments);
       }
 
@@ -51987,12 +52037,15 @@ var Graph = /*#__PURE__*/function () {
     key: "getData",
     value: function () {
       var _getData = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(host, command, dataSetKey) {
-        var arr, spotPy, comm, res, res0, cacheResult, mtime, cachedDataGet, bust_cache, cachedData, cachedRunCtimes, x, dataRequest, newData, cacheSum, cacheDate, response, lor_response, runs0, deletedRuns, baseMetrics, metric, funcPaths, metricNames, runs, filenames, summary, visibleCharts, _i4, _Object$entries4, _Object$entries4$_i, filename, fileContents, barCharts, _i5, _Object$entries5, _Object$entries5$_i, globalName, globalValue, globType, show;
+        var arr, spotPy, comm, res, res0, cacheResult, mtime, cachedDataGet, bust_cache, cachedData, cachedRunCtimes, x, dataRequest, newData, cacheSum, cacheDate, response, file, lor_response, runs0, deletedRuns, baseMetrics, metric, funcPaths, metricNames, runs, filenames, summary, visibleCharts, _i4, _Object$entries4, _Object$entries4$_i, filename, fileContents, barCharts, _i5, _Object$entries5, _Object$entries5$_i, globalName, globalValue, globType, show;
 
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
+                //var rzz = await lorenz(host, "cat /g/g0/pascal/zdeb/full/cacheToFE.json");
+                //console.dir(rzz);
+                //  https://rzlc.llnl.gov/lorenz/lora/lora.cgi/jsonp
                 console.log('host=' + host + '   command=' + command);
                 arr = command.split(' ');
                 spotPy = arr[0];
@@ -52088,7 +52141,7 @@ var Graph = /*#__PURE__*/function () {
 
                 newData = cacheSum.summary;
                 console.log('was able to find cache.');
-                _context3.next = 69;
+                _context3.next = 70;
                 break;
 
               case 38:
@@ -52115,36 +52168,38 @@ var Graph = /*#__PURE__*/function () {
 
               case 45:
                 newData = _context3.sent;
-                _context3.next = 69;
+                _context3.next = 70;
                 break;
 
               case 48:
                 _context3.prev = 48;
-                _context3.next = 51;
+                file = "".concat(command, " ").concat(dataSetKey); //var lor_response = await getMain0( host );
+
+                _context3.next = 52;
                 return lorenz(host, "".concat(command, " ").concat(dataSetKey, " '") + JSON.stringify(cachedRunCtimes) + "'");
 
-              case 51:
+              case 52:
                 lor_response = _context3.sent;
                 console.dir(lor_response);
 
                 if (!(lor_response.output.command_out.indexOf('ERROR') > -1)) {
-                  _context3.next = 56;
+                  _context3.next = 57;
                   break;
                 }
 
                 ST.Utility.error(lor_response.output.command_out);
                 return _context3.abrupt("return", false);
 
-              case 56:
+              case 57:
                 if (!(lor_response.error !== "")) {
-                  _context3.next = 59;
+                  _context3.next = 60;
                   break;
                 }
 
                 ST.Utility.error(lor_response.error);
                 return _context3.abrupt("return", false);
 
-              case 59:
+              case 60:
                 newData = JSON.parse(lor_response.output.command_out);
 
                 if (newData.foundReport) {
@@ -52152,11 +52207,11 @@ var Graph = /*#__PURE__*/function () {
                 }
 
                 DB.saveSummary(newData);
-                _context3.next = 69;
+                _context3.next = 70;
                 break;
 
-              case 64:
-                _context3.prev = 64;
+              case 65:
+                _context3.prev = 65;
                 _context3.t1 = _context3["catch"](48);
                 console.log('Exception: ');
                 console.dir(_context3.t1);
@@ -52167,7 +52222,7 @@ var Graph = /*#__PURE__*/function () {
                   RunSetMeta: {}
                 };
 
-              case 69:
+              case 70:
                 console.log('newData:  ');
                 console.dir(newData); //newData = ST.RunDictionaryTranslator.translate( newData );
 
@@ -52191,10 +52246,10 @@ var Graph = /*#__PURE__*/function () {
                 });
                 window.cachedData = cachedData; // cache newest version of data
 
-                _context3.next = 84;
+                _context3.next = 85;
                 return _localforage.default.setItem(dataSetKey, cachedData);
 
-              case 84:
+              case 85:
                 // add in datsetkey and datakey to globals
                 _lodash.default.forEach(cachedData.Runs, function (run, filename) {
                   run.Globals = run.Globals || {};
@@ -52278,20 +52333,20 @@ var Graph = /*#__PURE__*/function () {
                     table: []
                   }
                 };
-                _context3.next = 101;
+                _context3.next = 102;
                 return _localforage.default.getItem("show:" + dataSetKey);
 
-              case 101:
+              case 102:
                 _context3.t2 = _context3.sent;
 
                 if (_context3.t2) {
-                  _context3.next = 104;
+                  _context3.next = 105;
                   break;
                 }
 
                 _context3.t2 = defaultVisibleCharts;
 
-              case 104:
+              case 105:
                 visibleCharts = _context3.t2;
 
                 for (_i4 = 0, _Object$entries4 = Object.entries(cachedData.Runs); _i4 < _Object$entries4.length; _i4++) {
@@ -52322,32 +52377,32 @@ var Graph = /*#__PURE__*/function () {
                   });
                 }
 
-                _context3.next = 110;
+                _context3.next = 111;
                 return _localforage.default.getItem('scatterplots:' + this.dataSetKey);
 
-              case 110:
+              case 111:
                 _context3.t3 = _context3.sent;
 
                 if (_context3.t3) {
-                  _context3.next = 113;
+                  _context3.next = 114;
                   break;
                 }
 
                 _context3.t3 = [];
 
-              case 113:
+              case 114:
                 summary.layout.scatterplots = _context3.t3;
                 return _context3.abrupt("return", summary);
 
-              case 115:
+              case 116:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, this, [[48, 64]]);
+        }, _callee3, this, [[48, 65]]);
       }));
 
-      function getData(_x10, _x11, _x12) {
+      function getData(_x11, _x12, _x13) {
         return _getData.apply(this, arguments);
       }
 
@@ -52390,7 +52445,7 @@ var Graph = /*#__PURE__*/function () {
         }, _callee4, this);
       }));
 
-      function addScatterplot(_x13) {
+      function addScatterplot(_x14) {
         return _addScatterplot.apply(this, arguments);
       }
 
@@ -52440,7 +52495,7 @@ var Graph = /*#__PURE__*/function () {
         }, _callee5, this);
       }));
 
-      function setChartVisible(_x14) {
+      function setChartVisible(_x15) {
         return _setChartVisible.apply(this, arguments);
       }
 
@@ -52529,7 +52584,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49919" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54037" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

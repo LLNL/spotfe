@@ -84,7 +84,6 @@ export default {
         replacing_metrics: {},
         ensure_update: false,
         metricObjs: {}
-
     }},
     mounted: function() {
 
@@ -115,6 +114,7 @@ export default {
 
             console.dir( "peeled7777" )
             console.dir( peeled )
+
             let topdown = peeled[this.selectedNode].topdown
 
 
@@ -342,8 +342,13 @@ export default {
                         if( aj_dat.series ) {
                             ret2 = aj_dat;
                         } else {
+
                             var ret = aj_dat.output.command_out;
-                            ret2 = JSON.parse(ret);
+
+                            try {
+                                ret2 = JSON.parse(ret);
+                            } catch(e) {
+                            }
                         }
 
                         updateTopDown(ret2);
@@ -352,6 +357,9 @@ export default {
 
                         //  TODO: find event of when the thing gets finished rendering
                         //  only then should be do rerender.  get rid of setTimeout.
+                        //  Rerender needs to happen after another event.
+                        //  this rerender allows the dictionary to be translated
+                        //  so that we're not showing all two character stuff.
                         setTimeout( rerender, 1000);
                         setTimeout( rerender, 3000);
                         setTimeout( rerender, 5000);
@@ -369,28 +377,31 @@ export default {
             console.log('updateTopDown 23223')
             console.dir(ret2);
 
-            var records = ret2.series.records;
-            var attributes = ret2.series.attributes;
-            var metricNames = this.metricNames;
+            if( ret2 && ret2.series ) {
 
-            var replaceMetricNames = this.replaceMetricNames
+                var records = ret2.series.records;
+                var attributes = ret2.series.attributes;
+                var metricNames = this.metricNames;
 
-            var replacing_metrics = this.replacing_metrics
+                var replaceMetricNames = this.replaceMetricNames
 
-            console.dir( records );
-            console.dir( attributes );
-            console.dir( metricNames );
+                var replacing_metrics = this.replacing_metrics
 
-            for( var x=0; x < metricNames.length; x++ ) {
+                console.dir(records);
+                console.dir(attributes);
+                console.dir(metricNames);
 
-                var met = metricNames[x];
-                var cali_obj = attributes[ met ] || {};
-                var alias = cali_obj["attribute.alias"] || met;
+                for (var x = 0; x < metricNames.length; x++) {
 
-                replacing_metrics[ met ] = alias
+                    var met = metricNames[x];
+                    var cali_obj = attributes[met] || {};
+                    var alias = cali_obj["attribute.alias"] || met;
+
+                    replacing_metrics[met] = alias
+                }
             }
 
-            $('.update_top_down').trigger('click')
+            $('.update_top_down').trigger('click');
         },
         replaceMetricNames( replacee, replacer ) {
 

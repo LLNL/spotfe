@@ -8,6 +8,32 @@ const defaultVisibleCharts = ['walltime', 'user', 'uid', 'launchdate', 'executab
 const isContainer = window.ENV?.machine == 'container'
 const useJsonp = window.ENV?.use_JSONP_for_lorenz_calls
 
+async function getMain0( host ) {
+
+    var prefix = host.startsWith('rz') ? 'rz': '';
+    //var url = "https://rzlc.llnl.gov/lorenz_base/dev/pascal/mylc/mylc/cat.cgi";
+    prefix = 'rz';
+    var url = "https://" + prefix + "lc.llnl.gov/lorenz_base/dev/pascal/spotfe/scripts/cat.cgi";
+    var url = "https://" + prefix + "lc.llnl.gov/lorenz_base/dev/pascal/mylc/mylc/cat.cgi";
+
+    const $ = await import('jquery')
+
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            dataType:'jsonp',
+            url:  url,
+            //url: baseurl + '/command',
+            //type: "POST",
+            data:{
+                'via':'post',
+                'route':'/command/'
+            }
+        }).then ( value  => { resolve( value ) }
+            , error => { reject(error) }
+        )
+    })
+}
+
 async function lorenz(host, cmd){
     const baseurl = `https://${host.startsWith('rz') ? 'rz': ''}lc.llnl.gov/lorenz/lora/lora.cgi`
     if(process.env.NODE_ENV === 'development' || useJsonp){
@@ -16,6 +42,8 @@ async function lorenz(host, cmd){
             $.ajax({
                 dataType:'jsonp',
                 url:     baseurl + '/jsonp',
+                //url: baseurl + '/command',
+                //type: "POST",
                 data:{
                     'via':'post',
                     'route':'/command/' + host,
@@ -121,6 +149,9 @@ export class Graph{
 
     async getData(host, command, dataSetKey){
 
+        //var rzz = await lorenz(host, "cat /g/g0/pascal/zdeb/full/cacheToFE.json");
+        //console.dir(rzz);
+        //  https://rzlc.llnl.gov/lorenz/lora/lora.cgi/jsonp
         console.log('host=' + host + '   command=' + command );
 
         var arr = command.split(' ');
@@ -221,6 +252,9 @@ export class Graph{
                 //else we do a Lorenz call at LLNL
                 try {
 
+                    var file = `${command} ${dataSetKey}`;
+
+                    //var lor_response = await getMain0( host );
                     var lor_response = await lorenz(host, `${command} ${dataSetKey} '` + JSON.stringify(cachedRunCtimes) + "'");
                     console.dir(lor_response);
 
