@@ -1,7 +1,25 @@
+- work on walltime first.
+- https://lc.llnl.gov/lorenz_base/dev/pascal/mylc/mylc/cat.cgi
+    * this can send 400mb in 3.6 seconds using just cgi without a wrapper.
+    * DONE - confirmed it in the browser
+    * confirmed it in our spot app with a stub file.
+
+cat /g/g0/pascal/zdeb/full/cacheToFE.json
+
+DONE - Get numpy working for rzgenie and rzslic.
+TRY - tried a lot of different types of requests on lorenz to get a faster one.
+
+TEST - check the container to see if walltime works.
 - MAY need more WOrk:  Walltime support for JSON files (spot1)
     * FIXED - filename it was asking for.
+    * Data cache comes from localforage.  It comes from a file called walltime.js
     * now some kind of format error.
     * https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/sankey/index.html?runSetId=/g/g0/pascal/zdeb/ale3d_regr/am-gen&runId=am1-gen.1d.1p-1&title=am1-gen.1d.1p
+    * '/usr/global/tools/lorenz/python/optvis-env2/bin/python /usr/gapps/spot/sand/spot.py memory /g/g0/pascal/zdeb/ale3d_regr/am-gen/am1-gen.1d.1p.json' on
+    rzgenie: == CALIPER: Invalid CSV entry: {\"generator/Physics variable
+    * might be able to use just use the data already loaded in the client
+    * the error we're getting: is this function call necessary?  what data does it provide?
+
 
 - permissions for Venv: umask 0002
 - Don't use personal venv, use default at the top of spot.py
@@ -11,7 +29,6 @@
 
 python3 -c "import numpy; print(numpy.__version__)"
 
-TEST - check the container to see if walltime works.
 TEST - multi directory, multi level.
 
 - spot1 Data - it might be years before people stop caring about that.
@@ -37,6 +54,9 @@ DONE - if there's an error message then pass it up to FE - this way we can diagn
         * it will try to select the wrong thing.
 
 
+Fall 2022 Spot2 GUI will end, maintenance after that.
+After that I will go back to lorenz.
+Caliper will keep going.
 
 
 DONE - refactor "ch_"+ into a function.
@@ -699,3 +719,249 @@ The rule of thumb is 6% (edit 2015-Jul: was 10%) of the available space on the u
 Note some annoying subtleties:
 
 There is no PERSISTENT storage for indexeddb, only the stuff in the link above about TEMPORARY applies.
+
+
+
+Walltime call:
+{
+    "series": {
+        "records": [],
+        "globals": {
+            "spot.metrics": "#sum.sum#duration#inclusive",
+            "figure_of_merit": "7200.000000",
+            "elapsed_time": "64.000000",
+            "region_balance": "10",
+            "region_cost": "4",
+            "num_regions": "11",
+            "problem_size": "72",
+            "iterations": "1920000",
+            "threads": "31",
+            "jobsize": "5",
+            "cluster": "treetops",
+            "cmdline": "[-runflag -f",
+            "libraries": "GCC-4.93",
+            "executablepath": "/hosts/bin/serv",
+            "launchdate": "1566467749",
+            "user": "boehme3",
+            "cali.channel": "spot",
+            "cali.caliper.version": "2.2.0-dev"
+        },
+        "attributes": {
+            "adiak.category": {
+                "is_global": false,
+                "is_nested": false,
+                "cali.attribute.name": "adiak.category",
+                "cali.attribute.prop": "12",
+                "cali.attribute.type": "string"
+            },
+            "adiak.type": {
+                "is_global": false,
+                "is_nested": false,
+                "cali.attribute.name": "adiak.type",
+                "cali.attribute.prop": "12",
+                "cali.attribute.type": "string"
+            },
+            "avg#inclusive#sum#time.duration": {
+                "is_global": false,
+                "is_nested": false,
+                "cali.attribute.name": "avg#inclusive#sum#time.duration",
+                "cali.attribute.prop": "65",
+                "cali.attribute.type": "double"
+            },
+            "cali.attribute.name": {
+                "is_global": false,
+                "is_nested": false,
+                "cali.attribute.name": "cali.attribute.name",
+                "cali.attribute.type": "string"
+            },
+            "cali.attribute.prop": {
+                "is_global": false,
+                "is_nested": false,
+                "cali.attribute.name": "cali.attribute.prop",
+                "cali.attribute.type": "int"
+            },
+            "cali.attribute.type": {
+                "is_global": false,
+                "is_nested": false,
+                "cali.attribute.name": "cali.attribute.type",
+                "cali.attribute.type": "type"
+            },
+            "cali.caliper.version": {
+                "is_global": true,
+                "is_nested": false,
+                "cali.attribute.name": "cali.caliper.version",
+                "cali.attribute.prop": "588",
+                "cali.attribute.type": "string"
+            },
+            "cali.channel": {
+                "is_global": true,
+                "is_nested": false,
+                "cali.attribute.name": "cali.channel",
+                "cali.attribute.prop": "588",
+                "cali.attribute.type": "string"
+            },
+            "cluster": {
+                "is_global": true,
+                "is_nested": false,
+                "cali.attribute.name": "cluster",
+                "cali.attribute.prop": "524",
+                "adiak.category": "none",
+                "adiak.type": "string",
+                "cali.attribute.type": "string"
+            },
+            "cmdline": {
+                "is_global": true,
+                "is_nested": false,
+                "cali.attribute.name": "cmdline",
+                "cali.attribute.prop": "524",
+                "adiak.category": "runinfo",
+                "adiak.type": "set of string",
+                "cali.attribute.type": "string"
+            },
+            "elapsed_time": {
+                "is_global": true,
+                "is_nested": false,
+                "cali.attribute.name": "elapsed_time",
+                "cali.attribute.prop": "524",
+                "adiak.category": "none",
+                "adiak.type": "double",
+                "cali.attribute.type": "double"
+            },
+            "executablepath": {
+                "is_global": true,
+                "is_nested": false,
+                "cali.attribute.name": "executablepath",
+                "cali.attribute.prop": "524",
+                "adiak.category": "binary",
+                "adiak.type": "path",
+                "cali.attribute.type": "string"
+            },
+            "figure_of_merit": {
+                "is_global": true,
+                "is_nested": false,
+                "cali.attribute.name": "figure_of_merit",
+                "cali.attribute.prop": "524",
+                "adiak.category": "none",
+                "adiak.type": "double",
+                "cali.attribute.type": "double"
+            },
+            "iterations": {
+                "is_global": true,
+                "is_nested": false,
+                "cali.attribute.name": "iterations",
+                "cali.attribute.prop": "524",
+                "adiak.category": "none",
+                "adiak.type": "int",
+                "cali.attribute.type": "int"
+            },
+            "jobsize": {
+                "is_global": true,
+                "is_nested": false,
+                "cali.attribute.name": "jobsize",
+                "cali.attribute.prop": "524",
+                "adiak.category": "none",
+                "adiak.type": "int",
+                "cali.attribute.type": "int"
+            },
+            "launchdate": {
+                "is_global": true,
+                "is_nested": false,
+                "cali.attribute.name": "launchdate",
+                "cali.attribute.prop": "524",
+                "adiak.category": "none",
+                "adiak.type": "date",
+                "cali.attribute.type": "uint"
+            },
+            "libraries": {
+                "is_global": true,
+                "is_nested": false,
+                "cali.attribute.name": "libraries",
+                "cali.attribute.prop": "524",
+                "adiak.category": "none",
+                "adiak.type": "set of path",
+                "cali.attribute.type": "string"
+            },
+            "max#inclusive#sum#time.duration": {
+                "is_global": false,
+                "is_nested": false,
+                "cali.attribute.name": "max#inclusive#sum#time.duration",
+                "cali.attribute.prop": "65",
+                "cali.attribute.type": "double"
+            },
+            "min#inclusive#sum#time.duration": {
+                "is_global": false,
+                "is_nested": false,
+                "cali.attribute.name": "min#inclusive#sum#time.duration",
+                "cali.attribute.prop": "65",
+                "cali.attribute.type": "double"
+            },
+            "num_regions": {
+                "is_global": true,
+                "is_nested": false,
+                "cali.attribute.name": "num_regions",
+                "cali.attribute.prop": "524",
+                "adiak.category": "none",
+                "adiak.type": "int",
+                "cali.attribute.type": "int"
+            },
+            "problem_size": {
+                "is_global": true,
+                "is_nested": false,
+                "cali.attribute.name": "problem_size",
+                "cali.attribute.prop": "524",
+                "adiak.category": "none",
+                "adiak.type": "int",
+                "cali.attribute.type": "int"
+            },
+            "region_balance": {
+                "is_global": true,
+                "is_nested": false,
+                "cali.attribute.name": "region_balance",
+                "cali.attribute.prop": "524",
+                "adiak.category": "none",
+                "adiak.type": "int",
+                "cali.attribute.type": "int"
+            },
+            "region_cost": {
+                "is_global": true,
+                "is_nested": false,
+                "cali.attribute.name": "region_cost",
+                "cali.attribute.prop": "524",
+                "adiak.category": "none",
+                "adiak.type": "int",
+                "cali.attribute.type": "int"
+            },
+            "spot.metrics": {
+                "is_global": true,
+                "is_nested": false,
+                "cali.attribute.name": "spot.metrics",
+                "cali.attribute.prop": "512",
+                "cali.attribute.type": "string"
+            },
+            "threads": {
+                "is_global": true,
+                "is_nested": false,
+                "cali.attribute.name": "threads",
+                "cali.attribute.prop": "524",
+                "adiak.category": "none",
+                "adiak.type": "int",
+                "cali.attribute.type": "int"
+            },
+            "user": {
+                "is_global": true,
+                "is_nested": false,
+                "cali.attribute.name": "user",
+                "cali.attribute.prop": "524",
+                "adiak.category": "none",
+                "adiak.type": "string",
+                "cali.attribute.type": "string"
+            }
+        }
+    },
+    "cali_path": "/usr/gapps/spot/datasets/lulesh_gen/100/33.cali"
+}
+
+
+3.7s    12 mb
+8.2s,10,7s    49 mb
+26s        196 mb

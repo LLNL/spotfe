@@ -1,4 +1,4 @@
-cd /usr/gapps/spot/venv_python/
+cd /usr/gapps/spot/venv_python/bin/
 # this gets you into the venv.
 source activate
 
