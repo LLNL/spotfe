@@ -210,8 +210,9 @@ export default {
 
             console.log('Await2, param_str = ' + param_str);
             var lor_response = await lorenz(host, param_str );
-            
-            if( lor_response.error !== "" ) {
+
+
+            if( lor_response && lor_response.error !== "" ) {
                 ST.Utility.error( lor_response.error );
                 return false;
             }

@@ -288,8 +288,9 @@ export class Graph{
             }
         }
 
-        console.log('newData:  ');
-        console.dir( newData );
+        //  newData is too big to always print out.
+        //console.log('990newData:  ');
+        //console.dir( newData );
 
         //newData = ST.RunDictionaryTranslator.translate( newData );
         ST.RunDictionaryTranslator.set( newData.dictionary );

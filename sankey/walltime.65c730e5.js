@@ -29872,7 +29872,7 @@ var _default = {
               case 9:
                 lor_response = _context.sent;
 
-                if (!(lor_response.error !== "")) {
+                if (!(lor_response && lor_response.error !== "")) {
                   _context.next = 13;
                   break;
                 }

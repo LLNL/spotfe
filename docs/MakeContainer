@@ -6,6 +6,7 @@ DONE - work on walltime first.
     * WalltimeApp.vue line 20 - maybe investigate here to see why it's not rendering.
 ISSUE - can we get rid of setTimeout?
 
+TEST - multi directory levels.
 TEST - check the container to see if walltime works.
 
 DONE - CGI work to make output so much faster

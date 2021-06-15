@@ -52135,7 +52135,7 @@ var Graph = /*#__PURE__*/function () {
 
                 newData = cacheSum.summary;
                 console.log('was able to find cache.');
-                _context3.next = 78;
+                _context3.next = 76;
                 break;
 
               case 39:
@@ -52162,7 +52162,7 @@ var Graph = /*#__PURE__*/function () {
 
               case 46:
                 newData = _context3.sent;
-                _context3.next = 78;
+                _context3.next = 76;
                 break;
 
               case 49:
@@ -52210,19 +52210,16 @@ var Graph = /*#__PURE__*/function () {
                 newData = lor_response.output.command_out;
 
               case 67:
-                console.log("LOR response: ");
-                console.dir(newData);
-
                 if (newData.foundReport) {
                   console.log(newData.foundReport);
                 }
 
                 DB.saveSummary(newData);
-                _context3.next = 78;
+                _context3.next = 76;
                 break;
 
-              case 73:
-                _context3.prev = 73;
+              case 71:
+                _context3.prev = 71;
                 _context3.t1 = _context3["catch"](49);
                 console.log('Exception: ');
                 console.dir(_context3.t1);
@@ -52233,10 +52230,11 @@ var Graph = /*#__PURE__*/function () {
                   RunSetMeta: {}
                 };
 
-              case 78:
-                console.log('newData:  ');
-                console.dir(newData); //newData = ST.RunDictionaryTranslator.translate( newData );
-
+              case 76:
+                //  newData is too big to always print out.
+                //console.log('990newData:  ');
+                //console.dir( newData );
+                //newData = ST.RunDictionaryTranslator.translate( newData );
                 ST.RunDictionaryTranslator.set(newData.dictionary);
                 runs0 = newData.Runs; //  this will make jupyter button disappear.
 
@@ -52257,10 +52255,10 @@ var Graph = /*#__PURE__*/function () {
                 });
                 window.cachedData = cachedData; // cache newest version of data
 
-                _context3.next = 93;
+                _context3.next = 89;
                 return _localforage.default.setItem(dataSetKey, cachedData);
 
-              case 93:
+              case 89:
                 // add in datsetkey and datakey to globals
                 _lodash.default.forEach(cachedData.Runs, function (run, filename) {
                   run.Globals = run.Globals || {};
@@ -52344,20 +52342,20 @@ var Graph = /*#__PURE__*/function () {
                     table: []
                   }
                 };
-                _context3.next = 110;
+                _context3.next = 106;
                 return _localforage.default.getItem("show:" + dataSetKey);
 
-              case 110:
+              case 106:
                 _context3.t2 = _context3.sent;
 
                 if (_context3.t2) {
-                  _context3.next = 113;
+                  _context3.next = 109;
                   break;
                 }
 
                 _context3.t2 = defaultVisibleCharts;
 
-              case 113:
+              case 109:
                 visibleCharts = _context3.t2;
 
                 for (_i4 = 0, _Object$entries4 = Object.entries(cachedData.Runs); _i4 < _Object$entries4.length; _i4++) {
@@ -52388,29 +52386,29 @@ var Graph = /*#__PURE__*/function () {
                   });
                 }
 
-                _context3.next = 119;
+                _context3.next = 115;
                 return _localforage.default.getItem('scatterplots:' + this.dataSetKey);
 
-              case 119:
+              case 115:
                 _context3.t3 = _context3.sent;
 
                 if (_context3.t3) {
-                  _context3.next = 122;
+                  _context3.next = 118;
                   break;
                 }
 
                 _context3.t3 = [];
 
-              case 122:
+              case 118:
                 summary.layout.scatterplots = _context3.t3;
                 return _context3.abrupt("return", summary);
 
-              case 124:
+              case 120:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, this, [[49, 73]]);
+        }, _callee3, this, [[49, 71]]);
       }));
 
       function getData(_x12, _x13, _x14) {
@@ -52595,7 +52593,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54037" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65392" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
