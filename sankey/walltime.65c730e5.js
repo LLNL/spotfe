@@ -29997,6 +29997,8 @@ var _default = {
       if (isContainer) {
         this.getmemoryfunc(path);
       } else {
+        //  also run after memory call.
+        //$('.update_top_down').trigger('click');
         this.getDictionary();
         var updateTopDown = this.updateTopDown;
         var rerender = this.rerenderSoDictTranslationHappens;
@@ -30044,8 +30046,11 @@ var _default = {
         var metricNames = this.metricNames;
         var replaceMetricNames = this.replaceMetricNames;
         var replacing_metrics = this.replacing_metrics;
+        console.log("Records: ");
         console.dir(records);
+        console.log('Attributes: ');
         console.dir(attributes);
+        console.log('MetricNames: ');
         console.dir(metricNames);
 
         for (var x = 0; x < metricNames.length; x++) {
@@ -30115,7 +30120,9 @@ var _default = {
 
       x['--root path--'] = {
         value: 0
-      };
+      }; //console.log('Inside peeledData(): ');
+      //console.dir(x)
+
       return x;
     },
     changePath: function changePath(path) {
@@ -41215,7 +41222,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51074" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49986" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

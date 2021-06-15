@@ -1,25 +1,36 @@
+- https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/?sf=/usr/workspace/spotdev/martymcf/ale3d/spot_data/spot2
 - work on walltime first.
-- https://lc.llnl.gov/lorenz_base/dev/pascal/mylc/mylc/cat.cgi
+    *WalltimeApp.vue line 338 - this ajax request fails, i don't know if this is the cause of the issue
+    * the next two functions that happen after are immaterial to the rendering
+    * i think those are just for aliases.
+    * WalltimeApp.vue line 20 - maybe investigate here to see why it's not rendering.
+TEST - check the container to see if walltime works.
+
+DONE - CGI work to make output so much faster
+    * https://lc.llnl.gov/lorenz_base/dev/pascal/mylc/mylc/cat.cgi
     * this can send 400mb in 3.6 seconds using just cgi without a wrapper.
     * DONE - confirmed it in the browser
     * confirmed it in our spot app with a stub file.
 
-cat /g/g0/pascal/zdeb/full/cacheToFE.json
-
 DONE - Get numpy working for rzgenie and rzslic.
-TRY - tried a lot of different types of requests on lorenz to get a faster one.
 
-TEST - check the container to see if walltime works.
+
+
+
+
+
 - MAY need more WOrk:  Walltime support for JSON files (spot1)
     * FIXED - filename it was asking for.
     * Data cache comes from localforage.  It comes from a file called walltime.js
     * now some kind of format error.
     * https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/sankey/index.html?runSetId=/g/g0/pascal/zdeb/ale3d_regr/am-gen&runId=am1-gen.1d.1p-1&title=am1-gen.1d.1p
-    * '/usr/global/tools/lorenz/python/optvis-env2/bin/python /usr/gapps/spot/sand/spot.py memory /g/g0/pascal/zdeb/ale3d_regr/am-gen/am1-gen.1d.1p.json' on
+    * '/usr/global/tools/lorenz/python/optvis-env2/bin/python
+    /usr/gapps/spot/sand/spot.py memory /g/g0/pascal/zdeb/ale3d_regr/am-gen/am1-gen.1d.1p.json' on
     rzgenie: == CALIPER: Invalid CSV entry: {\"generator/Physics variable
     * might be able to use just use the data already loaded in the client
     * the error we're getting: is this function call necessary?  what data does it provide?
-
+    * "[Lorenz::REST::Command::runApprovedCommand] Failed to run command:
+    '/usr/global/tools/lorenz/python/optvis-env2/bin/python /usr/gapps/spot/sand/spot.py memory /g/g0/pascal/zdeb/ale3d_regr/usndhs/usndhs.1d.1p.json' on rzgenie: == CALIPER: Invalid CSV entry: {\"problem/cycle/all physics/lagrange/lagrange zonal/material model/material model evaluate/material: water/ko strength\": [[1, 0.105], [2, 0.105], [3, 0.108], [4, 0.105], [5, 0.105], [6, 0.105], [7, 0.106], [8, 0.104], [9, 0.106], [10, 0.1
 
 - permissions for Venv: umask 0002
 - Don't use personal venv, use default at the top of spot.py

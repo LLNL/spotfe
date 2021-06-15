@@ -328,6 +328,9 @@ export default {
 
             } else {
 
+                //  also run after memory call.
+                //$('.update_top_down').trigger('click');
+
                 this.getDictionary();
                 var updateTopDown = this.updateTopDown;
                 var rerender = this.rerenderSoDictTranslationHappens;
@@ -387,8 +390,11 @@ export default {
 
                 var replacing_metrics = this.replacing_metrics
 
+                console.log("Records: ");
                 console.dir(records);
+                console.log('Attributes: ');
                 console.dir(attributes);
+                console.log('MetricNames: ');
                 console.dir(metricNames);
 
                 for (var x = 0; x < metricNames.length; x++) {
@@ -461,6 +467,9 @@ export default {
                  return ['--root path--/' + funcPath, {value: parseFloat(metricValue), topdown}]
              }))
              x['--root path--'] = {value: 0}
+
+             //console.log('Inside peeledData(): ');
+             //console.dir(x)
              return x
         },
         changePath(path){

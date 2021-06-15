@@ -8,31 +8,26 @@ const defaultVisibleCharts = ['walltime', 'user', 'uid', 'launchdate', 'executab
 const isContainer = window.ENV?.machine == 'container'
 const useJsonp = window.ENV?.use_JSONP_for_lorenz_calls
 
-async function getMain0( host ) {
+async function getMain0( host, dataSetKey ) {
 
     var prefix = host.startsWith('rz') ? 'rz': '';
     //var url = "https://rzlc.llnl.gov/lorenz_base/dev/pascal/mylc/mylc/cat.cgi";
     prefix = 'rz';
-    var url = "https://" + prefix + "lc.llnl.gov/lorenz_base/dev/pascal/spotfe/scripts/cat.cgi";
-    var url = "https://" + prefix + "lc.llnl.gov/lorenz_base/dev/pascal/mylc/mylc/cat.cgi";
+    var url = "https://" + prefix + "lc.llnl.gov/lorenz_base/dev/pascal/spotfe/scripts/cat.cgi?" +
+        "dataSetKey=" + dataSetKey + '/cacheToFE.json';
+    //var url = "https://" + prefix + "lc.llnl.gov/lorenz_base/dev/pascal/mylc/mylc/cat.cgi";
 
     const $ = await import('jquery')
 
     return new Promise((resolve, reject) => {
         $.ajax({
-            dataType:'jsonp',
-            url:  url,
-            //url: baseurl + '/command',
-            //type: "POST",
-            data:{
-                'via':'post',
-                'route':'/command/'
-            }
+            url:  url
         }).then ( value  => { resolve( value ) }
             , error => { reject(error) }
         )
     })
 }
+
 
 async function lorenz(host, cmd){
     const baseurl = `https://${host.startsWith('rz') ? 'rz': ''}lc.llnl.gov/lorenz/lora/lora.cgi`
@@ -220,6 +215,8 @@ export class Graph{
 
         console.log('mtime: ' + mtime + '   cacheDate=' + cacheDate);
 
+        var cacheFileFound = parseInt(mtime) !== 2000400500;
+
         //  if the file modification time for the server side cache is newer then use it.
         if( mtime > cacheDate ) {
             console.log('mtime is newer so need to bust cache.');
@@ -252,24 +249,34 @@ export class Graph{
                 //else we do a Lorenz call at LLNL
                 try {
 
-                    var file = `${command} ${dataSetKey}`;
+                    var lor_response;
 
-                    //var lor_response = await getMain0( host );
-                    var lor_response = await lorenz(host, `${command} ${dataSetKey} '` + JSON.stringify(cachedRunCtimes) + "'");
-                    console.dir(lor_response);
+                    if( cacheFileFound ) {
 
-                    if( lor_response.output.command_out.indexOf('ERROR') > -1 ) {
+                        //  Use the super fast cat.cgi to output things really fast.
+                        lor_response = await getMain0(host, dataSetKey);
+                        newData = JSON.parse(lor_response);
+                    } else {
 
-                        ST.Utility.error( lor_response.output.command_out );
-                        return false;
+                        lor_response = await lorenz(host, `${command} ${dataSetKey} '` + JSON.stringify(cachedRunCtimes) + "'");
+
+                        if( lor_response.output.command_out.indexOf('ERROR') > -1 ) {
+
+                            ST.Utility.error( lor_response.output.command_out );
+                            return false;
+                        }
+
+                        if( lor_response.error !== "" ) {
+                            ST.Utility.error( lor_response.error );
+                            return false;
+                        }
+
+                        newData = lor_response.output.command_out;
                     }
 
-                    if( lor_response.error !== "" ) {
-                        ST.Utility.error( lor_response.error );
-                        return false;
-                    }
+                    console.log("LOR response: ");
+                    console.dir(newData);
 
-                    newData = JSON.parse(lor_response.output.command_out)
 
                     if( newData.foundReport ) {
                         console.log(newData.foundReport);

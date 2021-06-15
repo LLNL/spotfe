@@ -51737,12 +51737,12 @@ var defaultVisibleCharts = ['walltime', 'user', 'uid', 'launchdate', 'executable
 var isContainer = ((_window$ENV = window.ENV) === null || _window$ENV === void 0 ? void 0 : _window$ENV.machine) == 'container';
 var useJsonp = (_window$ENV2 = window.ENV) === null || _window$ENV2 === void 0 ? void 0 : _window$ENV2.use_JSONP_for_lorenz_calls;
 
-function getMain0(_x) {
+function getMain0(_x, _x2) {
   return _getMain.apply(this, arguments);
 }
 
 function _getMain() {
-  _getMain = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(host) {
+  _getMain = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(host, dataSetKey) {
     var prefix, url, $;
     return regeneratorRuntime.wrap(function _callee6$(_context6) {
       while (1) {
@@ -51751,23 +51751,16 @@ function _getMain() {
             prefix = host.startsWith('rz') ? 'rz' : ''; //var url = "https://rzlc.llnl.gov/lorenz_base/dev/pascal/mylc/mylc/cat.cgi";
 
             prefix = 'rz';
-            url = "https://" + prefix + "lc.llnl.gov/lorenz_base/dev/pascal/spotfe/scripts/cat.cgi";
-            url = "https://" + prefix + "lc.llnl.gov/lorenz_base/dev/pascal/mylc/mylc/cat.cgi";
-            _context6.next = 6;
+            url = "https://" + prefix + "lc.llnl.gov/lorenz_base/dev/pascal/spotfe/scripts/cat.cgi?" + "dataSetKey=" + dataSetKey + '/cacheToFE.json'; //var url = "https://" + prefix + "lc.llnl.gov/lorenz_base/dev/pascal/mylc/mylc/cat.cgi";
+
+            _context6.next = 5;
             return require("_bundle_loader")(require.resolve('jquery'));
 
-          case 6:
+          case 5:
             $ = _context6.sent;
             return _context6.abrupt("return", new Promise(function (resolve, reject) {
               $.ajax({
-                dataType: 'jsonp',
-                url: url,
-                //url: baseurl + '/command',
-                //type: "POST",
-                data: {
-                  'via': 'post',
-                  'route': '/command/'
-                }
+                url: url
               }).then(function (value) {
                 resolve(value);
               }, function (error) {
@@ -51775,7 +51768,7 @@ function _getMain() {
               });
             }));
 
-          case 8:
+          case 7:
           case "end":
             return _context6.stop();
         }
@@ -51785,7 +51778,7 @@ function _getMain() {
   return _getMain.apply(this, arguments);
 }
 
-function lorenz(_x2, _x3) {
+function lorenz(_x3, _x4) {
   return _lorenz.apply(this, arguments);
 }
 
@@ -51946,7 +51939,7 @@ var Graph = /*#__PURE__*/function () {
         }, _callee);
       }));
 
-      function openJupyter(_x4, _x5, _x6) {
+      function openJupyter(_x5, _x6, _x7) {
         return _openJupyter.apply(this, arguments);
       }
 
@@ -52027,7 +52020,7 @@ var Graph = /*#__PURE__*/function () {
         }, _callee2);
       }));
 
-      function openMultiJupyter(_x7, _x8, _x9, _x10) {
+      function openMultiJupyter(_x8, _x9, _x10, _x11) {
         return _openMultiJupyter.apply(this, arguments);
       }
 
@@ -52037,7 +52030,7 @@ var Graph = /*#__PURE__*/function () {
     key: "getData",
     value: function () {
       var _getData = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(host, command, dataSetKey) {
-        var arr, spotPy, comm, res, res0, cacheResult, mtime, cachedDataGet, bust_cache, cachedData, cachedRunCtimes, x, dataRequest, newData, cacheSum, cacheDate, response, file, lor_response, runs0, deletedRuns, baseMetrics, metric, funcPaths, metricNames, runs, filenames, summary, visibleCharts, _i4, _Object$entries4, _Object$entries4$_i, filename, fileContents, barCharts, _i5, _Object$entries5, _Object$entries5$_i, globalName, globalValue, globType, show;
+        var arr, spotPy, comm, res, res0, cacheResult, mtime, cachedDataGet, bust_cache, cachedData, cachedRunCtimes, x, dataRequest, newData, cacheSum, cacheDate, cacheFileFound, response, lor_response, runs0, deletedRuns, baseMetrics, metric, funcPaths, metricNames, runs, filenames, summary, visibleCharts, _i4, _Object$entries4, _Object$entries4$_i, filename, fileContents, barCharts, _i5, _Object$entries5, _Object$entries5$_i, globalName, globalValue, globType, show;
 
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
@@ -52127,7 +52120,8 @@ var Graph = /*#__PURE__*/function () {
 
                 cacheSum = window.cacheSum;
                 cacheDate = window.cacheSum ? window.cacheSum.date : 0;
-                console.log('mtime: ' + mtime + '   cacheDate=' + cacheDate); //  if the file modification time for the server side cache is newer then use it.
+                console.log('mtime: ' + mtime + '   cacheDate=' + cacheDate);
+                cacheFileFound = parseInt(mtime) !== 2000400500; //  if the file modification time for the server side cache is newer then use it.
 
                 if (mtime > cacheDate) {
                   console.log('mtime is newer so need to bust cache.');
@@ -52135,24 +52129,24 @@ var Graph = /*#__PURE__*/function () {
                 }
 
                 if (!(cacheSum && cacheSum.summary && !bust_cache && !isContainer)) {
-                  _context3.next = 38;
+                  _context3.next = 39;
                   break;
                 }
 
                 newData = cacheSum.summary;
                 console.log('was able to find cache.');
-                _context3.next = 70;
+                _context3.next = 78;
                 break;
 
-              case 38:
+              case 39:
                 console.log('could not find cache.');
 
                 if (!isContainer) {
-                  _context3.next = 48;
+                  _context3.next = 49;
                   break;
                 }
 
-                _context3.next = 42;
+                _context3.next = 43;
                 return fetch("/getdata", {
                   method: "post",
                   headers: {
@@ -52161,58 +52155,75 @@ var Graph = /*#__PURE__*/function () {
                   body: JSON.stringify(dataRequest)
                 });
 
-              case 42:
+              case 43:
                 response = _context3.sent;
-                _context3.next = 45;
+                _context3.next = 46;
                 return response.json();
 
-              case 45:
+              case 46:
                 newData = _context3.sent;
-                _context3.next = 70;
+                _context3.next = 78;
                 break;
 
-              case 48:
-                _context3.prev = 48;
-                file = "".concat(command, " ").concat(dataSetKey); //var lor_response = await getMain0( host );
+              case 49:
+                _context3.prev = 49;
 
-                _context3.next = 52;
+                if (!cacheFileFound) {
+                  _context3.next = 57;
+                  break;
+                }
+
+                _context3.next = 53;
+                return getMain0(host, dataSetKey);
+
+              case 53:
+                lor_response = _context3.sent;
+                newData = JSON.parse(lor_response);
+                _context3.next = 67;
+                break;
+
+              case 57:
+                _context3.next = 59;
                 return lorenz(host, "".concat(command, " ").concat(dataSetKey, " '") + JSON.stringify(cachedRunCtimes) + "'");
 
-              case 52:
+              case 59:
                 lor_response = _context3.sent;
-                console.dir(lor_response);
 
                 if (!(lor_response.output.command_out.indexOf('ERROR') > -1)) {
-                  _context3.next = 57;
+                  _context3.next = 63;
                   break;
                 }
 
                 ST.Utility.error(lor_response.output.command_out);
                 return _context3.abrupt("return", false);
 
-              case 57:
+              case 63:
                 if (!(lor_response.error !== "")) {
-                  _context3.next = 60;
+                  _context3.next = 66;
                   break;
                 }
 
                 ST.Utility.error(lor_response.error);
                 return _context3.abrupt("return", false);
 
-              case 60:
-                newData = JSON.parse(lor_response.output.command_out);
+              case 66:
+                newData = lor_response.output.command_out;
+
+              case 67:
+                console.log("LOR response: ");
+                console.dir(newData);
 
                 if (newData.foundReport) {
                   console.log(newData.foundReport);
                 }
 
                 DB.saveSummary(newData);
-                _context3.next = 70;
+                _context3.next = 78;
                 break;
 
-              case 65:
-                _context3.prev = 65;
-                _context3.t1 = _context3["catch"](48);
+              case 73:
+                _context3.prev = 73;
+                _context3.t1 = _context3["catch"](49);
                 console.log('Exception: ');
                 console.dir(_context3.t1);
                 newData = {
@@ -52222,7 +52233,7 @@ var Graph = /*#__PURE__*/function () {
                   RunSetMeta: {}
                 };
 
-              case 70:
+              case 78:
                 console.log('newData:  ');
                 console.dir(newData); //newData = ST.RunDictionaryTranslator.translate( newData );
 
@@ -52246,10 +52257,10 @@ var Graph = /*#__PURE__*/function () {
                 });
                 window.cachedData = cachedData; // cache newest version of data
 
-                _context3.next = 85;
+                _context3.next = 93;
                 return _localforage.default.setItem(dataSetKey, cachedData);
 
-              case 85:
+              case 93:
                 // add in datsetkey and datakey to globals
                 _lodash.default.forEach(cachedData.Runs, function (run, filename) {
                   run.Globals = run.Globals || {};
@@ -52333,20 +52344,20 @@ var Graph = /*#__PURE__*/function () {
                     table: []
                   }
                 };
-                _context3.next = 102;
+                _context3.next = 110;
                 return _localforage.default.getItem("show:" + dataSetKey);
 
-              case 102:
+              case 110:
                 _context3.t2 = _context3.sent;
 
                 if (_context3.t2) {
-                  _context3.next = 105;
+                  _context3.next = 113;
                   break;
                 }
 
                 _context3.t2 = defaultVisibleCharts;
 
-              case 105:
+              case 113:
                 visibleCharts = _context3.t2;
 
                 for (_i4 = 0, _Object$entries4 = Object.entries(cachedData.Runs); _i4 < _Object$entries4.length; _i4++) {
@@ -52377,32 +52388,32 @@ var Graph = /*#__PURE__*/function () {
                   });
                 }
 
-                _context3.next = 111;
+                _context3.next = 119;
                 return _localforage.default.getItem('scatterplots:' + this.dataSetKey);
 
-              case 111:
+              case 119:
                 _context3.t3 = _context3.sent;
 
                 if (_context3.t3) {
-                  _context3.next = 114;
+                  _context3.next = 122;
                   break;
                 }
 
                 _context3.t3 = [];
 
-              case 114:
+              case 122:
                 summary.layout.scatterplots = _context3.t3;
                 return _context3.abrupt("return", summary);
 
-              case 116:
+              case 124:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, this, [[48, 65]]);
+        }, _callee3, this, [[49, 73]]);
       }));
 
-      function getData(_x11, _x12, _x13) {
+      function getData(_x12, _x13, _x14) {
         return _getData.apply(this, arguments);
       }
 
@@ -52445,7 +52456,7 @@ var Graph = /*#__PURE__*/function () {
         }, _callee4, this);
       }));
 
-      function addScatterplot(_x14) {
+      function addScatterplot(_x15) {
         return _addScatterplot.apply(this, arguments);
       }
 
@@ -52495,7 +52506,7 @@ var Graph = /*#__PURE__*/function () {
         }, _callee5, this);
       }));
 
-      function setChartVisible(_x15) {
+      function setChartVisible(_x16) {
         return _setChartVisible.apply(this, arguments);
       }
 
