@@ -83,7 +83,7 @@ ST.CallSpot = function() {
         if( is_h ) {
             return $.ajax(obj);
         } else {
-            return $.ajax(obj).done(success).error(handle_error_);
+            return $.ajax(obj).done(success).error(obj.error || handle_error_);
         }
     };
 

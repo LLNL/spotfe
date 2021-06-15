@@ -334,39 +334,49 @@ export default {
                 this.getDictionary();
                 var updateTopDown = this.updateTopDown;
                 var rerender = this.rerenderSoDictTranslationHappens;
+                var success_handler = function( aj_dat ) {
+
+                    var ret2 = {};
+
+                    if( aj_dat.series ) {
+                        ret2 = aj_dat;
+                    } else {
+
+                        var ret = aj_dat.output.command_out;
+
+                        try {
+                            ret2 = JSON.parse(ret);
+                        } catch(e) {
+                        }
+                    }
+
+                    updateTopDown(ret2);
+
+                    console.log('debugTop19');
+
+                    //  TODO: find event of when the thing gets finished rendering
+                    //  only then should be do rerender.  get rid of setTimeout.
+                    //  Rerender needs to happen after another event.
+                    //  this rerender allows the dictionary to be translated
+                    //  so that we're not showing all two character stuff.
+                    setTimeout( rerender, 1000);
+                    setTimeout( rerender, 3000);
+                    setTimeout( rerender, 5000);
+                };
+
+                var error_handler = function() {
+
+                    updateTopDown({});
+                    setTimeout( rerender, 1000);
+                    setTimeout( rerender, 3000);
+                    setTimeout( rerender, 5000);
+                };
 
                 ST.CallSpot.ajax({
                     file: path,
                     type: "memory",
-                    success: function( aj_dat ) {
-
-                        var ret2 = {};
-
-                        if( aj_dat.series ) {
-                            ret2 = aj_dat;
-                        } else {
-
-                            var ret = aj_dat.output.command_out;
-
-                            try {
-                                ret2 = JSON.parse(ret);
-                            } catch(e) {
-                            }
-                        }
-
-                        updateTopDown(ret2);
-
-                        console.log('debugTop19');
-
-                        //  TODO: find event of when the thing gets finished rendering
-                        //  only then should be do rerender.  get rid of setTimeout.
-                        //  Rerender needs to happen after another event.
-                        //  this rerender allows the dictionary to be translated
-                        //  so that we're not showing all two character stuff.
-                        setTimeout( rerender, 1000);
-                        setTimeout( rerender, 3000);
-                        setTimeout( rerender, 5000);
-                    }
+                    success: success_handler,
+                    error: error_handler
                 });
             }
         },
@@ -394,8 +404,6 @@ export default {
                 console.dir(records);
                 console.log('Attributes: ');
                 console.dir(attributes);
-                console.log('MetricNames: ');
-                console.dir(metricNames);
 
                 for (var x = 0; x < metricNames.length; x++) {
 
@@ -405,8 +413,14 @@ export default {
 
                     replacing_metrics[met] = alias
                 }
+            } else {
+                this.replacing_metrics["yAxis"] = "yAxis";
             }
 
+            console.log('this.replacing_metrics: ');
+            console.dir(this.replacing_metrics);
+
+            //  this can not be called until replacing_metrics is set correctlying
             $('.update_top_down').trigger('click');
         },
         replaceMetricNames( replacee, replacer ) {
