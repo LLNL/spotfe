@@ -105,6 +105,8 @@ export default {
 
                     this.replaceMetricNames( met, alias )
                 }
+            } else {
+                this.replaceMetricNames("yAxis", "yAxis");
             }
 
             console.dir( this.data )
@@ -193,7 +195,7 @@ export default {
         },
     },
     methods:{
-        async getDictionary() {
+        async getDictionary( callback ) {
 
             //  /usr/gapps/spot/sand/spot.py getDictionary /usr/gapps/spot/datasets/lulesh_gen/100
             var dataSetKey = ST.Utility.get_param('runSetId');
@@ -222,7 +224,9 @@ export default {
             console.dir(newData);
             ST.RunDictionaryTranslator.set( newData.dictionary );
 
-            this.updateTopDownData();
+            //this.updateTopDownData();
+
+            callback();
         },
         async getmemoryfunc( path )
         {
@@ -331,52 +335,62 @@ export default {
                 //  also run after memory call.
                 //$('.update_top_down').trigger('click');
 
-                this.getDictionary();
+                var updateTopDownData = this.updateTopDownData;
                 var updateTopDown = this.updateTopDown;
                 var rerender = this.rerenderSoDictTranslationHappens;
-                var success_handler = function( aj_dat ) {
 
-                    var ret2 = {};
+                this.getDictionary( function() {
 
-                    if( aj_dat.series ) {
-                        ret2 = aj_dat;
-                    } else {
+                    var success_handler = function( aj_dat ) {
 
-                        var ret = aj_dat.output.command_out;
+                        var ret2 = {};
 
-                        try {
-                            ret2 = JSON.parse(ret);
-                        } catch(e) {
+                        if( aj_dat.series ) {
+                            ret2 = aj_dat;
+                        } else {
+
+                            var ret = aj_dat.output.command_out;
+
+                            try {
+                                ret2 = JSON.parse(ret);
+                            } catch(e) {
+                            }
                         }
-                    }
 
-                    updateTopDown(ret2);
+                        updateTopDown(ret2);
+                        updateTopDownData();
+                        console.log('debugTop19');
+                        //  this can not be called until replacing_metrics is set correctlying
+                        $('.update_top_down').trigger('click');
 
-                    console.log('debugTop19');
+                        //  TODO: find event of when the thing gets finished rendering
+                        //  only then should be do rerender.  get rid of setTimeout.
+                        //  Rerender needs to happen after another event.
+                        //  this rerender allows the dictionary to be translated
+                        //  so that we're not showing all two character stuff.
+                        setTimeout( rerender, 1000);
+                        setTimeout( rerender, 3000);
+                        setTimeout( rerender, 5000);
+                    };
 
-                    //  TODO: find event of when the thing gets finished rendering
-                    //  only then should be do rerender.  get rid of setTimeout.
-                    //  Rerender needs to happen after another event.
-                    //  this rerender allows the dictionary to be translated
-                    //  so that we're not showing all two character stuff.
-                    setTimeout( rerender, 1000);
-                    setTimeout( rerender, 3000);
-                    setTimeout( rerender, 5000);
-                };
+                    var error_handler = function() {
 
-                var error_handler = function() {
+                        updateTopDown({});
+                        updateTopDownData();
+                        //  this can not be called until replacing_metrics is set correctlying
+                        $('.update_top_down').trigger('click');
 
-                    updateTopDown({});
-                    setTimeout( rerender, 1000);
-                    setTimeout( rerender, 3000);
-                    setTimeout( rerender, 5000);
-                };
+                        setTimeout( rerender, 1000);
+                        setTimeout( rerender, 3000);
+                        setTimeout( rerender, 5000);
+                    };
 
-                ST.CallSpot.ajax({
-                    file: path,
-                    type: "memory",
-                    success: success_handler,
-                    error: error_handler
+                    ST.CallSpot.ajax({
+                        file: path,
+                        type: "memory",
+                        success: success_handler,
+                        error: error_handler
+                    });
                 });
             }
         },
@@ -419,9 +433,6 @@ export default {
 
             console.log('this.replacing_metrics: ');
             console.dir(this.replacing_metrics);
-
-            //  this can not be called until replacing_metrics is set correctlying
-            $('.update_top_down').trigger('click');
         },
         replaceMetricNames( replacee, replacer ) {
 

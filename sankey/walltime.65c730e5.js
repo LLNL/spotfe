@@ -29753,6 +29753,8 @@ var _default = {
           var alias = this.replacing_metrics[met];
           this.replaceMetricNames(met, alias);
         }
+      } else {
+        this.replaceMetricNames("yAxis", "yAxis");
       }
 
       console.dir(this.data);
@@ -29849,9 +29851,7 @@ var _default = {
     }
   },
   methods: {
-    getDictionary: function getDictionary() {
-      var _this = this;
-
+    getDictionary: function getDictionary(callback) {
       return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
         var dataSetKey, host, command, param_str, lor_response, newData;
         return regeneratorRuntime.wrap(function _callee$(_context) {
@@ -29885,9 +29885,9 @@ var _default = {
               case 15:
                 newData = JSON.parse(lor_response.output.command_out);
                 console.dir(newData);
-                ST.RunDictionaryTranslator.set(newData.dictionary);
+                ST.RunDictionaryTranslator.set(newData.dictionary); //this.updateTopDownData();
 
-                _this.updateTopDownData();
+                callback();
 
               case 19:
               case "end":
@@ -29898,7 +29898,7 @@ var _default = {
       }))();
     },
     getmemoryfunc: function getmemoryfunc(path) {
-      var _this2 = this;
+      var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
         var command, datarequest, response, newData;
@@ -29940,7 +29940,7 @@ var _default = {
                 console.log('newData:');
                 console.dir(newData);
 
-                _this2.updateTopDown(newData);
+                _this.updateTopDown(newData);
 
                 _context2.next = 19;
                 break;
@@ -29957,7 +29957,7 @@ var _default = {
       }))();
     },
     getScripts: function getScripts() {
-      var _this3 = this;
+      var _this2 = this;
 
       var files = ["../web/js/jquery-1.11.0.min.js", "../web/js/Utility.js", "../web/js/Environment.js", "../web/js/CallSpot.js?abb"]; //loadScriptsInOrder( files ).then( this.getAliases );
 
@@ -29968,7 +29968,7 @@ var _default = {
         console.log('jquery has been loaded.');
         $.when($.getScript("../web/js/Environment.js"), $.getScript("../web/js/Utility.js"), $.getScript("../web/js/CallSpot.js?abb"), $.getScript("../web/js/RunDictionaryTranslator.js?jasdf"), $.Deferred(function (deferred) {
           $(deferred.resolve);
-        })).done(_this3.getAliases);
+        })).done(_this2.getAliases);
       });
       document.body.appendChild(script);
     },
@@ -29999,47 +29999,54 @@ var _default = {
       } else {
         //  also run after memory call.
         //$('.update_top_down').trigger('click');
-        this.getDictionary();
+        var updateTopDownData = this.updateTopDownData;
         var updateTopDown = this.updateTopDown;
         var rerender = this.rerenderSoDictTranslationHappens;
+        this.getDictionary(function () {
+          var success_handler = function success_handler(aj_dat) {
+            var ret2 = {};
 
-        var success_handler = function success_handler(aj_dat) {
-          var ret2 = {};
+            if (aj_dat.series) {
+              ret2 = aj_dat;
+            } else {
+              var ret = aj_dat.output.command_out;
 
-          if (aj_dat.series) {
-            ret2 = aj_dat;
-          } else {
-            var ret = aj_dat.output.command_out;
+              try {
+                ret2 = JSON.parse(ret);
+              } catch (e) {}
+            }
 
-            try {
-              ret2 = JSON.parse(ret);
-            } catch (e) {}
-          }
+            updateTopDown(ret2);
+            updateTopDownData();
+            console.log('debugTop19'); //  this can not be called until replacing_metrics is set correctlying
 
-          updateTopDown(ret2);
-          console.log('debugTop19'); //  TODO: find event of when the thing gets finished rendering
-          //  only then should be do rerender.  get rid of setTimeout.
-          //  Rerender needs to happen after another event.
-          //  this rerender allows the dictionary to be translated
-          //  so that we're not showing all two character stuff.
+            $('.update_top_down').trigger('click'); //  TODO: find event of when the thing gets finished rendering
+            //  only then should be do rerender.  get rid of setTimeout.
+            //  Rerender needs to happen after another event.
+            //  this rerender allows the dictionary to be translated
+            //  so that we're not showing all two character stuff.
 
-          setTimeout(rerender, 1000);
-          setTimeout(rerender, 3000);
-          setTimeout(rerender, 5000);
-        };
+            setTimeout(rerender, 1000);
+            setTimeout(rerender, 3000);
+            setTimeout(rerender, 5000);
+          };
 
-        var error_handler = function error_handler() {
-          updateTopDown({});
-          setTimeout(rerender, 1000);
-          setTimeout(rerender, 3000);
-          setTimeout(rerender, 5000);
-        };
+          var error_handler = function error_handler() {
+            updateTopDown({});
+            updateTopDownData(); //  this can not be called until replacing_metrics is set correctlying
 
-        ST.CallSpot.ajax({
-          file: path,
-          type: "memory",
-          success: success_handler,
-          error: error_handler
+            $('.update_top_down').trigger('click');
+            setTimeout(rerender, 1000);
+            setTimeout(rerender, 3000);
+            setTimeout(rerender, 5000);
+          };
+
+          ST.CallSpot.ajax({
+            file: path,
+            type: "memory",
+            success: success_handler,
+            error: error_handler
+          });
         });
       }
     },
@@ -30073,9 +30080,7 @@ var _default = {
       }
 
       console.log('this.replacing_metrics: ');
-      console.dir(this.replacing_metrics); //  this can not be called until replacing_metrics is set correctlying
-
-      $('.update_top_down').trigger('click');
+      console.dir(this.replacing_metrics);
     },
     replaceMetricNames: function replaceMetricNames(replacee, replacer) {
       this.metricObjs[replacee] = {
