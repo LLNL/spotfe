@@ -210,10 +210,7 @@ export default {
 
             console.log('Await2, param_str = ' + param_str);
             var lor_response = await lorenz(host, param_str );
-
-            console.log('lor_response:');
-            console.dir(lor_response);
-
+            
             if( lor_response.error !== "" ) {
                 ST.Utility.error( lor_response.error );
                 return false;
@@ -486,9 +483,6 @@ export default {
 
                  var metricValue = metrics[metricName] || 0
 
-                 //console.log("metsavd:")
-                 //console.dir(metrics)
-                 //console.dir(metricName)
                  return ['--root path--/' + funcPath, {value: parseFloat(metricValue), topdown}]
              }))
              x['--root path--'] = {value: 0}
@@ -498,7 +492,6 @@ export default {
              return x
         },
         changePath(path){
-            console.log('change path.');
             this.selectedNode = path;
         },
         setTopdownNode(nodename){

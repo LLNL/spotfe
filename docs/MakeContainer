@@ -1,9 +1,11 @@
 - https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/?sf=/usr/workspace/spotdev/martymcf/ale3d/spot_data/spot2
-- work on walltime first.
+DONE - work on walltime first.
     *WalltimeApp.vue line 338 - this ajax request fails, i don't know if this is the cause of the issue
     * the next two functions that happen after are immaterial to the rendering
     * i think those are just for aliases.
     * WalltimeApp.vue line 20 - maybe investigate here to see why it's not rendering.
+ISSUE - can we get rid of setTimeout?
+
 TEST - check the container to see if walltime works.
 
 DONE - CGI work to make output so much faster

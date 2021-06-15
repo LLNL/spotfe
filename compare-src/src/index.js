@@ -274,10 +274,6 @@ export class Graph{
                         newData = lor_response.output.command_out;
                     }
 
-                    console.log("LOR response: ");
-                    console.dir(newData);
-
-
                     if( newData.foundReport ) {
                         console.log(newData.foundReport);
                     }

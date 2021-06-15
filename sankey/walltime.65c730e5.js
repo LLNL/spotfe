@@ -29871,25 +29871,23 @@ var _default = {
 
               case 9:
                 lor_response = _context.sent;
-                console.log('lor_response:');
-                console.dir(lor_response);
 
                 if (!(lor_response.error !== "")) {
-                  _context.next = 15;
+                  _context.next = 13;
                   break;
                 }
 
                 ST.Utility.error(lor_response.error);
                 return _context.abrupt("return", false);
 
-              case 15:
+              case 13:
                 newData = JSON.parse(lor_response.output.command_out);
                 console.dir(newData);
                 ST.RunDictionaryTranslator.set(newData.dictionary); //this.updateTopDownData();
 
                 callback();
 
-              case 19:
+              case 17:
               case "end":
                 return _context.stop();
             }
@@ -30127,10 +30125,7 @@ var _default = {
         });
 
         if (Object.keys(topdown).length == 0) topdown = null;
-        var metricValue = metrics[metricName] || 0; //console.log("metsavd:")
-        //console.dir(metrics)
-        //console.dir(metricName)
-
+        var metricValue = metrics[metricName] || 0;
         return ['--root path--/' + funcPath, {
           value: parseFloat(metricValue),
           topdown: topdown
@@ -30145,7 +30140,6 @@ var _default = {
       return x;
     },
     changePath: function changePath(path) {
-      console.log('change path.');
       this.selectedNode = path;
     },
     setTopdownNode: function setTopdownNode(nodename) {
