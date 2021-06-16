@@ -1,4 +1,8 @@
-- https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/?sf=/usr/workspace/spotdev/martymcf/ale3d/spot_data/spot2
+DONE - CGI work to make output so much faster
+    * https://lc.llnl.gov/lorenz_base/dev/pascal/mylc/mylc/cat.cgi
+    * this can send 400mb in 3.6 seconds using just cgi without a wrapper.
+    * DONE - confirmed it in the browser
+    * confirmed it in our spot app with a stub file.
 DONE - work on walltime first.
     *WalltimeApp.vue line 338 - this ajax request fails, i don't know if this is the cause of the issue
     * the next two functions that happen after are immaterial to the rendering
@@ -6,14 +10,14 @@ DONE - work on walltime first.
     * WalltimeApp.vue line 20 - maybe investigate here to see why it's not rendering.
 ISSUE - can we get rid of setTimeout?
 
-TEST - multi directory levels.
-TEST - check the container to see if walltime works.
+TEST- container.
+    * If I want to test other data sets, do i just put it under spotbe/demos?
+    * 
+BUG - walltime page for marty's data.
+BUG - multi directory levels. doesn't work for top level directory with
+    * /usr/workspace/spotdev/martymcf/ale3d/spot_data/spot2
 
-DONE - CGI work to make output so much faster
-    * https://lc.llnl.gov/lorenz_base/dev/pascal/mylc/mylc/cat.cgi
-    * this can send 400mb in 3.6 seconds using just cgi without a wrapper.
-    * DONE - confirmed it in the browser
-    * confirmed it in our spot app with a stub file.
+- https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/?sf=/usr/workspace/spotdev/martymcf/ale3d/spot_data/spot2
 
 DONE - Get numpy working for rzgenie and rzslic.
 
@@ -109,16 +113,6 @@ Next:
         * [Lorenz::REST::Command::runApprovedCommand] Failed to run command: '/usr/global/tools/lorenz/python/optvis-env2/bin/python /usr/gapps/spot/dev/spot.py memory /g/g0/pascal/zdeb/ale3d_regr/pipe/pipe-gen.4d.4p-1' on rzgenie: cali-query: Error: Could not read file /g/g0/pascal/zdeb/ale3d_regr/pipe/pipe-gen.4d.4p-1"
     * support for running our script in their build system.
     * /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/ale3d_regr/xno '{}' --writeToFile=1
-
-[Lorenz::REST::Command::runApprovedCommand]
-Failed to run command: '
-/usr/gapps/spot/dev/spot.py getData /usr/gapps/spot/datasets/lulesh_gen/100 '{}'' on
-rzgenie: Traceback (most recent call last):\n  File \"/usr/gapps/spot/dev/spot.py\",
-line 746, in <module>\n
-args.func(args)\n  File \"/usr/gapps/spot/dev/spot.py\",
-line 587, in getData\n    found = 'Found ' + str(len(json_output['Runs'].keys())) +
-' runs in JSON format.  '\nKeyError: 'Runs'"
-output: "
 
 
 
@@ -519,7 +513,7 @@ docker build -t spot2 --build-arg DEFAULT_SPOTPW=see .
 docker rm spot2_debug6
 
 docker build -t spot2 .
-docker run -v /Users/aschwanden1/datasets/:/data -p 8080:8080/tcp -p 8888:8888/tcp --name spot2_debug20 spot2
+docker run -v /Users/aschwanden1/datasets/:/data -p 8080:8080/tcp -p 8888:8888/tcp --name spot2_d50 spot2
 
 http://localhost:8080/?sf=lul_sept_28_timeseries
 
