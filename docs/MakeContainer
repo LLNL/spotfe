@@ -10,20 +10,32 @@ DONE - work on walltime first.
     * WalltimeApp.vue line 20 - maybe investigate here to see why it's not rendering.
 ISSUE - can we get rid of setTimeout?
 
+
+1) Deploy dev/ latest spot.py abd test cat.cgi there.
 TEST- container.
     * If I want to test other data sets, do i just put it under spotbe/demos?
-    * 
-BUG - walltime page for marty's data.
-BUG - multi directory levels. doesn't work for top level directory with
+1) Container:   * getData call does not work.
+2) BUG - walltime page for marty's data.
+        metricNames: function metricNames() {
+      return Object.keys(this.data[this.funcPaths[0]]).filter(function (name) {
+        return !name.startsWith('any#any#');
+      });
+    },
+    this.data and this.funcPaths is empty.
+    localforage.getItem() -> the object is there with it's Global but no "Data"
+    able to access var fileData = runSet.Runs[runId];  but "Data" not present.
+3) BUG - multi directory levels. doesn't work for top level directory with
     * /usr/workspace/spotdev/martymcf/ale3d/spot_data/spot2
 
-- https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/?sf=/usr/workspace/spotdev/martymcf/ale3d/spot_data/spot2
+- https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/?sf=
+/usr/workspace/spotdev/martymcf/ale3d/spot_data/spot2
 
 DONE - Get numpy working for rzgenie and rzslic.
 
 
-
-
+2022 -> try to get spot to a place where it becomes wrapped up.
+    * cut in money.
+    * maintenance mode.
 
 
 - MAY need more WOrk:  Walltime support for JSON files (spot1)
