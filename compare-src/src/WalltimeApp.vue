@@ -228,6 +228,7 @@ export default {
         },
         async getmemoryfunc( path )
         {
+            console.log('getmemoryfunc() 0');
             const command = "/opt/conda/bin/python3 /usr/gapps/spot/backend.py --config /usr/gapps/spot/backend_config.yaml memory /data/" +
                 path;
 
@@ -259,6 +260,22 @@ export default {
                 console.dir(newData);
 
                 this.updateTopDown( newData );
+
+                this.updateTopDownData();
+                console.log('debugTop21');
+                //  this can not be called until replacing_metrics is set correctlying
+                $('.update_top_down').trigger('click');
+
+                var rerender = this.rerenderSoDictTranslationHappens;
+
+                //  TODO: find event of when the thing gets finished rendering
+                //  only then should be do rerender.  get rid of setTimeout.
+                //  Rerender needs to happen after another event.
+                //  this rerender allows the dictionary to be translated
+                //  so that we're not showing all two character stuff.
+                setTimeout( rerender, 1000);
+                setTimeout( rerender, 3000);
+                setTimeout( rerender, 5000);
 
             } else {
                 console.log('no .json');
@@ -414,7 +431,7 @@ export default {
 
                 console.log("Records: ");
                 console.dir(records);
-                console.log('Attributes: ');
+                console.log('Attributes 2: ');
                 console.dir(attributes);
 
                 for (var x = 0; x < metricNames.length; x++) {

@@ -243,7 +243,14 @@ export class Graph{
                     body: JSON.stringify(dataRequest)
                 });
 
-                newData = await response.json()
+                var txt = await response.text();
+
+                for( var x=0; x < 15; x++ ) {
+                    txt = txt.replace(',,', ',');
+                }
+
+                newData = JSON.parse(txt);
+                //newData = await response.json()
 
             } else {
                 //else we do a Lorenz call at LLNL

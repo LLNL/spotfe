@@ -29899,18 +29899,19 @@ var _default = {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-        var command, datarequest, response, newData;
+        var command, datarequest, response, newData, rerender;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
+                console.log('getmemoryfunc() 0');
                 command = "/opt/conda/bin/python3 /usr/gapps/spot/backend.py --config /usr/gapps/spot/backend_config.yaml memory /data/" + path;
                 datarequest = {
                   command: command,
                   filepath: path
                 };
                 console.log('getmemoryfunc()');
-                _context2.next = 5;
+                _context2.next = 6;
                 return fetch("/getmemory", {
                   method: "post",
                   headers: {
@@ -29919,34 +29920,48 @@ var _default = {
                   body: JSON.stringify(datarequest)
                 });
 
-              case 5:
+              case 6:
                 response = _context2.sent;
                 console.log("here is the response obj: ");
                 console.dir(response);
 
                 if (!(response && response.json)) {
-                  _context2.next = 18;
+                  _context2.next = 26;
                   break;
                 }
 
                 console.log("about to do response.json();");
-                _context2.next = 12;
+                _context2.next = 13;
                 return response.json();
 
-              case 12:
+              case 13:
                 newData = _context2.sent;
                 console.log('newData:');
                 console.dir(newData);
 
                 _this.updateTopDown(newData);
 
-                _context2.next = 19;
+                _this.updateTopDownData();
+
+                console.log('debugTop21'); //  this can not be called until replacing_metrics is set correctlying
+
+                $('.update_top_down').trigger('click');
+                rerender = _this.rerenderSoDictTranslationHappens; //  TODO: find event of when the thing gets finished rendering
+                //  only then should be do rerender.  get rid of setTimeout.
+                //  Rerender needs to happen after another event.
+                //  this rerender allows the dictionary to be translated
+                //  so that we're not showing all two character stuff.
+
+                setTimeout(rerender, 1000);
+                setTimeout(rerender, 3000);
+                setTimeout(rerender, 5000);
+                _context2.next = 27;
                 break;
 
-              case 18:
+              case 26:
                 console.log('no .json');
 
-              case 19:
+              case 27:
               case "end":
                 return _context2.stop();
             }
@@ -30064,7 +30079,7 @@ var _default = {
         var replacing_metrics = this.replacing_metrics;
         console.log("Records: ");
         console.dir(records);
-        console.log('Attributes: ');
+        console.log('Attributes 2: ');
         console.dir(attributes);
 
         for (var x = 0; x < metricNames.length; x++) {
@@ -41235,7 +41250,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49986" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59827" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

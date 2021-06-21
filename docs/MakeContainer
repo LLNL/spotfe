@@ -13,8 +13,12 @@ ISSUE - can we get rid of setTimeout?
 
 1) Deploy dev/ latest spot.py abd test cat.cgi there.
 TEST- container.
-    * If I want to test other data sets, do i just put it under spotbe/demos?
-1) Container:   * getData call does not work.
+    * FIXED - 2 bugs
+
+
+FIXED - Still the walltime in container is broken.
+1) FIXED Container:   * getData call does not work.
+    index.js Line 246 -> there's a JSON parse error from ,,,,,
 2) BUG - walltime page for marty's data.
         metricNames: function metricNames() {
       return Object.keys(this.data[this.funcPaths[0]]).filter(function (name) {
@@ -36,6 +40,28 @@ DONE - Get numpy working for rzgenie and rzslic.
 2022 -> try to get spot to a place where it becomes wrapped up.
     * cut in money.
     * maintenance mode.
+
+
+DOCKER
+docker build -t spot2 --build-arg DEFAULT_SPOTPW=see .
+
+~/install/spot2_container/spotfe/compare-src: npm run watch-walltime
+
+# do this if you need to change any source code files.  if source files change need to rm and rebuild and rerun.
+docker rm spot2_debug6
+
+cd ~/install/spot2_container/
+docker build -t spot2 .
+docker run -v /Users/aschwanden1/datasets/:/data -p 8080:8080/tcp -p 8888:8888/tcp --name spot2_9 spot2
+
+http://localhost:8080/?sf=lul_sept_28_timeseries
+
+docker exec -it spot2_9 /bin/bash
+
+- run this from the command line in order to test the backend getData call:
+docker exec -it spot2_da5 /bin/bash
+/opt/conda/bin/python3 /usr/gapps/spot/backend.py --config  /usr/gapps/spot/backend_config.yaml getData /data/lul_sept_28_timeseries '{}'
+
 
 
 - MAY need more WOrk:  Walltime support for JSON files (spot1)
@@ -517,19 +543,6 @@ Debuging the python command line:
 
 SPOTPW=see  docker run -e SPOTPW -v /Users/aschwanden1/datasets/:/data -p 8080:8080/tcp -p 8888:8888/tcp --name spot2_d32 spot2
 
-docker build -t spot2 --build-arg DEFAULT_SPOTPW=see .
-
-~/install/spot2_container/spotfe/compare-src: npm run watch-walltime
-
-# do this if you need to change any source code files.  if source files change need to rm and rebuild and rerun.
-docker rm spot2_debug6
-
-docker build -t spot2 .
-docker run -v /Users/aschwanden1/datasets/:/data -p 8080:8080/tcp -p 8888:8888/tcp --name spot2_d50 spot2
-
-http://localhost:8080/?sf=lul_sept_28_timeseries
-
-docker exec -it spot2_da5 /bin/bash
 
 The above will start a debugging session where you or on the docker image:
 (base) root@bbe7b70e2409:/usr/gapps/spot# ls /data/lul_sept_28_timeseries/
