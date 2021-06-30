@@ -1,3 +1,35 @@
+it happens even with just 1 file:
+https://rzlc.llnl.gov/spot/dcvis/?ch_launchdate=1&ch_user=1&sf=/g/g0/pascal/zdeb/twoDbug
+Callspot.js 346:
+RangeError: Maximum call stack size exceeded
+    at https://rzlc.llnl.gov/spot/dcvis/web/js/crossfilter.js:2970:17
+    at quicksort (https://rzlc.llnl.gov/spot/dcvis/web/js/crossfilter.js:3007:9)
+    at sort (https://rzlc.llnl.gov/spot/dcvis/web/js/crossfilter.js:2845:21)
+    at quicksort (https://rzlc.llnl.gov/spot/dcvis/web/js/crossfilter.js:3116:12)
+    at sort (https://rzlc.llnl.gov/spot/dcvis/web/js/crossfilter.js:2845:21)
+    at quicksort (https://rzlc.llnl.gov/spot/dcvis/web/js/crossfilter.js:3116:12)
+    at sort (https://rzlc.llnl.gov/spot/dcvis/web/js/crossfilter.js:2845:21)
+    at quicksort (https://rzlc.llnl.gov/spot/dcvis/web/js/crossfilter.js:3116:1
+
+CFG - integration work.  try to do more for the integration work.
+
+Data should load from here:
+https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/?ch_launchdate=1&ch_user=1&sf=/usr/workspace/spotdev/martymcf/ale3d/spot_data/spot1.3month
+
+Run this from the command line:
+need to figure out why "Data" is not being populated.
+/usr/gapps/spot/sand/spot.py getData /usr/workspace/spotdev/martymcf/ale3d/spot_data/spot1.3month '{}' --writeToFile=1 | more
+/usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/ale3d_regr/am-gen '{}' --writeToFile=1 | more
+
+After that's fixed, redeploy and notify matt and marty.
+Then continue on CFG.
+
+/usr/gapps/spot/sand/spot.py getData /usr/gapps/spot/datasets/lulesh_gen/100 '{}' --writeToFile=1
+/usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/combine '{}' --writeToFile=1
+/usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/combine4 '{}' --writeToFile=1
+/usr/gapps/spot/sand/spot.py getData /usr/gapps/spot/datasets/demos/mpi '{}' --writeToFile=1
+/usr/gapps/spot/sand/spot.py getData /usr/workspace/spotdev/martymcf/ale3d/spot_data/spot2/  '{}' --writeToFile=1
+
 DONE - CGI work to make output so much faster
     * https://lc.llnl.gov/lorenz_base/dev/pascal/mylc/mylc/cat.cgi
     * this can send 400mb in 3.6 seconds using just cgi without a wrapper.
@@ -25,6 +57,9 @@ FIXED - Still the walltime in container is broken.
         return !name.startsWith('any#any#');
       });
     },
+    * the issue is "Data" is not in the object sotred i the localforage.  let's check what goes into the localforage.
+https://rzlc.llnl.gov/spot/dcvis/sankey/index.html?runSetId=/usr/workspace/spotdev/martymcf/ale3d/spot_data/spot1.3month&runId=sedov_a3d8.8d.8p-2&title=sedov_a3d8.8d.8p
+
     this.data and this.funcPaths is empty.
     localforage.getItem() -> the object is there with it's Global but no "Data"
     able to access var fileData = runSet.Runs[runId];  but "Data" not present.

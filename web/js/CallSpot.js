@@ -77,6 +77,7 @@ ST.CallSpot = function() {
         };
 
         obj.dataType = "jsonp";
+
         if( !is_h ) {
         }
 
