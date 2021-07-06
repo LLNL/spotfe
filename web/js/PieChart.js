@@ -36,7 +36,7 @@ ST.PieChart = function() {
         var quarter = ndx.dimension(function ( cali_object) {
 
             ST.Utility.validate_cali_object( cali_object, spec.dimension );
-            return cali_object[spec.dimension];
+            return cali_object[spec.dimension] || 0;
         });
 
         if( ST.cali_valid === false ) {

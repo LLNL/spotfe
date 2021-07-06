@@ -59,6 +59,17 @@ ST.ChartCollection = function() {
 
         ST.CompositeLayoutModel.update_composite();
 
+        var tcount = ST.Utility.get_param('tcount');
+        if( tcount ) {
+            the_data = the_data.slice(0, tcount);
+        }
+
+//        for( var z=0; z < the_data.length; z++ ) {
+//            delete the_data[z].data;
+//        }
+
+        console.dir( the_data );
+
         //amend_charts_( layout_spec );
 
         var GLOB_DAT = the_data;

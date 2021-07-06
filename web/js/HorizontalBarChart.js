@@ -44,7 +44,7 @@ ST.HorizontalBarChart = function() {
         var dayOfWeek = ndx.dimension(function (cali_object) {
 
             ST.Utility.validate_cali_object( cali_object, options.dimension );
-            return cali_object[ options.dimension ];
+            return cali_object[ options.dimension ] || 0;
             //return ST.Utility.limit_unique_values( cali_object, options.dimension );
         });
 
@@ -93,7 +93,7 @@ ST.HorizontalBarChart = function() {
         var dayOfWeek2 = ndx.dimension(function (cali_object) {
 
             ST.Utility.validate_cali_object( cali_object, options.dimension );
-            return cali_object[ options.dimension ];
+            return cali_object[ options.dimension ] || 0;
         });
 
         var dayOfWeekGroup2 = dayOfWeek2.group();

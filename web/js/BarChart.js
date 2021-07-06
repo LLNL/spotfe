@@ -68,7 +68,7 @@ ST.BarChart = function() {
             counts[ ret ] = counts[ ret ] || 0;
             counts[ ret ]++;
 
-            return ret;
+            return ret || 0;
         });
 
         if( ST.cali_valid === false ) {

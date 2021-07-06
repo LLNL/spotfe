@@ -11,10 +11,20 @@ RangeError: Maximum call stack size exceeded
     at sort (https://rzlc.llnl.gov/spot/dcvis/web/js/crossfilter.js:2845:21)
     at quicksort (https://rzlc.llnl.gov/spot/dcvis/web/js/crossfilter.js:3116:1
 
+problem is between
+6763 and 6766
+
+Firefox seems unaffected -> 10K is fine there.
+
 CFG - integration work.  try to do more for the integration work.
 
 Data should load from here:
 https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/?ch_launchdate=1&ch_user=1&sf=/usr/workspace/spotdev/martymcf/ale3d/spot_data/spot1.3month
+
+spot1.3month -> 5051
+
+“Maximum call stack size exceeded” crossfilter
+https://stackoverflow.com/questions/35119862/maximum-call-stack-size-exceeded-crossfilter#35137485
 
 Run this from the command line:
 need to figure out why "Data" is not being populated.
