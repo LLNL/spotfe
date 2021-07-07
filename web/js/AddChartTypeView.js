@@ -251,7 +251,9 @@ ST.AddChartTypeView = function() {
         yaxis = ST.Utility.strip(yaxis);
 
         var dimension = make_new_dimension_( xaxis, yaxis );
+        var dim_ch = ST.CallSpot.ch_key( dimension );
 
+        ST.UrlStateManager.update_url(dim_ch, "1");
 
         close_modal_();
 
@@ -428,6 +430,9 @@ ST.AddChartTypeView = function() {
 
         close_modal_();
         update_compare_view_();
+
+        var dim_ch = ST.CallSpot.ch_key( dimension );
+        ST.UrlStateManager.update_url(dim_ch, "1");
     };
 
 

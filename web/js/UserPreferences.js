@@ -30,13 +30,6 @@ ST.UserPreferences = function() {
 
     var render_ = function() {
 
-/*        ST.layout_used.charts.sort( function( a, b ) {
-
-            if(a.dimension < b.dimension) { return -1; }
-            if(a.dimension > b.dimension) { return 1; }
-            return 0;
-        });*/
-
         if( $('.user_pref_icon').length > 0 ) {
             //  Means it's already rendered and thus should auto update.
             return true;
