@@ -163,6 +163,21 @@ ST.CallSpot = function() {
     };
 
 
+    var make_table_consistent_with_charts_shown_ = function( dimension, show_chart ) {
+
+        var table = ST.layout_used.table;
+
+        for( var u = 0; u < table.length; u++ ) {
+
+            var tab = table[u];
+
+            if( tab.dimension === dimension ) {
+                tab.show = show_chart;
+            }
+        }
+    };
+
+
     var set_up_params_ = function( charts ) {
 
         if( is_something_showing_( charts ) ) {
@@ -174,9 +189,7 @@ ST.CallSpot = function() {
                 var show_chart = val === "1";
 
                 charts[x].show = show_chart;
-
-                //  make table consistent with charts shown.
-                ST.layout_used.table[x].show = show_chart;
+                make_table_consistent_with_charts_shown_( dimension, show_chart );
             }
         } else {
             //  else show whatever the default is and fix the URL parameters.
@@ -189,8 +202,7 @@ ST.CallSpot = function() {
                     ST.UrlStateManager.update_url(ch_key_( dim_ch ), "1");
                 }
 
-                //  make table consistent with charts shown.
-                ST.layout_used.table[x].show = ch.show;
+                make_table_consistent_with_charts_shown_( dim_ch, ch.show );
             }
         }
     };
@@ -202,7 +214,9 @@ ST.CallSpot = function() {
 //        return false;
 
         ST.Utility.check_error( summ );
-        ST.layout_used =  summ.layout || sqs.layout_used;
+
+        //  use saved layout, so that added charts, and editted titles remain in layout.
+        ST.layout_used =  sqs.layout_used || summ.layout;
 
         if( !sqs.layout_used ) {
             sqs.layout_used = summ.layout;
