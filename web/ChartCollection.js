@@ -330,7 +330,7 @@ ST.ChartCollection = function() {
         var ndim = ndx.dimension(function (cali_object) {
 
             uniq_counts[ cali_object[ dimension ] ] = 1;
-            return cali_object[ dimension ];
+            return cali_object[ dimension ] || 0;
         });
 
         return Object.keys( uniq_counts ).length;
