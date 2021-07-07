@@ -64,10 +64,6 @@ ST.ChartCollection = function() {
             the_data = the_data.slice(0, tcount);
         }
 
-//        for( var z=0; z < the_data.length; z++ ) {
-//            delete the_data[z].data;
-//        }
-
         console.dir( the_data );
 
         //amend_charts_( layout_spec );

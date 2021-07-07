@@ -26,6 +26,14 @@ spot1.3month -> 5051
 “Maximum call stack size exceeded” crossfilter
 https://stackoverflow.com/questions/35119862/maximum-call-stack-size-exceeded-crossfilter#35137485
 
+                for( var z=0; z < ST.newp.length; z++ ) {
+                    ST.newp[z] = {
+                        cluster: ST.newp[z].cluster,
+                        "test8": "yes"
+                    };
+                }
+
+
 Run this from the command line:
 need to figure out why "Data" is not being populated.
 /usr/gapps/spot/sand/spot.py getData /usr/workspace/spotdev/martymcf/ale3d/spot_data/spot1.3month '{}' --writeToFile=1 | more

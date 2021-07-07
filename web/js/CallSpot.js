@@ -171,8 +171,12 @@ ST.CallSpot = function() {
 
                 var dimension = charts[x].dimension;
                 var val = ST.Utility.get_param( ch_key_( dimension ) );
+                var show_chart = val === "1";
 
-                charts[x].show = val === "1";
+                charts[x].show = show_chart;
+
+                //  make table consistent with charts shown.
+                ST.layout_used.table[x].show = show_chart;
             }
         } else {
             //  else show whatever the default is and fix the URL parameters.
@@ -184,6 +188,9 @@ ST.CallSpot = function() {
                 if( ch.show ) {
                     ST.UrlStateManager.update_url(ch_key_( dim_ch ), "1");
                 }
+
+                //  make table consistent with charts shown.
+                ST.layout_used.table[x].show = ch.show;
             }
         }
     };
@@ -196,27 +203,6 @@ ST.CallSpot = function() {
 
         ST.Utility.check_error( summ );
         ST.layout_used =  summ.layout || sqs.layout_used;
-
-        //window.USE_EXPERIMENTAL = true;
-
-
-        if( window.USE_EXPERIMENTAL ) {
-
-            ST.layout_used.charts.push({
-                dimension: "experimental_composite",
-                title: "experimental_composite",
-                type: "int",
-                show: true,
-                viz: "BarChart"
-            });
-
-            ST.layout_used.table.push({
-                dimension: "experimental_composite",
-                label: "Experimental",
-                type: "int",
-                show: true
-            });
-        }
 
         if( !sqs.layout_used ) {
             sqs.layout_used = summ.layout;
@@ -337,6 +323,7 @@ ST.CallSpot = function() {
         //  Currently RenderChartCollection has a fatal javascript error coming from dc.js
         //  which needs to get fixed.
         try {
+
             if (ST && ST.ChartCollection ) {
 
                 ST.newp = newp;
