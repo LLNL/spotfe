@@ -2,6 +2,8 @@ DONE - BUG - Be able to save new charts and chart tile edits.
     * when adding a new chart, need to add it to the URL parameters.
     * test case where you're starting fresh and are given a URL with checkboxes in it.
 DONE - RangeError -> there was a undefined value in count_unique_values_in_chart_
+DONE - async issue.
+
 DEPLOY - RZ/CZ and regression test heavily.
 CFG -> implement integration for file loading.
 
@@ -27,6 +29,9 @@ problem is between
 6763 and 6766
 
 Firefox seems unaffected -> 10K is fine there.
+                    /*$.Deferred(function( deferred ){
+                        $( deferred.resolve );
+                    })*/
 
 
 Redeploy to CZ and Regression test thoroughly.

@@ -248,15 +248,15 @@ export default {
             });
 
 
-            console.log("here is the response obj: ")
+            console.log("here is the response obj: ");
             console.dir( response );
 
             if( response && response.json ) {
 
-                console.log("about to do response.json();")
+                console.log("about to do response.json();");
                 var newData = await response.json();
 
-                console.log('newData:')
+                console.log('newData:');
                 console.dir(newData);
 
                 this.updateTopDown( newData );
@@ -289,7 +289,6 @@ export default {
                 "../web/js/Environment.js",
                 "../web/js/CallSpot.js?abb"
             ];
-            //loadScriptsInOrder( files ).then( this.getAliases );
 
             let script = document.createElement('script');
             script.src = "../web/js/jquery-1.11.0.min.js";
@@ -298,15 +297,13 @@ export default {
             script.addEventListener('load', (event) => {
 
                 console.log('jquery has been loaded.');
+
                 $.when(
                     $.getScript("../web/js/Environment.js"),
                     $.getScript("../web/js/Utility.js"),
                     $.getScript("../web/js/CallSpot.js?abb"),
-                    $.getScript("../web/js/RunDictionaryTranslator.js?jasdf"),
-                    $.Deferred(function( deferred ){
-                        $( deferred.resolve );
-                    })
-                ).done( this.getAliases );
+                    $.getScript("../web/js/RunDictionaryTranslator.js?jz88992")
+                ).then( this.getAliases );
             });
 
             document.body.appendChild(script);
@@ -322,6 +319,7 @@ export default {
         //  Just reuse our existing get memory call for now, so we can retrieve aliases.
         getAliases() {
 
+            console.log('A getAliases');
             var runSetId = ST.Utility.get_param('runSetId');
 
             //  cali files use this:
@@ -339,6 +337,7 @@ export default {
             //  //'/usr/gapps/spot/datasets/lulesh_gen/100',
             var path = runSetId + "/" + suff;
 
+            console.log( 'getAliases path=' + path );
             var isContainer = window.ENV.machine == 'container'
 
             if( isContainer ) {

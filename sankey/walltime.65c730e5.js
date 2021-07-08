@@ -29972,16 +29972,13 @@ var _default = {
     getScripts: function getScripts() {
       var _this2 = this;
 
-      var files = ["../web/js/jquery-1.11.0.min.js", "../web/js/Utility.js", "../web/js/Environment.js", "../web/js/CallSpot.js?abb"]; //loadScriptsInOrder( files ).then( this.getAliases );
-
+      var files = ["../web/js/jquery-1.11.0.min.js", "../web/js/Utility.js", "../web/js/Environment.js", "../web/js/CallSpot.js?abb"];
       var script = document.createElement('script');
       script.src = "../web/js/jquery-1.11.0.min.js"; // assign an onload event handler
 
       script.addEventListener('load', function (event) {
         console.log('jquery has been loaded.');
-        $.when($.getScript("../web/js/Environment.js"), $.getScript("../web/js/Utility.js"), $.getScript("../web/js/CallSpot.js?abb"), $.getScript("../web/js/RunDictionaryTranslator.js?jasdf"), $.Deferred(function (deferred) {
-          $(deferred.resolve);
-        })).done(_this2.getAliases);
+        $.when($.getScript("../web/js/Environment.js"), $.getScript("../web/js/Utility.js"), $.getScript("../web/js/CallSpot.js?abb"), $.getScript("../web/js/RunDictionaryTranslator.js?jz88992")).then(_this2.getAliases);
       });
       document.body.appendChild(script);
     },
@@ -29992,6 +29989,7 @@ var _default = {
     },
     //  Just reuse our existing get memory call for now, so we can retrieve aliases.
     getAliases: function getAliases() {
+      console.log('A getAliases');
       var runSetId = ST.Utility.get_param('runSetId'); //  cali files use this:
 
       var runId = ST.Utility.get_param('runId'); //  JSON files use this:
@@ -30005,6 +30003,7 @@ var _default = {
       var suff = title === "undefined.json" ? runId : title; //  //'/usr/gapps/spot/datasets/lulesh_gen/100',
 
       var path = runSetId + "/" + suff;
+      console.log('getAliases path=' + path);
       var isContainer = window.ENV.machine == 'container';
 
       if (isContainer) {
@@ -41250,7 +41249,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59827" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59775" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
