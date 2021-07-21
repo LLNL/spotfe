@@ -1,11 +1,42 @@
+Next -
+When you click on a jupyter button or multi jupyter button do a popup modal.
+in that modal, have a select drop down for all the available templates
+    * USE case 1: we want olga and stephanie to easily be able to add templates
+    * Use case 2: we want some other scientist to be able to add templates
+        * but these templates are only intended for him and his team, no one else
+    * at some point we can check in 3 different locations to look in a person's home directory.
+-> want to be able to add new templates without editing source files.
+    * backend components goes and looks in the 3 locations (static)
+       * for example: user's home directory (~/notebooks)
+       * /usr/gapps/spot/templates (everybody already has read permissions) - stephanie could drop one in there for everyone
+       * one will be the "notebook" directory beneath the (SF) input directory.
+        * the name could come from the filename or within the file, the first line.
+        *
+
+
+
 DONE - BUG - Be able to save new charts and chart tile edits.
     * when adding a new chart, need to add it to the URL parameters.
     * test case where you're starting fresh and are given a URL with checkboxes in it.
 DONE - RangeError -> there was a undefined value in count_unique_values_in_chart_
-DONE - async issue.
+    * this fix allows us to load the spot2 dashboard on marty's new data.
+DONE - async issue -> intermittent loading issue with walltime code.
 
 DEPLOY - RZ/CZ and regression test heavily.
 CFG -> implement integration for file loading.
+
+BUG - https://rzlc.llnl.gov/spot/dcvis/sankey/index.html?runSetId=/usr/workspace/spotdev/martymcf/ale3d/spot_data/&runId=spot1.3month/sedov_a3d8.8d.8p-1&title=sedov_a3d8.8d.8p
+    * it can't find the data in localforage, is the key incorrect?
+    * or is the data not there?  was it never put there in the first place?
+https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/?ch_launchdate=1&ch_user=1&sf=/usr/workspace/spotdev/martymcf/ale3d/spot_data/spot1.3month
+                props:{
+                    filename: runId,
+                    data: fileData.Data ,
+                    meta: fileData.Globals
+                },
+    fileData.Data is empty.
+
+/usr/workspace/spotdev/martymcf/ale3d/spot_data/
 
 it happens even with just 1 file:
 https://rzlc.llnl.gov/spot/dcvis/?ch_launchdate=1&ch_user=1&sf=/g/g0/pascal/zdeb/twoDbug
@@ -190,15 +221,6 @@ Caliper will keep going.
 
 
 DONE - refactor "ch_"+ into a function.
-
-
-Next:
-When you click on a jupyter button or multi jupyter button do a popup modal.
-in that modal, have a select drop down for all the available templates
-    * USE case 1: we want olga and stephanie to easily be able to add templates
-    * Use case 2: we want some other scientist to be able to add templates
-        * but these templates are only intended for him and his team, no one else
-    * at some point we can check in 3 different locations to look in a person's home directory.
 
 
 
@@ -1072,3 +1094,21 @@ Walltime call:
 3.7s    12 mb
 8.2s,10,7s    49 mb
 26s        196 mb
+
+
+
+data is empty here:
+cachedData.Runs = Object.assign(cachedData.Runs, runs0);
+                cachedData.RunDataMeta = Object.assign(cachedData.RunDataMeta, newData.RunDataMeta);
+                cachedData.RunGlobalMeta = Object.assign(cachedData.RunGlobalMeta, newData.RunGlobalMeta);
+                cachedData.RunSetMeta = Object.assign(cachedData.RunSetMeta, newData.RunSetMeta);
+                cachedData.runCtimes = newData.runCtimes; // delete runs from cache that were deleted on backend
+
+                deletedRuns = newData.deletedRuns || [];
+                deletedRuns.forEach(function (deletedRun) {
+                  return delete cachedData.Runs[deletedRun];
+                });
+                window.cachedData = cachedData; // cache newest version of data
+
+                _context3.next = 91;
+                return _localforage.default.setItem(dataSetKey, cachedData);
