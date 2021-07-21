@@ -70,6 +70,9 @@ var TEST = function() {
 	    "/g/g0/pascal/zdeb/combine2",
 	    "/g/g0/pascal/zdeb/combine3",
 	    "/g/g0/pascal/zdeb/combine4",
+            "/usr/workspace/spotdev/martymcf/ale3d/spot_data/",
+            "/usr/workspace/spotdev/martymcf/ale3d/spot_data/spot1.3month",
+            "/usr/workspace/spotdev/martymcf/ale3d/spot_data/spot2"
         ];
 
 
