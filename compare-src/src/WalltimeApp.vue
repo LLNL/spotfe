@@ -302,13 +302,16 @@ export default {
 
                 $.getScript("../web/js/Environment.js", function () {
 
-                    $.getScript("../web/js/Utility.js", function () {
+//                    $.getScript("../web/js/DBStorage.js", function () {
 
-                        $.getScript("../web/js/CallSpot.js?abb", function () {
+                        $.getScript("../web/js/Utility.js", function () {
 
-                            $.getScript("../web/js/RunDictionaryTranslator.js?jz88992", getAliases );
+                            $.getScript("../web/js/CallSpot.js?abb", function () {
+
+                                $.getScript("../web/js/RunDictionaryTranslator.js?jz88992", getAliases);
+                            });
                         });
-                    });
+  //                  });
                 });
             });
 

@@ -16,8 +16,9 @@ ST.replaceYAxisWithValue = function( fd ) {
     }
 };
 
-localforage.getItem(runSetId)
-    .then(runSet => {
+DB.load( runSetId, function( runSet ) {
+//localforage.getItem(runSetId)
+//    .then(runSet => {
         var fileData = runSet.Runs[runId]
 
         for (const [key, val] of Object.entries(fileData.Globals)){

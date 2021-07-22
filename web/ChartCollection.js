@@ -484,17 +484,14 @@ ST.ChartCollection = function() {
 
                 window.cacheSum = cacheSum;
 
-                ST.graph.getData(host, command, file)
-                    .then(summary => {
+                var getDataCallback = function( summary ) {
 
                         ST.Utility.check_error( summary );
                         console.log('summary:', summary);
                         ST.CallSpot.handle_success2(summary);
+                };
 
-                    }).finally( summary => {
-
-                    ST.Utility.check_error( summary );
-                });
+                ST.graph.getData(host, command, file, getDataCallback);
             });
         });
 

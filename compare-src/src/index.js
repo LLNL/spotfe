@@ -142,7 +142,9 @@ export class Graph{
     }
 
 
-    async getData(host, command, dataSetKey) {
+    async getData(host, command, dataSetKey, callback) {
+
+        window.getDataCallback = callback;
 
         //var rzz = await lorenz(host, "cat /g/g0/pascal/zdeb/full/cacheToFE.json");
         //console.dir(rzz);
@@ -168,6 +170,9 @@ export class Graph{
         var cachedDataGet;
         var bust_cache = ST.Utility.get_param("cache") === "0";
 
+        window.compare = this.compare;
+        window.afterSetItemCacheRunner = this.afterSetItemCacheRunner;
+        window.afterCachedDataGet = this.afterCachedDataGet;
 
         if (bust_cache) {
 
@@ -179,23 +184,44 @@ export class Graph{
             }
 
             console.log('Got a new cachedData...');
+            return this.afterCachedDataGet( cachedDataGet, bust_cache, mtime, dataSetKey );
 
         } else {
 
             // Get Cached Data from local storage
-            cachedDataGet = await localforage.getItem(dataSetKey) || {
+/*            cachedDataGet = await localforage.getItem(dataSetKey) || {
                 Runs: {},
                 RunDataMeta: {},
                 RunGlobalMeta: {},
                 RunSetMeta: {}
             }
+
+            var afterCachedDataGet = this.afterCachedDataGet;
+            return afterCachedDataGet( cachedDataGet, bust_cache, mtime, dataSetKey );
+*/
+
+            DB.load( dataSetKey, function( cachedDataGet ) {
+
+                if( !cachedDataGet ) {
+                    cachedDataGet = {
+                        Runs: {},
+                        RunDataMeta: {},
+                        RunGlobalMeta: {},
+                        RunSetMeta: {}
+                    }
+                }
+
+                console.log('from DB.load:');
+                console.dir(cachedDataGet);
+
+                return window.afterCachedDataGet( cachedDataGet, bust_cache, mtime, dataSetKey, host );
+            });
         }
 
-        return this.afterCachedDataGet( cachedDataGet, bust_cache, mtime, dataSetKey );
     };
 
 
-    async afterCachedDataGet( cachedDataGet, bust_cache, mtime, dataSetKey ) {
+    async afterCachedDataGet( cachedDataGet, bust_cache, mtime, dataSetKey, host ) {
 
         const cachedData = cachedDataGet;
         const cachedRunCtimes = cachedData.runCtimes || {};
@@ -328,14 +354,25 @@ export class Graph{
 
         window.cachedData = cachedData;
 
-        // cache newest version of data
-        await localforage.setItem(dataSetKey, cachedData);
 
-        return this.afterSetItemCacheRunner( dataSetKey, cachedData );
+        // cache newest version of data
+        //await localforage.setItem(dataSetKey, cachedData);
+        //return window.afterSetItemCacheRunner( dataSetKey, cachedData );
+
+        console.log('DB.save');
+        //var afterSetItemCacheRunner = this.afterSetItemCacheRunner;
+        DB.save( dataSetKey, cachedData, function() {
+
+        });
+
+        console.log('save callback');
+        return window.afterSetItemCacheRunner( dataSetKey, cachedData );
     };
 
 
     async afterSetItemCacheRunner( dataSetKey, cachedData ) {
+
+        console.log('afterSetItemRunner');
 
         // add in datsetkey and datakey to globals
         _.forEach(cachedData.Runs, (run, filename) => {
@@ -396,7 +433,7 @@ export class Graph{
         //  The first run's meta object is used to determine what the drop down select options should be.
         window.runs = ST.CompositeLayoutModel.augment_first_run_to_include_composite_charts(runs);
 
-        this.compare(filenames)
+        window.compare(filenames)
 
         // 4. return summary
         const summary = {data: {}, layout: {charts: [], table: []}}
@@ -430,6 +467,8 @@ export class Graph{
 
         summary.layout.scatterplots = await localforage.getItem('scatterplots:' + this.dataSetKey) || []
 
+        console.log('getDataCallback');
+        window.getDataCallback( summary );
         return summary
     }
 

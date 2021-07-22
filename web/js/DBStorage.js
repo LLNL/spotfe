@@ -3,7 +3,7 @@ var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedD
 
 var DB = {};
 
-DB.cacheStore = "cacheStore0";
+DB.cacheStore = "cacheStore4";
 
 DB.init = function( callback ) {
 
@@ -24,11 +24,20 @@ DB.init = function( callback ) {
     };
 };
 
-DB.save = function( id, obj ) {
+DB.save = function( id, obj, callback ) {
 
     DB.tx = DB.db.transaction(DB.cacheStore, "readwrite");
 
-    var store = DB.tx.objectStore(DB.cacheStore);
+    const store = DB.tx.objectStore(DB.cacheStore);
+
+    store.onsuccess = function( ret ) {
+        //callback( ret );
+    };
+    store.error = function( err ) {
+        console.dir( err );
+    };
+
+    console.log('putting');
     store.put({id: id, value: obj});
 };
 

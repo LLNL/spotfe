@@ -52029,15 +52029,16 @@ var Graph = /*#__PURE__*/function () {
   }, {
     key: "getData",
     value: function () {
-      var _getData = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(host, command, dataSetKey) {
+      var _getData = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(host, command, dataSetKey, callback) {
         var arr, spotPy, comm, res, res0, cacheResult, mtime, cachedDataGet, bust_cache;
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                //var rzz = await lorenz(host, "cat /g/g0/pascal/zdeb/full/cacheToFE.json");
+                window.getDataCallback = callback; //var rzz = await lorenz(host, "cat /g/g0/pascal/zdeb/full/cacheToFE.json");
                 //console.dir(rzz);
                 //  https://rzlc.llnl.gov/lorenz/lora/lora.cgi/jsonp
+
                 console.log('host=' + host + '   command=' + command);
                 arr = command.split(' ');
                 spotPy = arr[0];
@@ -52045,25 +52046,28 @@ var Graph = /*#__PURE__*/function () {
                 res = '{"mtime": 3000900800}';
 
                 if (isContainer) {
-                  _context3.next = 10;
+                  _context3.next = 11;
                   break;
                 }
 
-                _context3.next = 8;
+                _context3.next = 9;
                 return lorenz(host, comm);
 
-              case 8:
+              case 9:
                 res0 = _context3.sent;
                 res = res0.output.command_out;
 
-              case 10:
+              case 11:
                 cacheResult = JSON.parse(res);
                 mtime = cacheResult.mtime;
                 console.dir(cacheResult);
                 bust_cache = ST.Utility.get_param("cache") === "0";
+                window.compare = this.compare;
+                window.afterSetItemCacheRunner = this.afterSetItemCacheRunner;
+                window.afterCachedDataGet = this.afterCachedDataGet;
 
                 if (!bust_cache) {
-                  _context3.next = 19;
+                  _context3.next = 24;
                   break;
                 }
 
@@ -52074,35 +52078,37 @@ var Graph = /*#__PURE__*/function () {
                   RunSetMeta: {}
                 };
                 console.log('Got a new cachedData...');
-                _context3.next = 25;
-                break;
-
-              case 19:
-                _context3.next = 21;
-                return _localforage.default.getItem(dataSetKey);
-
-              case 21:
-                _context3.t0 = _context3.sent;
-
-                if (_context3.t0) {
-                  _context3.next = 24;
-                  break;
-                }
-
-                _context3.t0 = {
-                  Runs: {},
-                  RunDataMeta: {},
-                  RunGlobalMeta: {},
-                  RunSetMeta: {}
-                };
-
-              case 24:
-                cachedDataGet = _context3.t0;
-
-              case 25:
                 return _context3.abrupt("return", this.afterCachedDataGet(cachedDataGet, bust_cache, mtime, dataSetKey));
 
-              case 26:
+              case 24:
+                // Get Cached Data from local storage
+
+                /*            cachedDataGet = await localforage.getItem(dataSetKey) || {
+                                Runs: {},
+                                RunDataMeta: {},
+                                RunGlobalMeta: {},
+                                RunSetMeta: {}
+                            }
+                
+                            var afterCachedDataGet = this.afterCachedDataGet;
+                            return afterCachedDataGet( cachedDataGet, bust_cache, mtime, dataSetKey );
+                */
+                DB.load(dataSetKey, function (cachedDataGet) {
+                  if (!cachedDataGet) {
+                    cachedDataGet = {
+                      Runs: {},
+                      RunDataMeta: {},
+                      RunGlobalMeta: {},
+                      RunSetMeta: {}
+                    };
+                  }
+
+                  console.log('from DB.load:');
+                  console.dir(cachedDataGet);
+                  return window.afterCachedDataGet(cachedDataGet, bust_cache, mtime, dataSetKey, host);
+                });
+
+              case 25:
               case "end":
                 return _context3.stop();
             }
@@ -52110,7 +52116,7 @@ var Graph = /*#__PURE__*/function () {
         }, _callee3, this);
       }));
 
-      function getData(_x12, _x13, _x14) {
+      function getData(_x12, _x13, _x14, _x15) {
         return _getData.apply(this, arguments);
       }
 
@@ -52119,7 +52125,7 @@ var Graph = /*#__PURE__*/function () {
   }, {
     key: "afterCachedDataGet",
     value: function () {
-      var _afterCachedDataGet = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(cachedDataGet, bust_cache, mtime, dataSetKey) {
+      var _afterCachedDataGet = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(cachedDataGet, bust_cache, mtime, dataSetKey, host) {
         var cachedData, cachedRunCtimes, x, dataRequest, newData, cacheSum, cacheDate, cacheFileFound, response, txt, lor_response, runs0, deletedRuns;
         return regeneratorRuntime.wrap(function _callee4$(_context4) {
           while (1) {
@@ -52285,22 +52291,24 @@ var Graph = /*#__PURE__*/function () {
                   return delete cachedData.Runs[deletedRun];
                 });
                 window.cachedData = cachedData; // cache newest version of data
+                //await localforage.setItem(dataSetKey, cachedData);
+                //return window.afterSetItemCacheRunner( dataSetKey, cachedData );
 
-                _context4.next = 66;
-                return _localforage.default.setItem(dataSetKey, cachedData);
+                console.log('DB.save'); //var afterSetItemCacheRunner = this.afterSetItemCacheRunner;
 
-              case 66:
-                return _context4.abrupt("return", this.afterSetItemCacheRunner(dataSetKey, cachedData));
+                DB.save(dataSetKey, cachedData, function () {});
+                console.log('save callback');
+                return _context4.abrupt("return", window.afterSetItemCacheRunner(dataSetKey, cachedData));
 
-              case 67:
+              case 68:
               case "end":
                 return _context4.stop();
             }
           }
-        }, _callee4, this, [[26, 48]]);
+        }, _callee4, null, [[26, 48]]);
       }));
 
-      function afterCachedDataGet(_x15, _x16, _x17, _x18) {
+      function afterCachedDataGet(_x16, _x17, _x18, _x19, _x20) {
         return _afterCachedDataGet.apply(this, arguments);
       }
 
@@ -52316,7 +52324,8 @@ var Graph = /*#__PURE__*/function () {
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
-                // add in datsetkey and datakey to globals
+                console.log('afterSetItemRunner'); // add in datsetkey and datakey to globals
+
                 _lodash.default.forEach(cachedData.Runs, function (run, filename) {
                   run.Globals = run.Globals || {};
                   run.Globals.dataSetKey = dataSetKey;
@@ -52390,7 +52399,7 @@ var Graph = /*#__PURE__*/function () {
                 this.dataSetKey = dataSetKey; //  The first run's meta object is used to determine what the drop down select options should be.
 
                 window.runs = ST.CompositeLayoutModel.augment_first_run_to_include_composite_charts(runs);
-                this.compare(filenames); // 4. return summary
+                window.compare(filenames); // 4. return summary
 
                 summary = {
                   data: {},
@@ -52399,20 +52408,20 @@ var Graph = /*#__PURE__*/function () {
                     table: []
                   }
                 };
-                _context5.next = 17;
+                _context5.next = 18;
                 return _localforage.default.getItem("show:" + dataSetKey);
 
-              case 17:
+              case 18:
                 _context5.t0 = _context5.sent;
 
                 if (_context5.t0) {
-                  _context5.next = 20;
+                  _context5.next = 21;
                   break;
                 }
 
                 _context5.t0 = defaultVisibleCharts;
 
-              case 20:
+              case 21:
                 visibleCharts = _context5.t0;
 
                 for (_i4 = 0, _Object$entries4 = Object.entries(cachedData.Runs); _i4 < _Object$entries4.length; _i4++) {
@@ -52443,24 +52452,26 @@ var Graph = /*#__PURE__*/function () {
                   });
                 }
 
-                _context5.next = 26;
+                _context5.next = 27;
                 return _localforage.default.getItem('scatterplots:' + this.dataSetKey);
 
-              case 26:
+              case 27:
                 _context5.t1 = _context5.sent;
 
                 if (_context5.t1) {
-                  _context5.next = 29;
+                  _context5.next = 30;
                   break;
                 }
 
                 _context5.t1 = [];
 
-              case 29:
+              case 30:
                 summary.layout.scatterplots = _context5.t1;
+                console.log('getDataCallback');
+                window.getDataCallback(summary);
                 return _context5.abrupt("return", summary);
 
-              case 31:
+              case 34:
               case "end":
                 return _context5.stop();
             }
@@ -52468,7 +52479,7 @@ var Graph = /*#__PURE__*/function () {
         }, _callee5, this);
       }));
 
-      function afterSetItemCacheRunner(_x19, _x20) {
+      function afterSetItemCacheRunner(_x21, _x22) {
         return _afterSetItemCacheRunner.apply(this, arguments);
       }
 
@@ -52511,7 +52522,7 @@ var Graph = /*#__PURE__*/function () {
         }, _callee6, this);
       }));
 
-      function addScatterplot(_x21) {
+      function addScatterplot(_x23) {
         return _addScatterplot.apply(this, arguments);
       }
 
@@ -52561,7 +52572,7 @@ var Graph = /*#__PURE__*/function () {
         }, _callee7, this);
       }));
 
-      function setChartVisible(_x22) {
+      function setChartVisible(_x24) {
         return _setChartVisible.apply(this, arguments);
       }
 

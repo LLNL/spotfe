@@ -29978,11 +29978,12 @@ var _default = {
       script.addEventListener('load', function (event) {
         console.log('jquery has been loaded.');
         $.getScript("../web/js/Environment.js", function () {
+          //                    $.getScript("../web/js/DBStorage.js", function () {
           $.getScript("../web/js/Utility.js", function () {
             $.getScript("../web/js/CallSpot.js?abb", function () {
               $.getScript("../web/js/RunDictionaryTranslator.js?jz88992", getAliases);
             });
-          });
+          }); //                  });
         });
       });
       document.body.appendChild(script);
@@ -41190,7 +41191,9 @@ ST.replaceYAxisWithValue = function (fd) {
   }
 };
 
-_localforage.default.getItem(runSetId).then(function (runSet) {
+DB.load(runSetId, function (runSet) {
+  //localforage.getItem(runSetId)
+  //    .then(runSet => {
   var fileData = runSet.Runs[runId];
 
   for (var _i = 0, _Object$entries = Object.entries(fileData.Globals); _i < _Object$entries.length; _i++) {
@@ -41224,7 +41227,6 @@ _localforage.default.getItem(runSetId).then(function (runSet) {
     }
   });
 });
-
 document.title = runId;
 },{"vue":"../node_modules/vue/dist/vue.runtime.esm.js","./WalltimeApp.vue":"WalltimeApp.vue","babel-polyfill":"../node_modules/babel-polyfill/lib/index.js","localforage":"../node_modules/localforage/dist/localforage.js"}],"../node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
