@@ -142,12 +142,12 @@ export class Graph{
     }
 
 
-    async getData(host, command, dataSetKey){
+    async getData(host, command, dataSetKey) {
 
         //var rzz = await lorenz(host, "cat /g/g0/pascal/zdeb/full/cacheToFE.json");
         //console.dir(rzz);
         //  https://rzlc.llnl.gov/lorenz/lora/lora.cgi/jsonp
-        console.log('host=' + host + '   command=' + command );
+        console.log('host=' + host + '   command=' + command);
 
         var arr = command.split(' ');
         var spotPy = arr[0];
@@ -155,7 +155,7 @@ export class Graph{
         var comm = spotPy + ` getCacheFileDate ${dataSetKey}`;
         var res = '{"mtime": 3000900800}';
 
-        if( !isContainer ) {
+        if (!isContainer) {
             var res0 = await lorenz(host, comm)
             res = res0.output.command_out
         }
@@ -169,8 +169,7 @@ export class Graph{
         var bust_cache = ST.Utility.get_param("cache") === "0";
 
 
-
-        if( bust_cache ) {
+        if (bust_cache) {
 
             cachedDataGet = {
                 Runs: {},
@@ -192,14 +191,20 @@ export class Graph{
             }
         }
 
+        return this.afterCachedDataGet( cachedDataGet, bust_cache, mtime, dataSetKey );
+    };
+
+
+    async afterCachedDataGet( cachedDataGet, bust_cache, mtime, dataSetKey ) {
+
         const cachedData = cachedDataGet;
         const cachedRunCtimes = cachedData.runCtimes || {};
 
         //  Round to prevent string from being too long.
-        for( var x in cachedRunCtimes ) {
+        for (var x in cachedRunCtimes) {
             cachedRunCtimes[x] = parseInt(cachedRunCtimes[x]);
 
-            if( bust_cache ) {
+            if (bust_cache) {
                 //  this should be low enough to prevent caching
                 cachedRunCtimes[x] = -1;
             }
@@ -218,12 +223,12 @@ export class Graph{
         var cacheFileFound = parseInt(mtime) !== 2000400500;
 
         //  if the file modification time for the server side cache is newer then use it.
-        if( mtime > cacheDate ) {
+        if (mtime > cacheDate) {
             console.log('mtime is newer so need to bust cache.');
             bust_cache = true;
         }
 
-        if( cacheSum && cacheSum.summary && !bust_cache && !isContainer ) {
+        if (cacheSum && cacheSum.summary && !bust_cache && !isContainer) {
 
             newData = cacheSum.summary;
             console.log('was able to find cache.');
@@ -245,7 +250,7 @@ export class Graph{
 
                 var txt = await response.text();
 
-                for( var x=0; x < 15; x++ ) {
+                for (var x = 0; x < 15; x++) {
                     txt = txt.replace(',,', ',');
                 }
 
@@ -258,7 +263,7 @@ export class Graph{
 
                     var lor_response;
 
-                    if( cacheFileFound ) {
+                    if (cacheFileFound) {
 
                         //  Use the super fast cat.cgi to output things really fast.
                         lor_response = await getMain0(host, dataSetKey);
@@ -267,21 +272,21 @@ export class Graph{
 
                         lor_response = await lorenz(host, `${command} ${dataSetKey} '` + JSON.stringify(cachedRunCtimes) + "'");
 
-                        if( lor_response.output.command_out.indexOf('ERROR') > -1 ) {
+                        if (lor_response.output.command_out.indexOf('ERROR') > -1) {
 
-                            ST.Utility.error( lor_response.output.command_out );
+                            ST.Utility.error(lor_response.output.command_out);
                             return false;
                         }
 
-                        if( lor_response.error !== "" ) {
-                            ST.Utility.error( lor_response.error );
+                        if (lor_response.error !== "") {
+                            ST.Utility.error(lor_response.error);
                             return false;
                         }
 
                         newData = lor_response.output.command_out;
                     }
 
-                    if( newData.foundReport ) {
+                    if (newData.foundReport) {
                         console.log(newData.foundReport);
                     }
 
@@ -300,12 +305,12 @@ export class Graph{
         //console.dir( newData );
 
         //newData = ST.RunDictionaryTranslator.translate( newData );
-        ST.RunDictionaryTranslator.set( newData.dictionary );
+        ST.RunDictionaryTranslator.set(newData.dictionary);
 
         var runs0 = newData.Runs;
 
         //  this will make jupyter button disappear.
-        if( newData.dictionary ) {
+        if (newData.dictionary) {
             ST.CallSpot.is_ale3d = true;
         }
 
@@ -324,7 +329,13 @@ export class Graph{
         window.cachedData = cachedData;
 
         // cache newest version of data
-        await localforage.setItem(dataSetKey, cachedData)
+        await localforage.setItem(dataSetKey, cachedData);
+
+        return this.afterSetItemCacheRunner( dataSetKey, cachedData );
+    };
+
+
+    async afterSetItemCacheRunner( dataSetKey, cachedData ) {
 
         // add in datsetkey and datakey to globals
         _.forEach(cachedData.Runs, (run, filename) => {
@@ -332,7 +343,7 @@ export class Graph{
             run.Globals = run.Globals || {};
             run.Globals.dataSetKey = dataSetKey
             run.Globals.datapath = filename
-        })
+        });
         cachedData.RunGlobalMeta.dataSetKey = {type:'string'}
         cachedData.RunGlobalMeta.datapath = {type:'string'}
 
@@ -419,9 +430,9 @@ export class Graph{
 
         summary.layout.scatterplots = await localforage.getItem('scatterplots:' + this.dataSetKey) || []
 
-        //sq.saveSummary(summary);
         return summary
     }
+
 
     async addScatterplot(options){
         const key = "scatterplots:" + this.dataSetKey

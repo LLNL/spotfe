@@ -13,6 +13,25 @@ in that modal, have a select drop down for all the available templates
         * the name could come from the filename or within the file, the first line.
         *
 
+Steps:
+1) Make new branch
+2) Get notebook location from command line argument --custom-template="/usr/home/myNewNotebookTemplate"
+3) Use location instead of CONFIG['template_notebook']
+    * copy and paste the existing template and make some modification to it for testing.
+4) Make sure it works for both single and multi templates.
+5) Make a new ajax call that will search for the three locations and return a list of notebooks it finds.
+6) On the front end, when person clicks on jupyter return ajax call, with notebook list
+    and render a modal that contains a select drop down.
+7) On selection, open the jupyter notebook selected.
+8) Test it on container mode.
+
+/usr/global/tools/lorenz/python/optvis-env2/bin/python /usr/gapps/spot/sand/spot.py jupyter /usr/gapps/spot/datasets/lulesh_gen/100/2.cali --custom_template=/g/g0/pascal/TNH.ipynb
+/usr/global/tools/lorenz/python/optvis-env2/bin/python /usr/gapps/spot/sand/spot.py multi_jupyter /usr/gapps/spot/datasets/lulesh_gen/100 '["49.cali","41.cali","7.cali"]' --custom_template=/g/g0/pascal/zdeb/Tmu.ipynb
+
+
+- Deploy to CZ Dev.
+
+https://business.llnl.gov/records-information-management/#startreview
 
 
 DONE - BUG - Be able to save new charts and chart tile edits.

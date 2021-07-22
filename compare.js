@@ -51742,23 +51742,23 @@ function getMain0(_x, _x2) {
 }
 
 function _getMain() {
-  _getMain = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(host, dataSetKey) {
+  _getMain = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee8(host, dataSetKey) {
     var prefix, url, $;
-    return regeneratorRuntime.wrap(function _callee6$(_context6) {
+    return regeneratorRuntime.wrap(function _callee8$(_context8) {
       while (1) {
-        switch (_context6.prev = _context6.next) {
+        switch (_context8.prev = _context8.next) {
           case 0:
             prefix = host.startsWith('rz') ? 'rz' : ''; //var url = "https://rzlc.llnl.gov/lorenz_base/dev/pascal/mylc/mylc/cat.cgi";
 
             prefix = 'rz';
             url = "https://" + prefix + "lc.llnl.gov/lorenz_base/dev/pascal/spotfe/scripts/cat.cgi?" + "dataSetKey=" + dataSetKey + '/cacheToFE.json'; //var url = "https://" + prefix + "lc.llnl.gov/lorenz_base/dev/pascal/mylc/mylc/cat.cgi";
 
-            _context6.next = 5;
+            _context8.next = 5;
             return require("_bundle_loader")(require.resolve('jquery'));
 
           case 5:
-            $ = _context6.sent;
-            return _context6.abrupt("return", new Promise(function (resolve, reject) {
+            $ = _context8.sent;
+            return _context8.abrupt("return", new Promise(function (resolve, reject) {
               $.ajax({
                 url: url
               }).then(function (value) {
@@ -51770,10 +51770,10 @@ function _getMain() {
 
           case 7:
           case "end":
-            return _context6.stop();
+            return _context8.stop();
         }
       }
-    }, _callee6);
+    }, _callee8);
   }));
   return _getMain.apply(this, arguments);
 }
@@ -51783,25 +51783,25 @@ function lorenz(_x3, _x4) {
 }
 
 function _lorenz() {
-  _lorenz = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7(host, cmd) {
+  _lorenz = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee9(host, cmd) {
     var baseurl, $, formData;
-    return regeneratorRuntime.wrap(function _callee7$(_context7) {
+    return regeneratorRuntime.wrap(function _callee9$(_context9) {
       while (1) {
-        switch (_context7.prev = _context7.next) {
+        switch (_context9.prev = _context9.next) {
           case 0:
             baseurl = "https://".concat(host.startsWith('rz') ? 'rz' : '', "lc.llnl.gov/lorenz/lora/lora.cgi");
 
             if (!("development" === 'development' || useJsonp)) {
-              _context7.next = 8;
+              _context9.next = 8;
               break;
             }
 
-            _context7.next = 4;
+            _context9.next = 4;
             return require("_bundle_loader")(require.resolve('jquery'));
 
           case 4:
-            $ = _context7.sent;
-            return _context7.abrupt("return", new Promise(function (resolve, reject) {
+            $ = _context9.sent;
+            return _context9.abrupt("return", new Promise(function (resolve, reject) {
               $.ajax({
                 dataType: 'jsonp',
                 url: baseurl + '/jsonp',
@@ -51822,7 +51822,7 @@ function _lorenz() {
           case 8:
             formData = new FormData();
             formData.append('command', cmd);
-            return _context7.abrupt("return", fetch(baseurl + '/command/' + host, {
+            return _context9.abrupt("return", fetch(baseurl + '/command/' + host, {
               method: 'POST',
               body: formData
             }).then(function (response) {
@@ -51833,10 +51833,10 @@ function _lorenz() {
 
           case 11:
           case "end":
-            return _context7.stop();
+            return _context9.stop();
         }
       }
-    }, _callee7);
+    }, _callee9);
   }));
   return _lorenz.apply(this, arguments);
 }
@@ -52030,8 +52030,7 @@ var Graph = /*#__PURE__*/function () {
     key: "getData",
     value: function () {
       var _getData = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(host, command, dataSetKey) {
-        var arr, spotPy, comm, res, res0, cacheResult, mtime, cachedDataGet, bust_cache, cachedData, cachedRunCtimes, x, dataRequest, newData, cacheSum, cacheDate, cacheFileFound, response, txt, lor_response, runs0, deletedRuns, baseMetrics, metric, funcPaths, metricNames, runs, filenames, summary, visibleCharts, _i4, _Object$entries4, _Object$entries4$_i, filename, fileContents, barCharts, _i5, _Object$entries5, _Object$entries5$_i, globalName, globalValue, globType, show;
-
+        var arr, spotPy, comm, res, res0, cacheResult, mtime, cachedDataGet, bust_cache;
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
@@ -52101,6 +52100,31 @@ var Graph = /*#__PURE__*/function () {
                 cachedDataGet = _context3.t0;
 
               case 25:
+                return _context3.abrupt("return", this.afterCachedDataGet(cachedDataGet, bust_cache, mtime, dataSetKey));
+
+              case 26:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+
+      function getData(_x12, _x13, _x14) {
+        return _getData.apply(this, arguments);
+      }
+
+      return getData;
+    }()
+  }, {
+    key: "afterCachedDataGet",
+    value: function () {
+      var _afterCachedDataGet = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(cachedDataGet, bust_cache, mtime, dataSetKey) {
+        var cachedData, cachedRunCtimes, x, dataRequest, newData, cacheSum, cacheDate, cacheFileFound, response, txt, lor_response, runs0, deletedRuns;
+        return regeneratorRuntime.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
                 cachedData = cachedDataGet;
                 cachedRunCtimes = cachedData.runCtimes || {}; //  Round to prevent string from being too long.
 
@@ -52129,24 +52153,24 @@ var Graph = /*#__PURE__*/function () {
                 }
 
                 if (!(cacheSum && cacheSum.summary && !bust_cache && !isContainer)) {
-                  _context3.next = 39;
+                  _context4.next = 14;
                   break;
                 }
 
                 newData = cacheSum.summary;
                 console.log('was able to find cache.');
-                _context3.next = 78;
+                _context4.next = 53;
                 break;
 
-              case 39:
+              case 14:
                 console.log('could not find cache.');
 
                 if (!isContainer) {
-                  _context3.next = 51;
+                  _context4.next = 26;
                   break;
                 }
 
-                _context3.next = 43;
+                _context4.next = 18;
                 return fetch("/getdata", {
                   method: "post",
                   headers: {
@@ -52155,13 +52179,13 @@ var Graph = /*#__PURE__*/function () {
                   body: JSON.stringify(dataRequest)
                 });
 
-              case 43:
-                response = _context3.sent;
-                _context3.next = 46;
+              case 18:
+                response = _context4.sent;
+                _context4.next = 21;
                 return response.text();
 
-              case 46:
-                txt = _context3.sent;
+              case 21:
+                txt = _context4.sent;
 
                 for (x = 0; x < 15; x++) {
                   txt = txt.replace(',,', ',');
@@ -52169,67 +52193,67 @@ var Graph = /*#__PURE__*/function () {
 
                 newData = JSON.parse(txt); //newData = await response.json()
 
-                _context3.next = 78;
+                _context4.next = 53;
                 break;
 
-              case 51:
-                _context3.prev = 51;
+              case 26:
+                _context4.prev = 26;
 
                 if (!cacheFileFound) {
-                  _context3.next = 59;
+                  _context4.next = 34;
                   break;
                 }
 
-                _context3.next = 55;
+                _context4.next = 30;
                 return getMain0(host, dataSetKey);
 
-              case 55:
-                lor_response = _context3.sent;
+              case 30:
+                lor_response = _context4.sent;
                 newData = JSON.parse(lor_response);
-                _context3.next = 69;
+                _context4.next = 44;
                 break;
 
-              case 59:
-                _context3.next = 61;
+              case 34:
+                _context4.next = 36;
                 return lorenz(host, "".concat(command, " ").concat(dataSetKey, " '") + JSON.stringify(cachedRunCtimes) + "'");
 
-              case 61:
-                lor_response = _context3.sent;
+              case 36:
+                lor_response = _context4.sent;
 
                 if (!(lor_response.output.command_out.indexOf('ERROR') > -1)) {
-                  _context3.next = 65;
+                  _context4.next = 40;
                   break;
                 }
 
                 ST.Utility.error(lor_response.output.command_out);
-                return _context3.abrupt("return", false);
+                return _context4.abrupt("return", false);
 
-              case 65:
+              case 40:
                 if (!(lor_response.error !== "")) {
-                  _context3.next = 68;
+                  _context4.next = 43;
                   break;
                 }
 
                 ST.Utility.error(lor_response.error);
-                return _context3.abrupt("return", false);
+                return _context4.abrupt("return", false);
 
-              case 68:
+              case 43:
                 newData = lor_response.output.command_out;
 
-              case 69:
+              case 44:
                 if (newData.foundReport) {
                   console.log(newData.foundReport);
                 }
 
                 DB.saveSummary(newData);
-                _context3.next = 78;
+                _context4.next = 53;
                 break;
 
-              case 73:
-                _context3.prev = 73;
-                _context3.t1 = _context3["catch"](51);
+              case 48:
+                _context4.prev = 48;
+                _context4.t0 = _context4["catch"](26);
                 console.log('Exception: ');
-                console.dir(_context3.t1);
+                console.dir(_context4.t0);
                 newData = {
                   Runs: {},
                   RunDataMeta: {},
@@ -52237,7 +52261,7 @@ var Graph = /*#__PURE__*/function () {
                   RunSetMeta: {}
                 };
 
-              case 78:
+              case 53:
                 //  newData is too big to always print out.
                 //console.log('990newData:  ');
                 //console.dir( newData );
@@ -52262,10 +52286,36 @@ var Graph = /*#__PURE__*/function () {
                 });
                 window.cachedData = cachedData; // cache newest version of data
 
-                _context3.next = 91;
+                _context4.next = 66;
                 return _localforage.default.setItem(dataSetKey, cachedData);
 
-              case 91:
+              case 66:
+                return _context4.abrupt("return", this.afterSetItemCacheRunner(dataSetKey, cachedData));
+
+              case 67:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this, [[26, 48]]);
+      }));
+
+      function afterCachedDataGet(_x15, _x16, _x17, _x18) {
+        return _afterCachedDataGet.apply(this, arguments);
+      }
+
+      return afterCachedDataGet;
+    }()
+  }, {
+    key: "afterSetItemCacheRunner",
+    value: function () {
+      var _afterSetItemCacheRunner = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(dataSetKey, cachedData) {
+        var baseMetrics, metric, funcPaths, metricNames, runs, filenames, summary, visibleCharts, _i4, _Object$entries4, _Object$entries4$_i, filename, fileContents, barCharts, _i5, _Object$entries5, _Object$entries5$_i, globalName, globalValue, globType, show;
+
+        return regeneratorRuntime.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
                 // add in datsetkey and datakey to globals
                 _lodash.default.forEach(cachedData.Runs, function (run, filename) {
                   run.Globals = run.Globals || {};
@@ -52349,21 +52399,21 @@ var Graph = /*#__PURE__*/function () {
                     table: []
                   }
                 };
-                _context3.next = 108;
+                _context5.next = 17;
                 return _localforage.default.getItem("show:" + dataSetKey);
 
-              case 108:
-                _context3.t2 = _context3.sent;
+              case 17:
+                _context5.t0 = _context5.sent;
 
-                if (_context3.t2) {
-                  _context3.next = 111;
+                if (_context5.t0) {
+                  _context5.next = 20;
                   break;
                 }
 
-                _context3.t2 = defaultVisibleCharts;
+                _context5.t0 = defaultVisibleCharts;
 
-              case 111:
-                visibleCharts = _context3.t2;
+              case 20:
+                visibleCharts = _context5.t0;
 
                 for (_i4 = 0, _Object$entries4 = Object.entries(cachedData.Runs); _i4 < _Object$entries4.length; _i4++) {
                   _Object$entries4$_i = _slicedToArray(_Object$entries4[_i4], 2), filename = _Object$entries4$_i[0], fileContents = _Object$entries4$_i[1];
@@ -52393,75 +52443,75 @@ var Graph = /*#__PURE__*/function () {
                   });
                 }
 
-                _context3.next = 117;
+                _context5.next = 26;
                 return _localforage.default.getItem('scatterplots:' + this.dataSetKey);
 
-              case 117:
-                _context3.t3 = _context3.sent;
+              case 26:
+                _context5.t1 = _context5.sent;
 
-                if (_context3.t3) {
-                  _context3.next = 120;
+                if (_context5.t1) {
+                  _context5.next = 29;
                   break;
                 }
 
-                _context3.t3 = [];
+                _context5.t1 = [];
 
-              case 120:
-                summary.layout.scatterplots = _context3.t3;
-                return _context3.abrupt("return", summary);
+              case 29:
+                summary.layout.scatterplots = _context5.t1;
+                return _context5.abrupt("return", summary);
 
-              case 122:
+              case 31:
               case "end":
-                return _context3.stop();
+                return _context5.stop();
             }
           }
-        }, _callee3, this, [[51, 73]]);
+        }, _callee5, this);
       }));
 
-      function getData(_x12, _x13, _x14) {
-        return _getData.apply(this, arguments);
+      function afterSetItemCacheRunner(_x19, _x20) {
+        return _afterSetItemCacheRunner.apply(this, arguments);
       }
 
-      return getData;
+      return afterSetItemCacheRunner;
     }()
   }, {
     key: "addScatterplot",
     value: function () {
-      var _addScatterplot = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(options) {
+      var _addScatterplot = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(options) {
         var key, scatterplots;
-        return regeneratorRuntime.wrap(function _callee4$(_context4) {
+        return regeneratorRuntime.wrap(function _callee6$(_context6) {
           while (1) {
-            switch (_context4.prev = _context4.next) {
+            switch (_context6.prev = _context6.next) {
               case 0:
                 key = "scatterplots:" + this.dataSetKey;
-                _context4.next = 3;
+                _context6.next = 3;
                 return _localforage.default.getItem(key);
 
               case 3:
-                _context4.t0 = _context4.sent;
+                _context6.t0 = _context6.sent;
 
-                if (_context4.t0) {
-                  _context4.next = 6;
+                if (_context6.t0) {
+                  _context6.next = 6;
                   break;
                 }
 
-                _context4.t0 = [];
+                _context6.t0 = [];
 
               case 6:
-                scatterplots = _context4.t0;
+                scatterplots = _context6.t0;
                 scatterplots.push(options);
 
                 _localforage.default.setItem(key, scatterplots);
 
               case 9:
               case "end":
-                return _context4.stop();
+                return _context6.stop();
             }
           }
-        }, _callee4, this);
+        }, _callee6, this);
       }));
 
-      function addScatterplot(_x15) {
+      function addScatterplot(_x21) {
         return _addScatterplot.apply(this, arguments);
       }
 
@@ -52470,32 +52520,32 @@ var Graph = /*#__PURE__*/function () {
   }, {
     key: "setChartVisible",
     value: function () {
-      var _setChartVisible = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(globalName) {
+      var _setChartVisible = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7(globalName) {
         var visible,
             showGlobals,
-            _args5 = arguments;
-        return regeneratorRuntime.wrap(function _callee5$(_context5) {
+            _args7 = arguments;
+        return regeneratorRuntime.wrap(function _callee7$(_context7) {
           while (1) {
-            switch (_context5.prev = _context5.next) {
+            switch (_context7.prev = _context7.next) {
               case 0:
-                visible = _args5.length > 1 && _args5[1] !== undefined ? _args5[1] : true;
-                _context5.t0 = Set;
-                _context5.next = 4;
+                visible = _args7.length > 1 && _args7[1] !== undefined ? _args7[1] : true;
+                _context7.t0 = Set;
+                _context7.next = 4;
                 return _localforage.default.getItem("show:" + this.dataSetKey);
 
               case 4:
-                _context5.t1 = _context5.sent;
+                _context7.t1 = _context7.sent;
 
-                if (_context5.t1) {
-                  _context5.next = 7;
+                if (_context7.t1) {
+                  _context7.next = 7;
                   break;
                 }
 
-                _context5.t1 = defaultVisibleCharts;
+                _context7.t1 = defaultVisibleCharts;
 
               case 7:
-                _context5.t2 = _context5.t1;
-                showGlobals = new _context5.t0(_context5.t2);
+                _context7.t2 = _context7.t1;
+                showGlobals = new _context7.t0(_context7.t2);
 
                 if (visible) {
                   showGlobals.add(globalName);
@@ -52505,13 +52555,13 @@ var Graph = /*#__PURE__*/function () {
 
               case 11:
               case "end":
-                return _context5.stop();
+                return _context7.stop();
             }
           }
-        }, _callee5, this);
+        }, _callee7, this);
       }));
 
-      function setChartVisible(_x16) {
+      function setChartVisible(_x22) {
         return _setChartVisible.apply(this, arguments);
       }
 
@@ -52600,7 +52650,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60152" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50932" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
