@@ -486,9 +486,9 @@ ST.ChartCollection = function() {
 
                 var getDataCallback = function( summary ) {
 
-                        ST.Utility.check_error( summary );
-                        console.log('summary:', summary);
-                        ST.CallSpot.handle_success2(summary);
+                    ST.Utility.check_error( summary );
+                    console.log('summary:', summary);
+                    ST.CallSpot.handle_success2(summary);
                 };
 
                 ST.graph.getData(host, command, file, getDataCallback);

@@ -184,7 +184,7 @@ export class Graph{
             }
 
             console.log('Got a new cachedData...');
-            return this.afterCachedDataGet( cachedDataGet, bust_cache, mtime, dataSetKey );
+            return this.afterCachedDataGet( cachedDataGet, bust_cache, mtime, dataSetKey, host, command );
 
         } else {
 
@@ -214,14 +214,13 @@ export class Graph{
                 console.log('from DB.load:');
                 console.dir(cachedDataGet);
 
-                return window.afterCachedDataGet( cachedDataGet, bust_cache, mtime, dataSetKey, host );
+                return window.afterCachedDataGet( cachedDataGet, bust_cache, mtime, dataSetKey, host, command );
             });
         }
-
     };
 
 
-    async afterCachedDataGet( cachedDataGet, bust_cache, mtime, dataSetKey, host ) {
+    async afterCachedDataGet( cachedDataGet, bust_cache, mtime, dataSetKey, host, command ) {
 
         const cachedData = cachedDataGet;
         const cachedRunCtimes = cachedData.runCtimes || {};
@@ -360,12 +359,16 @@ export class Graph{
         //return window.afterSetItemCacheRunner( dataSetKey, cachedData );
 
         console.log('DB.save');
+        console.dir(cachedData);
+
+        var str = JSON.stringify(cachedData).length;
+        console.log(str);
+
         //var afterSetItemCacheRunner = this.afterSetItemCacheRunner;
         DB.save( dataSetKey, cachedData, function() {
 
         });
 
-        console.log('save callback');
         return window.afterSetItemCacheRunner( dataSetKey, cachedData );
     };
 
@@ -429,6 +432,8 @@ export class Graph{
 
         // set data values
         this.dataSetKey = dataSetKey
+
+        console.log('window.runs 3');
 
         //  The first run's meta object is used to determine what the drop down select options should be.
         window.runs = ST.CompositeLayoutModel.augment_first_run_to_include_composite_charts(runs);

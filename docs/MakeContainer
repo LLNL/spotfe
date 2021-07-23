@@ -1,3 +1,18 @@
+- save debug and overhaul caching work in it's own branch and continue later
+- make sure that not having the cache file still works.
+/usr/workspace/spotdev/martymcf/ale3d/spot_data/spot1.3month: 80mb object going into cache
+/usr/workspace/spotdev/martymcf/ale3d/spot_data/: 145mb object going into cache.
+
+navigator.webkitTemporaryStorage.queryUsageAndQuota (
+    function(usedBytes, grantedBytes) {
+        console.log('we are using ', usedBytes, ' of ', grantedBytes, 'bytes');
+    },
+    function(e) { console.log('Error', e);  }
+);
+
+Attempt to expunge our data and see if that fixes the issue.
+
+
 Next -
 When you click on a jupyter button or multi jupyter button do a popup modal.
 in that modal, have a select drop down for all the available templates
