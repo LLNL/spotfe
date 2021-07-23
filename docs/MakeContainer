@@ -1,4 +1,7 @@
+
 - save debug and overhaul caching work in it's own branch and continue later
+- get rid of the last few commits in the pa-fe-runtable branch
+
 - make sure that not having the cache file still works.
 /usr/workspace/spotdev/martymcf/ale3d/spot_data/spot1.3month: 80mb object going into cache
 /usr/workspace/spotdev/martymcf/ale3d/spot_data/: 145mb object going into cache.
