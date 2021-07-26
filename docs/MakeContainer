@@ -1,17 +1,4 @@
-Next -
-When you click on a jupyter button or multi jupyter button do a popup modal.
-in that modal, have a select drop down for all the available templates
-    * USE case 1: we want olga and stephanie to easily be able to add templates
-    * Use case 2: we want some other scientist to be able to add templates
-        * but these templates are only intended for him and his team, no one else
-    * at some point we can check in 3 different locations to look in a person's home directory.
--> want to be able to add new templates without editing source files.
-    * backend components goes and looks in the 3 locations (static)
-       * for example: user's home directory (~/notebooks)
-       * /usr/gapps/spot/templates (everybody already has read permissions) - stephanie could drop one in there for everyone
-       * one will be the "notebook" directory beneath the (SF) input directory.
-        * the name could come from the filename or within the file, the first line.
-        *
+Left off on step 5: (let's make a new branch for it on the FE).
 
 Steps:
 1) Make new branch
@@ -27,6 +14,24 @@ Steps:
 
 /usr/global/tools/lorenz/python/optvis-env2/bin/python /usr/gapps/spot/sand/spot.py jupyter /usr/gapps/spot/datasets/lulesh_gen/100/2.cali --custom_template=/g/g0/pascal/TNH.ipynb
 /usr/global/tools/lorenz/python/optvis-env2/bin/python /usr/gapps/spot/sand/spot.py multi_jupyter /usr/gapps/spot/datasets/lulesh_gen/100 '["49.cali","41.cali","7.cali"]' --custom_template=/g/g0/pascal/zdeb/Tmu.ipynb
+
+
+
+Next -
+When you click on a jupyter button or multi jupyter button do a popup modal.
+in that modal, have a select drop down for all the available templates
+    * USE case 1: we want olga and stephanie to easily be able to add templates
+    * Use case 2: we want some other scientist to be able to add templates
+        * but these templates are only intended for him and his team, no one else
+    * at some point we can check in 3 different locations to look in a person's home directory.
+-> want to be able to add new templates without editing source files.
+    * backend components goes and looks in the 3 locations (static)
+       * for example: user's home directory (~/notebooks)
+       * /usr/gapps/spot/templates (everybody already has read permissions) - stephanie could drop one in there for everyone
+       * one will be the "notebook" directory beneath the (SF) input directory.
+        * the name could come from the filename or within the file, the first line.
+        *
+
 
 
 - Deploy to CZ Dev.
