@@ -534,27 +534,34 @@ ST.CallSpot = function() {
             window.open('memory/index.html?runSetId=' + file_left + '&runId=' + cali_fp);
         } else {
 
-            var sf = ST.Utility.get_file();
-
-            ajax_({
-                type: "getTemplates",
-                file: sf,
-                success: show_choices_
-            });
+            get_temps_and_show_();
         }
     };
 
 
+    var get_temps_and_show_ = function() {
+
+        var sf = ST.Utility.get_file();
+
+        ajax_({
+            type: "getTemplates",
+            file: sf,
+            success: show_choices_
+        });
+    };
+
     var show_choices_ = function( returned_dat ) {
 
         var com = returned_dat.output.command_out;
+
         com = com.replace('(', '');
         com = com.replace(')', '');
         com = com.replace(/'/g, '');
 
-        var json = JSON.parse( com );
+        var json_pre = JSON.parse( com );
 
-        console.dir( json );
+        console.dir( json_pre );
+        var json = json_pre.single;
 
         var options = "<option>Select a notebook:</option>";
 
