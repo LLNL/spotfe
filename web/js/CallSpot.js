@@ -622,6 +622,7 @@ ST.CallSpot = function() {
         handle_success: handle_success_,
         get_command_begin: get_command_begin_,
         drilldown: drill_down_,
+        get_temps_and_show: get_temps_and_show_,
         bind: bind_,
         ajax: ajax_
     }
