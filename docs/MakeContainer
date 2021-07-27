@@ -10,6 +10,7 @@ Steps:
 6) On the front end, when person clicks on jupyter return ajax call, with notebook list
     and render a modal that contains a select drop down.
 7) On selection, open the jupyter notebook selected.
+7.5) same thing for multi jupyter.
 8) Test it on container mode.
 
 /usr/global/tools/lorenz/python/optvis-env2/bin/python /usr/gapps/spot/sand/spot.py jupyter /usr/gapps/spot/datasets/lulesh_gen/100/2.cali --custom_template=/g/g0/pascal/TNH.ipynb

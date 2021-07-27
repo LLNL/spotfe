@@ -511,6 +511,8 @@ ST.CallSpot = function() {
         var cali_obj = ST.cali_obj_by_key[key];
         var cali_fp = cali_obj.file_path;
 
+        ST.CallSpot.filepath = obj.filepath;
+
         var file_left = cali_obj.run_set_id;
         file_left = strip_right_(file_left);
 
@@ -532,25 +534,69 @@ ST.CallSpot = function() {
             window.open('memory/index.html?runSetId=' + file_left + '&runId=' + cali_fp);
         } else {
 
-            var host = ST.params.machine;
-            var command = get_command_begin_() + ' ' + "jupyter";
-            //get_command_( "jupyter", file, "" );
-            console.log("ST.graph.openJupyter( \"" + file + "\", \"" + host + "\", \"" + command + "\" );");
+            var sf = ST.Utility.get_file();
 
-            ST.Utility.start_spinner();
-
-            ST.graph.openJupyter( file, host, command ).then( function( url ) {
-
-                ST.Utility.stop_spinner();
-
-                console.dir(url);
-                //var command_out = data.output.command_out;
-                //var url = command_out;
-
-                window.open(url);
-                // now go to the URL that BE tells us to go to.
+            ajax_({
+                type: "getTemplates",
+                file: sf,
+                success: show_choices_
             });
         }
+    };
+
+
+    var show_choices_ = function( returned_dat ) {
+
+        var com = returned_dat.output.command_out;
+        com = com.replace('(', '');
+        com = com.replace(')', '');
+        com = com.replace(/'/g, '');
+
+        var json = JSON.parse( com );
+
+        console.dir( json );
+
+        var options = "";
+        for( var x=0; x < json.length; x++ ) {
+            options += "<option>" + json[x] + '</option>';
+        }
+
+        var body = "Select a Jupyter notebook: <br>" +
+            "<select class='jupyter_notebook'>" + options + '</select>';
+
+        ReusableView.modal({
+            body: body,
+            header: "Select"
+        });
+
+        $('.outer_modal .jupyter_notebook').change( jupyter_notebook_selected_ );
+    };
+
+
+    var jupyter_notebook_selected_ = function( el ) {
+
+        console.dir( el );
+        var selected_notebook = $(el.target).val();
+        var file = ST.CallSpot.filepath;
+
+        ST.Utility.start_spinner();
+
+        var host = ST.params.machine;
+        var command = get_command_begin_() + ' ' + "jupyter --custom_template=" + selected_notebook;
+
+        console.log("ST.graph.openJupyter( \"" + file + "\", \"" + host + "\", \"" + command + "\" );");
+
+        ST.graph.openJupyter( file, host, command ).then( function( url ) {
+
+            ST.Utility.stop_spinner();
+
+            console.dir(url);
+            //var command_out = data.output.command_out;
+            //var url = command_out;
+
+            window.open(url);
+            // now go to the URL that BE tells us to go to.
+        });
     };
 
     var ch_key_ = function( dimension ) {
