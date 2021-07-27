@@ -641,6 +641,14 @@ body .bg-color-255-255-255-0 {
     display: none;
 }
 
-.jupyter_notebook select {
-    width: 380px;
+
+.outer_modal {
+
+    .select_a_jup {
+        padding: 45px 0 5px 0;
+    }
+    
+    .jupyter_notebook {
+        width: 495px;
+    }
 }

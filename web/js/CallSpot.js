@@ -556,12 +556,13 @@ ST.CallSpot = function() {
 
         console.dir( json );
 
-        var options = "";
+        var options = "<option>Select a notebook:</option>";
+
         for( var x=0; x < json.length; x++ ) {
             options += "<option>" + json[x] + '</option>';
         }
 
-        var body = "Select a Jupyter notebook: <br>" +
+        var body = "<div class='select_a_jup'>Select a Jupyter notebook: </div>" +
             "<select class='jupyter_notebook'>" + options + '</select>';
 
         ReusableView.modal({
