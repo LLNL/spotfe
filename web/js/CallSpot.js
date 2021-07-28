@@ -539,7 +539,9 @@ ST.CallSpot = function() {
     };
 
 
-    var get_temps_and_show_ = function() {
+    var get_temps_and_show_ = function( use_mutli_templates ) {
+
+        ST.CallSpot.use_multi_templates = use_mutli_templates;
 
         var sf = ST.Utility.get_file();
 
@@ -549,6 +551,7 @@ ST.CallSpot = function() {
             success: show_choices_
         });
     };
+
 
     var show_choices_ = function( returned_dat ) {
 
@@ -561,7 +564,9 @@ ST.CallSpot = function() {
         var json_pre = JSON.parse( com );
 
         console.dir( json_pre );
-        var json = json_pre.single;
+
+        var type_of_temps_to_use = ST.CallSpot.use_multi_templates ? 'multi' : 'single';
+        var json = json_pre[ type_of_temps_to_use ];
 
         var options = "<option>Select a notebook:</option>";
 
@@ -585,12 +590,20 @@ ST.CallSpot = function() {
 
         console.dir( el );
         var selected_notebook = $(el.target).val();
+        var custom = " --custom_template=" + selected_notebook;
+
+        if( ST.CallSpot.use_multi_templates ) {
+
+            multiJupyterExe(custom);
+            return true;
+        }
+
         var file = ST.CallSpot.filepath;
 
         ST.Utility.start_spinner();
 
         var host = ST.params.machine;
-        var command = get_command_begin_() + ' ' + "jupyter --custom_template=" + selected_notebook;
+        var command = get_command_begin_() + ' ' + "jupyter" + custom;
 
         console.log("ST.graph.openJupyter( \"" + file + "\", \"" + host + "\", \"" + command + "\" );");
 
@@ -606,6 +619,65 @@ ST.CallSpot = function() {
             // now go to the URL that BE tells us to go to.
         });
     };
+
+
+    var  multiJupyterExe = function( custom ) {
+
+        ST.Utility.start_spinner();
+
+        var cali_keys = ST.CallSpot.get_keys();// ST.str_cali_keys;
+        var cali_count = cali_keys.split(' ').length;
+        var cali_keys_arr = cali_keys.split(' ');
+
+        //  cali_path is /usr/gapps/spot/datasets/lulesh_gen/500/5.cali
+        var file_path = $('.directory').val();
+        var cali_quoted = " \"" + cali_keys + "\"";
+        var total_send = file_path + cali_quoted;
+        var limit = 15000; // 1700;
+        var t_count = total_send.length;
+
+        //limit = 50000;
+        console.log("t_count = " + t_count );
+
+
+        if( cali_count <= 1 ) {
+
+            ReusableView.warning("Less than 2 rows are selected.  Please select 2 or more rows to compare.");
+            ST.Utility.stop_spinner();
+            return false;
+        }
+
+        if( t_count > limit ) {
+
+            ReusableView.warning("Too many rows selected.  Please narrow the selection.  <br>" +
+                "request chars = " + t_count + "  limit = " + limit);
+            ST.Utility.stop_spinner();
+            return false;
+        }
+
+        var host = ST.params.machine;
+        var command = ST.CallSpot.get_command_begin() + " multi_jupyter" + custom;
+
+        console.dir( cali_keys_arr );
+        console.log( "host=" + host + "    command = " + command );
+
+        ST.graph.openMultiJupyter( file_path, cali_keys_arr, host, command ).then( finish_multi_ );
+    };
+
+
+    var finish_multi_ = function(data) {
+
+        ST.Utility.stop_spinner();
+
+        ST.Utility.check_error( data );
+        var command_out = data; // data.output.command_out;
+        var url = command_out;
+        console.log('co=' + command_out);
+
+        window.open(url);
+        // now go to the URL that BE tells us to go to.
+    };
+
 
     var ch_key_ = function( dimension ) {
         return "ch_" + dimension;

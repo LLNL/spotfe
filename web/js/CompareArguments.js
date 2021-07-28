@@ -59,45 +59,7 @@ ST.CompareArguments = function() {
                 },
                 multiJupyter: function() {
 
-                    ST.Utility.start_spinner();
-
-                    var cali_keys = ST.CallSpot.get_keys();// ST.str_cali_keys;
-                    var cali_count = cali_keys.split(' ').length;
-                    var cali_keys_arr = cali_keys.split(' ');
-
-                    //  cali_path is /usr/gapps/spot/datasets/lulesh_gen/500/5.cali
-                    var file_path = $('.directory').val();
-                    var cali_quoted = " \"" + cali_keys + "\"";
-                    var total_send = file_path + cali_quoted;
-                    var limit = 15000; // 1700;
-                    var t_count = total_send.length;
-
-                    //limit = 50000;
-                    console.log("t_count = " + t_count );
-
-
-                    if( cali_count <= 1 ) {
-
-                        ReusableView.warning("Less than 2 rows are selected.  Please select 2 or more rows to compare.");
-                        ST.Utility.stop_spinner();
-                        return false;
-                    }
-
-                    if( t_count > limit ) {
-
-                        ReusableView.warning("Too many rows selected.  Please narrow the selection.  <br>" +
-                                "request chars = " + t_count + "  limit = " + limit);
-                        ST.Utility.stop_spinner();
-                        return false;
-                    }
-
-                    var host = ST.params.machine;
-                    var command = ST.CallSpot.get_command_begin() + " multi_jupyter";
-
-                    console.dir( cali_keys_arr );
-                    console.log( "host=" + host + "    command = " + command );
-
-                    ST.graph.openMultiJupyter( file_path, cali_keys_arr, host, command ).then( finish_multi_ );
+                    ST.CallSpot.get_temps_and_show( true );
                 }
             },
             created: function() {
@@ -111,19 +73,6 @@ ST.CompareArguments = function() {
         });
     };
 
-
-    var finish_multi_ = function(data) {
-
-        ST.Utility.stop_spinner();
-
-        ST.Utility.check_error( data );
-        var command_out = data; // data.output.command_out;
-        var url = command_out;
-        console.log('co=' + command_out);
-
-        window.open(url);
-        // now go to the URL that BE tells us to go to.
-    };
 
     var load_compare = function () {
 

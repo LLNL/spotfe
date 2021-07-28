@@ -1,4 +1,5 @@
 Left off on step 5: (let's make a new branch for it on the FE).
+usr/global/tools/lorenz/python/optvis-env2/bin/python /usr/gapps/spot/sand/spot.py getTemplates /usr/gapps/spot/datasets/lulesh_gen/100
 
 Steps:
 1) Make new branch
