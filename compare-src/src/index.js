@@ -265,6 +265,7 @@ export class Graph{
                         newData = JSON.parse(lor_response);
                     } else {
 
+                        console.log('cache file not found, making lorenz call.')
                         lor_response = await lorenz(host, `${command} ${dataSetKey} '` + JSON.stringify(cachedRunCtimes) + "'");
 
                         if( lor_response.output.command_out.indexOf('ERROR') > -1 ) {
@@ -279,6 +280,7 @@ export class Graph{
                         }
 
                         newData = lor_response.output.command_out;
+                        console.dir(newData);
                     }
 
                     if( newData.foundReport ) {
