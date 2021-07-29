@@ -51920,7 +51920,7 @@ var Graph = /*#__PURE__*/function () {
                 return _context.abrupt("return", server + port + urlpath + auth);
 
               case 17:
-                _context.next = 23;
+                _context.next = 24;
                 break;
 
               case 19:
@@ -51929,9 +51929,16 @@ var Graph = /*#__PURE__*/function () {
 
               case 21:
                 url = _context.sent;
+
+                if (url.error) {
+                  ReusableView.modal({
+                    body: url.error
+                  });
+                }
+
                 return _context.abrupt("return", url.output.command_out);
 
-              case 23:
+              case 24:
               case "end":
                 return _context.stop();
             }
@@ -52001,7 +52008,7 @@ var Graph = /*#__PURE__*/function () {
                 return _context2.abrupt("return", server + port + urlpath + auth);
 
               case 15:
-                _context2.next = 21;
+                _context2.next = 22;
                 break;
 
               case 17:
@@ -52010,9 +52017,16 @@ var Graph = /*#__PURE__*/function () {
 
               case 19:
                 url = _context2.sent;
+
+                if (url.error) {
+                  ReusableView.modal({
+                    body: url.error
+                  });
+                }
+
                 return _context2.abrupt("return", url.output.command_out);
 
-              case 21:
+              case 22:
               case "end":
                 return _context2.stop();
             }

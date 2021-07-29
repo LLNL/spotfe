@@ -46,8 +46,8 @@ ST.CustomTemplates = function() {
             options += "<option>" + json[x] + '</option>';
         }
 
-        var body = "<div class='select_a_jup'>When you select a template, a number of " +
-            "<a class='explanation' href='javascript: void();'>substitutions are made</a>" +
+        var body = "<div class='select_a_jup'>" +
+            "<a class='explanation' href='javascript: void();'>How templates work</a>" +
             "</div>" +
             "<select class='jupyter_notebook'>" + options + '</select>';
 
@@ -64,16 +64,23 @@ ST.CustomTemplates = function() {
     var explanation_ = function() {
 
         ReusableView.modal({
-            body: "You may put the following strings inside your template, using an editor.  " +
+            body: "When you select a template, a number of substitutions are made." +
+                "You may put the following strings inside your template, using an editor.  " +
                 "Once your template is selected from the spot2 dashboard, the following substitutions will be made." +
                 "" +
-                "<h3>Template substitutions:</h3>" +
+                "<h4>Template substitutions:</h4>" +
                 "<table class='list_of_temp'>" +
                 "<tr><td>MUTLI_CALI_FILES</td><td>the runs you select are passed to any multi template you select.</td></tr>" +
                 "<tr><td>CALI_METRIC_NAME</td><td>the first runs 'metric_name' attribute is substitued for this.</td></tr>" +
                 "<tr><td>CALI_QUERY_PATH</td><td>/usr/gapps/spot/caliper-install/bin is subtituted for this string</td></tr>" +
                 "<tr><td>DEPLOY_DIR</td><td>/usr/gapps/spot/ is subtitued for this.</td></tr>" +
-                "</table>",
+                "</table>" +
+                "<h4>Locations of templates:</h4>" +
+                "<ul>" +
+                "<li>~/notebooks</li>" +
+                "<li>Spot file input directory - this is the input directory you specified at the top of the page.</li>" +
+                "<li>/usr/gapps/spot/templates/</li>" +
+                "</ul>",
             header: "Substitutions"
         });
     };

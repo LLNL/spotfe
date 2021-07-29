@@ -80,7 +80,8 @@ export class Graph{
                     'content-type': 'application/json'
                 },
                 body:  JSON.stringify({filepath})
-            })
+            });
+
             if(response.ok) {
                 let ipynbjson = await response.json()
                 let server = ""
@@ -104,6 +105,10 @@ export class Graph{
         } else {
             // for lorenz
             const url = await lorenz(host, `${command} ${filepath}`)
+            if( url.error ) {
+                ReusableView.modal({body: url.error});
+            }
+
             return url.output.command_out
         }
     }
@@ -136,7 +141,12 @@ export class Graph{
             }
         } else {
             // for lorenz
-            const url = await lorenz(host, `${command} ${basepath} '${JSON.stringify(subpaths)}'`)
+            const url = await lorenz(host, `${command} ${basepath} '${JSON.stringify(subpaths)}'`);
+
+            if( url.error ) {
+                ReusableView.modal({body: url.error});
+            }
+
             return url.output.command_out
         }
     }

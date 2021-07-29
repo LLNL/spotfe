@@ -1,9 +1,9 @@
 DONE - Help clicker for describing substitions
     * how they work, waht gets substituted.
-- Do some testing on error cases: document what we've already tested.
+DONE    - Do some testing on error cases: document what we've already tested.
     * Directory doesn't exist
     * Directory don't have permission
-    * File within directory don't have permission
+    * File within a directory does not have permission to read (gives you an error message)
     * "notebooks" is not a directory
     * "notebooks/multi" is not a directory
 - verify that it works in the container.
@@ -67,6 +67,15 @@ DONE - async issue -> intermittent loading issue with walltime code.
 
 DEPLOY - RZ/CZ and regression test heavily.
 CFG -> implement integration for file loading.
+
+navigator.webkitTemporaryStorage.queryUsageAndQuota (
+    function(usedBytes, grantedBytes) {
+        console.log('we are using ', usedBytes, ' of ', grantedBytes, 'bytes');
+    },
+    function(e) { console.log('Error', e);  }
+);
+
+
 
 BUG - https://rzlc.llnl.gov/spot/dcvis/sankey/index.html?runSetId=/usr/workspace/spotdev/martymcf/ale3d/spot_data/&runId=spot1.3month/sedov_a3d8.8d.8p-1&title=sedov_a3d8.8d.8p
     * it can't find the data in localforage, is the key incorrect?
