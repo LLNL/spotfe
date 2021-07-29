@@ -9,12 +9,23 @@ ST.CustomTemplates = function() {
         ST.CallSpot.ajax({
             type: "getTemplates",
             file: sf,
-            success: show_choices_
+            success: show_choices_,
+            error: function( el ) {
+                console.dir(el);
+            }
         });
     };
 
 
     var show_choices_ = function( returned_dat ) {
+
+        if( returned_dat.error !== "" ) {
+            ReusableView.modal({
+                header: "error",
+                body: returned_dat.error
+            });
+            return 0;
+        }
 
         var com = returned_dat.output.command_out;
 
