@@ -52120,7 +52120,7 @@ var Graph = /*#__PURE__*/function () {
     key: "afterCachedDataGet",
     value: function () {
       var _afterCachedDataGet = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(cachedDataGet, bust_cache, mtime, dataSetKey) {
-        var cachedData, cachedRunCtimes, x, dataRequest, newData, cacheSum, cacheDate, cacheFileFound, response, txt, lor_response, runs0, deletedRuns;
+        var cachedData, cachedRunCtimes, x, dataRequest, newData, cacheSum, cacheDate, cacheFileFound, response, txt, lor_response, runs0, deletedRuns, runs, z, am_dir, dg_obj;
         return regeneratorRuntime.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
@@ -52284,15 +52284,36 @@ var Graph = /*#__PURE__*/function () {
                 deletedRuns.forEach(function (deletedRun) {
                   return delete cachedData.Runs[deletedRun];
                 });
-                window.cachedData = cachedData; // cache newest version of data
+                window.cachedData = cachedData;
+                runs = cachedData.Runs;
+                z = 0;
 
-                _context4.next = 66;
+                for (am_dir in runs) {
+                  dg_obj = runs[am_dir];
+                  z++;
+
+                  if (z > 25) {
+                    delete runs[am_dir];
+                  }
+                }
+
+                console.log('reduced:');
+                console.dir(cachedData); // cache newest version of data
+
+                _context4.next = 71;
                 return _localforage.default.setItem(dataSetKey, cachedData);
 
-              case 66:
+              case 71:
+                _context4.next = 73;
+                return _localforage.default.getItem(dataSetKey).then(function (data) {
+                  console.log('debug dataSetKey cachedData ---> ');
+                  console.dir(data);
+                });
+
+              case 73:
                 return _context4.abrupt("return", this.afterSetItemCacheRunner(dataSetKey, cachedData));
 
-              case 67:
+              case 74:
               case "end":
                 return _context4.stop();
             }
@@ -52650,7 +52671,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51801" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50809" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

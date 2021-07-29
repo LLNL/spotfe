@@ -328,8 +328,31 @@ export class Graph{
 
         window.cachedData = cachedData;
 
+        var runs = cachedData.Runs;
+
+        var z = 0;
+
+        for(var am_dir in runs) {
+
+            var dg_obj = runs[am_dir];
+            z++;
+
+            if( z > 25) {
+                delete runs[am_dir];
+            }
+        }
+
+        console.log('reduced:');
+        console.dir( cachedData );
+
         // cache newest version of data
         await localforage.setItem(dataSetKey, cachedData);
+
+        await localforage.getItem(dataSetKey).then( function( data ) {
+
+            console.log('debug dataSetKey cachedData ---> ');
+            console.dir( data);
+        });
 
         return this.afterSetItemCacheRunner( dataSetKey, cachedData );
     };

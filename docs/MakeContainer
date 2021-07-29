@@ -1,3 +1,13 @@
+- Help clicker for describing substitions
+    * how they work, waht gets substituted.
+- Do some testing on error cases: document what we've already tested.
+- verify that it works in the container.
+
+
+- fix rerender() issue in other branch and redeploy on dev.
+- continue working on CFG.
+
+
 Left off on step 5: (let's make a new branch for it on the FE).
 usr/global/tools/lorenz/python/optvis-env2/bin/python /usr/gapps/spot/sand/spot.py getTemplates /usr/gapps/spot/datasets/lulesh_gen/100
 

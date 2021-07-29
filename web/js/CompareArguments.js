@@ -59,7 +59,7 @@ ST.CompareArguments = function() {
                 },
                 multiJupyter: function() {
 
-                    ST.CallSpot.get_temps_and_show( true );
+                    ST.CustomTemplates.get_temps_and_show( true );
                 }
             },
             created: function() {
