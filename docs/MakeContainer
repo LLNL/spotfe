@@ -1,10 +1,16 @@
-- Help clicker for describing substitions
+DONE - Help clicker for describing substitions
     * how they work, waht gets substituted.
 - Do some testing on error cases: document what we've already tested.
+    * Directory doesn't exist
+    * Directory don't have permission
+    * File within directory don't have permission
+    * "notebooks" is not a directory
+    * "notebooks/multi" is not a directory
 - verify that it works in the container.
 
 
 - fix rerender() issue in other branch and redeploy on dev.
+-> retest and also redeploy to CZ.
 - continue working on CFG.
 
 

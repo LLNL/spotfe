@@ -645,7 +645,21 @@ body .bg-color-255-255-255-0 {
 .outer_modal {
 
     .select_a_jup {
-        padding: 45px 0 5px 0;
+        padding: 10px;
+        margin: 0 0 25px 0;
+        border: 1px solid #dddddd;
+        background-color: #f2f2f2;
+    }
+
+    .list_of_temp {
+        border-collapse: separate;
+        border-spacing: 0px;
+
+        td {
+            padding: 7px;
+            background-color: #eeeeee;
+            border-top: 1px solid #cccccc;
+        }
     }
 
     .jupyter_notebook {
