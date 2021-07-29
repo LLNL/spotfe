@@ -191,11 +191,11 @@ export class Graph{
             }
         }
 
-        return this.afterCachedDataGet( cachedDataGet, bust_cache, mtime, dataSetKey, host );
+        return this.afterCachedDataGet( cachedDataGet, bust_cache, mtime, dataSetKey, host, command );
     };
 
 
-    async afterCachedDataGet( cachedDataGet, bust_cache, mtime, dataSetKey, host ) {
+    async afterCachedDataGet( cachedDataGet, bust_cache, mtime, dataSetKey, host, command ) {
 
         const cachedData = cachedDataGet;
         const cachedRunCtimes = cachedData.runCtimes || {};

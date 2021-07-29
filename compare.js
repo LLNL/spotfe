@@ -52100,7 +52100,7 @@ var Graph = /*#__PURE__*/function () {
                 cachedDataGet = _context3.t0;
 
               case 25:
-                return _context3.abrupt("return", this.afterCachedDataGet(cachedDataGet, bust_cache, mtime, dataSetKey, host));
+                return _context3.abrupt("return", this.afterCachedDataGet(cachedDataGet, bust_cache, mtime, dataSetKey, host, command));
 
               case 26:
               case "end":
@@ -52119,7 +52119,7 @@ var Graph = /*#__PURE__*/function () {
   }, {
     key: "afterCachedDataGet",
     value: function () {
-      var _afterCachedDataGet = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(cachedDataGet, bust_cache, mtime, dataSetKey, host) {
+      var _afterCachedDataGet = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(cachedDataGet, bust_cache, mtime, dataSetKey, host, command) {
         var cachedData, cachedRunCtimes, x, dataRequest, newData, cacheSum, cacheDate, cacheFileFound, response, txt, lor_response, runs0, deletedRuns;
         return regeneratorRuntime.wrap(function _callee4$(_context4) {
           while (1) {
@@ -52300,7 +52300,7 @@ var Graph = /*#__PURE__*/function () {
         }, _callee4, this, [[26, 48]]);
       }));
 
-      function afterCachedDataGet(_x15, _x16, _x17, _x18, _x19) {
+      function afterCachedDataGet(_x15, _x16, _x17, _x18, _x19, _x20) {
         return _afterCachedDataGet.apply(this, arguments);
       }
 
@@ -52468,7 +52468,7 @@ var Graph = /*#__PURE__*/function () {
         }, _callee5, this);
       }));
 
-      function afterSetItemCacheRunner(_x20, _x21) {
+      function afterSetItemCacheRunner(_x21, _x22) {
         return _afterSetItemCacheRunner.apply(this, arguments);
       }
 
@@ -52511,7 +52511,7 @@ var Graph = /*#__PURE__*/function () {
         }, _callee6, this);
       }));
 
-      function addScatterplot(_x22) {
+      function addScatterplot(_x23) {
         return _addScatterplot.apply(this, arguments);
       }
 
@@ -52561,7 +52561,7 @@ var Graph = /*#__PURE__*/function () {
         }, _callee7, this);
       }));
 
-      function setChartVisible(_x23) {
+      function setChartVisible(_x24) {
         return _setChartVisible.apply(this, arguments);
       }
 
