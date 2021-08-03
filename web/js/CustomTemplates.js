@@ -11,7 +11,7 @@ ST.CustomTemplates = function() {
 
         if( isContainer ) {
 
-            ST.Utility.container_ajax( url, commandFunction, sf, show_choices_);
+            ST.Utility.container_ajax( url, commandFunction, sf, show_choices_container_);
         } else {
 
             ST.CallSpot.ajax({
@@ -23,6 +23,17 @@ ST.CustomTemplates = function() {
                 }
             });
         }
+    };
+
+
+    var show_choices_container_ = function( com ) {
+
+        com = com.replace(/'/g, '');
+        com = com.replace('(', '');
+        com = com.replace(')', '');
+
+        var json = JSON.parse( com );
+        show_choices_render_( json );
     };
 
 
@@ -45,7 +56,17 @@ ST.CustomTemplates = function() {
         var json_pre = JSON.parse(com);
         show_choices_render_( json_pre );
     };
-    
+
+
+    var no_templates_explanation_ = '<br><br>' +
+        'Found 0 templates.  Please add templates.' +
+        '<h4>Locations of templates:</h4>' +
+        '<ul>' +
+        '<li>~/notebooks</li>' +
+        '<li>Spot file input directory - this is the input directory you specified at the top of the page.</li>' +
+        '<li>/usr/gapps/spot/templates/</li>' +
+        '</ul>';
+
 
     var show_choices_render_ = function( json_pre ) {
 
@@ -60,10 +81,12 @@ ST.CustomTemplates = function() {
             options += "<option>" + json[x] + '</option>';
         }
 
+        var explain = json.length === 0 ? no_templates_explanation_ : '';
+
         var body = "<div class='select_a_jup'>" +
             "<a class='explanation' href='javascript: void();'>How templates work</a>" +
             "</div>" +
-            "<select class='jupyter_notebook'>" + options + '</select>';
+            "<select class='jupyter_notebook'>" + options + '</select>' + explain;
 
         ReusableView.modal({
             body: body,
