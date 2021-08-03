@@ -191,6 +191,9 @@ export class Graph{
                 RunSetMeta: {}
             }
 
+            console.log('cachedDataGet:');
+            console.dir(cachedDataGet);
+
             var keys0 = Object.keys(cachedDataGet.Runs);
 
             if( keys0 && keys0.length === 0 ) {
@@ -288,7 +291,6 @@ export class Graph{
                         }
 
                         newData = lor_response.output.command_out;
-                        //console.dir(newData);
                     }
 
                     if( newData.foundReport ) {
@@ -305,9 +307,13 @@ export class Graph{
             }
         }
 
+        if( typeof newData === 'string') {
+            newData = JSON.parse(newData);
+        }
+
         //  newData is too big to always print out.
-        //console.log('990newData:  ');
-        //console.dir( newData );
+        console.log('990newData:  ');
+        console.dir( newData.Runs );
 
         //newData = ST.RunDictionaryTranslator.translate( newData );
         ST.RunDictionaryTranslator.set( newData.dictionary );
@@ -319,6 +325,9 @@ export class Graph{
             ST.CallSpot.is_ale3d = true;
         }
 
+
+        console.log('runs0:');
+        console.dir(runs0);
 
         // Merge new data with cached
         cachedData.Runs = Object.assign(cachedData.Runs, runs0);
