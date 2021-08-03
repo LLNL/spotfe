@@ -190,6 +190,14 @@ export class Graph{
                 RunGlobalMeta: {},
                 RunSetMeta: {}
             }
+
+            var keys0 = Object.keys(cachedData.Runs);
+
+            if( keys0 && keys0.length === 0 ) {
+
+                console.log('localforage came up with no runs, so bust cache.');
+                bust_cache = 1;
+            }
         }
 
         const cachedData = cachedDataGet;
@@ -280,7 +288,7 @@ export class Graph{
                         }
 
                         newData = lor_response.output.command_out;
-                        console.dir(newData);
+                        //console.dir(newData);
                     }
 
                     if( newData.foundReport ) {

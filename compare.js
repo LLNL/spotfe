@@ -52030,7 +52030,7 @@ var Graph = /*#__PURE__*/function () {
     key: "getData",
     value: function () {
       var _getData = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(host, command, dataSetKey) {
-        var arr, spotPy, comm, res, res0, cacheResult, mtime, cachedDataGet, bust_cache, cachedData, cachedRunCtimes, x, dataRequest, newData, cacheSum, cacheDate, cacheFileFound, response, txt, lor_response, runs0, deletedRuns, baseMetrics, metric, funcPaths, metricNames, runs, filenames, summary, visibleCharts, _i4, _Object$entries4, _Object$entries4$_i, filename, fileContents, barCharts, _i5, _Object$entries5, _Object$entries5$_i, globalName, globalValue, globType, show;
+        var arr, spotPy, comm, res, res0, cacheResult, mtime, cachedDataGet, bust_cache, keys0, cachedData, cachedRunCtimes, x, dataRequest, newData, cacheSum, cacheDate, cacheFileFound, response, txt, lor_response, runs0, deletedRuns, baseMetrics, metric, funcPaths, metricNames, runs, filenames, summary, visibleCharts, _i4, _Object$entries4, _Object$entries4$_i, filename, fileContents, barCharts, _i5, _Object$entries5, _Object$entries5$_i, globalName, globalValue, globType, show;
 
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
@@ -52075,7 +52075,7 @@ var Graph = /*#__PURE__*/function () {
                   RunSetMeta: {}
                 };
                 console.log('Got a new cachedData...');
-                _context3.next = 25;
+                _context3.next = 27;
                 break;
 
               case 19:
@@ -52099,8 +52099,14 @@ var Graph = /*#__PURE__*/function () {
 
               case 24:
                 cachedDataGet = _context3.t0;
+                keys0 = Object.keys(cachedData.Runs);
 
-              case 25:
+                if (keys0 && keys0.length === 0) {
+                  console.log('localforage came up with no runs, so bust cache.');
+                  bust_cache = 1;
+                }
+
+              case 27:
                 cachedData = cachedDataGet;
                 cachedRunCtimes = cachedData.runCtimes || {}; //  Round to prevent string from being too long.
 
@@ -52129,24 +52135,24 @@ var Graph = /*#__PURE__*/function () {
                 }
 
                 if (!(cacheSum && cacheSum.summary && !bust_cache && !isContainer)) {
-                  _context3.next = 39;
+                  _context3.next = 41;
                   break;
                 }
 
                 newData = cacheSum.summary;
                 console.log('was able to find cache.');
-                _context3.next = 80;
+                _context3.next = 81;
                 break;
 
-              case 39:
+              case 41:
                 console.log('could not find cache.');
 
                 if (!isContainer) {
-                  _context3.next = 51;
+                  _context3.next = 53;
                   break;
                 }
 
-                _context3.next = 43;
+                _context3.next = 45;
                 return fetch("/getdata", {
                   method: "post",
                   headers: {
@@ -52155,12 +52161,12 @@ var Graph = /*#__PURE__*/function () {
                   body: JSON.stringify(dataRequest)
                 });
 
-              case 43:
+              case 45:
                 response = _context3.sent;
-                _context3.next = 46;
+                _context3.next = 48;
                 return response.text();
 
-              case 46:
+              case 48:
                 txt = _context3.sent;
 
                 for (x = 0; x < 15; x++) {
@@ -52169,67 +52175,66 @@ var Graph = /*#__PURE__*/function () {
 
                 newData = JSON.parse(txt); //newData = await response.json()
 
-                _context3.next = 80;
+                _context3.next = 81;
                 break;
 
-              case 51:
-                _context3.prev = 51;
+              case 53:
+                _context3.prev = 53;
 
                 if (!cacheFileFound) {
-                  _context3.next = 59;
+                  _context3.next = 61;
                   break;
                 }
 
-                _context3.next = 55;
+                _context3.next = 57;
                 return getMain0(host, dataSetKey);
 
-              case 55:
+              case 57:
                 lor_response = _context3.sent;
                 newData = JSON.parse(lor_response);
-                _context3.next = 71;
+                _context3.next = 72;
                 break;
 
-              case 59:
+              case 61:
                 console.log('cache file not found, making lorenz call.');
-                _context3.next = 62;
+                _context3.next = 64;
                 return lorenz(host, "".concat(command, " ").concat(dataSetKey, " '") + JSON.stringify(cachedRunCtimes) + "'");
 
-              case 62:
+              case 64:
                 lor_response = _context3.sent;
 
                 if (!(lor_response.output.command_out.indexOf('ERROR') > -1)) {
-                  _context3.next = 66;
+                  _context3.next = 68;
                   break;
                 }
 
                 ST.Utility.error(lor_response.output.command_out);
                 return _context3.abrupt("return", false);
 
-              case 66:
+              case 68:
                 if (!(lor_response.error !== "")) {
-                  _context3.next = 69;
+                  _context3.next = 71;
                   break;
                 }
 
                 ST.Utility.error(lor_response.error);
                 return _context3.abrupt("return", false);
 
-              case 69:
-                newData = lor_response.output.command_out;
-                console.dir(newData);
-
               case 71:
+                newData = lor_response.output.command_out; //console.dir(newData);
+
+              case 72:
                 if (newData.foundReport) {
                   console.log(newData.foundReport);
                 }
 
                 DB.saveSummary(newData);
-                _context3.next = 80;
+                _context3.next = 81;
                 break;
 
-              case 75:
-                _context3.prev = 75;
-                _context3.t1 = _context3["catch"](51);
+              case 76:
+                _context3.prev = 76;
+                _context3.t1 = _context3["catch"](53);
                 console.log('Exception: ');
                 console.dir(_context3.t1);
                 newData = {
@@ -52239,7 +52244,7 @@ var Graph = /*#__PURE__*/function () {
                   RunSetMeta: {}
                 };
 
-              case 80:
+              case 81:
                 //  newData is too big to always print out.
                 //console.log('990newData:  ');
                 //console.dir( newData );
@@ -52264,10 +52269,10 @@ var Graph = /*#__PURE__*/function () {
                 });
                 window.cachedData = cachedData; // cache newest version of data
 
-                _context3.next = 93;
+                _context3.next = 94;
                 return _localforage.default.setItem(dataSetKey, cachedData);
 
-              case 93:
+              case 94:
                 // add in datsetkey and datakey to globals
                 _lodash.default.forEach(cachedData.Runs, function (run, filename) {
                   run.Globals = run.Globals || {};
@@ -52351,20 +52356,20 @@ var Graph = /*#__PURE__*/function () {
                     table: []
                   }
                 };
-                _context3.next = 110;
+                _context3.next = 111;
                 return _localforage.default.getItem("show:" + dataSetKey);
 
-              case 110:
+              case 111:
                 _context3.t2 = _context3.sent;
 
                 if (_context3.t2) {
-                  _context3.next = 113;
+                  _context3.next = 114;
                   break;
                 }
 
                 _context3.t2 = defaultVisibleCharts;
 
-              case 113:
+              case 114:
                 visibleCharts = _context3.t2;
 
                 for (_i4 = 0, _Object$entries4 = Object.entries(cachedData.Runs); _i4 < _Object$entries4.length; _i4++) {
@@ -52395,29 +52400,29 @@ var Graph = /*#__PURE__*/function () {
                   });
                 }
 
-                _context3.next = 119;
+                _context3.next = 120;
                 return _localforage.default.getItem('scatterplots:' + this.dataSetKey);
 
-              case 119:
+              case 120:
                 _context3.t3 = _context3.sent;
 
                 if (_context3.t3) {
-                  _context3.next = 122;
+                  _context3.next = 123;
                   break;
                 }
 
                 _context3.t3 = [];
 
-              case 122:
+              case 123:
                 summary.layout.scatterplots = _context3.t3;
                 return _context3.abrupt("return", summary);
 
-              case 124:
+              case 125:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, this, [[51, 75]]);
+        }, _callee3, this, [[53, 76]]);
       }));
 
       function getData(_x12, _x13, _x14) {
@@ -52602,7 +52607,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50809" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55254" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
