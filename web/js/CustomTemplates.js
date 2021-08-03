@@ -28,7 +28,7 @@ ST.CustomTemplates = function() {
 
     var show_choices_ = function( returned_dat ) {
 
-        if( returned_dat.error !== "" ) {
+        if (returned_dat.error !== "") {
             ReusableView.modal({
                 header: "error",
                 body: returned_dat.error
@@ -42,7 +42,12 @@ ST.CustomTemplates = function() {
         com = com.replace(')', '');
         com = com.replace(/'/g, '');
 
-        var json_pre = JSON.parse( com );
+        var json_pre = JSON.parse(com);
+        show_choices_render_( json_pre );
+    };
+    
+
+    var show_choices_render_ = function( json_pre ) {
 
         console.dir( json_pre );
 
