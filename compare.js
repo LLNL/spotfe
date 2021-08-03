@@ -52099,7 +52099,7 @@ var Graph = /*#__PURE__*/function () {
 
               case 24:
                 cachedDataGet = _context3.t0;
-                keys0 = Object.keys(cachedData.Runs);
+                keys0 = Object.keys(cachedDataGet.Runs);
 
                 if (keys0 && keys0.length === 0) {
                   console.log('localforage came up with no runs, so bust cache.');

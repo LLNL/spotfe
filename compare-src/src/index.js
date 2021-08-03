@@ -191,7 +191,7 @@ export class Graph{
                 RunSetMeta: {}
             }
 
-            var keys0 = Object.keys(cachedData.Runs);
+            var keys0 = Object.keys(cachedDataGet.Runs);
 
             if( keys0 && keys0.length === 0 ) {
 
