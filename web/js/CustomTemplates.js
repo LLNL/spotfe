@@ -5,15 +5,24 @@ ST.CustomTemplates = function() {
         ST.CallSpot.use_multi_templates = use_mutli_templates;
 
         var sf = ST.Utility.get_file();
+        const isContainer = window.ENV.machine == 'container';
+        var commandFunction = 'getTemplates';
+        var url = '/getTemplates';
 
-        ST.CallSpot.ajax({
-            type: "getTemplates",
-            file: sf,
-            success: show_choices_,
-            error: function( el ) {
-                console.dir(el);
-            }
-        });
+        if( isContainer ) {
+
+            ST.Utility.container_ajax( url, commandFunction, sf, show_choices_);
+        } else {
+
+            ST.CallSpot.ajax({
+                type: commandFunction,
+                file: sf,
+                success: show_choices_,
+                error: function( el ) {
+                    console.dir(el);
+                }
+            });
+        }
     };
 
 

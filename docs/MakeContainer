@@ -153,33 +153,8 @@ Then continue on CFG.
 /usr/gapps/spot/sand/spot.py getData /usr/gapps/spot/datasets/demos/mpi '{}' --writeToFile=1
 /usr/gapps/spot/sand/spot.py getData /usr/workspace/spotdev/martymcf/ale3d/spot_data/spot2/  '{}' --writeToFile=1
 
-DONE - CGI work to make output so much faster
-    * https://lc.llnl.gov/lorenz_base/dev/pascal/mylc/mylc/cat.cgi
-    * this can send 400mb in 3.6 seconds using just cgi without a wrapper.
-    * DONE - confirmed it in the browser
-    * confirmed it in our spot app with a stub file.
-DONE - work on walltime first.
-    *WalltimeApp.vue line 338 - this ajax request fails, i don't know if this is the cause of the issue
-    * the next two functions that happen after are immaterial to the rendering
-    * i think those are just for aliases.
-    * WalltimeApp.vue line 20 - maybe investigate here to see why it's not rendering.
-ISSUE - can we get rid of setTimeout?
 
 
-1) Deploy dev/ latest spot.py abd test cat.cgi there.
-TEST- container.
-    * FIXED - 2 bugs
-
-
-FIXED - Still the walltime in container is broken.
-1) FIXED Container:   * getData call does not work.
-    index.js Line 246 -> there's a JSON parse error from ,,,,,
-2) BUG - walltime page for marty's data.
-        metricNames: function metricNames() {
-      return Object.keys(this.data[this.funcPaths[0]]).filter(function (name) {
-        return !name.startsWith('any#any#');
-      });
-    },
     * the issue is "Data" is not in the object sotred i the localforage.  let's check what goes into the localforage.
 https://rzlc.llnl.gov/spot/dcvis/sankey/index.html?runSetId=/usr/workspace/spotdev/martymcf/ale3d/spot_data/spot1.3month&runId=sedov_a3d8.8d.8p-2&title=sedov_a3d8.8d.8p
 
@@ -221,19 +196,6 @@ docker exec -it spot2_da5 /bin/bash
 /opt/conda/bin/python3 /usr/gapps/spot/backend.py --config  /usr/gapps/spot/backend_config.yaml getData /data/lul_sept_28_timeseries '{}'
 
 
-
-- MAY need more WOrk:  Walltime support for JSON files (spot1)
-    * FIXED - filename it was asking for.
-    * Data cache comes from localforage.  It comes from a file called walltime.js
-    * now some kind of format error.
-    * https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/sankey/index.html?runSetId=/g/g0/pascal/zdeb/ale3d_regr/am-gen&runId=am1-gen.1d.1p-1&title=am1-gen.1d.1p
-    * '/usr/global/tools/lorenz/python/optvis-env2/bin/python
-    /usr/gapps/spot/sand/spot.py memory /g/g0/pascal/zdeb/ale3d_regr/am-gen/am1-gen.1d.1p.json' on
-    rzgenie: == CALIPER: Invalid CSV entry: {\"generator/Physics variable
-    * might be able to use just use the data already loaded in the client
-    * the error we're getting: is this function call necessary?  what data does it provide?
-    * "[Lorenz::REST::Command::runApprovedCommand] Failed to run command:
-    '/usr/global/tools/lorenz/python/optvis-env2/bin/python /usr/gapps/spot/sand/spot.py memory /g/g0/pascal/zdeb/ale3d_regr/usndhs/usndhs.1d.1p.json' on rzgenie: == CALIPER: Invalid CSV entry: {\"problem/cycle/all physics/lagrange/lagrange zonal/material model/material model evaluate/material: water/ko strength\": [[1, 0.105], [2, 0.105], [3, 0.108], [4, 0.105], [5, 0.105], [6, 0.105], [7, 0.106], [8, 0.104], [9, 0.106], [10, 0.1
 
 - permissions for Venv: umask 0002
 - Don't use personal venv, use default at the top of spot.py
