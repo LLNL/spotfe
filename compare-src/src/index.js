@@ -201,11 +201,11 @@ export class Graph{
             }
         }
 
-        return this.afterCachedDataGet( cachedDataGet, bust_cache, mtime, dataSetKey );
+        return this.afterCachedDataGet( cachedDataGet, bust_cache, mtime, dataSetKey, host, command );
     };
 
 
-    async afterCachedDataGet( cachedDataGet, bust_cache, mtime, dataSetKey ) {
+    async afterCachedDataGet( cachedDataGet, bust_cache, mtime, dataSetKey, host, command ) {
 
         const cachedData = cachedDataGet;
         const cachedRunCtimes = cachedData.runCtimes || {};
@@ -308,6 +308,11 @@ export class Graph{
                     newData = {Runs: {}, RunDataMeta: {}, RunGlobalMeta: {}, RunSetMeta: {}}
                 }
             }
+        }
+
+
+        if( typeof newData === 'string') {
+            newData = JSON.parse(newData);
         }
 
         //  newData is too big to always print out.

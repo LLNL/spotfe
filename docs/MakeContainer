@@ -1,3 +1,12 @@
+"Select which jupyter notebook you want to open:"
+? box at the top right.
+
+anoter paragraph with:
+"you can make custom jupy notbeobks."
+You make the template with jupyter.
+the resulting file can be saved in one of these locations.
+
+
 DONE - Help clicker for describing substitions
     * how they work, waht gets substituted.
 DONE    - Do some testing on error cases: document what we've already tested.
@@ -91,27 +100,6 @@ https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/?ch_launchdate=1&ch_user=1&s
     fileData.Data is empty.
 
 /usr/workspace/spotdev/martymcf/ale3d/spot_data/
-
-it happens even with just 1 file:
-https://rzlc.llnl.gov/spot/dcvis/?ch_launchdate=1&ch_user=1&sf=/g/g0/pascal/zdeb/twoDbug
-Callspot.js 346:
-RangeError: Maximum call stack size exceeded
-    at https://rzlc.llnl.gov/spot/dcvis/web/js/crossfilter.js:2970:17
-    at quicksort (https://rzlc.llnl.gov/spot/dcvis/web/js/crossfilter.js:3007:9)
-    at sort (https://rzlc.llnl.gov/spot/dcvis/web/js/crossfilter.js:2845:21)
-    at quicksort (https://rzlc.llnl.gov/spot/dcvis/web/js/crossfilter.js:3116:12)
-    at sort (https://rzlc.llnl.gov/spot/dcvis/web/js/crossfilter.js:2845:21)
-    at quicksort (https://rzlc.llnl.gov/spot/dcvis/web/js/crossfilter.js:3116:12)
-    at sort (https://rzlc.llnl.gov/spot/dcvis/web/js/crossfilter.js:2845:21)
-    at quicksort (https://rzlc.llnl.gov/spot/dcvis/web/js/crossfilter.js:3116:1
-It even happens when the data is almost entirely empty with nothing but
-one string "cluster" in the object!
-
-Let's try updating the crossfilter library!!  get the latest version
-    * will need to retest heavily.
-
-problem is between
-6763 and 6766
 
 Firefox seems unaffected -> 10K is fine there.
                     /*$.Deferred(function( deferred ){
