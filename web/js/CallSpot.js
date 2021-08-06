@@ -521,6 +521,20 @@ ST.CallSpot = function() {
 
         } else if( subject === "durations" ) {
 
+            const runSetId = ST.Utility.get_param("sf");
+
+            var oneRun = window.cachedData.Runs[cali_fp].Data;
+            var walldata = JSON.stringify( oneRun );
+            var walldata_key = runSetId + "_" + cali_fp;
+
+            console.log('walldata_key=' + walldata_key);
+            console.log('walldata(0,500)=' + walldata.substr(0,500) );
+
+            //  we use up a lot of storage when we setItem, so need to clear it periodically.
+            localStorage.clear();
+
+            localStorage.setItem( walldata_key, walldata );
+
             var url = 'sankey/index.html?runSetId=' + file_left +
                 "&runId=" + cali_fp +
                 "&title=" + cali_obj.title;

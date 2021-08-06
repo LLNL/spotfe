@@ -41192,6 +41192,11 @@ ST.replaceYAxisWithValue = function (fd) {
 
 _localforage.default.getItem(runSetId).then(function (runSet) {
   var fileData = runSet.Runs[runId];
+  var walldata_key = runSetId + '_' + runId;
+  var walldata = localStorage.getItem(walldata_key);
+  fileData.Data = JSON.parse(walldata);
+  console.log('walldata_key on wp:' + walldata_key);
+  console.log('walldata.substr(0,500): ' + walldata.substr(0, 500));
 
   for (var _i = 0, _Object$entries = Object.entries(fileData.Globals); _i < _Object$entries.length; _i++) {
     var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
@@ -41254,7 +41259,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53102" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54585" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
