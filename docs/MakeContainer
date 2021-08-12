@@ -94,6 +94,7 @@ https://stackoverflow.com/questions/35119862/maximum-call-stack-size-exceeded-cr
 Run this from the command line:
 need to figure out why "Data" is not being populated.
 /usr/gapps/spot/sand/spot.py getData /usr/workspace/spotdev/martymcf/ale3d/spot_data/spot1.3month '{}' --writeToFile=1 | more
+
 /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/ale3d_regr/am-gen '{}' --writeToFile=1 | more
 
 After that's fixed, redeploy and notify matt and marty.

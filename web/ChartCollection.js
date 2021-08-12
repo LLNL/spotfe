@@ -64,7 +64,7 @@ ST.ChartCollection = function() {
             the_data = the_data.slice(0, tcount);
         }
 
-        console.dir( the_data );
+        //console.dir( the_data );
 
         //amend_charts_( layout_spec );
 
@@ -276,7 +276,7 @@ ST.ChartCollection = function() {
         render_more_link_( the_data.length );
 
         ST.all_data = ST.dateDimension.top(80000);
-        console.dir(ST.all_data);
+        //console.dir(ST.all_data);
         //console.dir(runTable.top(80000));
 
         //simply call `.renderAll()` to render all charts on the page

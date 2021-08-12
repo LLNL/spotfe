@@ -109,13 +109,15 @@ export default {
                 this.replaceMetricNames("yAxis", "yAxis");
             }
 
-            console.dir( this.data )
+            //console.dir( this.data )
             console.dir( this.metricNames )
             console.dir( this.selectedNode )
             var peeled = this.peeledData(this.data, this.metricNames[0])
 
-            console.dir( "peeled7777" )
-            console.dir( peeled )
+            console.dir( "peeled7777 AAJJ99" );
+
+            
+            //console.dir( peeled )
 
             let topdown = peeled[this.selectedNode].topdown
 

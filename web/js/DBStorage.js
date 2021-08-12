@@ -26,11 +26,16 @@ DB.init = function( callback ) {
 
 DB.save = function( id, obj ) {
 
+    var comp_obj = LZString.compress( obj );
+
     DB.tx = DB.db.transaction(DB.cacheStore, "readwrite");
 
+    console.log('save obj length: ' + comp_obj.length);
+
     var store = DB.tx.objectStore(DB.cacheStore);
-    store.put({id: id, value: obj});
+    store.put({id: id, value: comp_obj});
 };
+
 
 DB.load = function( id, callback ) {
 
@@ -46,7 +51,17 @@ DB.load = function( id, callback ) {
         if( callback ) {
 
             var passIn = this.result ? this.result.value : false;
-            callback( passIn );
+
+
+            var uncompressed;
+
+            try {
+                uncompressed = LZString.decompress(passIn);
+            } catch( e ) {
+                uncompressed = passIn;
+            }
+
+            callback( uncompressed );
         }
     };
 };
