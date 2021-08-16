@@ -529,6 +529,7 @@ ST.CallSpot = function() {
 
             console.log('walldata_key=' + walldata_key);
             console.log('walldata(0,500)=' + walldata.substr(0,500) );
+            console.log('walldata.length=' + walldata.length );
 
             //  we use up a lot of storage when we setItem, so need to clear it periodically.
             localStorage.clear();

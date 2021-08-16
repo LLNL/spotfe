@@ -29755,14 +29755,15 @@ var _default = {
         }
       } else {
         this.replaceMetricNames("yAxis", "yAxis");
-      }
+      } //console.dir( this.data )
 
-      console.dir(this.data);
+
       console.dir(this.metricNames);
       console.dir(this.selectedNode);
       var peeled = this.peeledData(this.data, this.metricNames[0]);
-      console.dir("peeled7777");
-      console.dir(peeled);
+      console.dir("peeled7777 AAJJ99");
+      var iix = 234; //console.dir( peeled )
+
       var topdown = peeled[this.selectedNode].topdown;
 
       if (topdown) {
@@ -41259,7 +41260,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49540" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57346" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

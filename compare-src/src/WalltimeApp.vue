@@ -116,7 +116,7 @@ export default {
 
             console.dir( "peeled7777 AAJJ99" );
 
-            
+            var iix = 234;
             //console.dir( peeled )
 
             let topdown = peeled[this.selectedNode].topdown
