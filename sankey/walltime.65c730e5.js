@@ -41198,6 +41198,7 @@ _localforage.default.getItem(runSetId).then(function (runSet) {
   fileData.Data = JSON.parse(walldata);
   console.log('walldata_key on wp:' + walldata_key);
   console.log('walldata.substr(0,500): ' + walldata.substr(0, 500));
+  console.dir(fileData);
 
   for (var _i = 0, _Object$entries = Object.entries(fileData.Globals); _i < _Object$entries.length; _i++) {
     var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
@@ -41260,7 +41261,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57346" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51316" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -1,7 +1,22 @@
+Issues in firefox:
+- it keeps saying "wait"
+- Out of memory error.
+
+- FIXED -> localStorage running out of space
+
+Next step:
+-> Error handling:
+    * detect condition of where all values returned 0 from server
+    * most likely due to insufficient file permissions, let user know.
+
+
+
 1.3month test
 
 Regression test.
 redeploy to RZ and CZ
+
+/usr/gapps/spot/sand/spot.py getData /usr/gapps/spot/datasets/lulesh_gen/100 '{}' --writeToFile=1
 
 Next -
 When you click on a jupyter button or multi jupyter button do a popup modal.

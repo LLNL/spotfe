@@ -168,8 +168,6 @@ export class Graph{
         var cachedDataGet;
         var bust_cache = ST.Utility.get_param("cache") === "0";
 
-
-
         if( bust_cache ) {
 
             cachedDataGet = {
@@ -312,7 +310,7 @@ export class Graph{
         }
 
         //  newData is too big to always print out.
-        console.log('990newData:  ');
+        console.log('990AA newData:  ');
         console.dir( newData.Runs );
 
         //newData = ST.RunDictionaryTranslator.translate( newData );
@@ -326,8 +324,8 @@ export class Graph{
         }
 
 
-        console.log('runs0:');
-        console.dir(runs0);
+        console.log('runs before cacheDa83:');
+        //console.dir(runs0);
 
         // Merge new data with cached
         cachedData.Runs = Object.assign(cachedData.Runs, runs0);
@@ -341,9 +339,6 @@ export class Graph{
         deletedRuns.forEach(deletedRun => delete cachedData.Runs[deletedRun])
 
         window.cachedData = cachedData;
-
-        // cache newest version of data
-        await localforage.setItem(dataSetKey, cachedData)
 
         // add in datsetkey and datakey to globals
         _.forEach(cachedData.Runs, (run, filename) => {
@@ -399,7 +394,31 @@ export class Graph{
         }) 
 
         // set data values
-        this.dataSetKey = dataSetKey
+        this.dataSetKey = dataSetKey;
+
+
+        console.log('make Data empty: setItem with blanks.');
+
+        var lr0 = $.extend({}, cachedData );
+        //var lr = lr0.Runs;
+        var arr = {};
+
+        for( var run_id_x in cachedData.Runs ) {
+
+            var a_run = $.extend({}, cachedData.Runs[run_id_x]);
+            a_run.Data = {"blank":1};
+
+            arr[ run_id_x ] = a_run;
+        }
+
+        lr0.Runs = arr;
+        //  this is just the Meta data.  the actual "Data" is stored in cachedData
+        //  and will be sent to the durations page from CallSpot.js
+//        await localforage.setItem(dataSetKey, {'Runs': arr});
+        await localforage.setItem(dataSetKey, lr0);
+
+        console.log('A after setItem.');
+
 
         //  The first run's meta object is used to determine what the drop down select options should be.
         window.runs = ST.CompositeLayoutModel.augment_first_run_to_include_composite_charts(runs);

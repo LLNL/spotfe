@@ -27,6 +27,7 @@ localforage.getItem(runSetId)
 
         console.log('walldata_key on wp:' + walldata_key);
         console.log( 'walldata.substr(0,500): ' + walldata.substr(0,500) );
+        console.dir( fileData );
 
         for (const [key, val] of Object.entries(fileData.Globals)){
             const type_ = runSet.RunGlobalMeta[key] ? runSet.RunGlobalMeta[key].type : "string"

@@ -51784,7 +51784,8 @@ function lorenz(_x3, _x4) {
 
 function _lorenz() {
   _lorenz = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7(host, cmd) {
-    var baseurl, $, formData;
+    var baseurl, _$, formData;
+
     return regeneratorRuntime.wrap(function _callee7$(_context7) {
       while (1) {
         switch (_context7.prev = _context7.next) {
@@ -51800,9 +51801,9 @@ function _lorenz() {
             return require("_bundle_loader")(require.resolve('jquery'));
 
           case 4:
-            $ = _context7.sent;
+            _$ = _context7.sent;
             return _context7.abrupt("return", new Promise(function (resolve, reject) {
-              $.ajax({
+              _$.ajax({
                 dataType: 'jsonp',
                 url: baseurl + '/jsonp',
                 //url: baseurl + '/command',
@@ -52030,7 +52031,7 @@ var Graph = /*#__PURE__*/function () {
     key: "getData",
     value: function () {
       var _getData = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(host, command, dataSetKey) {
-        var arr, spotPy, comm, res, res0, cacheResult, mtime, cachedDataGet, bust_cache, keys0, cachedData, cachedRunCtimes, x, dataRequest, newData, cacheSum, cacheDate, cacheFileFound, response, txt, lor_response, runs0, deletedRuns, baseMetrics, metric, funcPaths, metricNames, runs, filenames, summary, visibleCharts, _i4, _Object$entries4, _Object$entries4$_i, filename, fileContents, barCharts, _i5, _Object$entries5, _Object$entries5$_i, globalName, globalValue, globType, show;
+        var arr, spotPy, comm, res, res0, cacheResult, mtime, cachedDataGet, bust_cache, keys0, cachedData, cachedRunCtimes, x, dataRequest, newData, cacheSum, cacheDate, cacheFileFound, response, txt, lor_response, runs0, deletedRuns, baseMetrics, metric, funcPaths, metricNames, runs, filenames, lr0, run_id_x, a_run, summary, visibleCharts, _i4, _Object$entries4, _Object$entries4$_i, filename, fileContents, barCharts, _i5, _Object$entries5, _Object$entries5$_i, globalName, globalValue, globType, show;
 
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
@@ -52252,7 +52253,7 @@ var Graph = /*#__PURE__*/function () {
                 } //  newData is too big to always print out.
 
 
-                console.log('990newData:  ');
+                console.log('990AA newData:  ');
                 console.dir(newData.Runs); //newData = ST.RunDictionaryTranslator.translate( newData );
 
                 ST.RunDictionaryTranslator.set(newData.dictionary);
@@ -52262,8 +52263,8 @@ var Graph = /*#__PURE__*/function () {
                   ST.CallSpot.is_ale3d = true;
                 }
 
-                console.log('runs0:');
-                console.dir(runs0); // Merge new data with cached
+                console.log('runs before cacheDa83:'); //console.dir(runs0);
+                // Merge new data with cached
 
                 cachedData.Runs = Object.assign(cachedData.Runs, runs0);
                 cachedData.RunDataMeta = Object.assign(cachedData.RunDataMeta, newData.RunDataMeta);
@@ -52275,13 +52276,8 @@ var Graph = /*#__PURE__*/function () {
                 deletedRuns.forEach(function (deletedRun) {
                   return delete cachedData.Runs[deletedRun];
                 });
-                window.cachedData = cachedData; // cache newest version of data
+                window.cachedData = cachedData; // add in datsetkey and datakey to globals
 
-                _context3.next = 101;
-                return _localforage.default.setItem(dataSetKey, cachedData);
-
-              case 101:
-                // add in datsetkey and datakey to globals
                 _lodash.default.forEach(cachedData.Runs, function (run, filename) {
                   run.Globals = run.Globals || {};
                   run.Globals.dataSetKey = dataSetKey;
@@ -52352,7 +52348,29 @@ var Graph = /*#__PURE__*/function () {
                   run.data['--root path--'] = baseMetrics;
                 }); // set data values
 
-                this.dataSetKey = dataSetKey; //  The first run's meta object is used to determine what the drop down select options should be.
+                this.dataSetKey = dataSetKey;
+                console.log('make Data empty: setItem with blanks.');
+                lr0 = $.extend({}, cachedData); //var lr = lr0.Runs;
+
+                arr = {};
+
+                for (run_id_x in cachedData.Runs) {
+                  a_run = $.extend({}, cachedData.Runs[run_id_x]);
+                  a_run.Data = {
+                    "blank": 1
+                  };
+                  arr[run_id_x] = a_run;
+                }
+
+                lr0.Runs = arr; //  this is just the Meta data.  the actual "Data" is stored in cachedData
+                //  and will be sent to the durations page from CallSpot.js
+                //        await localforage.setItem(dataSetKey, {'Runs': arr});
+
+                _context3.next = 117;
+                return _localforage.default.setItem(dataSetKey, lr0);
+
+              case 117:
+                console.log('A after setItem.'); //  The first run's meta object is used to determine what the drop down select options should be.
 
                 window.runs = ST.CompositeLayoutModel.augment_first_run_to_include_composite_charts(runs);
                 this.compare(filenames); // 4. return summary
@@ -52364,20 +52382,20 @@ var Graph = /*#__PURE__*/function () {
                     table: []
                   }
                 };
-                _context3.next = 118;
+                _context3.next = 123;
                 return _localforage.default.getItem("show:" + dataSetKey);
 
-              case 118:
+              case 123:
                 _context3.t2 = _context3.sent;
 
                 if (_context3.t2) {
-                  _context3.next = 121;
+                  _context3.next = 126;
                   break;
                 }
 
                 _context3.t2 = defaultVisibleCharts;
 
-              case 121:
+              case 126:
                 visibleCharts = _context3.t2;
 
                 for (_i4 = 0, _Object$entries4 = Object.entries(cachedData.Runs); _i4 < _Object$entries4.length; _i4++) {
@@ -52408,24 +52426,24 @@ var Graph = /*#__PURE__*/function () {
                   });
                 }
 
-                _context3.next = 127;
+                _context3.next = 132;
                 return _localforage.default.getItem('scatterplots:' + this.dataSetKey);
 
-              case 127:
+              case 132:
                 _context3.t3 = _context3.sent;
 
                 if (_context3.t3) {
-                  _context3.next = 130;
+                  _context3.next = 135;
                   break;
                 }
 
                 _context3.t3 = [];
 
-              case 130:
+              case 135:
                 summary.layout.scatterplots = _context3.t3;
                 return _context3.abrupt("return", summary);
 
-              case 132:
+              case 137:
               case "end":
                 return _context3.stop();
             }
@@ -52615,7 +52633,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49527" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51314" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
