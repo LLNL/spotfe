@@ -51743,20 +51743,21 @@ function getMain0(_x, _x2) {
 
 function _getMain() {
   _getMain = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(host, dataSetKey) {
-    var prefix, url, $;
+    var baseUrl, prefix, url, $;
     return regeneratorRuntime.wrap(function _callee6$(_context6) {
       while (1) {
         switch (_context6.prev = _context6.next) {
           case 0:
+            baseUrl = location.protocol + '//' + location.host + location.pathname;
             prefix = host.startsWith('rz') ? 'rz' : ''; //var url = "https://rzlc.llnl.gov/lorenz_base/dev/pascal/mylc/mylc/cat.cgi";
 
             prefix = 'rz';
-            url = "https://" + prefix + "lc.llnl.gov/lorenz_base/dev/pascal/spotfe/scripts/cat.cgi?" + "dataSetKey=" + dataSetKey + '/cacheToFE.json'; //var url = "https://" + prefix + "lc.llnl.gov/lorenz_base/dev/pascal/mylc/mylc/cat.cgi";
+            url = baseUrl + "/scripts/cat.cgi?" + "dataSetKey=" + dataSetKey + '/cacheToFE.json'; //var url = "https://" + prefix + "lc.llnl.gov/lorenz_base/dev/pascal/mylc/mylc/cat.cgi";
 
-            _context6.next = 5;
+            _context6.next = 6;
             return require("_bundle_loader")(require.resolve('jquery'));
 
-          case 5:
+          case 6:
             $ = _context6.sent;
             return _context6.abrupt("return", new Promise(function (resolve, reject) {
               $.ajax({
@@ -51768,7 +51769,7 @@ function _getMain() {
               });
             }));
 
-          case 7:
+          case 8:
           case "end":
             return _context6.stop();
         }

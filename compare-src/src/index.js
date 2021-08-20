@@ -10,10 +10,13 @@ const useJsonp = window.ENV?.use_JSONP_for_lorenz_calls
 
 async function getMain0( host, dataSetKey ) {
 
+    var baseUrl = location.protocol + '//' + location.host + location.pathname;
+
     var prefix = host.startsWith('rz') ? 'rz': '';
     //var url = "https://rzlc.llnl.gov/lorenz_base/dev/pascal/mylc/mylc/cat.cgi";
     prefix = 'rz';
-    var url = "https://" + prefix + "lc.llnl.gov/lorenz_base/dev/pascal/spotfe/scripts/cat.cgi?" +
+
+    var url = baseUrl + "/scripts/cat.cgi?" +
         "dataSetKey=" + dataSetKey + '/cacheToFE.json';
     //var url = "https://" + prefix + "lc.llnl.gov/lorenz_base/dev/pascal/mylc/mylc/cat.cgi";
 
