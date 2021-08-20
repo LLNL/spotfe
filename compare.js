@@ -51754,10 +51754,11 @@ function _getMain() {
             prefix = 'rz';
             url = baseUrl + "/scripts/cat.cgi?" + "dataSetKey=" + dataSetKey + '/cacheToFE.json'; //var url = "https://" + prefix + "lc.llnl.gov/lorenz_base/dev/pascal/mylc/mylc/cat.cgi";
 
-            _context6.next = 6;
+            console.log('asking for: ' + url);
+            _context6.next = 7;
             return require("_bundle_loader")(require.resolve('jquery'));
 
-          case 6:
+          case 7:
             $ = _context6.sent;
             return _context6.abrupt("return", new Promise(function (resolve, reject) {
               $.ajax({
@@ -51769,7 +51770,7 @@ function _getMain() {
               });
             }));
 
-          case 8:
+          case 9:
           case "end":
             return _context6.stop();
         }

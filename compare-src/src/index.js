@@ -20,6 +20,8 @@ async function getMain0( host, dataSetKey ) {
         "dataSetKey=" + dataSetKey + '/cacheToFE.json';
     //var url = "https://" + prefix + "lc.llnl.gov/lorenz_base/dev/pascal/mylc/mylc/cat.cgi";
 
+    console.log('asking for: ' + url);
+
     const $ = await import('jquery')
 
     return new Promise((resolve, reject) => {
