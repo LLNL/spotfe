@@ -1,3 +1,16 @@
+- Junk Cali file catch error
+DONE - Catch dictionary.json inside or cacheToFE.json, don't read it as another json file
+- directory where you don't have read permission for a file or for the dictionary.json file.
+DONE - Catch error that occurs inside execption handler.
+DONE - pass ERROR string to allow front end to display error from exception handler.
+
+- Date Limiter: deal with big Data ->
+    * Works: does improve crossfilter responsiveness
+    * does not make BE call faster
+    * does not seem to make compare rendering faster.
+
+- Redeploy to RZ and get feedback.
+
 Issues in firefox:
 - it keeps saying "wait"
 - Out of memory error.
@@ -8,8 +21,24 @@ Next step:
 -> Error handling:
     * detect condition of where all values returned 0 from server
     * most likely due to insufficient file permissions, let user know.
+    * Exception to error.
+
+Handle:
+    * Junk Cali file.
+    * Or a read error.
+
+Next:
+    * Repo clean up.
 
 
+
+DOMException:
+code: 0
+columnNumber: 0
+data: null
+filename: "https://rzlc.llnl.gov/spot/dcvis/web/js/DBStorage.js"
+lineNumber: 32​
+message: "IDBObjectStore.put: The serialized value is too large (size=286471320 bytes, max=267386880 bytes)."
 
 1.3month test
 

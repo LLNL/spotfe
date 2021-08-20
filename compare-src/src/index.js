@@ -277,6 +277,12 @@ export class Graph{
                         console.log('cache file not found, making lorenz call.')
                         lor_response = await lorenz(host, `${command} ${dataSetKey} '` + JSON.stringify(cachedRunCtimes) + "'");
 
+                        console.dir( lor_response );
+
+                        if( lor_response.status === "ERROR" ) {
+                            ST.Utility.error( lor_response.error );
+                        }
+
                         if( lor_response.output.command_out.indexOf('ERROR') > -1 ) {
 
                             ST.Utility.error( lor_response.output.command_out );
