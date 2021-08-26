@@ -384,10 +384,15 @@ export default Vue.extend({
 
                     runList.forEach(run => {
                         _.forEach(run.meta, (val, key) => {
-                            aggregatedRun.meta[key].push(val)
+                            if( aggregatedRun.meta[key] ) {
+                                aggregatedRun.meta[key].push(val);
+                            }
                         })
                         _.forEach(run.data, (val, key) => {
-                            aggregatedRun.data[key].push(val.value)
+
+                            if( aggregatedRun.data[key] ) {
+                                aggregatedRun.data[key].push(val.value);
+                            }
 
                             // console.log('list', groupByName, key, val.value, aggregatedRun.data[key])
                         })

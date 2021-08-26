@@ -1,4 +1,23 @@
-- Junk Cali file catch error
+1) got it working on padebug account
+2) still not working for marti -> I think it's because he's on "new private window"
+3) did better error handling to catch junk JSON files and junk CALI files
+4) Date limiter research
+5) Levels optimization from 5 layers to 3 layers.
+
+
+/usr/gapps/spot/sand/spot.py getData /usr/workspace/spotdev/martymcf/ale3d/spot_data/ '{}' --maxLevels=2 --writeToFile=1
+run alias sp
+
+- make option for limiting number of layers on the command line:
+    * this limits the sie of the file.
+    * use this on the martyMCF data.
+
+
+
+DONE - Catch junk JSON file
+- Catch Firefox out of memory
+
+DONE - Junk Cali file catch error
 DONE - Catch dictionary.json inside or cacheToFE.json, don't read it as another json file
 - directory where you don't have read permission for a file or for the dictionary.json file.
 DONE - Catch error that occurs inside execption handler.
@@ -8,6 +27,9 @@ DONE - pass ERROR string to allow front end to display error from exception hand
     * Works: does improve crossfilter responsiveness
     * does not make BE call faster
     * does not seem to make compare rendering faster.
+    (because, the dates are only filtered on the FE, but not for the compare data,
+    it was meant to operate on the crossfilter stuff)
+
 
 - Redeploy to RZ and get feedback.
 
@@ -137,7 +159,7 @@ https://stackoverflow.com/questions/35119862/maximum-call-stack-size-exceeded-cr
 
 Run this from the command line:
 need to figure out why "Data" is not being populated.
-/usr/gapps/spot/sand/spot.py getData /usr/workspace/spotdev/martymcf/ale3d/spot_data/spot1.3month '{}' --writeToFile=1 | more
+/usr/gapps/spot/sand/spot.py getData /usr/workspace/spotdev/martymcf/ale3d/spot_data/ '{}' --writeToFile=1
 
 /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/ale3d_regr/am-gen '{}' --writeToFile=1 | more
 

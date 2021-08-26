@@ -40241,10 +40241,15 @@ exports.default = vue_1.default.extend({
 
           runList.forEach(function (run) {
             lodash_1.default.forEach(run.meta, function (val, key) {
-              aggregatedRun.meta[key].push(val);
+              if (aggregatedRun.meta[key]) {
+                aggregatedRun.meta[key].push(val);
+              }
             });
             lodash_1.default.forEach(run.data, function (val, key) {
-              aggregatedRun.data[key].push(val.value); // console.log('list', groupByName, key, val.value, aggregatedRun.data[key])
+              if (aggregatedRun.data[key]) {
+                aggregatedRun.data[key].push(val.value);
+              } // console.log('list', groupByName, key, val.value, aggregatedRun.data[key])
+
             });
           }); // if the meta values are all the same that value is preserved else just mark it '--' to denote assorted values
 
@@ -52640,7 +52645,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51314" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60288" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
