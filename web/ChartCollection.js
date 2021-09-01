@@ -449,6 +449,14 @@ ST.ChartCollection = function() {
 
         if( defined_(yaxis)) {
             ST.graph.setYAxis(yaxis);
+        } else {
+
+            //  We can not set this string in the App.vue because of compile error.
+            ST.graph.setYAxis("avg#inclusive#sum#time.duration");
+
+            setTimeout( function() {
+                //ST.graph.setYAxis("avg#inclusive#sum#time.duration");
+            }, 4000);
         }
 
         if( defined_(aggregate)) {

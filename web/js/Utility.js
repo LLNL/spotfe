@@ -177,6 +177,7 @@ ST.Utility = function() {
         ST.params.get_rundata_url = ST.params.get_rundata_url || get_default_url_();
     };
 
+
     var get_default_machine_ = function() {
 
         //"cslic", "oslic", "rzgenie"

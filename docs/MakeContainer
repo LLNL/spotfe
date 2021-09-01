@@ -1,9 +1,27 @@
-1) got it working on padebug account
-2) still not working for marti -> I think it's because he's on "new private window"
-3) did better error handling to catch junk JSON files and junk CALI files
-4) Date limiter research
-5) Levels optimization from 5 layers to 3 layers.
+- launchdate.
+- manual rename change yAxis to a spot metric
+    * retest and regression test.
+- work on CFG bugs first.
+- non-readable directory -> catch this error
+    * it's easy to type the directory name.  right now, if the directory doesn't exist, show a standard error.
+    * probably just a try/catch and print statement.
 
+
+- Repo Clean up.
+
+
+- make sure that dictionary.json can still be auto-made, even if you dont have a cacheToFE.js file.
+
+DONE - Retest the container.
+
+1) DONE - got it working on padebug account
+2) still not working for marti -> I think it's because he's on "new private window"
+3) DONE - did better error handling to catch junk JSON files and junk CALI files
+4) DONE - Date limiter research
+5) DONE (waiting for feedback) - Levels optimization from 5 layers to 3 layers.
+
+
+As soon as optvis bug is done, roll out.
 
 /usr/gapps/spot/sand/spot.py getData /usr/workspace/spotdev/martymcf/ale3d/spot_data/ '{}' --maxLevels=2 --writeToFile=1
 run alias sp
@@ -229,7 +247,7 @@ docker rm spot2_debug6
 
 cd ~/install/spot2_container/
 docker build -t spot2 .
-docker run -v /Users/aschwanden1/datasets/:/data -p 8080:8080/tcp -p 8888:8888/tcp --name spot2_A0 spot2
+docker run -v /Users/aschwanden1/datasets/:/data -p 8080:8080/tcp -p 8888:8888/tcp --name spot2_Z1 spot2
 
 http://localhost:8080/?sf=lul_sept_28_timeseries
 
