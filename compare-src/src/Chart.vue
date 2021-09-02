@@ -213,7 +213,10 @@ export default Vue.extend({
             return this.runs.map(run => {
 
                 var encoded_title = run.meta[this.selectedXAxisMetric]
-                var layman_title = ST.RunDictionaryTranslator.lookupStr( encoded_title );
+                var is_date = !isNaN(encoded_title);
+
+                var looked_title = ST.RunDictionaryTranslator.lookupStr( encoded_title );
+                var layman_title = is_date ? encoded_title : looked_title;
 
                 const title = layman_title
                 if (['launchdate', 'launchday'].includes(this.selectedXAxisMetric)){ 
