@@ -28439,9 +28439,13 @@ var _default = {
   props: ['selectedNode', 'selectedTopdownNode', 'showTopdown', 'topdownData', 'runData', 'funcPath', 'handleClick'],
   computed: {
     title: function title() {
-      var encoded_title = "".concat(this.funcPath.split('/').slice(-1)[0], " (").concat(this.runData[this.funcPath].exclusive, ")");
-      var layman_title = ST.RunDictionaryTranslator.lookupStr(encoded_title);
-      return layman_title;
+      if (!window.ST) {
+        return "notitle";
+      } else {
+        var encoded_title = "".concat(this.funcPath.split('/').slice(-1)[0], " (").concat(this.runData[this.funcPath].exclusive, ")");
+        var layman_title = ST.RunDictionaryTranslator.lookupStr(encoded_title);
+        return layman_title;
+      }
     },
     iAmSelected: function iAmSelected() {
       return this.selectedNode == this.funcPath;
@@ -29658,7 +29662,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //import * as ST from '../../web/js/Utility.js'
 function lorenz(_x, _x2) {
   return _lorenz.apply(this, arguments);
-}
+} //import {get_param} from './functions.js'
+
 
 function _lorenz() {
   _lorenz = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(host, cmd) {
@@ -29718,6 +29723,29 @@ function _lorenz() {
   return _lorenz.apply(this, arguments);
 }
 
+function getUrlVars_() {
+  var vars = {};
+  var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+    vars[key] = value;
+  });
+  return vars;
+}
+
+;
+
+var get_param_ = function get_param_(param, decode_uri) {
+  var vars = getUrlVars_();
+  var ret = vars[param];
+
+  if (decode_uri) {
+    ret = decodeURIComponent(ret);
+  }
+
+  return ret;
+};
+
+window.wall_title = get_param_('title');
+console.log("wall_title=" + window.wall_title);
 var _default = {
   props: ['filename', 'data', 'meta'],
   data: function data() {
@@ -29726,6 +29754,7 @@ var _default = {
       selectedTopdownNode: 'fe',
       showTopdown: false,
       replacing_metrics: {},
+      wall_title: "",
       ensure_update: false,
       metricObjs: {}
     };
@@ -29748,6 +29777,9 @@ var _default = {
     topdownData: function topdownData() {
       this.filterMetricNames(); //this.replaceMetricNames( "avg#inclusive#sum#time.duration", "alias2344" )
 
+      console.log('replacing_metrics:');
+      console.dir(this.replacing_metrics);
+
       if (this.replacing_metrics) {
         for (var met in this.replacing_metrics) {
           var alias = this.replacing_metrics[met];
@@ -29755,9 +29787,19 @@ var _default = {
         }
       } else {
         this.replaceMetricNames("yAxis", "yAxis");
+      }
+
+      var is_cali = window.wall_title.indexOf('.cali') > -1;
+
+      if (!is_cali) {
+        var yy = "avg#inclusive#sum#time.duration";
+        this.replaceMetricNames(yy, yy);
+        delete this.metricObjs['yAxis'];
       } //console.dir( this.data )
 
 
+      console.log('metricobjs 88: ');
+      console.log(this.metricObjs);
       console.dir(this.metricNames);
       console.dir(this.selectedNode);
       var peeled = this.peeledData(this.data, this.metricNames[0]);
@@ -29995,6 +30037,8 @@ var _default = {
     },
     //  Just reuse our existing get memory call for now, so we can retrieve aliases.
     getAliases: function getAliases() {
+      console.dir(ST.CallSpot);
+      console.dir(ST.Utility);
       console.log('A getAliases');
       var runSetId = ST.Utility.get_param('runSetId'); //  cali files use this:
 
@@ -41197,7 +41241,7 @@ _localforage.default.getItem(runSetId).then(function (runSet) {
   var walldata = localStorage.getItem(walldata_key);
   fileData.Data = JSON.parse(walldata);
   console.log('walldata_key on wp:' + walldata_key);
-  console.log('walldata.substr(0,500): ' + walldata.substr(0, 500));
+  console.log('walldata.substr(0,5000): ' + walldata.substr(0, 5000));
   console.dir(fileData);
 
   for (var _i = 0, _Object$entries = Object.entries(fileData.Globals); _i < _Object$entries.length; _i++) {
@@ -41261,7 +41305,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63758" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56046" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

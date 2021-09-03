@@ -1,4 +1,5 @@
-- launchdate.
+- walltime not working because i'm guessing because i changed yAxis to sum# (spot2 metrics)
+FIXED - launchdate.
 - manual rename change yAxis to a spot metric
     * retest and regression test.
 - work on CFG bugs first.

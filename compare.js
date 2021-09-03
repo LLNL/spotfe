@@ -39550,9 +39550,13 @@ var _default = {
   props: ['selectedNode', 'selectedTopdownNode', 'showTopdown', 'topdownData', 'runData', 'funcPath', 'handleClick'],
   computed: {
     title: function title() {
-      var encoded_title = "".concat(this.funcPath.split('/').slice(-1)[0], " (").concat(this.runData[this.funcPath].exclusive, ")");
-      var layman_title = ST.RunDictionaryTranslator.lookupStr(encoded_title);
-      return layman_title;
+      if (!window.ST) {
+        return "notitle";
+      } else {
+        var encoded_title = "".concat(this.funcPath.split('/').slice(-1)[0], " (").concat(this.runData[this.funcPath].exclusive, ")");
+        var layman_title = ST.RunDictionaryTranslator.lookupStr(encoded_title);
+        return layman_title;
+      }
     },
     iAmSelected: function iAmSelected() {
       return this.selectedNode == this.funcPath;

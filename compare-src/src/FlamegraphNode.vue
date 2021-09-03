@@ -30,6 +30,7 @@
 
 <script>
 import {parentPath, childrenPaths, colorHash} from './functions.js'
+
 export default {
     props: [ 
         'selectedNode',
@@ -42,11 +43,17 @@ export default {
     ],
 
     computed:{
-        title(){ 
-            var encoded_title = `${this.funcPath.split('/').slice(-1)[0]} (${this.runData[this.funcPath].exclusive})`
-            var layman_title = ST.RunDictionaryTranslator.lookupStr( encoded_title );
+        title(){
 
-            return layman_title;
+            if( !window.ST ) {
+                return "notitle";
+            } else {
+
+                var encoded_title = `${this.funcPath.split('/').slice(-1)[0]} (${this.runData[this.funcPath].exclusive})`
+                var layman_title = ST.RunDictionaryTranslator.lookupStr(encoded_title);
+
+                return layman_title;
+            }
         },
         iAmSelected(){return this.selectedNode == this.funcPath},
         allFuncPaths(){return Object.keys(this.runData)},

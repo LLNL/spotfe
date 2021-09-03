@@ -22,3 +22,4 @@ export function colorHash(text, alpha){
     const b = parseInt(hash.slice(16, 18), 16)
     return `rgb(${r}, ${g}, ${b}, 0.6)`
 }
+

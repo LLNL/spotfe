@@ -73,6 +73,29 @@ async function lorenz(host, cmd){
     }
 }
 
+//import {get_param} from './functions.js'
+        function getUrlVars_() {
+            var vars = {};
+            var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+                vars[key] = value;
+            });
+            return vars;
+        };
+
+        var get_param_ = function( param, decode_uri ) {
+
+            var vars = getUrlVars_();
+            var ret = vars[param];
+
+            if( decode_uri ) {
+                ret = decodeURIComponent( ret );
+            }
+
+            return ret;
+        };
+
+        window.wall_title = get_param_('title');
+console.log("wall_title=" + window.wall_title);
 
 export default {
 
@@ -82,6 +105,7 @@ export default {
         selectedTopdownNode: 'fe',
         showTopdown: false,
         replacing_metrics: {},
+        wall_title: "",
         ensure_update: false,
         metricObjs: {}
     }},
@@ -97,6 +121,9 @@ export default {
             this.filterMetricNames()
             //this.replaceMetricNames( "avg#inclusive#sum#time.duration", "alias2344" )
 
+            console.log('replacing_metrics:');
+            console.dir( this.replacing_metrics );
+
             if( this.replacing_metrics ) {
 
                 for( var met in this.replacing_metrics ) {
@@ -109,7 +136,18 @@ export default {
                 this.replaceMetricNames("yAxis", "yAxis");
             }
 
+            var is_cali = window.wall_title.indexOf('.cali') > -1;
+
+            if( !is_cali ) {
+
+                var yy = "avg#inclusive#sum#time.duration";
+                this.replaceMetricNames( yy, yy );
+                delete this.metricObjs['yAxis'];
+            }
+
             //console.dir( this.data )
+            console.log('metricobjs 88: ');
+            console.log( this.metricObjs );
             console.dir( this.metricNames )
             console.dir( this.selectedNode )
             var peeled = this.peeledData(this.data, this.metricNames[0])
@@ -308,7 +346,7 @@ export default {
 
                         $.getScript("../web/js/CallSpot.js?abb", function () {
 
-                            $.getScript("../web/js/RunDictionaryTranslator.js?jz88992", getAliases );
+                            $.getScript("../web/js/RunDictionaryTranslator.js?jz88992", getAliases);
                         });
                     });
                 });
@@ -326,6 +364,9 @@ export default {
 
         //  Just reuse our existing get memory call for now, so we can retrieve aliases.
         getAliases() {
+
+            console.dir(ST.CallSpot);
+            console.dir(ST.Utility);
 
             console.log('A getAliases');
             var runSetId = ST.Utility.get_param('runSetId');
