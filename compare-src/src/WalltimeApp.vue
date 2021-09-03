@@ -431,9 +431,7 @@ export default {
                         //  Rerender needs to happen after another event.
                         //  this rerender allows the dictionary to be translated
                         //  so that we're not showing all two character stuff.
-                        setTimeout( rerender, 1000);
                         setTimeout( rerender, 3000);
-                        setTimeout( rerender, 5000);
                     };
 
                     var error_handler = function() {
@@ -443,9 +441,7 @@ export default {
                         //  this can not be called until replacing_metrics is set correctlying
                         $('.update_top_down').trigger('click');
 
-                        setTimeout( rerender, 1000);
                         setTimeout( rerender, 3000);
-                        setTimeout( rerender, 5000);
                     };
 
                     ST.CallSpot.ajax({
@@ -459,8 +455,9 @@ export default {
         },
         rerenderSoDictTranslationHappens() {
 
-            $('.exclusive-white-buffer').get(0).click();
-            $('.rootbutton').get(0).click();
+            //$('.exclusive-white-buffer').get(0).click();
+            //$('.rootbutton').get(0).click();
+            $('div.text').get(1).click();
         },
         updateTopDown( ret2 ) {
 

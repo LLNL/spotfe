@@ -30088,9 +30088,7 @@ var _default = {
             //  this rerender allows the dictionary to be translated
             //  so that we're not showing all two character stuff.
 
-            setTimeout(rerender, 1000);
             setTimeout(rerender, 3000);
-            setTimeout(rerender, 5000);
           };
 
           var error_handler = function error_handler() {
@@ -30098,9 +30096,7 @@ var _default = {
             updateTopDownData(); //  this can not be called until replacing_metrics is set correctlying
 
             $('.update_top_down').trigger('click');
-            setTimeout(rerender, 1000);
             setTimeout(rerender, 3000);
-            setTimeout(rerender, 5000);
           };
 
           ST.CallSpot.ajax({
@@ -30113,8 +30109,9 @@ var _default = {
       }
     },
     rerenderSoDictTranslationHappens: function rerenderSoDictTranslationHappens() {
-      $('.exclusive-white-buffer').get(0).click();
-      $('.rootbutton').get(0).click();
+      //$('.exclusive-white-buffer').get(0).click();
+      //$('.rootbutton').get(0).click();
+      $('div.text').get(1).click();
     },
     updateTopDown: function updateTopDown(ret2) {
       console.log('updateTopDown 23223');
