@@ -28440,7 +28440,7 @@ var _default = {
   computed: {
     title: function title() {
       if (!window.ST) {
-        return "notitle";
+        return "";
       } else {
         var encoded_title = "".concat(this.funcPath.split('/').slice(-1)[0], " (").concat(this.runData[this.funcPath].exclusive, ")");
         var layman_title = ST.RunDictionaryTranslator.lookupStr(encoded_title);
@@ -41302,7 +41302,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56046" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52133" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

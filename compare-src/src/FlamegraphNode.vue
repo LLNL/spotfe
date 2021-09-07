@@ -46,7 +46,7 @@ export default {
         title(){
 
             if( !window.ST ) {
-                return "notitle";
+                return "";
             } else {
 
                 var encoded_title = `${this.funcPath.split('/').slice(-1)[0]} (${this.runData[this.funcPath].exclusive})`

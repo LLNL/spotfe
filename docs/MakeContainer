@@ -1,9 +1,10 @@
-- walltime not working because i'm guessing because i changed yAxis to sum# (spot2 metrics)
+DONE - walltime not working because i'm guessing because i changed yAxis to sum# (spot2 metrics)
 FIXED - launchdate.
-- manual rename change yAxis to a spot metric
+DONE - manual rename change yAxis to a spot metric
     * retest and regression test.
 - work on CFG bugs first.
-- non-readable directory -> catch this error
+- deal with "no title issue"
+TEST - non-readable directory -> catch this error
     * it's easy to type the directory name.  right now, if the directory doesn't exist, show a standard error.
     * probably just a try/catch and print statement.
 
