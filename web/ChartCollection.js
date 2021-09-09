@@ -455,7 +455,7 @@ ST.ChartCollection = function() {
             ST.graph.setYAxis("avg#inclusive#sum#time.duration");
 
             setTimeout( function() {
-                //ST.graph.setYAxis("avg#inclusive#sum#time.duration");
+//                ST.graph.setYAxis("avg#inclusive#sum#time.duration");
             }, 4000);
         }
 

@@ -52074,11 +52074,10 @@ var Graph = /*#__PURE__*/function () {
               case 10:
                 cacheResult = JSON.parse(res);
                 mtime = cacheResult.mtime;
-                console.dir(cacheResult);
                 bust_cache = ST.Utility.get_param("cache") === "0";
 
                 if (!bust_cache) {
-                  _context3.next = 19;
+                  _context3.next = 18;
                   break;
                 }
 
@@ -52089,18 +52088,18 @@ var Graph = /*#__PURE__*/function () {
                   RunSetMeta: {}
                 };
                 console.log('Got a new cachedData...');
-                _context3.next = 29;
+                _context3.next = 28;
                 break;
 
-              case 19:
-                _context3.next = 21;
+              case 18:
+                _context3.next = 20;
                 return _localforage.default.getItem(dataSetKey);
 
-              case 21:
+              case 20:
                 _context3.t0 = _context3.sent;
 
                 if (_context3.t0) {
-                  _context3.next = 24;
+                  _context3.next = 23;
                   break;
                 }
 
@@ -52111,7 +52110,7 @@ var Graph = /*#__PURE__*/function () {
                   RunSetMeta: {}
                 };
 
-              case 24:
+              case 23:
                 cachedDataGet = _context3.t0;
                 console.log('cachedDataGet:');
                 console.dir(cachedDataGet);
@@ -52122,7 +52121,7 @@ var Graph = /*#__PURE__*/function () {
                   bust_cache = 1;
                 }
 
-              case 29:
+              case 28:
                 cachedData = cachedDataGet;
                 cachedRunCtimes = cachedData.runCtimes || {}; //  Round to prevent string from being too long.
 
@@ -52151,24 +52150,24 @@ var Graph = /*#__PURE__*/function () {
                 }
 
                 if (!(cacheSum && cacheSum.summary && !bust_cache && !isContainer)) {
-                  _context3.next = 43;
+                  _context3.next = 42;
                   break;
                 }
 
                 newData = cacheSum.summary;
                 console.log('was able to find cache.');
-                _context3.next = 85;
+                _context3.next = 84;
                 break;
 
-              case 43:
+              case 42:
                 console.log('could not find cache.');
 
                 if (!isContainer) {
-                  _context3.next = 55;
+                  _context3.next = 54;
                   break;
                 }
 
-                _context3.next = 47;
+                _context3.next = 46;
                 return fetch("/getdata", {
                   method: "post",
                   headers: {
@@ -52177,12 +52176,12 @@ var Graph = /*#__PURE__*/function () {
                   body: JSON.stringify(dataRequest)
                 });
 
-              case 47:
+              case 46:
                 response = _context3.sent;
-                _context3.next = 50;
+                _context3.next = 49;
                 return response.text();
 
-              case 50:
+              case 49:
                 txt = _context3.sent;
 
                 for (x = 0; x < 15; x++) {
@@ -52191,32 +52190,32 @@ var Graph = /*#__PURE__*/function () {
 
                 newData = JSON.parse(txt); //newData = await response.json()
 
-                _context3.next = 85;
+                _context3.next = 84;
                 break;
 
-              case 55:
-                _context3.prev = 55;
+              case 54:
+                _context3.prev = 54;
 
                 if (!cacheFileFound) {
-                  _context3.next = 63;
+                  _context3.next = 62;
                   break;
                 }
 
-                _context3.next = 59;
+                _context3.next = 58;
                 return getMain0(host, dataSetKey);
 
-              case 59:
+              case 58:
                 lor_response = _context3.sent;
                 newData = JSON.parse(lor_response);
-                _context3.next = 76;
+                _context3.next = 75;
                 break;
 
-              case 63:
+              case 62:
                 console.log('cache file not found, making lorenz call.');
-                _context3.next = 66;
+                _context3.next = 65;
                 return lorenz(host, "".concat(command, " ").concat(dataSetKey, " '") + JSON.stringify(cachedRunCtimes) + "'");
 
-              case 66:
+              case 65:
                 lor_response = _context3.sent;
                 console.dir(lor_response);
 
@@ -52225,37 +52224,37 @@ var Graph = /*#__PURE__*/function () {
                 }
 
                 if (!(lor_response.output.command_out.indexOf('ERROR') > -1)) {
-                  _context3.next = 72;
+                  _context3.next = 71;
                   break;
                 }
 
                 ST.Utility.error(lor_response.output.command_out);
                 return _context3.abrupt("return", false);
 
-              case 72:
+              case 71:
                 if (!(lor_response.error !== "")) {
-                  _context3.next = 75;
+                  _context3.next = 74;
                   break;
                 }
 
                 ST.Utility.error(lor_response.error);
                 return _context3.abrupt("return", false);
 
-              case 75:
+              case 74:
                 newData = lor_response.output.command_out;
 
-              case 76:
+              case 75:
                 if (newData.foundReport) {
                   console.log(newData.foundReport);
                 }
 
                 DB.saveSummary(newData);
-                _context3.next = 85;
+                _context3.next = 84;
                 break;
 
-              case 80:
-                _context3.prev = 80;
-                _context3.t1 = _context3["catch"](55);
+              case 79:
+                _context3.prev = 79;
+                _context3.t1 = _context3["catch"](54);
                 console.log('Exception: ');
                 console.dir(_context3.t1);
                 newData = {
@@ -52265,7 +52264,7 @@ var Graph = /*#__PURE__*/function () {
                   RunSetMeta: {}
                 };
 
-              case 85:
+              case 84:
                 if (typeof newData === 'string') {
                   newData = JSON.parse(newData);
                 } //  newData is too big to always print out.
@@ -52367,7 +52366,6 @@ var Graph = /*#__PURE__*/function () {
                 }); // set data values
 
                 this.dataSetKey = dataSetKey;
-                console.log('make Data empty: setItem with blanks.');
                 lr0 = $.extend({}, cachedData); //var lr = lr0.Runs;
 
                 arr = {};
@@ -52384,12 +52382,11 @@ var Graph = /*#__PURE__*/function () {
                 //  and will be sent to the durations page from CallSpot.js
                 //        await localforage.setItem(dataSetKey, {'Runs': arr});
 
-                _context3.next = 119;
+                _context3.next = 117;
                 return _localforage.default.setItem(dataSetKey, lr0);
 
-              case 119:
-                console.log('A after setItem.'); //  The first run's meta object is used to determine what the drop down select options should be.
-
+              case 117:
+                //  The first run's meta object is used to determine what the drop down select options should be.
                 window.runs = ST.CompositeLayoutModel.augment_first_run_to_include_composite_charts(runs);
                 this.compare(filenames); // 4. return summary
 
@@ -52400,20 +52397,20 @@ var Graph = /*#__PURE__*/function () {
                     table: []
                   }
                 };
-                _context3.next = 125;
+                _context3.next = 122;
                 return _localforage.default.getItem("show:" + dataSetKey);
 
-              case 125:
+              case 122:
                 _context3.t2 = _context3.sent;
 
                 if (_context3.t2) {
-                  _context3.next = 128;
+                  _context3.next = 125;
                   break;
                 }
 
                 _context3.t2 = defaultVisibleCharts;
 
-              case 128:
+              case 125:
                 visibleCharts = _context3.t2;
 
                 for (_i4 = 0, _Object$entries4 = Object.entries(cachedData.Runs); _i4 < _Object$entries4.length; _i4++) {
@@ -52444,29 +52441,29 @@ var Graph = /*#__PURE__*/function () {
                   });
                 }
 
-                _context3.next = 134;
+                _context3.next = 131;
                 return _localforage.default.getItem('scatterplots:' + this.dataSetKey);
 
-              case 134:
+              case 131:
                 _context3.t3 = _context3.sent;
 
                 if (_context3.t3) {
-                  _context3.next = 137;
+                  _context3.next = 134;
                   break;
                 }
 
                 _context3.t3 = [];
 
-              case 137:
+              case 134:
                 summary.layout.scatterplots = _context3.t3;
                 return _context3.abrupt("return", summary);
 
-              case 139:
+              case 136:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, this, [[55, 80]]);
+        }, _callee3, this, [[54, 79]]);
       }));
 
       function getData(_x12, _x13, _x14) {
@@ -52604,6 +52601,7 @@ var Graph = /*#__PURE__*/function () {
   }, {
     key: "setYAxis",
     value: function setYAxis(yAxisName) {
+      console.log('setting yAxis -----> ' + yAxisName);
       this.app.yAxis = yAxisName;
     }
   }, {
@@ -52651,7 +52649,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52132" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60812" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

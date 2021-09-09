@@ -226,9 +226,6 @@ ST.CallSpot = function() {
         var charts = ST.layout_used.charts;
         set_up_params_( charts );
 
-        console.log('1Checkboxes:');
-        console.dir(ST.layout_used);
-
         parsed = summ.data;
 
         var now = Math.round( Date.now() / 1000);

@@ -30,8 +30,6 @@ DB.save = function( id, obj ) {
 
     DB.tx = DB.db.transaction(DB.cacheStore, "readwrite");
 
-    console.log('save obj length: ' + comp_obj.length);
-
     var store = DB.tx.objectStore(DB.cacheStore);
     store.put({id: id, value: comp_obj});
 };

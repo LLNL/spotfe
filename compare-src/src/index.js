@@ -168,8 +168,6 @@ export class Graph{
         var cacheResult = JSON.parse(res);
         var mtime = cacheResult.mtime;
 
-        console.dir(cacheResult);
-
         var cachedDataGet;
         var bust_cache = ST.Utility.get_param("cache") === "0";
 
@@ -408,8 +406,6 @@ export class Graph{
         this.dataSetKey = dataSetKey;
 
 
-        console.log('make Data empty: setItem with blanks.');
-
         var lr0 = $.extend({}, cachedData );
         //var lr = lr0.Runs;
         var arr = {};
@@ -427,9 +423,6 @@ export class Graph{
         //  and will be sent to the durations page from CallSpot.js
 //        await localforage.setItem(dataSetKey, {'Runs': arr});
         await localforage.setItem(dataSetKey, lr0);
-
-        console.log('A after setItem.');
-
 
         //  The first run's meta object is used to determine what the drop down select options should be.
         window.runs = ST.CompositeLayoutModel.augment_first_run_to_include_composite_charts(runs);
@@ -517,6 +510,7 @@ export class Graph{
     }
 
     setYAxis(yAxisName){
+        console.log('setting yAxis -----> ' + yAxisName);
         this.app.yAxis = yAxisName
     }
 

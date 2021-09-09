@@ -1,10 +1,14 @@
+- default to avg#inclusive
+    * this will compile: 'avg#inclusive#sum#time.duration' and use it but it won't actually render. Argghhh!
+    * otherwise, wondering why yAxis doesn't work.
+
 DONE - walltime not working because i'm guessing because i changed yAxis to sum# (spot2 metrics)
 FIXED - launchdate.
 DONE - manual rename change yAxis to a spot metric
     * retest and regression test.
 - work on CFG bugs first.
 - deal with "no title issue"
-TEST - non-readable directory -> catch this error
+DONE - non-readable directory -> catch this error
     * it's easy to type the directory name.  right now, if the directory doesn't exist, show a standard error.
     * probably just a try/catch and print statement.
 
