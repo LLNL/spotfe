@@ -60,6 +60,9 @@ var TEST = function() {
             "demos/mpi"];
 
         var rtests = [
+            "/usr/gapps/spot/datasets/newdemo/mpi",
+            "/usr/gapps/spot/datasets/newdemo/test",
+            "/usr/gapps/spot/datasets/newdemo/user",
 	    "/g/g0/pascal/zdeb/ale3d_regr/am-gen",
 	    "/g/g0/pascal/zdeb/ale3d_regr/pipe",
 	    "/g/g0/pascal/zdeb/ale3d_regr/sedov",
