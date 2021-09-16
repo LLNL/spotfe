@@ -40134,14 +40134,14 @@ exports.default = vue_1.default.extend({
     },
     yAxisList: function yAxisList() {
       //  These are stubs meant to be replaced with the aliases we get back from the BE.
-      var stub = {
-        "avg#inclusive#sum#time.duration": "Duration Alias",
-        "sum#inclusive#sum#time.duration": "Sum Alias",
-        "min#inclusive#sum#time.duration": "Min Alias"
+      var aliasReplacements = {
+        "avg#inclusive#sum#time.duration": "Avg time/rank",
+        "sum#inclusive#sum#time.duration": "Total time",
+        "min#inclusive#sum#time.duration": "Min time/rank",
+        "max#inclusive#sum#time.duration": "Max time/rank"
       };
 
       if (window.cachedData) {
-        var aliasReplacements = {};
         var rdm = window.cachedData.RunDataMeta;
 
         for (var encoded in rdm) {
@@ -52649,7 +52649,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60812" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57507" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

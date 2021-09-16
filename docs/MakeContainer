@@ -1,19 +1,30 @@
+- y-axis -> get aliases get working for this.
+    * look at how walltimes does this.
+TEST - checkout /usr/gapps/spot/datasets/newdemo get these to work.
+- browser: firefox, chrome.
+    * Get the emulator out: Microsoft edge.
+- Marbl Dataset. (rz only). -> home directory or workspace directory.
+
+
 - default to avg#inclusive
     * this will compile: 'avg#inclusive#sum#time.duration' and use it but it won't actually render. Argghhh!
     * otherwise, wondering why yAxis doesn't work.
 
-DONE - walltime not working because i'm guessing because i changed yAxis to sum# (spot2 metrics)
+DONE - return normalized spot metric instead of yAxis.
+    * walltime not working because i'm guessing because i changed yAxis to sum# (spot2 metrics)
 FIXED - launchdate.
 DONE - manual rename change yAxis to a spot metric
     * retest and regression test.
-- work on CFG bugs first.
-- deal with "no title issue"
 DONE - non-readable directory -> catch this error
     * it's easy to type the directory name.  right now, if the directory doesn't exist, show a standard error.
     * probably just a try/catch and print statement.
 
 
+Next:
 - Repo Clean up.
+- deal with "no title issue" (corner case blank issue)
+- fix select drop down issue. preselecting the avg#inclusive won't work.
+    * need to find finish event, know when it's finished rendering.
 
 
 - make sure that dictionary.json can still be auto-made, even if you dont have a cacheToFE.js file.
