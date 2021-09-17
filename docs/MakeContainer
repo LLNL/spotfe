@@ -3,6 +3,7 @@
 TEST - checkout /usr/gapps/spot/datasets/newdemo get these to work.
 - browser: firefox, chrome.
     * Get the emulator out: Microsoft edge.
+    * do full regression test.
 - Marbl Dataset. (rz only). -> home directory or workspace directory.
 
 
