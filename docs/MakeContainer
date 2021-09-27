@@ -1,11 +1,22 @@
+DONE - EC review complete.
 - send mary the link to the new github.
-- y-axis -> get aliases get working for this.
+DONE - y-axis -> get aliases get working for this.
     * look at how walltimes does this.
-TEST - checkout /usr/gapps/spot/datasets/newdemo get these to work.
-- browser: firefox, chrome.
-    * Get the emulator out: Microsoft edge.
-    * do full regression test.
+    * hard coded.
+DONE - test checkout /usr/gapps/spot/datasets/newdemo get these to work.
+DONE - browser: firefox, chrome.
+DONE - Tested with user agent string: Get the emulator out: Microsoft edge.
+DONE - do full regression test.
+
+
+Still Need:
 - Marbl Dataset. (rz only). -> home directory or workspace directory.
+- Then prep spot release.
+- Release Tuesday morning 10am.
+
+After Release:
+- Give david a write up on the new interface that JSOn gets sent back to FE.
+
 
 
 - default to avg#inclusive
@@ -44,6 +55,7 @@ As soon as optvis bug is done, roll out.
 
 /usr/gapps/spot/sand/spot.py getData /usr/workspace/spotdev/martymcf/ale3d/spot_data/ '{}' --maxLevels=2 --writeToFile=1
 run alias sp
+
 
 - make option for limiting number of layers on the command line:
     * this limits the sie of the file.
