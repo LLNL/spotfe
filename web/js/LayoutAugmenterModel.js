@@ -47,6 +47,8 @@ ST.LayoutAugmenterModel = function() {
 
             for( var attr in dat ) {
 
+                attr = attr.toLowerCase();
+
                 if( !spec[attr] ) {
                     spec[attr] = {
                         min: 100000000000,

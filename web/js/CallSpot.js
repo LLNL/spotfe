@@ -208,6 +208,18 @@ ST.CallSpot = function() {
     };
 
 
+    var make_keys_lowercase_ = function( parsed_obj ) {
+
+        var vobj = {};
+
+        for( var x in parsed_obj ) {
+            vobj[ x.toLowerCase() ] = parsed_obj[x];
+        }
+
+        return vobj;
+    };
+
+
     var handle_success2_ = function( summ ) {
 
         console.dir(summ);
@@ -244,7 +256,10 @@ ST.CallSpot = function() {
 
             if (newp.length < ST.params.max) {
 
-                var valid_obj = parsed[key];
+                var parsed_obj = parsed[key];
+
+                var valid_obj = parsed_obj;
+                // make_keys_lowercase_( parsed_obj ); // parsed[key];
 
                 ST.cali_obj_by_key[new_index] = valid_obj;
                 ST.cali_obj_by_key[new_index].run_set_id = get_run_set_id_( ST.cali_obj_by_key[new_index].filepath, key );
