@@ -51880,12 +51880,12 @@ var Graph = /*#__PURE__*/function () {
             switch (_context.prev = _context.next) {
               case 0:
                 if (!isContainer) {
-                  _context.next = 19;
+                  _context.next = 20;
                   break;
                 }
 
                 _context.next = 3;
-                return fetch("/spotJupyter", {
+                return fetch("spotJupyter", {
                   method: "post",
                   headers: {
                     'content-type': 'application/json'
@@ -51899,7 +51899,7 @@ var Graph = /*#__PURE__*/function () {
                 response = _context.sent;
 
                 if (!response.ok) {
-                  _context.next = 17;
+                  _context.next = 18;
                   break;
                 }
 
@@ -51931,21 +51931,25 @@ var Graph = /*#__PURE__*/function () {
                   port = ":" + ipynbjson["port"];
                 }
 
+                if (ipynbjson.hasOwnProperty("base")) {
+                  urlpath = "/" + ipynbjson["base"] + urlpath;
+                }
+
                 return _context.abrupt("return", server + port + urlpath + auth);
 
-              case 17:
-                _context.next = 23;
+              case 18:
+                _context.next = 24;
                 break;
 
-              case 19:
-                _context.next = 21;
+              case 20:
+                _context.next = 22;
                 return lorenz(host, "".concat(command, " ").concat(filepath));
 
-              case 21:
+              case 22:
                 url = _context.sent;
                 return _context.abrupt("return", url.output.command_out);
 
-              case 23:
+              case 24:
               case "end":
                 return _context.stop();
             }
@@ -51969,12 +51973,12 @@ var Graph = /*#__PURE__*/function () {
             switch (_context2.prev = _context2.next) {
               case 0:
                 if (!isContainer) {
-                  _context2.next = 17;
+                  _context2.next = 20;
                   break;
                 }
 
                 _context2.next = 3;
-                return fetch("/spotMultiJupyter", {
+                return fetch("spotMultiJupyter", {
                   method: "post",
                   headers: {
                     'content-type': 'application/json'
@@ -51989,7 +51993,7 @@ var Graph = /*#__PURE__*/function () {
                 response = _context2.sent;
 
                 if (!response.ok) {
-                  _context2.next = 15;
+                  _context2.next = 18;
                   break;
                 }
 
@@ -51998,7 +52002,16 @@ var Graph = /*#__PURE__*/function () {
 
               case 7:
                 ipynbjson = _context2.sent;
-                server = window.location.protocol + '//' + window.location.hostname;
+                server = "";
+
+                if (ipynbjson.hasOwnProperty("server")) {
+                  server = ipynbjson["server"].trim();
+                }
+
+                if (server.length == 0) {
+                  server = window.location.protocol + '//' + window.location.hostname;
+                }
+
                 urlpath = ipynbjson["path"];
                 auth = "";
 
@@ -52012,21 +52025,25 @@ var Graph = /*#__PURE__*/function () {
                   port = ":" + ipynbjson["port"];
                 }
 
+                if (ipynbjson.hasOwnProperty("base")) {
+                  urlpath = "/" + ipynbjson["base"] + urlpath;
+                }
+
                 return _context2.abrupt("return", server + port + urlpath + auth);
 
-              case 15:
-                _context2.next = 21;
+              case 18:
+                _context2.next = 24;
                 break;
 
-              case 17:
-                _context2.next = 19;
+              case 20:
+                _context2.next = 22;
                 return lorenz(host, "".concat(command, " ").concat(basepath, " '").concat(JSON.stringify(subpaths), "'"));
 
-              case 19:
+              case 22:
                 url = _context2.sent;
                 return _context2.abrupt("return", url.output.command_out);
 
-              case 21:
+              case 24:
               case "end":
                 return _context2.stop();
             }
@@ -52649,7 +52666,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57507" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62500" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

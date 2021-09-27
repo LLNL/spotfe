@@ -29955,7 +29955,7 @@ var _default = {
                 };
                 console.log('getmemoryfunc()');
                 _context2.next = 6;
-                return fetch("/getmemory", {
+                return fetch("getmemory", {
                   method: "post",
                   headers: {
                     'content-type': 'application/json'
@@ -41302,7 +41302,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57508" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62521" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
