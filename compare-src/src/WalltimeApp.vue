@@ -279,7 +279,7 @@ export default {
 
             console.log('getmemoryfunc()');
 
-            let response = await fetch("/getmemory", {
+            let response = await fetch("getmemory", {
                 method: "post",
                 headers: {
                     'content-type': 'application/json'

@@ -79,7 +79,7 @@ export class Graph{
         //        filepath:  absolute path to califile
         if(isContainer){
             // for container
-            let response = await fetch("/spotJupyter", { 
+            let response = await fetch("spotJupyter", { 
                 method: "post", 
                 headers: {
                     'content-type': 'application/json'
@@ -95,7 +95,7 @@ export class Graph{
                 if (server.length == 0) {
                     server = window.location.protocol + '//' + window.location.hostname
                 }
-                const urlpath = ipynbjson["path"]
+                let urlpath = ipynbjson["path"]
                 let auth = ""
                 if (ipynbjson.hasOwnProperty("token")) {
                     auth = "?token=" + ipynbjson["token"]
@@ -103,7 +103,10 @@ export class Graph{
                 let port = ""
                 if (ipynbjson.hasOwnProperty("port")) {
                     port = ":" + ipynbjson["port"]
-                }                
+                }
+                if (ipynbjson.hasOwnProperty("base")) {
+                    urlpath = "/" + ipynbjson["base"] + urlpath
+                }
                 return server + port + urlpath + auth
             }
         } else {
@@ -118,7 +121,7 @@ export class Graph{
         //         filepath:  absolute path to califile
         if(isContainer){
             // for container
-            let response = await fetch("/spotMultiJupyter", { 
+            let response = await fetch("spotMultiJupyter", { 
                 method: "post", 
                 headers: {
                     'content-type': 'application/json',
@@ -127,8 +130,14 @@ export class Graph{
             })
             if(response.ok) {
                 let ipynbjson = await response.json()
-                const server = window.location.protocol + '//' + window.location.hostname
-                const urlpath = ipynbjson["path"]
+                let server = ""
+                if (ipynbjson.hasOwnProperty("server")) {
+                    server = ipynbjson["server"].trim()
+                }
+                if (server.length == 0) {
+                    server = window.location.protocol + '//' + window.location.hostname
+                }
+                let urlpath = ipynbjson["path"]
                 let auth = ""
                 if (ipynbjson.hasOwnProperty("token")) {
                     auth = "?token=" + ipynbjson["token"]
@@ -136,6 +145,9 @@ export class Graph{
                 let port = ""
                 if (ipynbjson.hasOwnProperty("port")) {
                     port = ":" + ipynbjson["port"]
+                }
+                if (ipynbjson.hasOwnProperty("base")) {
+                    urlpath = "/" + ipynbjson["base"] + urlpath
                 }
                 return server + port + urlpath + auth
             }

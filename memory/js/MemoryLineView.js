@@ -76,7 +76,7 @@ ST.MemoryLineView = function() {
 
         $.ajax({
             type: "POST",
-            url: "/getmemory",
+            url: "getmemory",
             data: datarequest,
             success: line_render_
         });
