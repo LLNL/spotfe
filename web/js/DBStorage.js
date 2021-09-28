@@ -26,7 +26,8 @@ DB.init = function( callback ) {
 
 DB.save = function( id, obj ) {
 
-    var comp_obj = LZString.compress( obj );
+    var str = JSON.stringify( obj );
+    var comp_obj = LZString.compress( str );
 
     DB.tx = DB.db.transaction(DB.cacheStore, "readwrite");
 
@@ -57,6 +58,12 @@ DB.load = function( id, callback ) {
                 uncompressed = LZString.decompress(passIn);
             } catch( e ) {
                 uncompressed = passIn;
+            }
+
+            try {
+                uncompressed = JSON.parse(uncompressed);
+            } catch( e ) {
+                uncompressed = "";
             }
 
             callback( uncompressed );
