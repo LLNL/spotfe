@@ -316,7 +316,8 @@ export class Graph{
                         console.log(newData.foundReport);
                     }
 
-                    var pd = JSON.parse(newData);
+
+                    var pd = typeof newData === "string" ? JSON.parse(newData) : newData;
 
                     if( pd.dictionary ) {
                         //  this is for the walltime page.

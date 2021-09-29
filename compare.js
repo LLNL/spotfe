@@ -52265,7 +52265,7 @@ var Graph = /*#__PURE__*/function () {
                   console.log(newData.foundReport);
                 }
 
-                pd = JSON.parse(newData);
+                pd = typeof newData === "string" ? JSON.parse(newData) : newData;
 
                 if (pd.dictionary) {
                   //  this is for the walltime page.
