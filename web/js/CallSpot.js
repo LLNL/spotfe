@@ -537,14 +537,16 @@ ST.CallSpot = function() {
 
             var oneRun = window.cachedData.Runs[cali_fp].Data;
             var walldata = JSON.stringify( oneRun );
-            var walldata_key = runSetId + "_" + cali_fp;
+
+            //  this is to prevent from using too much data.
+            var walldata_key = ST.walldata_key;// runSetId + "_" + cali_fp;
 
             console.log('walldata_key=' + walldata_key);
             console.log('walldata(0,500)=' + walldata.substr(0,500) );
             console.log('walldata.length=' + walldata.length );
 
             //  we use up a lot of storage when we setItem, so need to clear it periodically.
-            localStorage.clear();
+            //localStorage.clear();
 
             localStorage.setItem( walldata_key, walldata );
 

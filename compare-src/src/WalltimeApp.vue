@@ -238,7 +238,7 @@ export default {
         async getDictionary( callback ) {
 
             //  /usr/gapps/spot/sand/spot.py getDictionary /usr/gapps/spot/datasets/lulesh_gen/100
-            var dataSetKey = ST.Utility.get_param('runSetId');
+            /*var dataSetKey = ST.Utility.get_param('runSetId');
 
             ST.Utility.init_params();
 
@@ -260,7 +260,17 @@ export default {
             var newData = JSON.parse(lor_response.output.command_out)
 
             console.dir(newData);
-            ST.RunDictionaryTranslator.set( newData.dictionary );
+            */
+            var sf = ST.Utility.get_param("runSetId");
+            var key = "page_dictionary_" + sf;
+            var local_page = localStorage.getItem( key );
+            var dictionary =  JSON.parse(local_page);
+
+            console.log('key: ' + key)
+            console.log('local dictionary: ');
+            console.dir(dictionary);
+
+            ST.RunDictionaryTranslator.set( dictionary );
 
             //this.updateTopDownData();
 

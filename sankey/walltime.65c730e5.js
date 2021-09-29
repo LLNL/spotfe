@@ -29896,41 +29896,40 @@ var _default = {
   methods: {
     getDictionary: function getDictionary(callback) {
       return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-        var dataSetKey, host, command, param_str, lor_response, newData;
+        var sf, key, local_page, dictionary;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 //  /usr/gapps/spot/sand/spot.py getDictionary /usr/gapps/spot/datasets/lulesh_gen/100
-                dataSetKey = ST.Utility.get_param('runSetId');
-                ST.Utility.init_params();
-                host = ST.Utility.get_default_machine();
-                command = ST.Utility.get_command();
-                command = command.replace('getData', 'getDictionary');
-                param_str = "".concat(command, " ").concat(dataSetKey);
-                console.log('Await2, param_str = ' + param_str);
-                _context.next = 9;
-                return lorenz(host, param_str);
 
-              case 9:
-                lor_response = _context.sent;
-
-                if (!(lor_response && lor_response.error !== "")) {
-                  _context.next = 13;
-                  break;
+                /*var dataSetKey = ST.Utility.get_param('runSetId');
+                 ST.Utility.init_params();
+                 var host = ST.Utility.get_default_machine();
+                var command = ST.Utility.get_command();
+                 command = command.replace('getData', 'getDictionary');
+                var param_str = `${command} ${dataSetKey}`;
+                 console.log('Await2, param_str = ' + param_str);
+                var lor_response = await lorenz(host, param_str );
+                  if( lor_response && lor_response.error !== "" ) {
+                    ST.Utility.error( lor_response.error );
+                    return false;
                 }
-
-                ST.Utility.error(lor_response.error);
-                return _context.abrupt("return", false);
-
-              case 13:
-                newData = JSON.parse(lor_response.output.command_out);
-                console.dir(newData);
-                ST.RunDictionaryTranslator.set(newData.dictionary); //this.updateTopDownData();
+                 var newData = JSON.parse(lor_response.output.command_out)
+                 console.dir(newData);
+                */
+                sf = ST.Utility.get_param("runSetId");
+                key = "page_dictionary_" + sf;
+                local_page = localStorage.getItem(key);
+                dictionary = JSON.parse(local_page);
+                console.log('key: ' + key);
+                console.log('local dictionary: ');
+                console.dir(dictionary);
+                ST.RunDictionaryTranslator.set(dictionary); //this.updateTopDownData();
 
                 callback();
 
-              case 17:
+              case 9:
               case "end":
                 return _context.stop();
             }
@@ -41234,11 +41233,12 @@ ST.replaceYAxisWithValue = function (fd) {
 
 _localforage.default.getItem(runSetId).then(function (runSet) {
   var fileData = runSet.Runs[runId];
-  var walldata_key = runSetId + '_' + runId;
+  var walldata_key = "walldata_key"; // runSetId + '_' + runId;
+
   var walldata = localStorage.getItem(walldata_key);
   fileData.Data = JSON.parse(walldata);
-  console.log('walldata_key on wp:' + walldata_key);
-  console.log('walldata.substr(0,5000): ' + walldata.substr(0, 5000));
+  console.log('walldata_key on wp:' + walldata_key); //console.log( 'walldata.substr(0,5000): ' + walldata.substr(0,5000) );
+
   console.dir(fileData);
 
   for (var _i = 0, _Object$entries = Object.entries(fileData.Globals); _i < _Object$entries.length; _i++) {
@@ -41302,7 +41302,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62521" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50420" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -5,6 +5,8 @@ ST.Default = {
     LAYOUT: "/g/g0/pascal/default_layout.json"
 };
 
+ST.walldata_key = "walldata_key";
+
 ST.LAST_DAYS = "launchdate_days_ago";
 
 ST.CONSTS = {

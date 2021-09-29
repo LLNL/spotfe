@@ -20,13 +20,13 @@ localforage.getItem(runSetId)
     .then(runSet => {
         var fileData = runSet.Runs[runId];
 
-        var walldata_key = runSetId + '_' + runId;
+        var walldata_key = "walldata_key"; // runSetId + '_' + runId;
 
         var walldata = localStorage.getItem( walldata_key );
         fileData.Data = JSON.parse( walldata );
 
         console.log('walldata_key on wp:' + walldata_key);
-        console.log( 'walldata.substr(0,5000): ' + walldata.substr(0,5000) );
+        //console.log( 'walldata.substr(0,5000): ' + walldata.substr(0,5000) );
         console.dir( fileData );
 
         for (const [key, val] of Object.entries(fileData.Globals)){

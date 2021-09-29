@@ -52061,7 +52061,7 @@ var Graph = /*#__PURE__*/function () {
     key: "getData",
     value: function () {
       var _getData = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(host, command, dataSetKey) {
-        var arr, spotPy, comm, res, res0, cacheResult, mtime, cachedDataGet, bust_cache, keys0, cachedData, cachedRunCtimes, x, dataRequest, newData, cacheSum, cacheDate, cacheFileFound, response, txt, lor_response, runs0, deletedRuns, baseMetrics, metric, funcPaths, metricNames, runs, filenames, lr0, run_id_x, a_run, summary, visibleCharts, _i4, _Object$entries4, _Object$entries4$_i, filename, fileContents, barCharts, _i5, _Object$entries5, _Object$entries5$_i, globalName, globalValue, globType, show;
+        var arr, spotPy, comm, res, res0, cacheResult, mtime, cachedDataGet, bust_cache, keys0, cachedData, cachedRunCtimes, x, dataRequest, newData, cacheSum, cacheDate, cacheFileFound, response, txt, lor_response, pd, dstr, sf, key, runs0, deletedRuns, baseMetrics, metric, funcPaths, metricNames, runs, filenames, lr0, run_id_x, a_run, summary, visibleCharts, _i4, _Object$entries4, _Object$entries4$_i, filename, fileContents, barCharts, _i5, _Object$entries5, _Object$entries5$_i, globalName, globalValue, globType, show;
 
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
@@ -52173,7 +52173,7 @@ var Graph = /*#__PURE__*/function () {
 
                 newData = cacheSum.summary;
                 console.log('was able to find cache.');
-                _context3.next = 84;
+                _context3.next = 86;
                 break;
 
               case 42:
@@ -52207,7 +52207,7 @@ var Graph = /*#__PURE__*/function () {
 
                 newData = JSON.parse(txt); //newData = await response.json()
 
-                _context3.next = 84;
+                _context3.next = 86;
                 break;
 
               case 54:
@@ -52265,12 +52265,23 @@ var Graph = /*#__PURE__*/function () {
                   console.log(newData.foundReport);
                 }
 
+                pd = JSON.parse(newData);
+
+                if (pd.dictionary) {
+                  //  this is for the walltime page.
+                  dstr = JSON.stringify(pd.dictionary);
+                  sf = ST.Utility.get_param("sf");
+                  key = "page_dictionary_" + sf;
+                  console.log('page key: ' + key);
+                  localStorage.setItem(key, dstr);
+                }
+
                 DB.saveSummary(newData);
-                _context3.next = 84;
+                _context3.next = 86;
                 break;
 
-              case 79:
-                _context3.prev = 79;
+              case 81:
+                _context3.prev = 81;
                 _context3.t1 = _context3["catch"](54);
                 console.log('Exception: ');
                 console.dir(_context3.t1);
@@ -52281,7 +52292,7 @@ var Graph = /*#__PURE__*/function () {
                   RunSetMeta: {}
                 };
 
-              case 84:
+              case 86:
                 if (typeof newData === 'string') {
                   newData = JSON.parse(newData);
                 } //  newData is too big to always print out.
@@ -52399,10 +52410,10 @@ var Graph = /*#__PURE__*/function () {
                 //  and will be sent to the durations page from CallSpot.js
                 //        await localforage.setItem(dataSetKey, {'Runs': arr});
 
-                _context3.next = 117;
+                _context3.next = 119;
                 return _localforage.default.setItem(dataSetKey, lr0);
 
-              case 117:
+              case 119:
                 //  The first run's meta object is used to determine what the drop down select options should be.
                 window.runs = ST.CompositeLayoutModel.augment_first_run_to_include_composite_charts(runs);
                 this.compare(filenames); // 4. return summary
@@ -52414,20 +52425,20 @@ var Graph = /*#__PURE__*/function () {
                     table: []
                   }
                 };
-                _context3.next = 122;
+                _context3.next = 124;
                 return _localforage.default.getItem("show:" + dataSetKey);
 
-              case 122:
+              case 124:
                 _context3.t2 = _context3.sent;
 
                 if (_context3.t2) {
-                  _context3.next = 125;
+                  _context3.next = 127;
                   break;
                 }
 
                 _context3.t2 = defaultVisibleCharts;
 
-              case 125:
+              case 127:
                 visibleCharts = _context3.t2;
 
                 for (_i4 = 0, _Object$entries4 = Object.entries(cachedData.Runs); _i4 < _Object$entries4.length; _i4++) {
@@ -52458,29 +52469,29 @@ var Graph = /*#__PURE__*/function () {
                   });
                 }
 
-                _context3.next = 131;
+                _context3.next = 133;
                 return _localforage.default.getItem('scatterplots:' + this.dataSetKey);
 
-              case 131:
+              case 133:
                 _context3.t3 = _context3.sent;
 
                 if (_context3.t3) {
-                  _context3.next = 134;
+                  _context3.next = 136;
                   break;
                 }
 
                 _context3.t3 = [];
 
-              case 134:
+              case 136:
                 summary.layout.scatterplots = _context3.t3;
                 return _context3.abrupt("return", summary);
 
-              case 136:
+              case 138:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, this, [[54, 79]]);
+        }, _callee3, this, [[54, 81]]);
       }));
 
       function getData(_x12, _x13, _x14) {
@@ -52666,7 +52677,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62500" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50399" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -316,6 +316,19 @@ export class Graph{
                         console.log(newData.foundReport);
                     }
 
+                    var pd = JSON.parse(newData);
+
+                    if( pd.dictionary ) {
+                        //  this is for the walltime page.
+                        var dstr = JSON.stringify( pd.dictionary );
+                        var sf = ST.Utility.get_param("sf");
+                        var key = "page_dictionary_" + sf;
+
+                        console.log('page key: ' + key);
+
+                        localStorage.setItem(key, dstr);
+                    }
+
                     DB.saveSummary(newData);
                 } catch (e) {
 
