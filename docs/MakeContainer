@@ -1,14 +1,15 @@
-- not saving because it's being cleared.
+After Release:
+- Add Test Case for non-writable directory.
+- Give david a write up on the new interface that JSOn gets sent back to FE.
+
 
 FIXED - make it so that write error passes.
-
 Then afterwards;
-    * Walltime does not work, in a non-writable directory.
+DONE -    * Walltime does not work, in a non-writable directory.
 
 
 
 
-update_usage_file
 
 DONE - zd/performance -> LZString.compress messes up
 
@@ -23,13 +24,10 @@ DONE - Tested with user agent string: Get the emulator out: Microsoft edge.
 DONE - do full regression test.
 
 
-Still Need:
-- Marbl Dataset. (rz only). -> home directory or workspace directory.
-- Then prep spot release.
-- Release Tuesday morning 10am.
+DONE - Marbl Dataset. (rz only). -> home directory or workspace directory.
+DONE - Then prep spot release.
+DONE - Release Tuesday morning 10am.
 
-After Release:
-- Give david a write up on the new interface that JSOn gets sent back to FE.
 
 
 # Deploy FE
@@ -44,6 +42,7 @@ sp
 
 
 
+TEST -  After etc feature rerenders, is the button linked to the wrong file?
 - default to avg#inclusive
     * this will compile: 'avg#inclusive#sum#time.duration' and use it but it won't actually render. Argghhh!
     * otherwise, wondering why yAxis doesn't work.
