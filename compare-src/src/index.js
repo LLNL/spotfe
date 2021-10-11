@@ -193,12 +193,8 @@ export class Graph{
         var cachedDataGet;
         var bust_cache = ST.Utility.get_param("cache") === "0";
 
-<<<<<<< HEAD
-        if( bust_cache ) {
-=======
 
         if (bust_cache) {
->>>>>>> pa-custom-templates-fe
 
             cachedDataGet = {
                 Runs: {},
@@ -361,10 +357,6 @@ export class Graph{
             }
         }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> pa-custom-templates-fe
         if( typeof newData === 'string') {
             newData = JSON.parse(newData);
         }
@@ -400,41 +392,6 @@ export class Graph{
 
         window.cachedData = cachedData;
 
-<<<<<<< HEAD
-=======
-        var runs = cachedData.Runs;
-
-        var z = 0;
-
-        for(var am_dir in runs) {
-
-            var dg_obj = runs[am_dir];
-            z++;
-
-            if( z > 25) {
-                delete runs[am_dir];
-            }
-        }
-
-        console.log('reduced:');
-        console.dir( cachedData );
-
-        // cache newest version of data
-        await localforage.setItem(dataSetKey, cachedData);
-
-        await localforage.getItem(dataSetKey).then( function( data ) {
-
-            console.log('debug dataSetKey cachedData ---> ');
-            console.dir( data);
-        });
-
-        return this.afterSetItemCacheRunner( dataSetKey, cachedData );
-    };
-
-
-    async afterSetItemCacheRunner( dataSetKey, cachedData ) {
-
->>>>>>> pa-custom-templates-fe
         // add in datsetkey and datakey to globals
         _.forEach(cachedData.Runs, (run, filename) => {
 

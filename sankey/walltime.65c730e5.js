@@ -29968,7 +29968,7 @@ var _default = {
                 console.dir(response);
 
                 if (!(response && response.json)) {
-                  _context2.next = 23;
+                  _context2.next = 24;
                   break;
                 }
 
@@ -29993,17 +29993,18 @@ var _default = {
                 //  Rerender needs to happen after another event.
                 //  this rerender allows the dictionary to be translated
                 //  so that we're not showing all two character stuff.
-                //setTimeout( rerender, 1000);
+
+                rerender(); //setTimeout( rerender, 1000);
                 //setTimeout( rerender, 3000);
                 //setTimeout( rerender, 5000);
 
-                _context2.next = 24;
+                _context2.next = 25;
                 break;
 
-              case 23:
+              case 24:
                 console.log('no .json');
 
-              case 24:
+              case 25:
               case "end":
                 return _context2.stop();
             }
@@ -41302,7 +41303,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58107" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53340" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
