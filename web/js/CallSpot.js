@@ -523,6 +523,8 @@ ST.CallSpot = function() {
         var cali_obj = ST.cali_obj_by_key[key];
         var cali_fp = cali_obj.file_path;
 
+        ST.CallSpot.filepath = obj.filepath;
+
         var file_left = cali_obj.run_set_id;
         file_left = strip_right_(file_left);
 
@@ -561,26 +563,10 @@ ST.CallSpot = function() {
             window.open('memory/index.html?runSetId=' + file_left + '&runId=' + cali_fp);
         } else {
 
-            var host = ST.params.machine;
-            var command = get_command_begin_() + ' ' + "jupyter";
-            //get_command_( "jupyter", file, "" );
-            console.log("ST.graph.openJupyter( \"" + file + "\", \"" + host + "\", \"" + command + "\" );");
-
-            ST.Utility.start_spinner();
-
-            ST.graph.openJupyter( file, host, command ).then( function( url ) {
-
-                ST.Utility.stop_spinner();
-
-                console.dir(url);
-                //var command_out = data.output.command_out;
-                //var url = command_out;
-
-                window.open(url);
-                // now go to the URL that BE tells us to go to.
-            });
+            ST.CustomTemplates.get_temps_and_show();
         }
     };
+
 
     var ch_key_ = function( dimension ) {
         return "ch_" + dimension;

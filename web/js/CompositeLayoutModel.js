@@ -51,8 +51,8 @@ ST.CompositeLayoutModel = function() {
                     fd_contents += ", " + y;
                 }
 
-                console.log('Warning, I could not find the following attribute: "' + op.attribute + '" in the cali_object.  ' +
-                    'I could only find the following references: ' + fd_contents);
+                //console.log('Warning, I could not find the following attribute: "' + op.attribute + '" in the cali_object.  ' +
+                //    'I could only find the following references: ' + fd_contents);
             }
 
             str += operation + make_str_if_str_( key_val );

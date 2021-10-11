@@ -51,35 +51,16 @@ ST.MemoryLineView = function() {
         $.ajax(obj).done(from_lorenz_finish_).error(from_lorenz_finish_);
     };
 
-
     var container_ajax_ = function() {
 
         var runSetId = ST.Utility.get_param('runSetId');
-            var runId = ST.Utility.get_param('runId');
+        var runId = ST.Utility.get_param('runId');
 
-            //  //'/usr/gapps/spot/datasets/lulesh_gen/100',
-            var path = runSetId + "/" + runId;
+        //  //'/usr/gapps/spot/datasets/lulesh_gen/100',
+        var path = runSetId + "/" + runId;
+        var url = "/getmemory";
 
-        const command = "/opt/conda/bin/python3 /usr/gapps/spot/backend.py --config /usr/gapps/spot/backend_config.yaml memory /data/" +
-            path;
-
-        console.log('container ajax: ' + command);
-
-        var datarequest = {
-            command: command,
-            filepath: path
-        };
-
-        var data_obj = JSON.stringify(datarequest);
-
-        console.log('getmemoryfunc()');
-
-        $.ajax({
-            type: "POST",
-            url: "getmemory",
-            data: datarequest,
-            success: line_render_
-        });
+        ST.Utility.container_ajax( url, 'memory', path, line_render_ );
     };
 
 

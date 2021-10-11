@@ -447,7 +447,32 @@ ST.Utility = function() {
         $('.spinner_loader').hide();
     };
 
+    var container_ajax_ = function( url, commandFunction, path, success) {
+
+        const command = "/opt/conda/bin/python3 /usr/gapps/spot/backend.py " +
+            "--config /usr/gapps/spot/backend_config.yaml " +
+            commandFunction + " /data/" +
+            path;
+
+        console.log('container AJAX: ' + command);
+
+        var datarequest = {
+            command: command,
+            filepath: path
+        };
+
+        //var data_obj = JSON.stringify(datarequest);
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: datarequest,
+            success: success
+        });
+    };
+
     return {
+        container_ajax: container_ajax_,
         start_spinner: start_spinner_,
         stop_spinner: stop_spinner_,
         lookup_orig_str: lookup_orig_str_,

@@ -323,6 +323,7 @@ export default {
                 //  Rerender needs to happen after another event.
                 //  this rerender allows the dictionary to be translated
                 //  so that we're not showing all two character stuff.
+                rerender();
                 //setTimeout( rerender, 1000);
                 //setTimeout( rerender, 3000);
                 //setTimeout( rerender, 5000);
