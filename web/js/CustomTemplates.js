@@ -126,7 +126,8 @@ ST.CustomTemplates = function() {
                 "<tr><td>CALI_QUERY_PATH</td><td>/usr/gapps/spot/caliper-install/bin is subtituted for this string</td></tr>" +
                 "<tr><td>DEPLOY_DIR</td><td>/usr/gapps/spot/ is subtitued for this.</td></tr>" +
                 "</table>",
-            header: "Substitutions"
+            header: "Substitutions",
+            classes: "template_explain_main"
         });
     };
 
