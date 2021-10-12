@@ -110,6 +110,10 @@ ST.CustomTemplates = function() {
                 "<li>Spot file input directory - this is the input directory you specified at the top of the page.</li>" +
                 "<li>/usr/gapps/spot/templates/</li>" +
                 "</ul>" +
+                "Within each of those directories you need to have 2 directories called 'single' and 'multi'" +
+                "The <b>single</b> directory is where you put your single jupyter templates.  " +
+                "The <b>multi</b> directory is where you put your multi jupyter templates." +
+                "<br><br>" +
                 "When you select a template, a number of substitutions are made." +
                 "You may put the following strings inside your template, using an editor.  " +
                 "Once your template is selected from the spot2 dashboard, the following substitutions will be made." +
