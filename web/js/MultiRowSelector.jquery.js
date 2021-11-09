@@ -16,6 +16,26 @@ $.fn.MultiRowSelector = function( obj ) {
     };
 
 
+    var ofDrops_ = function() {
+
+        var ofs = "";
+        var ofTypes = [
+            '',
+            'day of week',  //  string -> mon, tue, etc.
+            'day of month', //  integer
+            'month of year',
+            'abs()'
+        ];
+
+        for( var x = 0; x < ofTypes.length; x++ ) {
+            ofs += '<option>' + ofTypes[x] + '</option>';
+        }
+
+        return '<select class="ofDate">' + ofs +
+            '</select>';
+    };
+
+
     //  First row does not have an operation select.
     var row_ = function( first_row ) {
 
@@ -25,6 +45,7 @@ $.fn.MultiRowSelector = function( obj ) {
 
         return '<tr class="multi_row">' +
             '<td>' + ( first_row ? "" : operation_select) + '</td>' +
+            '<td>' + ofDrops_() + '</td>' +
             '<td>' + attributes_select +
             input_const +
             '</td>' +
