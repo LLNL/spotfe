@@ -31,7 +31,7 @@ $.fn.MultiRowSelector = function( obj ) {
             ofs += '<option>' + ofTypes[x] + '</option>';
         }
 
-        return '<select class="ofDate">' + ofs +
+        return '<select class="unarySelector">' + ofs +
             '</select>';
     };
 
@@ -66,10 +66,12 @@ $.fn.MultiRowSelector = function( obj ) {
             var v = $(el).val();
             var tr = $(el).closest('tr.multi_row');
             var op_sel = tr.find('.operation_sel').val();
+            var unary_op = tr.find('.unarySelector').val();
 
             vals.push({
                 attribute: v,
-                operation: op_sel
+                operation: op_sel,
+                unary_operation: unary_op
             });
         });
 
