@@ -55,7 +55,8 @@ ST.CompositeLayoutModel = function() {
                 //    'I could only find the following references: ' + fd_contents);
             }
 
-            str += operation + make_str_if_str_( key_val );
+            var operator_value = make_str_if_str_( key_val );
+            str += operation + add_unary_( operator_value, key_val );
         }
 
         //console.log( str );
@@ -65,6 +66,28 @@ ST.CompositeLayoutModel = function() {
         var ev = eval( str );
 
         return ev;
+    };
+
+
+    var add_unary_ = function( val, key_val ) {
+
+        for( var ofTypeWord in $.fn.MultiRowSelector.ofTypes ) {
+
+            var def_obj = $.fn.MultiRowSelector.ofTypes[ ofTypeWord ];
+
+            if( def_obj ) {
+
+                var call_ret = "";
+
+                if( def_obj.call_func ) {
+                    call_ret = def_obj.call_func.replace( 'REPLACE_SUBJECT', key_val );
+                }
+
+                val = val.replace( ofTypeWord, call_ret );
+            }
+        }
+
+        return val;
     };
 
 

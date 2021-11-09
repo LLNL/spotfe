@@ -16,19 +16,25 @@ $.fn.MultiRowSelector = function( obj ) {
     };
 
 
+    $.fn.MultiRowSelector.ofTypes = {
+        '':{},
+        'day of week':{
+            "call_func":"$.fn.MultiRowSelector.get_day_of_week( REPLACE_SUBJECT )"
+        },  //  string -> mon, tue, etc.
+        'day of month':{}, //  integer
+        'month of year':{},
+        'abs()':{}
+    };
+
+
     var ofDrops_ = function() {
 
         var ofs = "";
-        var ofTypes = [
-            '',
-            'day of week',  //  string -> mon, tue, etc.
-            'day of month', //  integer
-            'month of year',
-            'abs()'
-        ];
 
-        for( var x = 0; x < ofTypes.length; x++ ) {
-            ofs += '<option>' + ofTypes[x] + '</option>';
+        var ofTypes = $.fn.MultiRowSelector.ofTypes;
+
+        for( var typeName in ofTypes ) {
+            ofs += '<option>' + typeName + '</option>';
         }
 
         return '<select class="unarySelector">' + ofs +
@@ -84,6 +90,10 @@ $.fn.MultiRowSelector = function( obj ) {
     //  Let's make this publicly available so that we can run it before submits happen.
     //  OR so we don't have to wait for a onchange event to occur.
     $.fn.MultiRowSelector.get_operations = get_operations_;
+
+    $.fn.MultiRowSelector.get_day_of_week = function() {
+        return "Monday";
+    };
 
     var bind_ = function( that ) {
 
@@ -142,3 +152,4 @@ $.fn.MultiRowSelector = function( obj ) {
         bind_( that );
     });
 };
+
