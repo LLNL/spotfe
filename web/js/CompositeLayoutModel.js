@@ -75,15 +75,14 @@ ST.CompositeLayoutModel = function() {
 
             var def_obj = $.fn.MultiRowSelector.ofTypes[ ofTypeWord ];
 
-            if( def_obj ) {
+            if( def_obj && ofTypeWord !== "" && typeof key_val === 'number') {
 
                 var call_ret = "";
 
                 if( def_obj.call_func ) {
                     call_ret = def_obj.call_func.replace( 'REPLACE_SUBJECT', key_val );
+                    return call_ret;
                 }
-
-                val = val.replace( ofTypeWord, call_ret );
             }
         }
 
