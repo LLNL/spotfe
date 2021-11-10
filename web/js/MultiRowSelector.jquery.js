@@ -168,6 +168,23 @@ $.fn.MultiRowSelector.get_month_of_year_int = function( val ) {
     return date.getDate();
 };
 
+$.fn.MultiRowSelector.abs_float = function( val ) {
+
+    return Math.abs( val );
+};
+
+$.fn.MultiRowSelector.negate_float = function( val ) {
+    return -1 * val;
+};
+
+$.fn.MultiRowSelector.modulo_float = function( val ) {
+    return val % 10;
+};
+
+$.fn.MultiRowSelector.const_float = function( val ) {
+    return val;
+};
+
 /*
     WARNING:
         DO NOT change the indexes, otherwise, the saved ofTypes indexes will
@@ -187,12 +204,21 @@ $.fn.MultiRowSelector.ofTypes = {
         "display": "month of year int"
     },
     '4':{
-        "call_func": "$.fn.MultiRowSelector.abs_int( REPLACE_SUBJECT )",
+        "call_func": "$.fn.MultiRowSelector.abs_float( REPLACE_SUBJECT )",
         "display": "abs()"
     },
-    'negate()':{},
-    'modulo()':{},
-    'const()':{}
+    '5':{
+        "call_func": "$.fn.MultiRowSelector.negate_float( REPLACE_SUBJECT )",
+        "display": "negate()"
+    },
+    '6':{
+        "call_func": "$.fn.MultiRowSelector.modulo_float( REPLACE_SUBJECT )",
+        "display": "modulo()"
+    },
+    '7':{
+        "call_func": "$.fn.MultiRowSelector.const_float( REPLACE_SUBJECT )",
+        "display": "const()"
+    }
 };
 
 
