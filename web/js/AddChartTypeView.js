@@ -313,12 +313,31 @@ ST.AddChartTypeView = function() {
     };
 
 
-    var gen_dimension_ = function( ops ) {
+    var gen_dimension_old_ = function( ops ) {
 
         var dim = "";
 
         for( var y=0; y < ops.length; y++ ) {
             dim += ops[y].attribute + "_";
+        }
+
+        return dim;
+    };
+
+
+    var gen_dimension_ = function( ops ) {
+
+        var dim = "";
+
+        for( var y=0; y < ops.length; y++ ) {
+
+            var op = ops[y];
+            var operation = op.operation || "no-op";
+            var unary_operation = op.unary_operation || "no-unary";
+            var attribute = op.attribute || "no-attribute";
+            var one_row = operation + "_" + unary_operation + "(" + attribute + "), ";
+
+            dim += one_row;
         }
 
         return dim;

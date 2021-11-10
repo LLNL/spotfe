@@ -339,14 +339,16 @@ table.only_multi_row_selector {
 
 .composite_chart_type {
 
+    width: 750px;
+
     .multi_row_selector {
 
         .unarySelector {
-            width: 75px;
+            width: 155px;
         }
 
         .dimension_attribute {
-            width: 290px;
+            width: 350px;
         }
 
         .input_const {
@@ -651,7 +653,7 @@ body .bg-color-255-255-255-0 {
 }
 
 .template_explain_main {
-    width: 750px;
+    width: 720px;
 }
 
 .outer_modal {

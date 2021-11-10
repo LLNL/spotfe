@@ -28,7 +28,9 @@ $.fn.MultiRowSelector = function( obj ) {
             ofs += '<option>' + obj.display + '</option>';
         }
 
-        return '<select class="unarySelector">' + ofs +
+        return '<select class="unarySelector">' +
+            //  means user doesn't want any unary operator for this row
+            '<option></option>' + ofs +
             '</select>';
     };
 
@@ -142,7 +144,12 @@ $.fn.MultiRowSelector = function( obj ) {
 };
 
 
-//  TODO: use javascript date to get real day of week.
+$.fn.MultiRowSelector.get_day_of_week_int = function( val ) {
+
+    var mod = val % 7;
+    return mod;
+};
+
 $.fn.MultiRowSelector.get_day_of_week_str = function( val ) {
 
     var days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
@@ -151,7 +158,6 @@ $.fn.MultiRowSelector.get_day_of_week_str = function( val ) {
     return days[mod];
 };
 
-//  TODO: use javascript date to get real day of month.
 $.fn.MultiRowSelector.get_day_of_month_int = function( val ) {
 
     var date = new Date( val * 1000 );
@@ -165,7 +171,16 @@ $.fn.MultiRowSelector.get_month_of_year_int = function( val ) {
     var date = new Date( val * 1000 );
 
     //  return month number.
-    return date.getDate();
+    return date.getMonth();
+};
+
+$.fn.MultiRowSelector.get_month_of_year_str = function( val ) {
+
+    var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    var month_index = $.fn.MultiRowSelector.get_month_of_year_int( val );
+
+    //  return month number.
+    return months[ month_index ] || "not a month";
 };
 
 $.fn.MultiRowSelector.abs_float = function( val ) {
@@ -195,6 +210,10 @@ $.fn.MultiRowSelector.ofTypes = {
         "call_func": "$.fn.MultiRowSelector.get_day_of_week_str( REPLACE_SUBJECT )",
         "display": "day of week str"
     },  //  string -> mon, tue, etc.
+    '1.5':{
+        "call_func": "$.fn.MultiRowSelector.get_day_of_week_int( REPLACE_SUBJECT )",
+        "display": "day of week int"
+    },  //  string -> mon, tue, etc.
     '2':{
         "call_func": "$.fn.MultiRowSelector.get_day_of_month_int( REPLACE_SUBJECT )",
         "display": "day of month int"
@@ -202,6 +221,10 @@ $.fn.MultiRowSelector.ofTypes = {
     '3':{
         "call_func": "$.fn.MultiRowSelector.get_month_of_year_int( REPLACE_SUBJECT )",
         "display": "month of year int"
+    },
+    '3.5':{
+        "call_func": "$.fn.MultiRowSelector.get_month_of_year_str( REPLACE_SUBJECT )",
+        "display": "month of year str"
     },
     '4':{
         "call_func": "$.fn.MultiRowSelector.abs_float( REPLACE_SUBJECT )",
