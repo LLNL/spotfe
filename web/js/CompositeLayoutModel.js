@@ -56,7 +56,7 @@ ST.CompositeLayoutModel = function() {
             }
 
             var operator_value = make_str_if_str_( key_val );
-            str += operation + add_unary_( operator_value, key_val );
+            str += operation + add_unary_( operator_value, op.unary_operation );
         }
 
         //console.log( str );
@@ -69,18 +69,18 @@ ST.CompositeLayoutModel = function() {
     };
 
 
-    var add_unary_ = function( val, key_val ) {
+    var add_unary_ = function( val, unary_operation ) {
 
         for( var ofTypeWord in $.fn.MultiRowSelector.ofTypes ) {
 
             var def_obj = $.fn.MultiRowSelector.ofTypes[ ofTypeWord ];
 
-            if( def_obj && ofTypeWord !== "" && typeof key_val === 'number') {
+            if( def_obj && ofTypeWord !== "" && ofTypeWord === unary_operation ) {
 
                 var call_ret = "";
 
                 if( def_obj.call_func ) {
-                    call_ret = def_obj.call_func.replace( 'REPLACE_SUBJECT', key_val );
+                    call_ret = def_obj.call_func.replace( 'REPLACE_SUBJECT', val );
                     return call_ret;
                 }
             }

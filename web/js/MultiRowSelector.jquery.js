@@ -16,19 +16,6 @@ $.fn.MultiRowSelector = function( obj ) {
     };
 
 
-    $.fn.MultiRowSelector.ofTypes = {
-        '':{},
-        'day of week':{
-            "call_func":"$.fn.MultiRowSelector.get_day_of_week( REPLACE_SUBJECT )"
-        },  //  string -> mon, tue, etc.
-        'day of month':{
-            "call_func":"$.fn.MultiRowSelector.get_day_of_month( REPLACE_SUBJECT )"
-        }, //  integer
-        'month of year':{},
-        'abs()':{}
-    };
-
-
     var ofDrops_ = function() {
 
         var ofs = "";
@@ -165,7 +152,26 @@ $.fn.MultiRowSelector.get_day_of_week = function( val ) {
 //  TODO: use javascript date to get real day of month.
 $.fn.MultiRowSelector.get_day_of_month = function( val ) {
 
-    var mod = val % 30;
+    var date = new Date( val * 1000 );
 
-    return days[mod];
+    //  return day of month.
+    return date.getDate();
 };
+
+
+$.fn.MultiRowSelector.ofTypes = {
+    '':{},
+    'day of week':{
+        "call_func": "$.fn.MultiRowSelector.get_day_of_week( REPLACE_SUBJECT )"
+    },  //  string -> mon, tue, etc.
+    'day of month':{
+        "call_func": "$.fn.MultiRowSelector.get_day_of_month( REPLACE_SUBJECT )"
+    }, //  integer
+    'month of year':{},
+    'abs()':{},
+    'negate()':{},
+    'modulo()':{},
+    'const()':{}
+};
+
+
