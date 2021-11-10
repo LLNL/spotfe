@@ -22,8 +22,10 @@ $.fn.MultiRowSelector = function( obj ) {
 
         var ofTypes = $.fn.MultiRowSelector.ofTypes;
 
-        for( var typeName in ofTypes ) {
-            ofs += '<option>' + typeName + '</option>';
+        for( var ofTypeIndex in ofTypes ) {
+
+            var obj = ofTypes[ ofTypeIndex ];
+            ofs += '<option>' + obj.display + '</option>';
         }
 
         return '<select class="unarySelector">' + ofs +
@@ -141,7 +143,7 @@ $.fn.MultiRowSelector = function( obj ) {
 
 
 //  TODO: use javascript date to get real day of week.
-$.fn.MultiRowSelector.get_day_of_week = function( val ) {
+$.fn.MultiRowSelector.get_day_of_week_str = function( val ) {
 
     var days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
     var mod = val % 7;
@@ -150,7 +152,7 @@ $.fn.MultiRowSelector.get_day_of_week = function( val ) {
 };
 
 //  TODO: use javascript date to get real day of month.
-$.fn.MultiRowSelector.get_day_of_month = function( val ) {
+$.fn.MultiRowSelector.get_day_of_month_int = function( val ) {
 
     var date = new Date( val * 1000 );
 
@@ -158,17 +160,36 @@ $.fn.MultiRowSelector.get_day_of_month = function( val ) {
     return date.getDate();
 };
 
+$.fn.MultiRowSelector.get_month_of_year_int = function( val ) {
 
+    var date = new Date( val * 1000 );
+
+    //  return month number.
+    return date.getDate();
+};
+
+/*
+    WARNING:
+        DO NOT change the indexes, otherwise, the saved ofTypes indexes will
+        be messed up in people's caches.
+ */
 $.fn.MultiRowSelector.ofTypes = {
-    '':{},
-    'day of week':{
-        "call_func": "$.fn.MultiRowSelector.get_day_of_week( REPLACE_SUBJECT )"
+    '1':{
+        "call_func": "$.fn.MultiRowSelector.get_day_of_week_str( REPLACE_SUBJECT )",
+        "display": "day of week str"
     },  //  string -> mon, tue, etc.
-    'day of month':{
-        "call_func": "$.fn.MultiRowSelector.get_day_of_month( REPLACE_SUBJECT )"
+    '2':{
+        "call_func": "$.fn.MultiRowSelector.get_day_of_month_int( REPLACE_SUBJECT )",
+        "display": "day of month int"
     }, //  integer
-    'month of year':{},
-    'abs()':{},
+    '3':{
+        "call_func": "$.fn.MultiRowSelector.get_month_of_year_int( REPLACE_SUBJECT )",
+        "display": "month of year int"
+    },
+    '4':{
+        "call_func": "$.fn.MultiRowSelector.abs_int( REPLACE_SUBJECT )",
+        "display": "abs()"
+    },
     'negate()':{},
     'modulo()':{},
     'const()':{}

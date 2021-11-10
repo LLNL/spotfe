@@ -71,11 +71,11 @@ ST.CompositeLayoutModel = function() {
 
     var add_unary_ = function( val, unary_operation ) {
 
-        for( var ofTypeWord in $.fn.MultiRowSelector.ofTypes ) {
+        for( var ofTypeWordIndex in $.fn.MultiRowSelector.ofTypes ) {
 
-            var def_obj = $.fn.MultiRowSelector.ofTypes[ ofTypeWord ];
+            var def_obj = $.fn.MultiRowSelector.ofTypes[ ofTypeWordIndex ];
 
-            if( def_obj && ofTypeWord !== "" && ofTypeWord === unary_operation ) {
+            if( def_obj && def_obj.display === unary_operation ) {
 
                 var call_ret = "";
 
