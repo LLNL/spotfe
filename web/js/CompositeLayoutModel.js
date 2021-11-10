@@ -247,7 +247,19 @@ ST.CompositeLayoutModel = function() {
     };
 
 
+    var log_ = function() {
+
+        for( var x in sqs.layout_used.charts) {
+
+            var obj = sqs.layout_used.charts[x];
+            if(obj.composite_layout) {
+                console.log( obj );
+            }
+        }
+    };
+
     return {
+        log: log_,
         remove_composite_chart_from_runs: remove_composite_chart_from_runs_,
         augment_first_run_to_include_composite_charts: augment_first_run_to_include_composite_charts_,
         get_js_type_based_on_cali_data_type: get_js_type_based_on_cali_data_type_,

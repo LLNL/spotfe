@@ -1,0 +1,147 @@
+Script started on Tue Nov  9 17:03:47 2021
+[?1034h[0;37maschwanden1@doc[0;33m (pa-day-of-date *)[34m ~/install/spot2_github/spotfe[0;22m: ../../../push_spot.bash git checkout -b pa-day-of-date[11Pmasterpa-custom-templates-fe master[K-b pa-day-of-date[6P../../../push_spot.bash [Kdocker run -it --entrypoint /bin/bash -p 5000:5000/tcp op tvis_d
+]0;root@a72e75997003: /coderoot@a72e75997003:/code# 
+]0;root@a72e75997003: /coderoot@a72e75997003:/code# 
+]0;root@a72e75997003: /coderoot@a72e75997003:/code# script
+Script started, file is typescript
+# exit
+Script done, file is typescript
+]0;root@a72e75997003: /coderoot@a72e75997003:/code# 
+]0;root@a72e75997003: /coderoot@a72e75997003:/code# 
+]0;root@a72e75997003: /coderoot@a72e75997003:/code# exit
+exit
+[0;37maschwanden1@doc[0;33m (pa-day-of-date *)[34m ~/install/spot2_github/spotfe[0;22m: 
+[0;37maschwanden1@doc[0;33m (pa-day-of-date *)[34m ~/install/spot2_github/spotfe[0;22m: 
+[0;37maschwanden1@doc[0;33m (pa-day-of-date *)[34m ~/install/spot2_github/spotfe[0;22m: 
+[0;37maschwanden1@doc[0;33m (pa-day-of-date *)[34m ~/install/spot2_github/spotfe[0;22m: docker run -it --entrypoint /bin/bash -p 5000:5000/tcp opttvis_d[A[0;37maschwanden1@doc[0;33m (pa-day-of-date *)[34m ~/install/spot2_github/spotfe[0;22m: [33P../../../push_spot.bash 
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cdocker run -it --entrypoint /bin/bash -p 5000:5000/tcp opttvis_d[A[0;37maschwanden1@doc[0;33m (pa-day-of-date *)[34m ~/install/spot2_github/spotfe[0;22m: [K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cdocker run -it --entrypoint /bin/bash -p 5000:5000/tcp opttvis_d[A[0;37maschwanden1@doc[0;33m (pa-day-of-date *)[34m ~/install/spot2_github/spotfe[0;22m: [K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cdocker run -it --entrypoint /bin/bash -p 5000:5000/tcp opttvis_d[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C-p 5000:5000/tcp optv[1Pis_d[A[0;37maschwanden1@doc[0;33m (pa-day-of-date *)[34m ~/install/spot2_github/spotfe[0;22m: [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C-p 5000:5000/tcp optvi[1Ps_d[A[0;37maschwanden1@doc[0;33m (pa-day-of-date *)[34m ~/install/spot2_github/spotfe[0;22m: [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C-p 5000:5000/tcp optvis[1P_d[A[0;37maschwanden1@doc[0;33m (pa-day-of-date *)[34m ~/install/spot2_github/spotfe[0;22m: [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C-p 5000:5000/tcp optvis_[1Pd[A[0;37maschwanden1@doc[0;33m (pa-day-of-date *)[34m ~/install/spot2_github/spotfe[0;22m: [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C-p 5000:5000/tcp optvis_d[K[A[0;37maschwanden1@doc[0;33m (pa-day-of-date *)[34m ~/install/spot2_github/spotfe[0;22m: [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C-p 5000:5000/tcp optvis_d [K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P
+mesg: ttyname failed: Inappropriate ioctl for device
+Script started, file is typescript
+# 
+Script done, file is typescript
+[0;37maschwanden1@doc[0;33m (pa-day-of-date *)[34m ~/install/spot2_github/spotfe[0;22m: docker run -p 5000:5000/tcp optvis_dit --entrypoint /bin/bash -p 5000:5000/tcp opttvis_d[A[0;37maschwanden1@doc[0;33m (pa-day-of-date *)[34m ~/install/spot2_github/spotfe[0;22m: [33P../../../push_spot.bash 
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cdocker run -it --entrypoint /bin/bash -p 5000:5000/tcp opttvis_d[A[0;37maschwanden1@doc[0;33m (pa-day-of-date *)[34m ~/install/spot2_github/spotfe[0;22m: [C[C[C[C[C[C[C[C[C[C[C[C[21Pp 5000:5000/tcp optvis_d
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+ * Serving Flask app 'app2.py' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+ * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+ * Running on http://172.17.0.2:5000/ (Press CTRL+C to quit)
+172.17.0.1 - - [10/Nov/2021 01:13:58] "GET / HTTP/1.1" 200 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/opt_vis/lib/d3.min.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/opt_vis/lib/graphlib.min.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/opt_vis/lib/graphlib-dot.min.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/opt_vis/lib/dagre-d3.min.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/opt_vis/lib/convexhull.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/CFGConf/lib/graphlib.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/CFGConf/lib/viz.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/opt_vis/goldenlayout-base.css HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/CFGConf/lib/graphlib-dot.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/CFGConf/style.css HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/opt_vis/goldenlayout-light-theme.css HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/opt_vis/style.css HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/opt_vis/lib/awesomplete.css HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/opt_vis/lib/atom-one-light.css HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/css/CheckboxWindowManager.css HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/css/modal.css HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/opt_vis/lib/jquery-1.11.1.min.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/opt_vis/lib/awesomplete.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/opt_vis/lib/intervaltree.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/CFGConf/lib/full.render.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/js/StateManager.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/opt_vis/modules/model.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/opt_vis/lib/goldenlayout.min.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/opt_vis/modules/views/cfgView.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/opt_vis/modules/controller.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/opt_vis/modules/call_graph/callGraph.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/opt_vis/modules/views/sourceCodeView.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/opt_vis/modules/views/loopFnTreeView.js?a HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/opt_vis/modules/var_rename/varRenamer.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/opt_vis/modules/views/disassemblyView.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/opt_vis/modules/utils.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/opt_vis/loopify_dagre.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/opt_vis/main_with_mvc_goldenlayout.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/opt_vis/modules/views/highlightedItemsView.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/opt_vis/modules/modelUtils.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/opt_vis/modules/mapAddressRanges.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/opt_vis/lib/highlight.pack.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/js/jquery.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/js/Ajax.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/js/GetFileChoices.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/js/ReusableView.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/js/ReturnStubs.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/js/CheckboxWindowManager.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/CFGConf/defs.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/js/Common.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/js/AutoTester.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/CFGConf/utils.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/CFGConf/fileUtils.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/CFGConf/loopify_dagre.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/CFGConf/cfgView.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/CFGConf/graphUtils.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/CFGConf/filtering.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/CFGConf/main.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[33mGET /undefined/static/opt_vis/sample_inputs/rajaperf_out_serial/raja-perf.exe.json HTTP/1.1[0m" 404 -
+172.17.0.1 - - [10/Nov/2021 01:13:59] "[36mGET /static/opt_vis/imgs/minus.png HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "GET / HTTP/1.1" 200 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/opt_vis/lib/d3.min.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/opt_vis/lib/graphlib-dot.min.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/opt_vis/lib/graphlib.min.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/opt_vis/lib/convexhull.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/opt_vis/lib/dagre-d3.min.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/CFGConf/lib/graphlib.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/css/CheckboxWindowManager.css HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/opt_vis/style.css HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/opt_vis/goldenlayout-base.css HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/CFGConf/style.css HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/opt_vis/lib/atom-one-light.css HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/opt_vis/goldenlayout-light-theme.css HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/opt_vis/lib/awesomplete.css HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/css/modal.css HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/CFGConf/lib/graphlib-dot.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/CFGConf/lib/viz.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/opt_vis/lib/jquery-1.11.1.min.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/CFGConf/lib/full.render.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/opt_vis/lib/goldenlayout.min.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/opt_vis/lib/intervaltree.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/js/StateManager.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/opt_vis/lib/awesomplete.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/opt_vis/modules/model.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/opt_vis/modules/controller.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/opt_vis/modules/views/sourceCodeView.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/opt_vis/modules/views/disassemblyView.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/opt_vis/modules/views/cfgView.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/opt_vis/modules/views/loopFnTreeView.js?a HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/opt_vis/modules/call_graph/callGraph.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/opt_vis/modules/var_rename/varRenamer.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/opt_vis/modules/modelUtils.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/opt_vis/modules/mapAddressRanges.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/opt_vis/modules/utils.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/opt_vis/modules/views/highlightedItemsView.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/opt_vis/loopify_dagre.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/opt_vis/main_with_mvc_goldenlayout.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/opt_vis/lib/highlight.pack.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/js/jquery.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/js/Ajax.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/js/GetFileChoices.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/js/ReusableView.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/js/ReturnStubs.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/js/CheckboxWindowManager.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/js/Common.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/js/AutoTester.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/CFGConf/fileUtils.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/CFGConf/defs.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/CFGConf/utils.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/CFGConf/loopify_dagre.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/CFGConf/graphUtils.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/CFGConf/cfgView.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/CFGConf/filtering.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/CFGConf/main.js HTTP/1.1[0m" 304 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[33mGET /undefined/static/opt_vis/sample_inputs/rajaperf_out_serial/raja-perf.exe.json HTTP/1.1[0m" 404 -
+172.17.0.1 - - [10/Nov/2021 01:14:29] "[36mGET /static/opt_vis/imgs/minus.png HTTP/1.1[0m" 304 -

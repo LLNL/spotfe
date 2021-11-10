@@ -21,7 +21,9 @@ $.fn.MultiRowSelector = function( obj ) {
         'day of week':{
             "call_func":"$.fn.MultiRowSelector.get_day_of_week( REPLACE_SUBJECT )"
         },  //  string -> mon, tue, etc.
-        'day of month':{}, //  integer
+        'day of month':{
+            "call_func":"$.fn.MultiRowSelector.get_day_of_month( REPLACE_SUBJECT )"
+        }, //  integer
         'month of year':{},
         'abs()':{}
     };
@@ -91,9 +93,6 @@ $.fn.MultiRowSelector = function( obj ) {
     //  OR so we don't have to wait for a onchange event to occur.
     $.fn.MultiRowSelector.get_operations = get_operations_;
 
-    $.fn.MultiRowSelector.get_day_of_week = function() {
-        return "Monday";
-    };
 
     var bind_ = function( that ) {
 
@@ -153,3 +152,20 @@ $.fn.MultiRowSelector = function( obj ) {
     });
 };
 
+
+//  TODO: use javascript date to get real day of week.
+$.fn.MultiRowSelector.get_day_of_week = function( val ) {
+
+    var days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    var mod = val % 7;
+
+    return days[mod];
+};
+
+//  TODO: use javascript date to get real day of month.
+$.fn.MultiRowSelector.get_day_of_month = function( val ) {
+
+    var mod = val % 30;
+
+    return days[mod];
+};
