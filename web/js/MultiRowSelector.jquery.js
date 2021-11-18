@@ -233,15 +233,15 @@ $.fn.MultiRowSelector.ofTypes = {
     '5':{
         "call_func": "$.fn.MultiRowSelector.negate_float( REPLACE_SUBJECT )",
         "display": "negate()"
-    },
-    '6':{
+    }
+/*    '6':{
         "call_func": "$.fn.MultiRowSelector.modulo_float( REPLACE_SUBJECT )",
         "display": "modulo()"
     },
     '7':{
         "call_func": "$.fn.MultiRowSelector.const_float( REPLACE_SUBJECT )",
         "display": "const()"
-    }
+    }*/
 };
 
 
