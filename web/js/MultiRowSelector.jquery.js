@@ -8,10 +8,6 @@ $.fn.MultiRowSelector = function( obj ) {
             sel += '<option>' + arr[x] + '</option>';
         }
 
-        if( cla === "dimension_attribute" ) {
-            //sel += "<option>CONSTANT</option>";
-        }
-
         return "<select class='"+ cla + "'>" + sel + "</select>";
     };
 
@@ -45,6 +41,7 @@ $.fn.MultiRowSelector = function( obj ) {
         return '<tr class="multi_row">' +
             '<td>' + ( first_row ? "" : operation_select) + '</td>' +
             '<td>' + ofDrops_() + '</td>' +
+            '<td><input type="text" class="const_binary_in"></td>' +
             '<td>' + attributes_select +
             input_const +
             '</td>' +
@@ -66,11 +63,13 @@ $.fn.MultiRowSelector = function( obj ) {
             var tr = $(el).closest('tr.multi_row');
             var op_sel = tr.find('.operation_sel').val();
             var unary_op = tr.find('.unarySelector').val();
+            var const_binary_in = tr.find('.const_binary_in').val();
 
             vals.push({
                 attribute: v,
                 operation: op_sel,
-                unary_operation: unary_op
+                unary_operation: unary_op,
+                const_binary_in: const_binary_in
             });
         });
 
@@ -192,12 +191,12 @@ $.fn.MultiRowSelector.negate_float = function( val ) {
     return -1 * val;
 };
 
-$.fn.MultiRowSelector.modulo_float = function( val ) {
-    return val % 10;
+$.fn.MultiRowSelector.modulo_float = function( val, const_binary_in ) {
+    return val % const_binary_in;
 };
 
-$.fn.MultiRowSelector.const_float = function( val ) {
-    return val;
+$.fn.MultiRowSelector.const_float = function( val, const_binary_in ) {
+    return const_binary_in;
 };
 
 /*
@@ -233,15 +232,15 @@ $.fn.MultiRowSelector.ofTypes = {
     '5':{
         "call_func": "$.fn.MultiRowSelector.negate_float( REPLACE_SUBJECT )",
         "display": "negate()"
-    }
-/*    '6':{
-        "call_func": "$.fn.MultiRowSelector.modulo_float( REPLACE_SUBJECT )",
+    },
+    '6':{
+        "call_func": "$.fn.MultiRowSelector.modulo_float( REPLACE_SUBJECT, CONST_BINARY_IN )",
         "display": "modulo()"
     },
     '7':{
-        "call_func": "$.fn.MultiRowSelector.const_float( REPLACE_SUBJECT )",
+        "call_func": "$.fn.MultiRowSelector.const_float( REPLACE_SUBJECT, CONST_BINARY_IN )",
         "display": "const()"
-    }*/
+    }
 };
 
 

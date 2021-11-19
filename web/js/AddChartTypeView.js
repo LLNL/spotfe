@@ -335,7 +335,9 @@ ST.AddChartTypeView = function() {
             var operation = op.operation || "no-op";
             var unary_operation = op.unary_operation || "no-unary";
             var attribute = op.attribute || "no-attribute";
-            var one_row = operation + "_" + unary_operation + "(" + attribute + "), ";
+            var const_binary_in = op.const_binary_in || "no-const-binary-in";
+
+            var one_row = operation + "_" + unary_operation + "(" + attribute + "|" + const_binary_in + "),";
 
             dim += one_row;
         }
