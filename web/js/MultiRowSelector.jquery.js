@@ -41,8 +41,8 @@ $.fn.MultiRowSelector = function( obj ) {
         return '<tr class="multi_row">' +
             '<td>' + ( first_row ? "" : operation_select) + '</td>' +
             '<td>' + ofDrops_() + '</td>' +
-            '<td><input type="text" class="const_binary_in"></td>' +
-            '<td>' + attributes_select +
+            //'<td><input type="text" class="const_binary_in"></td>' +
+            '<td class="right_select_col">' + attributes_select +
             input_const +
             '</td>' +
             '<td>' +
@@ -79,6 +79,31 @@ $.fn.MultiRowSelector = function( obj ) {
         return vals;
     };
 
+
+    var change_unary_selector_ = function( event ) {
+
+        var targ = event.target;
+        var changedTo = $(targ).val();
+
+        if( targ.className === "unarySelector" ) {
+            
+            var tr = $(targ).parent().parent();
+            var td_right = tr.find('.right_select_col');
+
+            if (changedTo === "const()") {
+
+                td_right.html('<input type="text" class="const_binary_in">');
+            } else {
+
+                var attributes_select = get_select_render_(obj.selectors[1], "dimension_attribute");
+
+                td_right.html(attributes_select);
+                var mrs = tr.closest('.multi_row_selector');
+                bind_(mrs);
+            }
+        }
+    };
+
     //  Let's make this publicly available so that we can run it before submits happen.
     //  OR so we don't have to wait for a onchange event to occur.
     $.fn.MultiRowSelector.get_operations = get_operations_;
@@ -89,8 +114,9 @@ $.fn.MultiRowSelector = function( obj ) {
         that.find('.delete_row').unbind('click').bind('click', delete_row_ );
         that.find('.add_row').unbind('click').bind('click', add_row_ );
 
-        that.find('select').unbind('change').change( function() {
+        that.find('select').unbind('change').change( function( event ) {
 
+            change_unary_selector_( event );
             var ops = get_operations_( that );
             obj.callback( ops );
         } );
