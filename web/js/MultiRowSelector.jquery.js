@@ -259,10 +259,11 @@ $.fn.MultiRowSelector.ofTypes = {
         "call_func": "$.fn.MultiRowSelector.negate_float( REPLACE_SUBJECT )",
         "display": "negate()"
     },
-    '6':{
+    //  THIS IS NOT a unary operator.  i don't think we'll use this again.
+/*    '6':{
         "call_func": "$.fn.MultiRowSelector.modulo_float( REPLACE_SUBJECT, CONST_BINARY_IN )",
         "display": "modulo()"
-    },
+    },*/
     '7':{
         "call_func": "$.fn.MultiRowSelector.const_float( REPLACE_SUBJECT, CONST_BINARY_IN )",
         "display": "const()"

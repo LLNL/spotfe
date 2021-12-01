@@ -332,15 +332,25 @@ ST.AddChartTypeView = function() {
         for( var y=0; y < ops.length; y++ ) {
 
             var op = ops[y];
-            var operation = op.operation || "no-op";
-            var unary_operation = op.unary_operation || "no-unary";
-            var attribute = op.attribute || "no-attribute";
-            var const_binary_in = op.const_binary_in || "no-const-binary-in";
+            var operation = op.operation || "noop";
+            var unary_operation = op.unary_operation || "nounary";
+            var attribute = op.attribute || "noattribute";
+            var const_binary_in = op.const_binary_in || "noconstbinaryin";
 
-            var one_row = operation + "_" + unary_operation + "(" + attribute + "|" + const_binary_in + "),";
+            var one_row = operation + "_" + unary_operation + "_open_" + attribute + "_bar_" + const_binary_in + "_close";
 
             dim += one_row;
         }
+
+        //  the DOM does not want ( or ) in there and neither does the URL bar.
+        //  we may want to compress the dimension.
+        dim = dim.replace(/\(/g, '');
+        dim = dim.replace(/\)/g, '');
+        dim = dim.replace(/ /g, '');
+        dim = dim.replace(/\+/g, '_pl_');
+        dim = dim.replace(/\-/g, '_mi_');
+        dim = dim.replace(/\*/g, '_mu_');
+        dim = dim.replace(/\//g, '_di_');
 
         return dim;
     };
@@ -470,6 +480,8 @@ ST.AddChartTypeView = function() {
                 return old;
             }
         }
+
+        console.log('When removing a chart, Could not find dimension: ' + dimension);
     };
 
 
