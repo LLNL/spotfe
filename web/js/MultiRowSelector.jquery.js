@@ -86,7 +86,7 @@ $.fn.MultiRowSelector = function( obj ) {
         var changedTo = $(targ).val();
 
         if( targ.className === "unarySelector" ) {
-            
+
             var tr = $(targ).parent().parent();
             var td_right = tr.find('.right_select_col');
 
