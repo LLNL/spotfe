@@ -83,7 +83,7 @@ ST.AddChartTypeView = function() {
             ren_delete_( true );
 
             var first_dropdown = $('.composite_chart_type .multi_row:eq(0) .dimension_attribute').val();
-            $('.composite_chart_type .chart_name').val( first_dropdown );
+            //$('.composite_chart_type .chart_name').val( first_dropdown );
 
         } else {
             $('.multi_row_selector').html("");
@@ -107,7 +107,7 @@ ST.AddChartTypeView = function() {
             var yaxis_sel = $('.composite_chart_type .yaxis select').val();
             var vs = xaxis_sel + " vs " + yaxis_sel;
 
-            $('.composite_chart_type .chart_name').val( vs );
+            //$('.composite_chart_type .chart_name').val( vs );
 
             var attributes_select = get_attributes_(["double", "long", "int"]);
             var sel = get_select_render_( attributes_select );
@@ -145,7 +145,7 @@ ST.AddChartTypeView = function() {
 
         var name = xaxis + " vs " + yaxis;
 
-        $('.composite_chart_type .chart_name').val( name );
+        //$('.composite_chart_type .chart_name').val( name );
     };
 
 
@@ -206,7 +206,7 @@ ST.AddChartTypeView = function() {
         $('.xaxis select').val( xaxis ).change(update_chart_name_);
         $('.yaxis select').val( yaxis ).change(update_chart_name_);
 
-        $('.composite_chart_type .chart_name').val( ch_name );
+        //$('.composite_chart_type .chart_name').val( ch_name );
     };
 
 
@@ -371,7 +371,7 @@ ST.AddChartTypeView = function() {
             ht += ope + op.attribute;
         }
 
-        $('.chart_name').val( ht );
+        //$('.chart_name').val( ht );
     };
 
 

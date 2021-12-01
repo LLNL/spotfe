@@ -57,10 +57,10 @@ $.fn.MultiRowSelector = function( obj ) {
         var parent = that.closest(".multi_row_selector");
         var vals = [];
 
-        var ops = parent.find("select.dimension_attribute").each( function( ind, el ) {
+        var ops = parent.find(".multi_row").each( function( ind, el ) {
 
-            var v = $(el).val();
-            var tr = $(el).closest('tr.multi_row');
+            var v = $(el).find('select.dimension_attribute').val();
+            var tr = $(el); //  $(el).closest('tr.multi_row');
             var op_sel = tr.find('.operation_sel').val();
             var unary_op = tr.find('.unarySelector').val();
             var const_binary_in = tr.find('.const_binary_in').val();
