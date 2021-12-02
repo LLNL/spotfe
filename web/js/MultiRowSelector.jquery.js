@@ -3,6 +3,7 @@ $.fn.MultiRowSelector = function( obj ) {
     var get_select_render_ = function( arr, cla ) {
 
         var sel = "";
+        
         for( var x=0; x < arr.length; x++ ) {
 
             sel += '<option>' + arr[x] + '</option>';
@@ -18,9 +19,27 @@ $.fn.MultiRowSelector = function( obj ) {
 
         var ofTypes = $.fn.MultiRowSelector.ofTypes;
 
-        for( var ofTypeIndex in ofTypes ) {
+        var ofTypesArr = [];
+        for( var x in ofTypes ) {
+            ofTypesArr.push( ofTypes[x] );
+        }
 
-            var obj = ofTypes[ ofTypeIndex ];
+        ofTypesArr.sort( function(a,b) {
+
+            if( a.display < b.display ) {
+                return -1;
+            }
+
+            if( a.display > b.display ) {
+                return 1;
+            }
+
+            return 0;
+        });
+
+        for( var y=0; y < ofTypesArr.length; y++ ) {
+
+            var obj = ofTypesArr[ y ];
             ofs += '<option>' + obj.display + '</option>';
         }
 
