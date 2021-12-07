@@ -86,7 +86,7 @@ ST.CompositeLayoutModel = function() {
                     if( typeof const_binary_in === "string" ) {
                         const_binary_in = '"' + const_binary_in + '"';
                     }
-                    
+
                     call_ret = call_ret.replace('CONST_BINARY_IN', const_binary_in );
 
                     return call_ret;

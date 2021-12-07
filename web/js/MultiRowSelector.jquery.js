@@ -71,6 +71,21 @@ $.fn.MultiRowSelector = function( obj ) {
     };
 
 
+    var get_returning_type_for_unary_ = function( unary_op ) {
+
+        for( var x in $.fn.MultiRowSelector.ofTypes ) {
+
+            var obj = $.fn.MultiRowSelector.ofTypes[x];
+
+            if( obj.display === unary_op ) {
+                return obj.type_return;
+            }
+        }
+
+        return "could not find type selected.";
+    };
+
+
     var get_operations_ = function( that ) {
 
         var parent = that.closest(".multi_row_selector");
@@ -83,12 +98,14 @@ $.fn.MultiRowSelector = function( obj ) {
             var op_sel = tr.find('.operation_sel').val();
             var unary_op = tr.find('.unarySelector').val();
             var const_binary_in = tr.find('.const_binary_in').val();
+            var ret_type = get_returning_type_for_unary_( unary_op );
 
             vals.push({
                 attribute: v,
                 operation: op_sel,
                 unary_operation: unary_op,
-                const_binary_in: const_binary_in
+                const_binary_in: const_binary_in,
+                ret_type: ret_type
             });
         });
 
@@ -252,31 +269,38 @@ $.fn.MultiRowSelector.const_float = function( val, const_binary_in ) {
 $.fn.MultiRowSelector.ofTypes = {
     '1':{
         "call_func": "$.fn.MultiRowSelector.get_day_of_week_str( REPLACE_SUBJECT )",
-        "display": "day of week str"
+        "display": "day of week str",
+        "type_return": "str"
     },  //  string -> mon, tue, etc.
     '1.5':{
         "call_func": "$.fn.MultiRowSelector.get_day_of_week_int( REPLACE_SUBJECT )",
-        "display": "day of week int"
+        "display": "day of week int",
+        "type_return": "int"
     },  //  string -> mon, tue, etc.
     '2':{
         "call_func": "$.fn.MultiRowSelector.get_day_of_month_int( REPLACE_SUBJECT )",
-        "display": "day of month int"
+        "display": "day of month int",
+        "type_return": "int"
     }, //  integer
     '3':{
         "call_func": "$.fn.MultiRowSelector.get_month_of_year_int( REPLACE_SUBJECT )",
-        "display": "month of year int"
+        "display": "month of year int",
+        "type_return": "int"
     },
     '3.5':{
         "call_func": "$.fn.MultiRowSelector.get_month_of_year_str( REPLACE_SUBJECT )",
-        "display": "month of year str"
+        "display": "month of year str",
+        "type_return": "str"
     },
     '4':{
         "call_func": "$.fn.MultiRowSelector.abs_float( REPLACE_SUBJECT )",
-        "display": "abs()"
+        "display": "abs()",
+        "type_return": "float"
     },
     '5':{
         "call_func": "$.fn.MultiRowSelector.negate_float( REPLACE_SUBJECT )",
-        "display": "negate()"
+        "display": "negate()",
+        "type_return": "float"
     },
     //  THIS IS NOT a unary operator.  i don't think we'll use this again.
 /*    '6':{
