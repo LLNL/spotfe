@@ -324,7 +324,7 @@ table.only_multi_row_selector {
     }
 
     tr td:first-child {
-        width: 100px;
+        width: 86px;
 
         select {
             width: 80px;
@@ -348,7 +348,7 @@ table.only_multi_row_selector {
         }
 
         .dimension_attribute {
-            width: 350px;
+            width: 384px;
         }
 
         .input_const {
@@ -363,7 +363,7 @@ table.only_multi_row_selector {
 
         tr:first-child td {
             border-top: 1px solid #bbbbbb;
-            padding: 12px 3px 3px 3px;
+            padding: 12px 3px 3px 0;
         }
 
 
@@ -659,7 +659,7 @@ body .bg-color-255-255-255-0 {
 .outer_modal {
 
     .const_binary_in {
-        width:    333px;
+        width:    368px;
         padding: 7px 7px;
     }
 

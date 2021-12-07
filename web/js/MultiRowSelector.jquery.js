@@ -3,7 +3,7 @@ $.fn.MultiRowSelector = function( obj ) {
     var get_select_render_ = function( arr, cla ) {
 
         var sel = "";
-        
+
         for( var x=0; x < arr.length; x++ ) {
 
             sel += '<option>' + arr[x] + '</option>';
