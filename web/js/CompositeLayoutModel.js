@@ -121,6 +121,13 @@ ST.CompositeLayoutModel = function() {
             var attribute = obo.attribute;
             var js_type = get_javascript_type_( attribute );
 
+            //  this is the case where you are using a unary operator to
+            //  override the type.  for example: Day_of_week_str( launchdate )
+            //  would return type str, not int.
+            if( obo.ret_type ) {
+                js_type = obo.ret_type;
+            }
+
             if( js_type === "string") {
                 return "PieChart";
             }
@@ -275,6 +282,7 @@ ST.CompositeLayoutModel = function() {
 
     var show_composites_ = function() {
 
+        var sep = " = ";
         console.log('============================================================');
 
         for( var x in sqs.layout_used.charts) {
@@ -282,6 +290,9 @@ ST.CompositeLayoutModel = function() {
             var obj = sqs.layout_used.charts[x];
 
             if(obj.composite_layout) {
+
+                console.log( pad_right_("Title") + sep + obj.title );
+                console.log( pad_right_("Viz") + sep + obj.viz );
 
                 var ops = obj.composite_layout.operations;
 
@@ -292,7 +303,7 @@ ST.CompositeLayoutModel = function() {
                     for( var att in op ) {
 
                         var con = op[att];
-                        console.log( pad_right_( att ) + ' = ' + con );
+                        console.log( pad_right_( att ) + sep + con );
                     }
 
                     if( y < (ops.length -1)) {

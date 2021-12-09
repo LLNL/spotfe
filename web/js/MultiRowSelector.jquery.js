@@ -82,7 +82,7 @@ $.fn.MultiRowSelector = function( obj ) {
             }
         }
 
-        return "could not find type selected.";
+        return "no unary op selected.";
     };
 
 
