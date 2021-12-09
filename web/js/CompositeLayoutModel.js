@@ -266,8 +266,49 @@ ST.CompositeLayoutModel = function() {
         }
     };
 
+
+    var pad_right_ = function(s) {
+        var s2 = s + "                             ";
+        var s3 = s2.slice(0, 16);
+        return s3;
+    };
+
+    var show_composites_ = function() {
+
+        console.log('============================================================');
+
+        for( var x in sqs.layout_used.charts) {
+
+            var obj = sqs.layout_used.charts[x];
+
+            if(obj.composite_layout) {
+
+                var ops = obj.composite_layout.operations;
+
+                for( var y=0; y < ops.length; y++ ) {
+
+                    var op = ops[y];
+
+                    for( var att in op ) {
+
+                        var con = op[att];
+                        console.log( pad_right_( att ) + ' = ' + con );
+                    }
+
+                    if( y < (ops.length -1)) {
+                        console.log('----------------------------------------');
+                    }
+                }
+
+                console.log('============================================================');
+            }
+        }
+    };
+
+
     return {
         log: log_,
+        show_composites: show_composites_,
         remove_composite_chart_from_runs: remove_composite_chart_from_runs_,
         augment_first_run_to_include_composite_charts: augment_first_run_to_include_composite_charts_,
         get_js_type_based_on_cali_data_type: get_js_type_based_on_cali_data_type_,
