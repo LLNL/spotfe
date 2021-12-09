@@ -82,7 +82,7 @@ $.fn.MultiRowSelector = function( obj ) {
             }
         }
 
-        return "no unary op selected.";
+        return ST.CONSTS.NO_UNARY_OP_SELECTED;
     };
 
 
@@ -274,7 +274,7 @@ $.fn.MultiRowSelector.ofTypes = {
     '1':{
         "call_func": "$.fn.MultiRowSelector.get_day_of_week_str( REPLACE_SUBJECT )",
         "display": "day of week str",
-        "type_return": "str"
+        "type_return": "string"
     },  //  string -> mon, tue, etc.
     '1.5':{
         "call_func": "$.fn.MultiRowSelector.get_day_of_week_int( REPLACE_SUBJECT )",
@@ -294,7 +294,7 @@ $.fn.MultiRowSelector.ofTypes = {
     '3.5':{
         "call_func": "$.fn.MultiRowSelector.get_month_of_year_str( REPLACE_SUBJECT )",
         "display": "month of year str",
-        "type_return": "str"
+        "type_return": "string"
     },
     '4':{
         "call_func": "$.fn.MultiRowSelector.abs_float( REPLACE_SUBJECT )",
@@ -314,7 +314,7 @@ $.fn.MultiRowSelector.ofTypes = {
     '7':{
         "call_func": "$.fn.MultiRowSelector.const_str( REPLACE_SUBJECT, CONST_BINARY_IN )",
         "display": "const( str )",
-        "type_return": "str"
+        "type_return": "string"
     },
     '8':{
         "call_func": "$.fn.MultiRowSelector.const_float( REPLACE_SUBJECT, CONST_BINARY_IN )",

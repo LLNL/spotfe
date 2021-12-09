@@ -124,7 +124,7 @@ ST.CompositeLayoutModel = function() {
             //  this is the case where you are using a unary operator to
             //  override the type.  for example: Day_of_week_str( launchdate )
             //  would return type str, not int.
-            if( obo.ret_type ) {
+            if( obo.ret_type && obo.ret_type !== ST.CONSTS.NO_UNARY_OP_SELECTED) {
                 js_type = obo.ret_type;
             }
 
@@ -143,9 +143,24 @@ ST.CompositeLayoutModel = function() {
 
             var obj = ST.cali_obj_by_key[x];
 
-            return typeof obj[att];
+            var ty = typeof obj[att];
+            if( ty === 'string' ) {
+
+                //  attempt to convert to a number.
+                var convert = +obj[att];
+
+                if( isNaN( convert ) || convert === undefined ) {
+                    return 'string';
+                } else {
+                    return 'number';
+                }
+            } else {
+                //  probably a number.
+                return ty;
+            }
         }
     };
+
 
     var get_js_type_based_on_cali_data_type_ = function( ops ) {
 
