@@ -126,7 +126,7 @@ $.fn.MultiRowSelector = function( obj ) {
             var tr = $(targ).parent().parent();
             var td_right = tr.find('.right_select_col');
 
-            if (changedTo === "const()") {
+            if (changedTo === "const( float )" || changedTo === "const( str )" ) {
 
                 td_right.html('<input type="text" class="const_binary_in">');
             } else {
@@ -258,7 +258,11 @@ $.fn.MultiRowSelector.modulo_float = function( val, const_binary_in ) {
 };
 
 $.fn.MultiRowSelector.const_float = function( val, const_binary_in ) {
-    return const_binary_in;
+    return +const_binary_in;
+};
+
+$.fn.MultiRowSelector.const_str = function( val, const_binary_in ) {
+    return ("" + const_binary_in);
 };
 
 /*
@@ -308,8 +312,12 @@ $.fn.MultiRowSelector.ofTypes = {
         "display": "modulo()"
     },*/
     '7':{
+        "call_func": "$.fn.MultiRowSelector.const_str( REPLACE_SUBJECT, CONST_BINARY_IN )",
+        "display": "const( str )"
+    },
+    '8':{
         "call_func": "$.fn.MultiRowSelector.const_float( REPLACE_SUBJECT, CONST_BINARY_IN )",
-        "display": "const()"
+        "display": "const( float )"
     }
 };
 

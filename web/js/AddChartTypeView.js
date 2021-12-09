@@ -325,6 +325,9 @@ ST.AddChartTypeView = function() {
     };
 
 
+    //  RETURNS:
+    //      * this must be DOM safe string
+    //      * must be as compact as possible so we don't go over the 2K URL limit.
     var gen_dimension_ = function( ops ) {
 
         var dim = "";
@@ -332,12 +335,21 @@ ST.AddChartTypeView = function() {
         for( var y=0; y < ops.length; y++ ) {
 
             var op = ops[y];
-            var operation = op.operation || "noop";
-            var unary_operation = op.unary_operation || "nounary";
-            var attribute = op.attribute || "noattribute";
-            var const_binary_in = op.const_binary_in || "noconstbinaryin";
 
-            var one_row = operation + "_" + unary_operation + "_open_" + attribute + "_bar_" + const_binary_in + "_close";
+            //  p stands for no operation
+            var operation = op.operation || "p";
+
+            //  u standds for no unary operation.
+            var unary_operation = op.unary_operation || "u";
+
+            //  a stands for default attributes
+            var attribute = op.attribute || "a";
+
+            //  c stands for const binary in.
+            var const_binary_in = op.const_binary_in || "c";
+
+            var one_row = operation + "_" + unary_operation + "_" +
+                            attribute + "_" + const_binary_in;
 
             dim += one_row;
         }
