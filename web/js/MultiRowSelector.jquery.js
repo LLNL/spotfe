@@ -313,11 +313,13 @@ $.fn.MultiRowSelector.ofTypes = {
     },*/
     '7':{
         "call_func": "$.fn.MultiRowSelector.const_str( REPLACE_SUBJECT, CONST_BINARY_IN )",
-        "display": "const( str )"
+        "display": "const( str )",
+        "type_return": "str"
     },
     '8':{
         "call_func": "$.fn.MultiRowSelector.const_float( REPLACE_SUBJECT, CONST_BINARY_IN )",
-        "display": "const( float )"
+        "display": "const( float )",
+        "type_return": "float"
     }
 };
 
