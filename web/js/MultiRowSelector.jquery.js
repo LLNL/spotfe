@@ -53,11 +53,21 @@ $.fn.MultiRowSelector = function( obj ) {
     //  First row does not have an operation select.
     var row_ = function( first_row ) {
 
+        var top_row = "";
+        if( first_row ) {
+            top_row = '<tr class="multi_row header_row">' +
+                '<td>Binary Ops</td>' +
+                '<td>Unary Operations</td>' +
+                '<td>Operand</td>' +
+                '<td></td>' +
+                '</tr>';
+        }
+
         var operation_select = get_select_render_( obj.selectors[0], "operation_sel" );
         var attributes_select = get_select_render_( obj.selectors[1], "dimension_attribute" );
         var input_const = "<input type='text' class='input_const' style='display: none;'>";
 
-        return '<tr class="multi_row">' +
+        return top_row + '<tr class="multi_row">' +
             '<td>' + ( first_row ? "" : operation_select) + '</td>' +
             '<td>' + ofDrops_() + '</td>' +
             //'<td><input type="text" class="const_binary_in"></td>' +
@@ -191,7 +201,11 @@ $.fn.MultiRowSelector = function( obj ) {
 
     return this.each( function() {
 
-        var html = '<table class="only_multi_row_selector">' + row_( true ) + '</table>' +
+        var top_row = "";
+
+        var html = '<table class="only_multi_row_selector">' +
+            row_( true ) +
+            '</table>' +
             '<div class="center">' +
             ReusableView.button("ADD ROW", "add_row", "myButton") +
             '</div>';

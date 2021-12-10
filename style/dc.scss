@@ -332,6 +332,12 @@ table.only_multi_row_selector {
         }
     }
 
+    .header_row td {
+        font-weight: bold;
+        font-size: 11px;
+        color: #888888;
+    }
+
     tr td:nth-child(2) select {
         width: 360px;
     }
