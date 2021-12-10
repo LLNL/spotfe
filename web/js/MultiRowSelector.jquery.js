@@ -55,7 +55,7 @@ $.fn.MultiRowSelector = function( obj ) {
 
         var top_row = "";
         if( first_row ) {
-            top_row = '<tr class="multi_row header_row">' +
+            top_row = '<tr class="header_row">' +
                 '<td>Binary Ops</td>' +
                 '<td>Unary Operations</td>' +
                 '<td>Operand</td>' +
@@ -166,6 +166,19 @@ $.fn.MultiRowSelector = function( obj ) {
             var ops = get_operations_( that );
             obj.callback( ops );
         } );
+
+        that.find('.help_button').unbind('click').bind('click', help_button_);
+    };
+
+
+    var help_button_ = function() {
+
+        ReusableView.modal({
+           header: "Help",
+           body: "Unary operations happen before binary operations." +
+               "<br><br>Binary operations happen according to operator presendence." +
+               "<br><br>strcat is needed to combine two strings."
+        });
     };
 
 
@@ -201,9 +214,9 @@ $.fn.MultiRowSelector = function( obj ) {
 
     return this.each( function() {
 
-        var top_row = "";
+        var help = ReusableView.button('?', 'help_button', 'myButton');
 
-        var html = '<table class="only_multi_row_selector">' +
+        var html = help + '<table class="only_multi_row_selector">' +
             row_( true ) +
             '</table>' +
             '<div class="center">' +

@@ -349,6 +349,17 @@ table.only_multi_row_selector {
 
     .multi_row_selector {
 
+        position: relative;
+
+        .help_button {
+            position: absolute;
+            right: 2px;
+            top: 23px;
+            padding: 4px 0;
+            width: 35px;
+            text-align: center;
+        }
+
         .unarySelector {
             width: 155px;
         }
