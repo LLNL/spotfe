@@ -306,7 +306,7 @@ export default {
                 console.log("about to do response.json();");
                 var newData = await response.json();
 
-                console.log('newData:');
+                console.log('newData2:');
                 console.dir(newData);
 
                 this.updateTopDown( newData );
