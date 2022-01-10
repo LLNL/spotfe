@@ -30114,7 +30114,7 @@ var _default = {
       $('div.text').get(1).click();
     },
     updateTopDown: function updateTopDown(ret2) {
-      console.log('updateTopDown 23223');
+      console.log('updateTopDown A:');
       console.dir(ret2);
 
       if (ret2 && ret2.series) {
