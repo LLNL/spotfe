@@ -410,7 +410,13 @@ ST.ChartCollection = function() {
                     var nobj = normalize_indexes_(d);
 
                     var col = "Region Balance";
-                    return nobj[what_sort]; // d.date;
+                    var ret = nobj[what_sort]; // d.date;
+
+                    if( !isNaN(ret) ) {
+                        ret = +ret;
+                    }
+
+                    return ret;
                 })
                     .order(is_up ? d3.ascending : d3.descending);
 
