@@ -412,6 +412,12 @@ ST.ChartCollection = function() {
                     var col = "Region Balance";
                     var ret = nobj[what_sort]; // d.date;
 
+                    if( !ret ) {
+                        //  composite dimensions
+                        var dimension = lookup_dimension_by_title_( what_sort );
+                        ret = nobj[ dimension ];
+                    }
+
                     if( !isNaN(ret) ) {
                         ret = +ret;
                     }
@@ -429,6 +435,22 @@ ST.ChartCollection = function() {
         });
     };
 
+
+    var lookup_dimension_by_title_ = function( label ) {
+
+        var table0 = sqs.layout_used.table;
+
+        for( var i=0; i < table0.length; i++ ) {
+
+            var obj = table0[i];
+
+            if( obj.label === label ) {
+                return obj.dimension;
+            }
+        }
+
+        return "could not find";
+    };
 
     var show_more_ = function() {
 
