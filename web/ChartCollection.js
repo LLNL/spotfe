@@ -438,13 +438,15 @@ ST.ChartCollection = function() {
 
     var lookup_dimension_by_title_ = function( label ) {
 
+        label = label.toLowerCase();
         var table0 = sqs.layout_used.table;
 
         for( var i=0; i < table0.length; i++ ) {
 
             var obj = table0[i];
+            var ol = obj.label.toLowerCase();
 
-            if( obj.label === label ) {
+            if( ol === label ) {
                 return obj.dimension;
             }
         }
