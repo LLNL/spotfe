@@ -84,7 +84,7 @@ ST.CustomTemplates = function() {
         var explain = json.length === 0 ? no_templates_explanation_ : '';
 
         var body = "<div class='select_a'>" +
-            "Found" + json.length + " options.\n" +
+            "Found " + json.length + " options.\n" +
             "Select which jupyter notebook you want to open:" +
             "<a class='explanation' href='javascript: void();'>?</a>" +
             "</div>" +
