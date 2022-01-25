@@ -1,8 +1,8 @@
 ST.CustomTemplates = function() {
 
-    var get_temps_and_show_ = function( use_mutli_templates ) {
+    var get_temps_and_show_ = function( use_multi_templates ) {
 
-        ST.CallSpot.use_multi_templates = use_mutli_templates;
+        ST.CallSpot.use_multi_templates = use_multi_templates;
 
         var sf = ST.Utility.get_file();
         const isContainer = window.ENV.machine == 'container';
@@ -59,12 +59,12 @@ ST.CustomTemplates = function() {
 
 
     var no_templates_explanation_ = '<br><br>' +
-        'Found 0 templates.  Please add templates.' +
+        'Found 0 templates. Please add templates to the appropriate subdirectories depending on how many caliper files you wish to analyze.' +
         '<h4>Locations of templates:</h4>' +
         '<ul>' +
-        '<li>~/notebooks</li>' +
-        '<li>Spot file input directory - this is the input directory you specified at the top of the page.</li>' +
-        '<li>/usr/gapps/spot/templates/</li>' +
+        '<li>~/notebooks/{single|multi}</li>' +
+        '<li><Spot file input directory>/<single|multi}- this is the input directory you specified at the top of the page.</li>' +
+        '<li>/usr/gapps/spot/templates/{single|multi}</li>' +
         '</ul>';
 
 
@@ -84,6 +84,7 @@ ST.CustomTemplates = function() {
         var explain = json.length === 0 ? no_templates_explanation_ : '';
 
         var body = "<div class='select_a'>" +
+            "Found" + json.length + " options.\n" +
             "Select which jupyter notebook you want to open:" +
             "<a class='explanation' href='javascript: void();'>?</a>" +
             "</div>" +
@@ -102,18 +103,16 @@ ST.CustomTemplates = function() {
     var explanation_ = function() {
 
         ReusableView.modal({
-            body: 'You can make custom jupyter templates in jupyter notebooks.  ' +
-                'They need to be saved in one of these locations:' +
+            body: 'You can create custom jupyter templates in jupyter notebooks.  ' +
+                'They can be saved in any of the following locations:' +
                 "<h4>Locations of templates:</h4>" +
                 "<ul>" +
-                "<li>~/notebooks</li>" +
-                "<li>Spot file input directory - this is the input directory you specified at the top of the page.</li>" +
-                "<li>/usr/gapps/spot/templates/</li>" +
+                "<li>~/notebooks/{single|multi}</li>" +
+                "<li><Spot file input directory>/{single|multi} - this is the input directory you specified at the top of the page.</li>" +
+                "<li>/usr/gapps/spot/templates/{single|multi}</li>" +
                 "</ul>" +
-                "Within each of those directories you need to have 2 directories " +
-                "called <b>'single'</b> and <b>'multi'.</b>  " +
-                "The <b>single</b> directory is where you put your single jupyter templates.  " +
-                "The <b>multi</b> directory is where you put your multi jupyter templates." +
+                "The <b>single</b> subdirectory is for jupyter templates that analyze a single spot file.  " +
+                "The <b>multi</b> subdirectory is for jupyter templates that analyze multiple spot files." +
                 "<br><br>" +
                 "When you select a template, a number of substitutions are made." +
                 "You may put the following strings inside your template, using an editor.  " +
@@ -121,10 +120,11 @@ ST.CustomTemplates = function() {
                 "" +
                 "<h4>Template substitutions:</h4>" +
                 "<table class='list_of_temp'>" +
-                "<tr><td>MUTLI_CALI_FILES</td><td>the runs you select are passed to any multi template you select.</td></tr>" +
-                "<tr><td>CALI_METRIC_NAME</td><td>the first runs 'metric_name' attribute is substitued for this.</td></tr>" +
-                "<tr><td>CALI_QUERY_PATH</td><td>/usr/gapps/spot/caliper-install/bin is subtituted for this string</td></tr>" +
-                "<tr><td>DEPLOY_DIR</td><td>/usr/gapps/spot/ is subtitued for this.</td></tr>" +
+                "<tr><td>MULTI_CALI_FILES</td><td>Replaced with the names of the runs selected, only available in templates selected from the multi subdirectory.</td></tr>" +
+                "<tr><td>CALI_FILE_NAME</td><td>Replaced with the name of the run selected, only available in templates selected from the single subdirectory.</td></tr>" +
+                "<tr><td>CALI_METRIC_NAME</td><td>Replaced with the 'metric_name' attribute of the first run .</td></tr>" +
+                "<tr><td>CALI_QUERY_PATH</td><td>Replaced with /usr/gapps/spot/caliper-install/bin.</td></tr>" +
+                "<tr><td>DEPLOY_DIR</td><td>Replaced with /usr/gapps/spot/.</td></tr>" +
                 "</table>",
             header: "Substitutions",
             classes: "template_explain_main"
