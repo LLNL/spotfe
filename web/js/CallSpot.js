@@ -462,10 +462,12 @@ ST.CallSpot = function() {
             var cali_key = cali_obj.file_path;
 
             //  it has to be a cali file, no JSON (ale3D stuff) will work.
-            //if( !cali_obj.json ) {
 
-            str += ' ' + cali_key;
-            //}
+            //  two copies of each key are returns by the dateDimension.top(Infinity) now
+            //  we don't need the ones with the full path in it.
+            if( cali_key.indexOf('/') === -1 ) {
+                str += ' ' + cali_key;
+            }
         }
 
         return str.substr(1);
