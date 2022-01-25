@@ -60,7 +60,7 @@ ST.MemoryLineView = function() {
         var path = runSetId + "/" + runId;
         var url = "/getmemory";
 
-        ST.Utility.container_ajax( url, 'memory', path, line_render_ );
+        ST.Utility.container_ajax( url, 'getTimeseriesData', path, line_render_ );
     };
 
 

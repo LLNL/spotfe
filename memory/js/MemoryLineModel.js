@@ -28,7 +28,7 @@ ST.MemoryLineModel = function() {
 
             for (var pound_name in rets) {
 
-                if (typeof rets[pound_name] === "number" &&
+                if ( !isNaN( rets[pound_name] ) &&
                     pound_name !== "block") {
 
                     check_cache_[z] = check_cache_[z] || {};
@@ -84,7 +84,7 @@ ST.MemoryLineModel = function() {
                 //console.dir( std );
             }
 
-            var records = ret2.series.records;
+            var records = ret2.series;
 
             ST.Utility.assert( records.length > 0, "Did not receive any records.  Please check to see that your cali files contain memory data.");
 
@@ -95,7 +95,7 @@ ST.MemoryLineModel = function() {
                 return a.block - b.block;
             });
 
-            attributes_ = ret2.series.attributes;
+            attributes_ = ret2.series.attributes || {};
 
             console.dir( ret2 );
             console.dir( records );

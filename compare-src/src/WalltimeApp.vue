@@ -279,7 +279,7 @@ export default {
         async getmemoryfunc( path )
         {
             console.log('getmemoryfunc() 0');
-            const command = "/opt/conda/bin/python3 /usr/gapps/spot/backend.py --config /usr/gapps/spot/backend_config.yaml memory /data/" +
+            const command = "/opt/conda/bin/python3 /usr/gapps/spot/backend.py --config /usr/gapps/spot/backend_config.yaml getTimeseriesData /data/" +
                 path;
 
             var datarequest = {
@@ -457,7 +457,7 @@ export default {
 
                     ST.CallSpot.ajax({
                         file: path,
-                        type: "memory",
+                        type: "getTimeseriesData",
                         success: success_handler,
                         error: error_handler
                     });
