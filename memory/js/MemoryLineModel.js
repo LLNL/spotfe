@@ -84,7 +84,7 @@ ST.MemoryLineModel = function() {
                 //console.dir( std );
             }
 
-            var records = ret2.series;
+            var records = ret2.series.records;
 
             ST.Utility.assert( records.length > 0, "Did not receive any records.  Please check to see that your cali files contain memory data.");
 

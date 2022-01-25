@@ -395,7 +395,7 @@ export default {
             var suff = title === "undefined.json" ? runId : title;
 
             //  //'/usr/gapps/spot/datasets/lulesh_gen/100',
-            var path = runSetId + "/" + suff;
+            var path = runSetId + " " + suff;
 
             console.log( 'getAliases path=' + path );
             var isContainer = window.ENV.machine == 'container'
