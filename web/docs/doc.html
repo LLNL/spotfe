@@ -71,17 +71,17 @@
     <h3>Usage</h3>
 
     <p>
-        Make selections on the 4 chart types.  For example, for barcharts or scatter charts, you can click and drag the chart to select entries which meet that condition.
-        For PieCharts and Horizontal bar charts you can click the bars or the pie slices to make selections.
+        Make selections on the four chart types.  For example, for barcharts or scatter charts, you can click and drag the chart to select entries which meet that condition.
+        For PieCharts and Horizontal bar charts, you can click the bars or the pie slices to make selections.
     </p>
 
     <p>
-        Everytime a selection has been made, the rest of the charts will update, reflecting the aggregate selections already made.
+        Every time a selection has been made, the rest of the charts will update, reflecting the aggregate selections already made.
         Also the Run table below will update showing the selections made.
     </p>
 
     <p>
-        From the Run table entry, you will have up to 3 buttons on the right: A juputer notebook, a durations page and a memory line graph page (currently in development).
+        From the Run table entry, you will have up to three buttons on the right: A jupyter notebook, a durations page, and a memory line graph page (currently in development).
     </p>
 
     <h3>Jupyter Notebooks</h3>
@@ -105,36 +105,30 @@
         above) will open a notebook containing all runs.
     </p>
     <p>
-        The notebooks use <a
-        href="https://github.com/llnl/hatchet">Hatchet</a>, is a Python-based
-        library for analyzing performance data that has a hierarchy, for
-        example, profiles represents calling context trees or call graphs.
-        These notebooks include sample Hatchet analyses that can be used on a
-        single run or across multiple runs. Please see the <a
-        href="https://hatchet.readthedocs.io/en/latest/">Hatchet
-        Documentation</a> for more example analyses.
+        The notebooks use <a href="https://github.com/llnl/hatchet">Hatchet</a>, a Python-based library for analyzing hierarchical performance data, such as profiles that represent calling context trees or call graphs. These notebooks include sample Hatchet analyses that can be used to analyze a single run or multiple runs. Please see the <a href="https://hatchet.readthedocs.io/en/latest/">Hatchet Documentation</a> for more example analyses.
     </p>
 
     <h3>Durations</h3>
-    <p>Clicking on the durations icon for a run, will open the walltimes page.</p>
+    <p>Clicking on the durations icon for a run will open the walltimes page.</p>
 
     <h3>Memory Line Graph</h3>
-    <p>Click on the line graph icon for a run, will open the memory line graph page.</p>
+    <p>Clicking on the line graph icon for a run will open the memory line graph page.</p>
 
 
 
     <h3>Chart Types</h3>
     <p>
-        Your run data attributes will be shown in 4 different chart types, as histograms which count the occurance of each data value.
+        Your run data attributes will be shown in four different chart
+types.<!--, as histograms which count the occurrence of each data value.-->
     <table class="doc_table">
         <tr>
             <td>Chart type</td>
-            <td>When its used</td>
+            <td>When it's used</td>
         </tr>
 
         <tr>
             <td>BarChart</td>
-            <td>used for numbers and integers</td>
+            <td>Used for numbers and integers</td>
         </tr>
         <tr>
             <td>Horizontal BarChart</td>
@@ -177,7 +171,7 @@
                 <img src="../img/docs/check.png"/>
             </td>
             <td>
-                You may show or hide charts using the checkboxes.  First click the checkbox icon at the top right.  That will open the checkbox drawer.  Then check or uncheck to show or hide charts.
+                You may show or hide charts using the checkboxes.  First, click the checkbox icon at the top right.  That will open the checkbox drawer.  Then, check or uncheck to show or hide charts.
             </td>
         </tr>
         <tr>
@@ -193,8 +187,7 @@
                 <img src="../img/docs/jup.png"/>
             </td>
             <td>
-                At the bottom, in the table section which shows run data, you'll see up to 3 buttons per row.
-                The Planet shaped icon will take you to a jupyter notebook.
+                At the bottom, in the table section which shows run data, you'll see up to three buttons per row.  The planet shaped icon will take you to a jupyter notebook.
             </td>
         </tr>
 
@@ -237,14 +230,13 @@
 
         <h4>machine</h4>
         <p>
-            You can specify the <b>machine</b> with machine= in the url bar.  Machine tells which machine to run it on.  You may need to run on a machine that you have access to.
-            Typical values for machine are rzgenie, rzslic, etc.
+            You can specify the <b>machine</b> with machine= in the url bar.  Machine tells which machine to run it on.  You may need to run on a machine that you have access to.  Typical values for machine are rzgenie, rzslic, etc.
         </p>
 
         <h4>spot file</h4>
         <p>
             You can specify the <b>s</b>pot <b>f</b>ile with sf= in the url bar.
-            sf= is the directory/file sf is short for the dataset (short for Spot File)
+            sf= is the directory/file sf is short for the data set (short for Spot File)
             <br><br>
             Typical values for this are:
         <pre>/usr/gapps/spot/datasets/lulesh2small</pre>
@@ -274,7 +266,7 @@
         <h4>command</h4>
         <p>
             Typical value for command is: /usr/gapps/wf/web/spot/virtenv/bin/python /usr/gapps/wf/web/spot/spot.py
-            <br><br>You can specify the <b>command</b> with command= in the url bar.  It sends this command to the Back end, where it gets run.
+            <br><br>You can specify the <b>command</b> with command= in the url bar.  It sends this command to the backend, where it gets run.
         </p>
 
         <h3>Color of charts</h3>
@@ -287,8 +279,9 @@
 
     <h3>Table Column Sorting</h3>
     <p>
-        By default the table columns will be sorted either as a string or as numbers based on the type of the data.  Hence "GNU" would be sorted as a string, but 238438 would be sorted as a number.  If
-        the string only contains numbers, such as "234234" we'll typecast it to a number and sort as a number.
+        By default, the table columns will be sorted either as a string or as numbers based on the type of the data.  Hence "GNU" would be sorted as a string, but 238438 would be sorted as a number.  If
+        the string only contains numbers, such as "234234", we'll typecast it
+to a number and sort it as a number.
     </p>
 
 
@@ -311,8 +304,8 @@
         Here's the <a href="../web/" target="_blank">Home</a>
     </p>
     <p>
-        If someone wanted to start playing with the this, they could leave all the default parameters and simply pass in sf=/directory/to/your/data
-        You’ll need to make sure that the data is the same format as this: (/usr/gapps/spot/datasets/lulesh2small ) to begin with.
+        If someone wanted to start playing with this, they could leave all the default parameters and simply pass in sf=/directory/to/your/data.
+        You’ll need to make sure that the data is the same format as this: (/usr/gapps/spot/datasets/lulesh2small) to begin with.
 
         Then you can create your own data sets.  At that point, you’ll need to start specifying a layout file.
 
@@ -354,7 +347,7 @@
     </p>
 
     <h3>key</h3>
-    <p>Key is a unique identifier that will get passed to the next page.  For our use case it's a cali file, but it can be any identifier you want.</p>
+    <p>Key is a unique identifier that will get passed to the next page.  For our use case, it's a cali file, but it can be any identifier you want.</p>
 
 
     <h2>Table Sorting</h2>
@@ -366,7 +359,7 @@
     <h2>DataSet Object Attributes</h2>
     <p>
         Most of the attributes above are arbitrary labels of things being plotted.  These labels need to match the layout file.  For example, "Compiler Name" in the layout spec as an
-        attribute of "dimension", must match the DataSet attribute "Compiler Name", etc.
+        attribute of "dimension" must match the DataSet attribute "Compiler Name", etc.
     </p>
 
     <p>
@@ -387,7 +380,7 @@
 
     <h2>Bar Chart Bucketed vs Linear</h2>
     <p>
-        There are 2 conditions upon which must be met for sub-integer bucketing:
+        There are two conditions which must be met for sub-integer bucketing:
     <ul>
         <li>At least one of the data values must be a decimal value.</li>
         <li>The difference between the lowest value and the highest value must be below the SUB_INTEGER_LIMIT, currently set to 12.</li>
@@ -396,8 +389,8 @@
 
 
     <h2>Layout Spec</h2>
-    <p>Here is an example of a layout file, that shows what you can currently set: (currently: dimension and labels need to match for now, but later we’ll support differences).
-        This layout spec is designed to be extended, such that we can add x axis titles, etc.
+    <p>Here is an example of a layout file that shows what you can currently set: (currently: dimension and labels need to match for now, but later we’ll support differences).
+        This layout spec is designed to be extended, such that we can add x-axis titles, etc.
     <pre>
     {
     "charts": [
@@ -471,11 +464,11 @@
     </p>
 
     <h3>Labels</h3>
-    <p>You can specify labels in any of the BarChart graphs, simply by adding "x-label", or "y-label"</p>
+    <p>You can specify labels in any of the BarChart graphs by adding "x-label", or "y-label".</p>
 
 
     <h2>Ticks</h2>
-    <p>You can specify the number of ticks you would like on the X-axis or the y-axis, via "x-ticks", or "y-ticks".</p>
+    <p>You can specify the number of ticks you would like on the x-axis or the y-axis via "x-ticks", or "y-ticks".</p>
 
 
     <h2></h2>
