@@ -15,7 +15,8 @@ ST.CONSTS = {
     "UNIQUE_STR": 200,
     "MAX_HOR_BAR_CHART_STR_LEN": 100,
     "ETC_BUCKET": "Etc bucket",
-    "STRCON": "_strcat_"
+    "STRCON": "_strcat_",
+    "NO_UNARY_OP_SELECTED": "no unary op selected"
 };
 
 ST.Utility = function() {

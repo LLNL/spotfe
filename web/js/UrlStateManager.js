@@ -83,6 +83,13 @@ ST.UrlStateManager = function() {
         var loc = "" + location.href;
         var newUrl = updateURLParameter(loc, param, val);
 
+        var nl = newUrl.length;
+
+        if( nl > 2047 ) {
+
+            ReusableView.alert('Warning', 'URL length (' + nl + ') is exceeding browser limit: 2047.');
+        }
+
         history.pushState({}, null, newUrl);
     };
 

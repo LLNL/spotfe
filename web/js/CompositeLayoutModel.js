@@ -55,7 +55,8 @@ ST.CompositeLayoutModel = function() {
                 //    'I could only find the following references: ' + fd_contents);
             }
 
-            str += operation + make_str_if_str_( key_val );
+            var operator_value = make_str_if_str_( key_val );
+            str += operation + add_unary_( operator_value, op.unary_operation, op.const_binary_in );
         }
 
         //console.log( str );
@@ -65,6 +66,35 @@ ST.CompositeLayoutModel = function() {
         var ev = eval( str );
 
         return ev;
+    };
+
+
+    var add_unary_ = function( val, unary_operation, const_binary_in ) {
+
+        for( var ofTypeWordIndex in $.fn.MultiRowSelector.ofTypes ) {
+
+            var def_obj = $.fn.MultiRowSelector.ofTypes[ ofTypeWordIndex ];
+
+            if( def_obj && def_obj.display === unary_operation ) {
+
+                var call_ret = "";
+
+                if( def_obj.call_func ) {
+
+                    call_ret = def_obj.call_func.replace( 'REPLACE_SUBJECT', val );
+
+                    if( typeof const_binary_in === "string" ) {
+                        const_binary_in = '"' + const_binary_in + '"';
+                    }
+
+                    call_ret = call_ret.replace('CONST_BINARY_IN', const_binary_in );
+
+                    return call_ret;
+                }
+            }
+        }
+
+        return val;
     };
 
 
@@ -91,6 +121,13 @@ ST.CompositeLayoutModel = function() {
             var attribute = obo.attribute;
             var js_type = get_javascript_type_( attribute );
 
+            //  this is the case where you are using a unary operator to
+            //  override the type.  for example: Day_of_week_str( launchdate )
+            //  would return type str, not int.
+            if( obo.ret_type && obo.ret_type !== ST.CONSTS.NO_UNARY_OP_SELECTED) {
+                js_type = obo.ret_type;
+            }
+
             if( js_type === "string") {
                 return "PieChart";
             }
@@ -106,9 +143,24 @@ ST.CompositeLayoutModel = function() {
 
             var obj = ST.cali_obj_by_key[x];
 
-            return typeof obj[att];
+            var ty = typeof obj[att];
+            if( ty === 'string' ) {
+
+                //  attempt to convert to a number.
+                var convert = +obj[att];
+
+                if( isNaN( convert ) || convert === undefined ) {
+                    return 'string';
+                } else {
+                    return 'number';
+                }
+            } else {
+                //  probably a number.
+                return ty;
+            }
         }
     };
+
 
     var get_js_type_based_on_cali_data_type_ = function( ops ) {
 
@@ -225,7 +277,64 @@ ST.CompositeLayoutModel = function() {
     };
 
 
+    var log_ = function() {
+
+        for( var x in sqs.layout_used.charts) {
+
+            var obj = sqs.layout_used.charts[x];
+            if(obj.composite_layout) {
+                console.log( obj );
+            }
+        }
+    };
+
+
+    var pad_right_ = function(s) {
+        var s2 = s + "                             ";
+        var s3 = s2.slice(0, 16);
+        return s3;
+    };
+
+    var show_composites_ = function() {
+
+        var sep = " = ";
+        console.log('============================================================');
+
+        for( var x in sqs.layout_used.charts) {
+
+            var obj = sqs.layout_used.charts[x];
+
+            if(obj.composite_layout) {
+
+                console.log( pad_right_("Title") + sep + obj.title );
+                console.log( pad_right_("Viz") + sep + obj.viz );
+
+                var ops = obj.composite_layout.operations;
+
+                for( var y=0; y < ops.length; y++ ) {
+
+                    var op = ops[y];
+
+                    for( var att in op ) {
+
+                        var con = op[att];
+                        console.log( pad_right_( att ) + sep + con );
+                    }
+
+                    if( y < (ops.length -1)) {
+                        console.log('----------------------------------------');
+                    }
+                }
+
+                console.log('============================================================');
+            }
+        }
+    };
+
+
     return {
+        log: log_,
+        show_composites: show_composites_,
         remove_composite_chart_from_runs: remove_composite_chart_from_runs_,
         augment_first_run_to_include_composite_charts: augment_first_run_to_include_composite_charts_,
         get_js_type_based_on_cali_data_type: get_js_type_based_on_cali_data_type_,

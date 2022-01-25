@@ -12,7 +12,7 @@ ST.MemoryLineView = function() {
         var runId = ST.Utility.get_param('runId');
 
         //  //'/usr/gapps/spot/datasets/lulesh_gen/100',
-        var path = runSetId + "/" + runId;
+        var path = runSetId + " " + runId;
 
         //window.ENV.machine = 'container';
 
@@ -25,7 +25,7 @@ ST.MemoryLineView = function() {
 
             ST.CallSpot.ajax({
                 file: path,
-                type: "memory",
+                type: "getTimeseriesData",
                 success: line_render_
             });
         }
@@ -60,7 +60,7 @@ ST.MemoryLineView = function() {
         var path = runSetId + "/" + runId;
         var url = "/getmemory";
 
-        ST.Utility.container_ajax( url, 'memory', path, line_render_ );
+        ST.Utility.container_ajax( url, 'getTimeseriesData', path, line_render_ );
     };
 
 

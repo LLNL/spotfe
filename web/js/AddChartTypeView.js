@@ -83,7 +83,7 @@ ST.AddChartTypeView = function() {
             ren_delete_( true );
 
             var first_dropdown = $('.composite_chart_type .multi_row:eq(0) .dimension_attribute').val();
-            $('.composite_chart_type .chart_name').val( first_dropdown );
+            //$('.composite_chart_type .chart_name').val( first_dropdown );
 
         } else {
             $('.multi_row_selector').html("");
@@ -107,7 +107,7 @@ ST.AddChartTypeView = function() {
             var yaxis_sel = $('.composite_chart_type .yaxis select').val();
             var vs = xaxis_sel + " vs " + yaxis_sel;
 
-            $('.composite_chart_type .chart_name').val( vs );
+            //$('.composite_chart_type .chart_name').val( vs );
 
             var attributes_select = get_attributes_(["double", "long", "int"]);
             var sel = get_select_render_( attributes_select );
@@ -145,7 +145,7 @@ ST.AddChartTypeView = function() {
 
         var name = xaxis + " vs " + yaxis;
 
-        $('.composite_chart_type .chart_name').val( name );
+        //$('.composite_chart_type .chart_name').val( name );
     };
 
 
@@ -206,7 +206,7 @@ ST.AddChartTypeView = function() {
         $('.xaxis select').val( xaxis ).change(update_chart_name_);
         $('.yaxis select').val( yaxis ).change(update_chart_name_);
 
-        $('.composite_chart_type .chart_name').val( ch_name );
+        //$('.composite_chart_type .chart_name').val( ch_name );
     };
 
 
@@ -313,13 +313,56 @@ ST.AddChartTypeView = function() {
     };
 
 
-    var gen_dimension_ = function( ops ) {
+    var gen_dimension_old_ = function( ops ) {
 
         var dim = "";
 
         for( var y=0; y < ops.length; y++ ) {
             dim += ops[y].attribute + "_";
         }
+
+        return dim;
+    };
+
+
+    //  RETURNS:
+    //      * this must be DOM safe string
+    //      * must be as compact as possible so we don't go over the 2K URL limit.
+    var gen_dimension_ = function( ops ) {
+
+        var dim = "";
+
+        for( var y=0; y < ops.length; y++ ) {
+
+            var op = ops[y];
+
+            //  p stands for no operation
+            var operation = op.operation || "p";
+
+            //  u standds for no unary operation.
+            var unary_operation = op.unary_operation || "u";
+
+            //  a stands for default attributes
+            var attribute = op.attribute || "a";
+
+            //  c stands for const binary in.
+            var const_binary_in = op.const_binary_in || "c";
+
+            var one_row = operation + "_" + unary_operation + "_" +
+                            attribute + "_" + const_binary_in;
+
+            dim += one_row;
+        }
+
+        //  the DOM does not want ( or ) in there and neither does the URL bar.
+        //  we may want to compress the dimension.
+        dim = dim.replace(/\(/g, '');
+        dim = dim.replace(/\)/g, '');
+        dim = dim.replace(/ /g, '');
+        dim = dim.replace(/\+/g, '_pl_');
+        dim = dim.replace(/\-/g, '_mi_');
+        dim = dim.replace(/\*/g, '_mu_');
+        dim = dim.replace(/\//g, '_di_');
 
         return dim;
     };
@@ -350,7 +393,7 @@ ST.AddChartTypeView = function() {
             ht += ope + op.attribute;
         }
 
-        $('.chart_name').val( ht );
+        //$('.chart_name').val( ht );
     };
 
 
@@ -449,6 +492,8 @@ ST.AddChartTypeView = function() {
                 return old;
             }
         }
+
+        console.log('When removing a chart, Could not find dimension: ' + dimension);
     };
 
 

@@ -410,7 +410,19 @@ ST.ChartCollection = function() {
                     var nobj = normalize_indexes_(d);
 
                     var col = "Region Balance";
-                    return nobj[what_sort]; // d.date;
+                    var ret = nobj[what_sort]; // d.date;
+
+                    if( !ret ) {
+                        //  composite dimensions
+                        var dimension = lookup_dimension_by_title_( what_sort );
+                        ret = nobj[ dimension ];
+                    }
+
+                    if( !isNaN(ret) ) {
+                        ret = +ret;
+                    }
+
+                    return ret;
                 })
                     .order(is_up ? d3.ascending : d3.descending);
 
@@ -423,6 +435,24 @@ ST.ChartCollection = function() {
         });
     };
 
+
+    var lookup_dimension_by_title_ = function( label ) {
+
+        label = label.toLowerCase();
+        var table0 = sqs.layout_used.table;
+
+        for( var i=0; i < table0.length; i++ ) {
+
+            var obj = table0[i];
+            var ol = obj.label.toLowerCase();
+
+            if( ol === label ) {
+                return obj.dimension;
+            }
+        }
+
+        return "could not find";
+    };
 
     var show_more_ = function() {
 

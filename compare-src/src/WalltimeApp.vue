@@ -279,7 +279,7 @@ export default {
         async getmemoryfunc( path )
         {
             console.log('getmemoryfunc() 0');
-            const command = "/opt/conda/bin/python3 /usr/gapps/spot/backend.py --config /usr/gapps/spot/backend_config.yaml memory /data/" +
+            const command = "/opt/conda/bin/python3 /usr/gapps/spot/backend.py --config /usr/gapps/spot/backend_config.yaml getTimeseriesData /data/" +
                 path;
 
             var datarequest = {
@@ -306,7 +306,7 @@ export default {
                 console.log("about to do response.json();");
                 var newData = await response.json();
 
-                console.log('newData:');
+                console.log('newData2:');
                 console.dir(newData);
 
                 this.updateTopDown( newData );
@@ -457,7 +457,7 @@ export default {
 
                     ST.CallSpot.ajax({
                         file: path,
-                        type: "memory",
+                        type: "getTimeseriesData",
                         success: success_handler,
                         error: error_handler
                     });
@@ -472,7 +472,7 @@ export default {
         },
         updateTopDown( ret2 ) {
 
-            console.log('updateTopDown 23223')
+            console.log('updateTopDown A:')
             console.dir(ret2);
 
             if( ret2 && ret2.series ) {

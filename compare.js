@@ -52337,7 +52337,7 @@ var Graph = /*#__PURE__*/function () {
                 } //  newData is too big to always print out.
 
 
-                console.log('990AA newData:  ');
+                console.log('991B newData:  ');
                 console.dir(newData.Runs); //newData = ST.RunDictionaryTranslator.translate( newData );
 
                 ST.RunDictionaryTranslator.set(newData.dictionary);
@@ -52716,7 +52716,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53617" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63165" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

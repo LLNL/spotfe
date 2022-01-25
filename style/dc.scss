@@ -324,11 +324,18 @@ table.only_multi_row_selector {
     }
 
     tr td:first-child {
-        width: 100px;
+        width: 86px;
 
         select {
             width: 80px;
+            margin: 1 0 0 0;
         }
+    }
+
+    .header_row td {
+        font-weight: bold;
+        font-size: 11px;
+        color: #888888;
     }
 
     tr td:nth-child(2) select {
@@ -338,7 +345,28 @@ table.only_multi_row_selector {
 
 .composite_chart_type {
 
+    width: 750px;
+
     .multi_row_selector {
+
+        position: relative;
+
+        .help_button {
+            position: absolute;
+            right: 2px;
+            top: 23px;
+            padding: 4px 0;
+            width: 35px;
+            text-align: center;
+        }
+
+        .unarySelector {
+            width: 155px;
+        }
+
+        .dimension_attribute {
+            width: 384px;
+        }
 
         .input_const {
             display: none;
@@ -352,7 +380,7 @@ table.only_multi_row_selector {
 
         tr:first-child td {
             border-top: 1px solid #bbbbbb;
-            padding: 12px 3px 3px 3px;
+            padding: 12px 3px 3px 0;
         }
 
 
@@ -642,10 +670,15 @@ body .bg-color-255-255-255-0 {
 }
 
 .template_explain_main {
-    width: 750px;
+    width: 720px;
 }
 
 .outer_modal {
+
+    .const_binary_in {
+        width:    368px;
+        padding: 7px 7px;
+    }
 
     .explanation {
         position: absolute;

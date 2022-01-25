@@ -29947,7 +29947,7 @@ var _default = {
             switch (_context2.prev = _context2.next) {
               case 0:
                 console.log('getmemoryfunc() 0');
-                command = "/opt/conda/bin/python3 /usr/gapps/spot/backend.py --config /usr/gapps/spot/backend_config.yaml memory /data/" + path;
+                command = "/opt/conda/bin/python3 /usr/gapps/spot/backend.py --config /usr/gapps/spot/backend_config.yaml getTimeseriesData /data/" + path;
                 datarequest = {
                   command: command,
                   filepath: path
@@ -29978,7 +29978,7 @@ var _default = {
 
               case 13:
                 newData = _context2.sent;
-                console.log('newData:');
+                console.log('newData2:');
                 console.dir(newData);
 
                 _this.updateTopDown(newData);
@@ -30101,7 +30101,7 @@ var _default = {
 
           ST.CallSpot.ajax({
             file: path,
-            type: "memory",
+            type: "getTimeseriesData",
             success: success_handler,
             error: error_handler
           });
@@ -30114,7 +30114,7 @@ var _default = {
       $('div.text').get(1).click();
     },
     updateTopDown: function updateTopDown(ret2) {
-      console.log('updateTopDown 23223');
+      console.log('updateTopDown A:');
       console.dir(ret2);
 
       if (ret2 && ret2.series) {
@@ -41303,7 +41303,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53340" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49304" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

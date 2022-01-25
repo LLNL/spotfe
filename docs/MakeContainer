@@ -291,6 +291,7 @@ DONE - Get numpy working for rzgenie and rzslic.
     * cut in money.
     * maintenance mode.
 
+docker run -it --entrypoint /bin/bash -p 5000:5000/tcp optvis_d
 
 DOCKER
 docker build -t spot2 --build-arg DEFAULT_SPOTPW=see .
