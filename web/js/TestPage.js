@@ -61,6 +61,9 @@ var TEST = function() {
 
         var rtests = [
             "/usr/gapps/spot/datasets/sqlite/lul_sept_28_timeseries.sqlite",
+            "/usr/gapps/spot/datasets/sqlite/newdemo_mpi.sqlite",
+            "/usr/gapps/spot/datasets/sqlite/newdemo_user.sqlite",
+            "/usr/gapps/spot/datasets/sqlite/newdemo_test.sqlite",
             "/usr/gapps/spot/datasets/newdemo/mpi",
             "/usr/gapps/spot/datasets/newdemo/test",
             "/usr/gapps/spot/datasets/newdemo/user",
