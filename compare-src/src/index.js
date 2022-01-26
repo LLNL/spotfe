@@ -376,8 +376,26 @@ export class Graph{
         }
 
 
-        console.log('runs before cacheDa83:');
-        //console.dir(runs0);
+        console.log('runs before cacheDa84:');
+        console.dir(runs0);
+
+        for(var x in runs0 ) {
+
+            var el = runs0[x].Data;
+
+            var da=el;
+
+            for( var root in da) {
+
+                var obj=da[root];
+
+                for( var z in obj) {
+                    obj[z] = +obj[z];
+                }
+            }
+        }
+
+        console.dir(runs0);
 
         // Merge new data with cached
         cachedData.Runs = Object.assign(cachedData.Runs, runs0);

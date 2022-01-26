@@ -40179,7 +40179,15 @@ exports.default = vue_1.default.extend({
       return metrics;
     },
     selectedRun: function selectedRun() {
-      return this.hoverX ? this.groupedAndAggregated[this.hoverX.groupName][this.hoverX.runIndex] : null;
+      if (this.hoverX) {
+        if (!window.gaa) {
+          window.gaa = this.groupedAndAggregated[this.hoverX.groupName][this.hoverX.runIndex];
+        }
+
+        return window.gaa;
+      }
+
+      return null;
     },
     groupedAndAggregated: function groupedAndAggregated() {
       var _this = this;
@@ -52172,7 +52180,7 @@ var Graph = /*#__PURE__*/function () {
     key: "afterCachedDataGet",
     value: function () {
       var _afterCachedDataGet = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(cachedDataGet, bust_cache, mtime, dataSetKey, host, command) {
-        var cachedData, cachedRunCtimes, x, dataRequest, newData, cacheSum, cacheDate, cacheFileFound, response, txt, lor_response, pd, dstr, sf, key, runs0, deletedRuns, baseMetrics, metric, funcPaths, metricNames, runs, filenames, lr0, arr, run_id_x, a_run, summary, visibleCharts, _i4, _Object$entries4, _Object$entries4$_i, filename, fileContents, barCharts, _i5, _Object$entries5, _Object$entries5$_i, globalName, globalValue, globType, show;
+        var cachedData, cachedRunCtimes, x, dataRequest, newData, cacheSum, cacheDate, cacheFileFound, response, txt, lor_response, pd, dstr, sf, key, runs0, el, da, root, obj, z, deletedRuns, baseMetrics, metric, funcPaths, metricNames, runs, filenames, lr0, arr, run_id_x, a_run, summary, visibleCharts, _i4, _Object$entries4, _Object$entries4$_i, filename, fileContents, barCharts, _i5, _Object$entries5, _Object$entries5$_i, globalName, globalValue, globType, show;
 
         return regeneratorRuntime.wrap(function _callee4$(_context4) {
           while (1) {
@@ -52347,8 +52355,23 @@ var Graph = /*#__PURE__*/function () {
                   ST.CallSpot.is_ale3d = true;
                 }
 
-                console.log('runs before cacheDa83:'); //console.dir(runs0);
-                // Merge new data with cached
+                console.log('runs before cacheDa84:');
+                console.dir(runs0);
+
+                for (x in runs0) {
+                  el = runs0[x].Data;
+                  da = el;
+
+                  for (root in da) {
+                    obj = da[root];
+
+                    for (z in obj) {
+                      obj[z] = +obj[z];
+                    }
+                  }
+                }
+
+                console.dir(runs0); // Merge new data with cached
 
                 cachedData.Runs = Object.assign(cachedData.Runs, runs0);
                 cachedData.RunDataMeta = Object.assign(cachedData.RunDataMeta, newData.RunDataMeta);
@@ -52449,10 +52472,10 @@ var Graph = /*#__PURE__*/function () {
                 //  and will be sent to the durations page from CallSpot.js
                 //        await localforage.setItem(dataSetKey, {'Runs': arr});
 
-                _context4.next = 91;
+                _context4.next = 94;
                 return _localforage.default.setItem(dataSetKey, lr0);
 
-              case 91:
+              case 94:
                 //  The first run's meta object is used to determine what the drop down select options should be.
                 window.runs = ST.CompositeLayoutModel.augment_first_run_to_include_composite_charts(runs);
                 this.compare(filenames); // 4. return summary
@@ -52464,20 +52487,20 @@ var Graph = /*#__PURE__*/function () {
                     table: []
                   }
                 };
-                _context4.next = 96;
+                _context4.next = 99;
                 return _localforage.default.getItem("show:" + dataSetKey);
 
-              case 96:
+              case 99:
                 _context4.t1 = _context4.sent;
 
                 if (_context4.t1) {
-                  _context4.next = 99;
+                  _context4.next = 102;
                   break;
                 }
 
                 _context4.t1 = defaultVisibleCharts;
 
-              case 99:
+              case 102:
                 visibleCharts = _context4.t1;
 
                 for (_i4 = 0, _Object$entries4 = Object.entries(cachedData.Runs); _i4 < _Object$entries4.length; _i4++) {
@@ -52508,24 +52531,24 @@ var Graph = /*#__PURE__*/function () {
                   });
                 }
 
-                _context4.next = 105;
+                _context4.next = 108;
                 return _localforage.default.getItem('scatterplots:' + this.dataSetKey);
 
-              case 105:
+              case 108:
                 _context4.t2 = _context4.sent;
 
                 if (_context4.t2) {
-                  _context4.next = 108;
+                  _context4.next = 111;
                   break;
                 }
 
                 _context4.t2 = [];
 
-              case 108:
+              case 111:
                 summary.layout.scatterplots = _context4.t2;
                 return _context4.abrupt("return", summary);
 
-              case 110:
+              case 113:
               case "end":
                 return _context4.stop();
             }
@@ -52716,7 +52739,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63165" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60100" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

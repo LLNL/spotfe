@@ -317,7 +317,15 @@ export default Vue.extend({
             return metrics;
         },
         selectedRun(){
-            return this.hoverX ? this.groupedAndAggregated[this.hoverX.groupName][this.hoverX.runIndex] : null
+            if( this.hoverX) {
+
+                if( !window.gaa ) {
+                    window.gaa = this.groupedAndAggregated[this.hoverX.groupName][this.hoverX.runIndex];
+                }
+                return window.gaa;
+            }
+
+            return null;
         },
         groupedAndAggregated(){
 

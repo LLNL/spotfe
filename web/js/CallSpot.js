@@ -465,9 +465,10 @@ ST.CallSpot = function() {
 
             //  two copies of each key are returns by the dateDimension.top(Infinity) now
             //  we don't need the ones with the full path in it.
-            if( cali_key.indexOf('/') === -1 ) {
-                str += ' ' + cali_key;
-            }
+            //  can not remove duplicate with / in it or rendering won't work.
+            //if( cali_key.indexOf('/') === -1 ) {
+            str += ' ' + cali_key;
+            //}
         }
 
         return str.substr(1);
