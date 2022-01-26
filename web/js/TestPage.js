@@ -60,6 +60,7 @@ var TEST = function() {
             "demos/mpi"];
 
         var rtests = [
+            "/usr/gapps/spot/datasets/sqlite/lul_sept_28_timeseries.sqlite",
             "/usr/gapps/spot/datasets/newdemo/mpi",
             "/usr/gapps/spot/datasets/newdemo/test",
             "/usr/gapps/spot/datasets/newdemo/user",
