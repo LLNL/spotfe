@@ -18,7 +18,7 @@ ST.RunDictionaryTranslator = function() {
     //  Example string inputs: "read restart ce (0)", "b$"
     var lookupStr_ = function( str ) {
 
-        var arr = str.split(' ');
+        var arr = typeof str === 'string' ? str.split(' ') : [];
         var total = "";
 
         for( var z=0; z < arr.length; z++ ) {
