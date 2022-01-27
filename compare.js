@@ -40179,15 +40179,7 @@ exports.default = vue_1.default.extend({
       return metrics;
     },
     selectedRun: function selectedRun() {
-      if (this.hoverX) {
-        if (!window.gaa) {
-          window.gaa = this.groupedAndAggregated[this.hoverX.groupName][this.hoverX.runIndex];
-        }
-
-        return window.gaa;
-      }
-
-      return null;
+      return this.hoverX ? this.groupedAndAggregated[this.hoverX.groupName][this.hoverX.runIndex] : null;
     },
     groupedAndAggregated: function groupedAndAggregated() {
       var _this = this;
@@ -52739,7 +52731,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60100" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49492" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
