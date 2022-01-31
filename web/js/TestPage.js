@@ -26,6 +26,7 @@ var TEST = function() {
         machines[3] = machines[3] || "";
         machines[4] = machines[4] || "";
 
+        //  env presented in each column
         testList.push({
             "page": count,
             "localhost": show[0] === 0 ? "" : "http://localhost:8888/" + luly + machines[0],
