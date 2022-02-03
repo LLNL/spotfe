@@ -135,7 +135,7 @@ ST.MemoryLineModel = function() {
             var unit = att['attribute.unit'];
 
             //  If alias is not available use pound name instead.
-            var alias = att['attribute.alias'] || pound_name;
+            var alias = att['alias'] || pound_name;
 
             if( !unit ) {
                 var warning = "attribute.unit is not defined for "+ pound_name;
@@ -168,7 +168,7 @@ ST.MemoryLineModel = function() {
     var get_trace_ = function( ret3, attr ) {
 
         var att = attributes_[ attr ];
-        var alias = att["attribute.alias"];
+        var alias = att["alias"];
 
         var trace = {
             x: [],
