@@ -30131,7 +30131,7 @@ var _default = {
         for (var x = 0; x < metricNames.length; x++) {
           var met = metricNames[x];
           var cali_obj = attributes[met] || {};
-          var alias = cali_obj["attribute.alias"] || met;
+          var alias = cali_obj["alias"] || met;
           replacing_metrics[met] = alias;
         }
       } else {
@@ -41303,7 +41303,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49304" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64654" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

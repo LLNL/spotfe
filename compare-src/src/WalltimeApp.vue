@@ -494,7 +494,7 @@ export default {
 
                     var met = metricNames[x];
                     var cali_obj = attributes[met] || {};
-                    var alias = cali_obj["attribute.alias"] || met;
+                    var alias = cali_obj["alias"] || met;
 
                     replacing_metrics[met] = alias
                 }
