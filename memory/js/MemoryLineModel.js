@@ -36,7 +36,7 @@ ST.MemoryLineModel = function() {
                     legend_[z] = legend_[z] || {};
                     attributes_[pound_name] = attributes_[pound_name] || {};
 
-                    var alias = attributes_[pound_name]["attribute.alias"] || pound_name;
+                    var alias = attributes_[pound_name]["alias"] || pound_name;
 
                     if (check_cache_[z][pound_name] !== false) {
 
