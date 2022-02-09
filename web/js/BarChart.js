@@ -154,7 +154,9 @@ ST.BarChart = function() {
             // (_optional_) set gap between bars manually in px, `default=2`
             .gap(1)
             // (_optional_) set filter brush rounding
-            .round( bin_me ? function(v) { return v;} : dc.round.floor)
+            .round( bin_me ? function(v) { return v;} : function(v) {
+			return parseInt(v);
+		})
             //.xUnits(function() {return 20;})   //  not a function.
             //.alwaysUseRounding(true)
             .x( use_buckets ? xinput2 : xinput )
