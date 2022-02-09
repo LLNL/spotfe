@@ -7,7 +7,9 @@
   "dependencies": {
     "crossfilter2": "^1.5.4",
     "d3": "^7.3.0",
-    "dc": "^4.2.7"
+    "dc": "^4.2.7",
+    "vue": "^3.2.30",
+    "jquery": "^3.6.0"
   },
   "devDependencies": {},
   "scripts": {
