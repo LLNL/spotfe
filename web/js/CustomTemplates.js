@@ -141,6 +141,10 @@ ST.CustomTemplates = function() {
 
             multiJupyterExe_(custom);
             return true;
+        } else {
+
+            newSingleJupyterExe_(custom);
+            return true;
         }
 
         var file = ST.CallSpot.filepath;
@@ -199,6 +203,26 @@ ST.CustomTemplates = function() {
             ST.Utility.stop_spinner();
             return false;
         }
+
+        var host = ST.params.machine;
+        var command = ST.CallSpot.get_command_begin() + " multi_jupyter" + custom;
+
+        console.dir( cali_keys_arr );
+        console.log( "host=" + host + "    command = " + command );
+
+        ST.graph.openMultiJupyter( file_path, cali_keys_arr, host, command ).then( finish_multi_ );
+    };
+
+
+    var newSingleJupyterExe_ = function( custom ) {
+
+        ST.Utility.start_spinner();
+
+        var cali_key = ST.CallSpot.cali_fp;
+        var cali_keys_arr = [ cali_key ];
+
+        //  cali_path is /usr/gapps/spot/datasets/lulesh_gen/500/5.cali
+        var file_path = $('.directory').val();
 
         var host = ST.params.machine;
         var command = ST.CallSpot.get_command_begin() + " multi_jupyter" + custom;

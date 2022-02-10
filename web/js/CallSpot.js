@@ -527,6 +527,7 @@ ST.CallSpot = function() {
         var cali_fp = cali_obj.file_path;
 
         ST.CallSpot.filepath = obj.filepath;
+        ST.CallSpot.cali_fp = cali_fp;
 
         var file_left = cali_obj.run_set_id;
         file_left = strip_right_(file_left);
