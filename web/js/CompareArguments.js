@@ -31,7 +31,9 @@ ST.CompareArguments = function() {
                     '<div class="tiny_letter">M</div>' +
                 '</div>';
 
-        Vue.component('bottom-tabs', {
+	const coapp = Vue.createApp({});
+
+        coapp.component('bottom-tabs', {
             data: function() {
                 return {
                     "isTableActive": false
@@ -68,9 +70,7 @@ ST.CompareArguments = function() {
             }
         });
 
-        new Vue({
-            el: "bottom-tabs"
-        });
+        coapp.mount('#bottom-tabs');
     };
 
 
