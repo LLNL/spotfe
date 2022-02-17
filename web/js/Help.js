@@ -24,7 +24,9 @@ var help_icon_ = function( file, params ) {
         working_html += '<div><a href="' + url + '" target="_blank">' + url + '</a></div>';
     }
 
-    Vue.component('help-section', {
+    const fapp = Vue.createApp({});
+
+    fapp.component('help-section', {
         data: function () {
             return {
                 seen: false,
@@ -60,8 +62,5 @@ var help_icon_ = function( file, params ) {
         }
     });
 
-    //  Need to find the dc.js end event handler.
-    new Vue({
-        el: "#help_icon"
-    });
+    fapp.mount('#help_icon')
 };
