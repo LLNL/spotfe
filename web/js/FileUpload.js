@@ -2,7 +2,7 @@ ST.FileUpload = function() {
 
     var dir = ST.Utility.get_param("sf");
 
-    Vue.component("file-upload", {
+    app.component("file-upload", {
         data: function() {
 
             return {
@@ -32,7 +32,5 @@ ST.FileUpload = function() {
         }
     });
 
-    new Vue({
-        'el': '#file_upload'
-    });
+    app.mount("#file_upload");
 }();
