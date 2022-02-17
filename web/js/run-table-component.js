@@ -1,7 +1,8 @@
 "use strict";
 
+const app = Vue.createApp({});
 
-Vue.component('run-table-component', {
+app.component('run-table-component', {
         template: `
 <div>
             <span>run table component:</span>
