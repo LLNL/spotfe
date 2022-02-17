@@ -52,7 +52,9 @@ ST.UserPreferences = function() {
 
         ST.layout_used.charts.sort( sort_charts_by_title_ );
 
-        Vue.component('user-preferences', {
+	const papp = Vue.createApp({});
+
+        papp.component('user-preferences', {
             data: function() {
                 return {
                     seen: false,
@@ -97,9 +99,7 @@ ST.UserPreferences = function() {
             }
         });
 
-        new Vue({
-            "el": "#user_preferences"
-        });
+        papp.mount('#user_preferences');
 
         $('.plus_icon').unbind('click').bind('click', function() {
 
