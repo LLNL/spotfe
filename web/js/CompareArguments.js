@@ -24,6 +24,8 @@ ST.CompareArguments = function() {
     };
 
 
+    const coapp = Vue.createApp({});
+
     var load_tabs_ = function() {
 
         var jup_button = '<div class="myButton icon multi_jupyter" v-on:click="multiJupyter()" title="Open all Jupyter files selected below">' +
@@ -31,7 +33,6 @@ ST.CompareArguments = function() {
                     '<div class="tiny_letter">M</div>' +
                 '</div>';
 
-	const coapp = Vue.createApp({});
 
         coapp.component('bottom-tabs', {
             data: function() {
