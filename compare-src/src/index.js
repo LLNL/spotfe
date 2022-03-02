@@ -187,8 +187,7 @@ export class Graph{
             res = res0.output.command_out
         }
 
-        var resp1 = res.split('}');
-        res = resp1[0];
+        res = ST.Utility.fix_LC_return_err( res );
 
         var cacheResult = JSON.parse(res);
         var mtime = cacheResult.mtime;
@@ -337,7 +336,12 @@ export class Graph{
                     }
 
 
-                    var pd = typeof newData === "string" ? JSON.parse(newData) : newData;
+                    var pd = newData;
+
+                    if( typeof newData === "string" ) {
+                        newData = ST.Utility.fix_LC_return_err( newData );
+                        pd = JSON.parse(newData);
+                    }
 
                     if( pd.dictionary ) {
                         //  this is for the walltime page.
@@ -361,6 +365,8 @@ export class Graph{
         }
 
         if( typeof newData === 'string') {
+
+            newData = ST.Utility.fix_LC_return_err( newData );
             newData = JSON.parse(newData);
         }
 

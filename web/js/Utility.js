@@ -474,7 +474,19 @@ ST.Utility = function() {
         });
     };
 
+    
+    var fix_LC_return_err_ = function( server_return_str ) {
+
+        //  this fix only works on strings, else just return the original contents.
+        if( typeof server_return_str === "string" ) {
+            return server_return_str.replace('}logout', '}');
+        }
+
+        return server_return_str;
+    };
+
     return {
+        fix_LC_return_err: fix_LC_return_err_,
         container_ajax: container_ajax_,
         start_spinner: start_spinner_,
         stop_spinner: stop_spinner_,
