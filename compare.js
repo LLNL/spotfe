@@ -52075,7 +52075,7 @@ var Graph = /*#__PURE__*/function () {
     key: "getData",
     value: function () {
       var _getData = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(host, command, dataSetKey) {
-        var arr, spotPy, comm, res, res0, cacheResult, mtime, cachedDataGet, bust_cache, keys0;
+        var arr, spotPy, comm, res, res0, resp1, cacheResult, mtime, cachedDataGet, bust_cache, keys0;
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
@@ -52102,12 +52102,14 @@ var Graph = /*#__PURE__*/function () {
                 res = res0.output.command_out;
 
               case 10:
+                resp1 = res.split('}');
+                res = resp1[0];
                 cacheResult = JSON.parse(res);
                 mtime = cacheResult.mtime;
                 bust_cache = ST.Utility.get_param("cache") === "0";
 
                 if (!bust_cache) {
-                  _context3.next = 18;
+                  _context3.next = 20;
                   break;
                 }
 
@@ -52118,18 +52120,18 @@ var Graph = /*#__PURE__*/function () {
                   RunSetMeta: {}
                 };
                 console.log('Got a new cachedData...');
-                _context3.next = 28;
+                _context3.next = 30;
                 break;
 
-              case 18:
-                _context3.next = 20;
+              case 20:
+                _context3.next = 22;
                 return _localforage.default.getItem(dataSetKey);
 
-              case 20:
+              case 22:
                 _context3.t0 = _context3.sent;
 
                 if (_context3.t0) {
-                  _context3.next = 23;
+                  _context3.next = 25;
                   break;
                 }
 
@@ -52140,7 +52142,7 @@ var Graph = /*#__PURE__*/function () {
                   RunSetMeta: {}
                 };
 
-              case 23:
+              case 25:
                 cachedDataGet = _context3.t0;
                 console.log('cachedDataGet:');
                 console.dir(cachedDataGet);
@@ -52151,10 +52153,10 @@ var Graph = /*#__PURE__*/function () {
                   bust_cache = 1;
                 }
 
-              case 28:
+              case 30:
                 return _context3.abrupt("return", this.afterCachedDataGet(cachedDataGet, bust_cache, mtime, dataSetKey, host, command));
 
-              case 29:
+              case 31:
               case "end":
                 return _context3.stop();
             }
@@ -52731,7 +52733,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64059" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63240" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

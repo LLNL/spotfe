@@ -67,6 +67,8 @@ ST.Utility = function() {
 
     var error_ = function( str ) {
 
+
+
         if( $('.error_statement').length === 0 ) {
 
             var html = '<div class="error_statement">' + str + '</div>';

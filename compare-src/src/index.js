@@ -187,6 +187,9 @@ export class Graph{
             res = res0.output.command_out
         }
 
+        var resp1 = res.split('}');
+        res = resp1[0];
+
         var cacheResult = JSON.parse(res);
         var mtime = cacheResult.mtime;
 
