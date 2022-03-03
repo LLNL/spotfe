@@ -485,7 +485,11 @@ ST.Utility = function() {
 
         //  this fix only works on strings, else just return the original contents.
         if( typeof server_return_str === "string" ) {
-            return server_return_str.replace('}logout', '}');
+
+            server_return_str = server_return_str.replace('}logout', '}');
+            server_return_str = server_return_str.replace('}\nlogout', '}');
+
+            return server_return_str;
         }
 
         return server_return_str;
