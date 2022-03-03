@@ -19,6 +19,12 @@ ST.CONSTS = {
     "NO_UNARY_OP_SELECTED": "no unary op selected"
 };
 
+ST.parse = function( par_val ) {
+
+    par_val = ST.Utility.fix_LC_return_err( par_val );
+    return JSON.parse( par_val );
+};
+
 ST.Utility = function() {
 
     function getUrlVars_() {

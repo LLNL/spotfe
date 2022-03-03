@@ -69,7 +69,7 @@ ST.MemoryLineModel = function() {
                 aj_dat = aj_dat.output.command_out;
             }
 
-            var aj_obj = JSON.parse(aj_dat);
+            var aj_obj = ST.parse(aj_dat);
 
             if( aj_obj.series ) {
 
@@ -79,7 +79,10 @@ ST.MemoryLineModel = function() {
             } else {
                 //  on Lorenz, not the container
                 var ret = aj_dat.output.command_out;
-                ret2 = JSON.parse(ret);
+
+                ret2 = ST.parse(ret);
+
+
                 //var std = JSON.parse(ret2.std);
                 //console.dir( std );
             }

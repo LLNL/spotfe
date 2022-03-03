@@ -212,8 +212,10 @@ ST.MemoryLineView = function() {
     var from_lorenz_finish_ = function( aj_dat ) {
 
         var ret = aj_dat.output.command_out;
-        var ret2 = JSON.parse( ret );
-        var ret3 = JSON.parse( ret2 );
+
+        var ret2 = ST.parse( ret );
+
+        var ret3 = ST.parse( ret2 );
 
         finish_render_( ret3 );
     };
