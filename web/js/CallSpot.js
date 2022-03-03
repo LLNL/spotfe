@@ -105,6 +105,8 @@ ST.CallSpot = function() {
         } else {
 
             var spotReturnedValue = command_out;
+            spotReturnedValue = ST.Utility.fix_LC_return_err( spotReturnedValue );
+
             var parsed_whole = JSON.parse(spotReturnedValue);
             console.dir( parsed_whole );
 
@@ -130,6 +132,8 @@ ST.CallSpot = function() {
                 } else {
 
                     command_out2 = parsed_whole.output.command_out;
+                    command_out2 = ST.Utility.fix_LC_return_err(command_out2);
+
                     var data = JSON.parse(command_out2);
                     parsed = data.data;
                     ST.layout_used = data.layout;
