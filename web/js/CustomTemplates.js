@@ -53,6 +53,8 @@ ST.CustomTemplates = function() {
         com = com.replace(')', '');
         com = com.replace(/'/g, '');
 
+        com = ST.Utility.fix_LC_return_err(com);
+
         var json_pre = JSON.parse(com);
         show_choices_render_( json_pre );
     };

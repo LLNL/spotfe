@@ -474,7 +474,7 @@ ST.Utility = function() {
         });
     };
 
-    
+
     var fix_LC_return_err_ = function( server_return_str ) {
 
         //  this fix only works on strings, else just return the original contents.
