@@ -488,6 +488,8 @@ ST.Utility = function() {
 
             server_return_str = server_return_str.replace('}logout', '}');
             server_return_str = server_return_str.replace('}\nlogout', '}');
+            server_return_str = server_return_str.replace('}\r\nlogout', '}');
+            server_return_str = server_return_str.replace('}\n\nlogout', '}');
 
             return server_return_str;
         }
