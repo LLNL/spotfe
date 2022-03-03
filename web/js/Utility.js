@@ -486,12 +486,10 @@ ST.Utility = function() {
         //  this fix only works on strings, else just return the original contents.
         if( typeof server_return_str === "string" ) {
 
-            server_return_str = server_return_str.replace('}logout', '}');
-            server_return_str = server_return_str.replace('}\nlogout', '}');
-            server_return_str = server_return_str.replace('}\r\nlogout', '}');
-            server_return_str = server_return_str.replace('}\n\nlogout', '}');
+            var index = server_return_str.lastIndexOf('}');
+            var before = server_return_str.slice(0, index);
 
-            return server_return_str;
+            return before + '}';
         }
 
         return server_return_str;
