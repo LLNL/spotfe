@@ -51829,6 +51829,8 @@ function _lorenz() {
               }).then(function (value) {
                 resolve(value);
               }, function (error) {
+                console.dir('error 909', error);
+                ReusableView.alert('Error', error.responseText);
                 reject(error);
               });
             }));
@@ -52039,7 +52041,7 @@ var Graph = /*#__PURE__*/function () {
                 return _context2.abrupt("return", server + port + urlpath + auth);
 
               case 18:
-                _context2.next = 25;
+                _context2.next = 27;
                 break;
 
               case 20:
@@ -52048,6 +52050,8 @@ var Graph = /*#__PURE__*/function () {
 
               case 22:
                 url = _context2.sent;
+                console.log('urL:');
+                console.dir(url);
 
                 if (url.error) {
                   ReusableView.modal({
@@ -52057,7 +52061,7 @@ var Graph = /*#__PURE__*/function () {
 
                 return _context2.abrupt("return", url.output.command_out);
 
-              case 25:
+              case 27:
               case "end":
                 return _context2.stop();
             }

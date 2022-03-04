@@ -49,8 +49,13 @@ async function lorenz(host, cmd){
                     'route':'/command/' + host,
                     'command':cmd,
                     }
-            }).then ( value  => { resolve( value ) }
-                    , error => { reject(error) }
+            }).then ( function(value)  {
+                resolve( value );
+                }, function(error) {
+                    console.dir('error 909', error);
+                    ReusableView.alert('Error', error.responseText);
+                reject(error);
+            }
             )
         })
     } 
@@ -159,6 +164,9 @@ export class Graph{
         } else {
             // for lorenz
             const url = await lorenz(host, `${command} ${basepath} '${JSON.stringify(subpaths)}'`);
+
+            console.log('urL:');
+            console.dir(url);
 
             if( url.error ) {
                 ReusableView.modal({body: url.error});
