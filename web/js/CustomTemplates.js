@@ -162,6 +162,7 @@ ST.CustomTemplates = function() {
 
             ST.Utility.stop_spinner();
 
+            url = fixLorenzLogoutWrapper_( url );
             console.dir(url);
             //var command_out = data.output.command_out;
             //var url = command_out;
@@ -171,6 +172,12 @@ ST.CustomTemplates = function() {
         });
     };
 
+
+    var fixLorenzLogoutWrapper_ = function( url ) {
+
+        url = url.replace('ipynblogout', 'ipynb');
+        return url;
+    };
 
     var  multiJupyterExe_ = function( custom ) {
 
