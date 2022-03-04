@@ -252,6 +252,8 @@ ST.CustomTemplates = function() {
         var url = command_out;
         console.log('co=' + command_out);
 
+        url = fixLorenzLogoutWrapper_( url );
+
         window.open(url);
         // now go to the URL that BE tells us to go to.
     };
