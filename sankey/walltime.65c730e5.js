@@ -30117,9 +30117,9 @@ var _default = {
       console.log('updateTopDown A:');
       console.dir(ret2);
 
-      if (ret2 && ret2.series) {
-        var records = ret2.series.records;
-        var attributes = ret2.series.attributes;
+      if (ret2) {
+        var records = ret2.series ? ret2.series.records : {};
+        var attributes = ret2.series ? ret2.series.attributes : {};
         var metricNames = this.metricNames;
         var replaceMetricNames = this.replaceMetricNames;
         var replacing_metrics = this.replacing_metrics;
@@ -41303,7 +41303,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64061" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62768" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

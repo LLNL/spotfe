@@ -475,10 +475,10 @@ export default {
             console.log('updateTopDown A:')
             console.dir(ret2);
 
-            if( ret2 && ret2.series ) {
+            if( ret2 ) {
 
-                var records = ret2.series.records;
-                var attributes = ret2.series.attributes;
+                var records = ret2.series ? ret2.series.records : {};
+                var attributes = ret2.series ? ret2.series.attributes : {};
                 var metricNames = this.metricNames;
 
                 var replaceMetricNames = this.replaceMetricNames

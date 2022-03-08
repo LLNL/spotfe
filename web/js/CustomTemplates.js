@@ -191,7 +191,7 @@ ST.CustomTemplates = function() {
         var file_path = $('.directory').val();
         var cali_quoted = " \"" + cali_keys + "\"";
         var total_send = file_path + cali_quoted;
-        
+
         var limit = 2200; //
         var t_count = total_send.length;
 
