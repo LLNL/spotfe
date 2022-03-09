@@ -176,6 +176,9 @@ ST.CustomTemplates = function() {
     var fixLorenzLogoutWrapper_ = function( url ) {
 
         url = url.replace('ipynblogout', 'ipynb');
+        url = url.replace('ipynb\nlogout', 'ipynb');
+        url = url.replace('ipynb\\nlogout', 'ipynb');
+        
         return url;
     };
 
