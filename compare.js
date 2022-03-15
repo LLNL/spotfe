@@ -52714,7 +52714,7 @@ var Graph = /*#__PURE__*/function () {
 
 exports.Graph = Graph;
 window.Graph = Graph;
-},{"vue":"../node_modules/vue/dist/vue.runtime.esm.js","./App.vue":"App.vue","babel-polyfill":"../node_modules/babel-polyfill/lib/index.js","localforage":"../node_modules/localforage/dist/localforage.js","lodash":"../node_modules/lodash/lodash.js","_bundle_loader":"../node_modules/parcel/src/builtins/bundle-loader.js","jquery":[["jquery.8a959d8d.js","../node_modules/jquery/dist/jquery.js"],"../node_modules/jquery/dist/jquery.js"]}],"../node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"vue":"../node_modules/vue/dist/vue.runtime.esm.js","./App.vue":"App.vue","babel-polyfill":"../node_modules/babel-polyfill/lib/index.js","localforage":"../node_modules/localforage/dist/localforage.js","lodash":"../node_modules/lodash/lodash.js","_bundle_loader":"../node_modules/parcel/src/builtins/bundle-loader.js","jquery":[["jquery.8a959d8d.js","../node_modules/jquery/dist/jquery.js"],"jquery.8a959d8d.js.map","../node_modules/jquery/dist/jquery.js"]}],"../node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -52742,7 +52742,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59172" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49375" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -52943,3 +52943,4 @@ module.exports = function loadJSBundle(bundle) {
 },{}],0:[function(require,module,exports) {
 var b=require("../node_modules/parcel/src/builtins/bundle-loader.js");b.register("js",require("../node_modules/parcel/src/builtins/loaders/browser/js-loader.js"));
 },{}]},{},["../node_modules/parcel/src/builtins/hmr-runtime.js",0,"index.js"], null)
+//# sourceMappingURL=/compare.js.map

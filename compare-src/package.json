@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "parcel build --no-minify src/index.js -d .. -o compare.js --no-source-maps",
-    "watch": "parcel watch src/index.js -d .. -o compare.js --no-source-maps",
+    "watch": "parcel watch src/index.js -d .. -o compare.js",
     "build-walltime": "parcel build src/walltime.pug -d ../sankey -o index.html --no-source-maps --public-url './'",
-    "watch-walltime": "parcel watch src/walltime.pug -d ../sankey -o index.html --no-source-maps --public-url './'"
+    "watch-walltime": "parcel watch src/walltime.pug -d ../sankey -o index.html --public-url './'"
   },
   "keywords": [],
   "author": "",
