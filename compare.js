@@ -51829,6 +51829,8 @@ function _lorenz() {
               }).then(function (value) {
                 resolve(value);
               }, function (error) {
+                console.dir('error 909', error);
+                ReusableView.alert('Error', error.responseText);
                 reject(error);
               });
             }));
@@ -52039,7 +52041,7 @@ var Graph = /*#__PURE__*/function () {
                 return _context2.abrupt("return", server + port + urlpath + auth);
 
               case 18:
-                _context2.next = 25;
+                _context2.next = 27;
                 break;
 
               case 20:
@@ -52048,6 +52050,8 @@ var Graph = /*#__PURE__*/function () {
 
               case 22:
                 url = _context2.sent;
+                console.log('urL:');
+                console.dir(url);
 
                 if (url.error) {
                   ReusableView.modal({
@@ -52057,7 +52061,7 @@ var Graph = /*#__PURE__*/function () {
 
                 return _context2.abrupt("return", url.output.command_out);
 
-              case 25:
+              case 27:
               case "end":
                 return _context2.stop();
             }
@@ -52102,12 +52106,13 @@ var Graph = /*#__PURE__*/function () {
                 res = res0.output.command_out;
 
               case 10:
+                res = ST.Utility.fix_LC_return_err(res);
                 cacheResult = JSON.parse(res);
                 mtime = cacheResult.mtime;
                 bust_cache = ST.Utility.get_param("cache") === "0";
 
                 if (!bust_cache) {
-                  _context3.next = 18;
+                  _context3.next = 19;
                   break;
                 }
 
@@ -52118,18 +52123,18 @@ var Graph = /*#__PURE__*/function () {
                   RunSetMeta: {}
                 };
                 console.log('Got a new cachedData...');
-                _context3.next = 28;
+                _context3.next = 29;
                 break;
 
-              case 18:
-                _context3.next = 20;
+              case 19:
+                _context3.next = 21;
                 return _localforage.default.getItem(dataSetKey);
 
-              case 20:
+              case 21:
                 _context3.t0 = _context3.sent;
 
                 if (_context3.t0) {
-                  _context3.next = 23;
+                  _context3.next = 24;
                   break;
                 }
 
@@ -52140,7 +52145,7 @@ var Graph = /*#__PURE__*/function () {
                   RunSetMeta: {}
                 };
 
-              case 23:
+              case 24:
                 cachedDataGet = _context3.t0;
                 console.log('cachedDataGet:');
                 console.dir(cachedDataGet);
@@ -52151,10 +52156,10 @@ var Graph = /*#__PURE__*/function () {
                   bust_cache = 1;
                 }
 
-              case 28:
+              case 29:
                 return _context3.abrupt("return", this.afterCachedDataGet(cachedDataGet, bust_cache, mtime, dataSetKey, host, command));
 
-              case 29:
+              case 30:
               case "end":
                 return _context3.stop();
             }
@@ -52212,7 +52217,7 @@ var Graph = /*#__PURE__*/function () {
 
                 newData = cacheSum.summary;
                 console.log('was able to find cache.');
-                _context4.next = 58;
+                _context4.next = 59;
                 break;
 
               case 14:
@@ -52246,7 +52251,7 @@ var Graph = /*#__PURE__*/function () {
 
                 newData = JSON.parse(txt); //newData = await response.json()
 
-                _context4.next = 58;
+                _context4.next = 59;
                 break;
 
               case 26:
@@ -52304,7 +52309,12 @@ var Graph = /*#__PURE__*/function () {
                   console.log(newData.foundReport);
                 }
 
-                pd = typeof newData === "string" ? JSON.parse(newData) : newData;
+                pd = newData;
+
+                if (typeof newData === "string") {
+                  newData = ST.Utility.fix_LC_return_err(newData);
+                  pd = JSON.parse(newData);
+                }
 
                 if (pd.dictionary) {
                   //  this is for the walltime page.
@@ -52316,11 +52326,11 @@ var Graph = /*#__PURE__*/function () {
                 }
 
                 DB.saveSummary(newData);
-                _context4.next = 58;
+                _context4.next = 59;
                 break;
 
-              case 53:
-                _context4.prev = 53;
+              case 54:
+                _context4.prev = 54;
                 _context4.t0 = _context4["catch"](26);
                 console.log('Exception: ');
                 console.dir(_context4.t0);
@@ -52331,8 +52341,9 @@ var Graph = /*#__PURE__*/function () {
                   RunSetMeta: {}
                 };
 
-              case 58:
+              case 59:
                 if (typeof newData === 'string') {
+                  newData = ST.Utility.fix_LC_return_err(newData);
                   newData = JSON.parse(newData);
                 } //  newData is too big to always print out.
 
@@ -52464,10 +52475,10 @@ var Graph = /*#__PURE__*/function () {
                 //  and will be sent to the durations page from CallSpot.js
                 //        await localforage.setItem(dataSetKey, {'Runs': arr});
 
-                _context4.next = 94;
+                _context4.next = 95;
                 return _localforage.default.setItem(dataSetKey, lr0);
 
-              case 94:
+              case 95:
                 //  The first run's meta object is used to determine what the drop down select options should be.
                 window.runs = ST.CompositeLayoutModel.augment_first_run_to_include_composite_charts(runs);
                 this.compare(filenames); // 4. return summary
@@ -52479,20 +52490,20 @@ var Graph = /*#__PURE__*/function () {
                     table: []
                   }
                 };
-                _context4.next = 99;
+                _context4.next = 100;
                 return _localforage.default.getItem("show:" + dataSetKey);
 
-              case 99:
+              case 100:
                 _context4.t1 = _context4.sent;
 
                 if (_context4.t1) {
-                  _context4.next = 102;
+                  _context4.next = 103;
                   break;
                 }
 
                 _context4.t1 = defaultVisibleCharts;
 
-              case 102:
+              case 103:
                 visibleCharts = _context4.t1;
 
                 for (_i4 = 0, _Object$entries4 = Object.entries(cachedData.Runs); _i4 < _Object$entries4.length; _i4++) {
@@ -52523,29 +52534,29 @@ var Graph = /*#__PURE__*/function () {
                   });
                 }
 
-                _context4.next = 108;
+                _context4.next = 109;
                 return _localforage.default.getItem('scatterplots:' + this.dataSetKey);
 
-              case 108:
+              case 109:
                 _context4.t2 = _context4.sent;
 
                 if (_context4.t2) {
-                  _context4.next = 111;
+                  _context4.next = 112;
                   break;
                 }
 
                 _context4.t2 = [];
 
-              case 111:
+              case 112:
                 summary.layout.scatterplots = _context4.t2;
                 return _context4.abrupt("return", summary);
 
-              case 113:
+              case 114:
               case "end":
                 return _context4.stop();
             }
           }
-        }, _callee4, this, [[26, 53]]);
+        }, _callee4, this, [[26, 54]]);
       }));
 
       function afterCachedDataGet(_x15, _x16, _x17, _x18, _x19, _x20) {
@@ -52731,7 +52742,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54027" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59172" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
