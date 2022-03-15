@@ -21,7 +21,7 @@
     "localforage": "^1.7.4",
     "md5": "^2.2.1",
     "parcel": "^1.12.4",
-    "vue": "^2.6.11",
+    "vue": "^3.2.31",
     "vue-hot-reload-api": "^2.3.4",
     "vue-plugin-load-script": "^1.3.2",
     "vuex": "^3.4.0"
