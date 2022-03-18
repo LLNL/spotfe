@@ -24,7 +24,8 @@ ST.CompareArguments = function() {
     };
 
 
-    const coapp = Vue.createApp({});
+    var coapp = Vue.createApp({});
+
 
     var load_tabs_ = function() {
 
@@ -71,7 +72,12 @@ ST.CompareArguments = function() {
             }
         });
 
-        coapp.mount('#bottom-tabs');
+        
+        if( !window.tabsMounted ) {
+
+            coapp.mount('#bottom-tabs');
+            window.tabsMounted = 1;
+        }
     };
 
 
