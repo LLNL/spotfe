@@ -8,28 +8,9 @@ Then afterwards;
 DONE -    * Walltime does not work, in a non-writable directory.
 
 
-
-
-
-DONE - zd/performance -> LZString.compress messes up
-
-DONE - EC review complete.
-- send mary the link to the new github.
-DONE - y-axis -> get aliases get working for this.
-    * look at how walltimes does this.
-    * hard coded.
-DONE - test checkout /usr/gapps/spot/datasets/newdemo get these to work.
-DONE - browser: firefox, chrome.
-DONE - Tested with user agent string: Get the emulator out: Microsoft edge.
-DONE - do full regression test.
-
-
-DONE - Marbl Dataset. (rz only). -> home directory or workspace directory.
-DONE - Then prep spot release.
-DONE - Release Tuesday morning 10am.
-
-
-
+/opt/conda/bin/python3 /usr/gapps/spot/backend.py --config /usr/gapps/spot/backend_config.yaml getTimeseriesData /data/lul_sept_28_timeseries /data/lul_sept_28_timeseries/200924-16330964138.cali
+/opt/conda/bin/python3+/usr/gapps/spot/backend.py+--config+/usr/gapps/spot/backend_config.yaml+getTimeseriesData+/data/lul_sept_28_timeseries//data/lul_sept_28_timeseries/200924-16383266200.cali
+/usr/global/tools/lorenz/python/optvis-env2/bin/python+/usr/gapps/spot/dev/spot.py+getTimeseriesData+/usr/gapps/spot/datasets/lulesh_gen/lul_sept_28_timeseries+/usr/gapps/spot/datasets/lulesh_gen/lul_sept_28_timeseries/200924-16383266200.cali
 # Deploy FE
 cp -r /usr/global/web-pages/lc/www/spot/dcvis/* /usr/global/web-pages/lc/www/spot2/
 
@@ -37,24 +18,7 @@ cp -r /usr/global/web-pages/lc/www/spot/dcvis/* /usr/global/web-pages/lc/www/spo
 cp /usr/gapps/spot/dev/*.py /usr/gapps/spot/live/
 
 # set permissions
-sp
 
-
-
-
-TEST -  After etc feature rerenders, is the button linked to the wrong file?
-- default to avg#inclusive
-    * this will compile: 'avg#inclusive#sum#time.duration' and use it but it won't actually render. Argghhh!
-    * otherwise, wondering why yAxis doesn't work.
-
-DONE - return normalized spot metric instead of yAxis.
-    * walltime not working because i'm guessing because i changed yAxis to sum# (spot2 metrics)
-FIXED - launchdate.
-DONE - manual rename change yAxis to a spot metric
-    * retest and regression test.
-DONE - non-readable directory -> catch this error
-    * it's easy to type the directory name.  right now, if the directory doesn't exist, show a standard error.
-    * probably just a try/catch and print statement.
 
 
 Next:
@@ -854,37 +818,6 @@ From here: ~/install/spot2_github/spotfe/compare-src
 npm install
 
 
-Average run time over 500 executions repeated 4 times
---------------------
-Library: ujson
-Version: 1.33
-ujson.dumps(data): 1.97361302376 (total) 0.000986806511879 (per call)
-ujson.loads(data): 2.05873394012 (total) 0.00102936697006 (per call)
---------------------
-Library: simplejson
-Version: 3.3.0
-simplejson.dumps(data): 3.24183320999 (total) 0.001620916605 (per call)
-simplejson.loads(data): 2.20791387558 (total) 0.00110395693779 (per call)
---------------------
-Library: jsonlib2
-Version: (1, 3, 10)
-jsonlib2.dumps(data): 2.211810112 (total) 0.001105905056 (per call)
-jsonlib2.loads(data): 2.55381131172 (total) 0.00127690565586 (per call)
---------------------
-Library: json
-Version: 2.0.9
-json.dumps(data): 2.35674309731 (total) 0.00117837154865 (per call)
-json.loads(data): 5.23104810715 (total) 0.00261552405357 (per call)
---------------------
-Library: yajl
-Version: None
-yajl.dumps(data): 2.85826969147 (total) 0.00142913484573 (per call)
-yajl.loads(data): 3.03867292404 (total) 0.00151933646202 (per call)
---------------------
-Fastest dumps: ujson 1.97361302376 (total)
-Fastest loads: ujson 2.05873394012 (total)
-
-
 
 
 tow2: (2 files)
@@ -911,80 +844,6 @@ with dumps: 25s, 30.7s, 25.4s
 
 watch /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/tow2 '{}'
 /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/tow2 '{}' >> ~/zdeb/compressed
-
-
-(base) [pascal@rzslic7:zdeb]$ ls -l xn1
-total 5388
--rw------- 1 pascal pascal  358087 Feb  9 19:52 xno-gen.1d.1p.json
--rw------- 1 pascal pascal  929036 Feb  9 19:52 xno.1d.1p.json
--rw------- 1 pascal pascal  364486 Feb  9 19:52 xno_large-gen.1d.1p.json
--rw------- 1 pascal pascal  927871 Feb  9 19:52 xno_large.1d.1p.json
--rw------- 1 pascal pascal  456980 Feb  9 19:52 xno_large4-gen.4d.4p.json
--rw------- 1 pascal pascal 1171256 Feb  9 19:52 xno_large4.4d.4p.json
--rw------- 1 pascal pascal  364503 Feb  9 19:52 xno_modequip-gen.1d.1p.json
--rw------- 1 pascal pascal  899964 Feb  9 19:52 xno_modequip.1d.1p.json
-(base) [pascal@rzslic7:zdeb]$ ls -l sedov
-total 6624
--rw------- 1 pascal pascal 345444 Mar  8 19:31 sedov_a3d-gen.1d.1p.json
--rw------- 1 pascal pascal 509258 Mar  8 19:31 sedov_a3d.1d.1p.json
--rw------- 1 pascal pascal 389402 Mar  8 19:31 sedov_a3d4-gen.4d.4p.json
--rw------- 1 pascal pascal 581240 Mar  8 19:31 sedov_a3d4.4d.4p.json
--rw------- 1 pascal pascal 390361 Mar  8 19:31 sedov_a3d8-gen.8d.8p.json
--rw------- 1 pascal pascal 563829 Mar  8 19:31 sedov_a3d8.8d.8p.json
--rw------- 1 pascal pascal 348486 Mar  8 19:31 sedov_adv-gen.1d.1p.json
--rw------- 1 pascal pascal 824139 Mar  8 19:31 sedov_adv.1d.1p.json
--rw------- 1 pascal pascal 400864 Mar  8 19:31 sedov_adv4-gen.4d.4p.json
--rw------- 1 pascal pascal 989274 Mar  8 19:31 sedov_adv4.4d.4p.json
--rw------- 1 pascal pascal 402364 Mar  8 19:31 sedov_adv8-gen.8d.8p.json
--rw------- 1 pascal pascal 958518 Mar  8 19:31 sedov_adv8.8d.8p.json
-(base) [pascal@rzslic7:zdeb]$ du -skh xn1
-5.3M	xn1
-(base) [pascal@rzslic7:zdeb]$ du -skh sedov
-6.5M	sedov
-(base) [pascal@rzslic7:zdeb]$ du -ksh a0
-43M	a0
-
-
-XN1 ~ about 8 files
-(base) [pascal@rzslic6:~]$ python -m cProfile /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/xn1 '{}' --poolCount 20 | grep 'function calls'
-         551782 function calls (548384 primitive calls) in 9.967 seconds
-(base) [pascal@rzslic6:~]$ python -m cProfile /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/xn1 '{}' --poolCount 5 | grep 'function calls'
-         550716 function calls (547333 primitive calls) in 10.244 seconds
-(base) [pascal@rzslic6:~]$ python -m cProfile /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/xn1 '{}' --poolCount 2 | grep 'function calls'
-         550551 function calls (547171 primitive calls) in 18.336 seconds
-
-Sedov about 7 or 8 files or so.
-(base) [pascal@rzslic6:~]$ python -m cProfile /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/sedov '{}' --poolCount 2 | grep 'function calls'
-         672036 function calls (668656 primitive calls) in 23.431 seconds
-(base) [pascal@rzslic6:~]$ python -m cProfile /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/sedov '{}' --poolCount 20 | grep 'function calls'
-         673258 function calls (669860 primitive calls) in 12.564 seconds
-(base) [pascal@rzslic6:~]$ python -m cProfile /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/sedov '{}' --poolCount 40 | grep 'function calls'
-         675390 function calls (671972 primitive calls) in 17.379 seconds
-
-A0: this is all the files.
-python -m cProfile /usr/gapps/spot/dev/spot.py getData /g/g0/pascal/zdeb/a0 '{}' | grep 'function calls'
-}         269201604 function calls (146312103 primitive calls) in 65.513 seconds
-(base) [pascal@rzslic6:~]$ python -m cProfile /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/a0 '{}' --poolCount 2 | grep 'function calls'
-         3648091 function calls (3644711 primitive calls) in 318.389 seconds
-(base) [pascal@rzslic6:~]$ python -m cProfile /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/a0 '{}' --poolCount 10 | grep 'function calls'
-         3648578 function calls (3645190 primitive calls) in 116.891 seconds
-(base) [pascal@rzslic6:~]$ python -m cProfile /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/a0 '{}' --poolCount 20 | grep 'function calls'
-         3649325 function calls (3645927 primitive calls) in 95.531 seconds
-(base) [pascal@rzslic6:~]$ python -m cProfile /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/a0 '{}' --poolCount 40 | grep 'function calls'
-         3651453 function calls (3648035 primitive calls) in 135.533 seconds
-
-
-Size:
-(base) [pascal@rzslic9:sand]$ ls -l  ~/zdeb/perf/measure_a0_size
--rw------- 1 pascal pascal 119067849 Mar 12 09:26 /g/g0/pascal/zdeb/perf/measure_a0_size
-
-That's 119 MB.
-But, could drop that by:
-    * getting rid of spaces
-    * compress yAxis string
-    * rep 0.0 with 0
-Get down to 80 MB.
-
 
 
 Update May 2020: Chrome now lets an origin use 60% of the storage device's space (Real nitty gritty: "storage device" is the partition containing the chrome profile directory). Updated article here https://web.dev/storage-for-the-web/#how-much

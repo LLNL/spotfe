@@ -29901,23 +29901,6 @@ var _default = {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                //  /usr/gapps/spot/sand/spot.py getDictionary /usr/gapps/spot/datasets/lulesh_gen/100
-
-                /*var dataSetKey = ST.Utility.get_param('runSetId');
-                 ST.Utility.init_params();
-                 var host = ST.Utility.get_default_machine();
-                var command = ST.Utility.get_command();
-                 command = command.replace('getData', 'getDictionary');
-                var param_str = `${command} ${dataSetKey}`;
-                 console.log('Await2, param_str = ' + param_str);
-                var lor_response = await lorenz(host, param_str );
-                  if( lor_response && lor_response.error !== "" ) {
-                    ST.Utility.error( lor_response.error );
-                    return false;
-                }
-                 var newData = JSON.parse(lor_response.output.command_out)
-                 console.dir(newData);
-                */
                 sf = ST.Utility.get_param("runSetId");
                 key = "page_dictionary_" + sf;
                 local_page = localStorage.getItem(key);
@@ -29937,7 +29920,7 @@ var _default = {
         }, _callee);
       }))();
     },
-    getmemoryfunc: function getmemoryfunc(path) {
+    containerAJAX: function containerAJAX(path, success, fail) {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
@@ -29946,15 +29929,15 @@ var _default = {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                console.log('getmemoryfunc() 0');
+                console.log('containerAJAX() 0');
                 command = "/opt/conda/bin/python3 /usr/gapps/spot/backend.py --config /usr/gapps/spot/backend_config.yaml getTimeseriesData /data/" + path;
                 datarequest = {
                   command: command,
                   filepath: path
                 };
-                console.log('getmemoryfunc()');
+                console.log('getTimeseriesData()');
                 _context2.next = 6;
-                return fetch("getmemory", {
+                return fetch("getTimeseriesData", {
                   method: "post",
                   headers: {
                     'content-type': 'application/json'
@@ -29968,7 +29951,7 @@ var _default = {
                 console.dir(response);
 
                 if (!(response && response.json)) {
-                  _context2.next = 24;
+                  _context2.next = 22;
                   break;
                 }
 
@@ -29978,7 +29961,6 @@ var _default = {
 
               case 13:
                 newData = _context2.sent;
-                console.log('newData2:');
                 console.dir(newData);
 
                 _this.updateTopDown(newData);
@@ -29994,17 +29976,15 @@ var _default = {
                 //  this rerender allows the dictionary to be translated
                 //  so that we're not showing all two character stuff.
 
-                rerender(); //setTimeout( rerender, 1000);
-                //setTimeout( rerender, 3000);
-                //setTimeout( rerender, 5000);
+                rerender();
 
-                _context2.next = 25;
-                break;
+                if (newData) {
+                  success();
+                } else {
+                  fail();
+                }
 
-              case 24:
-                console.log('no .json');
-
-              case 25:
+              case 22:
               case "end":
                 return _context2.stop();
             }
@@ -30037,6 +30017,40 @@ var _default = {
     },
     //  Just reuse our existing get memory call for now, so we can retrieve aliases.
     getAliases: function getAliases() {
+      var success_handler = function success_handler(aj_dat) {
+        var ret2 = {};
+
+        if (aj_dat && aj_dat.series) {
+          ret2 = aj_dat;
+        } else {
+          var ret = aj_dat.output.command_out;
+
+          try {
+            ret2 = JSON.parse(ret);
+          } catch (e) {}
+        }
+
+        updateTopDown(ret2);
+        updateTopDownData();
+        console.log('debugTop19'); //  this can not be called until replacing_metrics is set correctlying
+
+        $('.update_top_down').trigger('click'); //  TODO: find event of when the thing gets finished rendering
+        //  only then should be do rerender.  get rid of setTimeout.
+        //  Rerender needs to happen after another event.
+        //  this rerender allows the dictionary to be translated
+        //  so that we're not showing all two character stuff.
+
+        rerender();
+      };
+
+      var error_handler = function error_handler() {
+        updateTopDown({});
+        updateTopDownData(); //  this can not be called until replacing_metrics is set correctlying
+
+        $('.update_top_down').trigger('click');
+        rerender();
+      };
+
       console.dir(ST.CallSpot);
       console.dir(ST.Utility);
       console.log('A getAliases');
@@ -30057,7 +30071,7 @@ var _default = {
       var isContainer = window.ENV.machine == 'container';
 
       if (isContainer) {
-        this.getmemoryfunc(path);
+        this.containerAJAX(path, success_handler, error_handler);
       } else {
         //  also run after memory call.
         //$('.update_top_down').trigger('click');
@@ -30065,40 +30079,6 @@ var _default = {
         var updateTopDown = this.updateTopDown;
         var rerender = this.rerenderSoDictTranslationHappens;
         this.getDictionary(function () {
-          var success_handler = function success_handler(aj_dat) {
-            var ret2 = {};
-
-            if (aj_dat.series) {
-              ret2 = aj_dat;
-            } else {
-              var ret = aj_dat.output.command_out;
-
-              try {
-                ret2 = JSON.parse(ret);
-              } catch (e) {}
-            }
-
-            updateTopDown(ret2);
-            updateTopDownData();
-            console.log('debugTop19'); //  this can not be called until replacing_metrics is set correctlying
-
-            $('.update_top_down').trigger('click'); //  TODO: find event of when the thing gets finished rendering
-            //  only then should be do rerender.  get rid of setTimeout.
-            //  Rerender needs to happen after another event.
-            //  this rerender allows the dictionary to be translated
-            //  so that we're not showing all two character stuff.
-
-            rerender();
-          };
-
-          var error_handler = function error_handler() {
-            updateTopDown({});
-            updateTopDownData(); //  this can not be called until replacing_metrics is set correctlying
-
-            $('.update_top_down').trigger('click');
-            rerender();
-          };
-
           ST.CallSpot.ajax({
             file: path,
             type: "getTimeseriesData",
@@ -41303,7 +41283,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62768" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55564" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
