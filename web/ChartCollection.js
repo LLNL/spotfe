@@ -514,7 +514,9 @@ ST.ChartCollection = function() {
 
         host = machine || host;
 
+
         ST.graph = new Graph('#compare_bottom_outer');
+
 
         DB.init( function() {
 
