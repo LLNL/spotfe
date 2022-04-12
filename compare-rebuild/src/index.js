@@ -2,6 +2,7 @@
 
 
 import Vue from 'vue'
+import {createApp} from 'vue'
 import App from './App.vue'
 import "babel-polyfill"
 import localforage from 'localforage'
@@ -76,25 +77,31 @@ async function lorenz(host, cmd){
     }
 }
 
+
 export class Graph{
     constructor(selector){
 
-        this.app = window.Vue.createApp({
-            el: selector,
-            render: function(h) {
+        console.dir(App);
 
-                console.dir(h);
-                /*var my_app = h('App');
-                my_app['template'] =  "<div id='compare-window'></div>";
-                console.dir( my_app );
-                */
-                return h;
+        //const theapp = window.Vue.createApp(App);
+        //theapp.mount( "#compare_bottom_outer" );
+
+
+        this.app = window.Vue.createApp({
+            components: {
+                'app': App
             }
         });
 
-        this.app.component('App', App);
+        var templ = {
+            template: "<div>Compare tab contents2.</div>"
+        };
+
+        this.app.component('bluecomp', templ);
+
         this.app.mount(selector);
     }
+
 
     async openJupyter(filepath, host, command){
         // args:   command: should be something like:  '/usr/gapps/spot/dev/spot.py jupyter'
