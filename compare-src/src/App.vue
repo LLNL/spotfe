@@ -9,10 +9,10 @@
                 height:'40px',
                 display:'flex',
                 alignItems:'center',
-                }` 
+                }`
             )
             .selects(:style="{flex:1, display:'flex', alignItems:'center', flexWrap:'wrap'}")
-                label(for="xAxis-select" style="margin:5px") X-Axis: 
+                label(for="xAxis-select" style="margin:5px") X-Axis:
                 select#xAxis-select(v-model="xAxis")
                     option(v-for="option in xAxisList") {{ option }}
 
@@ -20,15 +20,15 @@
                 select#aggregate-select(:style="{marginRight: '10px'}" v-model="selectedAggregateBy")
                     option(v-for="option in ['', 'sum','avg', 'min', 'max' ]") {{ option }}
 
-                label(for="yAxis-select" style="margin:5px") Y-Axis: 
+                label(for="yAxis-select" style="margin:5px") Y-Axis:
                 select#yAxis-select(:value="yAxis" @input='yAxisSelected($event.target.value)')
                     option(v-for="option in yAxisList") {{ option }}
-                    
+
                 label(for="groupBy-select" style="margin:5px") Group By:
                 select#groupBy-select(v-model="selectedGroupBy")
                     option(v-for="option in groupByList") {{ option }}
-            
-            
+
+
             .scale-type-button(
                 :style=`{
                     borderRadius:'5px',
@@ -46,7 +46,7 @@
                 justifyContent:'center',
                 marginTop:'5px',
                 }`
-            ) 
+            )
             .legend-border(
                 :style=`{
                     display:'flex',
@@ -57,7 +57,7 @@
                     borderRadius:'15px',
                     backgroundColor:'#eee',
                     }`
-            ) 
+            )
                 .legend-item(v-for="path in displayedChildrenPaths"
                     @click='togglePathVisible(path)'
                     :style=`{
@@ -65,14 +65,14 @@
                         padding:'5px',
                         cursor:'pointer',
                         }`
-                    ) 
+                    )
                     .circle(
                     :style=`{
                         width:'15px',
                         height:'15px',
                         backgroundColor: disabledFuncPaths.includes(path) ? 'lightgrey': colorHash(path), borderRadius:'50px'
                         }`
-                    ) 
+                    )
                     .name(
                     :style=`{
                         marginLeft:'5px',
@@ -81,10 +81,10 @@
                     ) {{ legendItem(path) }}
     .comparison-charts(style="padding:10px")
         view-chart(
-            v-for="(runs, groupName) in groupedAndAggregated" 
-            :groupName="groupName" 
+            v-for="(runs, groupName) in groupedAndAggregated"
+            :groupName="groupName"
             :hoverX="hoverX"
-            :runs="runs" 
+            :runs="runs"
             :displayedChildrenPaths="difference(displayedChildrenPaths, disabledFuncPaths)"
             :selectedXAxisMetric="xAxis"
             :selectedYAxisMeta="yAxis"
@@ -95,7 +95,7 @@
             @toggle-hover-position-locked="toggleHoverPositionLock"
             )
     .run-view(
-        v-if="selectedRun" 
+        v-if="selectedRun"
         :style=`{
             width:'100%',
             height:'270px',
@@ -107,8 +107,8 @@
             }`
         )
         FlameGraph(
-            :runData='selectedRun.data' 
-            :selectedNode='selectedParent' 
+            :runData='selectedRun.data'
+            :selectedNode='selectedParent'
             :handleClick='changePath'
             )
         .global-meta(
@@ -126,9 +126,9 @@
                 v-for='(metaVal, metaName) in selectedRun.meta'
                 :style=`{
                     display:'flex',
-                    }` 
+                    }`
                 )
-                .name(:style="{color:'blue', fontWeight:'bold'}") {{ metaName }} 
+                .name(:style="{color:'blue', fontWeight:'bold'}") {{ metaName }}
                 .val(:style="{whiteSpace:'nowrap', overflowWrap:'break-word'}") : {{ metaVal }}
 </template>
 
@@ -217,25 +217,6 @@ export default Vue.extend({
                 } );
 
                 //var localGroupedAndAggregated = this.groupedAndAggregated;
-
-/*                if( !window.doFullRuns ) {
-
-                    filtered_runs = ST.RunsMeter.meter( filtered_runs );
-
-                    setTimeout( function() {
-
-                        window.doFullRuns = 1;
-                        this.runs.push({"filler": 2});
-                        this.runs.pop();
-
-                        $('.updateCompareView').trigger('click');
-
-                        console.log('Trigger get full runs.');
-
-                    }, 4000 );
-                } else {
-                    console.log('Got Full.');
-                }*/
 
                 return filtered_runs;
             }
@@ -375,7 +356,7 @@ export default Vue.extend({
                 const aggregateGroups = _.groupBy(runList, a => a.meta[this.xAxis])
                 const aggregatedValues = _.map(aggregateGroups, (runList, aggregateBykey) => {
                     const aggregatedRun = {
-                        data: _.fromPairs(_.map(runList[0].data, (val, key) => [key, []] )), 
+                        data: _.fromPairs(_.map(runList[0].data, (val, key) => [key, []] )),
                         meta: _.fromPairs(_.map(runList[0].meta, (val, key) => [key, []] )),
                     }
 
@@ -403,7 +384,7 @@ export default Vue.extend({
                         const uniqVals = _.uniq(metaList)
                         aggregatedRun.meta[metaName] =  uniqVals.length == 1 ? uniqVals[0]: '--'
                     })
-                    
+
                     // consolidate the data values into the type of aggregate
                     _.forEach(aggregatedRun.data, (dataList, dataName) => {
                         switch(this.selectedAggregateBy){
@@ -427,7 +408,7 @@ export default Vue.extend({
                     return aggregatedRun
                     })
                     return [groupByName, aggregatedValues]
-                    
+
                 }))
 
             console.log('finished aggregated...');
@@ -438,7 +419,7 @@ export default Vue.extend({
     methods:{
         legendItem( path ) {
 
-            var ret = path.slice(path.lastIndexOf('/') + 1;
+            var ret = path.slice(path.lastIndexOf('/') + 1);
 
             var layman_title = ST.RunDictionaryTranslator.lookupStr( ret );
             return layman_title;
@@ -496,6 +477,7 @@ export default Vue.extend({
         FlameGraph
     }
 })
+
 </script>
 
 <style lang="scss" scoped>

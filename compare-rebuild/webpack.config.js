@@ -3,6 +3,7 @@ const path = require('path')
 const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
+  mode: 'development',
   entry: {
     main: path.resolve(__dirname, './src/index.js'),
   },
@@ -16,6 +17,7 @@ module.exports = {
       // AND `<script>` blocks in `.vue` files
       {
         test: /\.js$/,
+        exclude: /node_modules/,
         loader: 'babel-loader'
       },
       // this will apply to both plain `.css` files
@@ -29,6 +31,12 @@ module.exports = {
       }
     ]
   },
+  resolve: {
+      alias: {
+        'vue$': 'vue/dist/vue.esm.js'
+      },
+      extensions: ['*', '.js', '.vue', '.json']
+    },
   plugins: [
     // make sure to include the plugin!
     new VueLoaderPlugin()

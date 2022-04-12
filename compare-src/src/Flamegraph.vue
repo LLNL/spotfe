@@ -1,48 +1,48 @@
 <template lang="pug">
-    .flamegraph(
+.flamegraph(
+    :style=`{
+        flex:2,
+        minWidth:'600px',
+        overflow:'scroll'
+        }`
+    )
+    .rootbutton(
+        @click="handleClick('--root path--')"
         :style=`{
-            flex:2,
-            minWidth:'600px',
-            overflow:'scroll'
+            backgroundColor:'#ddd',
+            textAlign:'center',
+            border: selectedNode == '--root path--' ? 'solid 1px black':'',
             }`
-        ) 
-        .rootbutton(
-            @click="handleClick('--root path--')"
+        ) /
+    .collapsed-parent(
+        v-for='funcPath in collapsedFuncPaths' v-if="funcPath != '--root path--'"
+        :style=`{
+            display:'flex',
+            alignItems:'center',
+            height:'25px',
+            backgroundColor:'white',
+            cursor:'pointer',
+            }`
+        @click='handleClick(funcPath)'
+        )
+        .text(
             :style=`{
-                backgroundColor:'#ddd',
-                textAlign:'center',
-                border: selectedNode == '--root path--' ? 'solid 1px black':'',
+                marginLeft:'3px',
+                overflow:'hidden',
+                cursor:'pointer'
                 }`
-            ) /
-        .collapsed-parent(
-            v-for='funcPath in collapsedFuncPaths' v-if="funcPath != '--root path--'"
-            :style=`{
-                display:'flex',
-                alignItems:'center',
-                height:'25px',
-                backgroundColor:'white',
-                cursor:'pointer',
-                }`
-            @click='handleClick(funcPath)'
-            )
-            .text(
-                :style=`{
-                    marginLeft:'3px',
-                    overflow:'hidden',
-                    cursor:'pointer'
-                    }`
-                ) {{ title(funcPath)}}
-        
-        FlamegraphNode(
-            :runData='addInclusive(runData)'
-            :selectedNode='selectedNode'
-            :selectedTopdownNode='selectedTopdownNode'
-            :topdownData='topdownData'
-            :funcPath='selectedNode'
-            :handleClick='handleClick'
-            :showTopdown='showTopdown'
-            )
-    
+            ) {{ title(funcPath)}}
+
+    FlamegraphNode(
+        :runData='addInclusive(runData)'
+        :selectedNode='selectedNode'
+        :selectedTopdownNode='selectedTopdownNode'
+        :topdownData='topdownData'
+        :funcPath='selectedNode'
+        :handleClick='handleClick'
+        :showTopdown='showTopdown'
+        )
+
 </template>
 
 <script>

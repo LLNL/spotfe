@@ -1,38 +1,38 @@
 <template lang="pug">
-    .flamenode(:style="{width:inclusiveWidthPercent, display:'flex', flexDirection:'column'}")
-        .inclusive(v-if="!title.startsWith('--root')" :style="{display:'flex', alignItems:'center', height:'25px', background:inclusiveBackground(funcPath)}"
-                  ) 
-            .exclusive-white-buffer( @click='handleClick(funcPath)' :style="{width:exclusiveWidthPercent, display:'inline-block', backgroundColor:'white', position: 'relative', border: showTopdown ?  '1px solid black' : ''}")
-                .exclusive(:style=`{ display:'flex' 
-                                   , position:'relative'
-                                   , alignItems:'center'
-                                   , height: '25px'
-                                   , backgroundColor: colorHash(funcPath) 
-                                   , cursor:'pointer'
-                                   , width: showTopdown ? topdownData[selectedTopdownNode].flame: '100%'
-                                   , border: iAmSelected ? '3px solid black' : '' 
-                                   }`
-                        )
-                .text(@click='handleClick(funcPath)' :style="{width: exclusiveWidthPercent,overflow: 'hidden', cursor:'pointer', whiteSpace:'nowrap', position:'absolute', top: '3px', left: '3px'}" :title='title' ) {{ title }} 
-                    
+.flamenode(:style="{width:inclusiveWidthPercent, display:'flex', flexDirection:'column'}")
+    .inclusive(v-if="!title.startsWith('--root')" :style="{display:'flex', alignItems:'center', height:'25px', background:inclusiveBackground(funcPath)}"
+              )
+        .exclusive-white-buffer( @click='handleClick(funcPath)' :style="{width:exclusiveWidthPercent, display:'inline-block', backgroundColor:'white', position: 'relative', border: showTopdown ?  '1px solid black' : ''}")
+            .exclusive(:style=`{ display:'flex'
+                               , position:'relative'
+                               , alignItems:'center'
+                               , height: '25px'
+                               , backgroundColor: colorHash(funcPath)
+                               , cursor:'pointer'
+                               , width: showTopdown ? topdownData[selectedTopdownNode].flame: '100%'
+                               , border: iAmSelected ? '3px solid black' : ''
+                               }`
+                    )
+            .text(@click='handleClick(funcPath)' :style="{width: exclusiveWidthPercent,overflow: 'hidden', cursor:'pointer', whiteSpace:'nowrap', position:'absolute', top: '3px', left: '3px'}" :title='title' ) {{ title }}
 
-        .children(:style="{display:'flex'}") 
-            FlamegraphNode(v-for='fp in childrenPaths(funcPath, allFuncPaths)'
-                           :runData='runData' 
-                           :selectedNode='selectedNode'
-                           :selectedTopdownNode='selectedTopdownNode'
-                           :topdownData='topdownData'
-                           :showTopdown='showTopdown'
-                           :funcPath='fp'
-                           :handleClick='handleClick'
-                           )
+
+    .children(:style="{display:'flex'}")
+        FlamegraphNode(v-for='fp in childrenPaths(funcPath, allFuncPaths)'
+                       :runData='runData'
+                       :selectedNode='selectedNode'
+                       :selectedTopdownNode='selectedTopdownNode'
+                       :topdownData='topdownData'
+                       :showTopdown='showTopdown'
+                       :funcPath='fp'
+                       :handleClick='handleClick'
+                       )
 </template>
 
 <script>
 import {parentPath, childrenPaths, colorHash} from './functions.js'
 
 export default {
-    props: [ 
+    props: [
         'selectedNode',
         'selectedTopdownNode',
         'showTopdown',
@@ -58,15 +58,15 @@ export default {
         iAmSelected(){return this.selectedNode == this.funcPath},
         allFuncPaths(){return Object.keys(this.runData)},
         myInclusive(){ return this.runData[this.funcPath].inclusive },
-        exclusiveWidthPercent(){ 
+        exclusiveWidthPercent(){
             // css doesn't like a width to be 0% so if it is zero just return 0 without the %
             if (this.myInclusive == 0) return 0
-            const width =  this.runData[this.funcPath].exclusive / this.myInclusive * 100 
+            const width =  this.runData[this.funcPath].exclusive / this.myInclusive * 100
             if(width == 0) return 0
             return width + "%"
         },
         inclusiveWidthPercent(){
-            return this.funcPath == this.selectedNode 
+            return this.funcPath == this.selectedNode
                      ? '100%'
                      :  this.myInclusive / this.runData[parentPath(this.funcPath)].inclusive * 100 + '%'
         },

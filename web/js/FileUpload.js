@@ -13,7 +13,7 @@ ST.FileUpload = function() {
         },
         template: '<form action="javascript:void(0);" method="post">' +
         //'<div class="instructions">Directory containing cali files:</div>' +
-        '<input type="text" class="directory" v-model:value="directory_val" v-on:keyup="keyup( $event )"/>' +
+        '<input type="text" class="directory" v-on:keyup="keyup( $event )"/>' +
         '<div class="update_button myButton icon" v-on:click="update( $event )">' +
         '<div class="inner"></div></div>' +
         '</form>',
@@ -26,7 +26,7 @@ ST.FileUpload = function() {
             },
             update: function( event ) {
 
-                var dir = this.directory_val;
+                var dir = $('.directory').val();
                 ST.UrlStateManager.update_url("sf", dir);
 
                 location.reload();

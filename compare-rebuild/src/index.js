@@ -17,7 +17,7 @@ async function getMain0( host, dataSetKey ) {
     var baseUrl = location.protocol + '//' + location.host + location.pathname;
 
     var prefix = host.startsWith('rz') ? 'rz': '';
-    //var url = "https://rzlc.llnl.gov/lorenz_base/dev/pascal/mylc/mylc/cat.cgi";
+    //var url = "h>ttps://rzlc.llnl.gov/lorenz_base/dev/pascal/mylc/mylc/cat.cgi";
     prefix = 'rz';
 
     var url = baseUrl + "/scripts/cat.cgi?" +
@@ -41,8 +41,10 @@ async function getMain0( host, dataSetKey ) {
 async function lorenz(host, cmd){
     const baseurl = `https://${host.startsWith('rz') ? 'rz': ''}lc.llnl.gov/lorenz/lora/lora.cgi`
     if(process.env.NODE_ENV === 'development' || useJsonp){
-        const $ = await import('jquery')
+
+        //const $ = await import('jquery')
         return new Promise((resolve, reject) => {
+
             $.ajax({
                 dataType:'jsonp',
                 url:     baseurl + '/jsonp',
@@ -76,11 +78,22 @@ async function lorenz(host, cmd){
 
 export class Graph{
     constructor(selector){
-        this.app = new Vue({
+
+        this.app = window.Vue.createApp({
             el: selector,
-            render: h => h('App'),
-            components:{App},
-        }).$children[0] 
+            render: function(h) {
+
+                console.dir(h);
+                /*var my_app = h('App');
+                my_app['template'] =  "<div id='compare-window'></div>";
+                console.dir( my_app );
+                */
+                return h;
+            }
+        });
+
+        this.app.component('App', App);
+        this.app.mount(selector);
     }
 
     async openJupyter(filepath, host, command){
