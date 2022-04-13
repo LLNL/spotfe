@@ -161,7 +161,7 @@ function getInitialYValue(runs){
       return defMetric
 }
 
-export default Vue.extend({
+export default {
     data() { return {
         xAxis: 'launchdate',
         xAxisListener: null,
@@ -216,27 +216,6 @@ export default Vue.extend({
                 var filtered_runs = window.runs.filter( function(run) {
                     return fnames.includes(run.meta.datapath.value);
                 } );
-
-                //var localGroupedAndAggregated = this.groupedAndAggregated;
-
-/*                if( !window.doFullRuns ) {
-
-                    filtered_runs = ST.RunsMeter.meter( filtered_runs );
-
-                    setTimeout( function() {
-
-                        window.doFullRuns = 1;
-                        this.runs.push({"filler": 2});
-                        this.runs.pop();
-
-                        $('.updateCompareView').trigger('click');
-
-                        console.log('Trigger get full runs.');
-
-                    }, 4000 );
-                } else {
-                    console.log('Got Full.');
-                }*/
 
                 return filtered_runs;
             }
@@ -496,7 +475,7 @@ export default Vue.extend({
         viewChart: Chart,
         FlameGraph
     }
-})
+}
 </script>
 
 <style scoped>

@@ -87,19 +87,17 @@ export class Graph{
         //theapp.mount( "#compare_bottom_outer" );
 
 
-        this.app = window.Vue.createApp({
-            components: {
-                'app': App
-            }
-        });
+        //  https://vuejsdevelopers.com/2020/03/16/vue-js-tutorial/
+        this.app = window.Vue.createApp(App);
 
         var templ = {
             template: "<div>Compare tab contents2.</div>"
         };
 
-        this.app.component('bluecomp', templ);
+        //this.app.component('bluecomp', templ);
 
         this.app.mount(selector);
+
     }
 
 
