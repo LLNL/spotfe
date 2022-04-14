@@ -1,5 +1,148 @@
 <template lang="pug">
-.chart
+.chart(
+    :style=`{
+        display:'flex',
+        flexDirection:'column',
+        alignItems:'stretch',
+        padding:'5px 60px 20px 20px',
+        border:'1px solid black',
+        margin:'5px'
+        }`
+    )
+    .groupname-title(
+        :style=`{
+            display:'flex',
+            justifyContent:'center'
+            }`
+        )
+        div {{ selectedGroupBy ? selectedGroupBy + ': ' + groupName : '' }}
+    .chartrow(
+        :style=`{
+            width:'100%',
+            display:'flex',
+            height:'240px',
+            }`
+        )
+        .yaxis(
+            style="display:flex"
+            )
+            .yaxis-title(
+                :style=`{
+                    width:0,
+                    display:'flex',
+                    alignItems:'center',
+                    justifyContent: 'center',
+                    }`
+                )
+                .title(
+                    style="transform:rotate(-90deg)"
+                    )  {{ selectedYAxisMeta }}
+            .yaxis-ticks(
+                :style="{height:'100%', width:'75px'}"
+                )
+                svg(
+                    height="320px"
+                    viewbox="0 0 100 100"
+                    )
+                    //- tick marks and text
+                    template(v-for="ytick in yticks")
+                        line(
+                            x1="70"
+                            x2="75"
+                            :y1="ytick[0]"
+                            :y2="ytick[0]"
+                            stroke="black"
+                            stroke-width="1"
+                            )
+                        text(text-anchor='end'
+                            :x='65'
+                            :y='ytick[0] + 4'
+                            )  {{ytick[1]}}
+                    //- axis line
+                    line(
+                        :x1="75"
+                        :y1="240"
+                        :x2="75"
+                        :y2="0"
+                        stroke="black"
+                        pointerEvents="none"
+                        )
+        .chartarea(ref='chartAreaSvg' :style="{flexGrow:1}")
+            svg(
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:v-on="http://www.w3.org/1999/v-on"
+                width="100%"
+                height="100%"
+                viewbox=" 0 100 100"
+                v-on:mousemove="notifyChartHoverPosition"
+
+                )
+                rect(
+                    width="100%"
+                    height="100%"
+                    fill="white"
+                    v-on:click='rectClicked'
+                    )
+                //- areas curves
+                g(cursor='pointer')
+                    path(
+                        v-for="series in seriesList"
+                        :fill="colorHash(series.key)"
+                        :d="areaFunc(series)"
+                        v-on:click="$emit('set-node', series.key)"
+                        )
+                //- selection line
+                line(
+                    v-if="hoverX && hoverX.groupName == groupName"
+                    :x1="x(hoverX.runIndex)"
+                    :y1="240"
+                    :x2="x(hoverX.runIndex)"
+                    :y2="0"
+                    stroke="black"
+                    pointerEvents="none"
+                    )
+
+    .xaxis(
+        :style=`{
+            position:"relative",
+            height:"75px",
+            marginLeft:"75px",
+            zIndex:0
+            }`
+        )
+        .xaxis-ticks(
+            v-for="(xTitle, i) in displayedXTitles"
+            v-if="(i % Math.floor(runs.length/numberOfTicks)) == 0"
+            :style=`{
+                position:'absolute',
+                left: i/(runs.length-1)*width + 'px',
+                height:'10px',
+                borderLeft:'1px solid black'
+                }`
+            )
+            span(
+                :style=`{
+                    position:'absolute',
+                    right:0,
+                    top:'10px',
+                    transformOrigin:'right',
+                    transform:'rotate(-60deg)',
+                    whiteSpace:'nowrap',
+                    maxWidth:'150px',
+                    overflow:'hidden'
+                    }`
+                ) {{ xTitle }}
+    .xaxis-title(
+        :style=`{
+            width:'100%',
+            height: '50px',
+            display: 'flex',
+            justifyContent:'center',
+            alignItems: 'flex-end'
+            }`
+        )
+        .xaxis-title-text {{ selectedXAxisMetric}}
+
 </template>
 
 <script>
