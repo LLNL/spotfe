@@ -1,31 +1,5 @@
 <template lang="pug">
-.flamenode(:style="{width:inclusiveWidthPercent, display:'flex', flexDirection:'column'}")
-    .inclusive(v-if="!title.startsWith('--root')" :style="{display:'flex', alignItems:'center', height:'25px', background:inclusiveBackground(funcPath)}"
-              )
-        .exclusive-white-buffer( @click='handleClick(funcPath)' :style="{width:exclusiveWidthPercent, display:'inline-block', backgroundColor:'white', position: 'relative', border: showTopdown ?  '1px solid black' : ''}")
-            .exclusive(:style=`{ display:'flex'
-                               , position:'relative'
-                               , alignItems:'center'
-                               , height: '25px'
-                               , backgroundColor: colorHash(funcPath)
-                               , cursor:'pointer'
-                               , width: showTopdown ? topdownData[selectedTopdownNode].flame: '100%'
-                               , border: iAmSelected ? '3px solid black' : ''
-                               }`
-                    )
-            .text(@click='handleClick(funcPath)' :style="{width: exclusiveWidthPercent,overflow: 'hidden', cursor:'pointer', whiteSpace:'nowrap', position:'absolute', top: '3px', left: '3px'}" :title='title' ) {{ title }}
-
-
-    .children(:style="{display:'flex'}")
-        FlamegraphNode(v-for='fp in childrenPaths(funcPath, allFuncPaths)'
-                       :runData='runData'
-                       :selectedNode='selectedNode'
-                       :selectedTopdownNode='selectedTopdownNode'
-                       :topdownData='topdownData'
-                       :showTopdown='showTopdown'
-                       :funcPath='fp'
-                       :handleClick='handleClick'
-                       )
+.flamenode
 </template>
 
 <script>

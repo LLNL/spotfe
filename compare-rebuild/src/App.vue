@@ -1,136 +1,5 @@
 
 <template lang="pug">
-#compare-window(:style="{display:'flex', flexDirection:'column'}")
-    .updateCompareView(@click="rerenderForSelectDropdownUpdate")
-    .sticky(:style="{position: 'sticky', top: 0, zIndex: 1}")
-        .topbar(
-            :style=`{
-                backgroundColor: 'lightgray',
-                padding:'5px',
-                height:'40px',
-                display:'flex',
-                alignItems:'center',
-                }`
-            )
-            .selects(:style="{flex:1, display:'flex', alignItems:'center', flexWrap:'wrap'}")
-                label(for="xAxis-select" style="margin:5px") X-Axis:
-                select#xAxis-select(v-model="xAxis")
-                    option(v-for="option in xAxisList") {{ option }}
-
-                label(for="aggregate-select" style="margin:5px") X-Axis Aggregate:
-                select#aggregate-select(:style="{marginRight: '10px'}" v-model="selectedAggregateBy")
-                    option(v-for="option in ['', 'sum','avg', 'min', 'max' ]") {{ option }}
-
-                label(for="yAxis-select" style="margin:5px") Y-Axis:
-                select#yAxis-select(:value="yAxis" @input='yAxisSelected($event.target.value)')
-                    option(v-for="option in yAxisList") {{ option }}
-
-                label(for="groupBy-select" style="margin:5px") Group By:
-                select#groupBy-select(v-model="selectedGroupBy")
-                    option(v-for="option in groupByList") {{ option }}
-
-
-            .scale-type-button(
-                :style=`{
-                    borderRadius:'5px',
-                    padding:'7px',
-                    backgroundColor:'#666',
-                    color:'white',
-                    cursor:'pointer',
-                    userSelect:'none',
-                    }`
-                @click="toggleScaleType"
-                ) Set {{ selectedScaleType == 'linear' ? 'Log' : 'Linear' }}
-        .legend(
-            :style=`{
-                display:'flex',
-                justifyContent:'center',
-                marginTop:'5px',
-                }`
-            )
-            .legend-border(
-                :style=`{
-                    display:'flex',
-                    flexWrap:'wrap',
-                    maxWidth:'100%',
-                    alignItems:'center',
-                    border:'1px solid black',
-                    borderRadius:'15px',
-                    backgroundColor:'#eee',
-                    }`
-            )
-                .legend-item(v-for="path in displayedChildrenPaths"
-                    @click='togglePathVisible(path)'
-                    :style=`{
-                        display:'flex',
-                        padding:'5px',
-                        cursor:'pointer',
-                        }`
-                    )
-                    .circle(
-                    :style=`{
-                        width:'15px',
-                        height:'15px',
-                        backgroundColor: disabledFuncPaths.includes(path) ? 'lightgrey': colorHash(path), borderRadius:'50px'
-                        }`
-                    )
-                    .name(
-                    :style=`{
-                        marginLeft:'5px',
-                        color: disabledFuncPaths.includes(path) ? 'lightgrey': 'black'
-                        }`
-                    ) {{ legendItem(path) }}
-    .comparison-charts(style="padding:10px")
-        view-chart(
-            v-for="(runs, groupName) in groupedAndAggregated"
-            :groupName="groupName"
-            :hoverX="hoverX"
-            :runs="runs"
-            :displayedChildrenPaths="difference(displayedChildrenPaths, disabledFuncPaths)"
-            :selectedXAxisMetric="xAxis"
-            :selectedYAxisMeta="yAxis"
-            :selectedGroupBy="selectedGroupBy"
-            :selectedScaleType='selectedScaleType'
-            @set-node="changePath"
-            @chart-hover-position-changed="setChartHoverPosition"
-            @toggle-hover-position-locked="toggleHoverPositionLock"
-            )
-    .run-view(
-        v-if="selectedRun"
-        :style=`{
-            width:'100%',
-            height:'270px',
-            display:'flex',
-            position:'sticky',
-            bottom: 0,
-            backgroundColor:'white',
-            padding:'10px'
-            }`
-        )
-        FlameGraph(
-            :runData='selectedRun.data'
-            :selectedNode='selectedParent'
-            :handleClick='changePath'
-            )
-        .global-meta(
-            :style=`{
-            flex: 1,
-            display:'flex',
-            flexDirection:'column',
-            minWidth:'300px',
-            maxWidth:'500px',
-            marginLeft:'20px',
-            overflow:'scroll',
-            }`
-            )
-            .metarow(
-                v-for='(metaVal, metaName) in selectedRun.meta'
-                :style=`{
-                    display:'flex',
-                    }`
-                )
-                .name(:style="{color:'blue', fontWeight:'bold'}") {{ metaName }}
-                .val(:style="{whiteSpace:'nowrap', overflowWrap:'break-word'}") : {{ metaVal }}
 </template>
 
 <script>
@@ -228,7 +97,8 @@ export default {
                 const firstRun = this.runs[0] || {meta:{}}
                 const metaKeys = Object.keys(firstRun.meta)
 
-                return metaKeys
+                console.dir( metaKeys );
+                return metaKeys; //["test0", "test1"]
             } else {
                 return []
             }
