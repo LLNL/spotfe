@@ -483,10 +483,6 @@ ST.ChartCollection = function() {
 
             //  We can not set this string in the App.vue because of compile error.
             ST.graph.setYAxis("avg#inclusive#sum#time.duration");
-
-            setTimeout( function() {
-//                ST.graph.setYAxis("avg#inclusive#sum#time.duration");
-            }, 4000);
         }
 
         if( defined_(aggregate)) {
@@ -525,11 +521,18 @@ ST.ChartCollection = function() {
                 window.cacheSum = cacheSum;
 
                 ST.graph.getData(host, command, file)
-                    .then(summary => {
+                    .then(function() {
 
-                        ST.Utility.check_error( summary );
-                        console.log('summary:', summary);
-                        ST.CallSpot.handle_success2(summary);
+                        ST.graph.setupRuns().then( function( summary ) {
+
+                            setup_pars_();
+                            set_up_listeners_();
+
+                            ST.Utility.check_error( summary );
+                            console.log('summary:', summary);
+                            ST.CallSpot.handle_success2(summary);
+                        });
+
 
                     }).finally( summary => {
 
@@ -538,9 +541,17 @@ ST.ChartCollection = function() {
             });
         });
 
-        setup_pars_();
+        if( ENV.turn_off_add_chart_feature ) {
+            $('body').addClass('turn_off_add_chart_feature');
+        }
+    };
 
-        // listen from chart
+    $(document).ready(init);
+
+
+    var set_up_listeners_ = function() {
+
+                // listen from chart
         ST.graph.addXAxisChangeListener(xAxis => {
 
             if( xAxis !== "undefined" ) {
@@ -569,13 +580,7 @@ ST.ChartCollection = function() {
                 ST.UrlStateManager.update_url('groupby', groupBy);
             }
         });
-
-        if( ENV.turn_off_add_chart_feature ) {
-            $('body').addClass('turn_off_add_chart_feature');
-        }
     };
-
-    $(document).ready(init);
 
 
     $.fn.ArrowFunctions = function (obj) {

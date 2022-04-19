@@ -1,6 +1,8 @@
 
 <template lang="pug">
 #compare-window(:style="{display:'flex', flexDirection:'column'}")
+    .testNewClass
+        div(v-for="myopt in ['1','2','3']") {{ myopt }}
     .updateCompareView(@click="rerenderForSelectDropdownUpdate")
     .sticky(:style="{position: 'sticky', top: 0, zIndex: 1}")
         .topbar(
@@ -81,19 +83,10 @@
                         }`
                     ) {{ legendItem(path) }}
     .comparison-charts(style="padding:10px")
+        div.testNEWdivq
         view-chart(
             v-for="(runs, groupName) in groupedAndAggregated"
             :groupName="groupName"
-            :hoverX="hoverX"
-            :runs="runs"
-            :displayedChildrenPaths="difference(displayedChildrenPaths, disabledFuncPaths)"
-            :selectedXAxisMetric="xAxis"
-            :selectedYAxisMeta="yAxis"
-            :selectedGroupBy="selectedGroupBy"
-            :selectedScaleType='selectedScaleType'
-            @set-node="changePath"
-            @chart-hover-position-changed="setChartHoverPosition"
-            @toggle-hover-position-locked="toggleHoverPositionLock"
             )
     .run-view(
         v-if="selectedRun"
@@ -107,6 +100,7 @@
             padding:'10px'
             }`
         )
+        .testNEWdiv2
         FlameGraph(
             :runData='selectedRun.data'
             :selectedNode='selectedParent'
@@ -166,6 +160,7 @@ export default {
         xAxis: 'launchdate',
         xAxisListener: null,
         yAxis: '',
+        recalcMe: 0,
         yAxisListener: null,
         selectedGroupBy: '',
         groupByListener: null,
@@ -209,6 +204,8 @@ export default {
     computed: {
         runs(){
 
+            return window.runs;
+
             if( this && this.filenames && window.runs ) {
 
                 var fnames = this.filenames;
@@ -223,11 +220,15 @@ export default {
             return [];
         },
         xAxisList(){
+
+            console.log('xaxisList:');
+            return ["testing0", "testing1", "t2"];
             if (this.filenames.length){
 
                 const firstRun = this.runs[0] || {meta:{}}
                 const metaKeys = Object.keys(firstRun.meta)
 
+                console.log('metaKeys:');
                 console.dir( metaKeys );
                 return metaKeys; //["test0", "test1"]
             } else {
@@ -298,18 +299,26 @@ export default {
             return metrics;
         },
         selectedRun(){
+
+            console.log('GAAZ:');
+            console.dir(this.groupedAndAggregated);
+            console.dir(this.hoverX);
+
+            //this.hoverX = {groupName: "all", "runIndex":1};
             return this.hoverX ? this.groupedAndAggregated[this.hoverX.groupName][this.hoverX.runIndex] : null;
         },
         groupedAndAggregated(){
 
-            var yAxisLookup = this.lookupOriginalYAxis( this.yAxis );
+            var yAxisLookup = this.lookupOriginalYAxis( this.yAxis || "avg#inclusive#sum#time.duration");
 
-            var countLoops = 0;
+            var countLoops = 0 + (this.recalcMe || 0);
             var peeledMetricData;
 
             var path = ST.Utility.get_param('sf');
             var key = 'peeledMetricData' + path;
             console.log('Started peeling, Using peel key: ' + key);
+            console.dir(this.runs);
+            //console.dir(window.runs);
 
             var localPeeled = localStorage.getItem(key);
 
@@ -347,6 +356,9 @@ export default {
             });
 
             const grouped = this.selectedGroupBy ? _.groupBy(orderedData, a => a.meta[this.selectedGroupBy]) : {"all": orderedData}
+
+            console.log('grouped:');
+            console.dir(grouped);
             if(!this.selectedAggregateBy) return grouped
 
             const aggregated = _.fromPairs(_.map(grouped, (runList, groupByName) => {
@@ -411,7 +423,8 @@ export default {
 
                 }))
 
-            console.log('finished aggregated...');
+            console.log('finished aggregated3: ');
+            console.dir(aggregated)
             return aggregated
         },
     },  // end computed

@@ -81,23 +81,7 @@ async function lorenz(host, cmd){
 export class Graph{
     constructor(selector){
 
-        console.dir(App);
-
-        //const theapp = window.Vue.createApp(App);
-        //theapp.mount( "#compare_bottom_outer" );
-
-
-        //  https://vuejsdevelopers.com/2020/03/16/vue-js-tutorial/
-        this.app = window.Vue.createApp(App);
-
-        var templ = {
-            template: "<div>Compare tab contents2.</div>"
-        };
-
-        //this.app.component('bluecomp', templ);
-
-        this.app.mount(selector);
-
+        this.selector = selector
     }
 
 
@@ -265,8 +249,8 @@ export class Graph{
 
     async afterCachedDataGet( cachedDataGet, bust_cache, mtime, dataSetKey, host, command ) {
 
-        const cachedData = cachedDataGet;
-        const cachedRunCtimes = cachedData.runCtimes || {};
+        this.cachedData = cachedDataGet;
+        const cachedRunCtimes = this.cachedData.runCtimes || {};
 
         //  Round to prevent string from being too long.
         for (var x in cachedRunCtimes) {
@@ -278,25 +262,32 @@ export class Graph{
             }
         }
 
-        const dataRequest = {dataSetKey, cachedRunCtimes};
+        this.cachedRunCtimes = cachedRunCtimes;
+        this.bust_cache = bust_cache;
 
-        // Get New  Data from backend
-        let newData;
+        this.command = command;
+        this.host = host;
+        this.dataSetKey = dataSetKey;
+        this.dataRequest = {dataSetKey, cachedRunCtimes};
 
-        var cacheSum = window.cacheSum;
+
         var cacheDate = window.cacheSum ? window.cacheSum.date : 0;
 
         console.log('mtime: ' + mtime + '   cacheDate=' + cacheDate);
 
-        var cacheFileFound = parseInt(mtime) !== 2000400500;
+        this.cacheFileFound = parseInt(mtime) !== 2000400500;
 
         //  if the file modification time for the server side cache is newer then use it.
         if (mtime > cacheDate) {
             console.log('mtime is newer so need to bust cache.');
-            bust_cache = true;
+            this.bust_cache = true;
         }
 
-        if (cacheSum && cacheSum.summary && !bust_cache && !isContainer) {
+        // Get New  Data from backend
+        let newData;
+        var cacheSum = window.cacheSum;
+
+        if (cacheSum && cacheSum.summary && !this.bust_cache && !isContainer) {
 
             newData = cacheSum.summary;
             console.log('was able to find cache.');
@@ -313,7 +304,7 @@ export class Graph{
                     headers: {
                         'content-type': 'application/json'
                     },
-                    body: JSON.stringify(dataRequest)
+                    body: JSON.stringify(this.dataRequest)
                 });
 
                 var txt = await response.text();
@@ -331,15 +322,17 @@ export class Graph{
 
                     var lor_response;
 
-                    if (cacheFileFound) {
+                    if (this.cacheFileFound) {
 
                         //  Use the super fast cat.cgi to output things really fast.
-                        lor_response = await getMain0(host, dataSetKey);
+                        lor_response = await getMain0(this.host, this.dataSetKey);
                         newData = JSON.parse(lor_response);
                     } else {
 
                         console.log('cache file not found, making lorenz call.')
-                        lor_response = await lorenz(host, `${command} ${dataSetKey} '` + JSON.stringify(cachedRunCtimes) + "'");
+                        var command_loc = this.command;
+                        var dataSetKey_loc = this.dataSetKey;
+                        lor_response = await lorenz(this.host, `${command_loc} ${dataSetKey_loc} '` + JSON.stringify(this.cachedRunCtimes) + "'");
 
                         console.dir( lor_response );
 
@@ -407,13 +400,50 @@ export class Graph{
         //newData = ST.RunDictionaryTranslator.translate( newData );
         ST.RunDictionaryTranslator.set(newData.dictionary);
 
-        var runs0 = newData.Runs;
+        this.runs_index = newData.Runs;
 
         //  this will make jupyter button disappear.
         if (newData.dictionary) {
             ST.CallSpot.is_ale3d = true;
         }
 
+        this.newData = newData;
+    }
+
+
+    async renderMe() {
+                console.dir(App);
+
+        //const theapp = window.Vue.createApp(App);
+        //theapp.mount( "#compare_bottom_outer" );
+
+
+        //  https://vuejsdevelopers.com/2020/03/16/vue-js-tutorial/
+        this.app = window.Vue.createApp(App);
+
+        var templ = {
+            template: "<div>Compare tab contents2.</div>"
+        };
+
+        //this.app.component('bluecomp', templ);
+
+        var app2 = this.app;
+
+        //setTimeout( function() {
+            app2.mount( this.selector );
+        //}, 5000);
+
+
+
+        //this.app.mount(selector);
+
+
+    }
+
+    async setupRuns() {
+
+        var cachedData = this.cachedData;
+        var runs0 = this.runs_index;
 
         console.log('runs before cacheDa84:');
         console.dir(runs0);
@@ -436,6 +466,7 @@ export class Graph{
 
         console.dir(runs0);
 
+        var newData = this.newData;
         // Merge new data with cached
         cachedData.Runs = Object.assign(cachedData.Runs, runs0);
         cachedData.RunDataMeta = Object.assign(cachedData.RunDataMeta, newData.RunDataMeta)
@@ -453,7 +484,7 @@ export class Graph{
         _.forEach(cachedData.Runs, (run, filename) => {
 
             run.Globals = run.Globals || {};
-            run.Globals.dataSetKey = dataSetKey
+            run.Globals.dataSetKey = this.dataSetKey
             run.Globals.datapath = filename
         });
         cachedData.RunGlobalMeta.dataSetKey = {type:'string'}
@@ -502,9 +533,6 @@ export class Graph{
             run.data['--root path--'] = baseMetrics
         }) 
 
-        // set data values
-        this.dataSetKey = dataSetKey;
-
 
         var lr0 = $.extend({}, cachedData );
         //var lr = lr0.Runs;
@@ -518,6 +546,8 @@ export class Graph{
             arr[ run_id_x ] = a_run;
         }
 
+        var dataSetKey = this.dataSetKey;
+
         lr0.Runs = arr;
         //  this is just the Meta data.  the actual "Data" is stored in cachedData
         //  and will be sent to the durations page from CallSpot.js
@@ -526,6 +556,8 @@ export class Graph{
 
         //  The first run's meta object is used to determine what the drop down select options should be.
         window.runs = ST.CompositeLayoutModel.augment_first_run_to_include_composite_charts(runs);
+
+        this.renderMe();
 
         this.compare(filenames)
 
@@ -561,6 +593,8 @@ export class Graph{
 
         summary.layout.scatterplots = await localforage.getItem('scatterplots:' + this.dataSetKey) || []
 
+        console.log('index.js:');
+        console.dir(summary);
         return summary
     }
 
