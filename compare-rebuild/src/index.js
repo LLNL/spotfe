@@ -412,11 +412,8 @@ export class Graph{
 
 
     async renderMe() {
-                console.dir(App);
 
-        //const theapp = window.Vue.createApp(App);
-        //theapp.mount( "#compare_bottom_outer" );
-
+        console.dir(App);
 
         //  https://vuejsdevelopers.com/2020/03/16/vue-js-tutorial/
         this.app = window.Vue.createApp(App);
@@ -429,16 +426,10 @@ export class Graph{
 
         var app2 = this.app;
 
-        //setTimeout( function() {
-            app2.mount( this.selector );
-        //}, 5000);
-
-
-
+        app2.mount( this.selector );
         //this.app.mount(selector);
-
-
     }
+
 
     async setupRuns() {
 
