@@ -2,37 +2,40 @@ ST.FileUpload = function() {
 
     var dir = ST.Utility.get_param("sf");
 
-    const fuapp = Vue.createApp({});
+    $(document).ready(function() {
 
-    fuapp.component("file-upload", {
-        data: function() {
+        const fuapp = Vue.createApp({});
 
-            return {
-                directory_val: dir
-            }
-        },
-        template: '<form action="javascript:void(0);" method="post">' +
-        //'<div class="instructions">Directory containing cali files:</div>' +
-        '<input type="text" class="directory" v-on:keyup="keyup( $event )"/>' +
-        '<div class="update_button myButton icon" v-on:click="update( $event )">' +
-        '<div class="inner"></div></div>' +
-        '</form>',
-        methods: {
-            keyup: function(e) {
+        fuapp.component("file-upload", {
+            data: function() {
 
-                if( e.keyCode === 13 ) {
-                    this.update(e);
+                return {
+                    directory_val: dir
                 }
             },
-            update: function( event ) {
+            template: '<form action="javascript:void(0);" method="post">' +
+                //'<div class="instructions">Directory containing cali files:</div>' +
+                '<input type="text" class="directory" v-on:keyup="keyup( $event )"/>' +
+                '<div class="update_button myButton icon" v-on:click="update( $event )">' +
+                '<div class="inner"></div></div>' +
+                '</form>',
+            methods: {
+                keyup: function(e) {
 
-                var dir = $('.directory').val();
-                ST.UrlStateManager.update_url("sf", dir);
+                    if( e.keyCode === 13 ) {
+                        this.update(e);
+                    }
+                },
+                update: function( event ) {
 
-                location.reload();
+                    var dir = $('.directory').val();
+                    ST.UrlStateManager.update_url("sf", dir);
+
+                    location.reload();
+                }
             }
-        }
-    });
+        });
 
-    fuapp.mount("#file_upload");
+        fuapp.mount("#file_upload");
+    });
 }();

@@ -24,10 +24,11 @@ ST.CompareArguments = function() {
     };
 
 
-    var coapp = Vue.createApp({});
 
 
     var load_tabs_ = function() {
+
+        var coapp = Vue.createApp({});
 
         var jup_button = '<div class="myButton icon multi_jupyter" v-on:click="multiJupyter()" title="Open all Jupyter files selected below">' +
                     '<div class="inner"></div>' +
