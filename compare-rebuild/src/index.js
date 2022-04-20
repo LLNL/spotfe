@@ -416,7 +416,7 @@ export class Graph{
         console.dir(App);
 
         //  https://vuejsdevelopers.com/2020/03/16/vue-js-tutorial/
-        this.app = window.Vue.createApp(App);
+        this.app = createApp(App);
 
         var templ = {
             template: "<div>Compare tab contents2.</div>"
@@ -548,8 +548,6 @@ export class Graph{
         //  The first run's meta object is used to determine what the drop down select options should be.
         window.runs = ST.CompositeLayoutModel.augment_first_run_to_include_composite_charts(runs);
 
-        this.renderMe();
-
         this.compare(filenames)
 
         // 4. return summary
@@ -608,7 +606,7 @@ export class Graph{
 
     compare(filenames){
         filenames = filenames || this.last_filenames;
-        this.app.filenames = filenames
+        //this.app.filenames = filenames
         this.last_filenames = filenames;
     }
 

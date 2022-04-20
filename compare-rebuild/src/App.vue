@@ -1,8 +1,6 @@
 
 <template lang="pug">
 #compare-window(:style="{display:'flex', flexDirection:'column'}")
-    .testNewClass
-        div(v-for="myopt in ['1','2','3']") {{ myopt }}
     .updateCompareView(@click="rerenderForSelectDropdownUpdate")
     .sticky(:style="{position: 'sticky', top: 0, zIndex: 1}")
         .topbar(
@@ -83,10 +81,19 @@
                         }`
                     ) {{ legendItem(path) }}
     .comparison-charts(style="padding:10px")
-        div.testNEWdivq
         view-chart(
             v-for="(runs, groupName) in groupedAndAggregated"
             :groupName="groupName"
+            :hoverX="hoverX"
+            :runs="runs"
+            :displayedChildrenPaths="difference(displayedChildrenPaths, disabledFuncPaths)"
+            :selectedXAxisMetric="xAxis"
+            :selectedYAxisMeta="yAxis"
+            :selectedGroupBy="selectedGroupBy"
+            :selectedScaleType='selectedScaleType'
+            @set-node="changePath"
+            @chart-hover-position-changed="setChartHoverPosition"
+            @toggle-hover-position-locked="toggleHoverPositionLock"
             )
     .run-view(
         v-if="selectedRun"
@@ -204,6 +211,8 @@ export default {
     computed: {
         runs(){
 
+            console.log('Main runs:');
+            console.dir(window.runs);
             return window.runs;
 
             if( this && this.filenames && window.runs ) {
@@ -222,14 +231,12 @@ export default {
         xAxisList(){
 
             console.log('xaxisList:');
-            return ["testing0", "testing1", "t2"];
-            if (this.filenames.length){
+
+            if (this.runs.length > 0){
 
                 const firstRun = this.runs[0] || {meta:{}}
                 const metaKeys = Object.keys(firstRun.meta)
 
-                console.log('metaKeys:');
-                console.dir( metaKeys );
                 return metaKeys; //["test0", "test1"]
             } else {
                 return []
@@ -239,8 +246,7 @@ export default {
             return this.runs[0] ? Object.keys(this.runs[0].data) : []
         },
         displayedChildrenPaths(){
-            var chp = childrenPaths(this.selectedParent, this.funcPathKeys)
-            console.dir(chp);
+            var chp = childrenPaths(this.selectedParent, this.funcPathKeys);
             return chp;
         },
         groupByList(){
@@ -357,9 +363,13 @@ export default {
 
             const grouped = this.selectedGroupBy ? _.groupBy(orderedData, a => a.meta[this.selectedGroupBy]) : {"all": orderedData}
 
-            console.log('grouped:');
-            console.dir(grouped);
-            if(!this.selectedAggregateBy) return grouped
+
+            if(!this.selectedAggregateBy) {
+
+                console.log('grouped:');
+                console.dir(grouped);
+                return grouped;
+            }
 
             const aggregated = _.fromPairs(_.map(grouped, (runList, groupByName) => {
                 // consolidate the run list into a single run

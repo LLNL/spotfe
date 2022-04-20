@@ -525,6 +525,8 @@ ST.ChartCollection = function() {
 
                         ST.graph.setupRuns().then( function( summary ) {
 
+                            ST.graph.renderMe();
+
                             setup_pars_();
                             set_up_listeners_();
 

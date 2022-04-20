@@ -202,12 +202,22 @@ export default {
     computed:{
         yticks(){
             const yticks = ticks(0, this.maxYval, 10)
-            return zip(yticks.map(this.y), yticks)
+            var ret_y_ticks = zip(yticks.map(this.y), yticks);
+
+            console.log('ret_y_ticks:' );
+            console.dir( ret_y_ticks );
+            return ret_y_ticks;
         },
         seriesList(){
-            const stackFunc = stack().keys(this.displayedChildrenPaths)
+            var stack_var = stack();
+
+            var xruns = window.runs;
+            var dcp = ["--root path--/main", "--root path--/blank"];
+
+            const stackFunc = stack_var.keys(this.displayedChildrenPaths);
             const viewData = this.runs.map(run => {return _.fromPairs(_.map(this.displayedChildrenPaths, path => [path, run.data[path].value]))})
             const stackData =  stackFunc(viewData)
+
             return stackData
         },
         displayedXTitles(){
