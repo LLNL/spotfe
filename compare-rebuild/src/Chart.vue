@@ -203,9 +203,6 @@ export default {
         yticks(){
             const yticks = ticks(0, this.maxYval, 10)
             var ret_y_ticks = zip(yticks.map(this.y), yticks);
-
-            console.log('ret_y_ticks:' );
-            console.dir( ret_y_ticks );
             return ret_y_ticks;
         },
         seriesList(){
@@ -221,7 +218,7 @@ export default {
             return stackData
         },
         displayedXTitles(){
-            return this.runs.map(run => {
+            var ret = this.runs.map(run => {
 
                 var encoded_title = run.meta[this.selectedXAxisMetric]
                 var is_date = !isNaN(encoded_title);
@@ -234,7 +231,12 @@ export default {
                     return timeFormat("%Y-%b-%d %H:%M")(new Date(parseInt(title + '000')))
                 }
                 return title
-            })
+            });
+
+            console.log('Z888displayedXTitles:');
+            console.dir(ret);
+
+            return ret;
         },
         numberOfTicks(){
             return Math.min(Math.round(this.width/50), this.runs.length)

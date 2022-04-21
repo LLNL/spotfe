@@ -107,7 +107,6 @@
             padding:'10px'
             }`
         )
-        .testNEWdiv2
         FlameGraph(
             :runData='selectedRun.data'
             :selectedNode='selectedParent'
@@ -204,15 +203,13 @@ export default {
                 }
 
             }
-            var yax = getInitialYValue(this.runs)
-            this.yAxis = yax; //this.lookupOriginalYAxis( yax );
         },
     },
     computed: {
         runs(){
 
             console.log('Main runs:');
-            console.dir(window.runs);
+            //console.dir(window.runs);
             return window.runs;
 
             if( this && this.filenames && window.runs ) {
@@ -305,19 +302,19 @@ export default {
             return metrics;
         },
         selectedRun(){
-
-            console.log('GAAZ:');
-            console.dir(this.groupedAndAggregated);
-            console.dir(this.hoverX);
-
-            //this.hoverX = {groupName: "all", "runIndex":1};
             return this.hoverX ? this.groupedAndAggregated[this.hoverX.groupName][this.hoverX.runIndex] : null;
         },
         groupedAndAggregated(){
 
-            var yAxisLookup = this.lookupOriginalYAxis( this.yAxis || "avg#inclusive#sum#time.duration");
+            if( this.yAxis === "" ) {
+                var yax = getInitialYValue(this.runs)
+                this.yAxis = yax; //this.lookupOriginalYAxis( yax );
+            }
 
-            var countLoops = 0 + (this.recalcMe || 0);
+            //  || "avg#inclusive#sum#time.duration")
+            var yAxisLookup = this.lookupOriginalYAxis( this.yAxis );
+
+            var countLoops = 0;
             var peeledMetricData;
 
             var path = ST.Utility.get_param('sf');
