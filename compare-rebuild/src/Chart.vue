@@ -188,7 +188,6 @@ export default {
             const groupName = this.groupName
 
             this.$emit('chart-hover-position-changed', groupName, runIndex)
-
         },
         rectClicked(event){
             this.$emit('toggle-hover-position-locked')
@@ -277,6 +276,9 @@ export default {
     mounted(){
         this.handleResize()
         window.addEventListener('resize', this.handleResize)
+
+        //  TODO: Call handleResize after compare tab is loaded, not with setInterval.
+        setInterval( this.handleResize, 5000);
     },
 
     beforeDestroy(){

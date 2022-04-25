@@ -302,7 +302,13 @@ export default {
             return metrics;
         },
         selectedRun(){
-            return this.hoverX ? this.groupedAndAggregated[this.hoverX.groupName][this.hoverX.runIndex] : null;
+            var ret = this.hoverX ? this.groupedAndAggregated[this.hoverX.groupName][this.hoverX.runIndex] : null;
+
+            if( ret == null ) {
+                //ret = this.groupedAndAggregated["all"][0];
+            }
+
+            return ret;
         },
         groupedAndAggregated(){
 
