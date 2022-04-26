@@ -99,7 +99,7 @@ console.log("wall_title=" + window.wall_title);
 
 export default {
 
-    props:['filename', 'data', 'meta'],
+    //props:['filename', 'data', 'meta'],
     data(){return {
         selectedNode: '--root path--',
         selectedTopdownNode: 'fe',
@@ -109,10 +109,16 @@ export default {
         ensure_update: false,
         metricObjs: {}
     }},
-    mounted: function() {
-
-    },
     computed:{
+        data(){
+            return window.WalltimeAppParams.data;
+        },
+        filename() {
+            return window.WalltimeAppParams.filename;
+        },
+        meta() {
+            return window.WalltimeAppParams.meta;
+        },
         funcPaths(){return Object.keys(this.data) },
         metricNames(){ return Object.keys(this.data[this.funcPaths[0]]).filter(name => !name.startsWith('any#any#'))},
         topDownNames(){ return Object.keys(this.data[this.funcPaths[0]]).filter(name => name.startsWith('any#any#'))},

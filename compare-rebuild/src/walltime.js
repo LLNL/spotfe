@@ -39,15 +39,17 @@ localforage.getItem(runSetId)
 
         //ST.replaceYAxisWithValue( fileData );
 
+        window.WalltimeAppParams = {};
+
+        window.WalltimeAppParams.filename = runId;
+        window.WalltimeAppParams.data = fileData.Data;
+        window.WalltimeAppParams.meta = fileData.Globals;
+
         App.data.filename = runId;
         App.data.data = fileData.Data;
         App.data.meta = fileData.Globals;
 
         var papp = createApp(App);
-
-        papp.filename = runId;
-        papp.data = fileData.Data;
-        papp.meta = fileData.Globals;
 
         papp.mount("#main");
 
