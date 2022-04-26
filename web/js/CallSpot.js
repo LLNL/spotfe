@@ -560,7 +560,7 @@ ST.CallSpot = function() {
 
             localStorage.setItem( walldata_key, walldata );
 
-            var url = 'sankey/index.html?runSetId=' + file_left +
+            var url = 'views/index.html?runSetId=' + file_left +
                 "&runId=" + cali_fp +
                 "&title=" + cali_obj.title;
 

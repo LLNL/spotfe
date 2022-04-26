@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import {createApp} from 'vue'
 import App from './WalltimeApp.vue'
 import "babel-polyfill"
 import localforage from 'localforage'
@@ -38,16 +39,19 @@ localforage.getItem(runSetId)
 
         //ST.replaceYAxisWithValue( fileData );
 
-        return new Vue({
-            el: "main",
-            render: h => h(App, {
-                props:{
-                    filename: runId, 
-                    data: fileData.Data ,
-                    meta: fileData.Globals
-                },
-            }),
-        })
-        
-    })
+        App.data.filename = runId;
+        App.data.data = fileData.Data;
+        App.data.meta = fileData.Globals;
+
+        var papp = createApp(App);
+
+        papp.filename = runId;
+        papp.data = fileData.Data;
+        papp.meta = fileData.Globals;
+
+        papp.mount("#main");
+
+        return papp;
+    });
+
 document.title = runId

@@ -50,7 +50,7 @@
     "watch": "babel-watch  --watch -- index",
     "dev": "npm run watch & npm run client:build-dev ",
     "client:build-dev": "webpack --watch",
-    "walltime": "webpack --config walltime.webpack.config.js"
+    "walltime": "webpack --config walltime.webpack.config.js --watch"
   },
   "repository": {},
   "author": "LLNL",
