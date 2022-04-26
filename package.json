@@ -45,8 +45,6 @@
     "webpack-cli": "^4.9.2"
   },
   "scripts": {
-    "build-walltime": "parcel build src/walltime.pug -d ../sankey -o index.html --no-source-maps --public-url './'",
-    "watch-walltime": "parcel watch src/walltime.pug -d ../sankey -o index.html --public-url './'",
     "watch": "babel-watch  --watch -- index",
     "dev": "npm run watch & npm run client:build-dev ",
     "client:build-dev": "webpack --watch",
