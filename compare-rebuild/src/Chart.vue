@@ -112,10 +112,9 @@
         )
         .xaxis-ticks(
             v-for="(xTitle, i) in displayedXTitles"
-            v-if="(i % Math.floor(runs.length/numberOfTicks)) == 0"
             :style=`{
                 position:'absolute',
-                left: i/(runs.length-1)*width + 'px',
+                left: i/(displayedXTitles.length-1)*width + 'px',
                 height:'10px',
                 borderLeft:'1px solid black'
                 }`
@@ -217,7 +216,19 @@ export default {
             return stackData
         },
         displayedXTitles(){
-            var ret = this.runs.map(run => {
+            console.log('test displayZZ');
+
+            var runsForXAxis = [];
+
+            for( var y=0; y < this.runs.length; y++ ) {
+
+                if( y % this.divNumberOfTicks == 0 ) {
+
+                    runsForXAxis.push( this.runs[y] );
+                }
+            }
+
+            var ret = runsForXAxis.map(run => {
 
                 var encoded_title = run.meta[this.selectedXAxisMetric]
                 var is_date = !isNaN(encoded_title);
@@ -237,8 +248,23 @@ export default {
 
             return ret;
         },
+        divNumberOfTicks() {
+
+            var re = Math.floor(this.runs.length/this.numberOfTicks);
+            console.log('Divide Number of Ticks: ' + re + "   ");
+            return re;
+        },
         numberOfTicks(){
-            return Math.min(Math.round(this.width/50), this.runs.length)
+            var wid = this.width;
+
+            if( wid < 300 ) {
+                wid = 300;
+            }
+
+            var ret = Math.min(Math.round(wid/50), this.runs.length)
+            console.log('number of ticks: ' + ret);
+
+            return isNaN(ret) ? 10 : ret;
 
         },
         maxYval(){
