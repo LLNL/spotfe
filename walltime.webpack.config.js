@@ -5,7 +5,10 @@ const { VueLoaderPlugin } = require('vue-loader')
 module.exports = {
     mode: 'development',
     entry: {
-        main: path.resolve(__dirname, './compare-rebuild/src/index.js')
+        main: path.resolve(__dirname, './compare-rebuild/src/walltime.js')
+    },
+    output: {
+        path: path.resolve(__dirname, './sankey_dist')
     },
     module: {
         rules: [
@@ -44,4 +47,3 @@ module.exports = {
         new VueLoaderPlugin(),
     ]
 }
-

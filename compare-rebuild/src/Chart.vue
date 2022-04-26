@@ -216,7 +216,6 @@ export default {
             return stackData
         },
         displayedXTitles(){
-            console.log('test displayZZ');
 
             var runsForXAxis = [];
 
@@ -243,15 +242,11 @@ export default {
                 return title
             });
 
-            console.log('Z888displayedXTitles:');
-            console.dir(ret);
-
             return ret;
         },
         divNumberOfTicks() {
 
             var re = Math.floor(this.runs.length/this.numberOfTicks);
-            console.log('Divide Number of Ticks: ' + re + "   ");
             return re;
         },
         numberOfTicks(){
@@ -262,10 +257,7 @@ export default {
             }
 
             var ret = Math.min(Math.round(wid/50), this.runs.length)
-            console.log('number of ticks: ' + ret);
-
             return isNaN(ret) ? 10 : ret;
-
         },
         maxYval(){
             return max(this.seriesList, d => max(d, d => d[1]))
