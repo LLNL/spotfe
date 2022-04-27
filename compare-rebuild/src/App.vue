@@ -185,7 +185,9 @@ export default {
     },
     watch:{
         xAxis(value){
-            if(this.xAxisListener) this.xAxisListener(value)
+            if(this.xAxisListener) {
+                this.xAxisListener(value)
+            }
         },
         selectedGroupBy(value){
             this.hoverX = null;
