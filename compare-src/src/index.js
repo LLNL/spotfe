@@ -286,7 +286,7 @@ export class Graph{
             if (isContainer) {
 
                 // first see if there is a data endpoint:  used in docker container
-                let response = await fetch("/getdata", {
+                let response = await fetch("getdata", {
                     method: "post",
                     headers: {
                         'content-type': 'application/json'

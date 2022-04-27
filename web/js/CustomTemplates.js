@@ -7,7 +7,7 @@ ST.CustomTemplates = function() {
         var sf = ST.Utility.get_file();
         const isContainer = window.ENV.machine == 'container';
         var commandFunction = 'getTemplates';
-        var url = '/getTemplates';
+        var url = 'getTemplates';
 
         if( isContainer ) {
 

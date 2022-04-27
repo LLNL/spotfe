@@ -52229,7 +52229,7 @@ var Graph = /*#__PURE__*/function () {
                 }
 
                 _context4.next = 18;
-                return fetch("/getdata", {
+                return fetch("getdata", {
                   method: "post",
                   headers: {
                     'content-type': 'application/json'
