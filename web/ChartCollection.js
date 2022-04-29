@@ -467,7 +467,9 @@ ST.ChartCollection = function() {
 
         for( var x=0; x < options.length; x++ ) {
 
-            if( option_str === options[x] ) {
+            var oval = $(options[x]).val();
+            
+            if( option_str === oval ) {
                 return x;
             }
         }
@@ -637,6 +639,7 @@ ST.ChartCollection = function() {
         init: init,
         show_more: show_more_,
         RenderChartCollection: RenderChartCollection,
-        bind_sort: bind_sort
+        bind_sort: bind_sort,
+        setup_pars: setup_pars_
     }
 }();
