@@ -78,6 +78,7 @@ ST.CompareArguments = function() {
 
             coapp.mount('#bottom-tabs');
             window.tabsMounted = 1;
+            load_compare();
         }
     };
 

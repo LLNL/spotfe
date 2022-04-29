@@ -554,14 +554,19 @@ ST.ChartCollection = function() {
     var set_up_listeners_ = function() {
 
                 // listen from chart
-        ST.graph.addXAxisChangeListener(xAxis => {
+        $('#xAxis-select').change( function() {
+
+            var xAxis = $(event.target).val();
 
             if( xAxis !== "undefined" ) {
                 ST.UrlStateManager.update_url('xaxis', xAxis);
             }
         });
 
-        ST.graph.addYAxisChangeListener(yAxis => {
+
+        $('#yAxis-select').change( function(yAxis) {
+
+            var yAxis = $(event.target).val();
 
             if( yAxis !== "undefined" ) {
                 var component = encodeURIComponent(yAxis);
@@ -569,14 +574,17 @@ ST.ChartCollection = function() {
             }
         });
 
-        ST.graph.addAggregateTypeChangeListener(agg =>{
+        $('#aggregate-select').change(agg_param =>{
 
+            var agg = $(event.target).val();
             if( agg !== "undefined" ) {
                 ST.UrlStateManager.update_url('aggregate', agg);
             }
         });
 
-        ST.graph.addGroupByChangeListener(groupBy => {
+        $('#groupBy-select').change(groupBy_param => {
+
+            var groupBy = $(event.target).val();
 
             if( groupBy !== "undefined" ) {
                 ST.UrlStateManager.update_url('groupby', groupBy);
