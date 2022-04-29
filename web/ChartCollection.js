@@ -460,6 +460,32 @@ ST.ChartCollection = function() {
         ST.ChartCollection.RenderChartCollection(ST.newp, ST.layout_used);
     };
 
+
+    var get_option_index_ = function( el, option_str ) {
+
+        var options = $(el.options);
+
+        for( var x=0; x < options.length; x++ ) {
+
+            if( option_str === options[x] ) {
+                return x;
+            }
+        }
+    };
+
+
+    var set_select_if_empty_ = function( element_id, url_str ) {
+
+        var ht_el = $("#" + element_id).get(0);
+        var opt_idx = get_option_index_( ht_el, url_str );
+
+        //  Only set it if it hasn't already been set.
+        if( ht_el.selectedIndex === 0 ) {
+            ht_el.selectedIndex = opt_idx;
+        }
+    };
+
+
     var setup_pars_ = function() {
 
         var xaxis = ST.Utility.get_param('xaxis');
@@ -470,23 +496,24 @@ ST.ChartCollection = function() {
         //yaxis = yaxis.replace('\%25252523', '#');
 
         if( defined_(xaxis) ) {
-            ST.graph.setXaxis(xaxis);
+            set_select_if_empty_("xAxis-select", xaxis );
         }
 
-        if( defined_(groupby)) {
-            ST.graph.setGroupBy(groupby);
+        if( defined_(groupby) ) {
+            set_select_if_empty_("groupBy-select", groupby);
         }
 
         if( defined_(yaxis)) {
-            ST.graph.setYAxis(yaxis);
+            set_select_if_empty_("yAxis-select", yaxis);
+            //ST.graph.setYAxis(yaxis);
         } else {
 
             //  We can not set this string in the App.vue because of compile error.
-            ST.graph.setYAxis("avg#inclusive#sum#time.duration");
+            //ST.graph.setYAxis("avg#inclusive#sum#time.duration");
         }
 
         if( defined_(aggregate)) {
-            ST.graph.setAggregateType(aggregate);
+            set_select_if_empty_("aggregate-select", aggregate);
         }
     };
 
