@@ -243,30 +243,6 @@ export default {
     methods:{
         async getDictionary( callback ) {
 
-            //  /usr/gapps/spot/sand/spot.py getDictionary /usr/gapps/spot/datasets/lulesh_gen/100
-            /*var dataSetKey = ST.Utility.get_param('runSetId');
-
-            ST.Utility.init_params();
-
-            var host = ST.Utility.get_default_machine();
-            var command = ST.Utility.get_command();
-
-            command = command.replace('getData', 'getDictionary');
-            var param_str = `${command} ${dataSetKey}`;
-
-            console.log('Await2, param_str = ' + param_str);
-            var lor_response = await lorenz(host, param_str );
-
-
-            if( lor_response && lor_response.error !== "" ) {
-                ST.Utility.error( lor_response.error );
-                return false;
-            }
-
-            var newData = JSON.parse(lor_response.output.command_out)
-
-            console.dir(newData);
-            */
             var sf = ST.Utility.get_param("runSetId");
             var key = "page_dictionary_" + sf;
             var local_page = localStorage.getItem( key );
@@ -282,9 +258,10 @@ export default {
 
             callback();
         },
-        async getmemoryfunc( path )
+        async containerAJAX( path, success, fail )
         {
-            console.log('getmemoryfunc() 0');
+
+            console.log('containerAJAX() 0');
             const command = "/opt/conda/bin/python3 /usr/gapps/spot/backend.py --config /usr/gapps/spot/backend_config.yaml getTimeseriesData /data/" +
                 path;
 
@@ -293,9 +270,9 @@ export default {
                 filepath: path
             };
 
-            console.log('getmemoryfunc()');
+            console.log('getTimeseriesData()');
 
-            let response = await fetch("getmemory", {
+            let response = await fetch("getTimeseriesData", {
                 method: "post",
                 headers: {
                     'content-type': 'application/json'
@@ -312,9 +289,7 @@ export default {
                 console.log("about to do response.json();");
                 var newData = await response.json();
 
-                console.log('newData2:');
-                console.dir(newData);
-
+                console.dir( newData );
                 this.updateTopDown( newData );
 
                 this.updateTopDownData();
@@ -330,12 +305,12 @@ export default {
                 //  this rerender allows the dictionary to be translated
                 //  so that we're not showing all two character stuff.
                 rerender();
-                //setTimeout( rerender, 1000);
-                //setTimeout( rerender, 3000);
-                //setTimeout( rerender, 5000);
 
-            } else {
-                console.log('no .json');
+                if( newData ) {
+                    success();
+                } else {
+                    fail();
+                }
             }
         },
         getScripts() {
@@ -382,6 +357,47 @@ export default {
         //  Just reuse our existing get memory call for now, so we can retrieve aliases.
         getAliases() {
 
+            var success_handler = function( aj_dat ) {
+
+                var ret2 = {};
+
+                if( aj_dat && aj_dat.series ) {
+                    ret2 = aj_dat;
+                } else {
+
+                    var ret = aj_dat.output.command_out;
+
+                    try {
+                        ret2 = JSON.parse(ret);
+                    } catch(e) {
+                    }
+                }
+
+                updateTopDown(ret2);
+                updateTopDownData();
+                console.log('debugTop19');
+                //  this can not be called until replacing_metrics is set correctlying
+                $('.update_top_down').trigger('click');
+
+                //  TODO: find event of when the thing gets finished rendering
+                //  only then should be do rerender.  get rid of setTimeout.
+                //  Rerender needs to happen after another event.
+                //  this rerender allows the dictionary to be translated
+                //  so that we're not showing all two character stuff.
+                rerender();
+            };
+
+            var error_handler = function() {
+
+                updateTopDown({});
+                updateTopDownData();
+                //  this can not be called until replacing_metrics is set correctlying
+                $('.update_top_down').trigger('click');
+
+                rerender();
+            };
+
+
             console.dir(ST.CallSpot);
             console.dir(ST.Utility);
 
@@ -408,7 +424,7 @@ export default {
 
             if( isContainer ) {
 
-                this.getmemoryfunc( path );
+                this.containerAJAX( path, success_handler, error_handler );
 
             } else {
 
@@ -420,46 +436,6 @@ export default {
                 var rerender = this.rerenderSoDictTranslationHappens;
 
                 this.getDictionary( function() {
-
-                    var success_handler = function( aj_dat ) {
-
-                        var ret2 = {};
-
-                        if( aj_dat.series ) {
-                            ret2 = aj_dat;
-                        } else {
-
-                            var ret = aj_dat.output.command_out;
-
-                            try {
-                                ret2 = JSON.parse(ret);
-                            } catch(e) {
-                            }
-                        }
-
-                        updateTopDown(ret2);
-                        updateTopDownData();
-                        console.log('debugTop19');
-                        //  this can not be called until replacing_metrics is set correctlying
-                        $('.update_top_down').trigger('click');
-
-                        //  TODO: find event of when the thing gets finished rendering
-                        //  only then should be do rerender.  get rid of setTimeout.
-                        //  Rerender needs to happen after another event.
-                        //  this rerender allows the dictionary to be translated
-                        //  so that we're not showing all two character stuff.
-                        rerender();
-                    };
-
-                    var error_handler = function() {
-
-                        updateTopDown({});
-                        updateTopDownData();
-                        //  this can not be called until replacing_metrics is set correctlying
-                        $('.update_top_down').trigger('click');
-
-                        rerender();
-                    };
 
                     ST.CallSpot.ajax({
                         file: path,

@@ -20,17 +20,20 @@ ST.FileUpload = function() {
                 '<div class="inner"></div></div>' +
                 '</form>',
             methods: {
-                keyup: function(e) {
+                keyup: function (e) {
 
-                    if( e.keyCode === 13 ) {
+                    if (e.keyCode === 13) {
                         this.update(e);
                     }
                 },
-                update: function( event ) {
+                update: function (event) {
 
-                    var dir = $('.directory').val();
-                    ST.UrlStateManager.update_url("sf", dir);
+                    var wl = window.location;
 
+                    //  We don't want the parameters set from the old URL to impact the new directory you're going to.
+                    var newUrl = wl.origin + wl.pathname + '?sf=' + this.directory_val;
+
+                    history.pushState({}, null, newUrl);
                     location.reload();
                 }
             }

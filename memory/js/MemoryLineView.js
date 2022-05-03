@@ -55,10 +55,14 @@ ST.MemoryLineView = function() {
 
         var runSetId = ST.Utility.get_param('runSetId');
         var runId = ST.Utility.get_param('runId');
+        //runId = runId.replace(/\/data/, "");
+
+        //  Now need a space in between *.cali and the rest of it.
+        runId = runId.replace(/\/(?=[^\/]*$)/, ' ');
 
         //  //'/usr/gapps/spot/datasets/lulesh_gen/100',
-        var path = runSetId + "/" + runId;
-        var url = "/getmemory";
+        var path = runId;
+        var url = "/sankey/getTimeseriesData";
 
         ST.Utility.container_ajax( url, 'getTimeseriesData', path, line_render_ );
     };
