@@ -164,10 +164,10 @@ function getInitialYValue(runs){
 export default {
     data() {
 
-        var xaxis = this.getDefaultSelect("xaxis");
-        var yaxis = this.getDefaultSelect("yaxis");
-        var aggregate = this.getDefaultSelect("aggregate");
-        var groupby = this.getDefaultSelect("groupby");
+        var xaxis = this.getFirstOptionInXaxis();
+        var yaxis = this.getFirstOptionInYaxis();
+        var aggregate = this.getFirstOptionInAgregate();
+        var groupby = this.getFirstOptionInGroupBy();
 
         yaxis = decodeURIComponent(yaxis);
 
@@ -458,46 +458,71 @@ export default {
     },  // end computed
 
     methods:{
-        getFirstOptionIn( url_param ) {
+        getFirstOptionInXaxis() {
 
-            var element_ids = {
-                "xaxis" : "xAxis-select",
-                "yaxis" : "yAxis-select",
-                "groupby": "groupBy-select",
-                "aggregate": "aggregate-select"
-            };
+            var xaxis = ST.Utility.get_param("xaxis");
 
-            //  Should not happen.
-            if( !element_ids[url_param] ) {
-                return "";
-            }
+            if( !xaxis ) {
+                var meta = window.runs[0].meta;
+                var set_to = "";
 
-            var element_id = element_ids[url_param];
-            var ht_el = $("#" + element_id).get(0);
-            var options = $(ht_el.options);
+                for (var x in meta) {
 
-            //  X-Axis should default to launchdate if it's present.
-            for( var x=0; x < options.length; x++ ) {
+                    if (set_to === "") {
+                        set_to = x;
+                    }
 
-                var oval = $(options[x]).val();
-
-                if( "launchdate" === oval ) {
-                    return "launchdate";
+                    if (x === "launchdate") {
+                        set_to = "launchdate";
+                    }
                 }
-            }
 
-            //  Base case
-            return options[0];
+                return set_to;
+            } else {
+                return xaxis;
+            }
         },
-        getDefaultSelect( url_param ) {
+        getFirstOptionInYaxis() {
 
-            var url_par_val = ST.Utility.get_param( url_param );
+            var def_val = decodeURIComponent("Min%20time%2Frank");
+            var yaxis = ST.Utility.get_param("yaxis");
 
-            if( !url_par_val ) {
-                return this.getFirstOptionIn( url_param );
+            if( yaxis ) {
+                return yaxis;
+            } else {
+                return def_val;
             }
+        },
+        getFirstOptionInGroupBy() {
 
-            return url_par_val;
+            var groupBy = ST.Utility.get_param("groupby");
+
+            if( groupBy ) {
+                return groupBy;
+            } else {
+
+                var meta = window.runs[0].meta;
+                var set_to = "";
+
+                for (var x in meta) {
+
+                    if (set_to === "") {
+                        set_to = x;
+                    }
+                }
+
+                return set_to;
+            }
+        },
+        getFirstOptionInAgregate() {
+
+            var agg = ST.Utility.get_param('aggregate');
+
+            if( agg ) {
+                return agg;
+            } else {
+                return 'max';
+            }
         },
         legendItem( path ) {
 
