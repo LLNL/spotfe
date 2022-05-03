@@ -62,7 +62,7 @@ ST.MemoryLineView = function() {
 
         //  //'/usr/gapps/spot/datasets/lulesh_gen/100',
         var path = runId;
-        var url = "/sankey/getTimeseriesData";
+        var url = "/views/getTimeseriesData";
 
         ST.Utility.container_ajax( url, 'getTimeseriesData', path, line_render_ );
     };
