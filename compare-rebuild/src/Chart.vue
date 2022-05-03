@@ -296,7 +296,7 @@ export default {
         window.addEventListener('resize', this.handleResize)
 
         //  TODO: Call handleResize after compare tab is loaded, not with setInterval.
-        setInterval( this.handleResize, 5000);
+        setInterval( this.handleResize, 1000);
     },
 
     beforeDestroy(){
