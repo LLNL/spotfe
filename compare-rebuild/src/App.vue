@@ -162,24 +162,34 @@ function getInitialYValue(runs){
 }
 
 export default {
-    data() { return {
-        xAxis: 'launchdate',
-        xAxisListener: null,
-        yAxis: '',
-        recalcMe: 0,
-        yAxisListener: null,
-        selectedGroupBy: '',
-        groupByListener: null,
-        selectedAggregateBy: '',
-        filenames:[],
-        aggregateListener: null,
-        rootFuncPath: '',
-        selectedParent: "--root path--",
-        selectedScaleType: "linear",
-        hoverX: null,
-        disabledFuncPaths: [],
-        hoverLock: false,
-    }},
+    data() {
+
+        var xaxis = this.getDefaultSelect("xaxis");
+        var yaxis = this.getDefaultSelect("yaxis");
+        var aggregate = this.getDefaultSelect("aggregate");
+        var groupby = this.getDefaultSelect("groupby");
+
+        yaxis = decodeURIComponent(yaxis);
+
+        return {
+            xAxis: xaxis,
+            xAxisListener: null,
+            yAxis: yaxis,
+            recalcMe: 0,
+            yAxisListener: null,
+            selectedGroupBy: groupby,
+            groupByListener: null,
+            selectedAggregateBy: aggregate,
+            filenames:[],
+            aggregateListener: null,
+            rootFuncPath: '',
+            selectedParent: "--root path--",
+            selectedScaleType: "linear",
+            hoverX: null,
+            disabledFuncPaths: [],
+            hoverLock: false,
+        }
+    },
     props: ['path'],
     mounted() {
     },
@@ -191,10 +201,14 @@ export default {
         },
         selectedGroupBy(value){
             this.hoverX = null;
-            if(this.groupByListener) this.groupByListener(value)
+            if(this.groupByListener) {
+                this.groupByListener(value)
+            }
         },
         selectedAggregateBy(value){
-            if(this.aggregateListener) this.aggregateListener(value)
+            if(this.aggregateListener) {
+                this.aggregateListener(value)
+            }
         },
         filenames(filenames){
             if(filenames.length){
@@ -203,7 +217,6 @@ export default {
                 if(this.rootFuncPath == '' || !allFuncPaths.includes(this.rootFuncPath)){
                     this.rootFuncPath = _.min(allFuncPaths)
                 }
-
             }
         },
     },
@@ -445,6 +458,47 @@ export default {
     },  // end computed
 
     methods:{
+        getFirstOptionIn( url_param ) {
+
+            var element_ids = {
+                "xaxis" : "xAxis-select",
+                "yaxis" : "yAxis-select",
+                "groupby": "groupBy-select",
+                "aggregate": "aggregate-select"
+            };
+
+            //  Should not happen.
+            if( !element_ids[url_param] ) {
+                return "";
+            }
+
+            var element_id = element_ids[url_param];
+            var ht_el = $("#" + element_id).get(0);
+            var options = $(ht_el.options);
+
+            //  X-Axis should default to launchdate if it's present.
+            for( var x=0; x < options.length; x++ ) {
+
+                var oval = $(options[x]).val();
+
+                if( "launchdate" === oval ) {
+                    return "launchdate";
+                }
+            }
+
+            //  Base case
+            return options[0];
+        },
+        getDefaultSelect( url_param ) {
+
+            var url_par_val = ST.Utility.get_param( url_param );
+
+            if( !url_par_val ) {
+                return this.getFirstOptionIn( url_param );
+            }
+
+            return url_par_val;
+        },
         legendItem( path ) {
 
             var ret = path.slice(path.lastIndexOf('/') + 1);

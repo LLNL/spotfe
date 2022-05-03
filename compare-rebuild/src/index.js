@@ -417,6 +417,7 @@ export class Graph{
 
         //  https://vuejsdevelopers.com/2020/03/16/vue-js-tutorial/
         this.app = createApp(App);
+        window.myApp = this.app;
 
         var templ = {
             template: "<div>Compare tab contents2.</div>"
@@ -629,21 +630,51 @@ export class Graph{
     }
 
     setXaxis(xAxisName){
+        //this.set_select_if_empty_("xAxis-select", xAxisName );
         this.app.xAxis = xAxisName
     }
 
     setYAxis(yAxisName){
         console.log('setting yAxis -----> ' + yAxisName);
+        //this.set_select_if_empty_("yAxis-select", yAxisName);
         this.app.yAxis = yAxisName
     }
 
     setAggregateType(aggregateType){
+        //this.set_select_if_empty_("aggregate-select", aggregateType);
         this.app.selectedAggregateBy = aggregateType
     }
 
     setGroupBy(groupBy){
+        //this.set_select_if_empty_("groupBy-select", groupBy);
         this.app.selectedGroupBy = groupBy
     }
+
+    get_option_index_( el, option_str ) {
+
+        var options = $(el.options);
+
+        for( var x=0; x < options.length; x++ ) {
+
+            var oval = $(options[x]).val();
+
+            if( option_str === oval ) {
+                return x;
+            }
+        }
+    };
+
+
+    set_select_if_empty_( element_id, url_str ) {
+
+        var ht_el = $("#" + element_id).get(0);
+        var opt_idx = this.get_option_index_( ht_el, url_str );
+
+        //  Only set it if it hasn't already been set.
+        if( ht_el.selectedIndex === 0 ) {
+            ht_el.selectedIndex = opt_idx;
+        }
+    };
 }
 
 window.Graph = Graph

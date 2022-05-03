@@ -461,33 +461,6 @@ ST.ChartCollection = function() {
     };
 
 
-    var get_option_index_ = function( el, option_str ) {
-
-        var options = $(el.options);
-
-        for( var x=0; x < options.length; x++ ) {
-
-            var oval = $(options[x]).val();
-            
-            if( option_str === oval ) {
-                return x;
-            }
-        }
-    };
-
-
-    var set_select_if_empty_ = function( element_id, url_str ) {
-
-        var ht_el = $("#" + element_id).get(0);
-        var opt_idx = get_option_index_( ht_el, url_str );
-
-        //  Only set it if it hasn't already been set.
-        if( ht_el.selectedIndex === 0 ) {
-            ht_el.selectedIndex = opt_idx;
-        }
-    };
-
-
     var setup_pars_ = function() {
 
         var xaxis = ST.Utility.get_param('xaxis');
@@ -498,16 +471,15 @@ ST.ChartCollection = function() {
         //yaxis = yaxis.replace('\%25252523', '#');
 
         if( defined_(xaxis) ) {
-            set_select_if_empty_("xAxis-select", xaxis );
+            ST.graph.setXaxis(xaxis);
         }
 
         if( defined_(groupby) ) {
-            set_select_if_empty_("groupBy-select", groupby);
+            ST.graph.setGroupBy(groupby);
         }
 
         if( defined_(yaxis)) {
-            set_select_if_empty_("yAxis-select", yaxis);
-            //ST.graph.setYAxis(yaxis);
+            ST.graph.setYAxis(yaxis);
         } else {
 
             //  We can not set this string in the App.vue because of compile error.
@@ -515,7 +487,7 @@ ST.ChartCollection = function() {
         }
 
         if( defined_(aggregate)) {
-            set_select_if_empty_("aggregate-select", aggregate);
+            ST.graph.setAggregateType(aggregate);
         }
     };
 
@@ -554,14 +526,16 @@ ST.ChartCollection = function() {
 
                         ST.graph.setupRuns().then( function( summary ) {
 
-                            ST.graph.renderMe();
+                            ST.graph.renderMe().then( function() {
 
-                            setup_pars_();
-                            set_up_listeners_();
+                                setup_pars_();
+                                set_up_listeners_();
 
-                            ST.Utility.check_error( summary );
-                            console.log('summary:', summary);
-                            ST.CallSpot.handle_success2(summary);
+                                ST.Utility.check_error( summary );
+                                console.log('summary:', summary);
+                                ST.CallSpot.handle_success2(summary);
+                            });
+
                         });
 
 
