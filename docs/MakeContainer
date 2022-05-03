@@ -1,3 +1,33 @@
+docker run -it --entrypoint /bin/bash -p 5000:5000/tcp optvis_d
+
+DOCKER
+docker build -t spot2 --build-arg DEFAULT_SPOTPW=see .
+
+~/install/spot2_container/spotfe/compare-src: npm run watch-walltime
+
+# do this if you need to change any source code files.  if source files change need to rm and rebuild and rerun.
+docker rm spot2_debug6
+
+cd ~/install/spot2_container/
+docker build -t spot2 .
+docker run -v /Users/aschwanden1/datasets/:/data -p 8080:8080/tcp -p 8888:8888/tcp --name f0 spot2
+docker run -v /Users/aschwanden1/install/spot2_github/spotbe/demos/survey/survey_nbody:/data -p 8080:8080/tcp -p 8888:8888/tcp --name k0 spot2
+
+http://localhost:8080/?sf=lul_sept_28_timeseries
+http://localhost:8080/?sf=sqlite/newdemo_mpi_number.sqlite
+http://localhost:8080/?sf=sqlite/newdemo_user_number.sqlite
+
+docker exec -it spot2_9 /bin/bash
+
+- run this from the command line in order to test the backend getData call:
+docker exec -it spot2_da5 /bin/bash
+/opt/conda/bin/python3 /usr/gapps/spot/backend.py --config  /usr/gapps/spot/backend_config.yaml getData /data/lul_sept_28_timeseries '{}'
+
+
+
+
+
+
 After Release:
 - Add Test Case for non-writable directory.
 - Give david a write up on the new interface that JSOn gets sent back to FE.
@@ -254,32 +284,6 @@ DONE - Get numpy working for rzgenie and rzslic.
 2022 -> try to get spot to a place where it becomes wrapped up.
     * cut in money.
     * maintenance mode.
-
-docker run -it --entrypoint /bin/bash -p 5000:5000/tcp optvis_d
-
-DOCKER
-docker build -t spot2 --build-arg DEFAULT_SPOTPW=see .
-
-~/install/spot2_container/spotfe/compare-src: npm run watch-walltime
-
-# do this if you need to change any source code files.  if source files change need to rm and rebuild and rerun.
-docker rm spot2_debug6
-
-cd ~/install/spot2_container/
-docker build -t spot2 .
-docker run -v /Users/aschwanden1/datasets/:/data -p 8080:8080/tcp -p 8888:8888/tcp --name spot2_Z1 spot2
-docker run -v /Users/aschwanden1/install/spot2_github/spotbe/demos/survey/survey_nbody:/data -p 8080:8080/tcp -p 8888:8888/tcp --name k0 spot2
-
-http://localhost:8080/?sf=lul_sept_28_timeseries
-http://localhost:8080/?sf=sqlite/newdemo_mpi_number.sqlite
-http://localhost:8080/?sf=sqlite/newdemo_user_number.sqlite
-
-docker exec -it spot2_9 /bin/bash
-
-- run this from the command line in order to test the backend getData call:
-docker exec -it spot2_da5 /bin/bash
-/opt/conda/bin/python3 /usr/gapps/spot/backend.py --config  /usr/gapps/spot/backend_config.yaml getData /data/lul_sept_28_timeseries '{}'
-
 
 
 - MAY need more WOrk:  Walltime support for JSON files (spot1)
