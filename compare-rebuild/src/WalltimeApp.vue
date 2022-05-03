@@ -454,8 +454,8 @@ export default {
         },
         updateTopDown( ret2 ) {
 
-            console.log('updateTopDown A:')
-            console.dir(ret2);
+            //console.log('updateTopDown A:')
+            //console.dir(ret2);
 
             if( ret2 ) {
 
