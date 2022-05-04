@@ -29,9 +29,10 @@ ST.FileUpload = function() {
                 update: function (event) {
 
                     var wl = window.location;
+                    var directory = $('.directory').val();
 
                     //  We don't want the parameters set from the old URL to impact the new directory you're going to.
-                    var newUrl = wl.origin + wl.pathname + '?sf=' + this.directory_val;
+                    var newUrl = wl.origin + wl.pathname + '?sf=' + directory;
 
                     history.pushState({}, null, newUrl);
                     location.reload();
