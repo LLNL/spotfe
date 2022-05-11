@@ -126,7 +126,7 @@ export class Graph{
         }
     }
 
-    async openMultiJupyter(basepath, subpaths, host, command){
+    async openMultiJupyter(basepath, subpaths, host, command, selected_notebook){
         // args:   command: should be something like:  '/usr/gapps/spot/dev/spot.py jupyter'
         //         filepath:  absolute path to califile
         if(isContainer){
@@ -136,7 +136,7 @@ export class Graph{
                 headers: {
                     'content-type': 'application/json',
                 },
-                body: JSON.stringify({basepath, subpaths})
+                body: JSON.stringify({basepath, subpaths, selected_notebook})
             })
             if(response.ok) {
                 let ipynbjson = await response.json()

@@ -281,18 +281,30 @@ docker exec -it spot2_da5 /bin/bash
 
 
 
-- MAY need more WOrk:  Walltime support for JSON files (spot1)
-    * FIXED - filename it was asking for.
-    * Data cache comes from localforage.  It comes from a file called walltime.js
-    * now some kind of format error.
-    * https://rzlc.llnl.gov/lorenz_base/dev/pascal/spotfe/sankey/index.html?runSetId=/g/g0/pascal/zdeb/ale3d_regr/am-gen&runId=am1-gen.1d.1p-1&title=am1-gen.1d.1p
-    * '/usr/global/tools/lorenz/python/optvis-env2/bin/python
-    /usr/gapps/spot/sand/spot.py memory /g/g0/pascal/zdeb/ale3d_regr/am-gen/am1-gen.1d.1p.json' on
-    rzgenie: == CALIPER: Invalid CSV entry: {\"generator/Physics variable
-    * might be able to use just use the data already loaded in the client
-    * the error we're getting: is this function call necessary?  what data does it provide?
-    * "[Lorenz::REST::Command::runApprovedCommand] Failed to run command:
-    '/usr/global/tools/lorenz/python/optvis-env2/bin/python /usr/gapps/spot/sand/spot.py memory /g/g0/pascal/zdeb/ale3d_regr/usndhs/usndhs.1d.1p.json' on rzgenie: == CALIPER: Invalid CSV entry: {\"problem/cycle/all physics/lagrange/lagrange zonal/material model/material model evaluate/material: water/ko strength\": [[1, 0.105], [2, 0.105], [3, 0.108], [4, 0.105], [5, 0.105], [6, 0.105], [7, 0.106], [8, 0.104], [9, 0.106], [10, 0.1
+JUPYTER LOCALHOST
+----------------------------------------------------------------------------------------------------------------------------
+docker run --rm --name spot -p 8080:8080/tcp -p 8888:8888/tcp -v /Users/aschwanden1/spotconf:/etc/spot -v /Users/aschwanden1/jupyterconf:/etc/jupyterhub spot2
+
+This is how you build and run for the jupyter case on localhost:
+docker build -t spot2 .; docker run --rm --name spot -p 8080:8080/tcp -p 8888:8888/tcp -v /Users/aschwanden1/spotconf:/etc/spot -v /Users/aschwanden1/jupyterconf:/etc/jupyterhub spot2
+
+Then in browser:
+http://localhost:8080/?sf=/demos/mpi&ch_launchdate=1&ch_user=1&launchdate=1616614532.0094914,1616614718.7708476
+
+~/ECPSPOTTutorialConfig: cat run_spot.sh
+~/spotconf
+~/jupyterconf
+
+
+
+----------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
 
 - permissions for Venv: umask 0002
 - Don't use personal venv, use default at the top of spot.py

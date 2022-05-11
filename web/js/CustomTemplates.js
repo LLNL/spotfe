@@ -1,5 +1,7 @@
 ST.CustomTemplates = function() {
 
+    var selected_notebook_;
+
     var get_temps_and_show_ = function( use_multi_templates ) {
 
         ST.CallSpot.use_multi_templates = use_multi_templates;
@@ -136,8 +138,8 @@ ST.CustomTemplates = function() {
     var jupyter_notebook_selected_ = function( el ) {
 
         console.dir( el );
-        var selected_notebook = $(el.target).val();
-        var custom = " --custom_template=" + selected_notebook;
+        selected_notebook_ = $(el.target).val();
+        var custom = " --custom_template=" + selected_notebook_;
 
         if( ST.CallSpot.use_multi_templates ) {
 
@@ -223,7 +225,7 @@ ST.CustomTemplates = function() {
         console.dir( cali_keys_arr );
         console.log( "host=" + host + "    command = " + command );
 
-        ST.graph.openMultiJupyter( file_path, cali_keys_arr, host, command ).then( finish_multi_ );
+        ST.graph.openMultiJupyter( file_path, cali_keys_arr, host, command, selected_notebook_ ).then( finish_multi_ );
     };
 
 
@@ -243,7 +245,7 @@ ST.CustomTemplates = function() {
         console.dir( cali_keys_arr );
         console.log( "host=" + host + "    command = " + command );
 
-        ST.graph.openMultiJupyter( file_path, cali_keys_arr, host, command ).then( finish_multi_ );
+        ST.graph.openMultiJupyter( file_path, cali_keys_arr, host, command, selected_notebook_ ).then( finish_multi_ );
     };
 
 

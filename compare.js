@@ -51975,7 +51975,7 @@ var Graph = /*#__PURE__*/function () {
   }, {
     key: "openMultiJupyter",
     value: function () {
-      var _openMultiJupyter = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(basepath, subpaths, host, command) {
+      var _openMultiJupyter = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(basepath, subpaths, host, command, selected_notebook) {
         var response, ipynbjson, server, urlpath, auth, port, url;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
@@ -51994,7 +51994,8 @@ var Graph = /*#__PURE__*/function () {
                   },
                   body: JSON.stringify({
                     basepath: basepath,
-                    subpaths: subpaths
+                    subpaths: subpaths,
+                    selected_notebook: selected_notebook
                   })
                 });
 
@@ -52069,7 +52070,7 @@ var Graph = /*#__PURE__*/function () {
         }, _callee2);
       }));
 
-      function openMultiJupyter(_x8, _x9, _x10, _x11) {
+      function openMultiJupyter(_x8, _x9, _x10, _x11, _x12) {
         return _openMultiJupyter.apply(this, arguments);
       }
 
@@ -52167,7 +52168,7 @@ var Graph = /*#__PURE__*/function () {
         }, _callee3, this);
       }));
 
-      function getData(_x12, _x13, _x14) {
+      function getData(_x13, _x14, _x15) {
         return _getData.apply(this, arguments);
       }
 
@@ -52559,7 +52560,7 @@ var Graph = /*#__PURE__*/function () {
         }, _callee4, this, [[26, 54]]);
       }));
 
-      function afterCachedDataGet(_x15, _x16, _x17, _x18, _x19, _x20) {
+      function afterCachedDataGet(_x16, _x17, _x18, _x19, _x20, _x21) {
         return _afterCachedDataGet.apply(this, arguments);
       }
 
@@ -52602,7 +52603,7 @@ var Graph = /*#__PURE__*/function () {
         }, _callee5, this);
       }));
 
-      function addScatterplot(_x21) {
+      function addScatterplot(_x22) {
         return _addScatterplot.apply(this, arguments);
       }
 
@@ -52652,7 +52653,7 @@ var Graph = /*#__PURE__*/function () {
         }, _callee6, this);
       }));
 
-      function setChartVisible(_x22) {
+      function setChartVisible(_x23) {
         return _setChartVisible.apply(this, arguments);
       }
 
@@ -52742,7 +52743,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61267" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51979" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
