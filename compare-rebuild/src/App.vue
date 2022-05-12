@@ -224,10 +224,9 @@ export default {
     computed: {
         runs(){
 
-            console.log('Main runs:');
+            //console.log('Main runs:');
             this.update_this_return;
             //console.dir(window.runs);
-            //return window.runs;
             window.compare_filenames = window.compare_filenames || {};
 
             if( this && window.compare_filenames && window.compare_filenames.length > 0 && window.runs ) {
@@ -244,8 +243,6 @@ export default {
             return window.runs;
         },
         xAxisList(){
-
-            console.log('xaxisList:');
 
             if (this.runs.length > 0){
 
@@ -295,7 +292,6 @@ export default {
             const firstRun = this.runs[0] || {data:{}}
             var metrics = Object.keys(Object.values(firstRun.data)[0] || {})
 
-            console.dir(firstRun);
 
             for( var y=0; y < metrics.length; y++ ) {
 
