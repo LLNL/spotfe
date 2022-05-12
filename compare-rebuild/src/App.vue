@@ -175,6 +175,7 @@ export default {
             xAxis: xaxis,
             xAxisListener: null,
             yAxis: yaxis,
+            update_this_return: -1,
             recalcMe: 0,
             yAxisListener: null,
             selectedGroupBy: groupby,
@@ -224,12 +225,14 @@ export default {
         runs(){
 
             console.log('Main runs:');
+            this.update_this_return;
             //console.dir(window.runs);
-            return window.runs;
+            //return window.runs;
+            window.compare_filenames = window.compare_filenames || {};
 
-            if( this && this.filenames && window.runs ) {
+            if( this && window.compare_filenames && window.compare_filenames.length > 0 && window.runs ) {
 
-                var fnames = this.filenames;
+                var fnames = window.compare_filenames;
                 //return window.runs.filter(run => this.filenames.includes(run.meta.datapath.value));
                 var filtered_runs = window.runs.filter( function(run) {
                     return fnames.includes(run.meta.datapath.value);
@@ -238,7 +241,7 @@ export default {
                 return filtered_runs;
             }
 
-            return [];
+            return window.runs;
         },
         xAxisList(){
 
@@ -458,6 +461,9 @@ export default {
     },  // end computed
 
     methods:{
+        updateRuns() {
+            this.update_this_return++;
+        },
         getFirstOptionInXaxis() {
 
             var xaxis = ST.Utility.get_param("xaxis");

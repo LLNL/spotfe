@@ -419,10 +419,9 @@ export class Graph{
 
         //  https://vuejsdevelopers.com/2020/03/16/vue-js-tutorial/
         this.app = createApp(App);
-        window.myApp = this.app;
 
         var app2 = this.app;
-        app2.mount( this.selector );
+        this.myApp = app2.mount( this.selector );
     }
 
 
@@ -601,7 +600,14 @@ export class Graph{
 
     compare(filenames){
         filenames = filenames || this.last_filenames;
-        //this.app.filenames = filenames
+
+        window.compare_filenames = filenames;
+
+        if( this.myApp ) {
+            this.myApp.updateRuns();
+            //this.app.filenames = filenames;
+        }
+
         this.last_filenames = filenames;
     }
 
