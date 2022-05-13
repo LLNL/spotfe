@@ -10,7 +10,7 @@ docker rm spot2_debug6
 
 cd ~/install/spot2_container/
 docker build -t spot2 .
-docker run -v /Users/aschwanden1/datasets/:/data -p 8080:8080/tcp -p 8888:8888/tcp --name f0 spot2
+docker run -v /Users/aschwanden1/datasets/:/data -p 8080:8080/tcp -p 8888:8888/tcp --name g0 spot2
 docker run -v /Users/aschwanden1/install/spot2_github/spotbe/demos/survey/survey_nbody:/data -p 8080:8080/tcp -p 8888:8888/tcp --name k0 spot2
 
 http://localhost:8080/?sf=lul_sept_28_timeseries
