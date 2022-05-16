@@ -7,12 +7,12 @@
             :style=`{
                 backgroundColor: 'lightgray',
                 padding:'5px',
-                height:'60px',
+                height:'78px',
                 display:'flex',
                 alignItems:'center',
                 }`
             )
-            .selects(:style="{flex:1, display:'flex', alignItems:'center', flexWrap:'wrap'}")
+            .selects(:style="{flex:1, display:'flex', alignItems:'center', flexWrap:'wrap', position:'relative', top: '-23px'}")
                 label(for="xAxis-select" style="margin:5px") X-Axis:
                 select#xAxis-select(v-model="xAxis")
                     option(v-for="option in xAxisList") {{ option }}
@@ -45,7 +45,7 @@
             :style=`{
                 display:'flex',
                 justifyContent:'center',
-                marginTop:'5px',
+                marginTop:'16px',
                 }`
             )
             .legend-border(
