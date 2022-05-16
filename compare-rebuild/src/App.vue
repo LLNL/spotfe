@@ -7,7 +7,7 @@
             :style=`{
                 backgroundColor: 'lightgray',
                 padding:'5px',
-                height:'40px',
+                height:'60px',
                 display:'flex',
                 alignItems:'center',
                 }`

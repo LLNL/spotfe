@@ -5,7 +5,7 @@
     padding: 7px;
     width: 20px; }
     .container div.launch_button div {
-      background-image: url(../img/refresh.png);
+      background-image: url(../web/img/refresh.png);
       background-size: 100% 100%;
       width: 17px;
       height: 17px; }
@@ -60,17 +60,15 @@
       /* Safari/Chrome */
       filter: invert(100%); }
   .container .help_icon div {
-    background-image: url(../img/info.png);
+    background-image: url(../web/img/info.png);
     background-size: 100% 100%; }
   .container .plus_icon {
     right: 95px; }
     .container .plus_icon div {
-      background-image: url(../img/plus.png);
+      background-image: url(../web/img/plus.png);
       background-size: 100% 100%; }
   .container .user_pref_icon {
     right: 50px; }
     .container .user_pref_icon div {
-      background-image: url(../img/check.png);
+      background-image: url(../web/img/check.png);
       background-size: 100% 100%; }
-
-/*# sourceMappingURL=Container.css.map */

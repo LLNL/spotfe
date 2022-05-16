@@ -297,7 +297,7 @@ body .dc-chart g.row text {
         padding: 7px;
 
         div {
-            background-image: url(../img/refresh.png);
+            background-image: url(../web/img/refresh.png);
             background-size: 100% 100%;
             width: 17px;
             height: 17px
@@ -450,7 +450,7 @@ table.only_multi_row_selector {
         height: 35px;
         width: 35px;
         /*background-image: url(../img/multi_jupyter.png);*/
-        background-image: url(../img/planet.gif);
+        background-image: url(../web/img/planet.gif);
         background-size: 100% 100%;
     }
 
@@ -477,7 +477,7 @@ table.dc-data-table {
         position: static;
 
         div {
-            background-image: url(../img/walltime.png);
+            background-image: url(../web/img/walltime.png);
             background-size: 100% 100%;
         }
     }
@@ -487,7 +487,7 @@ table.dc-data-table {
         position: static;
 
         div {
-            background-image: url(../img/graph.png);
+            background-image: url(../web/img/graph.png);
             background-size: 100% 100%;
         }
     }
@@ -500,7 +500,7 @@ table.dc-data-table {
         div {
             height: 16px;
             /* jupyter.png, planet.png, notes.png */
-            background-image: url(../img/planet.gif);
+            background-image: url(../web/img/planet.gif);
             background-size: 100% 100%;
         }
     }
@@ -652,7 +652,7 @@ table.dc-data-table {
 }
 
 #compare-window select {
-    height: 40px;
+    height: 31px;
     padding: 0;
     position: relative;
     top:4px;

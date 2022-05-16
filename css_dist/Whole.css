@@ -210,7 +210,7 @@ body .dc-chart g.row text {
     right: auto;
     padding: 7px; }
     #file_upload div.update_button div {
-      background-image: url(../img/refresh.png);
+      background-image: url(../web/img/refresh.png);
       background-size: 100% 100%;
       width: 17px;
       height: 17px; }
@@ -224,52 +224,74 @@ body .dc-chart g.row text {
 
 table.only_multi_row_selector tr:nth-child(2) td {
   padding: 0 0 0 0; }
+
 table.only_multi_row_selector tr td:first-child {
-  width: 100px; }
+  width: 86px; }
   table.only_multi_row_selector tr td:first-child select {
-    width: 80px; }
+    width: 80px;
+    margin: 1 0 0 0; }
+
+table.only_multi_row_selector .header_row td {
+  font-weight: bold;
+  font-size: 11px;
+  color: #888888; }
+
 table.only_multi_row_selector tr td:nth-child(2) select {
   width: 360px; }
 
-.composite_chart_type .multi_row_selector {
-  padding: 20px 0 0 0; }
-  .composite_chart_type .multi_row_selector .input_const {
-    display: none; }
-  .composite_chart_type .multi_row_selector table {
-    margin: 1px 0 0 0; }
-  .composite_chart_type .multi_row_selector tr:first-child td {
-    border-top: 1px solid #bbbbbb;
-    padding: 12px 3px 3px 3px; }
-  .composite_chart_type .multi_row_selector .delete_row {
+.composite_chart_type {
+  width: 750px; }
+  .composite_chart_type .multi_row_selector {
     position: relative;
-    top: -4px;
-    font-size: 18px;
-    width: 22px;
-    padding: 6px;
+    padding: 20px 0 0 0; }
+    .composite_chart_type .multi_row_selector .help_button {
+      position: absolute;
+      right: 2px;
+      top: 23px;
+      padding: 4px 0;
+      width: 35px;
+      text-align: center; }
+    .composite_chart_type .multi_row_selector .unarySelector {
+      width: 155px; }
+    .composite_chart_type .multi_row_selector .dimension_attribute {
+      width: 384px; }
+    .composite_chart_type .multi_row_selector .input_const {
+      display: none; }
+    .composite_chart_type .multi_row_selector table {
+      margin: 1px 0 0 0; }
+    .composite_chart_type .multi_row_selector tr:first-child td {
+      border-top: 1px solid #bbbbbb;
+      padding: 12px 3px 3px 0; }
+    .composite_chart_type .multi_row_selector .delete_row {
+      position: relative;
+      top: -4px;
+      font-size: 18px;
+      width: 22px;
+      padding: 6px;
+      text-align: center; }
+  .composite_chart_type.edit_mode .myButton.submit {
+    display: inline-block; }
+  .composite_chart_type.edit_mode .myButton.delete {
+    display: inline-block; }
+  .composite_chart_type.add_mode .myButton.submit {
+    display: inline-block; }
+  .composite_chart_type.add_mode .myButton.delete {
+    display: none; }
+  .composite_chart_type table {
+    width: 100%; }
+  .composite_chart_type select {
+    height: 36px; }
+  .composite_chart_type .pick_chart_type td {
+    padding: 0 0 17px 0;
+    border-bottom: 1px solid #bbbbbb; }
+  .composite_chart_type tr:nth-child(2) td {
+    padding: 26px 0 0 0; }
+  .composite_chart_type .chart_name {
+    padding: 5px;
+    margin: 10px 0 0 0; }
+  .composite_chart_type .center {
+    margin: 22px 0 7px 0;
     text-align: center; }
-.composite_chart_type.edit_mode .myButton.submit {
-  display: inline-block; }
-.composite_chart_type.edit_mode .myButton.delete {
-  display: inline-block; }
-.composite_chart_type.add_mode .myButton.submit {
-  display: inline-block; }
-.composite_chart_type.add_mode .myButton.delete {
-  display: none; }
-.composite_chart_type table {
-  width: 100%; }
-.composite_chart_type select {
-  height: 36px; }
-.composite_chart_type .pick_chart_type td {
-  padding: 0 0 17px 0;
-  border-bottom: 1px solid #bbbbbb; }
-.composite_chart_type tr:nth-child(2) td {
-  padding: 26px 0 0 0; }
-.composite_chart_type .chart_name {
-  padding: 5px;
-  margin: 10px 0 0 0; }
-.composite_chart_type .center {
-  margin: 22px 0 7px 0;
-  text-align: center; }
 
 .multi_jupyter.icon {
   position: static;
@@ -278,7 +300,7 @@ table.only_multi_row_selector tr td:nth-child(2) select {
     height: 35px;
     width: 35px;
     /*background-image: url(../img/multi_jupyter.png);*/
-    background-image: url(../img/planet.gif);
+    background-image: url(../web/img/planet.gif);
     background-size: 100% 100%; }
   .multi_jupyter.icon .tiny_letter {
     font-size: 13px;
@@ -296,23 +318,27 @@ table.only_multi_row_selector tr td:nth-child(2) select {
 table.dc-data-table .durations {
   position: static; }
   table.dc-data-table .durations div {
-    background-image: url(../img/walltime.png);
+    background-image: url(../web/img/walltime.png);
     background-size: 100% 100%; }
+
 table.dc-data-table .timeseries {
   position: static; }
   table.dc-data-table .timeseries div {
-    background-image: url(../img/graph.png);
+    background-image: url(../web/img/graph.png);
     background-size: 100% 100%; }
+
 table.dc-data-table .jupyter.icon {
   position: static;
   padding: 10px 7px 10px 8px; }
   table.dc-data-table .jupyter.icon div {
     height: 16px;
     /* jupyter.png, planet.png, notes.png */
-    background-image: url(../img/planet.gif);
+    background-image: url(../web/img/planet.gif);
     background-size: 100% 100%; }
+
 table.dc-data-table th {
   position: relative; }
+
 table.dc-data-table .up_arrow {
   position: absolute;
   top: 10px;
@@ -323,6 +349,7 @@ table.dc-data-table .up_arrow {
   border-right: 7px solid transparent;
   border-bottom: 7px solid #555555;
   cursor: pointer; }
+
 table.dc-data-table .down_arrow {
   position: absolute;
   top: 20px;
@@ -333,9 +360,11 @@ table.dc-data-table .down_arrow {
   border-right: 7px solid transparent;
   border-top: 7px solid #555555;
   cursor: pointer; }
+
 table.dc-data-table .dc-table-head {
   position: relative;
   left: 14px; }
+
 table.dc-data-table .dc-table-head:last-child {
   display: none; }
 
@@ -413,7 +442,7 @@ table.dc-data-table .dc-table-head:last-child {
       border-bottom: 4px solid white; }
 
 #compare-window select {
-  height: 40px;
+  height: 31px;
   padding: 0;
   position: relative;
   top: 4px;
@@ -426,6 +455,45 @@ table.dc-data-table .dc-table-head:last-child {
 
 body .bg-color-255-255-255-0 {
   display: none; }
+
+.template_explain_main {
+  width: 720px; }
+
+.outer_modal .const_binary_in {
+  width: 368px;
+  padding: 7px 7px; }
+
+.outer_modal .explanation {
+  position: absolute;
+  top: 8px;
+  right: 41px;
+  color: white;
+  font-weight: bold;
+  font-size: 22px;
+  padding: 3px;
+  background-color: #666;
+  border: 1px solid #888; }
+
+.outer_modal .select_a_jup {
+  padding: 10px;
+  margin: 0 0 25px 0;
+  border: 1px solid #dddddd;
+  background-color: #f2f2f2; }
+
+.outer_modal .list_of_temp {
+  border-collapse: separate;
+  border-spacing: 0px; }
+  .outer_modal .list_of_temp td {
+    padding: 7px;
+    background-color: #eeeeee;
+    border-top: 1px solid #cccccc; }
+
+.outer_modal .jupyter_notebook {
+  width: 495px;
+  margin: 15px 0 0 0; }
+
+.outer_modal h4 {
+  margin-top: 35px; }
 
 .dc-chart {
   position: relative; }
@@ -645,7 +713,7 @@ div div.dc-data-count {
     padding: 7px;
     width: 20px; }
     .container div.launch_button div {
-      background-image: url(../img/refresh.png);
+      background-image: url(../web/img/refresh.png);
       background-size: 100% 100%;
       width: 17px;
       height: 17px; }
@@ -700,17 +768,17 @@ div div.dc-data-count {
       /* Safari/Chrome */
       filter: invert(100%); }
   .container .help_icon div {
-    background-image: url(../img/info.png);
+    background-image: url(../web/img/info.png);
     background-size: 100% 100%; }
   .container .plus_icon {
     right: 95px; }
     .container .plus_icon div {
-      background-image: url(../img/plus.png);
+      background-image: url(../web/img/plus.png);
       background-size: 100% 100%; }
   .container .user_pref_icon {
     right: 50px; }
     .container .user_pref_icon div {
-      background-image: url(../img/check.png);
+      background-image: url(../web/img/check.png);
       background-size: 100% 100%; }
 
 .curtain {
@@ -849,6 +917,7 @@ div div.dc-data-count {
   100% {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg); } }
+
 @keyframes load3 {
   0% {
     -webkit-transform: rotate(0deg);
@@ -856,5 +925,3 @@ div div.dc-data-count {
   100% {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg); } }
-
-/*# sourceMappingURL=Whole.css.map */
