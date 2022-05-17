@@ -26,16 +26,36 @@ docker exec -it spot2_da5 /bin/bash
 
 
 
+Last:
+DONE - delete /src directory and make sure it still works.
+DONE - Link timeseries page to node_modules rather than individual JS files.
+DONE - be able to reselect properties selected from drop down that are now in the URL.
+        * xAxis watch isn't firing
+        * yAxis event fires but listener is undefined.
+DONE - update with latest from master
+DONE - Walltime page: "at the top says: "please provide a directory that contains dot cali files..."
+DONE - test ECP fixes before merging into master.
+DONE - need to fix the fact that when crossfilter is selected the graphs in compare don't update.
+        * 1. runs() is not being recomputed.
+        * index.js this.app.filenames does not affect App.vue this.filenames
+DONE - test localhost version too!
+        * Container Walltime is broken.  Fix:
+        -app.post('(/sankey)?/getTimeseriesData',(req, res) =>{
+        +app.post('(/views)?/getTimeseriesData',(req, res) =>{
+DONE - compile scss code to dc.css
+        * scss compile needs to be fixed.
+DONE - getTemplates - from jupyter call not working
+        * fixed default CONFIG['template_notebook'] and multi location
+        * make sure --custom_templates param gets passed.
 
 
-After Release:
-- Add Test Case for non-writable directory.
-- Give david a write up on the new interface that JSOn gets sent back to FE.
 
 
-FIXED - make it so that write error passes.
-Then afterwards;
-DONE -    * Walltime does not work, in a non-writable directory.
+
+
+
+
+
 
 
 /opt/conda/bin/python3 /usr/gapps/spot/backend.py --config /usr/gapps/spot/backend_config.yaml getTimeseriesData /data/lul_sept_28_timeseries /data/lul_sept_28_timeseries/200924-16330964138.cali
