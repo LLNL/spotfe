@@ -237,7 +237,7 @@ ST.CustomTemplates = function() {
         var cali_keys_arr = [ cali_key ];
 
         //  cali_path is /usr/gapps/spot/datasets/lulesh_gen/500/5.cali
-        var file_path = $('.directory').val();
+        var file_path = $('.directory').val() || ST.Utility.get_param("sf");
 
         var host = ST.params.machine;
         var command = ST.CallSpot.get_command_begin() + " multi_jupyter" + custom;
