@@ -315,15 +315,8 @@ export default {
         },
         getScripts() {
 
-            var files = [
-                "../web/js/jquery-1.11.0.min.js",
-                "../web/js/Utility.js",
-                "../web/js/Environment.js",
-                "../web/js/CallSpot.js?abb"
-            ];
-
             let script = document.createElement('script');
-            script.src = "../web/js/jquery-1.11.0.min.js";
+            script.src = "../node_modules/jquery/dist/jquery.min.js";
 
             var getAliases = this.getAliases;
 
