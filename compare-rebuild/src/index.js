@@ -29,10 +29,10 @@ async function getMain0( host, dataSetKey ) {
 
     console.log('asking for: ' + url);
 
-    const $ = await import('jquery')
+    //const $ = await import('jquery')
 
     return new Promise((resolve, reject) => {
-        $.ajax({
+        jQuery.ajax({
             url:  url
         }).then ( value  => { resolve( value ) }
             , error => { reject(error) }
