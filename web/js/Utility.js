@@ -408,7 +408,15 @@ ST.Utility = function() {
 
             //  return real actual value.
             last_uniq_str_ = cali_obj[dimension];
-            var short = cali_obj[dimension].substr(0, ST.CONSTS.MAX_HOR_BAR_CHART_STR_LEN);
+
+            var short = "";
+            if( typeof cali_obj[dimension] === "string") {
+                short = cali_obj[dimension].substr(0, ST.CONSTS.MAX_HOR_BAR_CHART_STR_LEN);
+            } else {
+                //  assume it's an array who has multiple values.
+                short = cali_obj[dimension].join("_");
+            }
+
             orig_str_lookup_[ short ] = cali_obj[dimension];
 
             return short;
