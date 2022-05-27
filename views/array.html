@@ -2,9 +2,62 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Array Demo</title>
 </head>
 <body>
 
+test
+<script src="../node_modules/crossfilter2/crossfilter.min.js"></script>
+
+<script>
+
+    var the_data = [{
+        productIDs: ["red", "green"],
+        chairs: 2
+    }, {
+        productIDs: ["red", "blue"],
+        chairs: 3
+    }, {
+        productIDs: ["yellow", "green"],
+        chairs: 8
+    }, {
+        productIDs: ["purple", "blue"],
+        chairs: 3
+    }, {
+        productIDs: ["turtle", "blue"],
+        chairs: 3
+    }, {
+        productIDs: ["red", "orange"],
+        chairs: 355
+    }, {
+        productIDs: ["red", "bluish-red"],
+        chairs: 32
+    }];
+
+    var ndx = crossfilter(the_data);
+    var all = ndx.groupAll();
+
+    var NDX = ndx;
+
+    // Dimension by full date
+    var colorDimension = ndx.dimension(function (d) {
+        return d.color;
+    });
+
+
+    var paymentsByProductID = ndx.dimension(function(d) { return d.productIDs; }, true);
+
+    // Group by product and sum total quantity. Group keys are product IDs.
+    var quantityGroupByProduct = paymentsByProductID.group().reduceSum(function(d) { return d.quantity; });
+
+    // Retrieve top result (as usual, unaffected by filter on associated dimension)
+    var toping = quantityGroupByProduct.top(1);
+
+    // Filter to all transactions purchasing a particular product
+    var red = paymentsByProductID.filter("red");
+
+    console.dir(red.top(100));
+
+</script>
 </body>
 </html>
