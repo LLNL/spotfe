@@ -266,46 +266,50 @@ div(style='max-width: 40%')
             let l3 = this.runData[this.selSankeyPath].topdown.l3_bound
             let ub = this.runData[this.selSankeyPath].topdown.uncore_bound
             let me = this.runData[this.selSankeyPath].topdown.mem_bound
-        return [ {namevals:
-            [ {name: "retiring", val: re*100, rawVal: re}
-            , {name: "bad spec", val: bs*100, rawVal: bs}
-            , {name: "frontend", val: fe*100, rawVal: fe}
-            , {name: "backend", val: be*100, rawVal: be}
-            ]
-          , xOffset: 50
-          , yOffset: 100
-          , width: 250
-          , spacing: 10
-          , rotate: 0
-          }
-        , {namevals:
-            [ {name: "mispredict", val: mp*100, rawVal: mp}
-            , {name: "mach clr", val: mc*100, rawVal: mc}
-            , {name: "latency", val: fl*100, rawVal: fl}
-            , {name: "bandwidth", val: bw*100, rawVal: bw}
-            , {name: "core", val: cb*100, rawVal: cb}
-            , {name: "memory", val: mb*100, rawVal: mb}
-            ]
-          , xOffset: 310
-          , yOffset: 210
-          , width: 120
-          , spacing: 10
-          , rotate: 0
-          }
-        , {namevals:
-            [ {name: "L1", val: l1*100, rawVal: l1}
-            , {name: "L2", val: l2*100, rawVal: l2}
-            , {name: "L3", val: l3*100, rawVal: l3}
-            , {name: "uncore", val: ub*100, rawVal: ub}
-            , {name: "mem bound", val: me*100, rawVal: me}
-            ]
-          , xOffset: 960
-          , yOffset: 320
-          , width: 20
-          , spacing: 5
-          , rotate: 90
-          }
-        ]
+          return [
+              {
+                  namevals:
+                      [ {name: "retiring", val: re*100, rawVal: re}
+                          , {name: "bad spec", val: bs*100, rawVal: bs}
+                          , {name: "frontend", val: fe*100, rawVal: fe}
+                          , {name: "backend", val: be*100, rawVal: be}
+                      ]
+                  , xOffset: 50
+                  , yOffset: 100
+                  , width: 250
+                  , spacing: 10
+                  , rotate: 0
+              }
+              , {
+                  namevals:
+                      [ {name: "mispredict", val: mp*100, rawVal: mp}
+                          , {name: "mach clr", val: mc*100, rawVal: mc}
+                          , {name: "latency", val: fl*100, rawVal: fl}
+                          , {name: "bandwidth", val: bw*100, rawVal: bw}
+                          , {name: "core", val: cb*100, rawVal: cb}
+                          , {name: "memory", val: mb*100, rawVal: mb}
+                      ]
+                  , xOffset: 310
+                  , yOffset: 210
+                  , width: 120
+                  , spacing: 10
+                  , rotate: 0
+              }
+              , {
+                  namevals:
+                      [ {name: "L1", val: l1*100, rawVal: l1}
+                          , {name: "L2", val: l2*100, rawVal: l2}
+                          , {name: "L3", val: l3*100, rawVal: l3}
+                          , {name: "uncore", val: ub*100, rawVal: ub}
+                          , {name: "mem bound", val: me*100, rawVal: me}
+                      ]
+                  , xOffset: 960
+                  , yOffset: 320
+                  , width: 20
+                  , spacing: 5
+                  , rotate: 90
+              }
+          ]
       }
     },
   }

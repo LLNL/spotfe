@@ -289,7 +289,10 @@ export class Graph{
         let newData;
         var cacheSum = window.cacheSum;
 
-        if (cacheSum && cacheSum.summary && !this.bust_cache && !isContainer) {
+        if( window.ENV.hard_code_summary_response ) {
+            newData = JSON.parse(window.ENV.hard_code_summary_response);
+
+        } else if (cacheSum && cacheSum.summary && !this.bust_cache && !isContainer) {
 
             newData = cacheSum.summary;
             console.log('was able to find cache.');
@@ -398,6 +401,32 @@ export class Graph{
         //  newData is too big to always print out.
         console.log('991B newData:  ');
         console.dir( newData.Runs );
+
+        var COLOR_STUBS = [
+            ["red", "blue"],
+            ["green"],
+            ["yellow", "red"],
+            ["purple", "orange", "yellow"],
+            ['red', 'black'],
+            ['red', 'white'],
+            ["orange"],
+            ["brown", "green", "red"],
+            ['yellow', 'orange'],
+            ['blackish'],
+            ['gray', 'blue', 'green'],
+            ['tan', 'yellow', 'orange'],
+            ['green', 'cyan'],
+            ['purple', 'red'],
+            ['white', 'green'],
+            ['black', 'gray']
+        ];
+
+        var color_idx = 0;
+
+        for( var x in newData.Runs ) {
+            newData.Runs[x].Globals.cluster = COLOR_STUBS[ color_idx ] || COLOR_STUBS[ 0 ];
+            color_idx++;
+        }
 
         //newData = ST.RunDictionaryTranslator.translate( newData );
         ST.RunDictionaryTranslator.set(newData.dictionary);

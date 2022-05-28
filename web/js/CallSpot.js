@@ -281,7 +281,9 @@ ST.CallSpot = function() {
 
                 for( var att in valid_obj ) {
 
-                    if( ST.LayoutAugmenterModel.is_unique_limited( att ) ) {
+                    var is_arr = typeof valid_obj[att] === 'object';
+
+                    if( ST.LayoutAugmenterModel.is_unique_limited( att ) && !is_arr ) {
                         valid_obj[att] = ST.Utility.limit_unique_values( valid_obj, att );
                     }
 

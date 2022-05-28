@@ -31,13 +31,15 @@ ST.PieChart = function() {
 
         $('.row:eq(0)').append(rcht);
 
+        var globs = ST.cali_obj_by_key[0][spec.dimension];
+        var isArr = typeof globs === 'object' && globs.length;
 
         // Summarize volume by quarter
-        var quarter = ndx.dimension(function ( cali_object) {
+        var quarter = ndx.dimension(function ( cali_object ) {
 
             ST.Utility.validate_cali_object( cali_object, spec.dimension );
             return cali_object[spec.dimension] || 0;
-        });
+        }, isArr );
 
         if( ST.cali_valid === false ) {
             //  Error on screen.

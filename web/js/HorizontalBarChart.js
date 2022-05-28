@@ -39,6 +39,8 @@ ST.HorizontalBarChart = function() {
             '#9ecae1'
         ];
 
+        var globs = ST.cali_obj_by_key[0][options.dimension];
+        var isArr = typeof globs === 'object' && globs.length;
 
         // Counts per weekday
         var dayOfWeek = ndx.dimension(function (cali_object) {
@@ -46,7 +48,7 @@ ST.HorizontalBarChart = function() {
             ST.Utility.validate_cali_object( cali_object, options.dimension );
             return cali_object[ options.dimension ] || 0;
             //return ST.Utility.limit_unique_values( cali_object, options.dimension );
-        });
+        }, isArr);
 
         if( ST.cali_valid === false ) {
             //  Error on screen.
