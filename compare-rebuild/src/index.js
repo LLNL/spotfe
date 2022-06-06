@@ -15,7 +15,7 @@ const defaultVisibleCharts = ['walltime', 'user', 'uid', 'launchdate', 'executab
 const isContainer = window.ENV?.machine == 'container'
 const useJsonp = window.ENV?.use_JSONP_for_lorenz_calls
 
-async function getMain0( host, dataSetKey ) {
+async function getMain0( host, filename ) {
 
     var baseUrl = location.protocol + '//' + location.host + location.pathname;
 
@@ -24,7 +24,7 @@ async function getMain0( host, dataSetKey ) {
     prefix = 'rz';
 
     var url = baseUrl + "/scripts/cat.cgi?" +
-        "dataSetKey=" + dataSetKey + '/cacheToFE.json';
+        "dataSetKey=" + filename;
     //var url = "https://" + prefix + "lc.llnl.gov/lorenz_base/dev/pascal/mylc/mylc/cat.cgi";
 
     console.log('asking for: ' + url);
@@ -330,8 +330,20 @@ export class Graph{
                     if (this.cacheFileFound) {
 
                         //  Use the super fast cat.cgi to output things really fast.
-                        lor_response = await getMain0(this.host, this.dataSetKey);
+                        var filename = this.dataSetKey + '/cacheToFE.json';
+                        lor_response = await getMain0(this.host, filename);
                         newData = JSON.parse(lor_response);
+
+                        /*for( var x=0; x < 18; x++ ) {
+                            var run_group = await getMain0(this.host, this.dataSetKey + '/runs_group' + x + '.json');
+                            var rg = JSON.parse(run_group);
+                            console.dir(rg);
+
+                            newData.Runs = jQuery.extend(newData.Runs, rg);
+                        }*/
+
+                        console.dir(newData.Runs);
+
                     } else {
 
                         console.log('cache file not found, making lorenz call.')
@@ -382,7 +394,8 @@ export class Graph{
                         localStorage.setItem(key, dstr);
                     }
 
-                    DB.saveSummary(newData);
+                    console.log('saveSummary:');
+                    //DB.saveSummary(newData);
                 } catch (e) {
 
                     console.log('Exception: ');
@@ -402,7 +415,7 @@ export class Graph{
         console.log('991B newData:  ');
         console.dir( newData.Runs );
 
-        var COLOR_STUBS = [
+/*        var COLOR_STUBS = [
             ["red", "blue"],
             ["green"],
             ["yellow", "red"],
@@ -426,7 +439,7 @@ export class Graph{
         for( var x in newData.Runs ) {
             newData.Runs[x].Globals.cluster = COLOR_STUBS[ color_idx ] || COLOR_STUBS[ 0 ];
             color_idx++;
-        }
+        }*/
 
         //newData = ST.RunDictionaryTranslator.translate( newData );
         ST.RunDictionaryTranslator.set(newData.dictionary);

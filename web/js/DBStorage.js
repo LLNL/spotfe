@@ -87,6 +87,7 @@ DB.saveSummary = function( summary ) {
     };
 
     DB.save( key, summaryWrap );
+    console.log('after save.');
 };
 
 DB.getSummary = function( callback ) {
