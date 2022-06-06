@@ -81,9 +81,15 @@ var TEST = function() {
 	    "/g/g0/pascal/zdeb/combine2",
 	    "/g/g0/pascal/zdeb/combine3",
 	    "/g/g0/pascal/zdeb/combine4",
-            "/usr/workspace/spotdev/martymcf/ale3d/spot_data/",
-            "/usr/workspace/spotdev/martymcf/ale3d/spot_data/spot1.3month",
-            "/usr/workspace/spotdev/martymcf/ale3d/spot_data/spot2"
+            //  This test case has both spot1.3month and spot2 in it
+            //  Note: need to run this on it first:
+            //  /usr/gapps/spot/sand/spot.py getData /g/g0/pascal/zdeb/ale3d '{}' --writeToFile=1
+            //  if there is no cacheToFE.json there.
+            "/g/g0/pascal/zdeb/ale3d"
+
+//            "/usr/workspace/spotdev/martymcf/ale3d/spot_data/",
+//            "/usr/workspace/spotdev/martymcf/ale3d/spot_data/spot1.3month",
+//            "/usr/workspace/spotdev/martymcf/ale3d/spot_data/spot2"
         ];
 
 
