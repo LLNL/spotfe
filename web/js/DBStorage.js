@@ -78,6 +78,7 @@ DB.summaryKey = function() {
 
 DB.saveSummary = function( summary ) {
 
+    console.log('saving summary:');
     var key = DB.summaryKey();
     var epochDate = parseInt( Date.now() / 1000 );
 

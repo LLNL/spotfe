@@ -247,7 +247,11 @@ export default {
             if (this.runs.length > 0){
 
                 const firstRun = this.runs[0] || {meta:{}}
-                const metaKeys = Object.keys(firstRun.meta)
+                var metaKeys = Object.keys(firstRun.meta);
+
+                //  for ale3d scalability purposes.
+                console.log('fixing List order:');
+                metaKeys = this.fixListOrder( metaKeys );
 
                 return metaKeys; //["test0", "test1"]
             } else {
@@ -457,6 +461,21 @@ export default {
     },  // end computed
 
     methods:{
+        fixListOrder( arr ) {
+
+            //  launchdate is horrible to have as a default groupBy
+            //  because there's too many unique values for it.
+            if( arr.indexOf('launchdate') === 0 ) {
+                arr = arr.slice(1);
+                arr.push('launchdate');
+            }
+            if( arr.indexOf('commit') === 0 ) {
+                arr = arr.slice(1);
+                arr.push('commit');
+            }
+
+            return arr;
+        },
         updateRuns() {
             this.update_this_return++;
         },
@@ -508,8 +527,17 @@ export default {
 
                 for (var x in meta) {
 
-                    if (set_to === "") {
+                    //  this makes "json" the default groupBy for ale3D data
+                    //  that way we load with just 1 groupBy, improving loading time.
+                    if (set_to === "" && x !== "launchdate" &&
+                        x !== "commit" && x !== "title") {
                         set_to = x;
+                    }
+
+                    //  prefer cluster if we have it.  It looks good in ale3d.
+                    //  otherwise pick something we have.
+                    if( x === "cluster") {
+                        set_to = "cluster";
                     }
                 }
 
