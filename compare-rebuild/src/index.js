@@ -412,8 +412,8 @@ export class Graph{
         }
 
         //  newData is too big to always print out.
-        console.log('991B newData:  ');
-        console.dir( newData.Runs );
+        //console.log('991B newData:  ');
+        //console.dir( newData.Runs );
 
 /*        var COLOR_STUBS = [
             ["red", "blue"],
@@ -472,8 +472,8 @@ export class Graph{
         var cachedData = this.cachedData;
         var runs0 = this.runs_index;
 
-        console.log('runs before cacheDa84:');
-        console.dir(runs0);
+        //console.log('runs before cacheDa84:');
+        //console.dir(runs0);
 
         for(var x in runs0 ) {
 
@@ -491,7 +491,7 @@ export class Graph{
             }
         }
 
-        console.dir(runs0);
+        //console.dir(runs0);
 
         var newData = this.newData;
         // Merge new data with cached
@@ -529,6 +529,7 @@ export class Graph{
         let runs = []
 
         const filenames = Object.keys(cachedData.Runs)
+        ST.Utility.doc_date('filenames');
 
         filenames.map(filename => {
             const fileData = cachedData.Runs[filename].Data

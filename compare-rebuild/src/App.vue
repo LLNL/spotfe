@@ -250,7 +250,7 @@ export default {
                 var metaKeys = Object.keys(firstRun.meta);
 
                 //  for ale3d scalability purposes.
-                console.log('fixing List order:');
+                //console.log('fixing List order:');
                 metaKeys = this.fixListOrder( metaKeys );
 
                 return metaKeys; //["test0", "test1"]
@@ -341,6 +341,8 @@ export default {
             var countLoops = 0;
             var peeledMetricData;
 
+            ST.Utility.doc_date("Started peeling");
+
             var path = ST.Utility.get_param('sf');
             var key = 'peeledMetricData' + path;
             console.log('Started peeling, Using peel key: ' + key);
@@ -352,6 +354,9 @@ export default {
             if( localPeeled && false ) {
                 peeledMetricData = localPeeled;
             } else {
+
+                ST.Utility.doc_date('PeeledMetric: ');
+
                 peeledMetricData = _.map(this.runs, run => {
 
                     var metaPair = _.map(run.meta, (meta, metaName) => [metaName, meta.value]);
@@ -359,7 +364,8 @@ export default {
 
                     var mapPair = _.map(run.data, function (metrics, funcPath) {
 
-                        var metricsFloat = parseFloat(metrics[yAxisLookup]);
+                        //var metricsFloat = parseFloat(metrics[yAxisLookup]);
+                        var metricsFloat = +metrics[yAxisLookup];
                         var pair = [funcPath, {value: metricsFloat}];
                         countLoops++;
 
@@ -372,6 +378,7 @@ export default {
                 });
 
                 localStorage.setItem(key, peeledMetricData);
+                ST.Utility.doc_date('Finish Peeled Metric');
             }
 
             console.log( 'countLoops = ' + countLoops );
@@ -455,7 +462,8 @@ export default {
                 }))
 
             console.log('finished aggregated3: ');
-            console.dir(aggregated)
+            console.dir(aggregated);
+            window.aggregated = aggregated;
             return aggregated
         },
     },  // end computed
