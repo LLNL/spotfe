@@ -94,12 +94,12 @@ ST.Utility = function() {
                 dimensions_available += ', ' + x;
             }
 
-            console.log('In the layout_spec I found <b>' + dimension + '</b>, but I could NOT find dimension <b>' + dimension + '</b> in the Data Set.  ' +
+            /*console.log('In the layout_spec I found <b>' + dimension + '</b>, but I could NOT find dimension <b>' + dimension + '</b> in the Data Set.  ' +
                 'Data set contains the following dimensions: ' + dimensions_available.substr(1) + '.  ' +
                 '<br><br>You can solve this problem in 1 of 2 ways: <ul>' +
                 '<li>Add <b>' + dimension + '</b> to the dataset OR</li>' +
                 '<li>Remove <b>' + dimension + '</b> from the layout file.</li>' +
-                '</ul>');
+                '</ul>');*/
 
             cali_object[dimension] = 0; // "not defined";
             //ST.cali_valid = false;
@@ -503,7 +503,37 @@ ST.Utility = function() {
         return server_return_str;
     };
 
+    var logs_ = [];
+
+    var doc_date_ = function( label ) {
+
+        label = label || "";
+        var seconds = (new Date()).getTime()/1000;
+
+        //console.log(label + ": " + seconds);
+        logs_.push({
+            label: label,
+            seconds: seconds
+        });
+    };
+
+
+    var show_logs_ = function() {
+
+        var first_time = logs_[0].seconds;
+
+        for( var x=0; x < logs_.length; x++ ) {
+
+            var label = logs_[x].label;
+            var time = logs_[x].seconds - first_time;
+
+            console.log(label + "           " + time);
+        }
+    };
+
     return {
+        show_logs: show_logs_,
+        doc_date: doc_date_,
         fix_LC_return_err: fix_LC_return_err_,
         container_ajax: container_ajax_,
         start_spinner: start_spinner_,
