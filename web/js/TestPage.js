@@ -87,7 +87,8 @@ var TEST = function() {
             //  if there is no cacheToFE.json there.
             "/g/g0/pascal/zdeb/ale3d",
             "/g/g0/pascal/zdeb/ale3d/spot2",
-            "/g/g0/pascal/zdeb/ale3d/spot1.3month"
+            "/g/g0/pascal/zdeb/ale3d/spot1.3month",
+            "/g/g0/pascal/zdeb/ale3d_level_2"
 
 //            "/usr/workspace/spotdev/martymcf/ale3d/spot_data/",
 //            "/usr/workspace/spotdev/martymcf/ale3d/spot_data/spot1.3month",
