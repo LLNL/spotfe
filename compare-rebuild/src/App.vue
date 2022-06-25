@@ -320,7 +320,11 @@ export default {
             return metrics;
         },
         selectedRun(){
-            var ret = this.hoverX ? this.groupedAndAggregated[this.hoverX.groupName][this.hoverX.runIndex] : null;
+
+            //console.log('groupName: ');
+            //console.dir(this.hoverX);
+
+            var ret = this.hoverX && this.groupedAndAggregated[this.hoverX.groupName] ? this.groupedAndAggregated[this.hoverX.groupName][this.hoverX.runIndex] : null;
 
             if( ret == null ) {
                 //ret = this.groupedAndAggregated["all"][0];

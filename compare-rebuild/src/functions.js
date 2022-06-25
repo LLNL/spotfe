@@ -3,10 +3,12 @@ import md5 from 'md5'
 
 
 export function childrenPaths(parentPath, paths){
-    return _.filter(paths, path => 
+    var ret = _.filter(paths, path =>
                         path.startsWith(parentPath) &&  
                         path.split('/').length - parentPath.split('/').length == 1
-                    )
+                    );
+
+    return ret;
 }
 
 export function parentPath(path){
