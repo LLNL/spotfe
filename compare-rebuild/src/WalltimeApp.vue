@@ -120,8 +120,15 @@ export default {
             return window.WalltimeAppParams.meta;
         },
         funcPaths(){return Object.keys(this.data) },
-        metricNames(){ return Object.keys(this.data[this.funcPaths[0]]).filter(name => !name.startsWith('any#any#'))},
-        topDownNames(){ return Object.keys(this.data[this.funcPaths[0]]).filter(name => name.startsWith('any#any#'))},
+        metricNames(){
+            var func_keys = this.data[this.funcPaths[0]];
+            console.log('func_keys=');
+            console.dir( func_keys );
+            return Object.keys(func_keys).filter(name => !name.startsWith('any#any#'));
+        },
+        topDownNames(){
+            return Object.keys(this.data[this.funcPaths[0]]).filter(name => name.startsWith('any#any#'));
+        },
         topdownData(){
 
             this.filterMetricNames()
@@ -486,6 +493,8 @@ export default {
                 "name": replacee,
                 "alias": replacer
             };
+
+            console.log('name=' + replacee + '  99alias=' + replacer);
 
             return true;
 

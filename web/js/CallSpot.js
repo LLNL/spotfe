@@ -564,9 +564,11 @@ ST.CallSpot = function() {
 
             localStorage.setItem( walldata_key, walldata );
 
+            var title = cali_obj.title === 0 ? 'undefined' : cali_obj.title;
+            
             var url = 'views/index.html?runSetId=' + file_left +
                 "&runId=" + cali_fp +
-                "&title=" + cali_obj.title;
+                "&title=" + title;
 
             window.open(url);
 
