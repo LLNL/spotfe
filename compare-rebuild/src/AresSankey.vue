@@ -70,6 +70,17 @@ v-card-media
           title {{ node.name + '\n' + format(node.value) }}
 div(style='max-width: 40%')
   v-slider(label="combine under %" v-model="sliderVal" thumb-label step="1" max='20')
+
+          FlameGraph(
+                :runData='peeledData(runData, "avg")'
+                :metricName='avg'
+                :showTopdown='showTopdown'
+                :topdownData='topdownData'
+                :selectedNode='selectedNode'
+                :selectedTopdownNode='selectedTopdownNode'
+                :handleClick='changePath'
+                )
+
 </template>
 
 <script>
@@ -113,7 +124,27 @@ div(style='max-width: 40%')
         }
             this.selTopdown = trnslt[name]
             this.selName = name
-      }
+      },
+        peeledData(runData, metricName){
+
+            var z;
+
+             let x =  _.fromPairs(_.map(runData, (metrics, funcPath) => {
+                 let topdown = {}
+                 _.forIn(metrics, (val, key) => {if(key.startsWith('any#any#')) topdown[key] = val})
+
+                 if(Object.keys(topdown).length == 0) topdown = null
+
+                 var metricValue = metrics[metricName] || 0
+
+                 return ['-RP/' + funcPath, {value: parseFloat(metricValue), topdown}]
+             }))
+             x['-RP'] = {value: 0}
+
+             //console.log('Inside peeledData(): ');
+             //console.dir(x)
+             return x
+        }
     },
     created() {
       console.log('data', this.runData)

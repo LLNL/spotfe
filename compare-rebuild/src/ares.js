@@ -12,7 +12,7 @@ var runData = {};
 runData[selSankeyPath] = {};
 
 runData[selSankeyPath].topdown = {
-    retiring: .15,
+    retiring: .75,
     bad_speculation: .8,
     frontend_bound: .612,
     backend_bound: .23,
