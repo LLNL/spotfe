@@ -88,7 +88,9 @@ var TEST = function() {
             "/g/g0/pascal/zdeb/ale3d",
             "/g/g0/pascal/zdeb/ale3d/spot2",
             "/g/g0/pascal/zdeb/ale3d/spot1.3month",
-            "/g/g0/pascal/zdeb/ale3d_level_2"
+            "/g/g0/pascal/zdeb/ale3d_level_2",
+            "/g/g0/pascal/zdeb/ale3d_level_5"
+
 
 //            "/usr/workspace/spotdev/martymcf/ale3d/spot_data/",
 //            "/usr/workspace/spotdev/martymcf/ale3d/spot_data/spot1.3month",
