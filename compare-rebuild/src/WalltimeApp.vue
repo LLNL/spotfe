@@ -101,7 +101,7 @@ export default {
 
     //props:['filename', 'data', 'meta'],
     data(){return {
-        selectedNode: '--root path--',
+        selectedNode: '-RP',
         selectedTopdownNode: 'fe',
         showTopdown: false,
         replacing_metrics: {},
@@ -541,9 +541,9 @@ export default {
 
                  var metricValue = metrics[metricName] || 0
 
-                 return ['--root path--/' + funcPath, {value: parseFloat(metricValue), topdown}]
+                 return ['-RP/' + funcPath, {value: parseFloat(metricValue), topdown}]
              }))
-             x['--root path--'] = {value: 0}
+             x['-RP'] = {value: 0}
 
              //console.log('Inside peeledData(): ');
              //console.dir(x)

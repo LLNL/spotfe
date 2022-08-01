@@ -521,11 +521,16 @@ ST.ChartCollection = function() {
 
                 window.cacheSum = cacheSum;
 
+                ST.logMem('before getData');
+
                 ST.graph.getData(host, command, file)
                     .then(function() {
 
+                        ST.logMem('before setupRuns');
+
                         ST.graph.setupRuns().then( function( summary ) {
 
+                            ST.logMem('after setupRuns');
                             ST.graph.renderMe().then( function() {
 
                                 setup_pars_();

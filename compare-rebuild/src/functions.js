@@ -16,7 +16,7 @@ export function parentPath(path){
 }
 
 export function colorHash(text, alpha){
-    text = text.slice(14) // remove '--root path--/'
+    text = text.slice(14) // remove '-RP/'
     const reverseString = text.split("").reverse().join("")
     const hash = md5(reverseString)
     const r = parseInt(hash.slice(12, 14), 16)

@@ -7,15 +7,15 @@
         }`
     )
     .rootbutton(
-        @click="handleClick('--root path--')"
+        @click="handleClick('-RP')"
         :style=`{
             backgroundColor:'#ddd',
             textAlign:'center',
-            border: selectedNode == '--root path--' ? 'solid 1px black':'',
+            border: selectedNode == '-RP' ? 'solid 1px black':'',
             }`
         ) /
     .collapsed-parent(
-        v-for='funcPath in collapsedFuncPaths' v-if="funcPath != '--root path--'"
+        v-for='funcPath in collapsedFuncPaths' v-if="funcPath != '-RP'"
         :style=`{
             display:'flex',
             alignItems:'center',

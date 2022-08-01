@@ -207,7 +207,7 @@ export default {
             var stack_var = stack();
 
             var xruns = window.runs;
-            var dcp = ["--root path--/main", "--root path--/blank"];
+            var dcp = ["-RP/main", "-RP/blank"];
 
             const stackFunc = stack_var.keys(this.displayedChildrenPaths);
             const viewData = this.runs.map(run => {return _.fromPairs(_.map(this.displayedChildrenPaths, path => [path, run.data[path].value]))})

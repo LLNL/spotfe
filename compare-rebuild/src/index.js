@@ -332,7 +332,10 @@ export class Graph{
                         //  Use the super fast cat.cgi to output things really fast.
                         var filename = this.dataSetKey + '/cacheToFE.json';
                         lor_response = await getMain0(this.host, filename);
+
+                        ST.logMem( "before parse memory" );
                         newData = JSON.parse(lor_response);
+                        ST.logMem( "after parse memory" );
 
                         /*for( var x=0; x < 18; x++ ) {
                             var run_group = await getMain0(this.host, this.dataSetKey + '/runs_group' + x + '.json');
@@ -463,7 +466,23 @@ export class Graph{
         this.app = createApp(App);
 
         var app2 = this.app;
+
+        ST.logMem("before mount");
         this.myApp = app2.mount( this.selector );
+        ST.logMem("after mount");
+    }
+
+    async freeApp() {
+
+        ST.logMem("before UNmount");
+        //this.app.destroy();
+        this.app.unmount();
+        this.myApp.destruct();
+        this.myApp.destroy();
+
+        delete this.myApp;
+        delete this.app;
+        ST.logMem("after mount");
     }
 
 
@@ -501,6 +520,8 @@ export class Graph{
         cachedData.RunSetMeta = Object.assign(cachedData.RunSetMeta, newData.RunSetMeta)
         cachedData.runCtimes = newData.runCtimes
 
+        ST.logMem('after cachedData');
+
         // delete runs from cache that were deleted on backend
         const deletedRuns = newData.deletedRuns || []
         deletedRuns.forEach(deletedRun => delete cachedData.Runs[deletedRun])
@@ -520,16 +541,28 @@ export class Graph{
 
         const baseMetrics = {}
         for(let metric in cachedData.RunDataMeta){
-            baseMetrics[metric] = 0.0
+
+            var new_met = metric;
+
+            /* SHRINK substr( shrink metrics.
+            if( metric === "avg#inclusive#sum#time.duration") {
+                new_met = "avg#";
+            }
+            new_met = metric.substr(0,4);*/
+
+            cachedData.RunDataMeta[new_met] = cachedData.RunDataMeta[metric];
+            baseMetrics[new_met] = 0.0
         }
 
         const funcPaths = new Set()
         const metricNames = new Set()
 
-        let runs = []
+        window.runs = []
 
         const filenames = Object.keys(cachedData.Runs)
         ST.Utility.doc_date('filenames');
+
+        ST.logMem('before filenames.map(');
 
         filenames.map(filename => {
             const fileData = cachedData.Runs[filename].Data
@@ -550,17 +583,20 @@ export class Graph{
                 
                 run.meta[metricName] = {value, type}
             }
-            runs.push(run)
+            window.runs.push(run)
         })
 
-        runs.forEach(run => {
+        ST.logMem('after meta but before data');
+
+        window.runs.forEach(run => {
             funcPaths.forEach(funcPath => {
-                run.data['--root path--/' + funcPath] = {...baseMetrics, ...run.data[funcPath]}
+                run.data['-RP/' + funcPath] = {...baseMetrics, ...run.data[funcPath]}
                 delete run.data[funcPath]
             })
-            run.data['--root path--'] = baseMetrics
+            run.data['-RP'] = baseMetrics
         }) 
 
+        ST.logMem('after data');
 
         var lr0 = $.extend({}, cachedData );
         //var lr = lr0.Runs;
@@ -582,8 +618,10 @@ export class Graph{
 //        await localforage.setItem(dataSetKey, {'Runs': arr});
         await localforage.setItem(dataSetKey, lr0);
 
+        ST.logMem('ZZ  before CompositeLayoutModel.augment_first_run');
+
         //  The first run's meta object is used to determine what the drop down select options should be.
-        window.runs = ST.CompositeLayoutModel.augment_first_run_to_include_composite_charts(runs);
+        window.runs = ST.CompositeLayoutModel.augment_first_run_to_include_composite_charts(window.runs);
 
         this.compare(filenames)
 

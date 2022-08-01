@@ -184,7 +184,7 @@ export default {
             filenames:[],
             aggregateListener: null,
             rootFuncPath: '',
-            selectedParent: "--root path--",
+            selectedParent: "-RP",
             selectedScaleType: "linear",
             hoverX: null,
             disabledFuncPaths: [],
@@ -355,6 +355,8 @@ export default {
 
             var localPeeled = localStorage.getItem(key);
 
+            ST.logMem( "before peeledMetricData memory");
+
             if( localPeeled && false ) {
                 peeledMetricData = localPeeled;
             } else {
@@ -364,6 +366,7 @@ export default {
                 peeledMetricData = _.map(this.runs, run => {
 
                     var metaPair = _.map(run.meta, (meta, metaName) => [metaName, meta.value]);
+                    //  function(meta, metaName) { return [metaName, meta.value]; }
                     const meta = _.fromPairs(metaPair);
 
                     var mapPair = _.map(run.data, function (metrics, funcPath) {
@@ -381,9 +384,11 @@ export default {
                     return {meta, data}
                 });
 
-                localStorage.setItem(key, peeledMetricData);
+                //localStorage.setItem(key, peeledMetricData);
                 ST.Utility.doc_date('Finish Peeled Metric');
             }
+
+            ST.logMem( "after peeledMetricData memory");
 
             console.log( 'countLoops = ' + countLoops );
             console.dir( peeledMetricData );
@@ -398,10 +403,13 @@ export default {
 
             if(!this.selectedAggregateBy) {
 
-                console.log('grouped:');
+                ST.logMem( "Grouped");
+
                 console.dir(grouped);
                 return grouped;
             }
+
+            ST.logMem( "Before Aggregate");
 
             const aggregated = _.fromPairs(_.map(grouped, (runList, groupByName) => {
                 // consolidate the run list into a single run
@@ -465,9 +473,9 @@ export default {
 
                 }))
 
-            console.log('finished aggregated3: ');
+            ST.logMem( "Finished aggregate");
             console.dir(aggregated);
-            window.aggregated = aggregated;
+            //window.aggregated = aggregated;
             return aggregated
         },
     },  // end computed

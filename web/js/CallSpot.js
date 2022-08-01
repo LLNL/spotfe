@@ -1,5 +1,13 @@
 var ST = ST || {};
 
+ST.logMem = function( text ) {
+    console.log( text  + ": " + ST.divide(performance.memory.usedJSHeapSize) + " MB");
+};
+
+ST.divide = function( num ) {
+    return parseInt(num / (1024*1024));
+};
+
 ST.CallSpot = function() {
 
     var get_command_begin_ = function() {
@@ -565,7 +573,7 @@ ST.CallSpot = function() {
             localStorage.setItem( walldata_key, walldata );
 
             var title = cali_obj.title === 0 ? 'undefined' : cali_obj.title;
-            
+
             var url = 'views/index.html?runSetId=' + file_left +
                 "&runId=" + cali_fp +
                 "&title=" + title;
